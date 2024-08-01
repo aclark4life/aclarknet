@@ -40,20 +40,18 @@ locale.setlocale(locale.LC_ALL, "")
 
 
 def get_queryset_related(self):
-        report = self.get_object()
-        company = report.company
-        notes = report.notes.all()
-        clients = report.clients.all()
-        invoices = report.invoices.all()
-        projects = report.projects.all()
-        contacts = report.contacts.all()
-        reports = report.reports.all()
-        queryset_related = [
-            q
-            for q in [clients, contacts, invoices, notes, projects, reports]
-            if q.exists()
-        ]
-        return company, projects, invoices, report, contacts, queryset_related
+    report = self.get_object()
+    company = report.company
+    notes = report.notes.all()
+    clients = report.clients.all()
+    invoices = report.invoices.all()
+    projects = report.projects.all()
+    contacts = report.contacts.all()
+    reports = report.reports.all()
+    queryset_related = [
+        q for q in [clients, contacts, invoices, notes, projects, reports] if q.exists()
+    ]
+    return company, projects, invoices, report, contacts, queryset_related
 
 
 class BaseReportView(BaseView, UserPassesTestMixin):
@@ -106,10 +104,11 @@ class BaseReportView(BaseView, UserPassesTestMixin):
 
 
 class ReportDetailView(BaseReportView, DetailView):
-
     def get_context_data(self, **kwargs):
 
-        company, projects, invoices, report, contacts, queryset_related = get_queryset_related(self)
+        company, projects, invoices, report, contacts, queryset_related = (
+            get_queryset_related(self)
+        )
 
         if company:
             queryset_related.insert(0, [company])
@@ -129,7 +128,6 @@ class ReportDetailView(BaseReportView, DetailView):
         self.queryset_related = queryset_related
         self.has_related = True
         context = super().get_context_data(**kwargs)
-
 
         entered = {"total": report.hours}
         approved = {"total": report.hours}
@@ -165,6 +163,7 @@ class CreateOrUpdateReportView(BaseReportView):
             }
 
         clients = Client.objects.filter(archived=False)
+
         invoices = Invoice.objects.filter(archived=False)
         projects = [invoice.project for invoice in invoices if invoice.project]
         tasks = [project.task for project in projects]
@@ -300,7 +299,9 @@ class ReportCopyView(BaseReportView, CreateView):
 
 
 class ReportEmailTextView(BaseReportView, View):
+
     def get(self, request, *args, **kwargs):
+
         object_id = self.kwargs["object_id"]
         obj = get_object_or_404(self.model, id=object_id)
 
@@ -321,6 +322,7 @@ class ReportEmailTextView(BaseReportView, View):
             amount = obj.amount
 
         contacts = obj.contacts.all()
+
         header.add_rows(
             [
                 ["", "", "", ""],
@@ -333,7 +335,6 @@ class ReportEmailTextView(BaseReportView, View):
                     "Cost:",
                     locale.currency(cost, grouping=True),
                 ],
-                # ["", "", "For:", ", ".join([i.name for i in contacts])]
                 ["", "", "", ""] if contacts else ["", "", "", ""],
                 ["", "", "", ""],
             ]
