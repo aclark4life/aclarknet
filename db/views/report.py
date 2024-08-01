@@ -163,11 +163,11 @@ class CreateOrUpdateReportView(BaseReportView):
             }
 
         clients = Client.objects.filter(archived=False)
-
         invoices = Invoice.objects.filter(archived=False)
+        companies = Company.objects.filter(archived=False)
+
         projects = [invoice.project for invoice in invoices if invoice.project]
         tasks = [project.task for project in projects]
-        companies = Company.objects.filter(archived=False)
 
         report_hours = invoices.aggregate(hours=Sum("hours"))["hours"]
         report_amount = invoices.aggregate(amount=Sum(F("amount")))["amount"]
@@ -238,10 +238,11 @@ class ReportCreateView(CreateOrUpdateReportView, CreateView):
     success_url = reverse_lazy("report_view")
 
     def get_form(self, form_class=None):
+        companies = Company.objects.filter(archived=False)
         if self.request.user.is_superuser:
             form_class = AdminReportForm
         form = super().get_form(form_class)
-        form.fields["company"].queryset = Company.objects.filter(archived=False)
+        form.fields["company"].queryset = companies
         return form
 
     def get_success_url(self):
