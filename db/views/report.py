@@ -110,6 +110,8 @@ class ReportDetailView(BaseReportView, DetailView):
             get_queryset_related(self)
         )
 
+        context["invoices"] = invoices
+
         if company:
             queryset_related.insert(0, [company])
 
@@ -139,9 +141,11 @@ class ReportDetailView(BaseReportView, DetailView):
                 contact_emails.append(contact.email)
         context["contact_emails"] = ", ".join(contact_emails)
         context["object_field_values"].append(("Contacts", ""))
+
         if contacts:
             for contact in contacts:
                 context["object_field_values"].append(("↳", contact))
+
         return context
 
     template_name = "view.html"
