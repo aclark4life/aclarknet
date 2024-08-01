@@ -105,6 +105,7 @@ class BaseReportView(BaseView, UserPassesTestMixin):
 
 class ReportDetailView(BaseReportView, DetailView):
     def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
 
         company, projects, invoices, report, contacts, queryset_related = (
             get_queryset_related(self)
@@ -129,7 +130,6 @@ class ReportDetailView(BaseReportView, DetailView):
 
         self.queryset_related = queryset_related
         self.has_related = True
-        context = super().get_context_data(**kwargs)
 
         entered = {"total": report.hours}
         approved = {"total": report.hours}
@@ -304,9 +304,7 @@ class ReportCopyView(BaseReportView, CreateView):
 
 
 class ReportEmailTextView(BaseReportView, View):
-
     def get(self, request, *args, **kwargs):
-
         object_id = self.kwargs["object_id"]
         obj = get_object_or_404(self.model, id=object_id)
 
