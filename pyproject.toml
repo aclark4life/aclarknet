@@ -1,0 +1,7 @@
+[project]
+name = "aclarknet"
+version = "0.1.0"
+dependencies = [
+    "wagtail",
+    "python-webpack-boilerplate",
+]
