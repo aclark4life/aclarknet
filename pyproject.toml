@@ -5,3 +5,6 @@ dependencies = [
     "wagtail",
     "python-webpack-boilerplate",
 ]
+
+[tool.setuptools]
+packages = []
