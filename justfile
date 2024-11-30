@@ -6,5 +6,5 @@ pip-install:
 alias i := pip-install
 
 open:
-    open https://localhost:8000
+    open http://localhost:8000
 alias o := open
