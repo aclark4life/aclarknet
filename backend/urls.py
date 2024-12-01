@@ -4,14 +4,19 @@ from django.contrib import admin
 
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
+from wagtail.documents import urls as wagtaildocs_urls
 
+from apps.search import views as search_views
 
 from debug_toolbar.toolbar import debug_toolbar_urls
 
 urlpatterns = [
     path("django/", admin.site.urls),
     path("wagtail/", include(wagtailadmin_urls)),
+    path("documents/", include(wagtaildocs_urls)),
+    path("search/", search_views.search, name="search"),
 ]
+
 
 if settings.DEBUG:
     from django.conf.urls.static import static
