@@ -5,6 +5,7 @@ from django.contrib import admin
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
 
+
 from debug_toolbar.toolbar import debug_toolbar_urls
 
 urlpatterns = [
