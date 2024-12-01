@@ -14,7 +14,5 @@ packages = []
 
 [tool.django_mongodb_cli]
 dev = [
-    "django-postgresql-project @ git+ssh://git@github.com/aclark4life/aclarknet-postgresql-project",
-    "django-postgresql-project @ git+ssh://git@github.com/aclark4life/django-postgresql-project",
     "django-postgresql-project @ git+ssh://git@github.com/aclark4life/wagtail-postgresql-project",
 ]
