@@ -50,3 +50,5 @@ eb-create:
 [group("ec2")]
 sgs:
     aws ec2 describe-security-groups --output table
+vpc:
+    aws ec2 describe-vpcs --output table
