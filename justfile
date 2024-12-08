@@ -31,6 +31,11 @@ fix-lounge:
 	eb ssh -c "sudo systemctl restart lounge"
 
 [group("django")]
+django-open:
+    open http://localhost:8000
+alias o := django-open
+
+[group("django")]
 django-serve:
     python manage.py runserver
 alias s := django-serve
