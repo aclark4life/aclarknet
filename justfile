@@ -1,15 +1,17 @@
-EB_ENV_NAME := "aclarknet"
 EC2_INSTANCE_MIN := "1"
 EC2_INSTANCE_MAX := "1"
-EC2_INSTANCE_PROFILE := "eb-ec2-role"
-EC2_INSTANCE_TYPE := "t2.micro"
+EC2_INSTANCE_PROFILE := "aws-elasticbeanstalk-ec2-role"
+EC2_INSTANCE_TYPE := "t4g.small"
 EB_SSH_KEY := "aclarknet"
-EB_PLATFORM := "Docker 17.09.0-ce"
+EB_PLATFORM := "Python 3.12 running on 64bit Amazon Linux 2023"
 EC2_LB_TYPE := "application"
-VPC_ID := "vpc-0a1b2c3d4e5f6g7h8"
-VPC_SUBNET_EC2 := "subnet-0a1b2c3d4e5f6g7h8"
-VPC_SUBNET_ELB := "subnet-0a1b2c3d4e5f6g7h8"
-VPC_SG := "sg-0461a71e4ee9c9d48"
+VPC_ID := "vpc-9dc18be5"
+VPC_SUBNET_EC2 := "subnet-7e1dae23,subnet-2333d62c"
+VPC_SUBNET_ELB := "subnet-7e1dae23,subnet-2333d62c"
+VPC_SG := "sg-0b545a7e,sg-0258ae68f8a5a1185"
+GIT_BRANCH := `git rev-parse --abbrev-ref HEAD`
+GIT_HASH := `git rev-parse --short HEAD`
+EB_ENV_NAME := "aclarknet-{{branch}}-{{hash}}"
 
 default:
     echo 'Hello, world!'
@@ -50,5 +52,11 @@ eb-create:
 [group("ec2")]
 sgs:
     aws ec2 describe-security-groups --output table
+
+[group("ec2")]
 vpc:
     aws ec2 describe-vpcs --output table
+
+[group("ec2")]
+sub:
+    aws ec2 describe-subnets --output table
