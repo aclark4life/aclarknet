@@ -191,3 +191,5 @@ WAGTAILDOCS_EXTENSIONS = [
     "xlsx",
     "zip",
 ]
+
+ALLOWED_HOSTS = []
