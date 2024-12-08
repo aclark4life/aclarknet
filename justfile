@@ -11,7 +11,6 @@ VPC_SUBNET_ELB := "subnet-7e1dae23,subnet-2333d62c"
 VPC_SG := "sg-0b545a7e,sg-0258ae68f8a5a1185"
 GIT_BRANCH := `git rev-parse --abbrev-ref HEAD`
 GIT_HASH := `git rev-parse --short HEAD`
-EB_ENV_NAME := "aclarknet-{{branch}}-{{hash}}"
 
 default:
     echo 'Hello, world!'
@@ -33,13 +32,13 @@ fix-lounge:
 
 [group("eb")]
 eb-create:
-    eb create {{EB_ENV_NAME}} \
+    eb create "aclarknet-{{GIT_BRANCH}}-{{GIT_HASH}}" \
          -im {{EC2_INSTANCE_MIN}} \
          -ix {{EC2_INSTANCE_MAX}} \
          -ip {{EC2_INSTANCE_PROFILE}} \
          -i {{EC2_INSTANCE_TYPE}} \
          -k {{EB_SSH_KEY}} \
-         -p {{EB_PLATFORM}} \
+         -p "{{EB_PLATFORM}}" \
          --elb-type {{EC2_LB_TYPE}} \
          --vpc \
          --vpc.id {{VPC_ID}} \
