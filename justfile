@@ -60,6 +60,11 @@ eb-deploy:
     eb deploy
 alias d := eb-deploy
 
+[group("eb")]
+eb-logs:
+    eb logs
+alias l := eb-logs
+
 [group("ec2")]
 sgs:
     aws ec2 describe-security-groups --output table
