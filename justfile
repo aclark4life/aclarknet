@@ -48,6 +48,11 @@ eb-create:
          --vpc.elbsubnets {{VPC_SUBNET_ELB}} \
          --vpc.securitygroups {{VPC_SG}}
 
+[group("eb")]
+eb-deploy:
+    eb deploy
+alias d := eb-deploy
+
 [group("ec2")]
 sgs:
     aws ec2 describe-security-groups --output table
