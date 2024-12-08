@@ -11,17 +11,13 @@ phases:
     commands:
       - n 21
       - "echo Install Phase: `date`"
-      - cd frontend && rm package-lock.json && npm install && cd ..
-      - n 20
-      - cd lounge && npm install && cd ..
+      - npm install
 
   build:
     commands:
       - n 21
       - "echo Build Phase: `date`"
-      - "echo $PATH"
-      - "echo `whoami`"
-      - cd frontend && npm run build && cd ..
+      - npm run build
 
 artifacts:
   files:
