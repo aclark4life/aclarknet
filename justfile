@@ -15,13 +15,10 @@ GIT_HASH := `git rev-parse --short HEAD`
 default:
     echo 'Hello, world!'
 
+[group("python")]
 pip-install:
     pip install -e .
 alias i := pip-install
-
-open:
-    open http://localhost:8000
-alias o := open
 
 [group("aclarknet")]
 fix-lounge:
