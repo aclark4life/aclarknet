@@ -6,3 +6,5 @@ try:
     from .local import *  # noqa: F403
 except ImportError:
     pass
+
+MIDDLEWARE.append("whitenoise.middleware.WhiteNoiseMiddleware")  # noqa
