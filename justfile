@@ -30,6 +30,11 @@ fix-lounge:
 	eb ssh -c "sudo cp /tmp/aclark.json /var/app/current/lounge/.thelounge/users/aclark.json"
 	eb ssh -c "sudo systemctl restart lounge"
 
+[group("django")]
+django-serve:
+    python manage.py runserver
+alias s := django-serve
+
 [group("eb")]
 eb-create:
     eb create "aclarknet-{{GIT_BRANCH}}-{{GIT_HASH}}" \
