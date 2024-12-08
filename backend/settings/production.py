@@ -1,3 +1,5 @@
+import os
+
 from .base import *  # noqa: F403
 
 DEBUG = False
@@ -8,3 +10,5 @@ except ImportError:
     pass
 
 MIDDLEWARE.append("whitenoise.middleware.WhiteNoiseMiddleware")  # noqa
+
+SECRET_KEY = os.environ.get("SECRET_KEY")
