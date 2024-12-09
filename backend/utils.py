@@ -45,3 +45,26 @@ def get_ec2_hostname():
     except requests.RequestException as e:
         print(f"Error retrieving EC2 hostname: {e}")
         return None
+
+
+def get_ec2_public_hostname():
+    try:
+        # Step 1: Get the token
+        token_url = "http://169.254.169.254/latest/api/token"
+        headers = {"X-aws-ec2-metadata-token-ttl-seconds": "21600"}
+        response = requests.put(token_url, headers=headers, timeout=2)
+        response.raise_for_status()  # Raise an error for bad responses
+
+        token = response.text
+
+        # Step 2: Use the token to get the public hostname
+        public_hostname_url = "http://169.254.169.254/latest/meta-data/public-hostname"
+        headers = {"X-aws-ec2-metadata-token": token}
+        response = requests.get(public_hostname_url, headers=headers, timeout=2)
+        response.raise_for_status()  # Raise an error for bad responses
+
+        public_hostname = response.text
+        return public_hostname
+    except requests.RequestException as e:
+        print(f"Error retrieving EC2 public hostname: {e}")
+        return None
