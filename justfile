@@ -20,6 +20,18 @@ pip-install:
     pip install -e .
 alias i := pip-install
 
+# ensure virtual environment is active
+[group('python')]
+check-venv:
+    #!/bin/bash
+    PYTHON_PATH=$(which python)
+    if [[ $PYTHON_PATH == *".venv/bin/python" ]]; then
+      echo "Virtual environment is active."
+    else
+      echo "Virtual environment is not active."
+      exit 1
+    fi
+
 [group("aclarknet")]
 fix-lounge:
 	eb ssh -c "sudo rm -rvf /var/app/current/lounge/node_modules"
@@ -76,3 +88,6 @@ vpc:
 [group("ec2")]
 sub:
     aws ec2 describe-subnets --output table
+
+logo: check-venv
+    python logo.py
