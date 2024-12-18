@@ -15,8 +15,8 @@ draw = ImageDraw.Draw(logo_image)
 # Define the text and font for the logo
 text = "ACLARK.NET, LLC"
 font_size = 40  # Adjust as desired
-font_color = (0, 0, 0, 255)  # Black text
-border_color = (0, 0, 0, 255)  # Black border
+font_color = (45, 118, 187, 255)  # #2D76BB in RGBA (dark blue)
+border_color = (45, 118, 187, 255)  # #2D76BB in RGBA (dark blue)
 
 # Load the Arial font and calculate the text size
 font = ImageFont.truetype("Arial.ttf", font_size)
@@ -57,4 +57,4 @@ cropped_image = logo_image.crop(
 )
 
 # Save the cropped logo as a PNG image with transparency
-cropped_image.save("aclarknet_logo_transparent.png")
+cropped_image.save("aclarknet_logo_transparent_blue.png")
