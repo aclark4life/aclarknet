@@ -1,60 +1,57 @@
 from PIL import Image, ImageDraw, ImageFont
 
-# Define the logo dimensions
-logo_width = 400
-logo_height = 200  # Rectangle dimensions
+# Define the logo dimensions (circle)
+logo_size = 500
 
 # Create a new transparent image with RGBA mode
 logo_image = Image.new(
-    "RGBA", (logo_width, logo_height), (0, 0, 0, 0)
+    "RGBA", (logo_size, logo_size), (0, 0, 0, 0)
 )  # Fully transparent
 
 # Set up the drawing context
 draw = ImageDraw.Draw(logo_image)
 
-# Define the text and font for the logo
-text = "ACLARK.NET, LLC"
+# Define the stacked text and font for the logo
+lines = ["ACLARK.", "NET,", "LLC"]
 font_size = 40  # Adjust as desired
 font_color = (45, 118, 187, 255)  # #2D76BB in RGBA (dark blue)
-border_color = (45, 118, 187, 255)  # #2D76BB in RGBA (dark blue)
+circle_color = (45, 118, 187, 255)  # #2D76BB in RGBA (dark blue)
 
-# Load the Arial font and calculate the text size
+# Load the Arial font
 font = ImageFont.truetype("Arial.ttf", font_size)
-text_width = draw.textlength(text, font=font)
-text_height = font_size
 
-# Add padding around the text for the border
-padding_x = 20
-padding_y = 10
-rectangle_width = text_width + 2 * padding_x
-rectangle_height = text_height + 2 * padding_y
-
-# Calculate the position to center the rectangle
-rectangle_x = (logo_width - rectangle_width) // 2
-rectangle_y = (logo_height - rectangle_height) // 2
-
-# Draw the rectangle border
-rectangle_coords = [
-    (rectangle_x, rectangle_y),
-    (rectangle_x + rectangle_width, rectangle_y + rectangle_height),
+# Calculate the total text height
+text_heights = [
+    draw.textbbox((0, 0), line, font=font)[3]
+    - draw.textbbox((0, 0), line, font=font)[1]
+    for line in lines
 ]
-border_width = 2
-draw.rectangle(rectangle_coords, outline=border_color, width=border_width)
+total_text_height = (
+    sum(text_heights) + (len(lines) - 1) * 10
+)  # Add spacing between lines
 
-# Draw the text inside the rectangle
-text_x = rectangle_x + padding_x
-text_y = rectangle_y + padding_y
-draw.text((text_x, text_y), text, font=font, fill=font_color)
+# Calculate the position to center the circle and text
+padding = 50
+circle_radius = (logo_size - padding * 2) // 2
+circle_center = (logo_size // 2, logo_size // 2)
 
-# Crop the image tightly around the rectangle
-cropped_image = logo_image.crop(
-    (
-        rectangle_coords[0][0] - border_width,  # Left
-        rectangle_coords[0][1] - border_width,  # Top
-        rectangle_coords[1][0] + border_width,  # Right
-        rectangle_coords[1][1] + border_width,  # Bottom
-    )
-)
+# Draw the circle border
+circle_bbox = [
+    (circle_center[0] - circle_radius, circle_center[1] - circle_radius),
+    (circle_center[0] + circle_radius, circle_center[1] + circle_radius),
+]
+border_width = 4
+draw.ellipse(circle_bbox, outline=circle_color, width=border_width)
 
-# Save the cropped logo as a PNG image with transparency
-cropped_image.save("aclarknet_logo_transparent_blue.png")
+# Draw each line of text centered inside the circle
+current_y = circle_center[1] - total_text_height // 2
+for line in lines:
+    text_bbox = draw.textbbox((0, 0), line, font=font)
+    text_width = text_bbox[2] - text_bbox[0]
+    text_height = text_bbox[3] - text_bbox[1]
+    text_x = (logo_size - text_width) // 2
+    draw.text((text_x, current_y), line, font=font, fill=font_color)
+    current_y += text_height + 10  # Move to the next line with spacing
+
+# Save the final logo as a PNG image with transparency
+logo_image.save("aclarknet_logo_with_circle.png")
