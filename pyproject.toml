@@ -14,5 +14,5 @@ packages = []
 
 [tool.django_mongodb_cli]
 dev = [
-    "django-mongodb-template @ git+ssh://git@github.com/aclark4life/django-mongodb-template@main",
+    "project-templates @ git+ssh://git@github.com/aclark4life/project-templates@main",
 ]
