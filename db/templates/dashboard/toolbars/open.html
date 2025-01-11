@@ -1,0 +1,11 @@
+{% if object.url %}
+    <div class="btn-group ms-auto" role="group">
+        <a class="btn btn-outline-primary"
+           href="{{ object.url }}"
+           data-toggle="tooltip"
+           title="Open URL"
+           target="_blank">
+            Open URL <i class="fa-solid fa-square-arrow-up-right"></i>
+        </a>
+    </div>
+{% endif %}
