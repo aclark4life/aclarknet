@@ -11,8 +11,3 @@ dependencies = [
 
 [tool.setuptools]
 packages = []
-
-[tool.django_mongodb_cli]
-dev = [
-    "django-postgresql-project @ git+ssh://git@github.com/aclark4life/wagtail-postgresql-project",
-]
