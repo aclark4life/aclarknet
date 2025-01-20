@@ -16,4 +16,5 @@ packages = []
 dev = [
     "django-project-templates @ git+ssh://git@github.com/aclark4life/django-project-templates@main",
     "django-mongodb-backend @ git+ssh://git@github.com/mongodb-labs/django-mongodb-backend@main",
+    "django-mongodb-polls @ git+ssh://git@github.com/aclark4life/django-mongodb-polls@main",
 ]
