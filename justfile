@@ -46,7 +46,6 @@ alias o := django-open
 
 [group("django")]
 django-serve:
-    /opt/homebrew/opt/postgresql@14/bin/postgres -D /opt/homebrew/var/postgresql@14 &
     python manage.py runserver
 alias s := django-serve
 
