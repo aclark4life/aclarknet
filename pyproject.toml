@@ -4,7 +4,10 @@ version = "0.1.0"
 dependencies = [
     "django-debug-toolbar",
     "django-extensions",
+    "django-import-export",
     "django-mongodb-backend",
+    "django-phonenumber-field",
+    "phonenumbers",
     "python-webpack-boilerplate",
     "wagtail",
 ]

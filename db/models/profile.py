@@ -9,9 +9,9 @@ class Profile(BaseModel):
         settings.AUTH_USER_MODEL, blank=True, null=True, on_delete=models.CASCADE
     )
     page_size = models.PositiveIntegerField(blank=True, null=True)
-    user_theme_preference = models.CharField(
-        max_length=10, choices=settings.THEMES, default="light"
-    )
+    # user_theme_preference = models.CharField(
+    #     max_length=10, choices=settings.THEMES, default="light"
+    # )
     rate = models.DecimalField(
         "Hourly Rate (United States Dollar - USD)",
         blank=True,
