@@ -1,5 +1,4 @@
 import django_mongodb_backend
-import dj_database_url
 import os
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -62,6 +61,7 @@ if settings_dict["ENGINE"] == "django_mongodb_backend":
         "wagtailforms": "mongo_migrations.wagtailforms",
         "wagtailembeds": "mongo_migrations.wagtailembeds",
         "wagtailusers": "mongo_migrations.wagtailusers",
+        "db": "mongo_migrations.db",
     }
 
 elif settings_dict["ENGINE"] == "django.db.backends.postgresql":

@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.postgres.fields import HStoreField
+# from django.contrib.postgres.fields import HStoreField
 
 
 from db.models.base import BaseModel
@@ -26,7 +26,7 @@ class Report(BaseModel):
     company = models.ForeignKey(
         "Company", blank=True, null=True, on_delete=models.SET_NULL
     )
-    team = HStoreField(blank=True, null=True)
+    # team = HStoreField(blank=True, null=True)
 
     def get_absolute_url(self):
         return reverse("report_view", args=[str(self.id)])
