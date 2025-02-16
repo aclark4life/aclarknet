@@ -1,12 +1,12 @@
 from django.db import models
-from taggit.managers import TaggableManager
+# from taggit.managers import TaggableManager
 
 from db.models.base import BaseModel
 from django.shortcuts import reverse
 
 
 class Client(BaseModel):
-    tags = TaggableManager(blank=True)
+    # tags = TaggableManager(blank=True)
     address = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     url = models.URLField("Website", blank=True, null=True)
