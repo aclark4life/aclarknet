@@ -1,4 +1,5 @@
 import django_mongodb_backend
+import dj_database_url
 import os
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -42,9 +43,7 @@ if settings_dict["ENGINE"] == "django_mongodb_backend":
         "django_extensions",
         "webpack_boilerplate",
         "debug_toolbar",
-        # "home",
-        "db",
-        "phonenumber_field",
+        "home",
     ]
 
     MIGRATION_MODULES = {
@@ -61,7 +60,6 @@ if settings_dict["ENGINE"] == "django_mongodb_backend":
         "wagtailforms": "mongo_migrations.wagtailforms",
         "wagtailembeds": "mongo_migrations.wagtailembeds",
         "wagtailusers": "mongo_migrations.wagtailusers",
-        "db": "mongo_migrations.db",
     }
 
 elif settings_dict["ENGINE"] == "django.db.backends.postgresql":
@@ -104,7 +102,7 @@ WEBPACK_LOADER = {
     "MANIFEST_FILE": os.path.join(BASE_DIR, "frontend", "build", "manifest.json")
 }
 
-SECRET_KEY = "django-insecure-n-1xut6vwm2@i)(pto)ys)e3pz=v&zya-5sjvrohm&(d4uz6=$"
+SECRET_KEY = "django-insecure-233wl04fp9j^4*0cffy$cy))($=_ss2x!_5=2_5-@#zzl-7u*l"
 
 TEMPLATES = [
     {
