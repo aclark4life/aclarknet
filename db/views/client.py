@@ -23,10 +23,12 @@ from ..models.task import Task
 from ..serializers import ClientSerializer
 from .base import BaseView
 
-if settings.USE_FAKE:
-    from faker import Faker
+# if settings.USE_FAKE:
+#     from faker import Faker
+# 
+#     fake = Faker()
 
-    fake = Faker()
+USE_FAKE = True
 
 
 class ClientAPIViewSet(viewsets.ModelViewSet):
@@ -84,7 +86,8 @@ class ClientCreateView(BaseClientView, CreateView):
             context["form"].initial = {
                 "company": company,
             }
-        if settings.USE_FAKE:
+        # if settings.USE_FAKE:
+        if USE_FAKE:
             context["form"].initial.update(
                 {
                     "name": fake.company(),
