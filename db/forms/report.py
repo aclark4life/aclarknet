@@ -27,7 +27,7 @@ class ReportForm(forms.ModelForm):
             "contacts",
             "user",
             "company",
-            "team",
+            # "team",
             "archived",
         )
 
@@ -90,12 +90,12 @@ class AdminReportForm(ReportForm):
         layout.append(
             Div(Field("company", css_class="form-control"), css_class="col-sm-6"),
         )
-        layout.append(
-            Div(
-                Field("team", css_class="form-control bg-transparent border"),
-                css_class="col-sm-6",
-            ),
-        )
+        # layout.append(
+        #     Div(
+        #         Field("team", css_class="form-control bg-transparent border"),
+        #         css_class="col-sm-6",
+        #     ),
+        # )
         layout.append(
             Div(
                 Field("contacts", css_class="form-control"),
