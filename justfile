@@ -103,6 +103,8 @@ npm-install:
 
 [group("npm")]
 npm-build:
-    cd frontend && npm build
+    cd frontend && npm run build
 
-alias n := npm-install npm-build
+frontend: npm-install npm-build
+
+alias n := frontend
