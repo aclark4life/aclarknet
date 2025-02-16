@@ -2,6 +2,7 @@
 name = "aclarknet"
 version = "0.1.0"
 dependencies = [
+    "Faker",
     "django-crispy-forms",
     "django-debug-toolbar",
     "django-extensions",
@@ -9,6 +10,7 @@ dependencies = [
     "django-mongodb-backend",
     "django-phonenumber-field",
     "phonenumbers",
+    "python-docx",
     "python-webpack-boilerplate",
     "wagtail",
 ]
