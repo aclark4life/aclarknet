@@ -46,6 +46,7 @@ if settings_dict["ENGINE"] == "django_mongodb_backend":
         # "home",
         "db",
         "import_export",
+        "crispy_forms",
     ]
 
     MIGRATION_MODULES = {
