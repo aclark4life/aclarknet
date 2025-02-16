@@ -45,6 +45,11 @@ django-open:
 alias o := django-open
 
 [group("django")]
+django-migrate:
+    django-mongodb-cli migrate
+alias m := django-migrate
+
+[group("django")]
 django-serve:
     python manage.py runserver
 alias s := django-serve
