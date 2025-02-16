@@ -96,3 +96,13 @@ sub:
 
 logo: check-venv
     python logo.py
+
+[group("npm")]
+npm-install:
+    cd frontend && npm install
+
+[group("npm")]
+npm-build:
+    cd frontend && npm build
+
+alias n := npm-install npm-build
