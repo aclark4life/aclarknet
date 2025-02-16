@@ -48,8 +48,8 @@ if settings_dict["ENGINE"] == "django_mongodb_backend":
         "import_export",
         "crispy_forms",
         "allauth",
-        "allauth.account",
-        "allauth.socialaccount",
+        "backend.mongo_apps.MongoAccountConfig",
+        "backend.mongo_apps.MongoSocialAccountConfig",
     ]
 
     MIGRATION_MODULES = {
