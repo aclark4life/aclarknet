@@ -43,7 +43,9 @@ if settings_dict["ENGINE"] == "django_mongodb_backend":
         "django_extensions",
         "webpack_boilerplate",
         "debug_toolbar",
-        "home",
+        # "home",
+        "db",
+        "import_export",
     ]
 
     MIGRATION_MODULES = {
