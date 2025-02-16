@@ -9,6 +9,7 @@ dependencies = [
     "django-import-export",
     "django-mongodb-backend",
     "django-phonenumber-field",
+    "html2docx",
     "phonenumbers",
     "python-docx",
     "python-webpack-boilerplate",
