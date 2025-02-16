@@ -49,7 +49,7 @@ if settings_dict["ENGINE"] == "django_mongodb_backend":
         "crispy_forms",
         "allauth",
         "allauth.account",
-        "allauth.social",
+        "allauth.socialaccount",
     ]
 
     MIGRATION_MODULES = {
