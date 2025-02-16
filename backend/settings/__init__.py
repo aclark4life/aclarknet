@@ -154,3 +154,4 @@ WAGTAIL_SITE_NAME = "backend"
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+USE_FAKE = True
