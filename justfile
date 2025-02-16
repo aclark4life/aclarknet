@@ -54,6 +54,11 @@ django-serve:
     python manage.py runserver
 alias s := django-serve
 
+[group("django")]
+django-su:
+    django-mongodb-cli createsuperuser
+alias su := django-su
+
 [group("eb")]
 eb-create:
     eb create "aclarknet-{{GIT_BRANCH}}-{{GIT_HASH}}" \
