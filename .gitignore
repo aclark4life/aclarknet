@@ -4,3 +4,5 @@ src/
 .elasticbeanstalk/
 .envrc
 package-lock.json
+server.log
+server.pid
