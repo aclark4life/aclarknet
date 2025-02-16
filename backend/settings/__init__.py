@@ -47,6 +47,8 @@ if settings_dict["ENGINE"] == "django_mongodb_backend":
         "db",
         "import_export",
         "crispy_forms",
+        "allauth",
+        "allauth.account",
     ]
 
     MIGRATION_MODULES = {
@@ -147,6 +149,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 WAGTAIL_SITE_NAME = "backend"
