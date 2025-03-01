@@ -6,3 +6,4 @@ src/
 package-lock.json
 server.log
 server.pid
+uv.lock
