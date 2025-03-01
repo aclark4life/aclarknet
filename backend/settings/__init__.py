@@ -47,6 +47,7 @@ if settings_dict["ENGINE"] == "django_mongodb_backend":
         "debug_toolbar",
         "home",
         "db",
+        "import_export",
     ]
 
     MIGRATION_MODULES = {
