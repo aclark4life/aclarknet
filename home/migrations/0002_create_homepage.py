@@ -1,3 +1,4 @@
+from bson import ObjectId
 from django.db import migrations
 
 # Do not use settings in migrations under normal circumstances.
@@ -13,7 +14,7 @@ def create_homepage(apps, schema_editor):
 
     # Delete the default homepage
     # If migration is run multiple times, it may have already been deleted
-    Page.objects.filter(id=2).delete()
+    Page.objects.filter(id=ObjectId("000000000000000000000001")).delete()
 
     # Create content type for homepage model
     homepage_content_type, __ = ContentType.objects.get_or_create(

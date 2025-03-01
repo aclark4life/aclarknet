@@ -2,6 +2,8 @@ import django_mongodb_backend
 import dj_database_url
 import os
 
+from bson import ObjectId
+
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
@@ -43,13 +45,7 @@ if settings_dict["ENGINE"] == "django_mongodb_backend":
         "django_extensions",
         "webpack_boilerplate",
         "debug_toolbar",
-        # "home",
-        "db",
-        "import_export",
-        "crispy_forms",
-        "allauth",
-        "backend.mongo_apps.MongoAccountConfig",
-        "backend.mongo_apps.MongoSocialAccountConfig",
+        "home",
     ]
 
     MIGRATION_MODULES = {
@@ -108,15 +104,8 @@ WEBPACK_LOADER = {
     "MANIFEST_FILE": os.path.join(BASE_DIR, "frontend", "build", "manifest.json")
 }
 
-SECRET_KEY = "django-insecure-233wl04fp9j^4*0cffy$cy))($=_ss2x!_5=2_5-@#zzl-7u*l"
+SECRET_KEY = "django-insecure-y+6plg)7c7%65p*pji2qt&n_cme-&j%gg)vbg5p#mmmx*r5y@8"
 
-TEMPLATES = [
-    {
-        "APP_DIRS": True,
-        "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join("backend", "templates")],
-    },
-]
 
 ALLOWED_HOSTS = ["*"]
 
@@ -125,9 +114,10 @@ STATIC_URL = "static/"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [
-            os.path.join(PROJECT_DIR, "templates"),
-        ],
+        # "DIRS": [
+        #     os.path.join(PROJECT_DIR, "templates"),
+        # ],
+        "DIRS": [os.path.join("backend", "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -150,7 +140,6 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
-    "allauth.account.middleware.AccountMiddleware",
 ]
 
 WAGTAIL_SITE_NAME = "backend"
@@ -158,4 +147,5 @@ WAGTAIL_SITE_NAME = "backend"
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
-USE_FAKE = True
+
+SITE_ID = ObjectId("000000000000000000000001")

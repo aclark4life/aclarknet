@@ -113,3 +113,9 @@ npm-build:
 frontend: npm-install npm-build
 
 alias n := frontend
+
+# ---------------------------------------- mongodb ----------------------------------------
+
+[group('mongodb')]
+db-init:
+    mongosh --eval 'use backend' --eval 'db.dropDatabase()'
