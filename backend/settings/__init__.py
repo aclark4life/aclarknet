@@ -55,6 +55,8 @@ if settings_dict["ENGINE"] == "django_mongodb_backend":
         "enmerkar",
         "django.contrib.humanize",
         "hijack",
+        "crispy_forms",
+        "crispy_bootstrap5",
     ]
 
     MIGRATION_MODULES = {
@@ -98,6 +100,7 @@ elif settings_dict["ENGINE"] == "django.db.backends.postgresql":
         "django_extensions",
         "webpack_boilerplate",
         "debug_toolbar",
+        "crispy_forms",
     ]
 else:
     raise ValueError("Neither MONGODB_URI nor POSTGRES_URI is set in the environment variables.")
@@ -165,3 +168,5 @@ LOGIN_REDIRECT_URL = "/"
 # db
 USE_FAKE = True
 PER_PAGE = 10
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
