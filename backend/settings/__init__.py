@@ -151,12 +151,3 @@ INTERNAL_IPS = [
 ]
 
 SITE_ID = ObjectId("000000000000000000000001")
-
-STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
-    },
-}
