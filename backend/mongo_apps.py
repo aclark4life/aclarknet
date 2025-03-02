@@ -15,6 +15,18 @@ from wagtail.embeds.apps import WagtailEmbedsAppConfig
 from wagtail.users.apps import WagtailUsersAppConfig
 
 
+from allauth.account.apps import AccountConfig
+from allauth.socialaccount.apps import SocialAccountConfig
+
+
+class MongoAccountConfig(AccountConfig):
+    default_auto_field = "django_mongodb_backend.fields.ObjectIdAutoField"
+
+
+class MongoSocialAccountConfig(SocialAccountConfig):
+    default_auto_field = "django_mongodb_backend.fields.ObjectIdAutoField"
+
+
 class MongoTaggitAppConfig(TaggitAppConfig):
     default_auto_field = "django_mongodb_backend.fields.ObjectIdAutoField"
 

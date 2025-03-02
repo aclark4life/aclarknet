@@ -48,6 +48,9 @@ if settings_dict["ENGINE"] == "django_mongodb_backend":
         "home",
         "db",
         "import_export",
+        "allauth",
+        "backend.mongo_apps.MongoAccountConfig",
+        "backend.mongo_apps.MongoSocialAccountConfig",
     ]
 
     MIGRATION_MODULES = {
@@ -142,6 +145,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 WAGTAIL_SITE_NAME = "backend"
