@@ -52,6 +52,8 @@ if settings_dict["ENGINE"] == "django_mongodb_backend":
         "backend.mongo_apps.MongoAccountConfig",
         "backend.mongo_apps.MongoSocialAccountConfig",
         "siteuser",
+        "enmerkar",
+        "django.contrib.humanize",
     ]
 
     MIGRATION_MODULES = {
