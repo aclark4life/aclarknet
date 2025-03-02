@@ -54,6 +54,7 @@ if settings_dict["ENGINE"] == "django_mongodb_backend":
         "siteuser",
         "enmerkar",
         "django.contrib.humanize",
+        "hijack",
     ]
 
     MIGRATION_MODULES = {
@@ -149,6 +150,7 @@ MIDDLEWARE = [
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     "allauth.account.middleware.AccountMiddleware",
+    "hijack.middleware.HijackUserMiddleware",
 ]
 
 WAGTAIL_SITE_NAME = "backend"

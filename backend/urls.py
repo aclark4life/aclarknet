@@ -9,6 +9,7 @@ urlpatterns = [
     path("admin/django/", admin.site.urls),
     path("admin/wagtail/", include("wagtail.admin.urls")),
     path("dashboard/", include("db.urls")),
+    path("hijack/", include("hijack.urls")),
     path("user/", include("siteuser.urls")),
     path("", BaseView.as_view(), name="base")
 ] + debug_toolbar_urls()
