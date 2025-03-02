@@ -1,4 +1,4 @@
-import 'react';
+import React from 'react';  // eslint-disable-line
 import { createRoot } from 'react-dom/client';
 import 'bootstrap';
 import '@fortawesome/fontawesome-free/js/fontawesome';

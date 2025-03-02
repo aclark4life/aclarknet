@@ -1,5 +1,5 @@
 // UserMenu.js
-import 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 function handleLogout() {  // eslint-disable-line no-unused-vars

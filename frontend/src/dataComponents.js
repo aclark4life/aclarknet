@@ -1,5 +1,5 @@
 // Via pwellever
-import 'react';
+import React from 'react';  // eslint-disable-line no-unused-vars
 import { createPortal } from 'react-dom';
 
 const parseProps = data => Object.entries(data).reduce((result, [key, value]) => {
