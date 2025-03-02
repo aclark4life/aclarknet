@@ -51,6 +51,7 @@ if settings_dict["ENGINE"] == "django_mongodb_backend":
         "allauth",
         "backend.mongo_apps.MongoAccountConfig",
         "backend.mongo_apps.MongoSocialAccountConfig",
+        "siteuser",
     ]
 
     MIGRATION_MODULES = {
