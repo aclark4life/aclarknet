@@ -1,7 +1,6 @@
 aclarknet.egg-info/
 __pycache__
 src/
-!frontend/src/
 .elasticbeanstalk/
 .envrc
 package-lock.json
