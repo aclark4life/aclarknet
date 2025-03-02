@@ -3,7 +3,6 @@ name = "aclarknet"
 version = "0.1.0"
 dependencies = [
     "Faker",
-    "babel",
     "django-allauth",
     "django-crispy-forms",
     "django-debug-toolbar",
@@ -11,6 +10,7 @@ dependencies = [
     "django-import-export",
     "django-mongodb-backend",
     "django-phonenumber-field",
+    "enmerkar",
     "html2docx",
     "phonenumbers",
     "python-docx",
