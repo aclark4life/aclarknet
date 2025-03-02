@@ -3,6 +3,7 @@ name = "aclarknet"
 version = "0.1.0"
 dependencies = [
     "Faker",
+    "babel",
     "django-allauth",
     "django-crispy-forms",
     "django-debug-toolbar",
