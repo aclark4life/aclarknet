@@ -116,12 +116,12 @@ urlpatterns += [
     path("company", CompanyListView.as_view(), name="company_index"),
     path("company", CompanyListView.as_view(), name="company_cancel"),
     path("company/create/", CompanyCreateView.as_view(), name="company_create"),
-    path("company/<int:pk>/", CompanyDetailView.as_view(), name="company_view"),
-    path("company/<int:pk>/update/", CompanyUpdateView.as_view(), name="company_edit"),
+    path("company/<str:pk>/", CompanyDetailView.as_view(), name="company_view"),
+    path("company/<str:pk>/update/", CompanyUpdateView.as_view(), name="company_edit"),
     path(
-        "company/<int:pk>/delete/", CompanyDeleteView.as_view(), name="company_delete"
+        "company/<str:pk>/delete/", CompanyDeleteView.as_view(), name="company_delete"
     ),
-    path("company/<int:pk>/copy/", CompanyCopyView.as_view(), name="company_copy"),
+    path("company/<str:pk>/copy/", CompanyCopyView.as_view(), name="company_copy"),
 ]
 
 urlpatterns += [
