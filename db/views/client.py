@@ -102,7 +102,7 @@ class ClientCreateView(BaseClientView, CreateView):
         if company_id:
             company = Company.objects.get(pk=company_id)
             company.client_set.add(obj)
-            return HttpResponseRedirect(reverse("company_view", args=[company_id]))
+            return HttpResponseRedirect(reverse("client_view", args=[obj.pk]))
         return super().form_valid(form)
 
 
