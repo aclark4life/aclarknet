@@ -178,7 +178,7 @@ DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.settings.SettingsPanel',
     'debug_toolbar.panels.headers.HeadersPanel',
     'debug_toolbar.panels.request.RequestPanel',
-    'django_mongodb_backend.debug_toolbar.panels.mql.MQLPanel',
+    'django_mongodb_extensions.debug_toolbar.panels.mql.MQLPanel',
     'debug_toolbar.panels.staticfiles.StaticFilesPanel',
     'debug_toolbar.panels.templates.TemplatesPanel',
     'debug_toolbar.panels.alerts.AlertsPanel',
