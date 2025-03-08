@@ -128,10 +128,10 @@ urlpatterns += [
     path("time", TimeListView.as_view(), name="time_index"),
     path("time", TimeListView.as_view(), name="time_cancel"),
     path("time/create/", TimeCreateView.as_view(), name="time_create"),
-    path("time/<int:pk>/", TimeDetailView.as_view(), name="time_view"),
-    path("time/<int:pk>/update/", TimeUpdateView.as_view(), name="time_edit"),
-    path("time/<int:pk>/delete/", TimeDeleteView.as_view(), name="time_delete"),
-    path("time/<int:pk>/copy/", TimeCopyView.as_view(), name="time_copy"),
+    path("time/<str:pk>/", TimeDetailView.as_view(), name="time_view"),
+    path("time/<str:pk>/update/", TimeUpdateView.as_view(), name="time_edit"),
+    path("time/<str:pk>/delete/", TimeDeleteView.as_view(), name="time_delete"),
+    path("time/<str:pk>/copy/", TimeCopyView.as_view(), name="time_copy"),
 ]
 
 urlpatterns += [
@@ -223,34 +223,34 @@ urlpatterns += [
     path("invoice/", InvoiceListView.as_view(), name="invoice_index"),
     path("invoice/", InvoiceListView.as_view(), name="invoice_cancel"),
     path("invoice/create/", InvoiceCreateView.as_view(), name="invoice_create"),
-    path("invoice/<int:pk>/", InvoiceDetailView.as_view(), name="invoice_view"),
-    path("invoice/<int:pk>/update/", InvoiceUpdateView.as_view(), name="invoice_edit"),
+    path("invoice/<str:pk>/", InvoiceDetailView.as_view(), name="invoice_view"),
+    path("invoice/<str:pk>/update/", InvoiceUpdateView.as_view(), name="invoice_edit"),
     path(
-        "invoice/<int:pk>/delete/", InvoiceDeleteView.as_view(), name="invoice_delete"
+        "invoice/<str:pk>/delete/", InvoiceDeleteView.as_view(), name="invoice_delete"
     ),
-    path("invoice/<int:pk>/copy/", InvoiceCopyView.as_view(), name="invoice_copy"),
+    path("invoice/<str:pk>/copy/", InvoiceCopyView.as_view(), name="invoice_copy"),
     path(
-        "invoice/export-doc/<int:object_id>/",
+        "invoice/export-doc/<str:object_id>/",
         InvoiceExportDOCView.as_view(),
         name="invoice_export_doc",
     ),
     path(
-        "invoice/export-pdf/<int:object_id>/",
+        "invoice/export-pdf/<str:object_id>/",
         InvoiceExportPDFView.as_view(),
         name="invoice_export_pdf",
     ),
     path(
-        "invoice/mail-doc/<int:object_id>/",
+        "invoice/mail-doc/<str:object_id>/",
         InvoiceEmailDOCView.as_view(),
         name="invoice_email_doc",
     ),
     path(
-        "invoice/mail-pdf/<int:object_id>/",
+        "invoice/mail-pdf/<str:object_id>/",
         InvoiceEmailPDFView.as_view(),
         name="invoice_email_pdf",
     ),
     path(
-        "invoice/mail-text/<int:object_id>/",
+        "invoice/mail-text/<str:object_id>/",
         InvoiceEmailTextView.as_view(),
         name="invoice_email_text",
     ),
