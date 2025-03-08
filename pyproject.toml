@@ -10,7 +10,6 @@ dependencies = [
     "django-extensions",
     "django-hijack",
     "django-import-export",
-    "django-mongodb-backend",
     "django-phonenumber-field",
     "enmerkar",
     "html2docx",
@@ -27,6 +26,7 @@ packages = []
 
 [tool.django_mongodb_cli]
 dev = [
-    "django-mongodb-templates @ git+ssh://git@github.com/aclark4life/django-mongodb-templates@main",
+    "django-mongodb-backend @ git+ssh://git@github.com/mongodb/django-mongodb-backend@main",
     "django-mongodb-extensions @ git+ssh://git@github.com/aclark4life/django-mongodb-extensions@main",
+    "django-mongodb-templates @ git+ssh://git@github.com/aclark4life/django-mongodb-templates@main",
 ]
