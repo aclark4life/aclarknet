@@ -6,8 +6,8 @@ from .views import BaseView
 
 urlpatterns = [
     path("accounts/", include("allauth.urls")),
-    path("admin/django/", admin.site.urls),
-    path("admin/wagtail/", include("wagtail.admin.urls")),
+    path("django/", admin.site.urls),
+    path("wagtail/", include("wagtail.admin.urls")),
     path("dashboard/", include("db.urls")),
     path("hijack/", include("hijack.urls")),
     path("user/", include("siteuser.urls")),
