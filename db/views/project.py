@@ -99,7 +99,7 @@ class ProjectCreateView(BaseProjectView, CreateView):
         if client_id:
             client = Client.objects.get(pk=client_id)
             client.project_set.add(obj)
-            return HttpResponseRedirect(reverse("client_view", args=[client_id]))
+            return HttpResponseRedirect(reverse("project_view", args=[obj.pk]))
         return super().form_valid(form)
 
 
