@@ -131,7 +131,7 @@
             {% for time_entry in times %}
                 <tr>
                     <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ time_entry.date }}</td>
-                    <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ time_entry.task }}</td>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ time_entry.task|default:"No task set" }}</td>
                     <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ time_entry.description }}</td>
                     <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">{{ time_entry.hours|floatformat:2|intcomma }}</td>
                     <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">
