@@ -213,10 +213,10 @@ urlpatterns += [
     path("client", ClientListView.as_view(), name="client_index"),
     path("client", ClientListView.as_view(), name="client_cancel"),
     path("client/create/", ClientCreateView.as_view(), name="client_create"),
-    path("client/<int:pk>/", ClientDetailView.as_view(), name="client_view"),
-    path("client/<int:pk>/update/", ClientUpdateView.as_view(), name="client_edit"),
-    path("client/<int:pk>/delete/", ClientDeleteView.as_view(), name="client_delete"),
-    path("client/<int:pk>/copy/", ClientCopyView.as_view(), name="client_copy"),
+    path("client/<str:pk>/", ClientDetailView.as_view(), name="client_view"),
+    path("client/<str:pk>/update/", ClientUpdateView.as_view(), name="client_edit"),
+    path("client/<str:pk>/delete/", ClientDeleteView.as_view(), name="client_delete"),
+    path("client/<str:pk>/copy/", ClientCopyView.as_view(), name="client_copy"),
 ]
 
 urlpatterns += [
