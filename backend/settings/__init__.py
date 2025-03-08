@@ -57,6 +57,7 @@ if settings_dict["ENGINE"] == "django_mongodb_backend":
         "hijack",
         "crispy_forms",
         "crispy_bootstrap5",
+        "django_mongodb_extensions",
     ]
 
     MIGRATION_MODULES = {
@@ -165,8 +166,24 @@ INTERNAL_IPS = [
 SITE_ID = ObjectId("000000000000000000000001")
 LOGIN_REDIRECT_URL = "/"
 
-# db
 USE_FAKE = True
 PER_PAGE = 10
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+DEBUG_TOOLBAR_PANELS = [
+    'debug_toolbar.panels.history.HistoryPanel',
+    'debug_toolbar.panels.versions.VersionsPanel',
+    'debug_toolbar.panels.timer.TimerPanel',
+    'debug_toolbar.panels.settings.SettingsPanel',
+    'debug_toolbar.panels.headers.HeadersPanel',
+    'debug_toolbar.panels.request.RequestPanel',
+    'django_mongodb_backend.debug_toolbar.panels.mql.MQLPanel',
+    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+    'debug_toolbar.panels.templates.TemplatesPanel',
+    'debug_toolbar.panels.alerts.AlertsPanel',
+    'debug_toolbar.panels.cache.CachePanel',
+    'debug_toolbar.panels.signals.SignalsPanel',
+    'debug_toolbar.panels.redirects.RedirectsPanel',
+    'debug_toolbar.panels.profiling.ProfilingPanel',
+]
