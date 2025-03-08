@@ -163,12 +163,12 @@ urlpatterns += [
     path("project", ProjectListView.as_view(), name="project_index"),
     path("project", ProjectListView.as_view(), name="project_cancel"),
     path("project/create/", ProjectCreateView.as_view(), name="project_create"),
-    path("project/<int:pk>/", ProjectDetailView.as_view(), name="project_view"),
-    path("project/<int:pk>/update/", ProjectUpdateView.as_view(), name="project_edit"),
+    path("project/<str:pk>/", ProjectDetailView.as_view(), name="project_view"),
+    path("project/<str:pk>/update/", ProjectUpdateView.as_view(), name="project_edit"),
     path(
-        "project/<int:pk>/delete/", ProjectDeleteView.as_view(), name="project_delete"
+        "project/<str:pk>/delete/", ProjectDeleteView.as_view(), name="project_delete"
     ),
-    path("project/<int:pk>/copy/", ProjectCopyView.as_view(), name="project_copy"),
+    path("project/<str:pk>/copy/", ProjectCopyView.as_view(), name="project_copy"),
 ]
 
 urlpatterns += [
