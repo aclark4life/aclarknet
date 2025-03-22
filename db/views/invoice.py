@@ -156,14 +156,14 @@ class InvoiceCreateView(BaseInvoiceView, CreateView):
 
         return context
 
-    def form_valid(self, form):
-        self.object = form.save()
-        project_id = self.request.GET.get("project_id")
-        if project_id:
-            project = Project.objects.get(pk=project_id)
-            self.object.project = project
-            self.object.save()
-        return super().form_valid(form)
+    # def form_valid(self, form):
+    #     self.object = form.save()
+    #     project_id = self.request.GET.get("project_id")
+    #     if project_id:
+    #         project = Project.objects.get(pk=project_id)
+    #         self.object.project = project
+    #         self.object.save()
+    #     return super().form_valid(form)
 
 
 class InvoiceDetailView(BaseInvoiceView, DetailView):

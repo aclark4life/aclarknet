@@ -79,7 +79,7 @@ class Invoice(BaseModel):
     def get_absolute_url(self):
         return reverse("invoice_view", args=[str(self.id)])
 
-    def save(self, *args, **kwargs):
-        if not self.subject:
-            self.subject = self.__str__()
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if not self.subject:
+    #         self.subject = self.__str__()
+    #     super().save(*args, **kwargs)
