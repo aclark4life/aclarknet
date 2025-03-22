@@ -46,17 +46,17 @@ alias o := django-open
 
 [group("django")]
 django-migrate:
-    django-mongodb-cli manage migrate
+    dm manage migrate
 alias m := django-migrate
 
 [group("django")]
 django-serve:
-    django-mongodb-cli runserver
+    dm runserver
 alias s := django-serve
 
 [group("django")]
 django-su:
-    django-mongodb-cli createsuperuser
+    dm createsuperuser
 alias su := django-su
 
 [group("eb")]
