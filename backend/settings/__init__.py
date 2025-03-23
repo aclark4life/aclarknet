@@ -217,3 +217,4 @@ DEBUG_TOOLBAR_PANELS = [
 #     },
 # }
 
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
