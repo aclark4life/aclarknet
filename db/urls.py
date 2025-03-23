@@ -138,22 +138,22 @@ urlpatterns += [
     path("task", TaskListView.as_view(), name="task_index"),
     path("task", TaskListView.as_view(), name="task_cancel"),
     path("task/create/", TaskCreateView.as_view(), name="task_create"),
-    path("task/<int:pk>/", TaskDetailView.as_view(), name="task_view"),
-    path("task/<int:pk>/update/", TaskUpdateView.as_view(), name="task_edit"),
-    path("task/<int:pk>/delete/", TaskDeleteView.as_view(), name="task_delete"),
-    path("task/<int:pk>/copy/", TaskCopyView.as_view(), name="task_copy"),
+    path("task/<str:pk>/", TaskDetailView.as_view(), name="task_view"),
+    path("task/<str:pk>/update/", TaskUpdateView.as_view(), name="task_edit"),
+    path("task/<str:pk>/delete/", TaskDeleteView.as_view(), name="task_delete"),
+    path("task/<str:pk>/copy/", TaskCopyView.as_view(), name="task_copy"),
 ]
 
 urlpatterns += [
     path("report", ReportListView.as_view(), name="report_index"),
     path("report", ReportListView.as_view(), name="report_cancel"),
     path("report/create/", ReportCreateView.as_view(), name="report_create"),
-    path("report/<int:pk>/", ReportDetailView.as_view(), name="report_view"),
-    path("report/<int:pk>/update/", ReportUpdateView.as_view(), name="report_edit"),
-    path("report/<int:pk>/delete/", ReportDeleteView.as_view(), name="report_delete"),
-    path("report/<int:pk>/copy/", ReportCopyView.as_view(), name="report_copy"),
+    path("report/<str:pk>/", ReportDetailView.as_view(), name="report_view"),
+    path("report/<str:pk>/update/", ReportUpdateView.as_view(), name="report_edit"),
+    path("report/<str:pk>/delete/", ReportDeleteView.as_view(), name="report_delete"),
+    path("report/<str:pk>/copy/", ReportCopyView.as_view(), name="report_copy"),
     path(
-        "report/mail-text/<int:object_id>/",
+        "report/mail-text/<str:object_id>/",
         ReportEmailTextView.as_view(),
         name="report_email_text",
     ),
@@ -175,22 +175,22 @@ urlpatterns += [
     path("user", UserListView.as_view(), name="user_index"),
     path("user", UserListView.as_view(), name="user_cancel"),
     path("user/create/", UserCreateView.as_view(), name="user_create"),
-    path("user/<int:pk>/", UserDetailView.as_view(), name="user_view"),
-    path("user/<int:pk>/update/", UserUpdateView.as_view(), name="user_edit"),
-    path("user/<int:pk>/delete/", UserDeleteView.as_view(), name="user_delete"),
-    path("user/<int:pk>/copy/", UserCopyView.as_view(), name="user_copy"),
+    path("user/<str:pk>/", UserDetailView.as_view(), name="user_view"),
+    path("user/<str:pk>/update/", UserUpdateView.as_view(), name="user_edit"),
+    path("user/<str:pk>/delete/", UserDeleteView.as_view(), name="user_delete"),
+    path("user/<str:pk>/copy/", UserCopyView.as_view(), name="user_copy"),
 ]
 
 urlpatterns += [
     path("contact", ContactListView.as_view(), name="contact_index"),
     path("contact", ContactListView.as_view(), name="contact_cancel"),
     path("contact/create/", ContactCreateView.as_view(), name="contact_create"),
-    path("contact/<int:pk>/", ContactDetailView.as_view(), name="contact_view"),
-    path("contact/<int:pk>/update/", ContactUpdateView.as_view(), name="contact_edit"),
+    path("contact/<str:pk>/", ContactDetailView.as_view(), name="contact_view"),
+    path("contact/<str:pk>/update/", ContactUpdateView.as_view(), name="contact_edit"),
     path(
-        "contact/<int:pk>/delete/", ContactDeleteView.as_view(), name="contact_delete"
+        "contact/<str:pk>/delete/", ContactDeleteView.as_view(), name="contact_delete"
     ),
-    path("contact/<int:pk>/copy/", ContactCopyView.as_view(), name="contact_copy"),
+    path("contact/<str:pk>/copy/", ContactCopyView.as_view(), name="contact_copy"),
 ]
 
 urlpatterns += [
@@ -198,12 +198,12 @@ urlpatterns += [
     path("note", NoteListView.as_view(), name="note_cancel"),
     path("note/fullscreen", NoteListFullScreen.as_view(), name="note-fullscreen"),
     path("note/create/", NoteCreateView.as_view(), name="note_create"),
-    path("note/<int:pk>/", NoteDetailView.as_view(), name="note_view"),
-    path("note/<int:pk>/update/", NoteUpdateView.as_view(), name="note_edit"),
-    path("note/<int:pk>/delete/", NoteDeleteView.as_view(), name="note_delete"),
-    path("note/<int:pk>/copy/", NoteCopyView.as_view(), name="note_copy"),
+    path("note/<str:pk>/", NoteDetailView.as_view(), name="note_view"),
+    path("note/<str:pk>/update/", NoteUpdateView.as_view(), name="note_edit"),
+    path("note/<str:pk>/delete/", NoteDeleteView.as_view(), name="note_delete"),
+    path("note/<str:pk>/copy/", NoteCopyView.as_view(), name="note_copy"),
     path(
-        "note/mail-text/<int:object_id>/",
+        "note/mail-text/<str:object_id>/",
         NoteEmailTextView.as_view(),
         name="note_email_text",
     ),
@@ -273,7 +273,7 @@ urlpatterns += [
 ]
 
 urlpatterns += [
-    path("convert/<int:user_id>/", UserToContactView.as_view(), name="user_to_contact"),
+    path("convert/<str:user_id>/", UserToContactView.as_view(), name="user_to_contact"),
 ]
 
 urlpatterns += [path("archive/", archive, name="archive")]
