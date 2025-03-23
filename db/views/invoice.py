@@ -508,7 +508,8 @@ class InvoiceEmailTextView(BaseInvoiceView, View):
             if entry.project:
                 if entry.project.task:
                     rate = entry.project.task.rate
-            total["amount"] += amount
+            if amount:
+                total["amount"] += amount
             total["hours"] += hours
             table.add_row(
                 [
