@@ -52,6 +52,11 @@ django-migrate:
 alias m := django-migrate
 
 [group("django")]
+django-migrations:
+    python manage.py makemigrations
+alias mm := django-migrations
+
+[group("django")]
 django-serve:
     dm runserver
 alias s := django-serve

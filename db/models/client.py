@@ -13,6 +13,7 @@ class Client(BaseModel):
     publish = models.BooleanField(default=False)
     link = models.BooleanField(default=False)
     email = models.EmailField(blank=True, null=True, default="aclark@aclark.net")
+    task = models.ForeignKey("Task", blank=True, null=True, on_delete=models.SET_NULL)
 
     # https://stackoverflow.com/a/6062320/185820
     class Meta:

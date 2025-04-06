@@ -15,6 +15,7 @@ from django.views.generic import (
 )
 
 from ..forms.task import TaskForm
+from ..models.client import Client
 from ..models.project import Project
 from ..models.task import Task
 from .base import BaseView
@@ -70,7 +71,12 @@ class TaskCreateView(BaseTaskView, CreateView):
 
     def form_valid(self, form):
         project_id = self.request.GET.get("project_id")
+        client_id = self.request.GET.get("client_id")
         obj = form.save()
+        if client_id:
+            client = Client.objects.get(pk=client_id)
+            obj.client_set.add(client)
+            return HttpResponseRedirect(reverse("client_view", args=[client_id]))
         if project_id:
             project = Project.objects.get(pk=project_id)
             obj.project_set.add(project)
