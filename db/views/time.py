@@ -90,6 +90,19 @@ class BaseTimeView(BaseView, UserPassesTestMixin):
 
 class TimeCreateView(BaseTimeView, CreateView):
     success_url = reverse_lazy("time_view")
+    next_url = None
+
+    def dispatch(self, request, *args, **kwargs):
+        invoice_id = self.request.GET.get("invoice_id")
+        if invoice_id:
+            self.next_url = reverse_lazy("invoice_view", args=[invoice_id])
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_success_url(self):
+        if self.next_url:
+            return self.next_url
+        else:
+            return reverse_lazy("time_view", args=[self.object.pk])
 
     def test_func(self):
         if self.request.user.is_superuser:
@@ -98,9 +111,6 @@ class TimeCreateView(BaseTimeView, CreateView):
             return True
         else:
             return False
-
-    def get_success_url(self):
-        return reverse_lazy("time_view", args=[self.object.pk])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -141,6 +151,7 @@ class TimeCreateView(BaseTimeView, CreateView):
                 "task": task_id,
             }
         )
+        context['next_url'] = self.next_url
         return context
 
 
