@@ -17,7 +17,9 @@ default:
 
 [group("python")]
 pip-install:
+    pip install -U pip
     pip install -e .
+    pre-commit install
 alias i := pip-install
 
 # ensure virtual environment is active
