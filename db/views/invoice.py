@@ -204,15 +204,16 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
         context["url_email_doc"] = self.url_email_doc
         context["url_email_pdf"] = self.url_email_pdf
         context["url_email_text"] = self.url_email_text
-        context["field_values"].append(
-            ("Total", locale.currency(self.object.amount, grouping=True))
-        )
-        context["field_values"].append(
-            ("Cost", locale.currency(self.object.cost, grouping=True))
-        )
-        context["field_values"].append(
-            ("Net", locale.currency(self.object.net, grouping=True))
-        )
+        if self.object.amount:
+            context["field_values"].append(
+                ("Total", locale.currency(self.object.amount, grouping=True))
+            )
+            context["field_values"].append(
+                ("Cost", locale.currency(self.object.cost, grouping=True))
+            )
+            context["field_values"].append(
+                ("Net", locale.currency(self.object.net, grouping=True))
+            )
         context["field_values"].append(("Hours", self.object.hours))
         context["field_values"].append(("Company", self.object.company))
         contacts = self.object.contacts.all()
