@@ -91,7 +91,8 @@ class TaskDetailView(BaseTaskView, DetailView):
         task = self.get_object()
         notes = task.notes.all()
         projects = Project.objects.filter(task=task)
-        queryset_related = [q for q in [notes, projects] if q.exists()]
+        clients = Client.objects.filter(task=task)
+        queryset_related = [q for q in [clients, notes, projects] if q.exists()]
         queryset_related = list(chain(*queryset_related))
         queryset_related = sorted(queryset_related, key=self.get_archived)
         self.queryset_related = queryset_related

@@ -114,6 +114,7 @@ class ClientDetailView(BaseClientView, DetailView):
         notes = client.notes.all()
         projects = client.project_set.all().order_by("archived")
         company = client.company
+        task = client.task
         contacts = client.contact_set.all()
         invoices = Invoice.objects.filter(project__in=projects)
         reports = client.report_set.all().order_by("-created")
@@ -126,6 +127,8 @@ class ClientDetailView(BaseClientView, DetailView):
         ]
         if company:
             queryset_related.insert(0, [company])
+        if task:
+            queryset_related.insert(0, [task])
         queryset_related = list(chain(*queryset_related))
         queryset_related = sorted(queryset_related, key=self.get_archived)
         self.queryset_related = queryset_related
