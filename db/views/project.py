@@ -82,10 +82,12 @@ class ProjectCreateView(BaseProjectView, CreateView):
         client_id = self.request.GET.get("client_id")
         if client_id:
             client = Client.objects.get(id=client_id)
+            task = client.task
         context["form"].initial = {
             "start_date": now,
             "end_date": now + timezone.timedelta(days=366),
             "client": client,
+            "task": task,
         }
         if settings.USE_FAKE:
             context["form"].initial.update(
