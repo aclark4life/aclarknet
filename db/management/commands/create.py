@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.apps import apps
 from faker import Faker
 import random
-
+from datetime import timedelta
 
 class Command(BaseCommand):
     help = "Generate fake data for a given model (with embedded submodels if applicable)."
@@ -16,15 +16,22 @@ class Command(BaseCommand):
             default=3,
             help="Number of projects to embed in each company (default: 3)",
         )
+        parser.add_argument(
+            "--invoices",
+            type=int,
+            default=2,
+            help="Number of invoices to embed in each project (default: 2)",
+        )
 
     def handle(self, *args, **options):
         model_name = options["model"]
         n = options["n"]
         num_projects = options["projects"]
+        num_invoices = options["invoices"]
 
         fake = Faker()
 
-        # Try to locate the model dynamically from all apps
+        # Locate model dynamically
         try:
             model = apps.get_model(app_label="db", model_name=model_name)
         except LookupError:
@@ -40,22 +47,34 @@ class Command(BaseCommand):
         created = []
 
         if model_name.lower() == "company":
-            # Import your embedded model
-            from db.models import Project
+            # Import embedded models
+            from db.models import Project, Invoice
 
             for _ in range(n):
-                # Create embedded Project objects
-                projects = [
-                    Project(
+                projects = []
+
+                for _ in range(num_projects):
+                    # Create embedded invoices
+                    invoices = [
+                        Invoice(
+                            number=f"{fake.random_int(1000, 9999)}",
+                            date=fake.date_this_year(),
+                            amount=round(random.uniform(100, 5000), 2),
+                        )
+                        for _ in range(num_invoices)
+                    ]
+
+                    # Create embedded project with invoices
+                    project = Project(
                         name=fake.bs().title(),
                         description=fake.text(max_nb_chars=120),
                         start_date=fake.date_this_decade(),
                         end_date=fake.date_between(start_date="+30d", end_date="+180d"),
+                        invoices=invoices,
                     )
-                    for _ in range(num_projects)
-                ]
+                    projects.append(project)
 
-                # Create the Company with embedded projects
+                # Create company with embedded projects
                 company = model.objects.create(
                     name=fake.company(),
                     address=fake.address(),
@@ -67,7 +86,7 @@ class Command(BaseCommand):
             self.stdout.write(
                 self.style.SUCCESS(
                     f"Successfully created {len(created)} Company(ies), "
-                    f"each with {num_projects} Project(s)."
+                    f"each with {num_projects} Project(s) and {num_invoices} Invoice(s) per project."
                 )
             )
 

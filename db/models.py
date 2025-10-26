@@ -16,11 +16,21 @@ class Company(models.Model):
         verbose_name_plural = "Companies"
 
 
+class Invoice(EmbeddedModel):
+    number = models.CharField(max_length=50)
+    date = models.DateField(null=True, blank=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"Invoice {self.number}"
+
+
 class Project(EmbeddedModel):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
+    invoices = EmbeddedModelArrayField("Invoice")  # embedded invoices
 
     def __str__(self):
         return self.name
