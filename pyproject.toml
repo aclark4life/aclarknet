@@ -17,8 +17,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-    "pytest",
-    "pytest-django",
+    "Faker",
     "ruff",
 ]
 encryption = [
