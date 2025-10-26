@@ -1,7 +1,7 @@
 # aclarknet settings module.
 
 from .base import *  # noqa
-from pymongo.encryption_options import AutoEncryptionOpts
+# from pymongo.encryption_options import AutoEncryptionOpts
 from bson import ObjectId
 
 # Queryable Encryption
@@ -38,7 +38,12 @@ INSTALLED_APPS += [
 ]
 
 # Flatpages and Redirects
-INSTALLED_APPS += [
-    "aclarknet.apps.MongoDBFlatPagesConfig",
-    "aclarknet.apps.MongoDBRedirectsConfig",
+# INSTALLED_APPS += [
+#     "aclarknet.apps.MongoDBFlatPagesConfig",
+#     "aclarknet.apps.MongoDBRedirectsConfig",
+# ]
+
+# aclarknet
+INSTALLED_APPS += [  # noqa
+    "db"
 ]
