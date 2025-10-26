@@ -5,21 +5,29 @@ import random
 
 
 class Command(BaseCommand):
-    help = "Generate fake data for a given model using Faker."
+    help = "Generate fake data for a given model (with embedded submodels if applicable)."
 
     def add_arguments(self, parser):
         parser.add_argument("model", type=str, help="Name of the model (e.g., Company)")
-        parser.add_argument("n", type=int, help="Number of instances to create")
+        parser.add_argument("n", type=int, help="Number of model instances to create")
+        parser.add_argument(
+            "--projects",
+            type=int,
+            default=3,
+            help="Number of projects to embed in each company (default: 3)",
+        )
 
     def handle(self, *args, **options):
         model_name = options["model"]
         n = options["n"]
+        num_projects = options["projects"]
 
-        # Get model dynamically from all registered apps
+        fake = Faker()
+
+        # Try to locate the model dynamically from all apps
         try:
             model = apps.get_model(app_label="db", model_name=model_name)
         except LookupError:
-            # Try to find the model in any app if app_label not specified
             for app_config in apps.get_app_configs():
                 try:
                     model = app_config.get_model(model_name)
@@ -27,25 +35,41 @@ class Command(BaseCommand):
                 except LookupError:
                     continue
             else:
-                raise CommandError(
-                    f"Model '{model_name}' not found in any installed app."
-                )
+                raise CommandError(f"Model '{model_name}' not found in any installed app.")
 
-        fake = Faker()
         created = []
 
-        # Add support for known model types (start with Company)
         if model_name.lower() == "company":
+            # Import your embedded model
+            from db.models import Project
+
             for _ in range(n):
-                instance = model.objects.create(
+                # Create embedded Project objects
+                projects = [
+                    Project(
+                        name=fake.bs().title(),
+                        description=fake.text(max_nb_chars=120),
+                        start_date=fake.date_this_decade(),
+                        end_date=fake.date_between(start_date="+30d", end_date="+180d"),
+                    )
+                    for _ in range(num_projects)
+                ]
+
+                # Create the Company with embedded projects
+                company = model.objects.create(
                     name=fake.company(),
                     address=fake.address(),
                     website=fake.url(),
+                    projects=projects,
                 )
-                created.append(instance)
+                created.append(company)
+
+            self.stdout.write(
+                self.style.SUCCESS(
+                    f"Successfully created {len(created)} Company(ies), "
+                    f"each with {num_projects} Project(s)."
+                )
+            )
+
         else:
             raise CommandError(f"Model '{model_name}' is not yet supported.")
-
-        self.stdout.write(
-            self.style.SUCCESS(f"Successfully created {len(created)} {model_name}(s).")
-        )
