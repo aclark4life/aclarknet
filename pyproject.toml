@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aclarknet"
+version = "0.1.0"
+description = "A Django project built with Django MongoDB CLI"
+authors = [
+    {name = "Your Name", email = "your.email@example.com"},
+]
+dependencies = [
+    "django-debug-toolbar",
+    "django-mongodb-backend",
+    "python-webpack-boilerplate",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-django",
+    "ruff",
+]
+encryption = [
+    "pymongocrypt",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "aclarknet.settings.base"
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+
+[tool.setuptools]
+packages = ["aclarknet"]
