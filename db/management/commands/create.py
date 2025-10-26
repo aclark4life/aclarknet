@@ -2,10 +2,10 @@ from django.core.management.base import BaseCommand, CommandError
 from django.apps import apps
 from faker import Faker
 import random
-from datetime import timedelta
+from datetime import timedelta, date
 
 class Command(BaseCommand):
-    help = "Generate fake data for a given model (with embedded submodels if applicable)."
+    help = "Create fake data for a given model with embedded submodels (projects, invoices, times)."
 
     def add_arguments(self, parser):
         parser.add_argument("model", type=str, help="Name of the model (e.g., Company)")
@@ -22,12 +22,19 @@ class Command(BaseCommand):
             default=2,
             help="Number of invoices to embed in each project (default: 2)",
         )
+        parser.add_argument(
+            "--times",
+            type=int,
+            default=5,
+            help="Number of time entries to embed in each invoice (default: 5)",
+        )
 
     def handle(self, *args, **options):
         model_name = options["model"]
         n = options["n"]
         num_projects = options["projects"]
         num_invoices = options["invoices"]
+        num_times = options["times"]
 
         fake = Faker()
 
@@ -48,23 +55,35 @@ class Command(BaseCommand):
 
         if model_name.lower() == "company":
             # Import embedded models
-            from db.models import Project, Invoice
+            from db.models import Project, Invoice, Time
 
             for _ in range(n):
                 projects = []
 
                 for _ in range(num_projects):
-                    # Create embedded invoices
-                    invoices = [
-                        Invoice(
+                    invoices = []
+
+                    for _ in range(num_invoices):
+                        # Create embedded Time entries
+                        times = [
+                            Time(
+                                date=fake.date_this_year(),
+                                hours=round(random.uniform(0.5, 8.0), 2),
+                                description=fake.sentence(nb_words=6),
+                            )
+                            for _ in range(num_times)
+                        ]
+
+                        # Create invoice with embedded times
+                        invoice = Invoice(
                             number=f"{fake.random_int(1000, 9999)}",
                             date=fake.date_this_year(),
                             amount=round(random.uniform(100, 5000), 2),
+                            times=times,
                         )
-                        for _ in range(num_invoices)
-                    ]
+                        invoices.append(invoice)
 
-                    # Create embedded project with invoices
+                    # Create project with embedded invoices
                     project = Project(
                         name=fake.bs().title(),
                         description=fake.text(max_nb_chars=120),
@@ -86,9 +105,11 @@ class Command(BaseCommand):
             self.stdout.write(
                 self.style.SUCCESS(
                     f"Successfully created {len(created)} Company(ies), "
-                    f"each with {num_projects} Project(s) and {num_invoices} Invoice(s) per project."
+                    f"each with {num_projects} Project(s), {num_invoices} Invoice(s) per project, "
+                    f"and {num_times} Time entry(ies) per invoice."
                 )
             )
 
         else:
             raise CommandError(f"Model '{model_name}' is not yet supported.")
+

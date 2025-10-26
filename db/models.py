@@ -16,10 +16,20 @@ class Company(models.Model):
         verbose_name_plural = "Companies"
 
 
+class Time(EmbeddedModel):
+    date = models.DateField(null=True, blank=True)
+    hours = models.DecimalField(max_digits=5, decimal_places=2)
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"{self.hours}h on {self.date}"
+
+
 class Invoice(EmbeddedModel):
     number = models.CharField(max_length=50)
     date = models.DateField(null=True, blank=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
+    times = EmbeddedModelArrayField("Time")  # embedded time entries
 
     def __str__(self):
         return f"Invoice {self.number}"
