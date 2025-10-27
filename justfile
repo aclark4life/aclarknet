@@ -17,6 +17,11 @@ django-migrate:
     python manage.py migrate
 alias m := django-migrate
 
+[group('django')]
+django-su:
+    export DJANGO_SUPERUSER_PASSWORD=admin && python manage.py createsuperuser --noinput --username admin --email aclark@aclark.net
+alias su := django-su
+
 [group('npm')]
 npm-install:
     cd frontend && npm install
