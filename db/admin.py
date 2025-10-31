@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib import admin
-from .models import Company
+from .models import Company, Project
+from django_mongodb_backend.forms import EmbeddedModelArrayField
+
 
 
 class CompanyAdminForm(forms.ModelForm):
@@ -10,6 +12,9 @@ class CompanyAdminForm(forms.ModelForm):
         widgets = {
             "website": forms.URLInput(attrs={"size": 60}),
         }
+    projects = EmbeddedModelArrayField(Project,
+        prefix="project", extra_forms=0,
+    )
 
 
 @admin.register(Company)
