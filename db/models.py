@@ -16,13 +16,15 @@ class Company(models.Model):
         verbose_name_plural = "Companies"
 
 
-class Time(EmbeddedModel):
-    date = models.DateField(null=True, blank=True)
-    hours = models.DecimalField(max_digits=5, decimal_places=2)
+class Project(EmbeddedModel):
+    name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
+    start_date = models.DateField(null=True, blank=True)
+    end_date = models.DateField(null=True, blank=True)
+    invoices = EmbeddedModelArrayField("Invoice")  # embedded invoices
 
     def __str__(self):
-        return f"{self.hours}h on {self.date}"
+        return self.name
 
 
 class Invoice(EmbeddedModel):
@@ -35,12 +37,10 @@ class Invoice(EmbeddedModel):
         return f"Invoice {self.number}"
 
 
-class Project(EmbeddedModel):
-    name = models.CharField(max_length=255)
+class Time(EmbeddedModel):
+    date = models.DateField(null=True, blank=True)
+    hours = models.DecimalField(max_digits=5, decimal_places=2)
     description = models.TextField(blank=True)
-    start_date = models.DateField(null=True, blank=True)
-    end_date = models.DateField(null=True, blank=True)
-    invoices = EmbeddedModelArrayField("Invoice")  # embedded invoices
 
     def __str__(self):
-        return self.name
+        return f"{self.hours}h on {self.date}"
