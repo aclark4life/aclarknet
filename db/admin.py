@@ -13,7 +13,7 @@ class CompanyAdminForm(forms.ModelForm):
             "website": forms.URLInput(attrs={"size": 60}),
         }
     projects = EmbeddedModelArrayField(Project,
-        prefix="project", extra_forms=0,
+        prefix="project", extra_forms=1,
     )
 
 

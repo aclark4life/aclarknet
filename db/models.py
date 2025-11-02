@@ -17,7 +17,7 @@ class Company(models.Model):
 
 
 class Project(EmbeddedModel):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, blank=True)
     description = models.TextField(blank=True)
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
@@ -28,9 +28,9 @@ class Project(EmbeddedModel):
 
 
 class Invoice(EmbeddedModel):
-    number = models.CharField(max_length=50)
+    number = models.CharField(max_length=50, blank=True)
     date = models.DateField(null=True, blank=True)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    amount = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
     times = EmbeddedModelArrayField("Time")  # embedded time entries
 
     def __str__(self):
@@ -39,7 +39,7 @@ class Invoice(EmbeddedModel):
 
 class Time(EmbeddedModel):
     date = models.DateField(null=True, blank=True)
-    hours = models.DecimalField(max_digits=5, decimal_places=2)
+    hours = models.DecimalField(max_digits=5, decimal_places=2, blank=True)
     description = models.TextField(blank=True)
 
     def __str__(self):
