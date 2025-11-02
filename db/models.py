@@ -4,9 +4,9 @@ from django_mongodb_backend.models import EmbeddedModel
 
 
 class Company(models.Model):
-    name = models.CharField(max_length=255)
-    address = models.TextField()
-    website = models.URLField()
+    name = models.CharField(max_length=255, blank=True)
+    address = models.TextField(blank=True)
+    website = models.URLField(blank=True)
     projects = EmbeddedModelArrayField("Project")
 
     def __str__(self):
