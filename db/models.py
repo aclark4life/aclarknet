@@ -13,9 +13,22 @@ class Company(models.Model):
         verbose_name_plural = "Companies"
 
 
-class Project(models.Model):
+class Client(models.Model):
     company = models.ForeignKey(
-        Company, on_delete=models.CASCADE, related_name="projects"
+        Company, on_delete=models.CASCADE, related_name="clients"
+    )
+    name = models.CharField(max_length=255)
+    email = models.EmailField(blank=True)
+    phone = models.CharField(max_length=50, blank=True)
+    address = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Project(models.Model):
+    client = models.ForeignKey(
+        Client, on_delete=models.CASCADE, related_name="projects"
     )
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
