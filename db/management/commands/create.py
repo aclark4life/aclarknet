@@ -5,7 +5,7 @@ import random
 
 
 class Command(BaseCommand):
-    help = "Create fake data for relational models (Company, Client, Project, Invoice, Time)."
+    help = "Create fake data for relational models (Company, Client, Project, Invoice, Time, Task)."
 
     def add_arguments(self, parser):
         parser.add_argument("model", type=str, help="Name of the model (e.g., Company)")
@@ -34,6 +34,12 @@ class Command(BaseCommand):
             default=5,
             help="Number of time entries per invoice (default: 5)",
         )
+        parser.add_argument(
+            "--tasks",
+            type=int,
+            default=5,
+            help="Number of task types to create (default: 5)",
+        )
 
     def handle(self, *args, **options):
         model_name = options["model"]
@@ -42,6 +48,7 @@ class Command(BaseCommand):
         num_projects = options["projects"]
         num_invoices = options["invoices"]
         num_times = options["times"]
+        num_tasks = options["tasks"]
 
         fake = Faker()
 
@@ -63,7 +70,17 @@ class Command(BaseCommand):
         created = []
 
         if model_name.lower() == "company":
-            from db.models import Company, Client, Project, Invoice, Time
+            from db.models import Company, Client, Project, Invoice, Time, Task
+
+            # Create some random Tasks
+            task_list = []
+            for _ in range(num_tasks):
+                task = Task.objects.create(
+                    name=fake.job(),
+                    hourly_rate=round(random.uniform(25, 150), 2),
+                    description=fake.text(max_nb_chars=100),
+                )
+                task_list.append(task)
 
             for _ in range(n):
                 company = Company.objects.create(
@@ -103,6 +120,7 @@ class Command(BaseCommand):
                             times = [
                                 Time(
                                     invoice=invoice,
+                                    task=random.choice(task_list),
                                     date=fake.date_this_year(),
                                     hours=round(random.uniform(0.5, 8.0), 2),
                                     description=fake.sentence(nb_words=6),
@@ -117,7 +135,8 @@ class Command(BaseCommand):
                 self.style.SUCCESS(
                     f"✅ Created {len(created)} Company(ies), each with "
                     f"{num_clients} Client(s), {num_projects} Project(s) per client, "
-                    f"{num_invoices} Invoice(s) per project, and {num_times} Time entry(ies) per invoice."
+                    f"{num_invoices} Invoice(s) per project, {num_times} Time entry(ies) per invoice, "
+                    f"and {num_tasks} Task type(s)."
                 )
             )
 

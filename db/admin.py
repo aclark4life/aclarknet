@@ -1,12 +1,14 @@
 from django.contrib import admin
-from .models import Company, Client, Project, Invoice, Time
+from .models import Company, Client, Project, Invoice, Time, Task
 
 
 # Inline for Time in Invoice
 class TimeInline(admin.TabularInline):
     model = Time
-    extra = 1  # number of empty forms
-    fields = ["date", "hours", "description"]
+    extra = 1
+    fields = ["date", "task", "hours", "description", "cost"]
+    readonly_fields = ["cost"]  # cost is calculated
+    show_change_link = False
 
 
 # Inline for Invoice in Project
@@ -14,8 +16,8 @@ class InvoiceInline(admin.TabularInline):
     model = Invoice
     extra = 1
     fields = ["number", "date", "amount"]
-    show_change_link = True  # optional, links to full invoice edit page
-    inlines = [TimeInline]  # Django doesn’t support nested inlines directly
+    show_change_link = True
+    # Nested inlines not supported natively
 
 
 # Inline for Project in Client
@@ -66,6 +68,13 @@ class InvoiceAdmin(admin.ModelAdmin):
 
 @admin.register(Time)
 class TimeAdmin(admin.ModelAdmin):
-    list_display = [field.name for field in Time._meta.fields]
-    list_filter = ["invoice", "date"]
-    search_fields = ["description"]
+    list_display = ["invoice", "task", "date", "hours", "description", "cost"]
+    list_filter = ["invoice", "task", "date"]
+    search_fields = ["description", "task__name"]
+    readonly_fields = ["cost"]
+
+
+@admin.register(Task)
+class TaskAdmin(admin.ModelAdmin):
+    list_display = ["name", "hourly_rate", "description"]
+    search_fields = ["name"]
