@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.db.models import Sum
 from .models import Company, Client, Project, Invoice, Time, Task
 
 
@@ -60,10 +61,19 @@ class ProjectAdmin(admin.ModelAdmin):
 
 @admin.register(Invoice)
 class InvoiceAdmin(admin.ModelAdmin):
-    list_display = [field.name for field in Invoice._meta.fields]
+    list_display = [field.name for field in Invoice._meta.fields] + ["total_time"]
     list_filter = ["project"]
     search_fields = ["number"]
     inlines = [TimeInline]
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        qs = qs.annotate(total_time_sum=Sum("times__hours"))
+        return qs
+
+    @admin.display(ordering="total_time_sum", description="Total Time (hours)")
+    def total_time(self, obj):
+        return obj.total_time_sum or 0
 
 
 @admin.register(Time)
