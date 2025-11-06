@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.db.models import Sum
+from django.db.models import Sum, F, ExpressionWrapper, DecimalField
 from .models import Company, Client, Project, Invoice, Time, Task
 
 
@@ -61,19 +61,36 @@ class ProjectAdmin(admin.ModelAdmin):
 
 @admin.register(Invoice)
 class InvoiceAdmin(admin.ModelAdmin):
-    list_display = [field.name for field in Invoice._meta.fields] + ["total_time"]
+    list_display = [field.name for field in Invoice._meta.fields] + [
+        "total_time",
+        "total_amount",
+    ]
     list_filter = ["project"]
     search_fields = ["number"]
     inlines = [TimeInline]
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
+        # total_time: sum of hours
         qs = qs.annotate(total_time_sum=Sum("times__hours"))
+        # total_amount: sum of hours * task.hourly_rate
+        qs = qs.annotate(
+            total_amount_sum=Sum(
+                ExpressionWrapper(
+                    F("times__hours") * F("times__task__hourly_rate"),
+                    output_field=DecimalField(max_digits=10, decimal_places=2),
+                )
+            )
+        )
         return qs
 
     @admin.display(ordering="total_time_sum", description="Total Time (hours)")
     def total_time(self, obj):
         return obj.total_time_sum or 0
+
+    @admin.display(ordering="total_amount_sum", description="Total Amount ($)")
+    def total_amount(self, obj):
+        return obj.total_amount_sum or 0
 
 
 @admin.register(Time)
