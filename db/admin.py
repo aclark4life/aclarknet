@@ -7,7 +7,7 @@ from .models import Company, Client, Project, Invoice, Time, Task
 class TimeInline(admin.TabularInline):
     model = Time
     extra = 1
-    fields = ["date", "task", "hours", "description", "cost"]
+    fields = ["date", "task", "hours", "description", "cost", "user"]
     readonly_fields = ["cost"]  # cost is calculated
     show_change_link = False
 

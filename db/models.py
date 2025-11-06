@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 
@@ -66,9 +67,24 @@ class Invoice(models.Model):
 
 
 class Time(models.Model):
-    invoice = models.ForeignKey(Invoice, on_delete=models.CASCADE, related_name="times")
+    invoice = models.ForeignKey(
+        "Invoice",
+        on_delete=models.CASCADE,
+        related_name="times",
+    )
     task = models.ForeignKey(
-        Task, on_delete=models.SET_NULL, null=True, blank=True, related_name="times"
+        "Task",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="times",
+    )
+    user = models.ForeignKey(  # 👈 New field
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="times",
     )
     date = models.DateField(null=True, blank=True)
     hours = models.DecimalField(max_digits=5, decimal_places=2)
@@ -76,7 +92,8 @@ class Time(models.Model):
 
     def __str__(self):
         task_name = self.task.name if self.task else "No Task"
-        return f"{self.hours}h on {self.date} ({task_name})"
+        user_name = self.user.username if self.user else "Anonymous"
+        return f"{self.hours}h by {user_name} on {self.date} ({task_name})"
 
     @property
     def cost(self):
