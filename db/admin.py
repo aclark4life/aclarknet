@@ -1,5 +1,9 @@
 from django.contrib import admin
 from django.db.models import Sum, F, ExpressionWrapper, DecimalField
+from django.http import HttpResponse
+from io import BytesIO
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 from .models import Company, Client, Project, Invoice, Time, Task
 
 
@@ -68,19 +72,18 @@ class InvoiceAdmin(admin.ModelAdmin):
     list_filter = ["project"]
     search_fields = ["number"]
     inlines = [TimeInline]
+    actions = ["export_as_pdf"]  # ✅ new action
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
-        # total_time: sum of hours
-        qs = qs.annotate(total_time_sum=Sum("times__hours"))
-        # total_amount: sum of hours * task.hourly_rate
         qs = qs.annotate(
+            total_time_sum=Sum("times__hours"),
             total_amount_sum=Sum(
                 ExpressionWrapper(
                     F("times__hours") * F("times__task__hourly_rate"),
                     output_field=DecimalField(max_digits=10, decimal_places=2),
                 )
-            )
+            ),
         )
         return qs
 
@@ -91,6 +94,72 @@ class InvoiceAdmin(admin.ModelAdmin):
     @admin.display(ordering="total_amount_sum", description="Total Amount ($)")
     def total_amount(self, obj):
         return obj.total_amount_sum or 0
+
+    # ✅ NEW: PDF Export Action
+    def export_as_pdf(self, request, queryset):
+        """Export selected invoices as a single PDF."""
+        buffer = BytesIO()
+        p = canvas.Canvas(buffer, pagesize=letter)
+        width, height = letter
+
+        y = height - 50
+        p.setFont("Helvetica-Bold", 16)
+        p.drawString(50, y, "Invoice Export")
+        y -= 30
+
+        for invoice in queryset:
+            p.setFont("Helvetica-Bold", 14)
+            p.drawString(50, y, f"Invoice #{invoice.number}")
+            y -= 20
+
+            p.setFont("Helvetica", 12)
+            project_name = invoice.project.name if invoice.project else "No Project"
+            p.drawString(50, y, f"Project: {project_name}")
+            y -= 15
+            p.drawString(50, y, f"Date: {invoice.date}")
+            y -= 15
+
+            # ✅ Compute total dynamically
+            total_amount = sum(
+                (time.hours * (time.task.hourly_rate if time.task else 0))
+                for time in invoice.times.all()
+            )
+            p.drawString(50, y, f"Amount: ${total_amount:.2f}")
+            y -= 15
+
+            p.setFont("Helvetica-Oblique", 12)
+            p.drawString(50, y, "Time Entries:")
+            y -= 20
+
+            for time_entry in invoice.times.all():
+                task = time_entry.task.name if time_entry.task else "No Task"
+                cost = time_entry.hours * (
+                    time_entry.task.hourly_rate if time_entry.task else 0
+                )
+                p.setFont("Helvetica", 11)
+                p.drawString(
+                    70,
+                    y,
+                    f"{time_entry.date} | {task} | {time_entry.hours}h | ${cost:.2f}",
+                )
+                y -= 15
+                if y < 100:  # new page when space runs out
+                    p.showPage()
+                    y = height - 50
+
+            y -= 30
+            if y < 100:
+                p.showPage()
+                y = height - 50
+
+        p.save()
+        buffer.seek(0)
+
+        response = HttpResponse(buffer, content_type="application/pdf")
+        response["Content-Disposition"] = 'attachment; filename="invoices.pdf"'
+        return response
+
+    export_as_pdf.short_description = "Export selected invoices as PDF"
 
 
 @admin.register(Time)
