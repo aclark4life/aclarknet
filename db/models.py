@@ -31,7 +31,7 @@ class Employee(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="employee"
     )
-    hourly_rate = models.DecimalField(max_digits=8, decimal_places=2, default=0)
+    hourly_rate = models.FloatField()
 
     def __str__(self):
         return f"{self.user.username} (${self.hourly_rate}/hr)"
@@ -57,7 +57,7 @@ class Task(models.Model):
     """
 
     name = models.CharField(max_length=255)
-    hourly_rate = models.DecimalField(max_digits=10, decimal_places=2)
+    hourly_rate = models.FloatField()
     description = models.TextField(blank=True)
 
     def __str__(self):
@@ -70,7 +70,7 @@ class Invoice(models.Model):
     )
     number = models.CharField(max_length=50)
     date = models.DateField(null=True, blank=True)
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    amount = models.FloatField()
 
     def __str__(self):
         return f"Invoice {self.number}"
@@ -95,7 +95,7 @@ class Time(models.Model):
         related_name="times",
     )
     date = models.DateField(null=True, blank=True)
-    hours = models.DecimalField(max_digits=5, decimal_places=2)
+    hours = models.FloatField()
     description = models.TextField(blank=True)
 
     @property

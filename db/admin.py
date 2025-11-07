@@ -1,44 +1,88 @@
 from django.contrib import admin
-from django.db.models import Sum, F, ExpressionWrapper, DecimalField
+from django.db.models import Sum, F, ExpressionWrapper, FloatField
 from django.http import HttpResponse
+from django.urls import reverse
+from django.utils.html import format_html
 from io import BytesIO
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
-from .models import Company, Client, Project, Invoice, Time, Task
+from .models import Company, Client, Employee, Project, Invoice, Time, Task
 
 
-# Inline for Time in Invoice
 class TimeInline(admin.TabularInline):
     model = Time
     extra = 1
-    fields = ["date", "task", "hours", "description", "cost", "user"]
-    readonly_fields = ["cost"]  # cost is calculated
-    show_change_link = False
+    fields = ["date", "view_link", "task", "hours", "cost"]
+    readonly_fields = ["cost", "view_link"]
+
+    def view_link(self, obj):
+        if obj.pk:
+            url = reverse("admin:db_time_change", args=[obj.pk])
+            return format_html(
+                '<a href="{}" class="inline-related" title="View selected time">'
+                '<img width=24 height=24 src="/static/admin/img/icon-viewlink.svg" alt="View"></a>',
+                url,
+            )
+        return "-"
+
+    view_link.short_description = "View"
 
 
-# Inline for Invoice in Project
 class InvoiceInline(admin.TabularInline):
     model = Invoice
     extra = 1
-    fields = ["number", "date", "amount"]
-    show_change_link = True
-    # Nested inlines not supported natively
+    fields = ["number", "view_link", "date", "amount"]
+    readonly_fields = ["view_link"]
+
+    def view_link(self, obj):
+        if obj.pk:
+            url = reverse("admin:db_invoice_change", args=[obj.pk])
+            return format_html(
+                '<a href="{}" class="inline-related" title="View selected invoice">'
+                '<img width=24 height=24 src="/static/admin/img/icon-viewlink.svg" alt="View"></a>',
+                url,
+            )
+        return "-"
+
+    view_link.short_description = "View"
 
 
-# Inline for Project in Client
-class ProjectInline(admin.TabularInline):
-    model = Project
-    extra = 1
-    fields = ["name", "description", "start_date", "end_date"]
-    show_change_link = True
-
-
-# Inline for Client in Company
 class ClientInline(admin.TabularInline):
     model = Client
     extra = 1
-    fields = ["name", "email", "phone", "address"]
-    show_change_link = True
+    fields = ["name", "view_link", "email", "phone"]
+    readonly_fields = ["view_link"]
+
+    def view_link(self, obj):
+        if obj.pk:
+            url = reverse("admin:db_client_change", args=[obj.pk])
+            return format_html(
+                '<a href="{}" class="inline-related" title="View selected client">'
+                '<img width=24 height=24 src="/static/admin/img/icon-viewlink.svg" alt="View"></a>',
+                url,
+            )
+        return "-"
+
+    view_link.short_description = "View"
+
+
+class ProjectInline(admin.TabularInline):
+    model = Project
+    extra = 1
+    fields = ["name", "view_link", "start_date", "end_date"]
+    readonly_fields = ["view_link"]
+
+    def view_link(self, obj):
+        if obj.pk:
+            url = reverse("admin:db_project_change", args=[obj.pk])
+            return format_html(
+                '<a href="{}" class="inline-related" title="View selected project">'
+                '<img width=24 height=24 src="/static/admin/img/icon-viewlink.svg" alt="View"></a>',
+                url,
+            )
+        return "-"
+
+    view_link.short_description = "View"
 
 
 @admin.register(Company)
@@ -65,14 +109,18 @@ class ProjectAdmin(admin.ModelAdmin):
 
 @admin.register(Invoice)
 class InvoiceAdmin(admin.ModelAdmin):
-    list_display = [field.name for field in Invoice._meta.fields] + [
+    # list_display = [field.name for field in Invoice._meta.fields] + [
+    list_display = [
+        "number",
+        "project",
+        "date",
         "total_time",
         "total_amount",
     ]
     list_filter = ["project"]
     search_fields = ["number"]
     inlines = [TimeInline]
-    actions = ["export_as_pdf"]  # ✅ new action
+    actions = ["export_as_pdf"]
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
@@ -81,7 +129,7 @@ class InvoiceAdmin(admin.ModelAdmin):
             total_amount_sum=Sum(
                 ExpressionWrapper(
                     F("times__hours") * F("times__task__hourly_rate"),
-                    output_field=DecimalField(max_digits=10, decimal_places=2),
+                    output_field=FloatField(),
                 )
             ),
         )
@@ -95,7 +143,6 @@ class InvoiceAdmin(admin.ModelAdmin):
     def total_amount(self, obj):
         return obj.total_amount_sum or 0
 
-    # ✅ NEW: PDF Export Action
     def export_as_pdf(self, request, queryset):
         """Export selected invoices as a single PDF."""
         buffer = BytesIO()
@@ -119,7 +166,6 @@ class InvoiceAdmin(admin.ModelAdmin):
             p.drawString(50, y, f"Date: {invoice.date}")
             y -= 15
 
-            # ✅ Compute total dynamically
             total_amount = sum(
                 (time.hours * (time.task.hourly_rate if time.task else 0))
                 for time in invoice.times.all()
@@ -164,7 +210,7 @@ class InvoiceAdmin(admin.ModelAdmin):
 
 @admin.register(Time)
 class TimeAdmin(admin.ModelAdmin):
-    list_display = ["invoice", "task", "date", "hours", "description", "cost", "user"]
+    list_display = ["invoice", "task", "date", "hours", "user"]
     list_filter = ["invoice", "task", "date"]
     search_fields = ["description", "task__name"]
     readonly_fields = ["cost"]
@@ -174,3 +220,9 @@ class TimeAdmin(admin.ModelAdmin):
 class TaskAdmin(admin.ModelAdmin):
     list_display = ["name", "hourly_rate", "description"]
     search_fields = ["name"]
+
+
+@admin.register(Employee)
+class EmployeeAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in Employee._meta.fields]
+    search_fields = ["first_name", "last_name", "email"]
