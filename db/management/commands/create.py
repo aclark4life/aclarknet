@@ -2,10 +2,13 @@ from django.core.management.base import BaseCommand, CommandError
 from django.apps import apps
 from faker import Faker
 import random
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class Command(BaseCommand):
-    help = "Create fake data for relational models (Company, Client, Project, Invoice, Time, Task)."
+    help = "Create fake data for relational models (Company, Client, Project, Invoice, Time, Task, User/Employee)."
 
     def add_arguments(self, parser):
         parser.add_argument("model", type=str, help="Name of the model (e.g., Company)")
@@ -40,6 +43,12 @@ class Command(BaseCommand):
             default=5,
             help="Number of task types to create (default: 5)",
         )
+        parser.add_argument(
+            "--users",
+            type=int,
+            default=5,
+            help="Number of users/employees to create (default: 5)",
+        )
 
     def handle(self, *args, **options):
         model_name = options["model"]
@@ -49,6 +58,7 @@ class Command(BaseCommand):
         num_invoices = options["invoices"]
         num_times = options["times"]
         num_tasks = options["tasks"]
+        num_users = options["users"]
 
         fake = Faker()
 
@@ -70,9 +80,36 @@ class Command(BaseCommand):
         created = []
 
         if model_name.lower() == "company":
-            from db.models import Company, Client, Project, Invoice, Time, Task
+            from db.models import (
+                Company,
+                Client,
+                Project,
+                Invoice,
+                Time,
+                Task,
+                Employee,
+            )
 
-            # Create some random Tasks
+            # -------------------------
+            # Create Users/Employees
+            # -------------------------
+            user_list = []
+            for _ in range(num_users):
+                user = User.objects.create_user(
+                    username=fake.user_name(),
+                    email=fake.email(),
+                    password="password123",  # default password
+                )
+                # Create Employee profile and set hourly rate
+                Employee.objects.create(
+                    user=user,
+                    hourly_rate=round(random.uniform(25, 150), 2),
+                )
+                user_list.append(user)
+
+            # -------------------------
+            # Create Tasks
+            # -------------------------
             task_list = []
             for _ in range(num_tasks):
                 task = Task.objects.create(
@@ -82,6 +119,9 @@ class Command(BaseCommand):
                 )
                 task_list.append(task)
 
+            # -------------------------
+            # Create Companies/Clients/Projects/Invoices/Times
+            # -------------------------
             for _ in range(n):
                 company = Company.objects.create(
                     name=fake.company(),
@@ -121,6 +161,7 @@ class Command(BaseCommand):
                                 Time(
                                     invoice=invoice,
                                     task=random.choice(task_list),
+                                    user=random.choice(user_list),
                                     date=fake.date_this_year(),
                                     hours=round(random.uniform(0.5, 8.0), 2),
                                     description=fake.sentence(nb_words=6),
@@ -133,10 +174,10 @@ class Command(BaseCommand):
 
             self.stdout.write(
                 self.style.SUCCESS(
-                    f"✅ Created {len(created)} Company(ies), each with "
-                    f"{num_clients} Client(s), {num_projects} Project(s) per client, "
+                    f"✅ Created {len(created)} Company(ies) with "
+                    f"{num_clients} Client(s) per company, {num_projects} Project(s) per client, "
                     f"{num_invoices} Invoice(s) per project, {num_times} Time entry(ies) per invoice, "
-                    f"and {num_tasks} Task type(s)."
+                    f"{num_tasks} Task type(s), and {num_users} Users/Employees."
                 )
             )
 

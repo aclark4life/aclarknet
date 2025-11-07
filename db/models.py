@@ -27,6 +27,16 @@ class Client(models.Model):
         return self.name
 
 
+class Employee(models.Model):
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="employee"
+    )
+    hourly_rate = models.DecimalField(max_digits=8, decimal_places=2, default=0)
+
+    def __str__(self):
+        return f"{self.user.username} (${self.hourly_rate}/hr)"
+
+
 class Project(models.Model):
     client = models.ForeignKey(
         Client, on_delete=models.CASCADE, related_name="projects"
@@ -68,9 +78,7 @@ class Invoice(models.Model):
 
 class Time(models.Model):
     invoice = models.ForeignKey(
-        "Invoice",
-        on_delete=models.CASCADE,
-        related_name="times",
+        "Invoice", on_delete=models.CASCADE, related_name="times"
     )
     task = models.ForeignKey(
         "Task",
@@ -79,7 +87,7 @@ class Time(models.Model):
         blank=True,
         related_name="times",
     )
-    user = models.ForeignKey(  # 👈 New field
+    user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
         null=True,
@@ -90,13 +98,20 @@ class Time(models.Model):
     hours = models.DecimalField(max_digits=5, decimal_places=2)
     description = models.TextField(blank=True)
 
+    @property
+    def cost(self):
+        """Use employee’s hourly rate if present, else task’s rate."""
+        if (
+            self.user
+            and hasattr(self.user, "employee")
+            and self.user.employee.hourly_rate
+        ):
+            return self.hours * self.user.employee.hourly_rate
+        elif self.task:
+            return self.hours * self.task.hourly_rate
+        return 0
+
     def __str__(self):
         task_name = self.task.name if self.task else "No Task"
         user_name = self.user.username if self.user else "Anonymous"
         return f"{self.hours}h by {user_name} on {self.date} ({task_name})"
-
-    @property
-    def cost(self):
-        """Calculate cost for this time entry based on hourly rate."""
-        if self.task:
-            return self.hours * self.task.hourly_rate
