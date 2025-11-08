@@ -271,7 +271,7 @@ class InvoiceAdmin(admin.ModelAdmin):
 
 @admin.register(Time)
 class TimeAdmin(admin.ModelAdmin):
-    list_display = ["invoice", "task", "date", "hours", "user"]
+    list_display = [field.name for field in Time._meta.fields]
     list_filter = ["invoice", "task", "date"]
     search_fields = ["description", "task__name"]
     readonly_fields = ["cost"]
