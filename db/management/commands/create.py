@@ -16,38 +16,38 @@ class Command(BaseCommand):
         parser.add_argument(
             "--clients",
             type=int,
-            default=2,
-            help="Number of clients per company (default: 2)",
+            default=1,
+            help="Number of clients per company (default: 1)",
         )
         parser.add_argument(
             "--projects",
             type=int,
-            default=3,
-            help="Number of projects per client (default: 3)",
+            default=1,
+            help="Number of projects per client (default: 1)",
         )
         parser.add_argument(
             "--invoices",
             type=int,
-            default=2,
-            help="Number of invoices per project (default: 2)",
+            default=1,
+            help="Number of invoices per project (default: 1)",
         )
         parser.add_argument(
             "--times",
             type=int,
-            default=5,
-            help="Number of time entries per invoice (default: 5)",
+            default=1,
+            help="Number of time entries per invoice (default: 1)",
         )
         parser.add_argument(
             "--tasks",
             type=int,
-            default=5,
-            help="Number of task types to create (default: 5)",
+            default=1,
+            help="Number of task types to create (default: 1)",
         )
         parser.add_argument(
             "--users",
             type=int,
-            default=5,
-            help="Number of users/employees to create (default: 5)",
+            default=1,
+            help="Number of users/employees to create (default: 1)",
         )
 
     def handle(self, *args, **options):
