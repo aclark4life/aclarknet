@@ -128,6 +128,7 @@ class InvoiceAdmin(admin.ModelAdmin):
     list_display = [field.name for field in Invoice._meta.fields] + [
         "total_time",
         "total_amount",
+        "total_revenue",
     ]
     list_filter = ["project"]
     search_fields = ["number"]
@@ -137,6 +138,7 @@ class InvoiceAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         qs = super().get_queryset(request)
+
         qs = qs.annotate(
             total_time_sum=Sum("times__hours"),
             total_amount_sum=Sum(
@@ -145,7 +147,27 @@ class InvoiceAdmin(admin.ModelAdmin):
                     output_field=FloatField(),
                 )
             ),
+            total_cost_sum=Sum(
+                ExpressionWrapper(
+                    F("times__hours") * F("times__user__employee__hourly_rate"),
+                    output_field=FloatField(),
+                )
+            ),
         )
+
+        # total_revenue = total_time * project rate
+        qs = qs.annotate(
+            total_revenue_sum=ExpressionWrapper(
+                F("total_time_sum") * F("project__rate"), output_field=FloatField()
+            )
+        )
+
+        qs = qs.annotate(
+            profit_sum=ExpressionWrapper(
+                F("total_revenue_sum") - F("total_cost_sum"), output_field=FloatField()
+            )
+        )
+
         return qs
 
     @admin.display(ordering="total_time_sum", description="Total Time (hours)")
@@ -155,6 +177,18 @@ class InvoiceAdmin(admin.ModelAdmin):
     @admin.display(ordering="total_amount_sum", description="Total Amount ($)")
     def total_amount(self, obj):
         return obj.total_amount_sum or 0
+
+    @admin.display(ordering="total_cost_sum", description="Total Cost ($)")
+    def total_cost(self, obj):
+        return obj.total_cost_sum or 0
+
+    @admin.display(ordering="total_revenue_sum", description="Revenue ($)")
+    def total_revenue(self, obj):
+        return obj.total_revenue_sum or 0
+
+    @admin.display(ordering="profit_sum", description="Profit ($)")
+    def profit(self, obj):
+        return obj.profit_sum or 0
 
     # ── Action for multiple selection ──────────────────────────────
     def export_as_pdf(self, request, queryset):

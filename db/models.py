@@ -46,8 +46,42 @@ class Project(models.Model):
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
 
+    # New field: hourly rate for project
+    rate = models.FloatField(
+        default=0, help_text="Hourly rate the project charges for work"
+    )
+
     def __str__(self):
         return self.name
+
+    @property
+    def total_hours(self):
+        """Sum of all hours logged across all invoices."""
+        return sum(
+            time.hours
+            for invoice in self.invoices.all()
+            for time in invoice.times.all()
+        )
+
+    @property
+    def total_revenue(self):
+        """
+        Revenue = total project hours * project rate.
+        Alternatively, sum invoice amounts if you want actual billed revenue.
+        """
+        return self.total_hours * self.rate
+
+    @property
+    def total_cost(self):
+        """Sum of employee costs across all time entries."""
+        return sum(
+            time.cost for invoice in self.invoices.all() for time in invoice.times.all()
+        )
+
+    @property
+    def profit(self):
+        """Revenue minus cost."""
+        return self.total_revenue - self.total_cost
 
 
 class Task(models.Model):
