@@ -152,6 +152,9 @@ class InvoiceAdmin(admin.ModelAdmin):
     actions = ["export_as_pdf"]
     change_form_template = "admin/db/invoice/change_form.html"
 
+    class Media:
+        css = {"all": ("admin/css/custom_admin.css",)}
+
     def get_queryset(self, request):
         qs = super().get_queryset(request)
 
