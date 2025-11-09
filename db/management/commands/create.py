@@ -144,6 +144,7 @@ class Command(BaseCommand):
                             name=fake.bs().title(),
                             description=fake.text(max_nb_chars=120),
                             start_date=fake.date_this_decade(),
+                            rate=round(random.uniform(25, 150), 2),
                             end_date=fake.date_between(
                                 start_date="+30d", end_date="+180d"
                             ),
