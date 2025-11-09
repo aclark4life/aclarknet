@@ -1,0 +1,36 @@
+/* Prevent horizontal overflow */
+.change-list table {
+  table-layout: fixed;
+  width: 100%;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+/* Optional: Make table container scrollable instead of overflowing */
+.change-list .results {
+  overflow-x: auto;
+}
+
+
+
+/* Prevent tabular inlines from overflowing horizontally */
+.inline-group table {
+  table-layout: fixed;
+  width: 100%;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+/* Ensure the inline group container scrolls horizontally instead of overflowing */
+.inline-group {
+  overflow-x: auto;
+  display: block;
+}
+
+/* Optional: make the fields more compact */
+.inline-group td {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}

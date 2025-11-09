@@ -18,8 +18,20 @@ from .models import Company, Client, Employee, Project, Invoice, Time, Task
 class TimeInline(admin.TabularInline):
     model = Time
     extra = 1
-    fields = ["view_link", "date", "task", "hours", "cost"]
+    fields = [
+        "view_link",
+        "cost",
+        "date",
+        "description",
+        "hours",
+        "invoice",
+        "task",
+        "user",
+    ]
     readonly_fields = ["cost", "view_link"]
+
+    class Media:
+        css = {"all": ("admin/css/custom_admin.css",)}
 
     def view_link(self, obj):
         if obj.pk:
@@ -49,6 +61,9 @@ class InvoiceInline(admin.TabularInline):
                 url,
             )
         return "-"
+
+    class Media:
+        css = {"all": ("admin/css/custom_admin.css",)}
 
     view_link.short_description = "View"
 
