@@ -129,6 +129,7 @@ class InvoiceAdmin(admin.ModelAdmin):
         "total_time",
         "total_amount",
         "total_revenue",
+        "profit",
     ]
     list_filter = ["project"]
     search_fields = ["number"]
