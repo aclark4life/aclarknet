@@ -132,7 +132,7 @@ class Command(BaseCommand):
                 for _ in range(num_clients):
                     client = Client.objects.create(
                         company=company,
-                        name=fake.name(),
+                        name=fake.company(),
                         email=fake.email(),
                         phone=fake.phone_number(),
                         address=fake.address(),
