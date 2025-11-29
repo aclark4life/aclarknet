@@ -12,3 +12,4 @@ aclarknet.sql
 !.elasticbeanstalk/*.global.yml
 .python-version
 .envrc
+aclarknet.egg-info/
