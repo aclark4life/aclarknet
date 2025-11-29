@@ -12,12 +12,35 @@ license = { text = "MIT" }
 authors = [
   { name = "Alex Clark" }
 ]
+# Runtime deps are sourced from requirements.txt via setuptools dynamic config
+# so requirements.txt remains the single source of truth.
+dynamic = ["dependencies"]
 
 [project.urls]
 Homepage = "https://aclark.net/"
 
+[project.optional-dependencies]
+# Test-only tools live here now; we previously had requirements-test.txt
+# and have migrated to pyproject.toml.
+test = [
+  "pytest",
+  "pytest-runner",
+  "coverage",
+  "pytest-mock",
+  "pytest-cov",
+  "hypothesis",
+  "selenium",
+  "pytest-django",
+  "factory-boy",
+  "flake8",
+  "tox",
+]
+
 [tool.setuptools]
 # Use explicit package discovery so setuptools is OK with multiple top-level Django apps
+
+[tool.setuptools.dynamic]
+dependencies = { file = ["requirements.txt"] }
 
 [tool.setuptools.packages.find]
 where = ["."]
