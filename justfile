@@ -37,6 +37,11 @@ django-serve:
     python manage.py runserver
 alias s := django-serve
 
+[group("django")]
+django-migrate:
+    python manage.py migrate
+alias m := django-migrate
+
 [group("eb")]
 eb-create:
     eb create "aclarknet-{{GIT_BRANCH}}-{{GIT_HASH}}" \
