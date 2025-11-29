@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aclarknet"
+version = "0.1.0"
+description = "ACLARK.net Django/Wagtail project"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+  { name = "Alex Clark" }
+]
+
+[project.urls]
+Homepage = "https://aclark.net/"
+
+[tool.setuptools]
+# Use explicit package discovery so setuptools is OK with multiple top-level Django apps
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["*"]
+exclude = [
+  "tests*",
+  "frontend*",
+  "lounge*",
+  "vendor*",
+]
