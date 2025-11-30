@@ -34,12 +34,12 @@ INSTALLED_APPS.append("wagtailcaptcha")  # noqa
 INSTALLED_APPS.append("hijack")  # noqa
 INSTALLED_APPS.append("resume")  # noqa
 INSTALLED_APPS.append("blog")  # noqa
-INSTALLED_APPS.append("puput")  # noqa
+INSTALLED_APPS.append("backend.apps.MongoPuputConfig")  # noqa
 INSTALLED_APPS.append("colorful")  # noqa
 INSTALLED_APPS.append("nowpage")  # noqa
-INSTALLED_APPS.append("django.contrib.sites")  # noqa
+INSTALLED_APPS.append("backend.apps.MongoSitesConfig")  # noqa
 # INSTALLED_APPS.append("newsletter")  # noqa
-INSTALLED_APPS.append("explorer")  # noqa
+INSTALLED_APPS.append("backend.apps.MongoExplorerConfig")  # noqa
 INSTALLED_APPS.append("django.contrib.admindocs")  # noqa
 INSTALLED_APPS.append("sorl.thumbnail")  # noqa
 MIDDLEWARE.append("hijack.middleware.HijackUserMiddleware")  # noqa

@@ -26,22 +26,22 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     # "home",
     "search",
-    "wagtail.contrib.forms",
-    "wagtail.contrib.redirects",
-    "wagtail.embeds",
+    "backend.apps.MongoWagtailFormsAppConfig",
+    "backend.apps.MongoWagtailRedirectsAppConfig",
+    "backend.apps.MongoWagtailEmbedsAppConfig",
     "wagtail.sites",
-    "wagtail.users",
+    "backend.apps.MongoWagtailUsersAppConfig",
     "wagtail.snippets",
-    "wagtail.documents",
-    "wagtail.images",
+    "backend.apps.MongoWagtailDocsAppConfig",
+    "backend.apps.MongoWagtailImagesAppConfig",
     "wagtail.search",
-    "wagtail.admin",
-    "wagtail",
+    "backend.apps.MongoWagtailAdminAppConfig",
+    "backend.apps.MongoWagtailCoreAppConfig",
     "modelcluster",
-    "taggit",
+    "backend.apps.MongoTaggitAppConfig",
     "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
+    "backend.apps.MongoAuthConfig",
+    "backend.apps.MongoContentTypesConfig",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
@@ -184,12 +184,12 @@ INSTALLED_APPS.append("webpack_boilerplate")
 INSTALLED_APPS.append("rest_framework")
 INSTALLED_APPS.append("rest_framework.authtoken")
 INSTALLED_APPS.append("allauth")
-INSTALLED_APPS.append("allauth.account")
-INSTALLED_APPS.append("allauth.socialaccount")
-INSTALLED_APPS.append("wagtailmenus")
+INSTALLED_APPS.append("backend.apps.MongoAccountConfig")
+INSTALLED_APPS.append("backend.apps.MongoSocialAccountConfig")
+INSTALLED_APPS.append("backend.apps.MongoWagtailMenusConfig")
 INSTALLED_APPS.append("wagtailmarkdown")
 INSTALLED_APPS.append("wagtail_modeladmin")
-INSTALLED_APPS.append("wagtailseo")
+INSTALLED_APPS.append("backend.apps.MongoWagtailSEOAppConfig")
 INSTALLED_APPS.append("wagtail_color_panel")
 INSTALLED_APPS.append("wagtail.contrib.settings")
 INSTALLED_APPS.append("django_extensions")
@@ -213,7 +213,7 @@ THEMES = [
     ("dark", "Dark Theme"),
 ]
 LOGIN_REDIRECT_URL = "/"
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+DEFAULT_AUTO_FIELD = "django_mongodb_backend.fields.ObjectIdAutoField"
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
