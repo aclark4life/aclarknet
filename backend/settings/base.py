@@ -176,8 +176,10 @@ WAGTAILADMIN_BASE_URL = "http://example.com"
 ALLOWED_HOSTS = ["*"]
 import dj_database_url  # noqa
 
-DATABASE_URL = os.environ.get("DATABASE_URL", "postgres://:@:/aclarknet")
-DATABASES["default"] = dj_database_url.parse(DATABASE_URL)
+DATABASES["default"] = {
+    "ENGINE": "django_mongodb_backend",
+    "NAME": "aclarknet",
+}
 INSTALLED_APPS.append("webpack_boilerplate")
 INSTALLED_APPS.append("rest_framework")
 INSTALLED_APPS.append("rest_framework.authtoken")
