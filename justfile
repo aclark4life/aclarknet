@@ -3,7 +3,8 @@
 default:
     echo 'Hello, world!'
 
-install:
+i:
     pip install -e .
 
-alias i := install
+p:
+    vi pyproject.toml
