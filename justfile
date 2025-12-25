@@ -37,3 +37,6 @@ su:
 
 se:
     vi aclarknet/settings.py
+
+o:
+    open http://localhost:8000/admin
