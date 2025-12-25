@@ -19,3 +19,9 @@ r:
 
 m:
     python manage.py migrate
+
+mm:
+    python manage.py makemigrations admin auth contenttypes
+
+d:
+    mongosh ${MONGODB_URI:-mongodb://localhost:27017} --eval 'db.getSiblingDB("aclarknet").dropDatabase()'
