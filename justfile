@@ -13,3 +13,6 @@ i:
 
 p:
     vi pyproject.toml
+
+r:
+    vi README.md
