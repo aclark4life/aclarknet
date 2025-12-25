@@ -4,3 +4,6 @@ version = "0.1.0"
 dependencies = [
   "django-mongodb-backend",
 ]
+
+[tool.setuptools]
+packages = ["aclarknet", "db"]
