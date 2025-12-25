@@ -1,6 +1,5 @@
 from itertools import chain
 
-from django.conf import settings
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import reverse
@@ -22,10 +21,10 @@ from ..models.project import Project
 from ..models.task import Task
 from .base import BaseView
 
-if settings.USE_FAKE:
-    from faker import Faker
-
-    fake = Faker()
+# if settings.USE_FAKE:
+#     from faker import Faker
+#
+#     fake = Faker()
 
 
 class BaseProjectView(BaseView, UserPassesTestMixin):
@@ -87,10 +86,10 @@ class ProjectCreateView(BaseProjectView, CreateView):
             "end_date": now + timezone.timedelta(days=366),
             "client": client,
         }
-        if settings.USE_FAKE:
-            context["form"].initial.update(
-                {"name": fake.text(), "description": fake.text()}
-            )
+        # if settings.USE_FAKE:
+        #     context["form"].initial.update(
+        #         {"name": fake.text(), "description": fake.text()}
+        #     )
         return context
 
     def form_valid(self, form):

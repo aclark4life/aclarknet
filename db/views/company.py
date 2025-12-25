@@ -1,7 +1,6 @@
 import random
 from itertools import chain
 
-from django.conf import settings
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy
@@ -21,10 +20,10 @@ from ..models.project import Project
 from ..models.task import Task
 from .base import BaseView
 
-if settings.USE_FAKE:
-    from faker import Faker
-
-    fake = Faker()
+# if settings.USE_FAKE:
+#     from faker import Faker
+#
+#     fake = Faker()
 
 
 class BaseCompanyView(BaseView, UserPassesTestMixin):
@@ -71,10 +70,10 @@ class CompanyCreateView(BaseCompanyView, CreateView):
         context["form"].initial = {
             "client_set": initial_values,
         }
-        if settings.USE_FAKE:
-            context["form"].initial["name"] = fake.company()
-            context["form"].initial["description"] = fake.catch_phrase()
-            context["form"].initial["url"] = fake.url()
+        # if settings.USE_FAKE:
+        #     context["form"].initial["name"] = fake.company()
+        #     context["form"].initial["description"] = fake.catch_phrase()
+        #     context["form"].initial["url"] = fake.url()
         return context
 
     def form_valid(self, form):

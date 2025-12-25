@@ -19,10 +19,10 @@ from ..models.note import Note
 from .base import BaseView
 
 
-if settings.USE_FAKE:
-    from faker import Faker
-
-    fake = Faker()
+# if settings.USE_FAKE:
+#     from faker import Faker
+#
+#     fake = Faker()
 
 
 class BaseNoteView(BaseView, UserPassesTestMixin):
@@ -68,11 +68,11 @@ class NoteCreateView(BaseNoteView, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if settings.USE_FAKE:
-            context["form"].initial = {
-                "title": fake.text(),
-                "text": fake.text(),
-            }
+        # if settings.USE_FAKE:
+        #     context["form"].initial = {
+        #         "title": fake.text(),
+        #         "text": fake.text(),
+        #     }
         return context
 
 

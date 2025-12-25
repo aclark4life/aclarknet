@@ -2,12 +2,12 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field
 from django import forms
 from django.utils import timezone
-from faker import Faker
+# from faker import Faker
 
 from ..models.contact import Contact
 from ..models.report import Report
 
-fake = Faker()
+# fake = Faker()
 
 
 class ReportForm(forms.ModelForm):
@@ -27,7 +27,7 @@ class ReportForm(forms.ModelForm):
             "contacts",
             "user",
             "company",
-            "team",
+            # "team",
             "archived",
         )
 

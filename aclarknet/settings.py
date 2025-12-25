@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     "db",
     "aclarknet.apps.MongoWagtailAppConfig",
     "aclarknet.apps.MongoTaggitAppConfig",
+    "allauth",
+    "allauth.socialaccount",
 ]
 
 MIDDLEWARE = [

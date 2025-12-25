@@ -28,7 +28,7 @@ class BaseView:
     order_by = ["archived", "-created"]
     paginated = False
     page_number = 1
-    per_page = settings.PER_PAGE
+    # per_page = settings.PER_PAGE
     queryset_related = []
     has_related = False
     has_preview = False

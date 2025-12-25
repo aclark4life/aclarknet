@@ -21,7 +21,8 @@ from django.views.generic import (
     UpdateView,
     View,
 )
-from faker import Faker
+
+# from faker import Faker
 from texttable import Texttable
 
 from ..forms.report import AdminReportForm, ReportForm
@@ -34,7 +35,7 @@ from ..models.time import Time
 
 from .base import BaseView
 
-fake = Faker()
+# fake = Faker()
 
 locale.setlocale(locale.LC_ALL, "")
 

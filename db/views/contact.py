@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy
@@ -9,13 +8,13 @@ from django.views.generic import (
     ListView,
     UpdateView,
 )
-from faker import Faker
+# from faker import Faker
 
 from ..forms.contact import ContactForm
 from ..models import Contact
 from .base import BaseView
 
-fake = Faker()
+# fake = Faker()
 
 
 class BaseContactView(BaseView, UserPassesTestMixin):
@@ -54,15 +53,16 @@ class ContactCreateView(BaseContactView, CreateView):
         context = super().get_context_data(**kwargs)
         model_name = self.model_name
 
-        if settings.USE_FAKE:
-            first_name = fake.first_name()
-            last_name = fake.last_name()
-            context["form"].initial = {
-                "name": " ".join([first_name, last_name]),
-                "first_name": first_name,
-                "last_name": last_name,
-                "email": fake.email(),
-            }
+        # if settings.USE_FAKE:
+        #     first_name = fake.first_name()
+        #     last_name = fake.last_name()
+        #     context["form"].initial = {
+        #         "name": " ".join([first_name, last_name]),
+        #         "first_name": first_name,
+        #         "last_name": last_name,
+        #         "email": fake.email(),
+        #     }
+
         context["model_name"] = model_name
         model_name_plural = self.model._meta.verbose_name_plural
         context["model_name_plural"] = model_name_plural

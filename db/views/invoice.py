@@ -22,7 +22,8 @@ from django.views.generic import (
     View,
 )
 from docx import Document
-from faker import Faker
+
+# from faker import Faker
 from html2docx import html2docx
 from texttable import Texttable
 from xhtml2pdf import pisa
@@ -31,7 +32,7 @@ from ..forms.invoice import InvoiceForm
 from ..models import Company, Invoice, Project, Time
 from .base import BaseView
 
-fake = Faker()
+# fake = Faker()
 
 
 class BaseInvoiceView(BaseView, UserPassesTestMixin):
@@ -146,13 +147,13 @@ class InvoiceCreateView(BaseInvoiceView, CreateView):
 
         # Update context to include fake text
         subject = None
-        if settings.USE_FAKE:
-            subject = fake.text()
-            context["form"].initial.update(
-                {
-                    "subject": subject,
-                }
-            )
+        # if settings.USE_FAKE:
+        #     subject = fake.text()
+        #     context["form"].initial.update(
+        #         {
+        #             "subject": subject,
+        #         }
+        #     )
 
         return context
 

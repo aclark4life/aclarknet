@@ -1,6 +1,5 @@
 from itertools import chain
 
-from django.conf import settings
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
@@ -23,10 +22,10 @@ from ..models.task import Task
 from ..serializers import ClientSerializer
 from .base import BaseView
 
-if settings.USE_FAKE:
-    from faker import Faker
-
-    fake = Faker()
+# if settings.USE_FAKE:
+#     from faker import Faker
+#
+#     fake = Faker()
 
 
 class ClientAPIViewSet(viewsets.ModelViewSet):
@@ -84,16 +83,16 @@ class ClientCreateView(BaseClientView, CreateView):
             context["form"].initial = {
                 "company": company,
             }
-        if settings.USE_FAKE:
-            context["form"].initial.update(
-                {
-                    "name": fake.company(),
-                    "url": fake.url(),
-                    "description": fake.catch_phrase(),
-                    "address": fake.address(),
-                    "tags": fake.text(),
-                }
-            )
+        # if settings.USE_FAKE:
+        #     context["form"].initial.update(
+        #         {
+        #             "name": fake.company(),
+        #             "url": fake.url(),
+        #             "description": fake.catch_phrase(),
+        #             "address": fake.address(),
+        #             "tags": fake.text(),
+        #         }
+        #     )
         return context
 
     def form_valid(self, form):

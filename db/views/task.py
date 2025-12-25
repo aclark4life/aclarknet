@@ -1,6 +1,5 @@
 from itertools import chain
 
-from django.conf import settings
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
@@ -19,10 +18,10 @@ from ..models.project import Project
 from ..models.task import Task
 from .base import BaseView
 
-if settings.USE_FAKE:
-    from faker import Faker
-
-    fake = Faker()
+# if settings.USE_FAKE:
+#     from faker import Faker
+#
+#     fake = Faker()
 
 
 class BaseTaskView(BaseView, UserPassesTestMixin):
@@ -61,11 +60,11 @@ class TaskCreateView(BaseTaskView, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if settings.USE_FAKE:
-            context["form"].initial = {
-                "name": fake.text(),
-                "rate": fake.pydecimal(left_digits=3, right_digits=2, positive=True),
-            }
+        # if settings.USE_FAKE:
+        #     context["form"].initial = {
+        #         "name": fake.text(),
+        #         "rate": fake.pydecimal(left_digits=3, right_digits=2, positive=True),
+        #     }
         return context
 
     def form_valid(self, form):

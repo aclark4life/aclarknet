@@ -1,6 +1,5 @@
 from itertools import chain
 
-from django.conf import settings
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
@@ -13,7 +12,7 @@ from django.views.generic import (
     ListView,
     UpdateView,
 )
-from faker import Faker
+# from faker import Faker
 
 from ..forms.time import AdminTimeForm, TimeForm
 from ..models.client import Client
@@ -24,7 +23,7 @@ from ..models.time import Time
 
 from .base import BaseView
 
-fake = Faker()
+# fake = Faker()
 
 
 class BaseTimeView(BaseView, UserPassesTestMixin):
@@ -109,8 +108,8 @@ class TimeCreateView(BaseTimeView, CreateView):
         project_id = None
         task_id = None
 
-        if settings.USE_FAKE:
-            description = fake.text()
+        # if settings.USE_FAKE:
+        #     description = fake.text()
 
         context["form"].initial = {
             "description": description,

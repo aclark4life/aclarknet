@@ -2,12 +2,18 @@
 name = "aclarknet"
 version = "0.1.0"
 dependencies = [
+  "django-allauth",
+  "django-crispy-forms",
   "django-import-export",
   "django-mongodb-backend",
   "django-phonenumber-field",
+  "html2docx",
   "phonenumbers",
+  "python-docx",
   "python-webpack-boilerplate",
+  "texttable",
   "wagtail",
+  "xhtml2pdf",
 ]
 
 [tool.setuptools]
