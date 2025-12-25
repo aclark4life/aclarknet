@@ -25,3 +25,6 @@ mm:
 
 d:
     mongosh ${MONGODB_URI:-mongodb://localhost:27017} --eval 'db.getSiblingDB("aclarknet").dropDatabase()'
+
+pc:
+    pre-commit run --all-files
