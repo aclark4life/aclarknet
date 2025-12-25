@@ -1,3 +1,6 @@
 [project]
 name = "aclarknet"
 version = "0.1.0"
+dependencies = [
+  "django-mongodb-backend",
+]

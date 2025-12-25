@@ -4,7 +4,7 @@ default:
     echo 'Hello, world!'
 
 i:
-    pip install -e .
+    uv pip install -e .
 
 p:
     vi pyproject.toml
