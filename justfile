@@ -1,6 +1,7 @@
 # https://just.systems
 # django-admin startproject aclarknet .
 # django-admin startapp db
+# python manage.py webpack_init -h
 
 default:
     echo 'Hello, world!'
