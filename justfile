@@ -16,3 +16,6 @@ p:
 
 r:
     vi README.md
+
+m:
+    python manage.py migrate
