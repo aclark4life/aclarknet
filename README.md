@@ -1,6 +1,6 @@
 # aclarknet
 
-(written by us.amazon.nova-micro-v1:0 when given the directory listing)
+(written by us.amazon.nova-micro-v1:0)
 
 This is a project that includes various configuration files and directories for
 different tools and environments.
