@@ -128,4 +128,5 @@ MIGRATION_MODULES = {
     "contenttypes": "aclarknet.migrations.contenttypes",
     "wagtailcore": "aclarknet.migrations.wagtail",
     "taggit": "aclarknet.migrations.taggit",
+    "db": "db.migrations",
 }

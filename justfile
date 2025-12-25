@@ -21,7 +21,7 @@ m:
     python manage.py migrate
 
 mm:
-    python manage.py makemigrations admin auth contenttypes wagtailcore taggit
+    python manage.py makemigrations admin auth contenttypes wagtailcore taggit db
 
 d:
     mongosh ${MONGODB_URI:-mongodb://localhost:27017} --eval 'db.getSiblingDB("aclarknet").dropDatabase()'
