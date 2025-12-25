@@ -13,4 +13,3 @@ window.document.addEventListener("DOMContentLoaded", function () {
     new Jumbotron(elem);
   }
 });
-
