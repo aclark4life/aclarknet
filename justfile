@@ -1,4 +1,5 @@
 # https://just.systems
+# django-admin startproject aclarknet .
 
 default:
     echo 'Hello, world!'
