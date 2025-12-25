@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "webpack_boilerplate",
+    "db",
+    "aclarknet.apps.MongoWagtailAppConfig",
+    "aclarknet.apps.MongoTaggitAppConfig",
 ]
 
 MIDDLEWARE = [
@@ -123,4 +126,6 @@ MIGRATION_MODULES = {
     "auth": "aclarknet.migrations.auth",
     "admin": "aclarknet.migrations.admin",
     "contenttypes": "aclarknet.migrations.contenttypes",
+    "wagtailcore": "aclarknet.migrations.wagtail",
+    "taggit": "aclarknet.migrations.taggit",
 }

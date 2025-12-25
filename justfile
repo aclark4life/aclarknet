@@ -21,7 +21,7 @@ m:
     python manage.py migrate
 
 mm:
-    python manage.py makemigrations admin auth contenttypes
+    python manage.py makemigrations admin auth contenttypes wagtailcore taggit
 
 d:
     mongosh ${MONGODB_URI:-mongodb://localhost:27017} --eval 'db.getSiblingDB("aclarknet").dropDatabase()'
@@ -34,3 +34,6 @@ s:
 
 su:
     export DJANGO_SUPERUSER_PASSWORD=admin && python manage.py createsuperuser --noinput --username=admin --email=admin@example.com
+
+se:
+    vi aclarknet/settings.py
