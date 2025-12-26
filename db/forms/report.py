@@ -2,12 +2,8 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field
 from django import forms
 from django.utils import timezone
-# from faker import Faker
-
 from ..models.contact import Contact
 from ..models.report import Report
-
-# fake = Faker()
 
 
 class ReportForm(forms.ModelForm):
@@ -63,9 +59,7 @@ class ReportForm(forms.ModelForm):
 class AdminReportForm(ReportForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Retrieve the existing layout object
         layout = self.helper.layout
-        # Make modifications to the layout object
         layout.append(
             Div(Field("net", css_class="form-control"), css_class="col-sm-4"),
         )
@@ -102,13 +96,9 @@ class AdminReportForm(ReportForm):
                 css_class="col-sm-6",
             ),
         )
-
-        # Sort choices for contacts field
         choices = self.fields["contacts"].choices
         sorted_choices = sorted(choices, key=lambda choice: choice[1])
         self.fields["contacts"].choices = sorted_choices
-
-        # Sort choices for user field
         choices = self.fields["user"].choices
         sorted_choices = sorted(choices, key=lambda choice: choice[1])
         self.fields["user"].choices = sorted_choices

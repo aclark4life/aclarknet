@@ -22,8 +22,6 @@ from django.views.generic import (
     View,
 )
 from docx import Document
-
-# from faker import Faker
 from html2docx import html2docx
 from texttable import Texttable
 from xhtml2pdf import pisa
@@ -31,8 +29,6 @@ from xhtml2pdf import pisa
 from ..forms.invoice import InvoiceForm
 from ..models import Company, Invoice, Project, Time
 from .base import BaseView
-
-# fake = Faker()
 
 
 class BaseInvoiceView(BaseView, UserPassesTestMixin):
@@ -92,25 +88,17 @@ class InvoiceCreateView(BaseInvoiceView, CreateView):
         context = super().get_context_data(**kwargs)
         project_id = self.request.GET.get("project_id")
         now = timezone.now()
-
-        # Get month and year
         year = now.year
         month = now.month
-
-        # Get start and end date
         start_date = timezone.datetime(year, month, 1)
         end_date = (
             timezone.datetime(year, month, 1) + timezone.timedelta(days=32)
         ).replace(day=1) - timezone.timedelta(days=1)
-
-        # Get due date
         month = now.month + 2
         if month > 12:
             year += 1
             month -= 12
         due_date = timezone.datetime(year, month, 1)
-
-        # Get issue date
         month = now.month + 1
         if month > 12:
             year += 1
@@ -119,16 +107,12 @@ class InvoiceCreateView(BaseInvoiceView, CreateView):
             year += 1
             month = 1
         issue_date = timezone.datetime(year, month, 1)
-
-        # Set initial context
         context["form"].initial = {
             "start_date": start_date,
             "end_date": end_date,
             "issue_date": issue_date,
             "due_date": due_date,
         }
-
-        # Update context to include project and client and company
         if project_id:
             project = Project.objects.get(pk=project_id)
             client = project.client
@@ -144,17 +128,7 @@ class InvoiceCreateView(BaseInvoiceView, CreateView):
                     "task": task,
                 }
             )
-
-        # Update context to include fake text
         subject = None
-        # if settings.USE_FAKE:
-        #     subject = fake.text()
-        #     context["form"].initial.update(
-        #         {
-        #             "subject": subject,
-        #         }
-        #     )
-
         return context
 
     def form_valid(self, form):
@@ -179,7 +153,6 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
         invoice = self.get_object()
         contacts = invoice.contacts.all()
         notes = invoice.notes.all()
-        # times = invoice.times.filter(hours__gte=0).order_by("-id")
         times = invoice.times.all().order_by("-id")
         project = invoice.project
         client = invoice.client

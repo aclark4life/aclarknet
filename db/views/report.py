@@ -22,7 +22,6 @@ from django.views.generic import (
     View,
 )
 
-# from faker import Faker
 from texttable import Texttable
 
 from ..forms.report import AdminReportForm, ReportForm
@@ -35,7 +34,6 @@ from ..models.time import Time
 
 from .base import BaseView
 
-# fake = Faker()
 
 locale.setlocale(locale.LC_ALL, "")
 
@@ -266,7 +264,6 @@ class ReportUpdateView(CreateOrUpdateReportView, UpdateView):
         return form
 
     def get_queryset(self):
-        # Retrieve the object to be edited
         queryset = super().get_queryset()
         return queryset.filter(pk=self.kwargs["pk"])
 

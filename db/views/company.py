@@ -20,11 +20,6 @@ from ..models.project import Project
 from ..models.task import Task
 from .base import BaseView
 
-# if settings.USE_FAKE:
-#     from faker import Faker
-#
-#     fake = Faker()
-
 
 class BaseCompanyView(BaseView, UserPassesTestMixin):
     model = Company
@@ -63,28 +58,19 @@ class CompanyCreateView(BaseCompanyView, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Set the initial value of the client_set field
         clients = list(Client.objects.all())
         random_clients = random.sample(clients, k=len(clients))  # Select random clients
         initial_values = [client.pk for client in random_clients]
         context["form"].initial = {
             "client_set": initial_values,
         }
-        # if settings.USE_FAKE:
-        #     context["form"].initial["name"] = fake.company()
-        #     context["form"].initial["description"] = fake.catch_phrase()
-        #     context["form"].initial["url"] = fake.url()
         return context
 
     def form_valid(self, form):
-        # Set the company's creator to the current user
         form.instance.creator = self.request.user
-        # Save the company instance without committing to the database
         company = form.save(commit=False)
-        # Add the selected clients to the company
         company.save()
         company.client_set.set(form.cleaned_data["client_set"])
-        # Commit the changes to the database
         form.save_m2m()
         return super().form_valid(form)
 
@@ -121,9 +107,7 @@ class CompanyUpdateView(BaseCompanyView, UpdateView):
     template_name = "edit.html"
 
     def form_valid(self, form):
-        # Save the form data
         response = super().form_valid(form)
-        # Add the selected clients to the company
         form.instance.client_set.set(form.cleaned_data["client_set"])
         return response
 
@@ -133,7 +117,6 @@ class CompanyUpdateView(BaseCompanyView, UpdateView):
         return context
 
     def get_queryset(self):
-        # Retrieve the object to be edited
         queryset = super().get_queryset()
         return queryset.filter(pk=self.kwargs["pk"])
 
@@ -160,20 +143,13 @@ class CompanyCopyView(BaseCompanyView, CreateView):
         return Company.objects.all()
 
     def get_initial(self):
-        # Get the original company object
         original_company = Company.objects.get(pk=self.kwargs["pk"])
-
-        # Return a dictionary of initial values for the form fields
         return {
             "name": original_company.name,
-            # Add more fields as needed
         }
 
     def form_valid(self, form):
-        # Copy the original company's data to a new company object
         new_company = form.save(commit=False)
         new_company.pk = None
         new_company.save()
-
-        # Redirect to the success URL
         return super().form_valid(form)

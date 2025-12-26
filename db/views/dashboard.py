@@ -43,9 +43,6 @@ class DashboardView(BaseView, UserPassesTestMixin, ListView):
         return self.request.user.is_authenticated
 
     def handle_no_permission(self):
-        # Customize the behavior when the user fails the test
-        # For example, redirect them to a login page or show an error message
-        # Here, we'll raise a 403 Forbidden error
         return HttpResponseRedirect(reverse("account_login"))
 
     def get_context_data(self, **kwargs):

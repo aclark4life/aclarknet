@@ -32,10 +32,7 @@ def update_selected_entries(request):
             return HttpResponseRedirect(reverse(f"{model_name}_index"))
 
         if action == "delete":
-            # try:
             deleted_entries = entries.delete()
-            # except:
-            #     deleted_entries = []
             if len(deleted_entries) > 0:
                 if deleted_entries[0]:
                     if model_name == "report":

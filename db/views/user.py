@@ -16,8 +16,6 @@ from django.views.generic import (
     UpdateView,
     View,
 )
-# from faker import Faker
-
 from ..forms.user import UserForm
 from ..models.contact import Contact
 from ..models.invoice import Invoice
@@ -25,8 +23,6 @@ from ..models.project import Project
 from ..models.time import Time
 
 from .base import BaseView
-
-# fake = Faker()
 
 
 class BaseUserView(BaseView):
@@ -51,9 +47,6 @@ class BaseUserMixin(UserPassesTestMixin):
         return self.request.user.is_superuser
 
     def handle_no_permission(self):
-        # Customize the behavior when the user fails the test
-        # For example, redirect them to a login page or show an error message
-        # Here, we'll raise a 403 Forbidden error
         raise PermissionDenied
 
 
@@ -121,21 +114,6 @@ class UserDetailView(BaseUserMixin, BaseUserView, DetailView):
 class UserCreateView(BaseUserView, CreateView):
     success_url = reverse_lazy("user_index")
     template_name = "edit.html"
-
-    # def get_initial(self):
-    #     fake_profile = fake.profile()
-    #     # Fake GitHub token
-    #     # token_length = 40
-    #     # allowed_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-    #     # token = "".join(random.choices(allowed_chars, k=token_length))
-    #     return {
-    #         "username": fake_profile["username"],
-    #         "email": fake_profile["mail"],
-    #         "password": fake.password(),
-    #         "rate": f"{random.random() * 100:.2f}",
-    #         "first_name": fake.first_name(),
-    #         "last_name": fake.last_name(),
-    #     }
 
     def form_valid(self, form):
         user = form.save(commit=False)

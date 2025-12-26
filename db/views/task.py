@@ -18,11 +18,6 @@ from ..models.project import Project
 from ..models.task import Task
 from .base import BaseView
 
-# if settings.USE_FAKE:
-#     from faker import Faker
-#
-#     fake = Faker()
-
 
 class BaseTaskView(BaseView, UserPassesTestMixin):
     model = Task
@@ -60,11 +55,6 @@ class TaskCreateView(BaseTaskView, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # if settings.USE_FAKE:
-        #     context["form"].initial = {
-        #         "name": fake.text(),
-        #         "rate": fake.pydecimal(left_digits=3, right_digits=2, positive=True),
-        #     }
         return context
 
     def form_valid(self, form):

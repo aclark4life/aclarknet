@@ -8,13 +8,9 @@ from django.views.generic import (
     ListView,
     UpdateView,
 )
-# from faker import Faker
-
 from ..forms.contact import ContactForm
 from ..models import Contact
 from .base import BaseView
-
-# fake = Faker()
 
 
 class BaseContactView(BaseView, UserPassesTestMixin):
@@ -52,17 +48,6 @@ class ContactCreateView(BaseContactView, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         model_name = self.model_name
-
-        # if settings.USE_FAKE:
-        #     first_name = fake.first_name()
-        #     last_name = fake.last_name()
-        #     context["form"].initial = {
-        #         "name": " ".join([first_name, last_name]),
-        #         "first_name": first_name,
-        #         "last_name": last_name,
-        #         "email": fake.email(),
-        #     }
-
         context["model_name"] = model_name
         model_name_plural = self.model._meta.verbose_name_plural
         context["model_name_plural"] = model_name_plural
@@ -95,7 +80,6 @@ class ContactUpdateView(BaseContactView, UpdateView):
         return context
 
     def get_queryset(self):
-        # Retrieve the object to be edited
         queryset = super().get_queryset()
         return queryset.filter(pk=self.kwargs["pk"])
 
@@ -109,9 +93,6 @@ class ContactDeleteView(BaseContactView, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context["url_cancel"] = reverse_lazy(
-        #     "contact_view", kwargs={"pk": self.kwargs["pk"]}
-        # )
         return context
 
     def get_queryset(self):
@@ -123,7 +104,6 @@ class ContactCopyView(BaseContactView, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Get the model name dynamically
         model_name = self.model._meta.model_name
         context["model_name"] = model_name
         context["%s_nav" % model_name] = True
@@ -133,14 +113,7 @@ class ContactCopyView(BaseContactView, CreateView):
         return Contact.objects.all()
 
     def form_valid(self, form):
-        # Get the original contact object
         original_contact = Contact.objects.get(pk=self.kwargs["pk"])
-
-        # Copy the original contact's data to a new contact object
         new_contact = original_contact
-
-        # Save the new contact object
         new_contact.save()
-
-        # Redirect to the success URL
         return super().form_valid(form)

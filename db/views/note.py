@@ -19,12 +19,6 @@ from ..models.note import Note
 from .base import BaseView
 
 
-# if settings.USE_FAKE:
-#     from faker import Faker
-#
-#     fake = Faker()
-
-
 class BaseNoteView(BaseView, UserPassesTestMixin):
     model = Note
     model_name = model._meta.model_name
@@ -68,11 +62,6 @@ class NoteCreateView(BaseNoteView, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # if settings.USE_FAKE:
-        #     context["form"].initial = {
-        #         "title": fake.text(),
-        #         "text": fake.text(),
-        #     }
         return context
 
 
@@ -136,16 +125,9 @@ class NoteCopyView(BaseNoteView, CreateView):
         return Note.objects.all()
 
     def form_valid(self, form):
-        # Get the original note object
         original_note = Note.objects.get(pk=self.kwargs["pk"])
-
-        # Copy the original note's data to a new note object
         new_note = original_note
-
-        # Save the new note object
         new_note.save()
-
-        # Redirect to the success URL
         return super().form_valid(form)
 
 

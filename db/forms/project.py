@@ -51,8 +51,6 @@ class ProjectForm(forms.ModelForm):
             Div(Field("client", css_class="form-control"), css_class="col-sm-12"),
             css_class="row",
         )
-
-        # Get the choices for the field
         choices = self.fields["team"].choices
         sorted_choices = sorted(choices, key=lambda choice: choice[1])
         self.fields["team"].choices = sorted_choices

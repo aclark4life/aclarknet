@@ -21,11 +21,6 @@ from ..models.project import Project
 from ..models.task import Task
 from .base import BaseView
 
-# if settings.USE_FAKE:
-#     from faker import Faker
-#
-#     fake = Faker()
-
 
 class BaseProjectView(BaseView, UserPassesTestMixin):
     model = Project
@@ -86,10 +81,6 @@ class ProjectCreateView(BaseProjectView, CreateView):
             "end_date": now + timezone.timedelta(days=366),
             "client": client,
         }
-        # if settings.USE_FAKE:
-        #     context["form"].initial.update(
-        #         {"name": fake.text(), "description": fake.text()}
-        #     )
         return context
 
     def form_valid(self, form):

@@ -12,7 +12,6 @@ from django.views.generic import (
     ListView,
     UpdateView,
 )
-# from faker import Faker
 
 from ..forms.time import AdminTimeForm, TimeForm
 from ..models.client import Client
@@ -22,8 +21,6 @@ from ..models.task import Task
 from ..models.time import Time
 
 from .base import BaseView
-
-# fake = Faker()
 
 
 class BaseTimeView(BaseView, UserPassesTestMixin):
@@ -107,9 +104,6 @@ class TimeCreateView(BaseTimeView, CreateView):
         description = None
         project_id = None
         task_id = None
-
-        # if settings.USE_FAKE:
-        #     description = fake.text()
 
         context["form"].initial = {
             "description": description,
@@ -251,13 +245,11 @@ class TimeCopyView(BaseTimeView, CreateView):
 
     def get_initial(self):
         original_time = Time.objects.get(pk=self.kwargs["pk"])
-        # tomorrow = original_time.date + timezone.timedelta(days=1)
         return {
             "user": original_time.user,
             "name": original_time.name,
             "hours": original_time.hours,
             "description": original_time.description,
-            # "date": tomorrow,
             "date": timezone.now,
             "invoice": original_time.invoice,
             "task": original_time.task,

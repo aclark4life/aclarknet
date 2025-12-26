@@ -22,11 +22,6 @@ from ..models.task import Task
 from ..serializers import ClientSerializer
 from .base import BaseView
 
-# if settings.USE_FAKE:
-#     from faker import Faker
-#
-#     fake = Faker()
-
 
 class ClientAPIViewSet(viewsets.ModelViewSet):
     queryset = Client.objects.filter(publish=True).order_by("name")
@@ -83,16 +78,6 @@ class ClientCreateView(BaseClientView, CreateView):
             context["form"].initial = {
                 "company": company,
             }
-        # if settings.USE_FAKE:
-        #     context["form"].initial.update(
-        #         {
-        #             "name": fake.company(),
-        #             "url": fake.url(),
-        #             "description": fake.catch_phrase(),
-        #             "address": fake.address(),
-        #             "tags": fake.text(),
-        #         }
-        #     )
         return context
 
     def form_valid(self, form):
@@ -165,18 +150,13 @@ class ClientCopyView(BaseClientView, CreateView):
         return Client.objects.all()
 
     def get_initial(self):
-        # Get the original client object
         original_client = Client.objects.get(pk=self.kwargs["pk"])
-        # Return a dictionary of initial values for the form fields
         return {
             "name": original_client.name,
-            # Add more fields as needed
         }
 
     def form_valid(self, form):
-        # Copy the original client's data to a new client object
         new_client = form.save(commit=False)
         new_client.pk = None
         new_client.save()
-        # Redirect to the success URL
         return super().form_valid(form)

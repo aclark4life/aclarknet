@@ -38,6 +38,5 @@ class CompanyForm(forms.ModelForm):
             css_class="row",
         )
 
-        # Set the initial value of the client_set field
         if self.instance.pk:
             self.fields["client_set"].initial = self.instance.client_set.all()
