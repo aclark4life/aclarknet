@@ -8,6 +8,7 @@
 default:
     echo 'Hello, world!'
 
+# uv pip install
 i:
     uv pip install -e .
 
