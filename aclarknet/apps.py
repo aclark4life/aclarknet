@@ -3,6 +3,8 @@ from django.contrib.auth.apps import AuthConfig
 from django.contrib.contenttypes.apps import ContentTypesConfig
 from wagtail.apps import WagtailAppConfig
 from taggit.apps import TaggitAppConfig
+from allauth.account.apps import AccountConfig
+from allauth.socialaccount.apps import SocialAccountConfig
 
 
 class MongoAdminConfig(AdminConfig):
@@ -22,4 +24,12 @@ class MongoWagtailAppConfig(WagtailAppConfig):
 
 
 class MongoTaggitAppConfig(TaggitAppConfig):
+    default_auto_field = "django_mongodb_backend.fields.ObjectIdAutoField"
+
+
+class MongoAccountConfig(AccountConfig):
+    default_auto_field = "django_mongodb_backend.fields.ObjectIdAutoField"
+
+
+class MongoSocialAccountConfig(SocialAccountConfig):
     default_auto_field = "django_mongodb_backend.fields.ObjectIdAutoField"

@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     "db",
     "aclarknet.apps.MongoWagtailAppConfig",
     "aclarknet.apps.MongoTaggitAppConfig",
-    "allauth",
-    "allauth.socialaccount",
+    "aclarknet.apps.MongoAccountConfig",
+    "aclarknet.apps.MongoSocialAccountConfig",
 ]
 
 MIDDLEWARE = [
@@ -54,6 +54,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "aclarknet.urls"
@@ -131,4 +132,6 @@ MIGRATION_MODULES = {
     "wagtailcore": "aclarknet.migrations.wagtail",
     "taggit": "aclarknet.migrations.taggit",
     "db": "db.migrations",
+    "account": "aclarknet.migrations.account",
+    "socialaccount": "aclarknet.migrations.socialaccount",
 }
