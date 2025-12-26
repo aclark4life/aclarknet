@@ -10,7 +10,7 @@ default:
 
 # uv pip install
 i:
-    uv pip install -e .
+    uv pip install -e '.[test]'
 
 p:
     nvim pyproject.toml
@@ -41,3 +41,6 @@ se:
 
 o:
     open http://localhost:8000/admin
+
+t:
+    pytest db/tests.py

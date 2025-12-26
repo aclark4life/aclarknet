@@ -16,5 +16,11 @@ dependencies = [
   "xhtml2pdf",
 ]
 
+[project.optional-dependencies]
+test = [
+  "pytest",
+  "pytest-django",
+]
+
 [tool.setuptools]
 packages = ["aclarknet", "db"]
