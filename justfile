@@ -13,10 +13,10 @@ i:
     uv pip install -e .
 
 p:
-    vi pyproject.toml
+    nvim pyproject.toml
 
 r:
-    vi README.md
+    nvim README.md
 
 m:
     python manage.py migrate
