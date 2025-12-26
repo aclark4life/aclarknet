@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "aclarknet.apps.MongoTaggitAppConfig",
     "aclarknet.apps.MongoAccountConfig",
     "aclarknet.apps.MongoSocialAccountConfig",
+    "import_export",
 ]
 
 MIDDLEWARE = [
