@@ -24,3 +24,6 @@ test = [
 
 [tool.setuptools]
 packages = ["aclarknet", "db"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "aclarknet.settings"

@@ -43,4 +43,4 @@ o:
     open http://localhost:8000/admin
 
 t:
-    pytest db/tests.py
+    pytest db/tests/base.py
