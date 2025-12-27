@@ -42,10 +42,13 @@ se:
     nvim aclarknet/settings.py
 
 o:
-    open http://localhost:8000/admin
+    open http://localhost:8000/admin/
 
 t:
     pytest db/tests/base.py
 
 n:
     npm install
+
+w:
+    open http://localhost:8000/wagtail/

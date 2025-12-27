@@ -66,8 +66,10 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import include, path
+from wagtail.admin import urls as wagtailadmin_urls
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("dashboard/", include("db.urls")),
+    path("wagtail/", include(wagtailadmin_urls)),
 ]
