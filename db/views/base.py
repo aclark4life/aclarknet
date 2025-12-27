@@ -1,6 +1,5 @@
 from django.db.models import BooleanField, Case, Value, When
 from django.core.paginator import Paginator
-from django.conf import settings
 from django.shortcuts import redirect
 
 archived_annotation = Case(
@@ -56,7 +55,8 @@ class BaseView:
         context["statcard"] = self.get_statcards()
         context["urls"] = self.get_urls()
 
-        per_page = self.request.GET.get("items_per_page", settings.PER_PAGE)
+        # per_page = self.request.GET.get("items_per_page", settings.PER_PAGE)
+        per_page = self.request.GET.get("items_per_page", 10)
         per_page = int(per_page)
         self.per_page = per_page
         context["items_per_page"] = self.per_page

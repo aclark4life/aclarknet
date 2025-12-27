@@ -39,7 +39,7 @@ su:
     export DJANGO_SUPERUSER_PASSWORD=admin && python manage.py createsuperuser --noinput --username=admin --email=admin@example.com
 
 se:
-    vi aclarknet/settings.py
+    nvim aclarknet/settings.py
 
 o:
     open http://localhost:8000/admin
