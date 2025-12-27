@@ -4,6 +4,7 @@
 # python manage.py webpack_init --no-input
 # ls -a | llm "Can you output a README.md based on what you see in this dir?"
 # pre-commit install
+# nvm install 14
 
 default:
     echo 'Hello, world!'
@@ -31,6 +32,7 @@ pc:
     pre-commit run --all-files
 
 s:
+    npm run watch &
     python manage.py runserver
 
 su:
@@ -44,3 +46,6 @@ o:
 
 t:
     pytest db/tests/base.py
+
+n:
+    npm install
