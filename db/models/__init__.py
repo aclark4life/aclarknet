@@ -4,7 +4,8 @@ from db.models.client import Client  # noqa
 from db.models.clientpage import ClientsPage  # noqa
 from db.models.company import Company  # noqa
 from db.models.contact import Contact  # noqa
-from db.models.home import HomePage  # noqa
+
+# from db.models.home import HomePage  # noqa
 from db.models.invoice import Invoice  # noqa
 from db.models.note import Note  # noqa
 from db.models.project import Project  # noqa

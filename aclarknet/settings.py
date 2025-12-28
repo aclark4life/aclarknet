@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "aclarknet.apps.MongoAccountConfig",
     "aclarknet.apps.MongoSocialAccountConfig",
     "import_export",
+    "cms",
 ]
 
 MIDDLEWARE = [
