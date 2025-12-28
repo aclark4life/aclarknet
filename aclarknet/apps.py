@@ -8,43 +8,68 @@ from allauth.socialaccount.apps import SocialAccountConfig
 from wagtail.admin.apps import WagtailAdminAppConfig
 from wagtail.documents.apps import WagtailDocsAppConfig
 from wagtail.images.apps import WagtailImagesAppConfig
+from wagtail.embeds.apps import WagtailEmbedsAppConfig
+from wagtail.contrib.forms.apps import WagtailFormsAppConfig
+from wagtail.contrib.redirects.apps import WagtailRedirectsAppConfig
+from wagtail.search.apps import WagtailSearchAppConfig
+from wagtail.users.apps import WagtailUsersAppConfig
 
 
-class MongoAdminConfig(AdminConfig):
+class AdminConfig(AdminConfig):
     default_auto_field = "django_mongodb_backend.fields.ObjectIdAutoField"
 
 
-class MongoAuthConfig(AuthConfig):
+class AuthConfig(AuthConfig):
     default_auto_field = "django_mongodb_backend.fields.ObjectIdAutoField"
 
 
-class MongoContentTypesConfig(ContentTypesConfig):
+class ContentTypesConfig(ContentTypesConfig):
     default_auto_field = "django_mongodb_backend.fields.ObjectIdAutoField"
 
 
-class MongoWagtailAppConfig(WagtailAppConfig):
+class WagtailConfig(WagtailAppConfig):
     default_auto_field = "django_mongodb_backend.fields.ObjectIdAutoField"
 
 
-class MongoTaggitAppConfig(TaggitAppConfig):
+class TaggitConfig(TaggitAppConfig):
     default_auto_field = "django_mongodb_backend.fields.ObjectIdAutoField"
 
 
-class MongoAccountConfig(AccountConfig):
+class AccountConfig(AccountConfig):
     default_auto_field = "django_mongodb_backend.fields.ObjectIdAutoField"
 
 
-class MongoSocialAccountConfig(SocialAccountConfig):
+class SocialAccountConfig(SocialAccountConfig):
     default_auto_field = "django_mongodb_backend.fields.ObjectIdAutoField"
 
 
-class MongoWagtailAdminConfig(WagtailAdminAppConfig):
+class WagtailAdminConfig(WagtailAdminAppConfig):
     default_auto_field = "django_mongodb_backend.fields.ObjectIdAutoField"
 
 
-class MongoWagtailDocsConfig(WagtailDocsAppConfig):
+class WagtailDocsConfig(WagtailDocsAppConfig):
     default_auto_field = "django_mongodb_backend.fields.ObjectIdAutoField"
 
 
-class MongoWagtailImagesConfig(WagtailImagesAppConfig):
+class WagtailImagesConfig(WagtailImagesAppConfig):
+    default_auto_field = "django_mongodb_backend.fields.ObjectIdAutoField"
+
+
+class WagtailEmbedsConfig(WagtailEmbedsAppConfig):
+    default_auto_field = "django_mongodb_backend.fields.ObjectIdAutoField"
+
+
+class WagtailFormsConfig(WagtailFormsAppConfig):
+    default_auto_field = "django_mongodb_backend.fields.ObjectIdAutoField"
+
+
+class WagtailRedirectsConfig(WagtailRedirectsAppConfig):
+    default_auto_field = "django_mongodb_backend.fields.ObjectIdAutoField"
+
+
+class WagtailSearchConfig(WagtailSearchAppConfig):
+    default_auto_field = "django_mongodb_backend.fields.ObjectIdAutoField"
+
+
+class WagtailUsersConfig(WagtailUsersAppConfig):
     default_auto_field = "django_mongodb_backend.fields.ObjectIdAutoField"
