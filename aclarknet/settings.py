@@ -32,6 +32,19 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # "wagtail.contrib.forms",
+    # "wagtail.contrib.redirects",
+    # "wagtail.embeds",
+    # "wagtail.sites",
+    # "wagtail.users",
+    # "wagtail.snippets",
+    # "wagtail.documents",
+    # "wagtail.images",
+    # "wagtail.search",
+    # "wagtail.admin",
+    # "wagtail",
+    # "modelcluster",
+    # "taggit",
     "aclarknet.apps.MongoAdminConfig",
     "aclarknet.apps.MongoAuthConfig",
     "aclarknet.apps.MongoContentTypesConfig",
@@ -46,6 +59,9 @@ INSTALLED_APPS = [
     "aclarknet.apps.MongoSocialAccountConfig",
     "import_export",
     "cms",
+    "aclarknet.apps.MongoWagtailAdminConfig",
+    "aclarknet.apps.MongoWagtailDocsConfig",
+    "aclarknet.apps.MongoWagtailImagesConfig",
 ]
 
 MIDDLEWARE = [
@@ -131,9 +147,14 @@ MIGRATION_MODULES = {
     "auth": "aclarknet.migrations.auth",
     "admin": "aclarknet.migrations.admin",
     "contenttypes": "aclarknet.migrations.contenttypes",
-    "wagtailcore": "aclarknet.migrations.wagtail",
+    "wagtailcore": "aclarknet.migrations.wagtailcore",
     "taggit": "aclarknet.migrations.taggit",
     "db": "db.migrations",
     "account": "aclarknet.migrations.account",
     "socialaccount": "aclarknet.migrations.socialaccount",
+    "wagtailadmin": "aclarknet.migrations.wagtailadmin",
+    "wagtaildocs": "aclarknet.migrations.wagtaildocs",
+    "wagtailimages": "aclarknet.migrations.wagtailimages",
 }
+
+WAGTAIL_SITE_NAME = "aclarknet"

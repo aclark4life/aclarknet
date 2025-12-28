@@ -23,7 +23,10 @@ m:
     python manage.py migrate
 
 mm:
-    python manage.py makemigrations admin auth contenttypes wagtailcore taggit db account socialaccount cms
+    rm -rvf aclarknet/migrations/
+    rm -rvf cms/migrations/
+    rm -rvf db/migrations/
+    python manage.py makemigrations admin auth contenttypes wagtailcore taggit db account socialaccount cms wagtailadmin wagtaildocs wagtailimages
 
 d:
     mongosh ${MONGODB_URI:-mongodb://localhost:27017} --eval 'db.getSiblingDB("aclarknet").dropDatabase()'
