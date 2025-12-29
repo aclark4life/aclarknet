@@ -11,7 +11,7 @@ default:
 
 # uv pip install
 i:
-    uv pip install -e '.[test]'
+    uv pip install -e '.[dev,test]'
 
 p:
     nvim pyproject.toml

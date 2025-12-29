@@ -19,6 +19,9 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+dev = [
+  "django-debug-toolbar",
+]
 test = [
   "pytest",
   "pytest-django",
