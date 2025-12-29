@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "aclarknet.apps.SocialAccountConfig",
     "cms",
     "db",
+    "django_extensions",
 ]
 
 MIDDLEWARE = [

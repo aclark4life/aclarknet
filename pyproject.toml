@@ -15,6 +15,7 @@ dependencies = [
   "wagtail",
   "xhtml2pdf",
   "babel",
+  "django-extensions",
 ]
 
 [project.optional-dependencies]
