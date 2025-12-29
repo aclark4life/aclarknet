@@ -27,7 +27,7 @@ mm:
     rm -rvf cms/migrations/
     rm -rvf db/migrations/
     rm -rvf home/migrations/
-    python manage.py makemigrations admin auth contenttypes wagtailcore taggit db account socialaccount cms wagtailadmin wagtaildocs wagtailimages wagtailembeds wagtailforms wagtailredirects wagtailsearch
+    python manage.py makemigrations admin auth contenttypes wagtailcore taggit db account socialaccount cms wagtailadmin wagtaildocs wagtailimages wagtailembeds wagtailforms wagtailredirects wagtailsearch home
 
 d:
     mongosh ${MONGODB_URI:-mongodb://localhost:27017} --eval 'db.getSiblingDB("aclarknet").dropDatabase()'

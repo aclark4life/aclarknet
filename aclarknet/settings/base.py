@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "aclarknet.apps.AccountConfig",
     "aclarknet.apps.SocialAccountConfig",
-    "cms",
     "db",
     "django_extensions",
 ]
