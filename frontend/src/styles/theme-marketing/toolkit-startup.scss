@@ -10,7 +10,7 @@ $theme-colors: (
   dark: #122a38
 );
 
-@import "./variables.scss";
+@import "./variables";
 
 // text overrides
 $body-color: #6c6f73;
@@ -55,4 +55,4 @@ $block-title-font-size: $font-size-base * 2.5;
 $block-lead-font-size-sm: $font-size-base * 1.4;
 $block-vertical-padding: 100px;
 
-@import "./components.scss";
+@import "./components";

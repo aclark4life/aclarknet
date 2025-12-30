@@ -1,10 +1,10 @@
-@import "~bootstrap/scss/bootstrap.scss";
-@import "theme-marketing/application-startup.scss";
-@import "theme-marketing/toolkit-startup.scss";
-@import "theme-dashboard/toolkit-light.scss";
-@import "theme-dashboard/toolkit-inverse.scss";
-@import "theme-aclarknet/index.scss";
-@import "puput.scss";
+@import "~bootstrap/scss/bootstrap";
+@import "theme-marketing/application-startup";
+@import "theme-marketing/toolkit-startup";
+@import "theme-dashboard/toolkit-light";
+@import "theme-dashboard/toolkit-inverse";
+@import "theme-aclarknet/index";
+@import "puput";
 
 #theme-toggler-authenticated:hover {
     cursor: pointer; /* Change cursor to pointer on hover */

@@ -1,8 +1,10 @@
 {
   "parser": "@babel/eslint-parser",
   "extends": [
-    "eslint:recommended"
+    "eslint:recommended",
+    "plugin:react/recommended"
   ],
+  "plugins": ["react"],
   "env": {
     "browser": true,
     "node": true
@@ -10,9 +12,21 @@
   "parserOptions": {
     "ecmaVersion": 8,
     "sourceType": "module",
-    "requireConfigFile": false
+    "requireConfigFile": false,
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "babelOptions": {
+      "presets": ["@babel/preset-react"]
+    }
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   },
   "rules": {
-    "semi": 2
+    "semi": 2,
+    "react/react-in-jsx-scope": "off"
   }
 }

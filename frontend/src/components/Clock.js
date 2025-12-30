@@ -1,8 +1,7 @@
 // Via ChatGPT
-import React, { useState, useEffect, useCallback, useRef } from 'react';
-import PropTypes from 'prop-types';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
-const Clock = ({ color = '#fff' }) => {
+const Clock = () => {
   const [date, setDate] = useState(new Date());
   const [blink, setBlink] = useState(true);
   const timerID = useRef();
@@ -36,10 +35,6 @@ const Clock = ({ color = '#fff' }) => {
       <div style={{ animation: blink ? 'blink 1s infinite' : 'none' }}><span className='me-2'>{formattedDate}</span> {formattedTime}</div>
     </>
   );
-};
-
-Clock.propTypes = {
-  color: PropTypes.string,
 };
 
 export default Clock;

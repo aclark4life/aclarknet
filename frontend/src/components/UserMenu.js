@@ -1,10 +1,5 @@
 // UserMenu.js
-import React from 'react';
 import PropTypes from 'prop-types';
-
-function handleLogout() {
-    window.location.href = '/accounts/logout';
-}
 
 const UserMenu = ({ isAuthenticated, isSuperuser }) => {
   return (
@@ -26,13 +21,13 @@ const UserMenu = ({ isAuthenticated, isSuperuser }) => {
                 <li><hr className="dropdown-divider"></hr></li>
                 <li><a className="dropdown-item" href="https://aclarknet.signin.aws.amazon.com/console" rel="noreferrer" target="_blank">AWS Console</a></li>
                 <li><a className="dropdown-item" href="/blog">Puput Blog</a></li>
-                <li><a className="dropdown-item" href="/django" target="_blank">Django Admin</a></li>
+                <li><a className="dropdown-item" href="/django" rel="noreferrer" target="_blank">Django Admin</a></li>
                 <li><a className="dropdown-item" href="https://analytics.google.com" rel="noreferrer" target="_blank">Google Analytics</a></li>
                 <li><a className="dropdown-item" href="https://admin.google.com/ac/home?hl=en" rel="noreferrer" target="_blank">Google Workspace</a></li>
-                <li><a className="dropdown-item" href="https://aclark.net/lounge/" target="_blank">Lounge IRC</a></li>
+                <li><a className="dropdown-item" href="https://aclark.net/lounge/" rel="noreferrer" target="_blank">Lounge IRC</a></li>
                 <li><a className="dropdown-item" href="https://logfire.pydantic.dev/aclark4life/aclarknet" rel="noreferrer" target="_blank">Pydantic Logfire</a></li>
-                <li><a className="dropdown-item" href="/explorer" target="_blank">SQL Explorer</a></li>
-                <li><a className="dropdown-item" href="/wagtail" target="_blank">Wagtail Admin</a></li>
+                <li><a className="dropdown-item" href="/explorer" rel="noreferrer" target="_blank">SQL Explorer</a></li>
+                <li><a className="dropdown-item" href="/wagtail" rel="noreferrer" target="_blank">Wagtail Admin</a></li>
               </>
             ) : null}
             <li><hr className="dropdown-divider"></hr></li>
