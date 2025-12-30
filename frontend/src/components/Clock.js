@@ -1,6 +1,5 @@
 // Via ChatGPT
-import React, { useState, useEffect, useCallback, useRef } from 'react';
-import PropTypes from 'prop-types';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 const Clock = () => {
   const [date, setDate] = useState(new Date());
@@ -37,7 +36,5 @@ const Clock = () => {
     </>
   );
 };
-
-Clock.propTypes = {};
 
 export default Clock;
