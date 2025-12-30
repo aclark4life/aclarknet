@@ -1,13 +1,21 @@
-
-// If you comment out code below, bootstrap will use red as primary color
-// and btn-primary will become red
-
-// $primary: red;
-
 @import "~bootstrap/scss/bootstrap";
+@import "theme-marketing/application-startup";
+@import "theme-marketing/toolkit-startup";
+@import "theme-dashboard/toolkit-light";
+@import "theme-dashboard/toolkit-inverse";
+@import "theme-aclarknet/index";
+@import "puput";
 
-.jumbotron {
-  // should be relative path of the entry scss file
-  background-image: url("../../vendors/images/sample.jpg");
-  background-size: cover;
+#theme-toggler-authenticated:hover {
+    cursor: pointer; /* Change cursor to pointer on hover */
+    color: #007bff; /* Change color on hover */
+}
+
+#theme-toggler-anonymous:hover {
+    cursor: pointer; /* Change cursor to pointer on hover */
+    color: #007bff; /* Change color on hover */
+}
+
+.accordion-button {
+    background: transparent !important;
 }

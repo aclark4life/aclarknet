@@ -1,0 +1,59 @@
+// Extended Bootstrap components
+@import "./custom/type-custom";
+@import "./custom/alerts-custom";
+@import "./custom/buttons-custom";
+@import "./custom/nav-heading";
+@import "./custom/navbar-utilities";
+
+// Custom theme components
+@import "./custom/icons";
+@import "./custom/text-inherit";
+@import "./custom/nav-bordered";
+@import "./custom/buttons-radius";
+@import "./custom/container-custom";
+@import "./custom/block";
+@import "./custom/navbar-transparent";
+@import "./custom/carousel-light";
+@import "./custom/callouts";
+@import "./custom/featured-list";
+@import "./custom/zoom";
+@import "./custom/text-ribbon";
+@import "./custom/iconlist";
+@import "./custom/cards-bold";
+@import "./custom/pull-quote";
+@import "./custom/stage";
+
+// // Custom styles
+// html {
+//   // set optimal base size
+//   font-size: $font-size-root;
+// }
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6,
+// .h1,
+// .h2,
+// .h3,
+// .h4,
+// .h5,
+// .h6 {
+//   &.text-uppercase {
+//     letter-spacing: 0.15em;
+//   }
+//   small,
+//   .small {
+//     font-weight: inherit;
+//   }
+// }
+// h6,
+// .h6 {
+//   margin-bottom: ($spacer-y * 0.25);
+//   // color: lighten($gray-500, 40%);
+//   text-transform: uppercase;
+// }
+// strong {
+//   font-weight: bold;
+// }

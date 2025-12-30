@@ -34,6 +34,7 @@
     "cross-env": "^7.0.3",
     "css-loader": "^7.1.2",
     "eslint": "^9.20.1",
+    "eslint-plugin-react": "^7.37.5",
     "eslint-webpack-plugin": "^4.2.0",
     "mini-css-extract-plugin": "^2.9.2",
     "postcss-loader": "^8.0.0",
@@ -51,6 +52,16 @@
   },
   "dependencies": {
     "14": "^3.1.6",
-    "core-js": "^3.37.0"
+    "@babel/preset-react": "^7.28.5",
+    "@fortawesome/fontawesome-free": "^7.1.0",
+    "bootstrap": "^5.3.8",
+    "chart.js": "^4.5.1",
+    "core-js": "^3.37.0",
+    "prop-types": "^15.8.1",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "sass": "^1.97.1",
+    "sass-loader": "^16.0.6",
+    "stylelint-config-standard-scss": "^16.0.0"
   }
 }
