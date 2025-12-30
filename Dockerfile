@@ -22,14 +22,15 @@ RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-r
     libjpeg62-turbo-dev \
     zlib1g-dev \
     libwebp-dev \
+    libcairo2-dev \
  && rm -rf /var/lib/apt/lists/*
 
 # Install the application server.
 RUN pip install "gunicorn==20.0.4"
 
 # Install the project requirements.
-COPY requirements.txt /
-RUN pip install -r /requirements.txt
+COPY . /app
+RUN pip install '/app[dev]'
 
 # Use /app folder as a directory where the source code is stored.
 WORKDIR /app

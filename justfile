@@ -57,3 +57,7 @@ n:
 
 w:
     open http://localhost:8000/wagtail/
+
+b:
+    docker build -t aclarknet .
+    aws ecr create-repository --repository-name aclarknet
