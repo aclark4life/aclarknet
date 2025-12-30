@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "db",
     "django_extensions",
     "cms",
+    "webpack_boilerplate",
 ]
 
 MIDDLEWARE = [
@@ -143,6 +144,7 @@ STATICFILES_FINDERS = [
 
 STATICFILES_DIRS = [
     PROJECT_DIR / "static",
+    BASE_DIR / "frontend/build",
 ]
 
 STATIC_ROOT = BASE_DIR / "static"
@@ -216,4 +218,8 @@ MIGRATION_MODULES = {
     "wagtailforms": "aclarknet.migrations.wagtailforms",
     "wagtailredirects": "aclarknet.migrations.wagtailredirects",
     "wagtailsearch": "aclarknet.migrations.wagtailsearch",
+}
+
+WEBPACK_LOADER = {
+    "MANIFEST_FILE": os.path.join(BASE_DIR, "frontend/build/manifest.json"),
 }

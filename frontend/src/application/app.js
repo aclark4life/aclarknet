@@ -1,6 +1,8 @@
 
 // This is the style entry file
-import "../styles/index.css";
+import "../styles/index.scss";
+
+import "bootstrap/dist/js/bootstrap.bundle";
 
 // We can import other JS file as we like
 import Jumbotron from "../components/jumbotron";
@@ -13,3 +15,4 @@ window.document.addEventListener("DOMContentLoaded", function () {
     new Jumbotron(elem);
   }
 });
+
