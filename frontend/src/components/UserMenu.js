@@ -1,10 +1,5 @@
 // UserMenu.js
-import React from 'react';
 import PropTypes from 'prop-types';
-
-function handleLogout() {
-    window.location.href = '/accounts/logout';
-}
 
 const UserMenu = ({ isAuthenticated, isSuperuser }) => {
   return (
