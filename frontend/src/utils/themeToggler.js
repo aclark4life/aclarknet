@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 body: JSON.stringify({ theme: newTheme }),
             })
             .then(response => response.json())
-            .then(data => {
+            .then(() => {
                 rootElement.setAttribute('data-bs-theme', newTheme);
             })
             .catch(error => {
