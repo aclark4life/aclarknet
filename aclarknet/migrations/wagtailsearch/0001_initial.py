@@ -6,27 +6,41 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('contenttypes', '0001_initial'),
+        ("contenttypes", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='IndexEntry',
+            name="IndexEntry",
             fields=[
-                ('id', django_mongodb_backend.fields.ObjectIdAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('object_id', models.CharField(max_length=50)),
-                ('title_norm', models.FloatField(default=1.0)),
-                ('content_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='+', to='contenttypes.contenttype')),
+                (
+                    "id",
+                    django_mongodb_backend.fields.ObjectIdAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("object_id", models.CharField(max_length=50)),
+                ("title_norm", models.FloatField(default=1.0)),
+                (
+                    "content_type",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="+",
+                        to="contenttypes.contenttype",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'index entry',
-                'verbose_name_plural': 'index entries',
-                'abstract': False,
-                'unique_together': {('content_type', 'object_id')},
+                "verbose_name": "index entry",
+                "verbose_name_plural": "index entries",
+                "abstract": False,
+                "unique_together": {("content_type", "object_id")},
             },
         ),
     ]

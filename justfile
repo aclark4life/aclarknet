@@ -11,6 +11,7 @@ default:
 
 # uv pip install
 i:
+    prek install
     uv pip install -e '.[dev,test]'
 
 p:
@@ -33,7 +34,7 @@ d:
     mongosh ${MONGODB_URI:-mongodb://localhost:27017} --eval 'db.getSiblingDB("aclarknet").dropDatabase()'
 
 pc:
-    pre-commit run --all-files
+    prek --all-files
 
 s:
     npm run watch &

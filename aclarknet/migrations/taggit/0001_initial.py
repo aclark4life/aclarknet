@@ -6,39 +6,93 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
-        ('contenttypes', '0001_initial'),
+        ("contenttypes", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Tag',
+            name="Tag",
             fields=[
-                ('id', django_mongodb_backend.fields.ObjectIdAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100, unique=True, verbose_name='name')),
-                ('slug', models.SlugField(allow_unicode=True, max_length=100, unique=True, verbose_name='slug')),
+                (
+                    "id",
+                    django_mongodb_backend.fields.ObjectIdAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(max_length=100, unique=True, verbose_name="name"),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        allow_unicode=True,
+                        max_length=100,
+                        unique=True,
+                        verbose_name="slug",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'tag',
-                'verbose_name_plural': 'tags',
+                "verbose_name": "tag",
+                "verbose_name_plural": "tags",
             },
         ),
         migrations.CreateModel(
-            name='TaggedItem',
+            name="TaggedItem",
             fields=[
-                ('id', django_mongodb_backend.fields.ObjectIdAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('object_id', models.IntegerField(db_index=True, verbose_name='object ID')),
-                ('content_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='%(app_label)s_%(class)s_tagged_items', to='contenttypes.contenttype', verbose_name='content type')),
-                ('tag', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='%(app_label)s_%(class)s_items', to='taggit.tag')),
+                (
+                    "id",
+                    django_mongodb_backend.fields.ObjectIdAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "object_id",
+                    models.IntegerField(db_index=True, verbose_name="object ID"),
+                ),
+                (
+                    "content_type",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="%(app_label)s_%(class)s_tagged_items",
+                        to="contenttypes.contenttype",
+                        verbose_name="content type",
+                    ),
+                ),
+                (
+                    "tag",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="%(app_label)s_%(class)s_items",
+                        to="taggit.tag",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'tagged item',
-                'verbose_name_plural': 'tagged items',
-                'indexes': [models.Index(fields=['content_type', 'object_id'], name='taggit_tagg_content_8fc721_idx')],
-                'constraints': [models.UniqueConstraint(fields=('content_type', 'object_id', 'tag'), name='taggit_taggeditem_content_type_id_object_id_tag_id_4bb97a8e_uniq')],
+                "verbose_name": "tagged item",
+                "verbose_name_plural": "tagged items",
+                "indexes": [
+                    models.Index(
+                        fields=["content_type", "object_id"],
+                        name="taggit_tagg_content_8fc721_idx",
+                    )
+                ],
+                "constraints": [
+                    models.UniqueConstraint(
+                        fields=("content_type", "object_id", "tag"),
+                        name="taggit_taggeditem_content_type_id_object_id_tag_id_4bb97a8e_uniq",
+                    )
+                ],
             },
         ),
     ]
