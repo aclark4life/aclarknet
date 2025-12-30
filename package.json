@@ -38,11 +38,11 @@
     "mini-css-extract-plugin": "^2.9.2",
     "postcss-loader": "^8.0.0",
     "postcss-preset-env": "^10.0.3",
+    "postcss-scss": "^4.0.9",
     "style-loader": "^4.0.0",
     "stylelint": "^16.14.1",
     "stylelint-config-standard-scss": "^13.1.0",
     "stylelint-webpack-plugin": "^5.0.1",
-    "postcss-scss": "^4.0.9",
     "tailwindcss": "^4.0.3",
     "webpack": "^5.104.1",
     "webpack-assets-manifest": "^5.2.1",
@@ -52,6 +52,14 @@
   },
   "dependencies": {
     "14": "^3.1.6",
-    "core-js": "^3.37.0"
+    "@babel/preset-react": "^7.28.5",
+    "@fortawesome/fontawesome-free": "^7.1.0",
+    "bootstrap": "^5.3.8",
+    "chart.js": "^4.5.1",
+    "core-js": "^3.37.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "sass": "^1.97.1",
+    "sass-loader": "^16.0.6"
   }
 }

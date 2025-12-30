@@ -54,6 +54,7 @@ module.exports = merge(common, {
           },
           "postcss-loader",
 
+          "sass-loader",
 
         ],
       },
