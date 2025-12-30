@@ -5,6 +5,10 @@
   "rules": {
     "at-rule-no-unknown": null,
     "scss/load-partial-extension": null,
-    "at-rule-no-vendor-prefix": null
+    "at-rule-no-vendor-prefix": null,
+    "scss/at-import-partial-extension": null,
+    "import-notation": null,
+    "no-invalid-double-slash-comments": null,
+    "declaration-property-value-no-unknown": null
   }
 }
