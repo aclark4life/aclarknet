@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import PropTypes from 'prop-types';
 
-const Clock = ({ color = '#fff' }) => {
+const Clock = () => {
   const [date, setDate] = useState(new Date());
   const [blink, setBlink] = useState(true);
   const timerID = useRef();
@@ -38,8 +38,6 @@ const Clock = ({ color = '#fff' }) => {
   );
 };
 
-Clock.propTypes = {
-  color: PropTypes.string,
-};
+Clock.propTypes = {};
 
 export default Clock;
