@@ -31,4 +31,4 @@ test = [
 packages = ["aclarknet", "db"]
 
 [tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "aclarknet.settings"
+DJANGO_SETTINGS_MODULE = "aclarknet.settings.dev"

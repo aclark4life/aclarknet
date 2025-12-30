@@ -218,6 +218,7 @@ MIGRATION_MODULES = {
     "wagtailforms": "aclarknet.migrations.wagtailforms",
     "wagtailredirects": "aclarknet.migrations.wagtailredirects",
     "wagtailsearch": "aclarknet.migrations.wagtailsearch",
+    "wagtailusers": "aclarknet.migrations.wagtailusers",
 }
 
 WEBPACK_LOADER = {
