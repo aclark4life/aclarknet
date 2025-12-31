@@ -48,12 +48,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.humanize",
     "aclarknet.apps.AccountConfig",
     "aclarknet.apps.SocialAccountConfig",
     "db",
     "django_extensions",
     "cms",
     "webpack_boilerplate",
+    "hijack",
 ]
 
 MIDDLEWARE = [
@@ -66,6 +68,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
     "allauth.account.middleware.AccountMiddleware",
+    "hijack.middleware.HijackUserMiddleware",
 ]
 
 ROOT_URLCONF = "aclarknet.urls"

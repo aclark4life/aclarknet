@@ -16,6 +16,7 @@ dependencies = [
   "xhtml2pdf",
   "babel",
   "django-extensions",
+  "django-hijack",
 ]
 
 [project.optional-dependencies]
