@@ -13,6 +13,20 @@ class AboutView(TemplateView):
         return context
 
 
+class CareersView(TemplateView):
+    template_name = "careers.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["open_positions"] = [
+            "Software Engineer",
+            "Product Manager",
+            "UX Designer",
+            "Data Scientist",
+        ]
+        return context
+
+
 class ClientsView(TemplateView):
     template_name = "clients.html"
 
@@ -24,6 +38,16 @@ class ClientsView(TemplateView):
             "Client C",
             "Client D",
         ]
+        return context
+
+
+class ContactView(TemplateView):
+    template_name = "contact.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["email"] = ""
+        context["phone"] = "+1-234-567-8900"
         return context
 
 
