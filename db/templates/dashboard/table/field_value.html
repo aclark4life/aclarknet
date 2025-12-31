@@ -1,26 +1,26 @@
 {% load babel humanize tz %}
 {% if field_name == "is_active" and field_value == False %}
     {# Show archived icon if inactive user #}
-    <i class="fa-solid fa-box-archive"></i>
+  <i class="fa-solid fa-box-archive"></i>
 {% elif field_name == "archived" and field_value == True %}
     {# Show archived icon if item archived #}
-    <i class="fa-solid fa-box-archive"></i>
+  <i class="fa-solid fa-box-archive"></i>
 {% elif field_name == "is_active" and field_value == True %}
     {# Show nothing if active user #}
 {% elif object.html and field_name == "text" %}
     {# Render html if html #}
-    {{ field_value|default:""|safe }}
+  {{ field_value|default:""|safe }}
 {% elif field_name == "amount" %}
     {# Format amount #}
-    {{ field_value|default:0|currencyfmt:"USD" }}
+  {{ field_value|default:0|currencyfmt:"USD" }}
 {% elif field_name == "cost" %}
     {# Format amount #}
-    {{ field_value|default:0|currencyfmt:"USD" }}
+  {{ field_value|default:0|currencyfmt:"USD" }}
 {% elif field_name == "net" %}
     {# Format amount #}
-    {{ field_value|default:0|currencyfmt:"USD" }}
+  {{ field_value|default:0|currencyfmt:"USD" }}
 {% elif field_name == "hours" %}
-    {{ field_value|default:0 }}
+  {{ field_value|default:0 }}
 {% else %}
-    {{ field_value|default:"" }}
+  {{ field_value|default:"" }}
 {% endif %}

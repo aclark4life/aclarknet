@@ -1,9 +1,9 @@
 {% load wagtailcore_tags %}
 <div class="{{ self.block_class }}">
-    {% if block.value.images.0 %}
-        {% include 'blocks/carousel_block.html' %}
-    {% else %}
-        {{ self.title }}
-        {{ self.content }}
-    {% endif %}
+  {% if block.value.images.0 %}
+    {% include 'blocks/carousel_block.html' %}
+  {% else %}
+    {{ self.title }}
+    {{ self.content }}
+  {% endif %}
 </div>

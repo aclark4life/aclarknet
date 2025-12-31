@@ -2,11 +2,11 @@
 {% block dashboard_title %}Search{% endblock %}
 {% block dashhead_title %}<h2 class="dashhead-title">Search</h2>{% endblock %}
 {% block dashboard %}
-    {% if search_results %}
-        {% include 'dashboard/toolbars/pagination/index.html' %}
-        {% include 'dashboard/table/index.html' %}
-        {% include 'dashboard/toolbars/pagination/index.html' %}
-    {% else %}
-        {% include 'dashboard/table/empty.html' %}
-    {% endif %}
+  {% if search_results %}
+    {% include 'dashboard/toolbars/pagination/index.html' %}
+    {% include 'dashboard/table/index.html' %}
+    {% include 'dashboard/toolbars/pagination/index.html' %}
+  {% else %}
+    {% include 'dashboard/table/empty.html' %}
+  {% endif %}
 {% endblock %}
