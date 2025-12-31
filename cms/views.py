@@ -13,6 +13,20 @@ class AboutView(TemplateView):
         return context
 
 
+class ClientsView(TemplateView):
+    template_name = "clients.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["clients"] = [
+            "Client A",
+            "Client B",
+            "Client C",
+            "Client D",
+        ]
+        return context
+
+
 class HomeView(TemplateView):
     template_name = "home.html"
 
