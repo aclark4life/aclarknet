@@ -3,7 +3,7 @@ from crispy_forms.layout import Div, Field
 from django import forms
 from django.utils import timezone
 
-from ..models.time import Time
+from ..models import Time
 
 
 class TimeForm(forms.ModelForm):

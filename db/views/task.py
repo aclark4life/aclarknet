@@ -14,8 +14,8 @@ from django.views.generic import (
 )
 
 from ..forms.task import TaskForm
-from ..models.project import Project
-from ..models.task import Task
+from ..models import Project
+from ..models import Task
 from .base import BaseView
 
 

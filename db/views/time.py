@@ -14,11 +14,11 @@ from django.views.generic import (
 )
 
 from ..forms.time import AdminTimeForm, TimeForm
-from ..models.client import Client
-from ..models.invoice import Invoice
-from ..models.project import Project
-from ..models.task import Task
-from ..models.time import Time
+from ..models import Client
+from ..models import Invoice
+from ..models import Project
+from ..models import Task
+from ..models import Time
 
 from .base import BaseView
 

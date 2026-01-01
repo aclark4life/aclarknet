@@ -7,17 +7,17 @@ from import_export import fields, widgets
 from import_export.admin import ImportExportModelAdmin
 from import_export.resources import ModelResource as ImportExportModelResource
 
-from .models.client import Client
-from .models.company import Company
-from .models.contact import Contact
-from .models.invoice import Invoice
-from .models.note import Note
-from .models.profile import Profile
-from .models.project import Project
-from .models.report import Report
-from .models.task import Task
-from .models.testimonial import Testimonial
-from .models.time import Time
+from .models import Client
+from .models import Company
+from .models import Contact
+from .models import Invoice
+from .models import Note
+from .models import Profile
+from .models import Project
+from .models import Report
+from .models import Task
+from .models import Testimonial
+from .models import Time
 
 
 @admin.register(Testimonial)

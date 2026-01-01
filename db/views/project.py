@@ -14,11 +14,11 @@ from django.views.generic import (
 )
 
 from ..forms.project import ProjectForm
-from ..models.client import Client
-from ..models.contact import Contact
-from ..models.invoice import Invoice
-from ..models.project import Project
-from ..models.task import Task
+from ..models import Client
+from ..models import Contact
+from ..models import Invoice
+from ..models import Project
+from ..models import Task
 from .base import BaseView
 
 

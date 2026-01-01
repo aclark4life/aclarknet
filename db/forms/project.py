@@ -2,8 +2,8 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field
 from django import forms
 
-from ..models.client import Client
-from ..models.project import Project
+from ..models import Client
+from ..models import Project
 
 
 class ProjectForm(forms.ModelForm):

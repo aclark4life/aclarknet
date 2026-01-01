@@ -2,8 +2,8 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field
 from django import forms
 from django.utils import timezone
-from ..models.contact import Contact
-from ..models.report import Report
+from ..models import Contact
+from ..models import Report
 
 
 class ReportForm(forms.ModelForm):

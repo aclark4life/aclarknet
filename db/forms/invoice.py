@@ -3,8 +3,8 @@ from crispy_forms.layout import Div, Field
 from django import forms
 from django.utils import timezone
 
-from ..models.contact import Contact
-from ..models.invoice import Invoice
+from ..models import Contact
+from ..models import Invoice
 
 
 class InvoiceForm(forms.ModelForm):

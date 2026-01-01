@@ -26,11 +26,11 @@ from texttable import Texttable
 
 from ..forms.report import AdminReportForm, ReportForm
 
-from ..models.client import Client
-from ..models.company import Company
-from ..models.invoice import Invoice
-from ..models.report import Report
-from ..models.time import Time
+from ..models import Client
+from ..models import Company
+from ..models import Invoice
+from ..models import Report
+from ..models import Time
 
 from .base import BaseView
 

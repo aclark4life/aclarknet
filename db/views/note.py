@@ -15,7 +15,7 @@ from django.views.generic import (
 )
 
 from ..forms.note import NoteForm
-from ..models.note import Note
+from ..models import Note
 from .base import BaseView
 
 

@@ -17,10 +17,10 @@ from django.views.generic import (
     View,
 )
 from ..forms.user import UserForm
-from ..models.contact import Contact
-from ..models.invoice import Invoice
-from ..models.project import Project
-from ..models.time import Time
+from ..models import Contact
+from ..models import Invoice
+from ..models import Project
+from ..models import Time
 
 from .base import BaseView
 

@@ -15,10 +15,10 @@ from django.views.generic import (
 from rest_framework import viewsets
 
 from ..forms.client import ClientForm
-from ..models.client import Client
-from ..models.company import Company
-from ..models.invoice import Invoice
-from ..models.task import Task
+from ..models import Client
+from ..models import Company
+from ..models import Invoice
+from ..models import Task
 from ..serializers import ClientSerializer
 from .base import BaseView
 

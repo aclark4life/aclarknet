@@ -13,11 +13,11 @@ from django.views.generic import (
 )
 
 from ..forms.company import CompanyForm
-from ..models.client import Client
-from ..models.company import Company
-from ..models.contact import Contact
-from ..models.project import Project
-from ..models.task import Task
+from ..models import Client
+from ..models import Company
+from ..models import Contact
+from ..models import Project
+from ..models import Task
 from .base import BaseView
 
 

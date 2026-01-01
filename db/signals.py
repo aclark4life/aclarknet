@@ -6,9 +6,9 @@ from django.urls import reverse
 from django.utils.html import strip_tags
 from django.core.mail import EmailMultiAlternatives
 from django.contrib.auth.signals import user_logged_in
-from .models.invoice import Invoice
-from .models.profile import Profile
-from .models.time import Time
+from .models import Invoice
+from .models import Profile
+from .models import Time
 
 
 @receiver(post_save, sender=Time)
