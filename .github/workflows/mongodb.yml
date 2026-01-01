@@ -1,0 +1,165 @@
+name: Install MongoDB via Supercharge
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  install-mongodb:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.10.0
+        with:
+          mongodb-version: '8.2'
+
+      - name: Install mongosh
+        run: |
+          wget -q https://downloads.mongodb.com/compass/mongosh-2.2.10-linux-x64.tgz
+          tar -xzf mongosh-*-linux-x64.tgz
+          sudo cp mongosh-*-linux-x64/bin/mongosh /usr/local/bin/
+          mongosh --version
+
+      - name: Install mongocryptd from Enterprise tarball
+        run: |
+          curl -sSL -o mongodb-enterprise.tgz "https://downloads.mongodb.com/linux/mongodb-linux-x86_64-enterprise-ubuntu2404-8.2.1.tgz"
+          tar -xzf mongodb-enterprise.tgz
+          sudo cp mongodb-linux-x86_64-enterprise-ubuntu2404-8.2.1/bin/mongocryptd /usr/local/bin/
+
+      - name: Start mongocryptd
+        run: |
+          nohup mongocryptd --logpath=/tmp/mongocryptd.log &
+
+      - name: Verify MongoDB installation
+        run: |
+          mongosh --eval 'db.runCommand({ connectionStatus: 1 })'
+
+      - name: Verify mongocryptd is running
+        run: |
+          pgrep mongocryptd
+
+      # 🧩 Install Mongo Crypt Shared Library
+      - name: Install Mongo Crypt Shared Library
+        run: |
+          curl -sSL -o mongo_crypt_shared_v1.tgz https://downloads.mongodb.com/linux/mongo_crypt_shared_v1-linux-x86_64-enterprise-ubuntu2404-8.2.1.tgz
+          tar -xzf mongo_crypt_shared_v1.tgz
+          sudo mkdir -p /usr/local/lib/mongo_crypt_v1
+          sudo cp lib/mongo_crypt_v1.so /usr/local/lib/mongo_crypt_v1/
+          echo "✅ Installed Mongo Crypt Shared Library to /usr/local/lib/mongo_crypt_v1"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install PyMongo with encryption support
+        run: |
+          python -m pip install --upgrade pip
+          pip install 'pymongo[encryption]'
+
+      - name: Test PyMongo connection with encryption
+        env:
+          LD_LIBRARY_PATH: /usr/local/lib/mongo_crypt_v1/
+        run: |
+          python - <<'PYCODE'
+          import os, sys
+          from pymongo import MongoClient
+          from pymongo.encryption_options import AutoEncryptionOpts
+
+          lib_path = os.environ["LD_LIBRARY_PATH"] + "/mongo_crypt_v1.so"
+          print(f"🔒 Using Mongo Crypt Shared Library: {lib_path}")
+
+          try:
+              client = MongoClient(
+                  "mongodb://localhost:27017/",
+                  auto_encryption_opts=AutoEncryptionOpts(
+                      kms_providers={"local": {"key": os.urandom(96)}},
+                      key_vault_namespace="encryption.__keyVault",
+                      crypt_shared_lib_path=lib_path,
+                      crypt_shared_lib_required=True,
+                  ),
+                  serverSelectionTimeoutMS=3000,
+              )
+              info = client.server_info()
+              print("✅ Successfully connected to MongoDB:", info.get("version"))
+          except Exception as e:
+              print("❌ Failed to connect to MongoDB:", e)
+              sys.exit(1)
+          PYCODE
+
+      - name: Test Python Tutorial Code with Encryption
+        env:
+          LD_LIBRARY_PATH: /usr/local/lib/mongo_crypt_v1/
+        run: |
+          python - <<'PYCODE'
+          import os, sys
+          from bson.codec_options import CodecOptions
+          from pymongo import MongoClient
+          from pymongo.encryption import ClientEncryption, AutoEncryptionOpts
+          from pymongo.errors import EncryptedCollectionError
+
+          lib_path = os.environ["LD_LIBRARY_PATH"] + "/mongo_crypt_v1.so"
+
+          try:
+              client = MongoClient(
+                  "mongodb://localhost:27017/",
+                  auto_encryption_opts=AutoEncryptionOpts(
+                      kms_providers={"local": {"key": os.urandom(96)}},
+                      key_vault_namespace="encryption.__keyVault",
+                      crypt_shared_lib_path=lib_path,
+                      crypt_shared_lib_required=True,
+                  ),
+                  serverSelectionTimeoutMS=3000,
+              )
+              codec_options = CodecOptions()
+              client_encryption = ClientEncryption(
+                  client.options.auto_encryption_opts._kms_providers,
+                  client.options.auto_encryption_opts._key_vault_namespace,
+                  client,
+                  codec_options,
+              )
+              client.drop_database("medicalRecords")
+              db = client["medicalRecords"]
+              encrypted_fields = {
+                  "fields": [
+                      {
+                          "path": "patientRecord.ssn",
+                          "bsonType": "string",
+                          "queries": [{"queryType": "equality"}],
+                      },
+                      {
+                          "path": "patientRecord.billing",
+                          "bsonType": "object",
+                      },
+                  ]
+              }
+              try:
+                  collection = client_encryption.create_encrypted_collection(
+                      db, "patient", encrypted_fields, "local"
+                  )
+                  patient = {
+                      "patientName": "Jon Doe",
+                      "patientId": 12345678,
+                      "patientRecord": {
+                          "ssn": "987-65-4320",
+                          "billing": {
+                              "type": "Visa",
+                              "number": "4111111111111111",
+                          },
+                          "billAmount": 1500,
+                      },
+                  }
+                  collection = client[DB_NAME][COLLECTION_NAME]
+                  collection.insert_one(patient)
+                  print(collection.find_one({"patientRecord.ssn": "987-65-4320"}))
+              except EncryptedCollectionError as e:
+                  print(f"Encrypted collection error: {e}")
+          except Exception as e:
+              print("❌ Failed to connect to MongoDB:", e)
+              sys.exit(1)
+          PYCODE
