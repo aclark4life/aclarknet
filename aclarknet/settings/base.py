@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     "cms",
     "webpack_boilerplate",
     "hijack",
+    "crispy_forms",
+    "crispy_bootstrap5",
 ]
 
 MIDDLEWARE = [
@@ -227,3 +229,6 @@ MIGRATION_MODULES = {
 WEBPACK_LOADER = {
     "MANIFEST_FILE": os.path.join(BASE_DIR, "frontend/build/manifest.json"),
 }
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"

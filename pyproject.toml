@@ -2,6 +2,7 @@
 name = "aclarknet"
 version = "0.1.0"
 dependencies = [
+  "crispy-bootstrap5",
   "django-allauth",
   "django-crispy-forms",
   "django-import-export",
