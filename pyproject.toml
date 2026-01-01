@@ -21,6 +21,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
+  "Faker",
   "django-debug-toolbar",
 ]
 test = [
