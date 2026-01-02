@@ -23,7 +23,6 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
-from django.core.exceptions import PermissionDenied
 from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.db.models import F, Q, Sum
 from django.http import FileResponse, HttpResponseRedirect, JsonResponse
@@ -44,16 +43,16 @@ from django.views.generic import (
 
 # Local imports
 from .base_views import BaseView, SuperuserRequiredMixin
-from .forms.client import ClientForm
-from .forms.company import CompanyForm
-from .forms.contact import ContactForm
-from .forms.invoice import InvoiceForm
-from .forms.note import NoteForm
-from .forms.project import ProjectForm
-from .forms.report import AdminReportForm, ReportForm
-from .forms.task import TaskForm
-from .forms.time import AdminTimeForm, TimeForm
-from .forms.user import UserForm
+from .forms import ClientForm
+from .forms import CompanyForm
+from .forms import ContactForm
+from .forms import InvoiceForm
+from .forms import NoteForm
+from .forms import ProjectForm
+from .forms import AdminReportForm, ReportForm
+from .forms import TaskForm
+from .forms import AdminTimeForm, TimeForm
+from .forms import UserForm
 from .models import Client, Company, Contact, Invoice, Note, Project, Report, Task, Time
 from .serializers import ClientSerializer
 from .utils import get_archived_annotation, get_model_class, get_queryset
@@ -84,7 +83,7 @@ def trigger_500(request):
 def archive(request):
     """
     Archive or unarchive an object.
-    
+
     Handles archiving for both db models and users.
     For invoices, also archives associated time entries.
     """
@@ -1477,7 +1476,7 @@ class ProjectCopyView(BaseProjectView, CreateView):
 def update_related_entries(request):
     """
     Update multiple related entries (archive, delete, save, etc.).
-    
+
     Handles bulk operations on database entries from the dashboard.
     """
     if request.method == "POST":
@@ -1580,21 +1579,6 @@ def update_related_entries(request):
             messages.success(request, summary_message)
 
     return HttpResponseRedirect(request.headers.get("Referer"))
-
-
-def get_queryset_related(self):
-    report = self.get_object()
-    company = report.company
-    notes = report.notes.all()
-    clients = report.clients.all()
-    invoices = report.invoices.all()
-    projects = report.projects.all()
-    contacts = report.contacts.all()
-    reports = report.reports.all()
-    queryset_related = [
-        q for q in [clients, contacts, invoices, notes, projects, reports] if q.exists()
-    ]
-    return company, projects, invoices, report, contacts, queryset_related
 
 
 class BaseReportView(BaseView, SuperuserRequiredMixin):
