@@ -1,85 +1,102 @@
+"""Views for the db app."""
+
+# Standard library imports
 import ast
-import chess
 import decimal
 import io
 import locale
 import random
-from django.shortcuts import render, reverse, redirect, get_object_or_404
-from .models import Client, Company, Contact, Invoice, Project, Note, Task, Time, Report
-from django.conf import settings
-from rest_framework import viewsets
-from django.views.generic import (
-    View,
-    CreateView,
-    UpdateView,
-    DetailView,
-    ListView,
-    DeleteView,
-    TemplateView,
-)
-from django.contrib import messages
-from django.db.models import F, Sum
-from django.contrib.auth.mixins import UserPassesTestMixin
-from django.core.exceptions import PermissionDenied
 from itertools import chain
-from .forms.user import UserForm
-from .forms.time import TimeForm, AdminTimeForm
-from .forms.task import TaskForm
-from .forms.project import ProjectForm
-from .forms.report import AdminReportForm, ReportForm
-from .forms.note import NoteForm
-from .forms.invoice import InvoiceForm
-from .forms.contact import ContactForm
-from .forms.company import CompanyForm
-from .forms.client import ClientForm
-from django.utils import timezone
-from django import apps
-from django.db.models import Q
-from django.core.mail import EmailMultiAlternatives
-from texttable import Texttable
-from django.core.mail import EmailMessage
-from django.contrib.auth.decorators import login_required
-from django.template.loader import get_template
-from xhtml2pdf import pisa
-from django.http import FileResponse, JsonResponse, HttpResponseRedirect
+
+# Third-party imports
+import chess
 from docx import Document
 from html2docx import html2docx
-from .serializers import ClientSerializer
-from django.core.paginator import Paginator
-from django.db.models import BooleanField, Case, Value, When
-from django.views.defaults import permission_denied
-from django.urls import reverse_lazy
+from rest_framework import viewsets
+from texttable import Texttable
+from xhtml2pdf import pisa
+
+# Django imports
+from django import apps
+from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.core.exceptions import PermissionDenied
+from django.core.mail import EmailMessage, EmailMultiAlternatives
+from django.db.models import F, Q, Sum
+from django.http import FileResponse, HttpResponseRedirect, JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render, reverse
+from django.template.loader import get_template
+from django.urls import reverse_lazy
+from django.utils import timezone
+from django.views.defaults import permission_denied
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    TemplateView,
+    UpdateView,
+    View,
+)
+
+# Local imports
+from .base_views import BaseView, SuperuserRequiredMixin
+from .forms.client import ClientForm
+from .forms.company import CompanyForm
+from .forms.contact import ContactForm
+from .forms.invoice import InvoiceForm
+from .forms.note import NoteForm
+from .forms.project import ProjectForm
+from .forms.report import AdminReportForm, ReportForm
+from .forms.task import TaskForm
+from .forms.time import AdminTimeForm, TimeForm
+from .forms.user import UserForm
+from .models import Client, Company, Contact, Invoice, Note, Project, Report, Task, Time
+from .serializers import ClientSerializer
+from .utils import get_archived_annotation, get_model_class, get_queryset
 
 User = get_user_model()
 
 
 def custom_403(request, exception=None):
+    """Handle 403 Forbidden errors."""
     return permission_denied(request, exception=exception, template_name="403.html")
 
 
 def custom_404(request, exception=None):
+    """Handle 404 Not Found errors."""
     return render(request, exception=exception, template_name="404.html")
 
 
 def custom_500(request, exception=None):
+    """Handle 500 Internal Server errors."""
     return render(request, exception=exception, template_name="500.html")
 
 
 def trigger_500(request):
+    """Deliberately trigger a 500 error for testing."""
     raise Exception("This is a deliberate 500 error.")
 
 
 def archive(request):
+    """
+    Archive or unarchive an object.
+    
+    Handles archiving for both db models and users.
+    For invoices, also archives associated time entries.
+    """
     archive = request.GET.get("archive", "true")
     model = request.GET.get("model")
     obj_id = request.GET.get("id")
     obj = None
     if model == "user":
-        ModelClass = apps.get_model(app_label="siteuser", model_name="User")
+        ModelClass = get_model_class("User", app_label="siteuser")
         archive_field = "is_active"
     else:
-        ModelClass = apps.get_model(app_label="db", model_name=model.capitalize())
+        ModelClass = get_model_class(model)
         archive_field = "archived"
     field_value = False if archive == "false" else True
     obj = ModelClass.objects.get(id=obj_id)
@@ -96,222 +113,16 @@ def archive(request):
     return HttpResponseRedirect(request.headers.get("Referer"))
 
 
-archived_annotation = Case(
-    When(is_active=False, then=Value(True)),
-    default=Value(False),
-    output_field=BooleanField(),
-)
+# Archived annotation for filtering archived users
+archived_annotation = get_archived_annotation()
 
 
 def redirect_admin_to_about_book(request):
     return redirect("/about/#book")
 
 
-class BaseView:
-    model = None
-    model_name = None
-    model_name_plural = None
-    url_cancel = None
-    url_copy = None
-    url_create = None
-    url_delete = None
-    url_edit = None
-    url_index = None
-    url_view = None
-    order_by = ["archived", "-created"]
-    paginated = False
-    page_number = 1
-    # per_page = settings.PER_PAGE
-    queryset_related = []
-    has_related = False
-    has_preview = False
-    search = False
-    dashboard = False
-    exclude = ["contacts"]
-
-    def get_archived(self, obj):
-        try:
-            return obj.archived
-        except:  # noqa
-            return not obj.is_active
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        if self.model_name:
-            context["model_name"] = self.model_name
-            context[f"{self.model_name}_nav"] = True
-
-        if self.model_name_plural:
-            context["model_name_plural"] = self.model_name_plural
-
-        context["statcards"] = {}
-        context["statcard"] = self.get_statcards()
-        context["urls"] = self.get_urls()
-
-        # per_page = self.request.GET.get("items_per_page", settings.PER_PAGE)
-        per_page = self.request.GET.get("items_per_page", 10)
-        per_page = int(per_page)
-        self.per_page = per_page
-        context["items_per_page"] = self.per_page
-
-        page_number = self.request.GET.get("page", 1)
-        page_number = int(page_number)
-        self.page_number = page_number
-        context["page_number"] = self.page_number
-
-        paginated = self.request.GET.get("paginated", "true")
-        paginated = False if paginated.lower() == "false" else True
-        self.paginated = paginated
-        context["paginated"] = self.paginated
-
-        queryset = self.get_queryset()
-        if queryset and not self.search:
-            queryset = queryset.order_by(*self.order_by)
-
-        related = False
-        if self.has_related:
-            if len(self.queryset_related) > 0:
-                context["has_related"] = True
-                queryset = self.queryset_related
-                related = True
-
-        if self.has_preview:
-            context["has_preview"] = True
-
-        paginator = Paginator(queryset, per_page)
-        if self.paginated:
-            page_obj = paginator.get_page(page_number)
-        else:
-            page_obj = queryset
-        context["page_obj"] = page_obj
-
-        field_values_page = []
-
-        if hasattr(self, "form_class"):
-            field_values_page = self.get_field_values(page_obj, related=related)
-            context["field_values_page"] = field_values_page
-
-        if hasattr(self, "object") and hasattr(self, "form_class"):
-            context["field_values"] = self.get_field_values()
-
-        if hasattr(self, "object") and self.model:
-            context["page_obj_detail_view"] = self.get_page_obj_detail_view()
-
-        if self.search:
-            context["search"] = self.search
-            field_values_page = self.get_field_values(page_obj, search=True)
-            if len(field_values_page) > 0:
-                context["search_results"] = True
-            else:
-                context["search_results"] = False
-            context["field_values_page"] = field_values_page
-
-        if field_values_page:
-            # Table headers via first row
-            table_headers = [i[0] for i in field_values_page[0]]
-            context["table_headers"] = table_headers
-
-        return context
-
-    def get_field_values(self, page_obj=None, search=False, related=False):
-        if page_obj:
-            _ = []
-            for item in page_obj:
-                field_values = []
-                if hasattr(page_obj, "object_list"):
-                    if page_obj.object_list[0] is not None:
-                        field_values.append(("type", item._meta.model_name))
-                        field_values.append(("id", item.id))
-                        field_values.append(("archived", self.get_archived(item)))
-                        field_values.append(("item", item))
-                else:
-                    field_values.append(("type", item._meta.model_name))
-                    field_values.append(("id", item.id))
-                    field_values.append(("archived", self.get_archived(item)))
-                    field_values.append(("item", item))
-                if hasattr(item, "amount"):
-                    field_values.append(("amount", item.amount))
-                if hasattr(item, "cost"):
-                    field_values.append(("cost", item.cost))
-                if hasattr(item, "net"):
-                    field_values.append(("net", item.net))
-                if hasattr(item, "hours"):
-                    field_values.append(("hours", item.hours))
-                _.append(field_values)
-            return _
-        else:
-            try:
-                object_fields = self.form_class().fields.keys()
-                field_values = [
-                    (field_name, getattr(self.object, field_name))
-                    for field_name in object_fields
-                    if field_name not in self.exclude and self.request.user.is_superuser
-                ]
-            except AttributeError:
-                field_values = []
-            return field_values
-
-    def get_page_obj_detail_view(self):
-        context = {}
-        first_object = None
-        last_object = None
-        next_object = None
-        previous_object = None
-        if self.request.user.is_authenticated and not self.request.user.is_superuser:
-            objects = self.model.objects.filter(user=self.request.user)
-        else:
-            objects = self.model.objects.all()
-        paginator = Paginator(objects, 1)
-        page_number = self.request.GET.get("page_number_detail", 1)
-        page_number = int(page_number)
-        page_obj_detail = paginator.get_page(page_number)
-        count = paginator.count
-        if page_number:
-            current_index = paginator.page(page_number).start_index()
-            if current_index < count:
-                next_object = objects[current_index]
-                last_object = objects[count - 1]
-            if current_index > 1:
-                previous_object = objects[current_index - 2]
-                first_object = objects[0]
-        context["next_object"] = next_object
-        context["previous_object"] = previous_object
-        context["first_object"] = first_object
-        context["last_object"] = last_object
-        context["count"] = count
-        context["page_obj"] = page_obj_detail
-        return context
-
-    def get_statcards(self):
-        context = {}
-
-        context["times"] = {}
-        context["invoices"] = {}
-
-        context["times"]["entered"] = 0
-        context["times"]["approved"] = 0
-        context["invoices"]["gross"] = 0
-        context["invoices"]["cost"] = 0
-        context["invoices"]["net"] = 0
-
-        return context
-
-    def get_urls(self):
-        context = {}
-
-        context["url_cancel"] = self.url_cancel
-        context["url_copy"] = self.url_copy
-        context["url_create"] = self.url_create
-        context["url_delete"] = self.url_delete
-        context["url_edit"] = self.url_edit
-        context["url_index"] = self.url_index
-        context["url_view"] = self.url_view
-
-        return context
-
-
 def blog(request):
+    """Redirect to external blog."""
     return HttpResponseRedirect("https://blog.aclark.net")
 
 
@@ -338,7 +149,9 @@ class ClientAPIViewSet(viewsets.ModelViewSet):
     serializer_class = ClientSerializer
 
 
-class BaseClientView(BaseView, UserPassesTestMixin):
+class BaseClientView(BaseView, SuperuserRequiredMixin):
+    """Base view for Client model operations."""
+
     model = Client
     model_name = model._meta.model_name
     model_name_plural = model._meta.verbose_name_plural
@@ -361,12 +174,6 @@ class BaseClientView(BaseView, UserPassesTestMixin):
         "url",
         "description",
     ]
-
-    def test_func(self):
-        return self.request.user.is_superuser
-
-    def handle_no_permission(self):
-        raise PermissionDenied
 
 
 class ClientListView(BaseClientView, ListView):
@@ -472,7 +279,9 @@ class ClientCopyView(BaseClientView, CreateView):
         return super().form_valid(form)
 
 
-class BaseCompanyView(BaseView, UserPassesTestMixin):
+class BaseCompanyView(BaseView, SuperuserRequiredMixin):
+    """Base view for Company model operations."""
+
     model = Company
     model_name = model._meta.model_name
     model_name_plural = model._meta.verbose_name_plural
@@ -486,12 +295,6 @@ class BaseCompanyView(BaseView, UserPassesTestMixin):
     url_index = f"{model_name.lower()}_index"
     url_view = f"{model_name.lower()}_view"
     exclude = ["client_set", "description", "url"]
-
-    def test_func(self):
-        return self.request.user.is_superuser
-
-    def handle_no_permission(self):
-        raise PermissionDenied
 
 
 class CompanyListView(BaseCompanyView, ListView):
@@ -606,7 +409,9 @@ class CompanyCopyView(BaseCompanyView, CreateView):
         return super().form_valid(form)
 
 
-class BaseContactView(BaseView, UserPassesTestMixin):
+class BaseContactView(BaseView, SuperuserRequiredMixin):
+    """Base view for Contact model operations."""
+
     model = Contact
     model_name = model._meta.model_name
     model_name_plural = model._meta.verbose_name_plural
@@ -622,12 +427,6 @@ class BaseContactView(BaseView, UserPassesTestMixin):
     url_index = f"{model_name.lower()}_index"
     url_view = f"{model_name.lower()}_view"
     exclude = ["first_name", "last_name", "url", "number"]
-
-    def test_func(self):
-        return self.request.user.is_superuser
-
-    def handle_no_permission(self):
-        raise PermissionDenied
 
 
 class ContactListView(BaseContactView, ListView):
@@ -712,33 +511,38 @@ class ContactCopyView(BaseContactView, CreateView):
         return super().form_valid(form)
 
 
-def get_queryset(model_class, filter_by=None, order_by=None):
-    _ = {}
-
-    queryset = model_class.objects.all()
-
-    if filter_by:
-        queryset = queryset.filter(**filter_by)
-
-    if order_by:
-        queryset = queryset.order_by(*order_by)
-
-    _["queryset"] = queryset
-
-    return _
+def get_queryset_related(self):
+    """Get related querysets for a report."""
+    report = self.get_object()
+    company = report.company
+    notes = report.notes.all()
+    clients = report.clients.all()
+    invoices = report.invoices.all()
+    projects = report.projects.all()
+    contacts = report.contacts.all()
+    reports = report.reports.all()
+    queryset_related = [
+        q for q in [clients, contacts, invoices, notes, projects, reports] if q.exists()
+    ]
+    return company, projects, invoices, report, contacts, queryset_related
 
 
 class DashboardView(BaseView, UserPassesTestMixin, ListView):
+    """Dashboard view for authenticated users."""
+
     template_name = "dashboard/index.html"
     dashboard = True
 
     def get_queryset(self):
+        """Return empty queryset as data is added in context."""
         return []
 
     def test_func(self):
+        """Test if user is authenticated."""
         return self.request.user.is_authenticated
 
     def handle_no_permission(self):
+        """Redirect to login if not authenticated."""
         return HttpResponseRedirect(reverse("account_login"))
 
     def get_context_data(self, **kwargs):
@@ -854,7 +658,9 @@ def html_mode(request):
     return HttpResponseRedirect(request.headers.get("Referer"))
 
 
-class BaseInvoiceView(BaseView, UserPassesTestMixin):
+class BaseInvoiceView(BaseView, SuperuserRequiredMixin):
+    """Base view for Invoice model operations."""
+
     model = Invoice
     model_name = model._meta.model_name
     model_name_plural = model._meta.verbose_name_plural
@@ -880,14 +686,9 @@ class BaseInvoiceView(BaseView, UserPassesTestMixin):
         "issue_date",
     ]
 
-    def test_func(self):
-        return self.request.user.is_superuser
-
-    def handle_no_permission(self):
-        raise PermissionDenied
-
     @staticmethod
     def generate_docx(html_content, title):
+        """Generate DOCX document from HTML content."""
         docx_content = html2docx(html_content, title=title)
         doc = Document(docx_content)
         buffer = io.BytesIO()
@@ -1369,7 +1170,9 @@ def lounge(request):
     return render(request, "lounge.html", context)
 
 
-class BaseNoteView(BaseView, UserPassesTestMixin):
+class BaseNoteView(BaseView, SuperuserRequiredMixin):
+    """Base view for Note model operations."""
+
     model = Note
     model_name = model._meta.model_name
     model_name_plural = model._meta.verbose_name_plural
@@ -1384,12 +1187,6 @@ class BaseNoteView(BaseView, UserPassesTestMixin):
     url_index = f"{model_name.lower()}_index"
     url_view = f"{model_name.lower()}_view"
     exclude = ["html"]
-
-    def test_func(self):
-        return self.request.user.is_superuser
-
-    def handle_no_permission(self):
-        raise PermissionDenied
 
 
 class NoteListView(BaseNoteView, ListView):
@@ -1526,7 +1323,9 @@ class NoteEmailTextView(BaseNoteView, View):
         return redirect(obj)
 
 
-class BaseProjectView(BaseView, UserPassesTestMixin):
+class BaseProjectView(BaseView, SuperuserRequiredMixin):
+    """Base view for Project model operations."""
+
     model = Project
     model_name = model._meta.model_name
     model_name_plural = model._meta.verbose_name_plural
@@ -1542,12 +1341,6 @@ class BaseProjectView(BaseView, UserPassesTestMixin):
     url_index = f"{model_name.lower()}_index"
     url_view = f"{model_name.lower()}_view"
     exclude = ["client", "start_date", "end_date", "team", "description"]
-
-    def test_func(self):
-        if self.request.user.is_superuser:
-            return True
-        else:
-            return False
 
 
 class ProjectListView(BaseProjectView, ListView):
@@ -1682,6 +1475,11 @@ class ProjectCopyView(BaseProjectView, CreateView):
 
 
 def update_related_entries(request):
+    """
+    Update multiple related entries (archive, delete, save, etc.).
+    
+    Handles bulk operations on database entries from the dashboard.
+    """
     if request.method == "POST":
         entry_ids = request.POST.getlist("entry_id")
         if not entry_ids:
@@ -1784,9 +1582,6 @@ def update_related_entries(request):
     return HttpResponseRedirect(request.headers.get("Referer"))
 
 
-locale.setlocale(locale.LC_ALL, "")
-
-
 def get_queryset_related(self):
     report = self.get_object()
     company = report.company
@@ -1802,7 +1597,9 @@ def get_queryset_related(self):
     return company, projects, invoices, report, contacts, queryset_related
 
 
-class BaseReportView(BaseView, UserPassesTestMixin):
+class BaseReportView(BaseView, SuperuserRequiredMixin):
+    """Base view for Report model operations."""
+
     model = Report
     model_name = model._meta.model_name
     model_name_plural = model._meta.verbose_name_plural
@@ -1837,13 +1634,8 @@ class BaseReportView(BaseView, UserPassesTestMixin):
         "team",
     ]
 
-    def test_func(self):
-        return self.request.user.is_superuser
-
-    def handle_no_permission(self):
-        raise PermissionDenied
-
     def get_context_data(self, **kwargs):
+        """Add export and email URLs to context."""
         context = super().get_context_data(**kwargs)
         context["url_export_pdf"] = self.url_export_pdf
         context["url_email_pdf"] = self.url_email_pdf
@@ -2199,24 +1991,22 @@ SEARCH_MODELS = (
 )
 
 
-class SearchView(UserPassesTestMixin, BaseView, ListView):
+class SearchView(SuperuserRequiredMixin, BaseView, ListView):
+    """Search view for searching across multiple models."""
+
     search = True
     template_name = "search.html"
     url_index = "search_index"
 
-    def test_func(self):
-        return self.request.user.is_superuser
-
-    def handle_no_permission(self):
-        raise PermissionDenied
-
     def get_context_data(self, **kwargs):
+        """Add search query to context."""
         context = super().get_context_data(**kwargs)
         query = self.request.GET.get("q")
         context["q"] = query
         return context
 
     def get_queryset(self):
+        """Search across multiple models."""
         queryset = []
         query = self.request.GET.get("q")
         if query:
@@ -2325,7 +2115,9 @@ def update_selected_entries(request):
     return HttpResponseRedirect(reverse(f"{model_name}_index"))
 
 
-class BaseTaskView(BaseView, UserPassesTestMixin):
+class BaseTaskView(BaseView, SuperuserRequiredMixin):
+    """Base view for Task model operations."""
+
     model = Task
     model_name = model._meta.model_name
     model_name_plural = model._meta.verbose_name_plural
@@ -2340,12 +2132,6 @@ class BaseTaskView(BaseView, UserPassesTestMixin):
     url_index = f"{model_name.lower()}_index"
     url_view = f"{model_name.lower()}_view"
     order_by = ["archived", "name", "-created"]
-
-    def test_func(self):
-        return self.request.user.is_superuser
-
-    def handle_no_permission(self):
-        raise PermissionDenied
 
 
 class TaskListView(BaseTaskView, ListView):
@@ -2435,7 +2221,9 @@ class TaskCopyView(BaseTaskView, CreateView):
         return super().form_valid(form)
 
 
-class BaseTimeView(BaseView, UserPassesTestMixin):
+class BaseTimeView(BaseView, SuperuserRequiredMixin):
+    """Base view for Time model operations."""
+
     model = Time
     model_name = model._meta.model_name
     model_name_plural = model._meta.verbose_name_plural
@@ -2450,12 +2238,6 @@ class BaseTimeView(BaseView, UserPassesTestMixin):
     url_index = f"{model_name.lower()}_index"
     url_view = f"{model_name.lower()}_view"
     exclude = ["client", "project", "task", "invoice"]
-
-    def test_func(self):
-        return self.request.user.is_superuser
-
-    def handle_no_permission(self):
-        raise PermissionDenied
 
     def get_form(self, form_class=None):
         if self.request.user.is_superuser:
@@ -2677,6 +2459,8 @@ class TimeCopyView(BaseTimeView, CreateView):
 
 
 class BaseUserView(BaseView):
+    """Base view for User model operations."""
+
     model = User
     model_name = model._meta.model_name
     model_name_plural = model._meta.verbose_name_plural
@@ -2693,12 +2477,10 @@ class BaseUserView(BaseView):
     url_view = f"{model_name.lower()}_view"
 
 
-class BaseUserMixin(UserPassesTestMixin):
-    def test_func(self):
-        return self.request.user.is_superuser
+class BaseUserMixin(SuperuserRequiredMixin):
+    """Mixin for User views that require superuser access."""
 
-    def handle_no_permission(self):
-        raise PermissionDenied
+    pass
 
 
 class UserListView(BaseUserMixin, BaseUserView, ListView):
