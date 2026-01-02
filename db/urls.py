@@ -1,36 +1,28 @@
 from django.urls import include, path
 
-from .views import trigger_500
-from .views.archive import archive
-
-
-from .views.client import (
+from .views import (
+    trigger_500,
+    html_mode,
+    archive,
     ClientCopyView,
     ClientCreateView,
     ClientDeleteView,
     ClientDetailView,
     ClientListView,
     ClientUpdateView,
-)
-from .views.company import (
     CompanyCopyView,
     CompanyCreateView,
     CompanyDeleteView,
     CompanyDetailView,
     CompanyListView,
     CompanyUpdateView,
-)
-from .views.contact import (
     ContactCopyView,
     ContactCreateView,
     ContactDeleteView,
     ContactDetailView,
     ContactListView,
     ContactUpdateView,
-)
-from .views.dashboard import DashboardView
-from .views.html import html_mode
-from .views.invoice import (
+    DashboardView,
     InvoiceCopyView,
     InvoiceCreateView,
     InvoiceDeleteView,
@@ -42,9 +34,7 @@ from .views.invoice import (
     InvoiceExportDOCView,
     InvoiceListView,
     InvoiceUpdateView,
-)
-from .views.lorem import FakeTextView
-from .views.note import (
+    FakeTextView,
     NoteCopyView,
     NoteCreateView,
     NoteDeleteView,
@@ -53,17 +43,13 @@ from .views.note import (
     NoteListView,
     NoteListFullScreen,
     NoteUpdateView,
-)
-from .views.project import (
     ProjectCopyView,
     ProjectCreateView,
     ProjectDeleteView,
     ProjectDetailView,
     ProjectListView,
     ProjectUpdateView,
-)
-from .views.related import update_related_entries
-from .views.report import (
+    update_related_entries,
     ReportCopyView,
     ReportCreateView,
     ReportDeleteView,
@@ -71,26 +57,20 @@ from .views.report import (
     ReportEmailTextView,
     ReportListView,
     ReportUpdateView,
-)
-from .views.search import SearchView
-from .views.selected import update_selected_entries
-from .views.task import (
+    SearchView,
+    update_selected_entries,
     TaskCopyView,
     TaskCreateView,
     TaskDeleteView,
     TaskDetailView,
     TaskListView,
     TaskUpdateView,
-)
-from .views.time import (
     TimeCopyView,
     TimeCreateView,
     TimeDeleteView,
     TimeDetailView,
     TimeListView,
     TimeUpdateView,
-)
-from .views.user import (
     UserCopyView,
     UserCreateView,
     UserDeleteView,
