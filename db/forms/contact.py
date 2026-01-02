@@ -16,7 +16,6 @@ class ContactForm(forms.ModelForm):
             "client",
             "url",
             "number",
-            "archived",
         )
         labels = {
             "name": "Full name",

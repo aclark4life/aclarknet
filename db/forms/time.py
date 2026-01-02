@@ -20,7 +20,6 @@ class TimeForm(forms.ModelForm):
             "project",
             "task",
             "invoice",
-            "archived",
             "amount",
             "net",
             "cost",

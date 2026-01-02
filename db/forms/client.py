@@ -17,7 +17,6 @@ class ClientForm(forms.ModelForm):
             "url",
             "company",
             "tags",
-            "archived",
         )
 
     def __init__(self, *args, **kwargs):

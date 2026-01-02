@@ -68,7 +68,6 @@ class InvoiceForm(forms.ModelForm):
             "start_date",
             "end_date",
             "due_date",
-            "archived",
             "po_number",
             "paid_amount",
             "reset",

@@ -24,7 +24,6 @@ class ReportForm(forms.ModelForm):
             "user",
             "company",
             # "team",
-            "archived",
         )
 
     def __init__(self, *args, **kwargs):
