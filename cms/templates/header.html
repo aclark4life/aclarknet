@@ -81,12 +81,12 @@
                href="/contact-us/">Contact Us</a>
           </li>
 
-          <li class="nav-item"
-              id="{% if request.user.is_authenticated %}theme-toggler-authenticated{% else %}theme-toggler-anonymous{% endif %}">
-            <span class="nav-link exclude-from-hover"
-                  data-bs-toggle="tooltip"
-                  title="Toggle dark mode">
-              <i class="fas fa-circle-half-stroke"></i>
+          <li class="nav-item">
+            <a class="nav-link exclude-from-hover"
+               data-bs-toggle="tooltip"
+               title="Go to dashboard"
+               href="{% url 'dashboard' %}">
+              <i class="fas fa-dashboard"></i>
             </span>
           </li>
 
