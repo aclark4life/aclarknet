@@ -24,6 +24,7 @@ urlpatterns += [
     path("search/", search_views.search, name="search"),
     path("dashboard/", include("db.urls")),
     path("hijack/", include("hijack.urls")),
+    path("accounts/", include("allauth.urls")),
 ]
 
 

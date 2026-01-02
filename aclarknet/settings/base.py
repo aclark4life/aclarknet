@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     "hijack",
     "crispy_forms",
     "crispy_bootstrap5",
+    "allauth",
 ]
 
 MIDDLEWARE = [
