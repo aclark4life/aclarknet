@@ -150,7 +150,6 @@ class InvoiceForm(forms.ModelForm):
         self.helper.form_class = "form-inline"
         self.helper.form_tag = False
         self.helper.layout = Div(
-            Div(Field("reset"), css_class="col-sm-3"),
             Div(Field("contacts", css_class="form-control"), css_class="col-sm-12"),
             Div(
                 Field("subject", css_class="form-control bg-transparent border"),
@@ -198,15 +197,12 @@ class InvoiceForm(forms.ModelForm):
             "due_date",
             "po_number",
             "paid_amount",
-            "reset",
         )
         widgets = {
             "ein": forms.widgets.NumberInput(),
             "po_number": forms.widgets.NumberInput(),
             "sa_number": forms.widgets.NumberInput(),
         }
-
-    reset = forms.BooleanField(required=False)
 
     issue_date = forms.DateField(
         widget=forms.DateInput(attrs={"type": "date"}),
