@@ -30,7 +30,6 @@ class ClientForm(forms.ModelForm):
         self.helper.form_class = "form-inline"
         self.helper.form_tag = False
         self.helper.layout = Div(
-            Div(Field("archived"), css_class="col-sm-3"),
             Div(Field("publish"), css_class="col-sm-3"),
             Div(Field("link"), css_class="col-sm-3"),
             Div(
@@ -71,7 +70,6 @@ class CompanyForm(forms.ModelForm):
         self.helper.form_class = "form-inline"
         self.helper.form_tag = False
         self.helper.layout = Div(
-            Div(Field("archived"), css_class="col-sm-3"),
             Div(
                 Field("name", css_class="form-control bg-transparent border"),
                 css_class="col-sm-6",
@@ -112,7 +110,6 @@ class ContactForm(forms.ModelForm):
         self.helper.form_class = "form-inline"
         self.helper.form_tag = False
         self.helper.layout = Div(
-            Div(Field("archived"), css_class="col-sm-12"),
             Div(
                 Field("first_name", css_class="form-control bg-transparent border"),
                 css_class="col-sm-6",
@@ -153,7 +150,6 @@ class InvoiceForm(forms.ModelForm):
         self.helper.form_class = "form-inline"
         self.helper.form_tag = False
         self.helper.layout = Div(
-            Div(Field("archived"), css_class="col-sm-3"),
             Div(Field("reset"), css_class="col-sm-3"),
             Div(Field("contacts", css_class="form-control"), css_class="col-sm-12"),
             Div(
@@ -255,7 +251,6 @@ class NoteForm(forms.ModelForm):
         self.helper.form_class = "form-inline"
         self.helper.form_tag = False
         self.helper.layout = Div(
-            Div(Field("archived", css_class=""), css_class="col-sm-3"),
             Div(Field("html", css_class=""), css_class="col-sm-3"),
             Div(
                 Field("title", css_class="form-control bg-transparent border"),
@@ -298,7 +293,6 @@ class ProjectForm(forms.ModelForm):
             "client"
         ].queryset = Client.objects.all()  # Fetch all clients for the dropdown
         self.helper.layout = Div(
-            Div(Field("archived"), css_class="col-sm-12"),
             Div(
                 Field("name", css_class="form-control bg-transparent border"),
                 css_class="col-sm-6",
@@ -344,7 +338,6 @@ class ReportForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.layout = Div(
-            Div(Field("archived"), css_class="col-sm-12"),
             Div(
                 Field("name", css_class="form-control bg-transparent border"),
                 css_class="col-sm-4",
@@ -428,7 +421,6 @@ class TaskForm(forms.ModelForm):
         self.helper.form_class = "form-inline"
         self.helper.form_tag = False
         self.helper.layout = Div(
-            Div(Field("archived", css_class=""), css_class="col-sm-3"),
             Div(
                 Field("name", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",
@@ -465,7 +457,6 @@ class TimeForm(forms.ModelForm):
         self.helper.form_class = "form-inline"
         self.helper.form_tag = False
         self.helper.layout = Div(
-            Div(Field("archived"), css_class="col-sm-12"),
             Div(Field("date", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("hours", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("user", css_class="form-control"), css_class="col-sm-4"),
