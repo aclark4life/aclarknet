@@ -8,6 +8,8 @@
       {% include 'dashboard/toolbars/dashhead/project.html' %}
     {% elif model_name == "client" %}
       {% include 'dashboard/toolbars/dashhead/client.html' %}
+    {% elif model_name == "company" %}
+      {% include 'dashboard/toolbars/dashhead/company.html' %}
     {% else %}
       {% include 'dashboard/toolbars/dashhead/model.html' %}
     {% endif %}
