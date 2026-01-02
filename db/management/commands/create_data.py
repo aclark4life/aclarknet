@@ -101,7 +101,7 @@ class Command(BaseCommand):
         tasks = []
         for _ in range(num_projects):  # Using num_projects for simplicity
             task = Task.objects.create(
-                name=fake.word(),
+                name=fake.sentence(),
                 rate=fake.random_number(digits=2, fix_len=True),
                 unit=fake.random_number(digits=2, fix_len=True),
             )
@@ -111,7 +111,7 @@ class Command(BaseCommand):
         projects = []
         for _ in range(num_projects):
             project = Project.objects.create(
-                name=fake.word(),
+                name=fake.sentence(),
                 client=random.choice(clients) if clients else None,
                 task=random.choice(tasks) if tasks else None,
                 start_date=fake.date_this_decade(),
