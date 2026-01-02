@@ -47,8 +47,10 @@ class Command(BaseCommand):
             Profile.objects.create(
                 user=user,
                 page_size=fake.random_int(min=10, max=100),
-                rate=fake.random_number(digits=2, fix_len=True),
-                unit=fake.random_number(digits=2, fix_len=True),
+                # rate=fake.random_number(digits=2, fix_len=True),
+                # unit=fake.random_number(digits=2, fix_len=True),
+                rate=100,
+                unit=1,
                 avatar_url=fake.image_url(),
                 bio=fake.text(),
                 address=fake.address(),
@@ -102,8 +104,10 @@ class Command(BaseCommand):
         for _ in range(num_projects):  # Using num_projects for simplicity
             task = Task.objects.create(
                 name=fake.sentence(),
-                rate=fake.random_number(digits=2, fix_len=True),
-                unit=fake.random_number(digits=2, fix_len=True),
+                # rate=fake.random_number(digits=2, fix_len=True),
+                # unit=fake.random_number(digits=2, fix_len=True),
+                rate=200,
+                unit=1,
             )
             tasks.append(task)
 
