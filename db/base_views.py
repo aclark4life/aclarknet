@@ -1,6 +1,5 @@
 """Base view classes for the db app."""
 
-from itertools import chain
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
@@ -125,8 +124,6 @@ class BaseView:
                     if page_obj.object_list[0] is not None:
                         field_values.append(("type", item._meta.model_name))
                         field_values.append(("id", item.id))
-                        field_values.append(("archived", self.get_archived(item)))
-                        field_values.append(("item", item))
                 else:
                     field_values.append(("type", item._meta.model_name))
                     field_values.append(("id", item.id))
