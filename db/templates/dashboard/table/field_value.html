@@ -13,6 +13,9 @@
 {% elif field_name == "amount" %}
     {# Format amount #}
   {{ field_value|default:0|currencyfmt:"USD" }}
+{% elif field_name == "paid_amount" %}
+    {# Format amount #}
+  {{ field_value|default:0|currencyfmt:"USD" }}
 {% elif field_name == "cost" %}
     {# Format amount #}
   {{ field_value|default:0|currencyfmt:"USD" }}
