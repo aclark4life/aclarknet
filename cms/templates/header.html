@@ -81,6 +81,15 @@
                href="/contact-us/">Contact Us</a>
           </li>
 
+          <li class="nav-item"
+              id="{% if request.user.is_authenticated %}theme-toggler-authenticated{% else %}theme-toggler-anonymous{% endif %}">
+            <span class="nav-link exclude-from-hover"
+                  data-bs-toggle="tooltip"
+                  title="Toggle dark mode">
+              <i class="fas fa-circle-half-stroke"></i>
+            </span>
+          </li>
+
         </ul>
       </div>
     </nav>
