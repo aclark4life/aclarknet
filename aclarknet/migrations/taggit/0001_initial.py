@@ -58,7 +58,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "object_id",
-                    models.IntegerField(db_index=True, verbose_name="object ID"),
+                    models.CharField(max_length=24, db_index=True, verbose_name="object ID"),
                 ),
                 (
                     "content_type",
