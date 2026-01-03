@@ -67,12 +67,12 @@ def custom_403(request, exception=None):
 
 def custom_404(request, exception=None):
     """Handle 404 Not Found errors."""
-    return render(request, exception=exception, template_name="404.html")
+    return render(request, template_name="404.html")
 
 
 def custom_500(request, exception=None):
     """Handle 500 Internal Server errors."""
-    return render(request, exception=exception, template_name="500.html")
+    return render(request, template_name="500.html")
 
 
 def trigger_500(request):
@@ -951,7 +951,7 @@ class InvoiceEmailDOCView(BaseInvoiceView, View):
                 email = EmailMessage(
                     subject=subject,
                     body="Please find attached, thank you!",
-                    from_email=User,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
                     to=[contact_email],
                 )
                 email.attach(
@@ -967,7 +967,7 @@ class InvoiceEmailDOCView(BaseInvoiceView, View):
             email = EmailMessage(
                 subject=subject,
                 body="Please find attached, thank you!",
-                from_email=User,
+                from_email=settings.DEFAULT_FROM_EMAIL,
                 to=[settings.DEFAULT_FROM_EMAIL],
             )
             email.attach(
@@ -1299,14 +1299,14 @@ class NoteEmailTextView(BaseNoteView, View):
                 email.to = [contact.email]
                 try:
                     email.send()
-                except:  # noqa
+                except Exception:
                     failures.append(contact.email)
                 else:
                     successes.append(contact.email)
         else:
             try:
                 email.send()
-            except:  # noqa
+            except Exception:
                 failures.append(settings.DEFAULT_FROM_EMAIL)
             else:
                 successes.append(settings.DEFAULT_FROM_EMAIL)
