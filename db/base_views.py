@@ -265,19 +265,21 @@ class BaseView:
         }
 
     def get_url_names(self):
-        """Get URL pattern names (not reversed URLs) for use with {% url %} tag."""
+        """Get URL pattern names (not reversed URLs) for use with {% url %} tag.
+        
+        Returns an empty dict if model is None (e.g., for non-model-based views).
+        """
         if self.model is None:
             return {}
         
-        model_name = self.model._meta.model_name
         return {
-            "url_cancel": f"{model_name}_cancel",
-            "url_copy": f"{model_name}_copy",
-            "url_create": f"{model_name}_create",
-            "url_delete": f"{model_name}_delete",
-            "url_edit": f"{model_name}_edit",
-            "url_index": f"{model_name}_index",
-            "url_view": f"{model_name}_view",
+            "url_cancel": f"{self.model_name}_cancel",
+            "url_copy": f"{self.model_name}_copy",
+            "url_create": f"{self.model_name}_create",
+            "url_delete": f"{self.model_name}_delete",
+            "url_edit": f"{self.model_name}_edit",
+            "url_index": f"{self.model_name}_index",
+            "url_view": f"{self.model_name}_view",
         }
 
     def get_urls(self):
