@@ -38,8 +38,14 @@
               <svg class="icon icon-cog w-action-icon" aria-hidden="true"><use href="#icon-cog"></use></svg>
               Dashboard
             </a>
-
           </li>
+          <li class="w-userbar__item " role="presentation">
+            <a href="{% url 'admin:index' %}" target="_parent" role="menuitem">
+              <svg class="icon icon-key w-action-icon" aria-hidden="true"><use href="#icon-key"></use></svg>
+              Go to Django admin
+            </a>
+          </li>
+
           {% block items %}
             {% for item in items %}
               {{ item|safe }}
