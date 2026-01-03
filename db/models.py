@@ -6,7 +6,6 @@ from django.conf import settings
 from uuid import uuid4
 from phonenumber_field.modelfields import PhoneNumberField
 from wagtail import blocks
-from taggit.managers import TaggableManager
 from wagtail.admin.panels import FieldPanel
 from wagtail.fields import StreamField
 from wagtail.images.blocks import ImageChooserBlock
@@ -112,7 +111,7 @@ class CareersPage(Page):
 
 
 class Client(BaseModel):
-    tags = TaggableManager(blank=True)
+    # tags = TaggableManager(blank=True)
     address = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     url = models.URLField("Website", blank=True, null=True)

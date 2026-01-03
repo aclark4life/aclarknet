@@ -20,7 +20,7 @@ class ClientForm(forms.ModelForm):
             "address",
             "url",
             "company",
-            "tags",
+            # "tags",
         )
 
     def __init__(self, *args, **kwargs):
@@ -46,7 +46,7 @@ class ClientForm(forms.ModelForm):
                 css_class="col-sm-12",
             ),
             Div(Field("company", css_class="form-control"), css_class="col-sm-12"),
-            Div(Field("tags", css_class="form-control"), css_class="col-sm-12"),
+            # Div(Field("tags", css_class="form-control"), css_class="col-sm-12"),
             css_class="row",
         )
 
