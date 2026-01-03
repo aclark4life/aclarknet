@@ -3,34 +3,90 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
+from django.shortcuts import reverse
 
 
 class BaseView:
     """Base view class with common functionality for all model views."""
 
-    model = None
-    model_name = None
-    model_name_plural = None
+    _queryset_related = None
 
-    # URL Configuration
-    url_cancel = None
-    url_copy = None
-    url_create = None
-    url_delete = None
-    url_edit = None
-    url_index = None
-    url_view = None
+    @property
+    def queryset_related(self):
+        if self.model is None:
+            return None
+        return self._queryset_related
 
-    # Behavior Flags
-    order_by = ["archived", "-created"]
+    # ---- View behavior ----
     paginated = False
     page_number = 1
-    queryset_related = None  # Changed from [] to None for cleaner checks
     has_related = False
     has_preview = False
-    search = False
     dashboard = False
-    exclude = ["contacts"]
+
+    # ---- Model-dependent helpers ----
+    def _if_model(self, value):
+        return value if self.model is not None else None
+
+    @property
+    def order_by(self):
+        return self._if_model(["archived", "-created"])
+
+    @property
+    def exclude(self):
+        return self._if_model(["contacts"])
+
+    @property
+    def search(self):
+        return bool(self.model)
+
+    def _model_url(self, action: str):
+        if self.model is None:
+            return None
+        return reverse(
+            f"{self.model._meta.app_label}:{self.model._meta.model_name}_{action}"
+        )
+
+    @property
+    def url_cancel(self):
+        return self._model_url("cancel")
+
+    @property
+    def url_copy(self):
+        return self._model_url("copy")
+
+    @property
+    def url_create(self):
+        return self._model_url("create")
+
+    @property
+    def url_delete(self):
+        return self._model_url("delete")
+
+    @property
+    def url_edit(self):
+        return self._model_url("edit")
+
+    @property
+    def url_index(self):
+        return self._model_url("index")
+
+    @property
+    def url_view(self):
+        return self._model_url("view")
+
+    def _model_meta(self):
+        return self.model._meta if self.model is not None else None
+
+    @property
+    def model_name(self):
+        meta = self._model_meta()
+        return meta.model_name if meta else None
+
+    @property
+    def model_name_plural(self):
+        meta = self._model_meta()
+        return meta.verbose_name_plural if meta else None
 
     def get_archived(self, obj):
         """Get archived status of an object, falling back to is_active."""

@@ -233,7 +233,7 @@ class ClientDetailView(BaseClientView, DetailView):
             queryset_related.insert(0, [company])
         queryset_related = list(chain(*queryset_related))
         queryset_related = sorted(queryset_related, key=self.get_archived)
-        self.queryset_related = queryset_related
+        self._queryset_related = queryset_related
         self.has_related = True
         context = super().get_context_data(**kwargs)
         return context
@@ -353,7 +353,7 @@ class CompanyDetailView(BaseCompanyView, DetailView):
         ]
         queryset_related = list(chain(*queryset_related))
         queryset_related = sorted(queryset_related, key=self.get_archived)
-        self.queryset_related = queryset_related
+        self._queryset_related = queryset_related
         self.has_related = True
         context = super().get_context_data(**kwargs)
         return context
@@ -462,7 +462,7 @@ class ContactDetailView(BaseContactView, DetailView):
         queryset_related = [q for q in [notes] if q.exists()]
         if client:
             queryset_related.insert(0, client)
-        self.queryset_related = queryset_related
+        self._queryset_related = queryset_related
         self.has_related = True
         context = super().get_context_data(**kwargs)
         return context
@@ -793,7 +793,7 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
             queryset_related.append([task])
         queryset_related = list(chain(*queryset_related))
         queryset_related = sorted(queryset_related, key=self.get_archived)
-        self.queryset_related = queryset_related
+        self._queryset_related = queryset_related
         self.has_related = True
         self.has_preview = True
         context = super().get_context_data(**kwargs)
@@ -1161,7 +1161,7 @@ class InvoiceEmailTextView(BaseInvoiceView, View):
 class FakeTextView(View):
     """
     Placeholder view for generating fake text data.
-    
+
     Currently unimplemented. When implemented, this view will use Faker
     to generate sample paragraph text via JSON response.
     """
@@ -1169,8 +1169,7 @@ class FakeTextView(View):
     def get(self, request, *args, **kwargs):
         """Return HTTP 501 Not Implemented for now."""
         return JsonResponse(
-            {"error": "This feature is not yet implemented."},
-            status=501
+            {"error": "This feature is not yet implemented."}, status=501
         )
 
 
@@ -1424,7 +1423,7 @@ class ProjectDetailView(BaseProjectView, DetailView):
         if client:
             queryset_related.insert(0, client)
         queryset_related = sorted(queryset_related, key=self.get_archived)
-        self.queryset_related = queryset_related
+        self._queryset_related = queryset_related
         self.has_related = True
         context = super().get_context_data(**kwargs)
         return context
@@ -1664,7 +1663,7 @@ class ReportDetailView(BaseReportView, DetailView):
                 if time_entry:
                     queryset_related.append(time_entry)
 
-        self.queryset_related = queryset_related
+        self._queryset_related = queryset_related
         self.has_related = True
 
         contact_emails = []
@@ -2209,7 +2208,7 @@ class TaskDetailView(BaseTaskView, DetailView):
         queryset_related = [q for q in [notes, projects] if q.exists()]
         queryset_related = list(chain(*queryset_related))
         queryset_related = sorted(queryset_related, key=self.get_archived)
-        self.queryset_related = queryset_related
+        self._queryset_related = queryset_related
         self.has_related = True
         context = super().get_context_data(**kwargs)
         return context
@@ -2406,7 +2405,7 @@ class TimeDetailView(BaseTimeView, DetailView):
         time = self.get_object()
         if time.invoice:
             queryset_related = list(chain([time.invoice]))
-            self.queryset_related = queryset_related
+            self._queryset_related = queryset_related
             self.has_related = True
         context = super().get_context_data(**kwargs)
         return context
@@ -2538,7 +2537,7 @@ class UserDetailView(BaseUserMixin, BaseUserView, DetailView):
 
         queryset_related = list(chain(projects, times, invoices))
         queryset_related = sorted(queryset_related, key=self.get_archived)
-        self.queryset_related = queryset_related
+        self._queryset_related = queryset_related
         self.has_related = True
         context = super().get_context_data(**kwargs)
 
