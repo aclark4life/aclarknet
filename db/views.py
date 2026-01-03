@@ -1,5 +1,11 @@
 """Views for the db app."""
 
+from django.apps import apps
+from django.db import transaction
+
+# Import your models explicitly or use apps.get_model safely
+from django.contrib.auth.models import User
+
 # Standard library imports
 import ast
 import decimal
@@ -17,10 +23,8 @@ from texttable import Texttable
 from xhtml2pdf import pisa
 
 # Django imports
-from django import apps
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.mail import EmailMessage, EmailMultiAlternatives
@@ -56,8 +60,6 @@ from .forms import UserForm
 from .models import Client, Company, Contact, Invoice, Note, Project, Report, Task, Time
 from .serializers import ClientSerializer
 from .utils import get_archived_annotation, get_model_class, get_queryset
-
-User = get_user_model()
 
 
 def custom_403(request, exception=None):
@@ -2005,94 +2007,138 @@ class SearchView(SuperuserRequiredMixin, BaseView, ListView):
         return queryset
 
 
+def get_model_config(model_name):
+    """
+    Returns configuration for allowed models to prevent arbitrary access.
+    Maps string names to Model Class and specific field settings.
+    """
+    # Configuration map: 'slug': {'model': Class, 'archive_field': 'field_name'}
+    config = {
+        "user": {"model": User, "archive_field": "is_active", "active_val": True},
+        # For dynamic models, ensure you trust the 'db' app
+        "report": {
+            "model": apps.get_model("db", "Report"),
+            "archive_field": "archived",
+            "active_val": False,
+        },
+        "invoice": {
+            "model": apps.get_model("db", "Invoice"),
+            "archive_field": "archived",
+            "active_val": False,
+        },
+        "note": {
+            "model": apps.get_model("db", "Note"),
+            "archive_field": "archived",
+            "active_val": False,
+        },
+    }
+    return config.get(model_name)
+
+
+@transaction.atomic
 def update_selected_entries(request):
-    if request.method == "POST":
-        model_name = request.POST.get("model_name")
-        action = request.POST.get("action")
+    if request.method != "POST":
+        return HttpResponseRedirect(reverse("dashboard"))
 
-        if not model_name:
-            messages.error(request, "Invalid model selected.")
-            return HttpResponseRedirect(reverse("dashboard"))
+    model_name = request.POST.get("model_name")
+    action = request.POST.get("action")
+    entry_ids = request.POST.getlist("entry_id")
 
-        if model_name == "user":
-            from django.contrib.auth.models import User as ModelClass
-        else:
-            ModelClass = apps.get_model(
-                app_label="db", model_name=model_name.capitalize()
-            )
+    # 1. Validation and Configuration Lookup
+    model_conf = get_model_config(model_name)
 
-        entry_ids = request.POST.getlist("entry_id")
-        if not entry_ids:
-            messages.error(request, "No entries selected.")
-            return HttpResponseRedirect(reverse(f"{model_name}_index"))
+    if not model_conf:
+        messages.error(request, "Invalid model selected.")
+        return HttpResponseRedirect(reverse("dashboard"))
 
-        try:
-            entries = ModelClass.objects.filter(pk__in=entry_ids)
-        except ModelClass.DoesNotExist:
-            messages.error(request, f"Selected {model_name} entries not found.")
-            return HttpResponseRedirect(reverse(f"{model_name}_index"))
+    if not entry_ids:
+        messages.error(request, "No entries selected.")
+        return HttpResponseRedirect(reverse(f"{model_name}_index"))
 
+    ModelClass = model_conf["model"]
+
+    # 2. Fetch Entries
+    # Filter returns empty queryset, it does not raise DoesNotExist
+    entries = ModelClass.objects.filter(pk__in=entry_ids)
+    count = entries.count()
+
+    if count == 0:
+        messages.warning(request, f"Selected {model_name} entries not found.")
+        return HttpResponseRedirect(reverse(f"{model_name}_index"))
+
+    # 3. Action Dispatcher
+    try:
         if action == "delete":
-            deleted_entries = entries.delete()
-            if len(deleted_entries) > 0:
-                if deleted_entries[0]:
-                    if model_name == "report":
-                        message = f"Successfully deleted {deleted_entries[1]['db.Report']} {model_name} entries."
-                    else:
-                        message = f"Successfully deleted {deleted_entries[0]} {model_name} entries."
-                    messages.success(request, message)
-                else:
-                    messages.warning(request, f"No {model_name} entries were deleted.")
+            # delete() returns (total_count, {model_label: count})
+            deleted_count, _ = entries.delete()
+            if deleted_count > 0:
+                messages.success(
+                    request,
+                    f"Successfully deleted {deleted_count} {model_name} entries.",
+                )
             else:
                 messages.warning(request, f"No {model_name} entries were deleted.")
 
         elif action == "archive":
-            if model_name == "user":
-                entries.update(is_active=False)
-            else:
-                entries.update(archived=True)
+            target_field = model_conf["archive_field"]
+            target_value = not model_conf[
+                "active_val"
+            ]  # e.g., is_active=False or archived=True
+
+            entries.update(**{target_field: target_value})
+
+            # Handle Invoice specific relationship update
             if model_name == "invoice":
-                [i.times.all().update(archived=True) for i in entries]
+                # Optimization: Update related items in one query rather than looping
+                # Assuming 'times' is the related_name for a TimeEntry model
+                for invoice in entries:
+                    invoice.times.all().update(archived=True)
+
             messages.success(
-                request, f"Successfully archived {len(entry_ids)} {model_name} entries."
+                request, f"Successfully archived {count} {model_name} entries."
             )
+
         elif action == "unarchive":
-            if model_name == "user":
-                entries.update(is_active=True)
-            else:
-                entries.update(archived=False)
+            target_field = model_conf["archive_field"]
+            target_value = model_conf[
+                "active_val"
+            ]  # e.g., is_active=True or archived=False
+
+            entries.update(**{target_field: target_value})
+
             if model_name == "invoice":
-                [i.times.all().update(archived=False) for i in entries]
+                for invoice in entries:
+                    invoice.times.all().update(archived=False)
+
             messages.success(
-                request,
-                f"Successfully unarchived {len(entry_ids)} {model_name} entries.",
+                request, f"Successfully unarchived {count} {model_name} entries."
             )
-        elif action == "html":
-            if model_name == "note":
-                entries.update(html=True)
-                messages.success(
-                    request,
-                    f"Successfully HTMLed {len(entry_ids)} {model_name} entries.",
-                )
+
+        elif action in ["html", "unhtml"]:
+            if model_name != "note":
+                messages.error(request, "HTML action only applicable to Notes.")
             else:
-                messages.error(request, "Invalid action requested.")
-        elif action == "unhtml":
-            if model_name == "note":
-                entries.update(html=False)
+                is_html = action == "html"
+                entries.update(html=is_html)
+                status_text = "HTMLed" if is_html else "Un-HTMLed"
                 messages.success(
-                    request,
-                    f"Successfully Un-HTMLed {len(entry_ids)} {model_name} entries.",
+                    request, f"Successfully {status_text} {count} {model_name} entries."
                 )
-            else:
-                messages.error(request, "Invalid action requested.")
+
         elif action == "save":
-            [i.save() for i in entries]
+            # Iterate to trigger save() signals (bulk_update does not trigger signals)
+            for entry in entries:
+                entry.save()
             messages.success(
-                request,
-                f"Successfully saved {len(entry_ids)} {model_name} entries.",
+                request, f"Successfully saved {count} {model_name} entries."
             )
+
         else:
             messages.error(request, "Invalid action requested.")
+
+    except Exception as e:
+        # Catch unexpected DB errors
+        messages.error(request, f"An error occurred: {str(e)}")
 
     return HttpResponseRedirect(reverse(f"{model_name}_index"))
 
