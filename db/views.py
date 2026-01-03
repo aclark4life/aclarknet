@@ -2527,18 +2527,12 @@ class UserUpdateView(BaseUserMixin, BaseUserView, UpdateView):
         return reverse("user_view", args=[user_id])
 
 
-class TimeDeleteView(BaseTimeView, DeleteView):
+class TimeDeleteView(BaseTimeView, FilterByUserMixin, DeleteView):
     template_name = "delete.html"
 
     def test_func(self):
         time = self.get_object()
         return self.request.user.is_superuser or self.request.user == time.user
-
-    def get_queryset(self):
-        queryset = Time.objects.all()
-        if not self.request.user.is_superuser:
-            queryset = queryset.filter(user=self.request.user)
-        return queryset
 
     def get_success_url(self):
         return (
