@@ -1,74 +1,131 @@
+"""Views for the CMS app."""
+
+from django.conf import settings
 from django.views.generic import TemplateView
 
-# Create your views here.
+
+class BaseCMSView(TemplateView):
+    """Base view for CMS pages with common context."""
+
+    page_name = None
+
+    def get_context_data(self, **kwargs):
+        """Add common CMS context data."""
+        context = super().get_context_data(**kwargs)
+        if self.page_name:
+            context["page_name"] = self.page_name
+        return context
 
 
-class AboutView(TemplateView):
+class AboutView(BaseCMSView):
+    """About page view displaying company information."""
+
     template_name = "about.html"
+    page_name = "about"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["company_name"] = "Tech Solutions Inc."
-        context["founded_year"] = 2010
+        context["company_name"] = getattr(
+            settings, "COMPANY_NAME", "ACLARK.NET, LLC"
+        )
+        context["founded_year"] = getattr(settings, "COMPANY_FOUNDED_YEAR", 2003)
         return context
 
 
-class CareersView(TemplateView):
+class CareersView(BaseCMSView):
+    """Careers page view displaying open positions."""
+
     template_name = "careers.html"
+    page_name = "careers"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["open_positions"] = [
-            "Software Engineer",
-            "Product Manager",
-            "UX Designer",
-            "Data Scientist",
-        ]
+        context["open_positions"] = getattr(
+            settings,
+            "OPEN_POSITIONS",
+            [
+                "Software Engineer",
+                "Product Manager",
+                "UX Designer",
+                "Data Scientist",
+            ],
+        )
         return context
 
 
-class ClientsView(TemplateView):
+class ClientsView(BaseCMSView):
+    """Clients page view displaying client list."""
+
     template_name = "clients.html"
+    page_name = "clients"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["clients"] = [
-            "Client A",
-            "Client B",
-            "Client C",
-            "Client D",
-        ]
+        # Try to get clients from database first, fall back to settings
+        try:
+            from db.models import Client
+
+            clients = Client.objects.filter(publish=True, archived=False).order_by(
+                "name"
+            )
+            context["clients"] = clients
+        except (ImportError, Exception):
+            context["clients"] = getattr(
+                settings,
+                "FEATURED_CLIENTS",
+                [
+                    "Client A",
+                    "Client B",
+                    "Client C",
+                    "Client D",
+                ],
+            )
         return context
 
 
-class ContactView(TemplateView):
+class ContactView(BaseCMSView):
+    """Contact page view displaying contact information."""
+
     template_name = "contact.html"
+    page_name = "contact"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["email"] = ""
-        context["phone"] = "+1-234-567-8900"
+        context["email"] = getattr(settings, "CONTACT_EMAIL", settings.DEFAULT_FROM_EMAIL)
+        context["phone"] = getattr(settings, "CONTACT_PHONE", "+1-202-555-0000")
         return context
 
 
-class HomeView(TemplateView):
+class HomeView(BaseCMSView):
+    """Home page view."""
+
     template_name = "home.html"
+    page_name = "home"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["message"] = "Welcome to the Home Page!"
+        context["message"] = getattr(
+            settings, "HOMEPAGE_MESSAGE", "Welcome to ACLARK.NET!"
+        )
         return context
 
 
-class ServicesView(TemplateView):
+class ServicesView(BaseCMSView):
+    """Services page view displaying available services."""
+
     template_name = "services.html"
+    page_name = "services"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["services"] = [
-            "Web Development",
-            "App Development",
-            "SEO Optimization",
-            "Digital Marketing",
-        ]
+        context["services"] = getattr(
+            settings,
+            "SERVICES_LIST",
+            [
+                "Web Development",
+                "App Development",
+                "SEO Optimization",
+                "Digital Marketing",
+            ],
+        )
         return context
