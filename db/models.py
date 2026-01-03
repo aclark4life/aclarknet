@@ -7,9 +7,30 @@ from uuid import uuid4
 from phonenumber_field.modelfields import PhoneNumberField
 from wagtail import blocks
 from taggit.managers import TaggableManager
+from taggit.models import TaggedItemBase, GenericTaggedItemBase
 from wagtail.admin.panels import FieldPanel
 from wagtail.fields import StreamField
 from wagtail.images.blocks import ImageChooserBlock
+
+
+class MongoDBTaggedItem(GenericTaggedItemBase):
+    """
+    Custom TaggedItem model that uses CharField for object_id to support MongoDB ObjectId.
+    """
+    object_id = models.CharField(max_length=24, db_index=True, verbose_name="object ID")
+
+    class Meta:
+        verbose_name = "tagged item"
+        verbose_name_plural = "tagged items"
+        indexes = [
+            models.Index(fields=["content_type", "object_id"]),
+        ]
+        constraints = [
+            models.UniqueConstraint(
+                fields=("content_type", "object_id", "tag"),
+                name="db_mongodbtaggeditem_content_type_object_id_tag_uniq",
+            )
+        ]
 
 
 class MarketingBlock(blocks.StructBlock):
@@ -112,7 +133,7 @@ class CareersPage(Page):
 
 
 class Client(BaseModel):
-    tags = TaggableManager(blank=True)
+    tags = TaggableManager(blank=True, through=MongoDBTaggedItem)
     address = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     url = models.URLField("Website", blank=True, null=True)
