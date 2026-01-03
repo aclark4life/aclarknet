@@ -2530,6 +2530,10 @@ class UserUpdateView(BaseUserMixin, BaseUserView, UpdateView):
 class TimeDeleteView(BaseTimeView, DeleteView):
     template_name = "delete.html"
 
+    def test_func(self):
+        time = self.get_object()
+        return self.request.user.is_superuser or self.request.user == time.user
+
     def get_success_url(self):
         return (
             reverse_lazy("time_index")
