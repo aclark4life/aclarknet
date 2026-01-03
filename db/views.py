@@ -2534,6 +2534,12 @@ class TimeDeleteView(BaseTimeView, DeleteView):
         time = self.get_object()
         return self.request.user.is_superuser or self.request.user == time.user
 
+    def get_queryset(self):
+        queryset = Time.objects.all()
+        if not self.request.user.is_superuser:
+            queryset = queryset.filter(user=self.request.user)
+        return queryset
+
     def get_success_url(self):
         return (
             reverse_lazy("time_index")
