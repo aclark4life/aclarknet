@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.utils import timezone
-from db.models.base import BaseModel
+from db.models import BaseModel
 
 
 # Create a subclass of BaseModel for testing
