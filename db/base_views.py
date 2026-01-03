@@ -82,7 +82,7 @@ class BaseView:
             queryset = self.queryset_related
             related = True
 
-        # FIX: Only call order_by if it's a QuerySet, not a list
+        # Only call order_by if it's a QuerySet, not a list
         if hasattr(queryset, "order_by") and not self.search:
             queryset = queryset.order_by(*self.order_by)
 

@@ -47,16 +47,20 @@ from django.views.generic import (
 
 # Local imports
 from .base_views import BaseView, SuperuserRequiredMixin
-from .forms import ClientForm
-from .forms import CompanyForm
-from .forms import ContactForm
-from .forms import InvoiceForm
-from .forms import NoteForm
-from .forms import ProjectForm
-from .forms import AdminReportForm, ReportForm
-from .forms import TaskForm
-from .forms import AdminTimeForm, TimeForm
-from .forms import UserForm
+from .forms import (
+    AdminReportForm,
+    AdminTimeForm,
+    ClientForm,
+    CompanyForm,
+    ContactForm,
+    InvoiceForm,
+    NoteForm,
+    ProjectForm,
+    ReportForm,
+    TaskForm,
+    TimeForm,
+    UserForm,
+)
 from .models import Client, Company, Contact, Invoice, Note, Project, Report, Task, Time
 from .serializers import ClientSerializer
 from .utils import get_archived_annotation, get_model_class, get_queryset
@@ -1155,11 +1159,19 @@ class InvoiceEmailTextView(BaseInvoiceView, View):
 
 
 class FakeTextView(View):
-    pass
-    # def get(self, request, *args, **kwargs):
-    #     fake = Faker()
-    #     fake_data = {"paragraph": [fake.paragraph() for i in range(2)]}
-    #     return JsonResponse(fake_data)
+    """
+    Placeholder view for generating fake text data.
+    
+    Currently unimplemented. When implemented, this view will use Faker
+    to generate sample paragraph text via JSON response.
+    """
+
+    def get(self, request, *args, **kwargs):
+        """Return HTTP 501 Not Implemented for now."""
+        return JsonResponse(
+            {"error": "This feature is not yet implemented."},
+            status=501
+        )
 
 
 @login_required
