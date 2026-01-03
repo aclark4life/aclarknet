@@ -11,6 +11,8 @@ class BaseView:
     model = None
     model_name = None
     model_name_plural = None
+
+    # URL Configuration
     url_cancel = None
     url_copy = None
     url_create = None
@@ -18,10 +20,12 @@ class BaseView:
     url_edit = None
     url_index = None
     url_view = None
+
+    # Behavior Flags
     order_by = ["archived", "-created"]
     paginated = False
     page_number = 1
-    queryset_related = []
+    queryset_related = None  # Changed from [] to None for cleaner checks
     has_related = False
     has_preview = False
     search = False
@@ -29,192 +33,190 @@ class BaseView:
     exclude = ["contacts"]
 
     def get_archived(self, obj):
-        """Get archived status of an object."""
+        """Get archived status of an object, falling back to is_active."""
+        return getattr(obj, "archived", not getattr(obj, "is_active", True))
+
+    def _get_int_param(self, key, default):
+        """Helper to safely parse integer GET parameters."""
         try:
-            return obj.archived
-        except AttributeError:
-            return not obj.is_active
+            return int(self.request.GET.get(key, default))
+        except (ValueError, TypeError):
+            return default
 
     def get_context_data(self, **kwargs):
         """Get context data for template rendering."""
         context = super().get_context_data(**kwargs)
 
+        # 1. Model Metadata
         if self.model_name:
             context["model_name"] = self.model_name
             context[f"{self.model_name}_nav"] = True
+            context["model_name_plural"] = (
+                self.model_name_plural or f"{self.model_name}s"
+            )
 
-        if self.model_name_plural:
-            context["model_name_plural"] = self.model_name_plural
+        # 2. Parameters from Request
+        self.per_page = self._get_int_param("items_per_page", 10)
+        self.page_number = self._get_int_param("page", 1)
 
-        context["statcards"] = {}
-        context["statcard"] = self.get_statcards()
-        context["urls"] = self.get_urls()
+        paginated_str = self.request.GET.get("paginated", "true").lower()
+        self.paginated = paginated_str != "false"
 
-        per_page = self.request.GET.get("items_per_page", 10)
-        per_page = int(per_page)
-        self.per_page = per_page
-        context["items_per_page"] = self.per_page
+        context.update(
+            {
+                "items_per_page": self.per_page,
+                "page_number": self.page_number,
+                "paginated": self.paginated,
+                "urls": self.get_urls(),
+                "statcard": self.get_statcards(),
+                "statcards": {},  # Kept for backward compatibility
+            }
+        )
 
-        page_number = self.request.GET.get("page", 1)
-        page_number = int(page_number)
-        self.page_number = page_number
-        context["page_number"] = self.page_number
-
-        paginated = self.request.GET.get("paginated", "true")
-        paginated = False if paginated.lower() == "false" else True
-        self.paginated = paginated
-        context["paginated"] = self.paginated
-
+        # 3. Queryset Handling
         queryset = self.get_queryset()
-        if queryset and not self.search:
-            queryset = queryset.order_by(*self.order_by)
-
         related = False
-        if self.has_related:
-            if len(self.queryset_related) > 0:
-                context["has_related"] = True
-                queryset = self.queryset_related
-                related = True
+
+        if self.has_related and self.queryset_related is not None:
+            context["has_related"] = True
+            queryset = self.queryset_related
+            related = True
+
+        # FIX: Only call order_by if it's a QuerySet, not a list
+        if hasattr(queryset, "order_by") and not self.search:
+            queryset = queryset.order_by(*self.order_by)
 
         if self.has_preview:
             context["has_preview"] = True
 
-        paginator = Paginator(queryset, per_page)
+        # 4. Pagination
+        paginator = Paginator(queryset, self.per_page)
         if self.paginated:
-            page_obj = paginator.get_page(page_number)
+            page_obj = paginator.get_page(self.page_number)
         else:
             page_obj = queryset
         context["page_obj"] = page_obj
 
+        # 5. Field Extraction Logic
         field_values_page = []
 
-        if hasattr(self, "form_class"):
-            field_values_page = self.get_field_values(page_obj, related=related)
-            context["field_values_page"] = field_values_page
-
-        if hasattr(self, "object") and hasattr(self, "form_class"):
-            context["field_values"] = self.get_field_values()
-
-        if hasattr(self, "object") and self.model:
-            context["page_obj_detail_view"] = self.get_page_obj_detail_view()
-
+        # Handle search-specific display
         if self.search:
             context["search"] = self.search
             field_values_page = self.get_field_values(page_obj, search=True)
-            if len(field_values_page) > 0:
-                context["search_results"] = True
-            else:
-                context["search_results"] = False
+            context["search_results"] = len(field_values_page) > 0
             context["field_values_page"] = field_values_page
 
-        if field_values_page:
-            # Table headers via first row
-            table_headers = [i[0] for i in field_values_page[0]]
-            context["table_headers"] = table_headers
+        # Handle standard list display
+        elif hasattr(self, "form_class"):
+            field_values_page = self.get_field_values(page_obj, related=related)
+            context["field_values_page"] = field_values_page
+
+        # Extract table headers from the first row of results
+        if field_values_page and len(field_values_page) > 0:
+            context["table_headers"] = [i[0] for i in field_values_page[0]]
+
+        # Detail view specific context
+        if hasattr(self, "object"):
+            if hasattr(self, "form_class"):
+                context["field_values"] = self.get_field_values()
+            if self.model:
+                context["page_obj_detail_view"] = self.get_page_obj_detail_view()
 
         return context
 
     def get_field_values(self, page_obj=None, search=False, related=False):
         """Get field values for display in templates."""
-        if page_obj:
-            _ = []
+        if page_obj is not None:
+            results = []
+            attrs_to_check = ["amount", "cost", "net", "hours"]
+
             for item in page_obj:
-                field_values = []
-                if hasattr(page_obj, "object_list"):
-                    if page_obj.object_list[0] is not None:
-                        field_values.append(("type", item._meta.model_name))
-                        field_values.append(("id", item.id))
-                else:
-                    field_values.append(("type", item._meta.model_name))
-                    field_values.append(("id", item.id))
+                if item is None:
+                    continue
+
+                field_values = [
+                    ("type", item._meta.model_name),
+                    ("id", item.id),
+                ]
+
+                # If it's a single object (not a paginator object list)
+                if not hasattr(page_obj, "object_list"):
                     field_values.append(("archived", self.get_archived(item)))
                     field_values.append(("item", item))
-                if hasattr(item, "amount"):
-                    field_values.append(("amount", item.amount))
-                if hasattr(item, "cost"):
-                    field_values.append(("cost", item.cost))
-                if hasattr(item, "net"):
-                    field_values.append(("net", item.net))
-                if hasattr(item, "hours"):
-                    field_values.append(("hours", item.hours))
-                _.append(field_values)
-            return _
-        else:
-            try:
-                object_fields = self.form_class().fields.keys()
-                field_values = [
-                    (field_name, getattr(self.object, field_name))
-                    for field_name in object_fields
-                    if field_name not in self.exclude and self.request.user.is_superuser
-                ]
-            except AttributeError:
-                field_values = []
-            return field_values
+
+                # Dynamically add specific attributes if they exist
+                for attr in attrs_to_check:
+                    if hasattr(item, attr):
+                        field_values.append((attr, getattr(item, attr)))
+
+                results.append(field_values)
+            return results
+
+        # Logic for Detail View field extraction
+        try:
+            object_fields = self.form_class().fields.keys()
+            return [
+                (f, getattr(self.object, f))
+                for f in object_fields
+                if f not in self.exclude and self.request.user.is_superuser
+            ]
+        except (AttributeError, TypeError):
+            return []
 
     def get_page_obj_detail_view(self):
-        """Get pagination context for detail view."""
-        context = {}
-        first_object = None
-        last_object = None
-        next_object = None
-        previous_object = None
-        if self.request.user.is_authenticated and not self.request.user.is_superuser:
-            objects = self.model.objects.filter(user=self.request.user)
+        """Get pagination context for detail view navigation."""
+        user = self.request.user
+        if user.is_authenticated and not user.is_superuser:
+            objects = self.model.objects.filter(user=user)
         else:
             objects = self.model.objects.all()
-        paginator = Paginator(objects, 1)
-        page_number = self.request.GET.get("page_number_detail", 1)
-        page_number = int(page_number)
-        page_obj_detail = paginator.get_page(page_number)
-        count = paginator.count
-        if page_number:
-            current_index = paginator.page(page_number).start_index()
-            if current_index < count:
-                next_object = objects[current_index]
-                last_object = objects[count - 1]
-            if current_index > 1:
-                previous_object = objects[current_index - 2]
-                first_object = objects[0]
-        context["next_object"] = next_object
-        context["previous_object"] = previous_object
-        context["first_object"] = first_object
-        context["last_object"] = last_object
-        context["count"] = count
-        context["page_obj"] = page_obj_detail
-        return context
+
+        count = objects.count()
+        page_number = self._get_int_param("page_number_detail", 1)
+
+        # Use slicing for better performance on large querysets
+        try:
+            current_obj = objects[page_number - 1]
+            next_obj = objects[page_number] if page_number < count else None
+            prev_obj = objects[page_number - 2] if page_number > 1 else None
+        except (IndexError, AssertionError):
+            current_obj = next_obj = prev_obj = None
+
+        return {
+            "page_obj": current_obj,
+            "next_object": next_obj,
+            "previous_object": prev_obj,
+            "first_object": objects.first(),
+            "last_object": objects.last(),
+            "count": count,
+        }
 
     def get_statcards(self):
-        """Get statistics cards data."""
-        context = {}
-        context["times"] = {}
-        context["invoices"] = {}
-        context["times"]["entered"] = 0
-        context["times"]["approved"] = 0
-        context["invoices"]["gross"] = 0
-        context["invoices"]["cost"] = 0
-        context["invoices"]["net"] = 0
-        return context
+        """Get statistics cards data (stub)."""
+        return {
+            "times": {"entered": 0, "approved": 0},
+            "invoices": {"gross": 0, "cost": 0, "net": 0},
+        }
 
     def get_urls(self):
         """Get URL names for various actions."""
-        context = {}
-        context["url_cancel"] = self.url_cancel
-        context["url_copy"] = self.url_copy
-        context["url_create"] = self.url_create
-        context["url_delete"] = self.url_delete
-        context["url_edit"] = self.url_edit
-        context["url_index"] = self.url_index
-        context["url_view"] = self.url_view
-        return context
+        return {
+            "url_cancel": self.url_cancel,
+            "url_copy": self.url_copy,
+            "url_create": self.url_create,
+            "url_delete": self.url_delete,
+            "url_edit": self.url_edit,
+            "url_index": self.url_index,
+            "url_view": self.url_view,
+        }
 
 
 class SuperuserRequiredMixin(UserPassesTestMixin):
     """Mixin to require superuser access."""
 
     def test_func(self):
-        """Test if user is superuser."""
         return self.request.user.is_superuser
 
     def handle_no_permission(self):
-        """Handle permission denied."""
         raise PermissionDenied
