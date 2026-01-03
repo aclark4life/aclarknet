@@ -98,7 +98,7 @@ def archive(request):
         ModelClass = get_model_class(model)
         archive_field = "archived"
     field_value = False if archive == "false" else True
-    obj = ModelClass.objects.get(id=obj_id)
+    obj = get_object_or_404(ModelClass, id=obj_id)
     if model == "user":
         field_value = not (field_value)
     setattr(obj, archive_field, field_value)
@@ -107,8 +107,7 @@ def archive(request):
             setattr(time_entry, archive_field, field_value)
             time_entry.save()
 
-    if obj:
-        obj.save()
+    obj.save()
     return HttpResponseRedirect(request.headers.get("Referer"))
 
 
@@ -504,8 +503,8 @@ class ContactCopyView(BaseContactView, CreateView):
         return Contact.objects.all()
 
     def form_valid(self, form):
-        original_contact = Contact.objects.get(pk=self.kwargs["pk"])
-        new_contact = original_contact
+        new_contact = form.save(commit=False)
+        new_contact.pk = None
         new_contact.save()
         return super().form_valid(form)
 
@@ -1271,8 +1270,8 @@ class NoteCopyView(BaseNoteView, CreateView):
         return Note.objects.all()
 
     def form_valid(self, form):
-        original_note = Note.objects.get(pk=self.kwargs["pk"])
-        new_note = original_note
+        new_note = form.save(commit=False)
+        new_note.pk = None
         new_note.save()
         return super().form_valid(form)
 
