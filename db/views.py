@@ -66,6 +66,59 @@ from .serializers import ClientSerializer
 from .utils import get_archived_annotation, get_model_class, get_queryset
 
 
+class AuthenticatedRequiredMixin(SuperuserRequiredMixin):
+    """
+    Allow superusers or authenticated users.
+    """
+
+    def test_func(self):
+        return self.request.user.is_authenticated
+
+
+class RedirectToObjectViewMixin:
+    """
+    Redirect to object detail view after create/update/copy.
+    """
+
+    def get_success_url(self):
+        return reverse_lazy(
+            f"{self.model._meta.model_name}_view",
+            args=[self.object.pk],
+        )
+
+
+class FilterByUserMixin:
+    """
+    Non-superusers only see their own objects.
+    """
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if not self.request.user.is_superuser:
+            queryset = queryset.filter(user=self.request.user)
+        return queryset
+
+
+class ModelCopyMixin:
+    """
+    Generic copy behavior for models.
+    """
+
+    def get_initial(self):
+        original = self.model.objects.get(pk=self.kwargs["pk"])
+        initial = {}
+        for field in original._meta.fields:
+            if field.name not in self.exclude:
+                initial[field.name] = getattr(original, field.name)
+        return initial
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.pk = None
+        obj.save()
+        return super().form_valid(form)
+
+
 def custom_403(request, exception=None):
     """Handle 403 Forbidden errors."""
     return permission_denied(request, exception=exception, template_name="403.html")
@@ -2260,23 +2313,15 @@ class TaskCopyView(BaseTaskView, CreateView):
         return super().form_valid(form)
 
 
-class BaseTimeView(BaseView, SuperuserRequiredMixin):
+class BaseTimeView(BaseView, AuthenticatedRequiredMixin):
     """Base view for Time model operations."""
 
     model = Time
-    model_name = model._meta.model_name
-    model_name_plural = model._meta.verbose_name_plural
     form_model = TimeForm
     form_class = TimeForm
     template_name = "edit.html"
-    url_cancel = f"{model_name.lower()}_cancel"
-    url_copy = f"{model_name.lower()}_copy"
-    url_create = f"{model_name.lower()}_create"
-    url_delete = f"{model_name.lower()}_delete"
-    url_edit = f"{model_name.lower()}_edit"
-    url_index = f"{model_name.lower()}_index"
-    url_view = f"{model_name.lower()}_view"
-    exclude = ["client", "project", "task", "invoice"]
+
+    _exclude = ["client", "project", "task", "invoice"]
 
     def get_form(self, form_class=None):
         if self.request.user.is_superuser:
@@ -2284,217 +2329,100 @@ class BaseTimeView(BaseView, SuperuserRequiredMixin):
 
         form = super().get_form(form_class)
 
-        projects = Project.objects.filter(team__in=[self.request.user], archived=False)
+        projects = Project.objects.filter(
+            team__in=[self.request.user],
+            archived=False,
+        )
 
         if not self.request.user.is_superuser:
-            invoices = Invoice.objects.filter(project__in=projects, archived=False)
+            invoices = Invoice.objects.filter(
+                project__in=projects,
+                archived=False,
+            )
+
             if projects:
                 form.fields["project"].empty_label = None
                 form.fields["project"].queryset = projects
+
             if invoices:
                 form.fields["invoice"].empty_label = None
                 form.fields["invoice"].queryset = invoices
             else:
                 form.fields["invoice"].queryset = Invoice.objects.none()
+
             form.fields["user"].empty_label = None
             form.fields["user"].queryset = User.objects.filter(pk=self.request.user.id)
 
-        if self.request.user.is_superuser:
+        else:
             project = projects.first()
             if project:
-                form.fields["task"].empty_label = None
-                if project.task:
-                    form.fields["task"].queryset = Task.objects.filter(
-                        project__in=projects,
-                    )
                 form.fields["project"].empty_label = None
                 form.fields["project"].queryset = projects
+
+                if project.task:
+                    form.fields["task"].empty_label = None
+                    form.fields["task"].queryset = Task.objects.filter(
+                        project__in=projects
+                    )
+
                 form.fields["client"].empty_label = None
                 form.fields["client"].queryset = Client.objects.filter(
-                    project__in=projects,
+                    project__in=projects
                 )
 
         return form
 
 
-class TimeCreateView(BaseTimeView, CreateView):
-    success_url = reverse_lazy("time_view")
-
-    def test_func(self):
-        if self.request.user.is_superuser:
-            return True
-        elif self.request.user.is_authenticated:
-            return True
-        else:
-            return False
-
-    def get_success_url(self):
-        return reverse_lazy("time_view", args=[self.object.pk])
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        client_id = None
-        description = None
-        project_id = None
-        task_id = None
-
-        context["form"].initial = {
-            "description": description,
-            "user": self.request.user.id,
-        }
-
-        invoice_id = self.request.GET.get("invoice_id")
-
-        try:
-            invoice = Invoice.objects.get(pk=invoice_id)
-        except (ValueError, Invoice.DoesNotExist):
-            invoice = None
-
-        if invoice:
-            if invoice.client:
-                client_id = invoice.client.id
-            if invoice.project:
-                project_id = invoice.project.id
-
-                if invoice.project.task:
-                    task_id = invoice.project.task.id
-
-        context["form"].initial.update(
-            {
-                "client": client_id,
-                "invoice": invoice_id,
-                "project": project_id,
-                "task": task_id,
-            }
-        )
-        return context
+class TimeCreateView(
+    BaseTimeView,
+    RedirectToObjectViewMixin,
+    CreateView,
+):
+    pass
 
 
-class TimeListView(BaseTimeView, ListView):
+class TimeListView(
+    BaseTimeView,
+    FilterByUserMixin,
+    ListView,
+):
     template_name = "index.html"
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        if self.request.user.is_authenticated and not self.request.user.is_superuser:
-            queryset = queryset.filter(user=self.request.user)
-        return queryset
-
-    def test_func(self):
-        if self.request.user.is_superuser:
-            return True
-        elif self.request.user.is_authenticated:
-            return True
-        else:
-            return False
 
 
 class TimeDetailView(BaseTimeView, DetailView):
     template_name = "view.html"
 
     def test_func(self):
-        time_entry = self.get_object()
-        time_user = time_entry.user
-        if self.request.user.is_superuser:
-            return True
-        elif self.request.user.is_authenticated and self.request.user == time_user:
-            return True
-        else:
-            return False
+        time = self.get_object()
+        return self.request.user.is_superuser or self.request.user == time.user
 
     def get_context_data(self, **kwargs):
         time = self.get_object()
         if time.invoice:
-            queryset_related = list(chain([time.invoice]))
-            self._queryset_related = queryset_related
+            self._queryset_related = [time.invoice]
             self.has_related = True
-        context = super().get_context_data(**kwargs)
-        return context
+        return super().get_context_data(**kwargs)
 
 
-class TimeUpdateView(BaseTimeView, UpdateView):
-    success_url = reverse_lazy("time_view")
-
+class TimeUpdateView(
+    BaseTimeView,
+    RedirectToObjectViewMixin,
+    UpdateView,
+):
     def form_valid(self, form):
-        user_id = form.initial["user"]
+        user_id = form.initial.get("user")
         if user_id:
-            user = User.objects.get(pk=user_id)
-            form.instance.user = user
+            form.instance.user = User.objects.get(pk=user_id)
         return super().form_valid(form)
 
-    def test_func(self):
-        if self.request.user.is_superuser:
-            return True
-        elif self.request.user.is_authenticated:
-            return True
-        else:
-            return False
 
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(pk=self.kwargs["pk"])
-
-    def get_success_url(self):
-        return reverse_lazy("time_view", args=[self.object.pk])
-
-
-class TimeDeleteView(BaseTimeView, DeleteView):
-    success_url = reverse_lazy("time_index")
-    template_name = "delete.html"
-
-    def test_func(self):
-        if self.request.user.is_superuser:
-            return True
-        elif self.request.user.is_authenticated:
-            return True
-        else:
-            return False
-
-    def get_success_url(self):
-        if self.request.user.is_superuser:
-            return reverse_lazy("time_index")
-        else:
-            return reverse_lazy("dashboard")
-
-    def get_queryset(self):
-        return Time.objects.all()
-
-
-class TimeCopyView(BaseTimeView, CreateView):
-    success_url = reverse_lazy("time_index")
-
-    def get_success_url(self):
-        return reverse_lazy("time_view", args=[self.object.pk])
-
-    def test_func(self):
-        if self.request.user.is_superuser:
-            return True
-        elif self.request.user.is_authenticated:
-            return True
-        else:
-            return False
-
-    def get_queryset(self):
-        return Time.objects.all()
-
-    def get_initial(self):
-        original_time = Time.objects.get(pk=self.kwargs["pk"])
-        return {
-            "user": original_time.user,
-            "name": original_time.name,
-            "hours": original_time.hours,
-            "description": original_time.description,
-            "date": timezone.now,
-            "invoice": original_time.invoice,
-            "task": original_time.task,
-            "project": original_time.project,
-            "client": original_time.client,
-        }
-
-    def form_valid(self, form):
-        new_time = form.save(commit=False)
-        new_time.pk = None
-        new_time.save()
-        return super().form_valid(form)
+class TimeCopyView(
+    BaseTimeView,
+    ModelCopyMixin,
+    RedirectToObjectViewMixin,
+    CreateView,
+):
+    pass
 
 
 class BaseUserView(BaseView):
@@ -2615,6 +2543,17 @@ class UserUpdateView(BaseUserMixin, BaseUserView, UpdateView):
         user = self.get_object()
         user_id = user.id
         return reverse("user_view", args=[user_id])
+
+
+class TimeDeleteView(BaseTimeView, DeleteView):
+    template_name = "delete.html"
+
+    def get_success_url(self):
+        return (
+            reverse_lazy("time_index")
+            if self.request.user.is_superuser
+            else reverse_lazy("dashboard")
+        )
 
 
 class UserDeleteView(BaseUserMixin, BaseUserView, DeleteView):

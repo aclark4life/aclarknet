@@ -9,6 +9,8 @@ from django.shortcuts import reverse
 class BaseView:
     """Base view class with common functionality for all model views."""
 
+    OBJECT_URLS = {"copy", "edit", "delete", "view"}
+
     _queryset_related = None
 
     @property
@@ -43,9 +45,16 @@ class BaseView:
     def _model_url(self, action: str):
         if self.model is None:
             return None
-        return reverse(
-            f"{self.model._meta.app_label}:{self.model._meta.model_name}_{action}"
-        )
+
+        name = f"{self.model._meta.model_name}_{action}"
+
+        if action in self.OBJECT_URLS:
+            obj = getattr(self, "object", None)
+            if obj is None:
+                return None
+            return reverse(name, args=[obj.pk])
+
+        return reverse(name)
 
     @property
     def url_cancel(self):
