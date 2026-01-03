@@ -67,12 +67,12 @@ def custom_403(request, exception=None):
 
 def custom_404(request, exception=None):
     """Handle 404 Not Found errors."""
-    return render(request, exception=exception, template_name="404.html")
+    return render(request, template_name="404.html")
 
 
 def custom_500(request, exception=None):
     """Handle 500 Internal Server errors."""
-    return render(request, exception=exception, template_name="500.html")
+    return render(request, template_name="500.html")
 
 
 def trigger_500(request):
@@ -98,7 +98,7 @@ def archive(request):
         ModelClass = get_model_class(model)
         archive_field = "archived"
     field_value = False if archive == "false" else True
-    obj = ModelClass.objects.get(id=obj_id)
+    obj = get_object_or_404(ModelClass, id=obj_id)
     if model == "user":
         field_value = not (field_value)
     setattr(obj, archive_field, field_value)
@@ -107,8 +107,7 @@ def archive(request):
             setattr(time_entry, archive_field, field_value)
             time_entry.save()
 
-    if obj:
-        obj.save()
+    obj.save()
     return HttpResponseRedirect(request.headers.get("Referer"))
 
 
@@ -504,8 +503,8 @@ class ContactCopyView(BaseContactView, CreateView):
         return Contact.objects.all()
 
     def form_valid(self, form):
-        original_contact = Contact.objects.get(pk=self.kwargs["pk"])
-        new_contact = original_contact
+        new_contact = form.save(commit=False)
+        new_contact.pk = None
         new_contact.save()
         return super().form_valid(form)
 
@@ -751,7 +750,6 @@ class InvoiceCreateView(BaseInvoiceView, CreateView):
                     "task": task,
                 }
             )
-        subject = None
         return context
 
     def form_valid(self, form):
@@ -951,7 +949,7 @@ class InvoiceEmailDOCView(BaseInvoiceView, View):
                 email = EmailMessage(
                     subject=subject,
                     body="Please find attached, thank you!",
-                    from_email=User,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
                     to=[contact_email],
                 )
                 email.attach(
@@ -967,7 +965,7 @@ class InvoiceEmailDOCView(BaseInvoiceView, View):
             email = EmailMessage(
                 subject=subject,
                 body="Please find attached, thank you!",
-                from_email=User,
+                from_email=settings.DEFAULT_FROM_EMAIL,
                 to=[settings.DEFAULT_FROM_EMAIL],
             )
             email.attach(
@@ -1271,8 +1269,8 @@ class NoteCopyView(BaseNoteView, CreateView):
         return Note.objects.all()
 
     def form_valid(self, form):
-        original_note = Note.objects.get(pk=self.kwargs["pk"])
-        new_note = original_note
+        new_note = form.save(commit=False)
+        new_note.pk = None
         new_note.save()
         return super().form_valid(form)
 
@@ -1299,14 +1297,14 @@ class NoteEmailTextView(BaseNoteView, View):
                 email.to = [contact.email]
                 try:
                     email.send()
-                except:  # noqa
+                except Exception:
                     failures.append(contact.email)
                 else:
                     successes.append(contact.email)
         else:
             try:
                 email.send()
-            except:  # noqa
+            except Exception:
                 failures.append(settings.DEFAULT_FROM_EMAIL)
             else:
                 successes.append(settings.DEFAULT_FROM_EMAIL)
@@ -2581,12 +2579,9 @@ class UserCopyView(BaseUserMixin, BaseUserView, CreateView):
 
 class UserToContactView(BaseUserView, View):
     def get(self, request, user_id):
-        try:
-            user = User.objects.get(id=user_id)
-            contact = Contact(
-                first_name=user.first_name, last_name=user.last_name, email=user.email
-            )
-            contact.save()
-            return HttpResponseRedirect(reverse("contact_view", args=[contact.id]))
-        except User.DoesNotExist:
-            return render("error.html")
+        user = get_object_or_404(User, id=user_id)
+        contact = Contact(
+            first_name=user.first_name, last_name=user.last_name, email=user.email
+        )
+        contact.save()
+        return HttpResponseRedirect(reverse("contact_view", args=[contact.id]))
