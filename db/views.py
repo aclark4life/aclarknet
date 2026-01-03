@@ -2420,19 +2420,10 @@ class BaseUserView(BaseView):
     """Base view for User model operations."""
 
     model = User
-    model_name = model._meta.model_name
-    model_name_plural = model._meta.verbose_name_plural
     form_class = UserForm
     form_model = UserForm
     order_by = ["-is_active", "username"]
     exclude = ["rate", "mail", "address", "first_name", "last_name"]
-    url_cancel = f"{model_name.lower()}_cancel"
-    url_create = f"{model_name.lower()}_create"
-    url_copy = f"{model_name.lower()}_copy"
-    url_delete = f"{model_name.lower()}_delete"
-    url_edit = f"{model_name.lower()}_edit"
-    url_index = f"{model_name.lower()}_index"
-    url_view = f"{model_name.lower()}_view"
 
 
 class BaseUserMixin(SuperuserRequiredMixin):
