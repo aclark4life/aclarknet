@@ -88,7 +88,7 @@ jobs:
         env:
           LD_LIBRARY_PATH: /usr/local/lib/mongo_crypt_v1/
         run: |
-          python manage.py test
+          pytest db/tests/base.py
 
   # Commented out ECS deployment for now
   # deploy:
