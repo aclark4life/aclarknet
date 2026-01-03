@@ -2211,18 +2211,9 @@ class BaseTaskView(BaseView, SuperuserRequiredMixin):
     """Base view for Task model operations."""
 
     model = Task
-    model_name = model._meta.model_name
-    model_name_plural = model._meta.verbose_name_plural
     form_model = TaskForm
     form_class = TaskForm
     template_name = "edit.html"
-    url_cancel = f"{model_name.lower()}_cancel"
-    url_copy = f"{model_name.lower()}_copy"
-    url_create = f"{model_name.lower()}_create"
-    url_delete = f"{model_name.lower()}_delete"
-    url_edit = f"{model_name.lower()}_edit"
-    url_index = f"{model_name.lower()}_index"
-    url_view = f"{model_name.lower()}_view"
     order_by = ["archived", "name", "-created"]
 
 
