@@ -1,3 +1,5 @@
+[![CI/CD Pipeline](https://github.com/aclark4life/aclarknet/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/aclark4life/aclarknet/actions/workflows/ci-cd.yml)
+
 (Written by [us.amazon.nova-micro-v1:0](https://github.com/aclark4life/aclarknet/blob/0d39a6525465a7ea4083177b4e536f98de19fd88/justfile#L5))
 
 This is a project that includes various configuration files and directories for different tools and environments.
