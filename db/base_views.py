@@ -264,17 +264,27 @@ class BaseView:
             "invoices": {"gross": 0, "cost": 0, "net": 0},
         }
 
+    def get_url_names(self):
+        """Get URL pattern names (not reversed URLs) for use with {% url %} tag.
+        
+        Returns an empty dict if model is None (e.g., for non-model-based views).
+        """
+        if self.model is None:
+            return {}
+        
+        return {
+            "url_cancel": f"{self.model_name}_cancel",
+            "url_copy": f"{self.model_name}_copy",
+            "url_create": f"{self.model_name}_create",
+            "url_delete": f"{self.model_name}_delete",
+            "url_edit": f"{self.model_name}_edit",
+            "url_index": f"{self.model_name}_index",
+            "url_view": f"{self.model_name}_view",
+        }
+
     def get_urls(self):
         """Get URL names for various actions."""
-        return {
-            "url_cancel": self.url_cancel,
-            "url_copy": self.url_copy,
-            "url_create": self.url_create,
-            "url_delete": self.url_delete,
-            "url_edit": self.url_edit,
-            "url_index": self.url_index,
-            "url_view": self.url_view,
-        }
+        return self.get_url_names()
 
 
 class SuperuserRequiredMixin(UserPassesTestMixin):
