@@ -15,6 +15,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+        ("contenttypes", "0001_initial"),
         ("taggit", "0001_initial"),
         ("wagtailcore", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
@@ -232,6 +233,57 @@ class Migration(migrations.Migration):
             bases=("wagtailcore.page",),
         ),
         migrations.CreateModel(
+            name="MongoDBTaggedItem",
+            fields=[
+                (
+                    "id",
+                    django_mongodb_backend.fields.ObjectIdAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "object_id",
+                    models.CharField(max_length=24, db_index=True, verbose_name="object ID"),
+                ),
+                (
+                    "content_type",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="%(app_label)s_%(class)s_tagged_items",
+                        to="contenttypes.contenttype",
+                        verbose_name="content type",
+                    ),
+                ),
+                (
+                    "tag",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="%(app_label)s_%(class)s_items",
+                        to="taggit.tag",
+                    ),
+                ),
+            ],
+            options={
+                "verbose_name": "tagged item",
+                "verbose_name_plural": "tagged items",
+                "indexes": [
+                    models.Index(
+                        fields=["content_type", "object_id"],
+                        name="db_mongodbta_content_8fc721_idx",
+                    )
+                ],
+                "constraints": [
+                    models.UniqueConstraint(
+                        fields=("content_type", "object_id", "tag"),
+                        name="db_mongodbtaggeditem_content_type_object_id_tag_uniq",
+                    )
+                ],
+            },
+        ),
+        migrations.CreateModel(
             name="Client",
             fields=[
                 (
@@ -274,7 +326,7 @@ class Migration(migrations.Migration):
                     taggit.managers.TaggableManager(
                         blank=True,
                         help_text="A comma-separated list of tags.",
-                        through="taggit.TaggedItem",
+                        through="db.MongoDBTaggedItem",
                         to="taggit.Tag",
                         verbose_name="Tags",
                     ),
