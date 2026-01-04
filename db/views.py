@@ -949,17 +949,8 @@ class BaseInvoiceView(BaseView, SuperuserRequiredMixin):
     """Base view for Invoice model operations."""
 
     model = Invoice
-    model_name = model._meta.model_name
-    model_name_plural = model._meta.verbose_name_plural
     form_model = InvoiceForm
     form_class = InvoiceForm
-    url_cancel = f"{model_name.lower()}_cancel"
-    url_copy = f"{model_name.lower()}_copy"
-    url_create = f"{model_name.lower()}_create"
-    url_delete = f"{model_name.lower()}_delete"
-    url_edit = f"{model_name.lower()}_edit"
-    url_index = f"{model_name.lower()}_index"
-    url_view = f"{model_name.lower()}_view"
     template_name = "edit.html"
     exclude = [
         "contacts",
@@ -985,15 +976,14 @@ class BaseInvoiceView(BaseView, SuperuserRequiredMixin):
 
 
 class InvoiceListView(BaseInvoiceView, ListView):
-    model = Invoice
     template_name = "index.html"
 
 
-class InvoiceCreateView(BaseInvoiceView, CreateView):
-    success_url = reverse_lazy("invoice_view")
-
-    def get_success_url(self):
-        return reverse_lazy("invoice_view", args=[self.object.pk])
+class InvoiceCreateView(
+    BaseInvoiceView,
+    RedirectToObjectViewMixin,
+    CreateView,
+):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1110,12 +1100,13 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
         return context
 
 
-class InvoiceUpdateView(BaseInvoiceView, UpdateView):
-    template_name = "edit.html"
-
+class InvoiceUpdateView(
+    BaseInvoiceView,
+    RedirectToObjectViewMixin,
+    UpdateView,
+):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["url_cancel"] = f"{self.model_name}_view"
         context["pk"] = self.kwargs["pk"]
         return context
 
@@ -1130,43 +1121,26 @@ class InvoiceUpdateView(BaseInvoiceView, UpdateView):
         queryset = super().get_queryset()
         return queryset.filter(pk=self.kwargs["pk"])
 
-    def get_success_url(self):
-        return reverse_lazy("invoice_view", args=[self.object.pk])
-
     def form_valid(self, form):
         self.object = form.save()
         return super().form_valid(form)
 
 
 class InvoiceDeleteView(BaseInvoiceView, DeleteView):
-    model = Invoice
-    form_model = InvoiceForm
-    success_url = reverse_lazy("invoice_index")
     template_name = "delete.html"
-
-    def get_queryset(self):
-        return Invoice.objects.all()
-
-
-class InvoiceCopyView(BaseInvoiceView, CreateView):
-    model = Invoice
-    form_model = InvoiceForm
     success_url = reverse_lazy("invoice_index")
 
     def get_queryset(self):
         return Invoice.objects.all()
 
-    def get_initial(self):
-        original_invoice = Invoice.objects.get(pk=self.kwargs["pk"])
-        return {
-            "name": original_invoice.name,
-        }
 
-    def form_valid(self, form):
-        new_invoice = form.save(commit=False)
-        new_invoice.pk = None
-        new_invoice.save()
-        return super().form_valid(form)
+class InvoiceCopyView(
+    BaseInvoiceView,
+    ModelCopyMixin,
+    RedirectToObjectViewMixin,
+    CreateView,
+):
+    pass
 
 
 class InvoiceExportPDFView(BaseInvoiceView, View):
