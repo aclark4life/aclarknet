@@ -1,43 +1,59 @@
 {% extends 'base.html' %}
-{% load static webpack_loader babel %}
+{% load static webpack_loader babel humanize %}
+
 {% block title %}ACLARK.NET &middot; Dashboard{% endblock %}
+
 {% block content %}
   <div class="container my-5 py-4">
     <div class="row">
       {% include 'dashboard/sidebar.html' %}
+
       <div class="col-md-9 content">
+        {# Dashboard Header #}
         <div class="dashhead">
           <div class="dashhead-title">
             <h6 class="dashhead-subtitle">Dashboards</h6>
-            {% block dashhead_title %}<h2 class="dashhead-title text-secondary">Overview</h2>{% endblock %}
+            {% block dashhead_title %}
+              <h2 class="dashhead-title text-secondary">Overview</h2>
+            {% endblock %}
           </div>
           <div class="btn-toolbar dashhead-toolbar">
             {% block dashhead_toolbar %}
-              {% include 'dashboard/toolbars/dashhead.html' %}
+              {% include 'toolbars/dashhead.html' %}
             {% endblock %}
           </div>
         </div>
+
+        {# Admin Top Bar #}
         {% if request.user.is_superuser %}
           {% include 'dashboard/topbar.html' %}
         {% endif %}
+
+        {# Main Dashboard Content #}
         {% block dashboard %}
+          {# Admin Charts #}
           {% if request.user.is_superuser %}
             <div class="row my-3">
-              {# Gross, Cost, Net #}
-              {% include 'dashboard/charts/revenue.html' %}
-              {# Entered vs. Approved #}
-              {% include 'dashboard/charts/time.html' %}
+              {% include 'charts/revenue.html' %}
+              {% include 'charts/time.html' %}
             </div>
           {% endif %}
-          {% load babel humanize %}
+
+          {# Stat Cards #}
           {% if request.user.is_superuser %}
             {% include 'dashboard/statcards/revenue.html' %}
           {% endif %}
           {% include 'dashboard/statcards/time.html' %}
+
+          {# Invoices (Admin Only) #}
           {% if request.user.is_superuser %}
             {% include 'dashboard/invoice.html' %}
           {% endif %}
+
+          {# Time Tracking (All Users) #}
           {% include 'dashboard/time.html' %}
+
+          {# Admin Data Grids #}
           {% if request.user.is_superuser %}
             <div class="row">
               {% include 'dashboard/task.html' %}
@@ -52,7 +68,9 @@
       </div>
     </div>
   </div>
-  {% include 'dashboard/modal/lorem.html' %}
-  {% include 'dashboard/modal/hijack.html' %}
-  {% include 'dashboard/modal/fullscreen.html' %}
+
+  {# Modals #}
+  {% include 'modal/lorem.html' %}
+  {% include 'modal/hijack.html' %}
+  {% include 'modal/fullscreen.html' %}
 {% endblock %}

@@ -10,11 +10,11 @@
   </h2>
 {% endblock %}
 {% block dashboard %}
-  {% include 'dashboard/toolbars/view.html' %}
+  {% include 'toolbars/view.html' %}
   {% if has_preview %}
     {% include 'dashboard/preview.html' %}
   {% endif %}
-  {% include 'dashboard/table/view.html' %}
+  {% include 'table/view.html' %}
   {% if has_related and user.is_superuser %}
     {% include 'dashboard/related.html' %}
   {% endif %}
