@@ -2,7 +2,10 @@
 <div class="col-md-6 mb-5">
   <div class="list-group mb-3">
     <a class="list-group-item list-group-item-action justify-content-between d-flex fw-semibold p-3"
-       href="{% url 'company_index' %}">Companies <span class="badge bg-primary">{{ companies.queryset|length }}</span></a>
+       href="{% url 'company_index' %}">
+      Companies
+      <span class="badge bg-primary">{{ companies.queryset|length }}</span>
+    </a>
     {% for item in companies.queryset %}
       <a class="list-group-item list-group-item-action justify-content-between d-flex"
          href="{% url 'company_view' item.id %}">
