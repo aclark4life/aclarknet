@@ -2075,25 +2075,69 @@ def get_model_config(model_name):
     """
     Returns configuration for allowed models to prevent arbitrary access.
     Maps string names to Model Class and specific field settings.
+    Includes has_user_field to indicate if the model should be filtered by user.
     """
-    # Configuration map: 'slug': {'model': Class, 'archive_field': 'field_name'}
+    # Configuration map: 'slug': {'model': Class, 'archive_field': 'field_name', 'has_user_field': bool}
     config = {
-        "user": {"model": User, "archive_field": "is_active", "active_val": True},
-        # For dynamic models, ensure you trust the 'db' app
+        "user": {
+            "model": User,
+            "archive_field": "is_active",
+            "active_val": True,
+            "has_user_field": False,
+        },
         "report": {
             "model": apps.get_model("db", "Report"),
             "archive_field": "archived",
             "active_val": False,
+            "has_user_field": True,
         },
         "invoice": {
             "model": apps.get_model("db", "Invoice"),
             "archive_field": "archived",
             "active_val": False,
+            "has_user_field": True,
         },
         "note": {
             "model": apps.get_model("db", "Note"),
             "archive_field": "archived",
             "active_val": False,
+            "has_user_field": True,
+        },
+        "time": {
+            "model": apps.get_model("db", "Time"),
+            "archive_field": "archived",
+            "active_val": False,
+            "has_user_field": True,
+        },
+        "task": {
+            "model": apps.get_model("db", "Task"),
+            "archive_field": "archived",
+            "active_val": False,
+            "has_user_field": False,
+        },
+        "client": {
+            "model": apps.get_model("db", "Client"),
+            "archive_field": "archived",
+            "active_val": False,
+            "has_user_field": False,
+        },
+        "company": {
+            "model": apps.get_model("db", "Company"),
+            "archive_field": "archived",
+            "active_val": False,
+            "has_user_field": False,
+        },
+        "contact": {
+            "model": apps.get_model("db", "Contact"),
+            "archive_field": "archived",
+            "active_val": False,
+            "has_user_field": False,
+        },
+        "project": {
+            "model": apps.get_model("db", "Project"),
+            "archive_field": "archived",
+            "active_val": False,
+            "has_user_field": False,
         },
     }
     return config.get(model_name)
@@ -2124,10 +2168,15 @@ def update_selected_entries(request):
     # 2. Fetch Entries
     # Filter returns empty queryset, it does not raise DoesNotExist
     entries = ModelClass.objects.filter(pk__in=entry_ids)
+    
+    # Apply user filtering for non-superusers if model has user field
+    if not request.user.is_superuser and model_conf.get("has_user_field", False):
+        entries = entries.filter(user=request.user)
+    
     count = entries.count()
 
     if count == 0:
-        messages.warning(request, f"Selected {model_name} entries not found.")
+        messages.warning(request, f"Selected {model_name} entries not found or you don't have permission.")
         return HttpResponseRedirect(reverse(f"{model_name}_index"))
 
     # 3. Action Dispatcher
