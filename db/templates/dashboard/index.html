@@ -22,9 +22,18 @@
         {% endif %}
         {% block dashboard %}
           {% if request.user.is_superuser %}
-            {% include 'dashboard/charts/index.html' %}
+            <div class="row my-3">
+              {# Gross, Cost, Net #}
+              {% include 'dashboard/charts/revenue.html' %}
+              {# Entered vs. Approved #}
+              {% include 'dashboard/charts/time.html' %}
+            </div>
           {% endif %}
-          {% include 'dashboard/statcards/index.html' %}
+          {% load babel humanize %}
+          {% if request.user.is_superuser %}
+            {% include 'dashboard/statcards/revenue.html' %}
+          {% endif %}
+          {% include 'dashboard/statcards/time.html' %}
           {% if request.user.is_superuser %}
             {% include 'dashboard/invoice.html' %}
           {% endif %}
@@ -38,12 +47,10 @@
               {% include 'dashboard/client.html' %}
               {% include 'dashboard/company.html' %}
             </div>
-            </div>
           {% endif %}
         {% endblock %}
       </div>
     </div>
-  </div>
   </div>
   {% include 'dashboard/modal/lorem.html' %}
   {% include 'dashboard/modal/hijack.html' %}
