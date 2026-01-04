@@ -27,11 +27,8 @@ from .views import (
     InvoiceCreateView,
     InvoiceDeleteView,
     InvoiceDetailView,
-    InvoiceEmailDOCView,
     InvoiceEmailPDFView,
-    InvoiceEmailTextView,
     InvoiceExportPDFView,
-    InvoiceExportDOCView,
     InvoiceListView,
     InvoiceUpdateView,
     FakeTextView,
@@ -210,29 +207,14 @@ urlpatterns += [
     ),
     path("invoice/<path:pk>/copy", InvoiceCopyView.as_view(), name="invoice_copy"),
     path(
-        "invoice/export-doc/<path:object_id>/",
-        InvoiceExportDOCView.as_view(),
-        name="invoice_export_doc",
-    ),
-    path(
         "invoice/export-pdf/<path:object_id>/",
         InvoiceExportPDFView.as_view(),
         name="invoice_export_pdf",
     ),
     path(
-        "invoice/mail-doc/<path:object_id>/",
-        InvoiceEmailDOCView.as_view(),
-        name="invoice_email_doc",
-    ),
-    path(
         "invoice/mail-pdf/<path:object_id>/",
         InvoiceEmailPDFView.as_view(),
         name="invoice_email_pdf",
-    ),
-    path(
-        "invoice/mail-text/<path:object_id>/",
-        InvoiceEmailTextView.as_view(),
-        name="invoice_email_text",
     ),
 ]
 
