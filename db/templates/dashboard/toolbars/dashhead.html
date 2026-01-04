@@ -1,0 +1,9 @@
+{% if not dashboard %}
+  <div class="btn-toolbar">
+    <div class="btn-group">
+      <a class="btn-toolbar-item input-with-icon btn btn-outline-primary"
+         href="{% url urls.url_create %}"><i class="fa-solid fa-plus"></i><span class="ms-1">Add {{ model_name }}</span>
+      </a>
+    </div>
+  </div>
+{% endif %}
