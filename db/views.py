@@ -2165,18 +2165,23 @@ def update_selected_entries(request):
 
     ModelClass = model_conf["model"]
 
-    # 2. Fetch Entries
+    # 2. Fetch Entries with user filtering applied early
     # Filter returns empty queryset, it does not raise DoesNotExist
     entries = ModelClass.objects.filter(pk__in=entry_ids)
     
     # Apply user filtering for non-superusers if model has user field
+    # This is done early to prevent information leakage about entry existence
     if not request.user.is_superuser and model_conf.get("has_user_field", False):
         entries = entries.filter(user=request.user)
     
     count = entries.count()
 
     if count == 0:
-        messages.warning(request, f"Selected {model_name} entries not found or you don't have permission.")
+        # Provide appropriate message based on whether user filtering was applied
+        if not request.user.is_superuser and model_conf.get("has_user_field", False):
+            messages.warning(request, f"No {model_name} entries found that you have permission to modify.")
+        else:
+            messages.warning(request, f"Selected {model_name} entries not found.")
         return HttpResponseRedirect(reverse(f"{model_name}_index"))
 
     # 3. Action Dispatcher
