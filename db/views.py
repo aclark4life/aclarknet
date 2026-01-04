@@ -419,11 +419,22 @@ class CompanyDeleteView(BaseCompanyView, DeleteView):
 
 class CompanyCopyView(
     BaseCompanyView,
-    ModelCopyMixin,
     RedirectToObjectViewMixin,
     CreateView,
 ):
     template_name = "edit.html"
+
+    def get_initial(self):
+        original_company = Company.objects.get(pk=self.kwargs["pk"])
+        return {
+            "name": original_company.name,
+        }
+
+    def form_valid(self, form):
+        new_company = form.save(commit=False)
+        new_company.pk = None
+        new_company.save()
+        return super().form_valid(form)
 
 
 class BaseContactView(BaseView, SuperuserRequiredMixin):
@@ -485,11 +496,14 @@ class ContactDeleteView(BaseContactView, DeleteView):
 
 class ContactCopyView(
     BaseContactView,
-    ModelCopyMixin,
     RedirectToObjectViewMixin,
     CreateView,
 ):
-    pass
+    def form_valid(self, form):
+        new_contact = form.save(commit=False)
+        new_contact.pk = None
+        new_contact.save()
+        return super().form_valid(form)
 
 
 def get_queryset_related(self):
