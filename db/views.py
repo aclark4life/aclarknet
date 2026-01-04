@@ -15,7 +15,6 @@ import random
 from itertools import chain
 
 # Third-party imports
-import chess
 from docx import Document
 from html2docx import html2docx
 from rest_framework import viewsets
@@ -42,7 +41,6 @@ from django.views.generic import (
     DeleteView,
     DetailView,
     ListView,
-    TemplateView,
     UpdateView,
     View,
 )
@@ -473,24 +471,6 @@ def redirect_admin_to_about_book(request):
 def blog(request):
     """Redirect to external blog."""
     return HttpResponseRedirect("https://blog.aclark.net")
-
-
-class ChessBoardView(TemplateView):
-    template_name = "chess_board.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        board = chess.Board()
-        html = chess.svg.board(board=board).replace("svg", "svg style='width:100%;'")
-        context["chess_board"] = html
-        context["chess_nav"] = True
-        display_mode = (
-            {"bg": "dark", "text": "light"}
-            if self.request.user.profile.dark
-            else {"bg": "light", "text": "dark"}
-        )
-        context["display_mode"] = display_mode
-        return context
 
 
 class ClientAPIViewSet(viewsets.ModelViewSet):
@@ -984,7 +964,6 @@ class InvoiceCreateView(
     RedirectToObjectViewMixin,
     CreateView,
 ):
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         project_id = self.request.GET.get("project_id")

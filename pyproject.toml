@@ -18,7 +18,6 @@ dependencies = [
   "babel",
   "django-extensions",
   "django-hijack",
-  "chess",
 ]
 
 [project.optional-dependencies]
