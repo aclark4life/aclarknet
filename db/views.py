@@ -404,12 +404,6 @@ class CompanyUpdateView(
         form.instance.client_set.set(form.cleaned_data["client_set"])
         return response
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["url_cancel"] = f"{self.model_name}_view"
-        context["pk"] = self.kwargs["pk"]
-        return context
-
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(pk=self.kwargs["pk"])
@@ -476,12 +470,6 @@ class ContactUpdateView(
     RedirectToObjectViewMixin,
     UpdateView,
 ):
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["url_cancel"] = f"{self.model_name}_view"
-        context["pk"] = self.kwargs["pk"]
-        return context
-
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(pk=self.kwargs["pk"])
