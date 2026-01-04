@@ -1,3 +1,11 @@
-<div class="btn-group mx-1">{% include 'dashboard/toolbars/export/report/email.html' %}</div>
+<div class="btn-group mx-1">
+  <a class="btn btn-outline-primary btn-block d-flex align-items-center"
+     data-toggle="tooltip"
+     title="Email Text"
+     href="{% if object %}{% url url_email_text object_id=object.id %}{% else %}{% url url_email_text %}{% endif %}">
+    <i class="fa-solid fa-file-lines"></i>
+    <span class="visually-hidden">Email Text</span>
+  </a>
+</div>
 <div class="btn-group mx-1">{% include 'dashboard/toolbars/export/report/modal.html' %}</div>
 {% include 'dashboard/modal/report.html' %}

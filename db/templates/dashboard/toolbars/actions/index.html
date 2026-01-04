@@ -1,5 +1,17 @@
 <div class="btn-group">
-  {% include 'dashboard/toolbars/actions/edit.html' %}
-  {% include 'dashboard/toolbars/actions/copy.html' %}
-  {% include 'dashboard/toolbars/actions/delete.html' %}
+  <a class="btn btn-outline-primary btn-block d-flex align-items-center"
+     href="{% url urls.url_edit object.pk %}">
+    <i class="fas fa-edit"></i>
+    <span class="visually-hidden">Edit</span>
+  </a>
+  <a class="btn btn-outline-primary btn-block d-flex align-items-center"
+     href="{% url urls.url_copy object.pk %}">
+    <i class="fas fa-copy"></i>
+    <span class="visually-hidden">Copy</span>
+  </a>
+  <a class="btn btn-outline-primary btn-block d-flex align-items-center"
+     href="{% url urls.url_delete object.pk %}">
+    <i class="fas fa-trash"></i>
+    <span class="visually-hidden">Delete</span>
+  </a>
 </div>
