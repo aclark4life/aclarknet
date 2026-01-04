@@ -661,6 +661,7 @@ class CompanyDetailView(BaseCompanyView, DetailView):
         self._queryset_related = queryset_related
         self.has_related = True
         context = super().get_context_data(**kwargs)
+        context["company"] = company
         return context
 
 

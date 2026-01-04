@@ -1,0 +1,3 @@
+{% if model_name == "company" %}
+  <a href="{% url 'client_create' %}?company_id={{ company.id }}" class="btn btn-outline-primary">Add Client</a>
+{% endif %}
