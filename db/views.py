@@ -1107,6 +1107,7 @@ class InvoiceUpdateView(
 ):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["url_cancel"] = f"{self.model_name}_view"
         context["pk"] = self.kwargs["pk"]
         return context
 
