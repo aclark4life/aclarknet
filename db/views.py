@@ -1237,18 +1237,9 @@ class BaseNoteView(BaseView, SuperuserRequiredMixin):
     """Base view for Note model operations."""
 
     model = Note
-    model_name = model._meta.model_name
-    model_name_plural = model._meta.verbose_name_plural
     form_model = NoteForm
     form_class = NoteForm
     template_name = "edit.html"
-    url_cancel = f"{model_name.lower()}_cancel"
-    url_copy = f"{model_name.lower()}_copy"
-    url_create = f"{model_name.lower()}_create"
-    url_delete = f"{model_name.lower()}_delete"
-    url_edit = f"{model_name.lower()}_edit"
-    url_index = f"{model_name.lower()}_index"
-    url_view = f"{model_name.lower()}_view"
     exclude = ["html"]
 
 
