@@ -331,17 +331,9 @@ class BaseCompanyView(BaseView, SuperuserRequiredMixin):
     """Base view for Company model operations."""
 
     model = Company
-    model_name = model._meta.model_name
-    model_name_plural = model._meta.verbose_name_plural
     form_model = CompanyForm
     form_class = CompanyForm
-    url_cancel = f"{model_name.lower()}_cancel"
-    url_copy = f"{model_name.lower()}_copy"
-    url_create = f"{model_name.lower()}_create"
-    url_delete = f"{model_name.lower()}_delete"
-    url_edit = f"{model_name.lower()}_edit"
-    url_index = f"{model_name.lower()}_index"
-    url_view = f"{model_name.lower()}_view"
+    order_by = ["archived", "name"]
     exclude = ["client_set", "description", "url"]
 
 
@@ -349,14 +341,12 @@ class CompanyListView(BaseCompanyView, ListView):
     template_name = "index.html"
 
 
-class CompanyCreateView(BaseCompanyView, CreateView):
-    model = Company
-    form_model = CompanyForm
-    success_url = reverse_lazy("company_view")
+class CompanyCreateView(
+    BaseCompanyView,
+    RedirectToObjectViewMixin,
+    CreateView,
+):
     template_name = "edit.html"
-
-    def get_success_url(self):
-        return reverse_lazy("company_view", args=[self.object.pk])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -378,7 +368,6 @@ class CompanyCreateView(BaseCompanyView, CreateView):
 
 
 class CompanyDetailView(BaseCompanyView, DetailView):
-    model = Company
     template_name = "view.html"
 
     def get_context_data(self, **kwargs):
@@ -403,9 +392,11 @@ class CompanyDetailView(BaseCompanyView, DetailView):
         return context
 
 
-class CompanyUpdateView(BaseCompanyView, UpdateView):
-    model = Company
-    form_model = CompanyForm
+class CompanyUpdateView(
+    BaseCompanyView,
+    RedirectToObjectViewMixin,
+    UpdateView,
+):
     template_name = "edit.html"
 
     def form_valid(self, form):
@@ -415,6 +406,7 @@ class CompanyUpdateView(BaseCompanyView, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["url_cancel"] = f"{self.model_name}_view"
         context["pk"] = self.kwargs["pk"]
         return context
 
@@ -422,58 +414,32 @@ class CompanyUpdateView(BaseCompanyView, UpdateView):
         queryset = super().get_queryset()
         return queryset.filter(pk=self.kwargs["pk"])
 
-    def get_success_url(self):
-        return reverse_lazy("company_view", args=[self.object.pk])
-
 
 class CompanyDeleteView(BaseCompanyView, DeleteView):
-    model = Company
-    form_model = CompanyForm
-    success_url = reverse_lazy("company_index")
     template_name = "delete.html"
+    success_url = reverse_lazy("company_index")
 
     def get_queryset(self):
         return Company.objects.all()
 
 
-class CompanyCopyView(BaseCompanyView, CreateView):
-    model = Company
-    form_model = CompanyForm
+class CompanyCopyView(
+    BaseCompanyView,
+    ModelCopyMixin,
+    RedirectToObjectViewMixin,
+    CreateView,
+):
     template_name = "edit.html"
-
-    def get_queryset(self):
-        return Company.objects.all()
-
-    def get_initial(self):
-        original_company = Company.objects.get(pk=self.kwargs["pk"])
-        return {
-            "name": original_company.name,
-        }
-
-    def form_valid(self, form):
-        new_company = form.save(commit=False)
-        new_company.pk = None
-        new_company.save()
-        return super().form_valid(form)
 
 
 class BaseContactView(BaseView, SuperuserRequiredMixin):
     """Base view for Contact model operations."""
 
     model = Contact
-    model_name = model._meta.model_name
-    model_name_plural = model._meta.verbose_name_plural
     form_model = ContactForm
     form_class = ContactForm
     template_name = "edit.html"
     order_by = ["archived", "name"]
-    url_cancel = f"{model_name.lower()}_cancel"
-    url_copy = f"{model_name.lower()}_copy"
-    url_create = f"{model_name.lower()}_create"
-    url_delete = f"{model_name.lower()}_delete"
-    url_edit = f"{model_name.lower()}_edit"
-    url_index = f"{model_name.lower()}_index"
-    url_view = f"{model_name.lower()}_view"
     exclude = ["first_name", "last_name", "url", "number"]
 
 
@@ -481,19 +447,12 @@ class ContactListView(BaseContactView, ListView):
     template_name = "index.html"
 
 
-class ContactCreateView(BaseContactView, CreateView):
-    def get_success_url(self):
-        return reverse_lazy("contact_view", args=[self.object.pk])
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        model_name = self.model_name
-        context["model_name"] = model_name
-        model_name_plural = self.model._meta.verbose_name_plural
-        context["model_name_plural"] = model_name_plural
-        context["url_index"] = "%s_index" % model_name
-        context["%s_nav" % model_name] = True
-        return context
+class ContactCreateView(
+    BaseContactView,
+    RedirectToObjectViewMixin,
+    CreateView,
+):
+    pass
 
 
 class ContactDetailView(BaseContactView, DetailView):
@@ -512,7 +471,11 @@ class ContactDetailView(BaseContactView, DetailView):
         return context
 
 
-class ContactUpdateView(BaseContactView, UpdateView):
+class ContactUpdateView(
+    BaseContactView,
+    RedirectToObjectViewMixin,
+    UpdateView,
+):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["url_cancel"] = f"{self.model_name}_view"
@@ -523,40 +486,22 @@ class ContactUpdateView(BaseContactView, UpdateView):
         queryset = super().get_queryset()
         return queryset.filter(pk=self.kwargs["pk"])
 
-    def get_success_url(self):
-        return reverse_lazy("contact_view", args=[self.object.pk])
-
 
 class ContactDeleteView(BaseContactView, DeleteView):
-    success_url = reverse_lazy("contact_index")
     template_name = "delete.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-
-    def get_queryset(self):
-        return Contact.objects.all()
-
-
-class ContactCopyView(BaseContactView, CreateView):
     success_url = reverse_lazy("contact_index")
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        model_name = self.model._meta.model_name
-        context["model_name"] = model_name
-        context["%s_nav" % model_name] = True
-        return context
-
     def get_queryset(self):
         return Contact.objects.all()
 
-    def form_valid(self, form):
-        new_contact = form.save(commit=False)
-        new_contact.pk = None
-        new_contact.save()
-        return super().form_valid(form)
+
+class ContactCopyView(
+    BaseContactView,
+    ModelCopyMixin,
+    RedirectToObjectViewMixin,
+    CreateView,
+):
+    pass
 
 
 def get_queryset_related(self):
