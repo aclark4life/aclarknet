@@ -1,3 +1,4 @@
+import React from 'react';
 import { createRoot } from 'react-dom/client';
 import 'bootstrap';
 import '@fortawesome/fontawesome-free/js/fontawesome';

@@ -1,4 +1,5 @@
 // UserMenu.js
+import React from 'react';
 import PropTypes from 'prop-types';
 
 const UserMenu = ({ isAuthenticated, isSuperuser }) => {
