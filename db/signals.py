@@ -16,7 +16,7 @@ def send_email_on_time_creation(sender, instance, created, **kwargs):
     if created:
         user = instance.user
         username = user.username if user else "Unknown User"
-        if user.profile:
+        if user and user.profile:
             if user.profile.mail:
                 subject = f"New Time object created by {username}"
                 time_object_url = "https://aclark.net" + reverse(
