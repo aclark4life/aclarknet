@@ -17,7 +17,6 @@ from itertools import chain
 # Third-party imports
 from docx import Document
 from html2docx import html2docx
-from rest_framework import viewsets
 from texttable import Texttable
 from xhtml2pdf import pisa
 
@@ -61,7 +60,6 @@ from .forms import (
     UserForm,
 )
 from .models import Client, Company, Contact, Invoice, Note, Project, Report, Task, Time
-from .serializers import ClientSerializer
 from .utils import get_archived_annotation, get_model_class, get_queryset
 
 
@@ -462,11 +460,6 @@ def archive(request):
 
 # Archived annotation for filtering archived users
 archived_annotation = get_archived_annotation()
-
-
-class ClientAPIViewSet(viewsets.ModelViewSet):
-    queryset = Client.objects.filter(publish=True).order_by("name")
-    serializer_class = ClientSerializer
 
 
 class BaseClientView(BaseView, SuperuserRequiredMixin):
