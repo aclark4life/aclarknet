@@ -2578,13 +2578,3 @@ class UserDeleteView(BaseUserMixin, BaseUserView, DeleteView):
 class UserCopyView(BaseUserMixin, BaseUserView, CreateView):
     success_url = reverse_lazy("user_index")
     template_name = "edit.html"
-
-
-class UserToContactView(BaseUserView, View):
-    def get(self, request, user_id):
-        user = get_object_or_404(User, id=user_id)
-        contact = Contact(
-            first_name=user.first_name, last_name=user.last_name, email=user.email
-        )
-        contact.save()
-        return HttpResponseRedirect(reverse("contact_view", args=[contact.id]))

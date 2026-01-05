@@ -73,7 +73,6 @@ from .views import (
     UserDeleteView,
     UserDetailView,
     UserListView,
-    UserToContactView,
     UserUpdateView,
 )
 
@@ -234,14 +233,7 @@ urlpatterns += [
     path("search/", SearchView.as_view(), name="search"),
 ]
 
-urlpatterns += [
-    path(
-        "convert/<path:user_id>/", UserToContactView.as_view(), name="user_to_contact"
-    ),
-]
-
 urlpatterns += [path("archive/", archive, name="archive")]
-# urlpatterns += [path("chess-board/", ChessBoardView.as_view(), name="chess-board")]
 urlpatterns += [path("html-mode/", html_mode, name="html-mode")]
 urlpatterns += [path("trigger_500/", trigger_500, name="trigger_500")]
 
