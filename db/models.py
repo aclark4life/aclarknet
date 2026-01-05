@@ -277,7 +277,6 @@ class Invoice(BaseModel):
 
 
 class Note(BaseModel):
-    html = models.BooleanField("HTML", default=False)
     text = models.TextField(blank=True, null=True)
     contacts = models.ManyToManyField("Contact", blank=True)
     user = models.ForeignKey(

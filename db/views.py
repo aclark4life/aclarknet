@@ -1559,24 +1559,6 @@ def update_related_entries(request):
                 summary_message += (
                     f"Successfully unarchived {model_name} entry: {entry_id}\n"
                 )
-            elif action == "html":
-                if model_name == "note":
-                    entry.html = True
-                    entry.save()
-                    summary_message += (
-                        f"Successfully HTMLed {model_name} entry: {entry_id}\n"
-                    )
-                else:
-                    messages.error(request, "Invalid action requested.")
-            elif action == "unhtml":
-                if model_name == "note":
-                    entry.html = False
-                    entry.save()
-                    summary_message += (
-                        f"Successfully Un-HTMLed {model_name} entry: {entry_id}\n"
-                    )
-                else:
-                    messages.error(request, "Invalid action requested.")
             elif action == "save":
                 try:
                     entry.save()
@@ -2186,17 +2168,6 @@ def update_selected_entries(request):
             messages.success(
                 request, f"Successfully unarchived {count} {model_name} entries."
             )
-
-        elif action in ["html", "unhtml"]:
-            if model_name != "note":
-                messages.error(request, "HTML action only applicable to Notes.")
-            else:
-                is_html = action == "html"
-                entries.update(html=is_html)
-                status_text = "HTMLed" if is_html else "Un-HTMLed"
-                messages.success(
-                    request, f"Successfully {status_text} {count} {model_name} entries."
-                )
 
         elif action == "save":
             # Iterate to trigger save() signals (bulk_update does not trigger signals)

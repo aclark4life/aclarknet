@@ -238,7 +238,7 @@ class InvoiceForm(forms.ModelForm):
 class NoteForm(forms.ModelForm):
     class Meta:
         model = Note
-        fields = ("html", "text", "title")
+        fields = ("text", "title")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -247,7 +247,6 @@ class NoteForm(forms.ModelForm):
         self.helper.form_class = "form-inline"
         self.helper.form_tag = False
         self.helper.layout = Div(
-            Div(Field("html", css_class=""), css_class="col-sm-3"),
             Div(
                 Field("title", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",
