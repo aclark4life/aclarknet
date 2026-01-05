@@ -15,8 +15,6 @@ import random
 from itertools import chain
 
 # Third-party imports
-from docx import Document
-from html2docx import html2docx
 from texttable import Texttable
 from xhtml2pdf import pisa
 
@@ -927,16 +925,6 @@ class BaseInvoiceView(BaseView, SuperuserRequiredMixin):
         "task",
         "issue_date",
     ]
-
-    @staticmethod
-    def generate_docx(html_content, title):
-        """Generate DOCX document from HTML content."""
-        docx_content = html2docx(html_content, title=title)
-        doc = Document(docx_content)
-        buffer = io.BytesIO()
-        doc.save(buffer)
-        buffer.seek(0)
-        return buffer
 
 
 class InvoiceListView(BaseInvoiceView, ListView):
