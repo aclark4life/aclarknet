@@ -40,16 +40,12 @@
         <ul class="nav nav-pills nav-stacked flex-column mt-5">
           <li class="nav-header">Dashboards</li>
           <li class="nav-item">
-            <a class="nav-link{% if contact_nav %} active{% endif %}"
-               href="{% url 'contact_index' %}">Contacts</a>
+            <a class="nav-link{% if client_nav %} active{% endif %}"
+               href="{% url 'client_index' %}">Clients</a>
           </li>
           <li class="nav-item">
             <a class="nav-link{% if note_nav %} active{% endif %}"
                href="{% url 'note_index' %}">Notes</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link{% if client_nav %} active{% endif %}"
-               href="{% url 'client_index' %}">Clients</a>
           </li>
           <li class="nav-item">
             <a class="nav-link{% if task_nav %} active{% endif %}"
@@ -60,12 +56,16 @@
                href="{% url 'user_index' %}">Users</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link{% if company_nav %} active{% endif %}"
-               href="{% url 'company_index' %}">Companies</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link{% if report_nav %} active{% endif %}"
                href="{% url 'report_index' %}">Reports</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link{% if contact_nav %} active{% endif %}"
+               href="{% url 'contact_index' %}">Contacts</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link{% if company_nav %} active{% endif %}"
+               href="{% url 'company_index' %}">Companies</a>
           </li>
         </ul>
       {% endif %}

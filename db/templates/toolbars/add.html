@@ -1,9 +1,9 @@
 {% if model_name == "company" %}
-  <a href="{% url 'client_create' %}?company_id={{ company.id }}" class="btn btn-outline-primary">Add Client</a>
+  <a href="{% url 'client_create' %}?company_id={{ company.id }}" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i>Add Client</a>
 {% elif model_name == "client" %}
-  <a href="{% url 'project_create' %}?client_id={{ client.id }}" class="btn btn-outline-primary">Add Project</a>
+  <a href="{% url 'project_create' %}?client_id={{ client.id }}" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i>Add Project</a>
 {% elif model_name == "project" %}
-  <a href="{% url 'invoice_create' %}?project_id={{ project.id }}" class="btn btn-outline-primary">Add Invoice</a>
+  <a href="{% url 'invoice_create' %}?project_id={{ project.id }}" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i>Add Invoice</a>
 {% elif model_name == "invoice" %}
-  <a href="{% url 'time_create' %}?invoice_id={{ invoice.id }}" class="btn btn-outline-primary">Add Time</a>
+  <a href="{% url 'time_create' %}?invoice_id={{ invoice.id }}" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i>Add Time</a>
 {% endif %}

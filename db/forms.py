@@ -13,13 +13,13 @@ class ClientForm(forms.ModelForm):
     class Meta:
         model = Client
         fields = (
-            "publish",
-            "link",
+            # "publish",
+            # "link",
             "name",
             "description",
             "address",
             "url",
-            "company",
+            # "company",
             # "tags",
         )
 
@@ -30,8 +30,8 @@ class ClientForm(forms.ModelForm):
         self.helper.form_class = "form-inline"
         self.helper.form_tag = False
         self.helper.layout = Div(
-            Div(Field("publish"), css_class="col-sm-3"),
-            Div(Field("link"), css_class="col-sm-3"),
+            # Div(Field("publish"), css_class="col-sm-3"),
+            # Div(Field("link"), css_class="col-sm-3"),
             Div(
                 Field("name", css_class="form-control bg-transparent border"),
                 css_class="col-sm-6",
@@ -45,7 +45,7 @@ class ClientForm(forms.ModelForm):
                 Field("address", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",
             ),
-            Div(Field("company", css_class="form-control"), css_class="col-sm-12"),
+            # Div(Field("company", css_class="form-control"), css_class="col-sm-12"),
             # Div(Field("tags", css_class="form-control"), css_class="col-sm-12"),
             css_class="row",
         )
@@ -95,7 +95,7 @@ class ContactForm(forms.ModelForm):
             "last_name",
             "name",
             "email",
-            "client",
+            # "client",
             "url",
             "number",
         )
@@ -131,7 +131,7 @@ class ContactForm(forms.ModelForm):
                 Field("url", css_class="form-control bg-transparent border"),
                 css_class="col-sm-6",
             ),
-            Div(Field("client", css_class="form-control"), css_class="col-sm-12"),
+            # Div(Field("client", css_class="form-control"), css_class="col-sm-12"),
             css_class="row",
         )
 
@@ -150,13 +150,13 @@ class InvoiceForm(forms.ModelForm):
         self.helper.form_class = "form-inline"
         self.helper.form_tag = False
         self.helper.layout = Div(
-            Div(Field("contacts", css_class="form-control"), css_class="col-sm-12"),
+            # Div(Field("contacts", css_class="form-control"), css_class="col-sm-12"),
             Div(
                 Field("subject", css_class="form-control bg-transparent border"),
                 css_class="col-sm-6",
             ),
             Div(Field("user", css_class="form-control"), css_class="col-sm-6"),
-            Div(Field("company", css_class="form-control"), css_class="col-sm-6"),
+            # Div(Field("company", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("start_date", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("end_date", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("issue_date", css_class="form-control"), css_class="col-sm-6"),
@@ -165,7 +165,7 @@ class InvoiceForm(forms.ModelForm):
             Div(Field("project", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("task", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("po_number", css_class="form-control"), css_class="col-sm-6"),
-            Div(Field("paid_amount", css_class="form-control"), css_class="col-sm-6"),
+            # Div(Field("paid_amount", css_class="form-control"), css_class="col-sm-6"),
             css_class="row mx-1",
         )
 
@@ -270,7 +270,7 @@ class ProjectForm(forms.ModelForm):
             "task",
             "start_date",
             "end_date",
-            "team",
+            # "team",
         )
         widgets = {
             "start_date": forms.DateInput(attrs={"type": "date"}),
@@ -299,13 +299,13 @@ class ProjectForm(forms.ModelForm):
                 Field("description", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",
             ),
-            Div(Field("team", css_class="form-control"), css_class="col-sm-12"),
-            Div(Field("client", css_class="form-control"), css_class="col-sm-12"),
+            # Div(Field("team", css_class="form-control"), css_class="col-sm-12"),
+            # Div(Field("client", css_class="form-control"), css_class="col-sm-12"),
             css_class="row",
         )
-        choices = self.fields["team"].choices
-        sorted_choices = sorted(choices, key=lambda choice: choice[1])
-        self.fields["team"].choices = sorted_choices
+        # choices = self.fields["team"].choices
+        # sorted_choices = sorted(choices, key=lambda choice: choice[1])
+        # self.fields["team"].choices = sorted_choices
 
 
 class ReportForm(forms.ModelForm):
