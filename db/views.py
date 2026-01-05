@@ -464,15 +464,6 @@ def archive(request):
 archived_annotation = get_archived_annotation()
 
 
-def redirect_admin_to_about_book(request):
-    return redirect("/about/#book")
-
-
-def blog(request):
-    """Redirect to external blog."""
-    return HttpResponseRedirect("https://blog.aclark.net")
-
-
 class ClientAPIViewSet(viewsets.ModelViewSet):
     queryset = Client.objects.filter(publish=True).order_by("name")
     serializer_class = ClientSerializer
