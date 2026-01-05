@@ -1,5 +1,6 @@
 // Via ChatGPT
 import { useState, useEffect, useCallback, useRef } from 'react';
+import React from 'react';
 
 const Clock = () => {
   const [date, setDate] = useState(new Date());
