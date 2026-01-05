@@ -34,20 +34,11 @@
             <a class="nav-link{% if time_nav %} active{% endif %}"
                href="{% url 'time_index' %}">Times</a>
           </li>
-                    {% comment %}
-                            <li class="nav-item">
-                                <a data-bs-toggle="modal" class="nav-link{% if lorem_nav %} active{% endif %}" href="#fakeTextModal">Lorem</a>
-                            </li>
-                    {% endcomment %}
         </ul>
       {% endif %}
       {% if request.user.is_superuser %}
         <ul class="nav nav-pills nav-stacked flex-column mt-5">
           <li class="nav-header">Dashboards</li>
-          <li class="nav-item">
-            <a class="nav-link{% if time_nav %} active{% endif %}"
-               href="{% url 'time_index' %}">Times</a>
-          </li>
           <li class="nav-item">
             <a class="nav-link{% if contact_nav %} active{% endif %}"
                href="{% url 'contact_index' %}">Contacts</a>
@@ -72,9 +63,13 @@
             <a class="nav-link{% if company_nav %} active{% endif %}"
                href="{% url 'company_index' %}">Companies</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link{% if report_nav %} active{% endif %}"
+               href="{% url 'report_index' %}">Reports</a>
+          </li>
         </ul>
       {% endif %}
       <hr class="visible-xs mt-3">
-  </div>
-</nav>
+    </div>
+  </nav>
 </div>

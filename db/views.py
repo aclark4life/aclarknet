@@ -661,7 +661,6 @@ class CompanyDetailView(BaseCompanyView, DetailView):
         self._queryset_related = queryset_related
         self.has_related = True
         context = super().get_context_data(**kwargs)
-        context["company"] = company
         return context
 
 
@@ -1074,8 +1073,6 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
         if contacts:
             for contact in contacts:
                 context["field_values"].append(("↳", contact))
-
-        context["preview_template"] = "dashboard/table/invoice.html"
 
         return context
 
