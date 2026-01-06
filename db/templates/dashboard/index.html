@@ -50,18 +50,16 @@
             {% include 'dashboard/invoice.html' %}
           {% endif %}
 
+          {% include 'dashboard/project.html' %}
+
           {# Time Tracking (All Users) #}
           {% include 'dashboard/time.html' %}
 
           {# Admin Data Grids #}
           {% if request.user.is_superuser %}
             <div class="row">
-              {% include 'dashboard/task.html' %}
-              {% include 'dashboard/project.html' %}
-            </div>
-            <div class="row">
               {% include 'dashboard/client.html' %}
-              {% include 'dashboard/company.html' %}
+              {% include 'dashboard/task.html' %}
             </div>
           {% endif %}
         {% endblock %}
