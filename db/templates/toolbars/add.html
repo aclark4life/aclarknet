@@ -6,4 +6,5 @@
   <a href="{% url 'invoice_create' %}?project_id={{ project.id }}" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i>Add Invoice</a>
 {% elif model_name == "invoice" %}
   <a href="{% url 'time_create' %}?invoice_id={{ invoice.id }}" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i>Add Time</a>
+  <a href="{% url 'invoice_export_pdf' object.id %}" class="btn btn-outline-primary"><i class="fa-solid fa-download"></i>Export PDF</a>
 {% endif %}

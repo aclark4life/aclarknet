@@ -206,7 +206,7 @@ urlpatterns += [
     ),
     path("invoice/<path:pk>/copy", InvoiceCopyView.as_view(), name="invoice_copy"),
     path(
-        "invoice/export-pdf/<path:object_id>/",
+        "invoice/export-pdf/<path:object_id>",
         InvoiceExportPDFView.as_view(),
         name="invoice_export_pdf",
     ),

@@ -1097,7 +1097,7 @@ class InvoiceExportPDFView(BaseInvoiceView, View):
     def get(self, request, *args, **kwargs):
         object_id = self.kwargs["object_id"]
         obj = get_object_or_404(self.model, id=object_id)
-        self.template_name = "dashboard/table/invoice.html"
+        self.template_name = "table/invoice.html"
         context = {}
         context["pdf"] = True
         context["object"] = obj
@@ -1122,7 +1122,7 @@ class InvoiceEmailPDFView(BaseInvoiceView, View):
     def get(self, request, *args, **kwargs):
         object_id = self.kwargs["object_id"]
         obj = get_object_or_404(self.model, id=object_id)
-        self.template_name = "dashboard/table/invoice.html"
+        self.template_name = "table/invoice.html"
         context = {}
         context["pdf"] = True
         context["object"] = obj
