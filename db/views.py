@@ -2311,31 +2311,31 @@ class BaseTimeView(BaseView, AuthenticatedRequiredMixin):
             form.fields["project"].queryset = projects
             form.fields["project"].empty_label = None
 
-        if not user.is_superuser:
-            # Standard User Logic
-            invoices = Invoice.objects.filter(project__in=projects, archived=False)
-            form.fields["invoice"].queryset = (
-                invoices if invoices.exists() else Invoice.objects.none()
-            )
-            if invoices.exists():
-                form.fields["invoice"].empty_label = None
+        # if not user.is_superuser:
+        # Standard User Logic
+        invoices = Invoice.objects.filter(project__in=projects, archived=False)
+        form.fields["invoice"].queryset = (
+            invoices if invoices.exists() else Invoice.objects.none()
+        )
+        if invoices.exists():
+            form.fields["invoice"].empty_label = None
 
-            # Constrain user field to just themselves
-            form.fields["user"].queryset = User.objects.filter(pk=user.pk)
-            form.fields["user"].empty_label = None
-        else:
-            # Superuser Logic (Simplified)
-            # Note: 'project.task' check in original might be better handled via distinct()
-            # on the queryset rather than checking the first object.
-            form.fields["task"].queryset = Task.objects.filter(
-                project__in=projects
-            ).distinct()
-            form.fields["client"].queryset = Client.objects.filter(
-                project__in=projects
-            ).distinct()
+        # Constrain user field to just themselves
+        form.fields["user"].queryset = User.objects.filter(pk=user.pk)
+        form.fields["user"].empty_label = None
+        # else:
+        #     # Superuser Logic (Simplified)
+        #     # Note: 'project.task' check in original might be better handled via distinct()
+        #     # on the queryset rather than checking the first object.
+        #     form.fields["task"].queryset = Task.objects.filter(
+        #         project__in=projects
+        #     ).distinct()
+        #     form.fields["client"].queryset = Client.objects.filter(
+        #         project__in=projects
+        #     ).distinct()
 
-            for field in ["task", "client"]:
-                form.fields[field].empty_label = None
+        #     for field in ["task", "client"]:
+        #         form.fields[field].empty_label = None
 
         return form
 

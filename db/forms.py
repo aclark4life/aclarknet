@@ -432,17 +432,17 @@ class TimeForm(forms.ModelForm):
     class Meta:
         model = Time
         fields = [
-            "user",
+            # "user",
             "date",
             "hours",
             "description",
-            "client",
-            "project",
-            "task",
-            "invoice",
-            "amount",
-            "net",
-            "cost",
+            # "client",
+            # "project",
+            # "task",
+            # "invoice",
+            # "amount",
+            # "net",
+            # "cost",
         ]
 
     def __init__(self, *args, **kwargs):
@@ -454,9 +454,9 @@ class TimeForm(forms.ModelForm):
         self.helper.layout = Div(
             Div(Field("date", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("hours", css_class="form-control"), css_class="col-sm-6"),
-            Div(Field("user", css_class="form-control"), css_class="col-sm-4"),
-            Div(Field("invoice", css_class="form-control"), css_class="col-sm-4"),
-            Div(Field("project", css_class="form-control"), css_class="col-sm-4"),
+            # Div(Field("user", css_class="form-control"), css_class="col-sm-4"),
+            # Div(Field("invoice", css_class="form-control"), css_class="col-sm-4"),
+            # Div(Field("project", css_class="form-control"), css_class="col-sm-4"),
             Div(
                 Field("description", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",
@@ -482,30 +482,30 @@ class AdminTimeForm(TimeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Retrieve the existing layout object
-        layout = self.helper.layout
+        # layout = self.helper.layout
 
         # Make modifications to the layout object
-        layout.append(
-            Div(Field("task", css_class="form-control"), css_class="col-sm-4")
-        )
-        layout.append(
-            Div(Field("project", css_class="form-control"), css_class="col-sm-4")
-        )
-        layout.append(
-            Div(Field("client", css_class="form-control"), css_class="col-sm-4")
-        )
-        layout.append(
-            Div(Field("amount", css_class="form-control"), css_class="col-sm-4")
-        )
-        layout.append(
-            Div(Field("cost", css_class="form-control"), css_class="col-sm-4")
-        )
-        layout.append(Div(Field("net", css_class="form-control"), css_class="col-sm-4"))
+        # layout.append(
+        #     Div(Field("task", css_class="form-control"), css_class="col-sm-4")
+        # )
+        # layout.append(
+        #     Div(Field("project", css_class="form-control"), css_class="col-sm-4")
+        # )
+        # layout.append(
+        #     Div(Field("client", css_class="form-control"), css_class="col-sm-4")
+        # )
+        # layout.append(
+        #     Div(Field("amount", css_class="form-control"), css_class="col-sm-4")
+        # )
+        # layout.append(
+        #     Div(Field("cost", css_class="form-control"), css_class="col-sm-4")
+        # )
+        # layout.append(Div(Field("net", css_class="form-control"), css_class="col-sm-4"))
 
         # Sort choices for user field
-        choices = self.fields["user"].choices
-        sorted_choices = sorted(choices, key=lambda choice: choice[1])
-        self.fields["user"].choices = sorted_choices
+        # choices = self.fields["user"].choices
+        # sorted_choices = sorted(choices, key=lambda choice: choice[1])
+        # self.fields["user"].choices = sorted_choices
 
 
 class UserForm(forms.ModelForm):
