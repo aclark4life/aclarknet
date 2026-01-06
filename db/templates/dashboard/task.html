@@ -21,7 +21,7 @@
               <a class="list-group-item list-group-item-action justify-content-between d-flex"
                  href="{% url 'task_view' item.id %}">
                 <span>{{ item }}</span>
-                <span class="text-muted">{{ item.rate|currencyfmt:"USD" }}</span>
+                <span class="text-muted">{{ item.rate|default:0|currencyfmt:"USD" }}</span>
               </a>
             {% endfor %}
           </div>
