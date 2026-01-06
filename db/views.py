@@ -2295,51 +2295,47 @@ class BaseTimeView(BaseView, AuthenticatedRequiredMixin):
     _exclude = ["client", "project", "task", "invoice"]
 
     def get_form(self, form_class=None):
-        if self.request.user.is_superuser:
+        user = self.request.user
+
+        # 1. Determine form class early
+        if user.is_superuser:
             form_class = AdminTimeForm
 
         form = super().get_form(form_class)
 
-        projects = Project.objects.filter(
-            team__in=[self.request.user],
-            archived=False,
-        )
+        # 2. Prefetch common queryset
+        projects = Project.objects.filter(team=user, archived=False)
 
-        if not self.request.user.is_superuser:
-            invoices = Invoice.objects.filter(
-                project__in=projects,
-                archived=False,
+        # 3. Apply shared logic: if projects exist, remove empty labels
+        if projects.exists():
+            form.fields["project"].queryset = projects
+            form.fields["project"].empty_label = None
+
+        if not user.is_superuser:
+            # Standard User Logic
+            invoices = Invoice.objects.filter(project__in=projects, archived=False)
+            form.fields["invoice"].queryset = (
+                invoices if invoices.exists() else Invoice.objects.none()
             )
-
-            if projects:
-                form.fields["project"].empty_label = None
-                form.fields["project"].queryset = projects
-
-            if invoices:
+            if invoices.exists():
                 form.fields["invoice"].empty_label = None
-                form.fields["invoice"].queryset = invoices
-            else:
-                form.fields["invoice"].queryset = Invoice.objects.none()
 
+            # Constrain user field to just themselves
+            form.fields["user"].queryset = User.objects.filter(pk=user.pk)
             form.fields["user"].empty_label = None
-            form.fields["user"].queryset = User.objects.filter(pk=self.request.user.id)
-
         else:
-            project = projects.first()
-            if project:
-                form.fields["project"].empty_label = None
-                form.fields["project"].queryset = projects
+            # Superuser Logic (Simplified)
+            # Note: 'project.task' check in original might be better handled via distinct()
+            # on the queryset rather than checking the first object.
+            form.fields["task"].queryset = Task.objects.filter(
+                project__in=projects
+            ).distinct()
+            form.fields["client"].queryset = Client.objects.filter(
+                project__in=projects
+            ).distinct()
 
-                if project.task:
-                    form.fields["task"].empty_label = None
-                    form.fields["task"].queryset = Task.objects.filter(
-                        project__in=projects
-                    )
-
-                form.fields["client"].empty_label = None
-                form.fields["client"].queryset = Client.objects.filter(
-                    project__in=projects
-                )
+            for field in ["task", "client"]:
+                form.fields[field].empty_label = None
 
         return form
 
