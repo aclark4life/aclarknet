@@ -2288,27 +2288,27 @@ class BaseTimeView(BaseView, AuthenticatedRequiredMixin):
 
     _exclude = ["client", "project", "task", "invoice"]
 
-    def get_form(self, form_class=None):
-        user = self.request.user
+    # def get_form(self, form_class=None):
+    #     user = self.request.user
 
-        form = super().get_form(form_class)
+    #     form = super().get_form(form_class)
 
-        projects = Project.objects.filter(team=user, archived=False)
+    #     projects = Project.objects.filter(team=user, archived=False)
 
-        if projects.exists():
-            form.fields["project"].queryset = projects
-            form.fields["project"].empty_label = None
+    #     if projects.exists():
+    #         form.fields["project"].queryset = projects
+    #         form.fields["project"].empty_label = None
 
-        invoices = Invoice.objects.filter(project__in=projects, archived=False)
-        form.fields["invoice"].queryset = (
-            invoices if invoices.exists() else Invoice.objects.none()
-        )
-        if invoices.exists():
-            form.fields["invoice"].empty_label = None
+    #     invoices = Invoice.objects.filter(project__in=projects, archived=False)
+    #     form.fields["invoice"].queryset = (
+    #         invoices if invoices.exists() else Invoice.objects.none()
+    #     )
+    #     if invoices.exists():
+    #         form.fields["invoice"].empty_label = None
 
-        form.fields["user"].queryset = User.objects.filter(pk=user.pk)
-        form.fields["user"].empty_label = None
-        return form
+    #     form.fields["user"].queryset = User.objects.filter(pk=user.pk)
+    #     form.fields["user"].empty_label = None
+    #     return form
 
 
 class TimeCreateView(
