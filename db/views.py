@@ -2316,7 +2316,14 @@ class TimeCreateView(
     RedirectToObjectViewMixin,
     CreateView,
 ):
-    pass
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        invoice_id = self.request.GET.get("invoice_id")
+        if invoice_id:
+            context["form"].initial = {
+                "invoice": invoice_id,
+            }
+        return context
 
 
 class TimeListView(

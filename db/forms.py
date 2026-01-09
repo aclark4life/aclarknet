@@ -391,7 +391,7 @@ class TimeForm(forms.ModelForm):
             # "client",
             # "project",
             # "task",
-            # "invoice",
+            "invoice",
             # "amount",
             # "net",
             # "cost",
@@ -407,7 +407,7 @@ class TimeForm(forms.ModelForm):
             Div(Field("date", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("hours", css_class="form-control"), css_class="col-sm-6"),
             # Div(Field("user", css_class="form-control"), css_class="col-sm-4"),
-            # Div(Field("invoice", css_class="form-control"), css_class="col-sm-4"),
+            Div(Field("invoice", css_class="form-control"), css_class="col-sm-4"),
             # Div(Field("project", css_class="form-control"), css_class="col-sm-4"),
             Div(
                 Field("description", css_class="form-control bg-transparent border"),
