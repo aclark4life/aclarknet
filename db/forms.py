@@ -493,7 +493,7 @@ class UserForm(forms.ModelForm):
 
     def save(self, commit=True):
         user = super().save(commit=commit)
-        
+
         # Get or create profile for the user if Profile model is available
         profile = getattr(user, "profile", None)
         if not profile and HAS_PROFILE:
@@ -502,15 +502,15 @@ class UserForm(forms.ModelForm):
             else:
                 # If not committing, we can't create the profile yet
                 profile = None
-        
+
         if profile:
             profile.rate = self.cleaned_data.get("rate")
             profile.address = self.cleaned_data.get("address")
             profile.mail = self.cleaned_data.get("mail")
             if commit:
                 profile.save()
-        
+
         if commit:
             user.save()
-            
+
         return user
