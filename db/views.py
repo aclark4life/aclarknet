@@ -11,7 +11,6 @@ import ast
 import decimal
 import io
 import locale
-import random
 from itertools import chain
 
 # Third-party imports
@@ -89,7 +88,8 @@ class BaseView:
 
     @property
     def exclude(self):
-        return self._if_model(["contacts"])
+        # Return empty list by default, let subclasses override
+        return self._if_model([])
 
     @property
     def search(self):
@@ -487,15 +487,13 @@ class ClientCreateView(BaseClientView, CreateView):
     def get_success_url(self):
         return reverse_lazy("client_view", args=[self.object.pk])
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_initial(self):
+        initial = super().get_initial()
         companies = Company.objects.all()
         if companies:
             company = companies.first()
-            context["form"].initial = {
-                "company": company,
-            }
-        return context
+            initial["company"] = company
+        return initial
 
     def form_valid(self, form):
         company_id = self.request.GET.get("company_id")
@@ -600,16 +598,6 @@ class CompanyCreateView(
     CreateView,
 ):
     template_name = "edit.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        clients = list(Client.objects.all())
-        random_clients = random.sample(clients, k=len(clients))  # Select random clients
-        initial_values = [client.pk for client in random_clients]
-        context["form"].initial = {
-            "client_set": initial_values,
-        }
-        return context
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
@@ -1251,9 +1239,8 @@ class NoteUpdateView(BaseNoteView, UpdateView):
     success_url = reverse_lazy("note_view")
 
     def form_valid(self, form):
-        html = form.initial["html"]
-        if html:
-            form.instance.html = html
+        # html field is not in the form, so we preserve the existing value
+        # The form only has 'text' and 'title' fields (see NoteForm)
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -2296,27 +2283,6 @@ class BaseTimeView(BaseView, AuthenticatedRequiredMixin):
 
     _exclude = ["client", "project", "task", "invoice"]
 
-    # def get_form(self, form_class=None):
-    #     user = self.request.user
-
-    #     form = super().get_form(form_class)
-
-    #     projects = Project.objects.filter(team=user, archived=False)
-
-    #     if projects.exists():
-    #         form.fields["project"].queryset = projects
-    #         form.fields["project"].empty_label = None
-
-    #     invoices = Invoice.objects.filter(project__in=projects, archived=False)
-    #     form.fields["invoice"].queryset = (
-    #         invoices if invoices.exists() else Invoice.objects.none()
-    #     )
-    #     if invoices.exists():
-    #         form.fields["invoice"].empty_label = None
-
-    #     form.fields["user"].queryset = User.objects.filter(pk=user.pk)
-    #     form.fields["user"].empty_label = None
-    #     return form
 
 
 class TimeCreateView(
@@ -2356,7 +2322,7 @@ class TimeDetailView(BaseTimeView, DetailView):
             self.has_related = True
         context = super().get_context_data(**kwargs)
         context["is_detail_view"] = True
-        return super().get_context_data(**kwargs)
+        return context
 
 
 class TimeUpdateView(
@@ -2365,9 +2331,8 @@ class TimeUpdateView(
     UpdateView,
 ):
     def form_valid(self, form):
-        user_id = form.initial.get("user")
-        if user_id:
-            form.instance.user = User.objects.get(pk=user_id)
+        # User field should already be on the instance or in cleaned_data
+        # No need to manually set it from initial values
         return super().form_valid(form)
 
 
@@ -2481,9 +2446,7 @@ class UserUpdateView(BaseUserMixin, BaseUserView, UpdateView):
         return context
 
     def form_valid(self, form):
-        is_active = form.initial["is_active"]
-        if is_active:
-            form.instance.is_active = is_active
+        # is_active is already handled by the form, no need to manually set it
         return super().form_valid(form)
 
     def get_success_url(self):
