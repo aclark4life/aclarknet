@@ -5,6 +5,13 @@ from django import forms
 from django.utils import timezone
 from .models import Client, Company, Contact, Invoice, Note, Project, Report, Task, Time
 
+# Try to import Profile model - it may not exist in some configurations
+try:
+    from .models import Profile
+    HAS_PROFILE = True
+except ImportError:
+    HAS_PROFILE = False
+
 
 User = get_user_model()
 
@@ -487,18 +494,13 @@ class UserForm(forms.ModelForm):
     def save(self, commit=True):
         user = super().save(commit=commit)
         
-        # Get or create profile for the user
+        # Get or create profile for the user if Profile model is available
         profile = getattr(user, "profile", None)
-        if not profile:
-            # Try to get the Profile model and create if it doesn't exist
-            try:
-                from db.models import Profile
-                if commit:
-                    profile, created = Profile.objects.get_or_create(user=user)
-                else:
-                    # If not committing, we can't create the profile yet
-                    profile = None
-            except (ImportError, AttributeError):
+        if not profile and HAS_PROFILE:
+            if commit:
+                profile, created = Profile.objects.get_or_create(user=user)
+            else:
+                # If not committing, we can't create the profile yet
                 profile = None
         
         if profile:
