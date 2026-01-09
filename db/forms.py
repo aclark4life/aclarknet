@@ -17,7 +17,7 @@ class ClientForm(forms.ModelForm):
             # "link",
             "name",
             "description",
-            "address",
+            # "address",
             "url",
             # "company",
             # "tags",
@@ -41,10 +41,10 @@ class ClientForm(forms.ModelForm):
                 Field("description", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",
             ),
-            Div(
-                Field("address", css_class="form-control bg-transparent border"),
-                css_class="col-sm-12",
-            ),
+            # Div(
+            #     Field("address", css_class="form-control bg-transparent border"),
+            #     css_class="col-sm-12",
+            # ),
             # Div(Field("company", css_class="form-control"), css_class="col-sm-12"),
             # Div(Field("tags", css_class="form-control"), css_class="col-sm-12"),
             css_class="row",
@@ -61,7 +61,7 @@ class CompanyForm(forms.ModelForm):
 
     class Meta:
         model = Company
-        fields = ("name", "url", "description", "client_set")
+        fields = ("name", "url", "description")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -79,7 +79,7 @@ class CompanyForm(forms.ModelForm):
                 Field("description", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",
             ),
-            Div(Field("client_set", css_class="vh-100"), css_class="col-sm-12"),
+            # Div(Field("client_set", css_class="vh-100"), css_class="col-sm-12"),
             css_class="row",
         )
 
