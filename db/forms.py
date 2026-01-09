@@ -5,6 +5,13 @@ from django import forms
 from django.utils import timezone
 from .models import Client, Company, Contact, Invoice, Note, Project, Report, Task, Time
 
+# Try to import Profile model - it may not exist in some configurations
+try:
+    from .models import Profile
+    HAS_PROFILE = True
+except ImportError:
+    HAS_PROFILE = False
+
 
 User = get_user_model()
 
@@ -169,17 +176,22 @@ class InvoiceForm(forms.ModelForm):
             css_class="row mx-1",
         )
 
-        # Get the choices for the field
+        # Sort client choices by name
         choices = self.fields["client"].choices
-        sorted_choices = sorted(choices, key=lambda choice: choice[1])
-        self.fields["client"].choices = sorted_choices
+        # Skip the empty choice (first item) and sort the rest
+        if len(choices) > 1:
+            empty_choice = [choices[0]]
+            sorted_choices = sorted(choices[1:], key=lambda choice: choice[1])
+            self.fields["client"].choices = empty_choice + sorted_choices
 
-        # Get the choices for the field
+        # Sort contacts choices by name
         choices = self.fields["contacts"].choices
         sorted_choices = sorted(choices, key=lambda choice: choice[1])
         self.fields["contacts"].choices = sorted_choices
 
-        self.fields["company"].empty_label = None
+        # Only set empty_label to None if company field is required
+        if self.fields["company"].required:
+            self.fields["company"].empty_label = None
 
     class Meta:
         model = Invoice
@@ -481,13 +493,24 @@ class UserForm(forms.ModelForm):
 
     def save(self, commit=True):
         user = super().save(commit=commit)
+
+        # Get or create profile for the user if Profile model is available
         profile = getattr(user, "profile", None)
+        if not profile and HAS_PROFILE:
+            if commit:
+                profile, created = Profile.objects.get_or_create(user=user)
+            else:
+                # If not committing, we can't create the profile yet
+                profile = None
+
         if profile:
-            profile.rate = self.cleaned_data["rate"]
-            profile.address = self.cleaned_data["address"]
-            profile.mail = self.cleaned_data["mail"]
+            profile.rate = self.cleaned_data.get("rate")
+            profile.address = self.cleaned_data.get("address")
+            profile.mail = self.cleaned_data.get("mail")
+            if commit:
+                profile.save()
+
         if commit:
             user.save()
-        if profile and commit:
-            profile.save()
+
         return user
