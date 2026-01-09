@@ -19,15 +19,10 @@
           </div>
           <div class="btn-toolbar dashhead-toolbar">
             {% block dashhead_toolbar %}
-              {% include 'toolbars/dashhead.html' %}
+              {% include 'dashhead.html' %}
             {% endblock %}
           </div>
         </div>
-
-        {# Admin Top Bar #}
-        {% if request.user.is_superuser %}
-          {% include 'dashboard/topbar.html' %}
-        {% endif %}
 
         {# Main Dashboard Content #}
         {% block dashboard %}

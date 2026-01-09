@@ -1,0 +1,27 @@
+{% if not dashboard or not view %}
+  <div class="btn-toolbar">
+    <div class="btn-group">
+      {% if not is_detail_view %}
+        <a class="btn-toolbar-item input-with-icon btn btn-outline-primary"
+           href="{% url urls.url_create %}"><i class="fa-solid fa-plus"></i><span class="ms-1">Add {{ model_name }}</span>
+        </a>
+      {% else %}
+
+
+
+        {% if model_name == "company" %}
+          <a title="Add client" data-toggle="tooltip" href="{% url 'client_create' %}?company_id={{ company.id }}" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i><span class="d-none d-lg-inline">Add Client</span></a>
+        {% elif model_name == "client" %}
+          <a title="Add project" data-toggle="tooltip" href="{% url 'project_create' %}?client_id={{ client.id }}" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i><span class="d-none d-lg-inline">Add Project</span></a>
+        {% elif model_name == "project" %}
+          <a title="Add invoice" data-toggle="tooltip" href="{% url 'invoice_create' %}?project_id={{ project.id }}" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i><span class="d-none d-lg-inline">Add Invoice</span></a>
+        {% elif model_name == "invoice" %}
+          <a title="Add time" data-toggle="tooltip" href="{% url 'time_create' %}?invoice_id={{ invoice.id }}" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i><span class="d-none d-lg-inline">Add Time</span></a>
+        {% endif %}
+
+      {% endif %}
+
+
+    </div>
+  </div>
+{% endif %}

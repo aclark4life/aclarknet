@@ -1,0 +1,3 @@
+{% if model_name == "invoice" %}
+  <a title="Export PDF" data-toggle="tooltip" href="{% url 'invoice_export_pdf' object.id %}" class="btn btn-outline-primary"><i class="fa-solid fa-download"></i><span class="d-none d-lg-inline">Export PDF</span></a>
+{% endif %}

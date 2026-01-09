@@ -532,6 +532,7 @@ class ClientDetailView(BaseClientView, DetailView):
         self._queryset_related = queryset_related
         self.has_related = True
         context = super().get_context_data(**kwargs)
+        context["is_detail_view"] = True
         return context
 
 
@@ -641,6 +642,7 @@ class CompanyDetailView(BaseCompanyView, DetailView):
         self._queryset_related = queryset_related
         self.has_related = True
         context = super().get_context_data(**kwargs)
+        context["is_detail_view"] = True
         return context
 
 
@@ -725,6 +727,7 @@ class ContactDetailView(BaseContactView, DetailView):
         self._queryset_related = queryset_related
         self.has_related = True
         context = super().get_context_data(**kwargs)
+        context["is_detail_view"] = True
         return context
 
 
@@ -1019,6 +1022,7 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
         self.has_related = True
         self.has_preview = True
         context = super().get_context_data(**kwargs)
+        context["is_detail_view"] = True
 
         context["times"] = times
         context["notes"] = notes
@@ -1237,6 +1241,7 @@ class NoteDetailView(BaseNoteView, DetailView):
         context["url_export_pdf"] = self.url_export_pdf
         context["url_email_pdf"] = self.url_email_pdf
         context["url_email_text"] = self.url_email_text
+        context["is_detail_view"] = True
         return context
 
 
@@ -1429,6 +1434,7 @@ class ProjectDetailView(BaseProjectView, DetailView):
         self._queryset_related = queryset_related
         self.has_related = True
         context = super().get_context_data(**kwargs)
+        context["is_detail_view"] = True
         return context
 
 
@@ -1663,6 +1669,7 @@ class ReportDetailView(BaseReportView, DetailView):
             for contact in contacts:
                 context["field_values"].append(("↳", contact))
 
+        context["is_detail_view"] = True
         return context
 
     template_name = "view.html"
@@ -2229,6 +2236,7 @@ class TaskDetailView(BaseTaskView, DetailView):
         self._queryset_related = queryset_related
         self.has_related = True
         context = super().get_context_data(**kwargs)
+        context["is_detail_view"] = True
         return context
 
 
@@ -2346,6 +2354,8 @@ class TimeDetailView(BaseTimeView, DetailView):
         if time.invoice:
             self._queryset_related = [time.invoice]
             self.has_related = True
+        context = super().get_context_data(**kwargs)
+        context["is_detail_view"] = True
         return super().get_context_data(**kwargs)
 
 
@@ -2443,6 +2453,7 @@ class UserDetailView(BaseUserMixin, BaseUserView, DetailView):
 
         context["user"] = self.request.user
         context["user_view"] = True
+        context["is_detail_view"] = True
 
         return context
 
