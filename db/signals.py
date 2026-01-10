@@ -78,7 +78,7 @@ def update_invoice(sender, instance, **kwargs):
                 time.net = time.amount - time.cost
             except (AttributeError, TypeError):
                 time.amount = 0
-                time.net = 0 - time.cost
+                time.net = -time.cost
 
         time.save()
 
