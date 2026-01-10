@@ -38,8 +38,6 @@ class ClientForm(forms.ModelForm):
         self.helper.form_class = "form-inline"
         self.helper.form_tag = False
         self.helper.layout = Div(
-            # Div(Field("publish"), css_class="col-sm-3"),
-            # Div(Field("link"), css_class="col-sm-3"),
             Div(
                 Field("name", css_class="form-control bg-transparent border"),
                 css_class="col-sm-6",
@@ -49,12 +47,6 @@ class ClientForm(forms.ModelForm):
                 Field("description", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",
             ),
-            # Div(
-            #     Field("address", css_class="form-control bg-transparent border"),
-            #     css_class="col-sm-12",
-            # ),
-            # Div(Field("company", css_class="form-control"), css_class="col-sm-12"),
-            # Div(Field("tags", css_class="form-control"), css_class="col-sm-12"),
             css_class="row",
         )
 
@@ -87,7 +79,6 @@ class CompanyForm(forms.ModelForm):
                 Field("description", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",
             ),
-            # Div(Field("client_set", css_class="vh-100"), css_class="col-sm-12"),
             css_class="row",
         )
 
@@ -158,13 +149,11 @@ class InvoiceForm(forms.ModelForm):
         self.helper.form_class = "form-inline"
         self.helper.form_tag = False
         self.helper.layout = Div(
-            # Div(Field("contacts", css_class="form-control"), css_class="col-sm-12"),
             Div(
                 Field("subject", css_class="form-control bg-transparent border"),
                 css_class="col-sm-6",
             ),
             Div(Field("user", css_class="form-control"), css_class="col-sm-6"),
-            # Div(Field("company", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("start_date", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("end_date", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("issue_date", css_class="form-control"), css_class="col-sm-6"),
@@ -173,7 +162,6 @@ class InvoiceForm(forms.ModelForm):
             Div(Field("project", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("task", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("po_number", css_class="form-control"), css_class="col-sm-6"),
-            # Div(Field("paid_amount", css_class="form-control"), css_class="col-sm-6"),
             css_class="row mx-1",
         )
 
@@ -266,7 +254,6 @@ class NoteForm(forms.ModelForm):
                 Field("text", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",
             ),
-            # Div(Field("notes", css_class="form-control"), css_class="col-sm-12"),
             css_class="row",
         )
 
@@ -281,7 +268,6 @@ class ProjectForm(forms.ModelForm):
             "task",
             "start_date",
             "end_date",
-            # "team",
         )
         widgets = {
             "start_date": forms.DateInput(attrs={"type": "date"}),
@@ -310,13 +296,8 @@ class ProjectForm(forms.ModelForm):
                 Field("description", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",
             ),
-            # Div(Field("team", css_class="form-control"), css_class="col-sm-12"),
-            # Div(Field("client", css_class="form-control"), css_class="col-sm-12"),
             css_class="row",
         )
-        # choices = self.fields["team"].choices
-        # sorted_choices = sorted(choices, key=lambda choice: choice[1])
-        # self.fields["team"].choices = sorted_choices
 
 
 class ReportForm(forms.ModelForm):
@@ -336,7 +317,6 @@ class ReportForm(forms.ModelForm):
             "contacts",
             "user",
             "company",
-            # "team",
         )
 
     def __init__(self, *args, **kwargs):
@@ -417,9 +397,7 @@ class TimeForm(forms.ModelForm):
         self.helper.layout = Div(
             Div(Field("date", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("hours", css_class="form-control"), css_class="col-sm-6"),
-            # Div(Field("user", css_class="form-control"), css_class="col-sm-4"),
             Div(Field("invoice", css_class="form-control"), css_class="col-sm-4"),
-            # Div(Field("project", css_class="form-control"), css_class="col-sm-4"),
             Div(
                 Field("description", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",
