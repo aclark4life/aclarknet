@@ -90,7 +90,7 @@ class Command(BaseCommand):
                 description=fake.text(),
                 url=fake.url(),
                 email=fake.email(),
-                company=random.choice(companies) if companies else None,
+                company=random.choice(companies),
             )
             clients.append(client)
         self.stdout.write(
@@ -117,6 +117,7 @@ class Command(BaseCommand):
                 code=fake.random_int(min=1000, max=9999),
                 description=fake.text(),
                 po_number=fake.bothify(text="PO-#######"),
+                client=random.choice(clients),
             )
             projects.append(project)
         self.stdout.write(
@@ -133,6 +134,7 @@ class Command(BaseCommand):
                 amount=0,
                 paid_amount=0,
                 currency="USD",
+                project=random.choice(projects),
             )
             invoices.append(invoice)
         self.stdout.write(
@@ -153,8 +155,7 @@ class Command(BaseCommand):
             Time.objects.create(
                 date=fake.date_this_decade(),
                 hours=hours,
-                # client=random.choice(clients) if clients else None,
-                project=random.choice(projects) if projects else None,
+                project=random.choice(projects),
                 task=task,
                 user=random.choice(users),
                 invoice=random.choice(invoices) if invoices else None,
