@@ -1,0 +1,245 @@
+"""Views package for the db app.
+
+This package organizes views into logical modules for better maintainability.
+"""
+
+# Base classes and error handlers
+from .base import (
+    AuthenticatedRequiredMixin,
+    BaseView,
+    FilterByUserMixin,
+    ModelCopyMixin,
+    RedirectToObjectViewMixin,
+    SuperuserRequiredMixin,
+    custom_403,
+    custom_404,
+    custom_500,
+    trigger_500,
+)
+
+# Client views
+from .client import (
+    ClientCopyView,
+    ClientCreateView,
+    ClientDeleteView,
+    ClientDetailView,
+    ClientListView,
+    ClientUpdateView,
+)
+
+# Company views
+from .company import (
+    CompanyCopyView,
+    CompanyCreateView,
+    CompanyDeleteView,
+    CompanyDetailView,
+    CompanyListView,
+    CompanyUpdateView,
+)
+
+# Contact views
+from .contact import (
+    ContactCopyView,
+    ContactCreateView,
+    ContactDeleteView,
+    ContactDetailView,
+    ContactListView,
+    ContactUpdateView,
+)
+
+# Dashboard and utility views
+from .dashboard import (
+    DashboardView,
+    FakeTextView,
+    display_mode,
+    html_mode,
+    lounge,
+    save_positions,
+)
+
+# Invoice views
+from .invoice import (
+    InvoiceCopyView,
+    InvoiceCreateView,
+    InvoiceDeleteView,
+    InvoiceDetailView,
+    InvoiceEmailPDFView,
+    InvoiceExportPDFView,
+    InvoiceListView,
+    InvoiceUpdateView,
+)
+
+# Note views
+from .note import (
+    NoteCopyView,
+    NoteCreateView,
+    NoteDeleteView,
+    NoteDetailView,
+    NoteEmailTextView,
+    NoteListFullScreen,
+    NoteListView,
+    NoteUpdateView,
+)
+
+# Project views
+from .project import (
+    ProjectCopyView,
+    ProjectCreateView,
+    ProjectDeleteView,
+    ProjectDetailView,
+    ProjectListView,
+    ProjectUpdateView,
+)
+
+# Report views
+from .report import (
+    ReportCopyView,
+    ReportCreateView,
+    ReportDeleteView,
+    ReportDetailView,
+    ReportEmailTextView,
+    ReportListView,
+    ReportUpdateView,
+)
+
+# Search views
+from .search import SearchView
+
+# Task views
+from .task import (
+    TaskCopyView,
+    TaskCreateView,
+    TaskDeleteView,
+    TaskDetailView,
+    TaskListView,
+    TaskUpdateView,
+)
+
+# Time views
+from .time import (
+    TimeCopyView,
+    TimeCreateView,
+    TimeDeleteView,
+    TimeDetailView,
+    TimeListView,
+    TimeUpdateView,
+)
+
+# User views
+from .user import (
+    UserCopyView,
+    UserCreateView,
+    UserDeleteView,
+    UserDetailView,
+    UserListView,
+    UserUpdateView,
+)
+
+# Utility functions
+from .utils import (
+    archive,
+    update_related_entries,
+    update_selected_entries,
+)
+
+__all__ = [
+    # Base classes
+    "AuthenticatedRequiredMixin",
+    "BaseView",
+    "FilterByUserMixin",
+    "ModelCopyMixin",
+    "RedirectToObjectViewMixin",
+    "SuperuserRequiredMixin",
+    "custom_403",
+    "custom_404",
+    "custom_500",
+    "trigger_500",
+    # Client views
+    "ClientCopyView",
+    "ClientCreateView",
+    "ClientDeleteView",
+    "ClientDetailView",
+    "ClientListView",
+    "ClientUpdateView",
+    # Company views
+    "CompanyCopyView",
+    "CompanyCreateView",
+    "CompanyDeleteView",
+    "CompanyDetailView",
+    "CompanyListView",
+    "CompanyUpdateView",
+    # Contact views
+    "ContactCopyView",
+    "ContactCreateView",
+    "ContactDeleteView",
+    "ContactDetailView",
+    "ContactListView",
+    "ContactUpdateView",
+    # Dashboard views
+    "DashboardView",
+    "FakeTextView",
+    "display_mode",
+    "html_mode",
+    "lounge",
+    "save_positions",
+    # Invoice views
+    "InvoiceCopyView",
+    "InvoiceCreateView",
+    "InvoiceDeleteView",
+    "InvoiceDetailView",
+    "InvoiceEmailPDFView",
+    "InvoiceExportPDFView",
+    "InvoiceListView",
+    "InvoiceUpdateView",
+    # Note views
+    "NoteCopyView",
+    "NoteCreateView",
+    "NoteDeleteView",
+    "NoteDetailView",
+    "NoteEmailTextView",
+    "NoteListFullScreen",
+    "NoteListView",
+    "NoteUpdateView",
+    # Project views
+    "ProjectCopyView",
+    "ProjectCreateView",
+    "ProjectDeleteView",
+    "ProjectDetailView",
+    "ProjectListView",
+    "ProjectUpdateView",
+    # Report views
+    "ReportCopyView",
+    "ReportCreateView",
+    "ReportDeleteView",
+    "ReportDetailView",
+    "ReportEmailTextView",
+    "ReportListView",
+    "ReportUpdateView",
+    # Search views
+    "SearchView",
+    # Task views
+    "TaskCopyView",
+    "TaskCreateView",
+    "TaskDeleteView",
+    "TaskDetailView",
+    "TaskListView",
+    "TaskUpdateView",
+    # Time views
+    "TimeCopyView",
+    "TimeCreateView",
+    "TimeDeleteView",
+    "TimeDetailView",
+    "TimeListView",
+    "TimeUpdateView",
+    # User views
+    "UserCopyView",
+    "UserCreateView",
+    "UserDeleteView",
+    "UserDetailView",
+    "UserListView",
+    "UserUpdateView",
+    # Utility functions
+    "archive",
+    "update_related_entries",
+    "update_selected_entries",
+]
