@@ -1,6 +1,7 @@
 """Time-related views."""
 
-from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy, reverse
 from django.views.generic import (
     CreateView,
     DeleteView,
@@ -17,7 +18,7 @@ from .base import (
     RedirectToObjectViewMixin,
 )
 from ..forms import TimeForm
-from ..models import Time
+from ..models import Time, Invoice
 
 
 class BaseTimeView(BaseView, AuthenticatedRequiredMixin):
@@ -42,6 +43,15 @@ class TimeCreateView(
                 "invoice": invoice_id,
             }
         return context
+
+    def form_valid(self, form):
+        invoice_id = self.request.GET.get("invoice_id")
+        obj = form.save()
+        if invoice_id:
+            invoice = Invoice.objects.get(pk=invoice_id)
+            invoice.times.add(obj)
+            return HttpResponseRedirect(reverse("invoice_view", args=[invoice_id]))
+        return super().form_valid(form)
 
 
 class TimeListView(

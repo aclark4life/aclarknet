@@ -129,27 +129,15 @@ class NoteEmailTextView(BaseNoteView, View):
             to=[settings.DEFAULT_FROM_EMAIL],
         )
 
-        contacts = obj.contacts.all()
-
         successes = []
         failures = []
 
-        if contacts:
-            for contact in contacts:
-                email.to = [contact.email]
-                try:
-                    email.send()
-                except Exception:
-                    failures.append(contact.email)
-                else:
-                    successes.append(contact.email)
+        try:
+            email.send()
+        except Exception:
+            failures.append(settings.DEFAULT_FROM_EMAIL)
         else:
-            try:
-                email.send()
-            except Exception:
-                failures.append(settings.DEFAULT_FROM_EMAIL)
-            else:
-                successes.append(settings.DEFAULT_FROM_EMAIL)
+            successes.append(settings.DEFAULT_FROM_EMAIL)
         if successes:
             messages.success(
                 request, f"Email sent successfully to: {', '.join(successes)}."

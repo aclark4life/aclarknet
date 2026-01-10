@@ -28,12 +28,11 @@ def get_queryset_related(self):
     clients = report.clients.all()
     invoices = report.invoices.all()
     projects = report.projects.all()
-    contacts = report.contacts.all()
     reports = report.reports.all()
     queryset_related = [
-        q for q in [clients, contacts, invoices, notes, projects, reports] if q.exists()
+        q for q in [clients, invoices, notes, projects, reports] if q.exists()
     ]
-    return company, projects, invoices, report, contacts, queryset_related
+    return company, projects, invoices, report, queryset_related
 
 
 class BaseReportView(BaseView, SuperuserRequiredMixin):
@@ -70,8 +69,8 @@ class ReportDetailView(BaseReportView, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        company, projects, invoices, report, contacts, queryset_related = (
-            get_queryset_related(self)
+        company, projects, invoices, report, queryset_related = get_queryset_related(
+            self
         )
 
         context["invoices"] = invoices
@@ -93,18 +92,6 @@ class ReportDetailView(BaseReportView, DetailView):
 
         self._queryset_related = queryset_related
         self.has_related = True
-
-        contact_emails = []
-
-        for contact in contacts:
-            if contact.email:
-                contact_emails.append(contact.email)
-        context["contact_emails"] = ", ".join(contact_emails)
-        context["field_values"].append(("Contacts", ""))
-
-        if contacts:
-            for contact in contacts:
-                context["field_values"].append(("↳", contact))
 
         context["is_detail_view"] = True
         return context

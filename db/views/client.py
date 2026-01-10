@@ -63,15 +63,12 @@ class ClientDetailView(BaseClientView, DetailView):
         notes = client.notes.all()
         projects = client.project_set.all().order_by("archived")
         company = client.company
-        contacts = client.contact_set.all()
         invoices = Invoice.objects.filter(project__in=projects)
         reports = client.report_set.all().order_by("-created")
         invoices = invoices.order_by("archived", "-created")
         tasks = Task.objects.filter(project__in=projects)
         queryset_related = [
-            q
-            for q in [notes, projects, contacts, invoices, tasks, reports]
-            if q.exists()
+            q for q in [notes, projects, invoices, tasks, reports] if q.exists()
         ]
         if company:
             queryset_related.insert(0, [company])

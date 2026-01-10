@@ -13,7 +13,7 @@ from django.views.generic import (
 
 from .base import BaseView, RedirectToObjectViewMixin, SuperuserRequiredMixin
 from ..forms import CompanyForm
-from ..models import Company, Contact, Project, Task
+from ..models import Company, Project, Task
 
 
 class BaseCompanyView(BaseView, SuperuserRequiredMixin):
@@ -55,12 +55,7 @@ class CompanyDetailView(BaseCompanyView, DetailView):
         )
         notes = company.notes.all()
         tasks = Task.objects.filter(project__in=projects).order_by("archived", "name")
-        contacts = Contact.objects.filter(client__in=clients).order_by(
-            "archived", "name"
-        )
-        queryset_related = [
-            q for q in [clients, contacts, notes, projects, tasks] if q.exists()
-        ]
+        queryset_related = [q for q in [clients, notes, projects, tasks] if q.exists()]
         queryset_related = list(chain(*queryset_related))
         queryset_related = sorted(queryset_related, key=self.get_archived)
         self._queryset_related = queryset_related

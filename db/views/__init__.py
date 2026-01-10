@@ -50,11 +50,8 @@ from .contact import (
 # Dashboard and utility views
 from .dashboard import (
     DashboardView,
-    FakeTextView,
     display_mode,
-    html_mode,
     lounge,
-    save_positions,
 )
 
 # Invoice views
@@ -177,7 +174,6 @@ __all__ = [
     "ContactUpdateView",
     # Dashboard views
     "DashboardView",
-    "FakeTextView",
     "display_mode",
     "html_mode",
     "lounge",

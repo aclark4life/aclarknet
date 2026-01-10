@@ -29,7 +29,7 @@ from .base import (
     SuperuserRequiredMixin,
 )
 from ..forms import InvoiceForm
-from ..models import Company, Invoice, Project, Time
+from ..models import Invoice, Project, Time
 
 
 class BaseInvoiceView(BaseView, SuperuserRequiredMixin):
@@ -83,14 +83,12 @@ class InvoiceCreateView(
             project = Project.objects.get(pk=project_id)
             client = project.client
             task = project.task
-            company = Company.objects.first()
             subject = f"{project} {now.strftime('%B %Y')}"
             context["form"].initial.update(
                 {
                     "subject": subject,
                     "client": client,
                     "project": project,
-                    "company": company,
                     "task": task,
                 }
             )
@@ -116,13 +114,12 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
 
     def get_context_data(self, **kwargs):
         invoice = self.get_object()
-        contacts = invoice.contacts.all()
         notes = invoice.notes.all()
         times = invoice.times.all().order_by("-id")
         project = invoice.project
         client = invoice.client
         task = invoice.task
-        queryset_related = [q for q in [notes, times, contacts] if q.exists()]
+        queryset_related = [q for q in [notes, times] if q.exists()]
         if project:
             queryset_related.append([project])
         if client:
@@ -133,7 +130,7 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
         queryset_related = sorted(queryset_related, key=self.get_archived)
         self._queryset_related = queryset_related
         self.has_related = True
-        self.has_preview = True
+        self.has_accordion = True
         context = super().get_context_data(**kwargs)
         context["is_detail_view"] = True
 
@@ -154,12 +151,6 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
             ("Net", locale.currency(self.object.net, grouping=True))
         )
         context["field_values"].append(("Hours", self.object.hours))
-        context["field_values"].append(("Company", self.object.company))
-        contacts = self.object.contacts.all()
-        context["field_values"].append(("Contacts", ""))
-        if contacts:
-            for contact in contacts:
-                context["field_values"].append(("↳", contact))
 
         return context
 
@@ -248,40 +239,19 @@ class InvoiceEmailPDFView(BaseInvoiceView, View):
         pisa.CreatePDF(io.BytesIO(html_content.encode("UTF-8")), pdf_file)
         pdf_file.seek(0)
         subject = obj.subject
-        contact_emails = [
-            contact.email for contact in obj.contacts.all() if contact.email is not None
-        ]
-        if contact_emails:
-            for contact_email in contact_emails:
-                email = EmailMessage(
-                    subject=subject,
-                    body="Please find attached, thank you!",
-                    from_email=settings.DEFAULT_FROM_EMAIL,
-                    to=[contact_email],
-                )
-                email.attach(
-                    f"{subject.replace(' ', '_')}.pdf",
-                    pdf_file.getvalue(),
-                    "application/pdf",
-                )
-                email.send()
-                messages.success(
-                    request, f"Email sent successfully to: {contact_email}"
-                )
-        else:
-            email = EmailMessage(
-                subject=subject,
-                body="Please find attached, thank you!",
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                to=[settings.DEFAULT_FROM_EMAIL],
-            )
-            email.attach(
-                f"{subject.replace(' ', '_')}.pdf",
-                pdf_file.getvalue(),
-                "application/pdf",
-            )
-            email.send()
-            messages.success(
-                request, f"Email sent successfully to: {settings.DEFAULT_FROM_EMAIL}"
-            )
+        email = EmailMessage(
+            subject=subject,
+            body="Please find attached, thank you!",
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[settings.DEFAULT_FROM_EMAIL],
+        )
+        email.attach(
+            f"{subject.replace(' ', '_')}.pdf",
+            pdf_file.getvalue(),
+            "application/pdf",
+        )
+        email.send()
+        messages.success(
+            request, f"Email sent successfully to: {settings.DEFAULT_FROM_EMAIL}"
+        )
         return redirect(obj)

@@ -11,8 +11,8 @@
 {% endblock %}
 {% block dashboard %}
   {% include 'toolbars/index.html' %}
-  {% if has_preview %}
-    {% include 'dashboard/preview.html' %}
+  {% if has_accordion %}
+    {% include 'accordion.html' %}
   {% endif %}
   {% include 'table/view.html' %}
   {% if has_related and user.is_superuser %}

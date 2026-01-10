@@ -148,13 +148,9 @@ class Invoice(BaseModel):
     hours = models.DecimalField(
         "Hours", default=1.0, blank=True, null=True, max_digits=12, decimal_places=2
     )
-    company = models.ForeignKey(
-        "Company", blank=True, null=True, on_delete=models.SET_NULL
-    )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, blank=True, null=True, on_delete=models.SET_NULL
     )
-    contacts = models.ManyToManyField("Contact", blank=True)
 
     reset = models.BooleanField(default=False)
 
@@ -169,7 +165,6 @@ class Invoice(BaseModel):
 
 class Note(BaseModel):
     text = models.TextField(blank=True, null=True)
-    contacts = models.ManyToManyField("Contact", blank=True)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, blank=True, null=True, on_delete=models.SET_NULL
     )
@@ -276,7 +271,6 @@ class Report(BaseModel):
     projects = models.ManyToManyField("Project", blank=True)
     tasks = models.ManyToManyField("Task", blank=True)
     invoices = models.ManyToManyField("Invoice", blank=True)
-    contacts = models.ManyToManyField("Contact", blank=True)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, blank=True, null=True, on_delete=models.SET_NULL
     )

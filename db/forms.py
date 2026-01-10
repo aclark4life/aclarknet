@@ -166,25 +166,14 @@ class InvoiceForm(forms.ModelForm):
             sorted_choices = sorted(choices[1:], key=lambda choice: choice[1])
             self.fields["client"].choices = empty_choice + sorted_choices
 
-        # Sort contacts choices by name
-        choices = self.fields["contacts"].choices
-        sorted_choices = sorted(choices, key=lambda choice: choice[1])
-        self.fields["contacts"].choices = sorted_choices
-
-        # Only set empty_label to None if company field is required
-        if self.fields["company"].required:
-            self.fields["company"].empty_label = None
-
     class Meta:
         model = Invoice
         fields = (
-            "contacts",
             "user",
             "project",
             "task",
             "subject",
             "client",
-            "company",
             "issue_date",
             "start_date",
             "end_date",
@@ -218,12 +207,6 @@ class InvoiceForm(forms.ModelForm):
         widget=forms.DateInput(attrs={"type": "date"}),
         required=False,
         initial=timezone.now,
-    )
-
-    contacts = forms.ModelMultipleChoiceField(
-        queryset=Contact.objects.filter(archived=False),
-        widget=forms.SelectMultiple(attrs={"class": "form-control"}),
-        required=False,
     )
 
 
@@ -307,7 +290,6 @@ class ReportForm(forms.ModelForm):
             "invoices",
             "projects",
             "tasks",
-            "contacts",
             "user",
             "company",
         )
@@ -331,12 +313,6 @@ class ReportForm(forms.ModelForm):
         widget=forms.DateInput(attrs={"type": "date", "class": "col-2"}),
         required=False,
         initial=timezone.now,
-    )
-
-    contacts = forms.ModelMultipleChoiceField(
-        queryset=Contact.objects.filter(archived=False),
-        widget=forms.SelectMultiple(attrs={"class": "form-control"}),
-        required=False,
     )
 
 

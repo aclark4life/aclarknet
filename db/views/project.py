@@ -16,7 +16,7 @@ from django.views.generic import (
 
 from .base import BaseView, SuperuserRequiredMixin
 from ..forms import ProjectForm
-from ..models import Client, Contact, Invoice, Project, Task
+from ..models import Client, Invoice, Project, Task
 
 
 class BaseProjectView(BaseView, SuperuserRequiredMixin):
@@ -93,14 +93,12 @@ class ProjectDetailView(BaseProjectView, DetailView):
         tasks = Task.objects.filter(project=project)
         client = project.client
         company = None
-        contacts = Contact.objects.none()
         if client:
             company = client.company
-            contacts = client.contact_set.all()
         invoices = Invoice.objects.filter(project=project).order_by(
             "-created", "archived"
         )
-        queryset_related = [q for q in [contacts, tasks, notes, invoices] if q.exists()]
+        queryset_related = [q for q in [tasks, notes, invoices] if q.exists()]
         queryset_related = list(chain(*queryset_related))
         if company:
             queryset_related.insert(0, company)

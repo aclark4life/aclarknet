@@ -28,7 +28,7 @@ class BaseView:
     paginated = False
     page_number = 1
     has_related = False
-    has_preview = False
+    has_accordion = False
     dashboard = False
 
     # ---- Model-dependent helpers ----
@@ -144,8 +144,8 @@ class BaseView:
             queryset = self.queryset_related
             related = True
 
-        if self.has_preview:
-            context["has_preview"] = True
+        if self.has_accordion:
+            context["has_accordion"] = True
 
         # 4. Pagination
         paginator = Paginator(queryset, self.per_page)

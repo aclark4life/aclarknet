@@ -2,7 +2,7 @@
 
 from django.contrib.auth.decorators import login_required
 from django.db.models import F, Sum
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, reverse
 from django.views.generic import ListView
 
@@ -11,7 +11,6 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from ..models import (
     Client,
     Company,
-    Contact,
     Invoice,
     Note,
     Project,
@@ -64,7 +63,6 @@ class DashboardView(BaseView, UserPassesTestMixin, ListView):
         context["projects"] = get_base(Project).order_by("name")
         context["notes"] = get_base(Note).order_by("-created")
         context["tasks"] = get_base(Task).order_by("name")
-        context["contacts"] = get_base(Contact).order_by("last_name")
         context["clients"] = get_base(Client).order_by("name")
         context["reports"] = get_base(Report).order_by("-created")
 
@@ -114,52 +112,8 @@ def display_mode(request):
     return HttpResponseRedirect(request.headers.get("Referer"))
 
 
-def save_positions(request):
-    if request.method == "POST":
-        profile = request.user.profile
-        positions = request.POST.get("positions")
-        profile.draggable_positions = positions
-        profile.save()
-        return JsonResponse({"success": True})
-    else:
-        return JsonResponse({"success": False})
-
-
-def html_mode(request):
-    from django.apps import apps
-    from django.shortcuts import get_object_or_404
-
-    html = request.GET.get("html", "true")
-    model = request.GET.get("model")
-    obj_id = request.GET.get("id")
-    html = False if html.lower() == "false" else True
-    ModelClass = apps.get_model(app_label="db", model_name=model.capitalize())
-    obj = get_object_or_404(ModelClass, pk=obj_id)
-    if html:
-        obj.html = True
-    else:
-        obj.html = False
-    obj.save()
-    return HttpResponseRedirect(request.headers.get("Referer"))
-
-
 @login_required
 def lounge(request):
     context = {}
     context["lounge_nav"] = True
     return render(request, "lounge.html", context)
-
-
-class FakeTextView(ListView):
-    """
-    Placeholder view for generating fake text data.
-
-    Currently unimplemented. When implemented, this view will use Faker
-    to generate sample paragraph text via JSON response.
-    """
-
-    def get(self, request, *args, **kwargs):
-        """Return HTTP 501 Not Implemented for now."""
-        return JsonResponse(
-            {"error": "This feature is not yet implemented."}, status=501
-        )
