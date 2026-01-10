@@ -130,7 +130,6 @@ class ContactForm(forms.ModelForm):
                 Field("url", css_class="form-control bg-transparent border"),
                 css_class="col-sm-6",
             ),
-            # Div(Field("client", css_class="form-control"), css_class="col-sm-12"),
             css_class="row",
         )
 
