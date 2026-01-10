@@ -213,7 +213,6 @@ class InvoiceForm(forms.ModelForm):
         )
         widgets = {
             "po_number": forms.widgets.NumberInput(),
-            "sa_number": forms.widgets.NumberInput(),
         }
 
     issue_date = forms.DateField(
