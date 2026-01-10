@@ -1,6 +1,79 @@
 from bson import ObjectId
 from django.urls import include, path, register_converter
 
+# Company Views
+from .views import (
+    CompanyCopyView,
+    CompanyCreateView,
+    CompanyDeleteView,
+    CompanyDetailView,
+    CompanyListView,
+    CompanyUpdateView,
+)
+
+# Time Views
+from .views import (
+    TimeCopyView,
+    TimeCreateView,
+    TimeDeleteView,
+    TimeDetailView,
+    TimeListView,
+    TimeUpdateView,
+)
+
+# Task Views
+from .views import (
+    TaskCopyView,
+    TaskCreateView,
+    TaskDeleteView,
+    TaskDetailView,
+    TaskListView,
+    TaskUpdateView,
+)
+
+# Project Views
+from .views import (
+    ProjectCopyView,
+    ProjectCreateView,
+    ProjectDeleteView,
+    ProjectDetailView,
+    ProjectListView,
+    ProjectUpdateView,
+)
+
+# User Views
+from .views import (
+    UserCopyView,
+    UserCreateView,
+    UserDeleteView,
+    UserDetailView,
+    UserListView,
+    UserUpdateView,
+)
+
+# Contact Views
+from .views import (
+    ContactCopyView,
+    ContactCreateView,
+    ContactDeleteView,
+    ContactDetailView,
+    ContactListView,
+    ContactUpdateView,
+)
+
+# Note Views
+from .views import (
+    NoteCopyView,
+    NoteCreateView,
+    NoteDeleteView,
+    NoteDetailView,
+    NoteEmailTextView,
+    NoteListFullScreen,
+    NoteListView,
+    NoteUpdateView,
+)
+
+# Client Views
 from .views import (
     ClientCopyView,
     ClientCreateView,
@@ -8,19 +81,10 @@ from .views import (
     ClientDetailView,
     ClientListView,
     ClientUpdateView,
-    CompanyCopyView,
-    CompanyCreateView,
-    CompanyDeleteView,
-    CompanyDetailView,
-    CompanyListView,
-    CompanyUpdateView,
-    ContactCopyView,
-    ContactCreateView,
-    ContactDeleteView,
-    ContactDetailView,
-    ContactListView,
-    ContactUpdateView,
-    DashboardView,
+)
+
+# Invoice Views
+from .views import (
     InvoiceCopyView,
     InvoiceCreateView,
     InvoiceDeleteView,
@@ -29,43 +93,14 @@ from .views import (
     InvoiceExportPDFView,
     InvoiceListView,
     InvoiceUpdateView,
-    NoteCopyView,
-    NoteCreateView,
-    NoteDeleteView,
-    NoteDetailView,
-    NoteEmailTextView,
-    NoteListView,
-    NoteListFullScreen,
-    NoteUpdateView,
-    ProjectCopyView,
-    ProjectCreateView,
-    ProjectDeleteView,
-    ProjectDetailView,
-    ProjectListView,
-    ProjectUpdateView,
-    SearchView,
-    TaskCopyView,
-    TaskCreateView,
-    TaskDeleteView,
-    TaskDetailView,
-    TaskListView,
-    TaskUpdateView,
-    TimeCopyView,
-    TimeCreateView,
-    TimeDeleteView,
-    TimeDetailView,
-    TimeListView,
-    TimeUpdateView,
-    UserCopyView,
-    UserCreateView,
-    UserDeleteView,
-    UserDetailView,
-    UserListView,
-    UserUpdateView,
-    trigger_500,
-    update_related_entries,
-    update_selected_entries,
 )
+
+# Other Views
+from .views import DashboardView
+from .views import SearchView
+from .views import trigger_500
+from .views import update_related_entries
+from .views import update_selected_entries
 
 
 # Via timgraham
