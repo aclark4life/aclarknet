@@ -138,7 +138,6 @@ class Command(BaseCommand):
                 end_date=fake.date_this_decade(),
                 code=fake.random_int(min=1000, max=9999),
                 description=fake.text(),
-                po_number=fake.bothify(text="PO-#######"),
                 client=random.choice(clients),
             )
             projects.append(project)

@@ -121,7 +121,6 @@ class Invoice(BaseModel):
         "Start Date", blank=True, default=timezone.now, null=True
     )
     end_date = models.DateField("End Date", blank=True, default=timezone.now, null=True)
-    po_number = models.CharField("PO Number", max_length=300, blank=True, null=True)
     amount = models.DecimalField(
         "Invoice Amount", blank=True, null=True, max_digits=12, decimal_places=2
     )
@@ -250,7 +249,6 @@ class Project(BaseModel):
         blank=True, null=True, max_digits=12, decimal_places=2
     )
     description = models.TextField(blank=True, null=True)
-    po_number = models.CharField("PO Number", max_length=300, blank=True, null=True)
     companies = models.ManyToManyField(Company)
     draggable_positions = models.JSONField(null=True, blank=True)
     github_project = models.CharField(

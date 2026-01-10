@@ -141,7 +141,6 @@ class InvoiceForm(forms.ModelForm):
             Div(Field("issue_date", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("due_date", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("project", css_class="form-control"), css_class="col-sm-6"),
-            Div(Field("po_number", css_class="form-control"), css_class="col-sm-6"),
             css_class="row mx-1",
         )
 
@@ -154,12 +153,8 @@ class InvoiceForm(forms.ModelForm):
             "start_date",
             "end_date",
             "due_date",
-            "po_number",
             "paid_amount",
         )
-        widgets = {
-            "po_number": forms.widgets.NumberInput(),
-        }
 
     issue_date = forms.DateField(
         widget=forms.DateInput(attrs={"type": "date"}),
