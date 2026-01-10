@@ -788,9 +788,9 @@ class DashboardView(BaseView, UserPassesTestMixin, ListView):
         times = get_base(Time).order_by("-archived", "-date")
         context["times"] = times
 
-        entered = times["queryset"].aggregate(total=Sum(F("hours")))
+        entered = times.aggregate(total=Sum(F("hours")))
         approved = (
-            times["queryset"]
+            times
             .filter(invoice__isnull=False)
             .aggregate(total=Sum(F("hours")))
         )
@@ -801,9 +801,9 @@ class DashboardView(BaseView, UserPassesTestMixin, ListView):
         entered = entered["total"] or 0
         approved = approved["total"] or 0
 
-        gross = invoices["queryset"].aggregate(amount=Sum(F("amount")))["amount"]
-        cost = invoices["queryset"].aggregate(cost=Sum(F("cost")))["cost"]
-        net = invoices["queryset"].aggregate(net=Sum(F("net")))["net"]
+        gross = invoices.aggregate(amount=Sum(F("amount")))["amount"]
+        cost = invoices.aggregate(cost=Sum(F("cost")))["cost"]
+        net = invoices.aggregate(net=Sum(F("net")))["net"]
 
         gross = gross or 0
         cost = cost or 0
