@@ -139,7 +139,6 @@ class Invoice(BaseModel):
         default="United States Dollar - USD", max_length=300, blank=True, null=True
     )
 
-    # https://stackoverflow.com/a/6062320/185820
     class Meta:
         ordering = ["subject"]
 
@@ -260,7 +259,7 @@ class Project(BaseModel):
         "GitHub Repository", max_length=300, blank=True, null=True
     )
 
-    class Meta:  # https://stackoverflow.com/a/6062320/185820
+    class Meta:
         ordering = ["name"]
 
     def get_absolute_url(self):

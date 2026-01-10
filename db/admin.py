@@ -283,7 +283,6 @@ class TimeAdmin(ImportExportModelAdmin):
     actions = [item_inactive]
 
 
-# Define and reregister a custom UserAdmin class
 class CustomUserAdmin(UserAdmin):
     list_display = (
         "username",
