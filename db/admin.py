@@ -126,9 +126,6 @@ class InvoiceResource(ImportExportModelResource):
     paid_amount = fields.Field(
         column_name="paid_amount", attribute="paid_amount", widget=DecimalWidget()
     )
-    subtotal = fields.Field(
-        column_name="subtotal", attribute="subtotal", widget=DecimalWidget()
-    )
     balance = fields.Field(
         column_name="balance", attribute="balance", widget=DecimalWidget()
     )
