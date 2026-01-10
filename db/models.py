@@ -1,5 +1,3 @@
-from uuid import uuid4
-
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
@@ -99,7 +97,6 @@ class Contact(BaseModel):
     phone = models.CharField(max_length=300, blank=True, null=True)
     fax = PhoneNumberField(blank=True, null=True)
     address = models.TextField(blank=True, null=True)
-    uuid = models.UUIDField("UUID", max_length=300, default=uuid4)
     number = models.CharField(max_length=300, blank=True, null=True)
     url = models.URLField("URL", max_length=300, blank=True, null=True)
 
@@ -166,7 +163,6 @@ class Invoice(BaseModel):
     class Meta:
         ordering = ["subject"]
 
-    doc_type = models.CharField(max_length=300, blank=True, null=True)
     gross = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     net = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     cost = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
@@ -227,11 +223,8 @@ class Profile(BaseModel):
     job_title = models.CharField(max_length=150, blank=True, null=True)
     twitter_username = models.CharField(max_length=150, blank=True, null=True)
     slug = models.SlugField(max_length=150, blank=True, null=True)
-    lounge_password = models.CharField(max_length=150, blank=True, null=True)
-    lounge_username = models.CharField(max_length=150, blank=True, null=True)
     mail = models.BooleanField(default=False)
     dark = models.BooleanField("Dark Mode", default=True)
-    github_access_token = models.CharField(max_length=150, blank=True, null=True)
 
     def is_staff(self):
         if self.user:
