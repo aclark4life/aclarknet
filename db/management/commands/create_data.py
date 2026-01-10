@@ -1,4 +1,5 @@
 import random
+from decimal import Decimal
 
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
@@ -101,7 +102,7 @@ class Command(BaseCommand):
         for _ in range(num_projects):  # Using num_projects for simplicity
             task = Task.objects.create(
                 name=fake.sentence(),
-                rate=200,
+                rate=100,
                 unit=1,
             )
             tasks.append(task)
@@ -123,7 +124,7 @@ class Command(BaseCommand):
             self.style.SUCCESS(f"Successfully created {num_projects} projects")
         )
 
-        # Create Invoices
+        # Create Invoices (without amounts initially)
         invoices = []
         for _ in range(num_invoices):
             invoice = Invoice.objects.create(
@@ -131,26 +132,49 @@ class Command(BaseCommand):
                 issue_date=fake.date_this_decade(),
                 due_date=fake.date_this_decade(),
                 client=random.choice(clients) if clients else None,
-                amount=fake.random_number(digits=5, fix_len=True),
-                paid_amount=fake.random_number(digits=5, fix_len=True),
+                amount=0,
+                paid_amount=0,
                 currency="USD",
             )
             invoices.append(invoice)
         self.stdout.write(
             self.style.SUCCESS(f"Successfully created {num_invoices} invoices")
         )
-        # Create Time Entries
+        
+        # Create Time Entries with calculated amounts
         for _ in range(num_times):
+            task = random.choice(tasks)
+            hours = fake.random_int(min=1, max=40)  # More realistic hours
+            # Calculate amount from task rate * hours
+            amount = Decimal(str(task.rate)) * Decimal(str(hours)) if task.rate else Decimal('0')
+            
             Time.objects.create(
                 date=fake.date_this_decade(),
-                hours=fake.random_number(digits=2, fix_len=True),
+                hours=hours,
                 client=random.choice(clients) if clients else None,
                 project=random.choice(projects) if projects else None,
-                task=random.choice(tasks),  # Ensure a task is always chosen
+                task=task,
                 user=random.choice(users),
                 invoice=random.choice(invoices) if invoices else None,
-                amount=fake.random_number(digits=5, fix_len=True),
+                amount=amount,
             )
         self.stdout.write(
             self.style.SUCCESS(f"Successfully created {num_times} time entries")
+        )
+        
+        # Update invoice amounts from their time entries
+        for invoice in invoices:
+            # Sum all time entries for this invoice
+            time_entries = Time.objects.filter(invoice=invoice)
+            total_amount = sum((time.amount or Decimal('0')) for time in time_entries)
+            invoice.amount = total_amount
+            # Set paid_amount to a random portion of total (0% to 100%)
+            if total_amount > 0:
+                invoice.paid_amount = total_amount * Decimal(str(fake.random.uniform(0, 1)))
+            else:
+                invoice.paid_amount = Decimal('0')
+            invoice.save()
+        
+        self.stdout.write(
+            self.style.SUCCESS(f"Successfully updated invoice amounts from time entries")
         )

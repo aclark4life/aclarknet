@@ -12,7 +12,7 @@ def assign_default_task_to_times(apps, schema_editor):
     default_task, created = Task.objects.get_or_create(
         name="Default Task",
         defaults={
-            "rate": None,
+            "rate": 100.0,
             "unit": 1.0,
         },
     )
