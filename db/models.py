@@ -315,7 +315,7 @@ class Task(BaseModel):
         task, created = cls.objects.get_or_create(
             name="Default Task",
             defaults={
-                "rate": None,
+                "rate": 100.0,
                 "unit": 1.0,
             },
         )
