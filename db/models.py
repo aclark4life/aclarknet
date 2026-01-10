@@ -195,6 +195,14 @@ class Profile(BaseModel):
     slug = models.SlugField(max_length=150, blank=True, null=True)
     mail = models.BooleanField(default=False)
     dark = models.BooleanField("Dark Mode", default=True)
+    default_task = models.ForeignKey(
+        "Task",
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name="profile_defaults",
+        help_text="Default task for this user's time entries",
+    )
 
     def is_staff(self):
         if self.user:
@@ -251,6 +259,14 @@ class Project(BaseModel):
     github_repository = models.CharField(
         "GitHub Repository", max_length=300, blank=True, null=True
     )
+    default_task = models.ForeignKey(
+        "Task",
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name="project_defaults",
+        help_text="Default task for this project's time entries",
+    )
 
     class Meta:
         ordering = ["name"]
@@ -292,6 +308,18 @@ class Task(BaseModel):
 
     def get_absolute_url(self):
         return reverse("task_view", args=[str(self.id)])
+
+    @classmethod
+    def get_default_task(cls):
+        """Get or create the default task for time entries."""
+        task, created = cls.objects.get_or_create(
+            name="Default Task",
+            defaults={
+                "rate": None,
+                "unit": 1.0,
+            },
+        )
+        return task
 
 
 class Testimonial(BaseModel):
@@ -351,6 +379,21 @@ class Time(BaseModel):
     amount = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     cost = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     net = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
+
+    def save(self, *args, **kwargs):
+        # Assign default task if no task is specified
+        # Priority: explicit task > project default > user default > global default
+        if not self.task_id:
+            # Check for project-specific default task
+            if self.project and self.project.default_task:
+                self.task = self.project.default_task
+            # Check for user-specific default task
+            elif self.user and hasattr(self.user, 'profile') and self.user.profile.default_task:
+                self.task = self.user.profile.default_task
+            # Fall back to global default task
+            else:
+                self.task = Task.get_default_task()
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse("time_view", args=[str(self.id)])
