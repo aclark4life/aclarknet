@@ -9,7 +9,7 @@
       {% include 'dashboard/sidebar.html' %}
 
       <div class="col-md-9 content">
-        {# Dashboard Header #}
+                {# Dashboard Header #}
         <div class="dashhead">
           <div class="dashhead-title">
             <h6 class="dashhead-subtitle">Dashboards</h6>
@@ -24,9 +24,9 @@
           </div>
         </div>
 
-        {# Main Dashboard Content #}
+                {# Main Dashboard Content #}
         {% block dashboard %}
-          {# Admin Charts #}
+                    {# Admin Charts #}
           {% if request.user.is_superuser %}
             <div class="row my-3">
               {% include 'charts/revenue.html' %}
@@ -34,23 +34,23 @@
             </div>
           {% endif %}
 
-          {# Stat Cards #}
+                    {# Stat Cards #}
           {% if request.user.is_superuser %}
             {% include 'dashboard/statcards/revenue.html' %}
           {% endif %}
           {% include 'dashboard/statcards/time.html' %}
 
-          {# Invoices (Admin Only) #}
+                    {# Invoices (Admin Only) #}
           {% if request.user.is_superuser %}
             {% include 'dashboard/invoice.html' %}
           {% endif %}
 
           {% include 'dashboard/project.html' %}
 
-          {# Time Tracking (All Users) #}
+                    {# Time Tracking (All Users) #}
           {% include 'dashboard/time.html' %}
 
-          {# Admin Data Grids #}
+                    {# Admin Data Grids #}
           {% if request.user.is_superuser %}
             <div class="row">
               {% include 'dashboard/client.html' %}
@@ -62,7 +62,7 @@
     </div>
   </div>
 
-  {# Modals #}
+    {# Modals #}
   {% include 'modal/lorem.html' %}
   {% include 'modal/hijack.html' %}
   {% include 'modal/fullscreen.html' %}

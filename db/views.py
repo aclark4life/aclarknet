@@ -1,11 +1,5 @@
 """Views for the db app."""
 
-from django.apps import apps
-from django.db import transaction
-
-# Import your models explicitly or use apps.get_model safely
-from django.contrib.auth.models import User
-
 # Standard library imports
 import ast
 import decimal
@@ -13,18 +7,20 @@ import io
 import locale
 from itertools import chain
 
-# Third-party imports
-from texttable import Texttable
-from xhtml2pdf import pisa
+from django.apps import apps
 
 # Django imports
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
-from django.core.mail import EmailMessage, EmailMultiAlternatives
+
+# Import your models explicitly or use apps.get_model safely
+from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
+from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.core.paginator import Paginator
+from django.db import transaction
 from django.db.models import F, Q, Sum
 from django.http import FileResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render, reverse
@@ -40,6 +36,10 @@ from django.views.generic import (
     UpdateView,
     View,
 )
+
+# Third-party imports
+from texttable import Texttable
+from xhtml2pdf import pisa
 
 # Local imports
 from .forms import (
@@ -2282,7 +2282,6 @@ class BaseTimeView(BaseView, AuthenticatedRequiredMixin):
     template_name = "edit.html"
 
     _exclude = ["client", "project", "task", "invoice"]
-
 
 
 class TimeCreateView(

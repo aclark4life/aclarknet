@@ -1,8 +1,10 @@
 import random
-from faker import Faker
-from django.core.management.base import BaseCommand
-from db.models import Company, Client, Project, Invoice, Time, Task, Profile
+
 from django.contrib.auth.models import User
+from django.core.management.base import BaseCommand
+from faker import Faker
+
+from db.models import Company, Client, Project, Invoice, Time, Task, Profile
 
 fake = Faker()
 

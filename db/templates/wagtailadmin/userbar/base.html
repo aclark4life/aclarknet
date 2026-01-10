@@ -3,7 +3,8 @@
 <template id="wagtail-userbar-template">
     {# In preview panels, we still render the userbar UI, but hidden by default. #}
   <aside {% if request.in_preview_panel %}hidden{% endif %}>
-    <div class="w-userbar w-userbar--{{ position|default:'bottom-right' }} {% admin_theme_classname %}" data-wagtail-userbar data-wagtail-userbar-origin="{{ origin|default:"" }}" part="userbar">
+    <div class="w-userbar w-userbar--{{ position|default:'bottom-right' }} {% admin_theme_classname %}"
+         data-wagtail-userbar data-wagtail-userbar-origin="{{ origin|default:"" }}" part="userbar">
       {% block css %}
         {% versioned_static 'wagtailadmin/css/core.css' as core_css_url %}
         <link rel="stylesheet" href="{% build_absolute_url core_css_url %}">
@@ -28,20 +29,27 @@
           </defs>
         </svg>
 
-        <button aria-controls="wagtail-userbar-items" aria-haspopup="true" class="w-userbar-trigger" id="wagtail-userbar-trigger" data-wagtail-userbar-trigger>
-          {% block branding_logo %}{% include "wagtailadmin/logo.html" with classname="w-userbar-icon" %}{% endblock %}
+        <button aria-controls="wagtail-userbar-items" aria-haspopup="true" class="w-userbar-trigger"
+                id="wagtail-userbar-trigger" data-wagtail-userbar-trigger>
+          {% block branding_logo %}
+            {% include "wagtailadmin/logo.html" with classname="w-userbar-icon" %}{% endblock %}
           <span class="w-sr-only">{% trans 'View Wagtail quick actions' %}</span>
         </button>
-        <ul aria-labelledby="wagtail-userbar-trigger" class="w-userbar-items" id="wagtail-userbar-items" role="menu">
+        <ul aria-labelledby="wagtail-userbar-trigger" class="w-userbar-items" id="wagtail-userbar-items"
+            role="menu">
           <li class="w-userbar__item " role="presentation">
             <a href="{% url 'dashboard' %}" target="_parent" role="menuitem">
-              <svg class="icon icon-cog w-action-icon" aria-hidden="true"><use href="#icon-cog"></use></svg>
+              <svg class="icon icon-cog w-action-icon" aria-hidden="true">
+                <use href="#icon-cog"></use>
+              </svg>
               Dashboard
             </a>
           </li>
           <li class="w-userbar__item " role="presentation">
             <a href="{% url 'admin:index' %}" target="_parent" role="menuitem">
-              <svg class="icon icon-key w-action-icon" aria-hidden="true"><use href="#icon-key"></use></svg>
+              <svg class="icon icon-key w-action-icon" aria-hidden="true">
+                <use href="#icon-key"></use>
+              </svg>
               Go to Django admin
             </a>
           </li>

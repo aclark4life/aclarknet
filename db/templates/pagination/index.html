@@ -3,7 +3,7 @@
     <form class="form">
       <div class="input-group">
         {% if page_obj.paginator.count > items_per_page %}
-          {# Previous pagination buttons #}
+                    {# Previous pagination buttons #}
           {% if page_obj.has_previous %}
             <a class="btn btn-outline-primary"
                href="?page=1&items_per_page={{ items_per_page }}&q={{ q }}">
@@ -25,7 +25,7 @@
               <span class="visually-hidden">Previous page</span>
             </button>
           {% endif %}
-          {# Next pagination buttons #}
+                    {# Next pagination buttons #}
           {% if page_obj.has_next %}
             <a class="btn btn-outline-primary"
                href="?page={{ page_obj.next_page_number }}&items_per_page={{ items_per_page }}&q={{ q }}">
@@ -49,17 +49,20 @@
           {% endif %}
         {% endif %}
         {% if page_obj.paginator %}
-          {# https://stackoverflow.com/a/7405779/185820 #}
+                    {# https://stackoverflow.com/a/7405779/185820 #}
           {% if field_values_page|length|add:0 >= items_per_page %}
             <select class="form-select btn-outline-primary"
                     name="items_per_page"
                     onchange="this.form.submit()">
               <option value="10"
-                      {% if request.GET.items_per_page == '10' %}selected{% endif %}>10 items per page</option>
+                      {% if request.GET.items_per_page == '10' %}selected{% endif %}>10 items per page
+              </option>
               <option value="100"
-                      {% if request.GET.items_per_page == '100' %}selected{% endif %}>100 items per page</option>
+                      {% if request.GET.items_per_page == '100' %}selected{% endif %}>100 items per page
+              </option>
               <option value="1000"
-                      {% if request.GET.items_per_page == '1000' %}selected{% endif %}>1000 items per page</option>
+                      {% if request.GET.items_per_page == '1000' %}selected{% endif %}>1000 items per page
+              </option>
             </select>
           {% endif %}
         {% endif %}

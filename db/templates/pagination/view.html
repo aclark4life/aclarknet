@@ -1,6 +1,7 @@
 <div class="btn-group">
   <button class="btn btn-outline-primary" disabled>
-    {{ model_name.title }} {{ page_obj_detail_view.page_obj.number }} of {{ page_obj_detail_view.page_obj.paginator.num_pages }}
+    {{ model_name.title }} {{ page_obj_detail_view.page_obj.number }}
+    of {{ page_obj_detail_view.page_obj.paginator.num_pages }}
   </button>
   {% if page_obj_detail_view.first_object %}
     <a class="btn btn-outline-primary btn-block d-flex align-items-center"
@@ -27,7 +28,7 @@
     </button>
   {% endif %}
   {% if page_obj_detail_view.page_obj.has_next %}
-    {# https://stackoverflow.com/a/50874653/185820 #}
+        {# https://stackoverflow.com/a/50874653/185820 #}
     <a class="btn btn-outline-primary btn-block d-flex align-items-center"
        href="{% url urls.url_view page_obj_detail_view.next_object.pk %}?page_number_detail={{ page_obj_detail_view.page_obj.next_page_number }}">
       <i class="fa fa-chevron-circle-right"></i>

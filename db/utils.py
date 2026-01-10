@@ -1,6 +1,7 @@
 """Utility functions for the db app."""
 
 import locale
+
 from django import apps
 from django.db.models import BooleanField, Case, Value, When
 

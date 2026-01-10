@@ -1,14 +1,6 @@
 from bson import ObjectId
 from django.urls import include, path, register_converter
 
-from .views import trigger_500
-from .views import archive
-from .views import DashboardView
-from .views import update_related_entries
-from .views import SearchView
-from .views import update_selected_entries
-
-
 from .views import (
     ClientCopyView,
     ClientCreateView,
@@ -76,6 +68,12 @@ from .views import (
     UserListView,
     UserUpdateView,
 )
+from .views import DashboardView
+from .views import SearchView
+from .views import archive
+from .views import trigger_500
+from .views import update_related_entries
+from .views import update_selected_entries
 
 
 # Via timgraham

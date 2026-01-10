@@ -17,7 +17,8 @@
               style="text-align: right;
                      font-weight: bold;
                      padding: 3px 3px 0 0;
-                     border-right: 1px solid #ddd">Subject</td>
+                     border-right: 1px solid #ddd">Subject
+          </td>
           <td style="text-align: left; padding: 3px 0 8px 3px;">
             <div>{{ object.subject }}</div>
           </td>
@@ -28,13 +29,15 @@
                      font-weight: bold;
                      padding: 3px 3px 0 0;
                      width: 15%;
-                     border-right: 1px solid #ddd">Invoice Number</td>
+                     border-right: 1px solid #ddd">Invoice Number
+          </td>
           <td valign="top" style="text-align: left; padding: 3px 0 8px 3px;">{{ object.id }}</td>
           <td valign="top"
               style="text-align: right;
                      font-weight: bold;
                      padding: 3px 3px 0 0;
-                     border-right: 1px solid #ddd">From</td>
+                     border-right: 1px solid #ddd">From
+          </td>
           <td style="text-align: left; padding: 3px 0 8px 3px; width: 30%;">
             <div>
               {{ object.company }}
@@ -48,7 +51,8 @@
               style="text-align: right;
                      font-weight: bold;
                      padding: 3px 3px 0 0;
-                     border-right: 1px solid #ddd">Issue Date</td>
+                     border-right: 1px solid #ddd">Issue Date
+          </td>
           <td valign="top" style="text-align: left; padding: 3px 0 8px 3px;">{{ object.issue_date }}</td>
           <td valign="top"
               style="text-align: right;
@@ -72,7 +76,8 @@
               style="text-align: right;
                      font-weight: bold;
                      padding: 0 3px 0 0;
-                     border-right: 1px solid #ddd">Performance Period</td>
+                     border-right: 1px solid #ddd">Performance Period
+          </td>
           <td style="text-align: left; padding: 0 0 8px 3px;">
             <div>{{ object.start_date }}&mdash;{{ object.end_date }}</div>
           </td>
@@ -93,7 +98,8 @@
                 style="text-align: right;
                        font-weight: bold;
                        padding: 0 3px 0 0;
-                       border-right: 1px solid #ddd">Purchase Order Number</td>
+                       border-right: 1px solid #ddd">Purchase Order Number
+            </td>
             <td style="text-align: left; padding: 0 0 8px 3px;">
               <div>{{ object.po_number }}</div>
             </td>
@@ -106,27 +112,33 @@
         <th style="border: 1px solid #ddd;
                    background-color: #f2f2f2;
                    padding: 8px;
-                   text-align: left">Date</th>
+                   text-align: left">Date
+        </th>
         <th style="border: 1px solid #ddd;
                    background-color: #f2f2f2;
                    padding: 8px;
-                   text-align: left">Task</th>
+                   text-align: left">Task
+        </th>
         <th style="border: 1px solid #ddd;
                    background-color: #f2f2f2;
                    padding: 8px;
-                   text-align: left">Description</th>
+                   text-align: left">Description
+        </th>
         <th style="border: 1px solid #ddd;
                    background-color: #f2f2f2;
                    padding: 8px;
-                   text-align: left">Quantity</th>
+                   text-align: left">Quantity
+        </th>
         <th style="border: 1px solid #ddd;
                    background-color: #f2f2f2;
                    padding: 8px;
-                   text-align: left">Unit Price</th>
+                   text-align: left">Unit Price
+        </th>
         <th style="border: 1px solid #ddd;
                    background-color: #f2f2f2;
                    padding: 8px;
-                   text-align: left">Amount</th>
+                   text-align: left">Amount
+        </th>
       </tr>
       {% for time_entry in times %}
         <tr>

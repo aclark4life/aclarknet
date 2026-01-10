@@ -8,10 +8,11 @@
           <tr>
             {% if request.user.is_superuser %}
               <th scope="col" class="not-sortable">
-                <input type="checkbox" id="select-all" />
+                <input type="checkbox" id="select-all"/>
                 <span class="visually-hidden">Link text</span>
               </th>
-              {% if model_name == "user" %}<th>Hijack</th>{% endif %}
+              {% if model_name == "user" %}
+                <th>Hijack</th>{% endif %}
             {% endif %}
             {% for field_name in table_headers %}
               <th>{% include 'table/field_name.html' %}</th>
@@ -26,7 +27,7 @@
                     style="cursor: pointer">
                   {% if request.user.is_superuser %}
                     <td onclick="event.stopPropagation();">
-                      <input type="checkbox" name="entry_id" value="{{ object_id }}" />
+                      <input type="checkbox" name="entry_id" value="{{ object_id }}"/>
                     </td>
                   {% endif %}
                   {% if request.user.is_superuser %}

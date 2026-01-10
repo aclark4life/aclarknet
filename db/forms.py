@@ -1,17 +1,18 @@
-from crispy_forms.layout import Div, Field
 from crispy_forms.helper import FormHelper
-from django.contrib.auth import get_user_model
+from crispy_forms.layout import Div, Field
 from django import forms
+from django.contrib.auth import get_user_model
 from django.utils import timezone
+
 from .models import Client, Company, Contact, Invoice, Note, Project, Report, Task, Time
 
 # Try to import Profile model - it may not exist in some configurations
 try:
     from .models import Profile
+
     HAS_PROFILE = True
 except ImportError:
     HAS_PROFILE = False
-
 
 User = get_user_model()
 

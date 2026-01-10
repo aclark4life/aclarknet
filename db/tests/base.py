@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.utils import timezone
+
 from db.models import BaseModel
 
 

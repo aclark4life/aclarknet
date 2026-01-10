@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 # Via https://github.com/Zegocover/enmerkar/blob/master/enmerkar/middleware.py
 
+from threading import local
+
 from babel import Locale, UnknownLocaleError
 from django.utils.deprecation import MiddlewareMixin
 from django.utils.translation import get_language
-from threading import local
-
 
 __all__ = ["get_current_locale", "LocaleMiddleware"]
 

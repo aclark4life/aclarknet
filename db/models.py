@@ -1,14 +1,15 @@
+from uuid import uuid4
+
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
-from wagtail.models import Page
-from django.conf import settings
-from uuid import uuid4
 from phonenumber_field.modelfields import PhoneNumberField
 from wagtail import blocks
 from wagtail.admin.panels import FieldPanel
 from wagtail.fields import StreamField
 from wagtail.images.blocks import ImageChooserBlock
+from wagtail.models import Page
 
 
 class MarketingBlock(blocks.StructBlock):
@@ -399,6 +400,7 @@ class Report(BaseModel):
     company = models.ForeignKey(
         "Company", blank=True, null=True, on_delete=models.SET_NULL
     )
+
     # team = HStoreField(blank=True, null=True)
 
     def get_absolute_url(self):

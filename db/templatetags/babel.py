@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Via https://github.com/Zegocover/enmerkar/blob/master/enmerkar/templatetags/babel.py
-from babel import support as babel_support
 from babel import core as babel_core
+from babel import support as babel_support
 from django.conf import settings
 from django.template import Library
 from django.utils.translation import to_locale, get_language
