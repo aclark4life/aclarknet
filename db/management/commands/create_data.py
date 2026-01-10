@@ -112,7 +112,6 @@ class Command(BaseCommand):
             project = Project.objects.create(
                 name=fake.sentence(),
                 client=random.choice(clients) if clients else None,
-                task=random.choice(tasks) if tasks else None,
                 start_date=fake.date_this_decade(),
                 end_date=fake.date_this_decade(),
                 code=fake.random_int(min=1000, max=9999),
@@ -132,7 +131,6 @@ class Command(BaseCommand):
                 issue_date=fake.date_this_decade(),
                 due_date=fake.date_this_decade(),
                 client=random.choice(clients) if clients else None,
-                task=random.choice(tasks) if tasks else None,
                 amount=fake.random_number(digits=5, fix_len=True),
                 paid_amount=fake.random_number(digits=5, fix_len=True),
                 currency="USD",
@@ -141,7 +139,6 @@ class Command(BaseCommand):
         self.stdout.write(
             self.style.SUCCESS(f"Successfully created {num_invoices} invoices")
         )
-
         # Create Time Entries
         for _ in range(num_times):
             Time.objects.create(
@@ -149,7 +146,7 @@ class Command(BaseCommand):
                 hours=fake.random_number(digits=2, fix_len=True),
                 client=random.choice(clients) if clients else None,
                 project=random.choice(projects) if projects else None,
-                task=random.choice(tasks) if tasks else None,
+                task=random.choice(tasks),  # Ensure a task is always chosen
                 user=random.choice(users),
                 invoice=random.choice(invoices) if invoices else None,
                 amount=fake.random_number(digits=5, fix_len=True),

@@ -122,7 +122,6 @@ class Invoice(BaseModel):
     end_date = models.DateField("End Date", blank=True, default=timezone.now, null=True)
     po_number = models.CharField("PO Number", max_length=300, blank=True, null=True)
     client = models.ForeignKey(Client, blank=True, null=True, on_delete=models.SET_NULL)
-    task = models.ForeignKey("Task", blank=True, null=True, on_delete=models.SET_NULL)
     amount = models.DecimalField(
         "Invoice Amount", blank=True, null=True, max_digits=12, decimal_places=2
     )
@@ -218,7 +217,6 @@ class Project(BaseModel):
     """
 
     client = models.ForeignKey(Client, blank=True, null=True, on_delete=models.SET_NULL)
-    task = models.ForeignKey("Task", blank=True, null=True, on_delete=models.SET_NULL)
     team = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)

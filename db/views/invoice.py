@@ -82,14 +82,12 @@ class InvoiceCreateView(
         if project_id:
             project = Project.objects.get(pk=project_id)
             client = project.client
-            task = project.task
             subject = f"{project} {now.strftime('%B %Y')}"
             context["form"].initial.update(
                 {
                     "subject": subject,
                     "client": client,
                     "project": project,
-                    "task": task,
                 }
             )
         return context
@@ -118,14 +116,11 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
         times = invoice.times.all().order_by("-id")
         project = invoice.project
         client = invoice.client
-        task = invoice.task
         queryset_related = [q for q in [notes, times] if q.exists()]
         if project:
             queryset_related.append([project])
         if client:
             queryset_related.append([client])
-        if task:
-            queryset_related.append([task])
         queryset_related = list(chain(*queryset_related))
         queryset_related = sorted(queryset_related, key=self.get_archived)
         self._queryset_related = queryset_related
