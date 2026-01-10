@@ -195,6 +195,14 @@ class Profile(BaseModel):
     slug = models.SlugField(max_length=150, blank=True, null=True)
     mail = models.BooleanField(default=False)
     dark = models.BooleanField("Dark Mode", default=True)
+    default_task = models.ForeignKey(
+        "Task",
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name="profile_defaults",
+        help_text="Default task for this user's time entries",
+    )
 
     def is_staff(self):
         if self.user:
@@ -250,6 +258,14 @@ class Project(BaseModel):
     )
     github_repository = models.CharField(
         "GitHub Repository", max_length=300, blank=True, null=True
+    )
+    default_task = models.ForeignKey(
+        "Task",
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name="project_defaults",
+        help_text="Default task for this project's time entries",
     )
 
     class Meta:
@@ -366,8 +382,17 @@ class Time(BaseModel):
 
     def save(self, *args, **kwargs):
         # Assign default task if no task is specified
+        # Priority: explicit task > project default > user default > global default
         if not self.task_id:
-            self.task = Task.get_default_task()
+            # Check for project-specific default task
+            if self.project and self.project.default_task:
+                self.task = self.project.default_task
+            # Check for user-specific default task
+            elif self.user and hasattr(self.user, 'profile') and self.user.profile.default_task:
+                self.task = self.user.profile.default_task
+            # Fall back to global default task
+            else:
+                self.task = Task.get_default_task()
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
