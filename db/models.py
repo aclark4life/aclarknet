@@ -48,7 +48,6 @@ class BaseModel(models.Model):
 
 
 class Client(BaseModel):
-    # tags = TaggableManager(blank=True)
     address = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     url = models.URLField("Website", blank=True, null=True)
@@ -185,9 +184,6 @@ class Profile(BaseModel):
         settings.AUTH_USER_MODEL, blank=True, null=True, on_delete=models.CASCADE
     )
     page_size = models.PositiveIntegerField(blank=True, null=True)
-    # user_theme_preference = models.CharField(
-    #     max_length=10, choices=settings.THEMES, default="light"
-    # )
     rate = models.DecimalField(
         "Hourly Rate (United States Dollar - USD)",
         blank=True,
@@ -289,8 +285,6 @@ class Report(BaseModel):
     company = models.ForeignKey(
         "Company", blank=True, null=True, on_delete=models.SET_NULL
     )
-
-    # team = HStoreField(blank=True, null=True)
 
     def get_absolute_url(self):
         return reverse("report_view", args=[str(self.id)])

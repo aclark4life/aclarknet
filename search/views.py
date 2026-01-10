@@ -5,13 +5,6 @@ from django.template.response import TemplateResponse
 
 from wagtail.models import Page
 
-# To enable logging of search queries for use with the "Promoted search results" module
-# <https://docs.wagtail.org/en/stable/reference/contrib/searchpromotions.html>
-# uncomment the following line and enable in search function below
-# (after adding wagtail.contrib.search_promotions to INSTALLED_APPS):
-
-# from wagtail.contrib.search_promotions.models import Query
-
 
 RESULTS_PER_PAGE = 10
 
@@ -32,11 +25,6 @@ def search(request):
     # Perform search if query provided
     if search_query:
         search_results = Page.objects.live().search(search_query)
-
-        # Optional: Log search query for promoted results module
-        # Uncomment after enabling wagtail.contrib.search_promotions:
-        # query = Query.get(search_query)
-        # query.add_hit()
 
     else:
         search_results = Page.objects.none()
