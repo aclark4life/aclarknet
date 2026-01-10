@@ -212,7 +212,6 @@ class InvoiceForm(forms.ModelForm):
             "paid_amount",
         )
         widgets = {
-            "ein": forms.widgets.NumberInput(),
             "po_number": forms.widgets.NumberInput(),
             "sa_number": forms.widgets.NumberInput(),
         }

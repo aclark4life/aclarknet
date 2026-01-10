@@ -1,67 +1,8 @@
-from uuid import uuid4
-
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
-from wagtail import blocks
-from wagtail.admin.panels import FieldPanel
-from wagtail.fields import StreamField
-from wagtail.images.blocks import ImageChooserBlock
-from wagtail.models import Page
-
-
-class MarketingBlock(blocks.StructBlock):
-    title = blocks.CharBlock(required=False, help_text="Enter the block title")
-    content = blocks.RichTextBlock(required=False, help_text="Enter the block content")
-    images = blocks.ListBlock(
-        ImageChooserBlock(required=False),
-        help_text="Select one or two images for column display. Select three or more images for carousel display.",
-    )
-    image = ImageChooserBlock(
-        required=False, help_text="Select one image for background display."
-    )
-    block_class = blocks.CharBlock(
-        required=False,
-        help_text="Enter a CSS class for styling the marketing block",
-        classname="full title",
-        default="vh-100 app-ribbon",
-    )
-    image_class = blocks.CharBlock(
-        required=False,
-        help_text="Enter a CSS class for styling the column display image(s)",
-        classname="full title",
-        default="img-thumbnail p-5",
-    )
-    layout_class = blocks.CharBlock(
-        required=False,
-        help_text="Enter a CSS class for styling the layout.",
-        classname="full title",
-        default="d-flex flex-row",
-    )
-
-    class Meta:
-        icon = "placeholder"
-        template = "blocks/marketing_block.html"
-
-
-class AboutPage(Page):
-    template = "about_page.html"
-    marketing_blocks = StreamField(
-        [
-            ("marketing_block", MarketingBlock()),
-        ],
-        blank=True,
-        null=True,
-        use_json_field=True,
-    )
-    content_panels = Page.content_panels + [
-        FieldPanel("marketing_blocks"),
-    ]
-
-    class Meta:
-        verbose_name = "About Page"
 
 
 class BaseModel(models.Model):
@@ -107,10 +48,6 @@ class BaseModel(models.Model):
         )
 
 
-class CareersPage(Page):
-    template = "careers_page.html"
-
-
 class Client(BaseModel):
     # tags = TaggableManager(blank=True)
     address = models.TextField(blank=True, null=True)
@@ -129,30 +66,6 @@ class Client(BaseModel):
 
     def get_absolute_url(self):
         return reverse("client_view", args=[str(self.id)])
-
-
-class ClientsPage(Page):
-    template = "clients_page.html"
-
-    def get_context(self, request):
-        context = super().get_context(request)
-
-        categories = {}
-
-        for tag, category in settings.CLIENT_CATEGORIES.items():
-            categories[category] = Client.objects.filter(
-                tags__name__in=[tag], publish=True
-            )
-
-        context["categories"] = categories
-
-        testimonials = Testimonial.objects.all()
-        context["testimonials"] = testimonials
-
-        return context
-
-    class Meta:
-        verbose_name = "Clients Page"
 
 
 class Company(BaseModel):
@@ -184,7 +97,6 @@ class Contact(BaseModel):
     phone = models.CharField(max_length=300, blank=True, null=True)
     fax = PhoneNumberField(blank=True, null=True)
     address = models.TextField(blank=True, null=True)
-    uuid = models.UUIDField("UUID", max_length=300, default=uuid4)
     number = models.CharField(max_length=300, blank=True, null=True)
     url = models.URLField("URL", max_length=300, blank=True, null=True)
 
@@ -234,7 +146,6 @@ class Invoice(BaseModel):
         blank=True, null=True, max_digits=12, decimal_places=2
     )
     discount = models.IntegerField(blank=True, null=True)
-    ein = models.IntegerField("EIN", blank=True, null=True)
     tax = models.IntegerField(blank=True, null=True)
     tax2 = models.IntegerField(blank=True, null=True)
     project = models.ForeignKey(
@@ -251,7 +162,6 @@ class Invoice(BaseModel):
     class Meta:
         ordering = ["subject"]
 
-    doc_type = models.CharField(max_length=300, blank=True, null=True)
     gross = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     net = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     cost = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
@@ -312,11 +222,8 @@ class Profile(BaseModel):
     job_title = models.CharField(max_length=150, blank=True, null=True)
     twitter_username = models.CharField(max_length=150, blank=True, null=True)
     slug = models.SlugField(max_length=150, blank=True, null=True)
-    lounge_password = models.CharField(max_length=150, blank=True, null=True)
-    lounge_username = models.CharField(max_length=150, blank=True, null=True)
     mail = models.BooleanField(default=False)
     dark = models.BooleanField("Dark Mode", default=True)
-    github_access_token = models.CharField(max_length=150, blank=True, null=True)
 
     def is_staff(self):
         if self.user:
@@ -405,29 +312,6 @@ class Report(BaseModel):
 
     def get_absolute_url(self):
         return reverse("report_view", args=[str(self.id)])
-
-
-class Service(BaseModel):
-    description = models.TextField(blank=True, null=True)
-
-    class Meta:
-        ordering = ["name"]
-
-    def get_absolute_url(self):
-        return reverse("service_view", args=[str(self.id)])
-
-
-class ServicesPage(Page):
-    template = "services_page.html"
-
-    def get_context(self, request):
-        context = super().get_context(request)
-        services = Service.objects.all()
-        context["services"] = services
-        return context
-
-    class Meta:
-        verbose_name = "Services Page"
 
 
 class Task(BaseModel):
