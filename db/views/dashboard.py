@@ -1,23 +1,15 @@
-"""Dashboard and utility views."""
-
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.db.models import F, Sum
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, reverse
 from django.views.generic import ListView
 
 from .base import BaseView
-from django.contrib.auth.mixins import UserPassesTestMixin
-from ..models import (
-    Client,
-    Company,
-    Invoice,
-    Note,
-    Project,
-    Report,
-    Task,
-    Time,
-)
+from ..models import Client, Company, Invoice, Note, Project, Report, Task, Time
+
+User = get_user_model()
 
 
 class DashboardView(BaseView, UserPassesTestMixin, ListView):
@@ -40,80 +32,80 @@ class DashboardView(BaseView, UserPassesTestMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
         context["overview_nav"] = True
 
-        context = super().get_context_data(**kwargs)
-        context["overview_nav"] = True
-
-        # 1. Define the common filtering logic once
         user = self.request.user
         is_admin = user.is_superuser
 
-        # 2. Helper to get a filtered queryset based on user status
-        def get_base(model):
+        def get_base_queryset(model):
+            """Helper to get a filtered queryset based on user status."""
             if is_admin:
                 return model.objects.filter(archived=False)
             return model.objects.filter(archived=False, user=user)
 
-        # 3. Assign context variables using native Django chaining
-        invoices = get_base(Invoice)
-        context["invoices"] = invoices
-        context["companies"] = get_base(Company).order_by("name")
-        context["projects"] = get_base(Project).order_by("name")
-        context["notes"] = get_base(Note).order_by("-created")
-        context["tasks"] = get_base(Task).order_by("name")
-        context["clients"] = get_base(Client).order_by("name")
-        context["reports"] = get_base(Report).order_by("-created")
+        context.update(
+            {
+                "invoices": get_base_queryset(Invoice),
+                "companies": get_base_queryset(Company).order_by("name"),
+                "projects": get_base_queryset(Project).order_by("name"),
+                "notes": get_base_queryset(Note).order_by("-created"),
+                "tasks": get_base_queryset(Task).order_by("name"),
+                "clients": get_base_queryset(Client).order_by("name"),
+                "reports": get_base_queryset(Report).order_by("-created"),
+                "times": get_base_queryset(Time).order_by("-archived", "-date"),
+            }
+        )
 
-        # Handle specific ordering for 'times'
-        times = get_base(Time).order_by("-archived", "-date")
-        context["times"] = times
+        times = context["times"]
+        entered = times.aggregate(total=Sum(F("hours")))["total"] or 0
+        approved = (
+            times.filter(invoice__isnull=False).aggregate(total=Sum(F("hours")))[
+                "total"
+            ]
+            or 0
+        )
 
-        entered = times.aggregate(total=Sum(F("hours")))
-        approved = times.filter(invoice__isnull=False).aggregate(total=Sum(F("hours")))
+        gross = (
+            get_base_queryset(Invoice).aggregate(amount=Sum(F("amount")))["amount"] or 0
+        )
+        cost = get_base_queryset(Invoice).aggregate(cost=Sum(F("cost")))["cost"] or 0
+        net = get_base_queryset(Invoice).aggregate(net=Sum(F("net")))["net"] or 0
 
-        context["statcard"]["times"]["entered"] = entered
-        context["statcard"]["times"]["approved"] = approved
-
-        entered = entered["total"] or 0
-        approved = approved["total"] or 0
-
-        gross = invoices.aggregate(amount=Sum(F("amount")))["amount"]
-        cost = invoices.aggregate(cost=Sum(F("cost")))["cost"]
-        net = invoices.aggregate(net=Sum(F("net")))["net"]
-
-        gross = gross or 0
-        cost = cost or 0
-        net = net or 0
-
-        context["statcards"] = {}
-        context["statcards"]["dashboard"] = {}
-        context["statcards"]["dashboard"]["invoices"] = {}
-        context["statcards"]["dashboard"]["invoices"]["gross"] = gross
-        context["statcards"]["dashboard"]["invoices"]["cost"] = cost
-        context["statcards"]["dashboard"]["invoices"]["net"] = net
-
-        context["dataset_times"] = [int(entered), int(approved)]
-        context["dataset_invoices"] = [int(gross), int(cost), int(net)]
-        context["dashboard"] = self.dashboard
+        context.update(
+            {
+                "statcard": {
+                    "times": {
+                        "entered": entered,
+                        "approved": approved,
+                    }
+                },
+                "statcards": {
+                    "dashboard": {
+                        "invoices": {
+                            "gross": gross,
+                            "cost": cost,
+                            "net": net,
+                        }
+                    }
+                },
+                "dataset_times": [int(entered), int(approved)],
+                "dataset_invoices": [int(gross), int(cost), int(net)],
+                "dashboard": self.dashboard,
+            }
+        )
 
         return context
 
 
 def display_mode(request):
     mode = request.GET.get("display-mode", "dark")
-    if mode == "light":
-        request.user.profile.dark = False
-        request.user.profile.save()
-    elif mode == "dark":
-        request.user.profile.dark = True
-        request.user.profile.save()
+    profile = request.user.profile
+    profile.dark = mode == "dark"
+    profile.save()
     return HttpResponseRedirect(request.headers.get("Referer"))
 
 
 @login_required
 def lounge(request):
-    context = {}
-    context["lounge_nav"] = True
+    context = {"lounge_nav": True}
     return render(request, "lounge.html", context)
