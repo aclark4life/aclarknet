@@ -140,7 +140,6 @@ class Command(BaseCommand):
                 amount=fake.random_number(digits=5, fix_len=True),
                 paid_amount=fake.random_number(digits=5, fix_len=True),
                 currency="USD",
-                currency_symbol="$",
             )
             invoices.append(invoice)
         self.stdout.write(
