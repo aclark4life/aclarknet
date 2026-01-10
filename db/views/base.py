@@ -224,8 +224,10 @@ class BaseView:
 
         # Logic for Detail View field extraction
         try:
-            # Get all form fields
-            form_fields = list(self.form_class().fields.keys())
+            # Get all form fields (use cached form if available to avoid re-instantiation)
+            if not hasattr(self, "_cached_form_fields"):
+                self._cached_form_fields = list(self.form_class().fields.keys())
+            form_fields = self._cached_form_fields.copy()
             
             # Apply field_values_include filter if specified
             if self.field_values_include is not None:

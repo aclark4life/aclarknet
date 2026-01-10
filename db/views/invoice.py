@@ -129,11 +129,27 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
         self.has_accordion = True
         
         # Define extra field values with formatted currency
+        # Use safe formatting with None checks
         self.field_values_extra = [
-            ("Total", locale.currency(invoice.amount, grouping=True)),
-            ("Cost", locale.currency(invoice.cost, grouping=True)),
-            ("Net", locale.currency(invoice.net, grouping=True)),
-            ("Hours", invoice.hours),
+            (
+                "Total",
+                locale.currency(invoice.amount, grouping=True)
+                if invoice.amount is not None
+                else "N/A",
+            ),
+            (
+                "Cost",
+                locale.currency(invoice.cost, grouping=True)
+                if invoice.cost is not None
+                else "N/A",
+            ),
+            (
+                "Net",
+                locale.currency(invoice.net, grouping=True)
+                if invoice.net is not None
+                else "N/A",
+            ),
+            ("Hours", invoice.hours if invoice.hours is not None else "N/A"),
         ]
         
         context = super().get_context_data(**kwargs)
