@@ -6,7 +6,7 @@ from io import StringIO
 from django.core.management import call_command
 from django.test import TestCase
 
-from db.models import Task, Invoice, Time, User, Client, Project
+from db.models import Task, Invoice, Time, User, Client, Project, Contact
 
 
 class CreateDataCommandTest(TestCase):
@@ -74,3 +74,26 @@ class CreateDataCommandTest(TestCase):
         self.assertEqual(default_task.name, "Default Task")
         self.assertEqual(default_task.rate, Decimal('100'))
         self.assertEqual(default_task.unit, Decimal('1.0'))
+
+    def test_contacts_created_and_associated_with_clients(self):
+        """Test that contacts are created and associated with clients."""
+        # Run the command with minimal data
+        call_command('create_data', '--companies=2', '--clients=3', '--contacts=5',
+                     '--projects=1', '--invoices=1', '--times=1', '--users=1', 
+                     stdout=StringIO())
+        
+        # Check that contacts were created
+        contacts = Contact.objects.all()
+        self.assertEqual(contacts.count(), 5, "Should create 5 contacts")
+        
+        # Check that all contacts are associated with clients
+        for contact in contacts:
+            self.assertIsNotNone(contact.client, "Contact should be associated with a client")
+            self.assertIn(contact.client, Client.objects.all(), 
+                         "Contact should be associated with an existing client")
+            
+        # Check that contacts have required fields populated
+        for contact in contacts:
+            self.assertTrue(contact.first_name or contact.last_name, 
+                          "Contact should have at least first or last name")
+            self.assertIsNotNone(contact.email, "Contact should have email")
