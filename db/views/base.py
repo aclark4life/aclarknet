@@ -30,6 +30,12 @@ class BaseView:
     has_related = False
     has_accordion = False
     dashboard = False
+    
+    # ---- Field values customization ----
+    # Subclasses can set these to customize which fields are shown in detail views
+    field_values_include = None  # List of field names to include (None = all fields)
+    field_values_exclude = None  # List of field names to exclude
+    field_values_extra = None  # List of (field_name, value) tuples to append
 
     # ---- Model-dependent helpers ----
     def _if_model(self, value):
@@ -180,7 +186,17 @@ class BaseView:
         return context
 
     def get_field_values(self, page_obj=None, search=False, related=False):
-        """Get field values for display in templates."""
+        """Get field values for display in templates.
+        
+        For list views (page_obj provided):
+            Returns a list of field value tuples for each item.
+            
+        For detail views (no page_obj):
+            Returns field values from form_class fields, with customization options:
+            - field_values_include: Only include these fields
+            - field_values_exclude: Exclude these fields
+            - field_values_extra: Additional (name, value) tuples to append
+        """
         if page_obj is not None:
             results = []
             attrs_to_check = ["amount", "cost", "net", "hours"]
@@ -208,12 +224,28 @@ class BaseView:
 
         # Logic for Detail View field extraction
         try:
-            object_fields = self.form_class().fields.keys()
-            return [
+            # Get all form fields
+            form_fields = list(self.form_class().fields.keys())
+            
+            # Apply field_values_include filter if specified
+            if self.field_values_include is not None:
+                form_fields = [f for f in form_fields if f in self.field_values_include]
+            
+            # Apply field_values_exclude filter if specified
+            if self.field_values_exclude is not None:
+                form_fields = [f for f in form_fields if f not in self.field_values_exclude]
+            
+            # Build the base field values list
+            result = [
                 (f, getattr(self.object, f))
-                for f in object_fields
-                if self.request.user.is_superuser
+                for f in form_fields
             ]
+            
+            # Append any extra fields specified by the view
+            if self.field_values_extra is not None:
+                result.extend(self.field_values_extra)
+            
+            return result
         except (AttributeError, TypeError):
             return []
 

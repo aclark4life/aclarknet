@@ -127,6 +127,15 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
         self._queryset_related = queryset_related
         self.has_related = True
         self.has_accordion = True
+        
+        # Define extra field values with formatted currency
+        self.field_values_extra = [
+            ("Total", locale.currency(invoice.amount, grouping=True)),
+            ("Cost", locale.currency(invoice.cost, grouping=True)),
+            ("Net", locale.currency(invoice.net, grouping=True)),
+            ("Hours", invoice.hours),
+        ]
+        
         context = super().get_context_data(**kwargs)
         context["is_detail_view"] = True
 
@@ -137,16 +146,6 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
         context["url_email_doc"] = self.url_email_doc
         context["url_email_pdf"] = self.url_email_pdf
         context["url_email_text"] = self.url_email_text
-        context["field_values"].append(
-            ("Total", locale.currency(self.object.amount, grouping=True))
-        )
-        context["field_values"].append(
-            ("Cost", locale.currency(self.object.cost, grouping=True))
-        )
-        context["field_values"].append(
-            ("Net", locale.currency(self.object.net, grouping=True))
-        )
-        context["field_values"].append(("Hours", self.object.hours))
 
         return context
 
