@@ -94,10 +94,6 @@ class BaseView:
         meta = self._model_meta()
         return meta.verbose_name_plural if meta else None
 
-    def get_archived(self, obj):
-        """Get archived status of an object, falling back to is_active."""
-        return getattr(obj, "archived", not getattr(obj, "is_active", True))
-
     def _get_int_param(self, key, default):
         """Helper to safely parse integer GET parameters."""
         try:
@@ -200,7 +196,6 @@ class BaseView:
 
                 # If it's a single object (not a paginator object list)
                 if not hasattr(page_obj, "object_list"):
-                    field_values.append(("archived", self.get_archived(item)))
                     field_values.append(("item", item))
 
                 # Dynamically add specific attributes if they exist

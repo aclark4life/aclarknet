@@ -14,22 +14,8 @@ from .models import Invoice
 from .models import Note
 from .models import Profile
 from .models import Project
-from .models import Report
 from .models import Task
-from .models import Testimonial
 from .models import Time
-
-
-@admin.register(Testimonial)
-class TestimonialAdmin(ImportExportModelAdmin):
-    pass
-
-
-def item_inactive(modeladmin, request, queryset):
-    queryset.update(archived=True)
-
-
-item_inactive.short_description = "Selected items inactive"
 
 
 class BooleanWidget(widgets.Widget):
@@ -152,12 +138,11 @@ class InvoiceResource(ImportExportModelResource):
 @admin.register(Invoice)
 class InvoiceAdmin(ImportExportModelAdmin):
     resource_class = InvoiceResource
-    actions = [item_inactive]
 
 
 @admin.register(Note)
 class NoteAdmin(ImportExportModelAdmin):
-    actions = [item_inactive]
+    pass
 
 
 class ProjectResource(ImportExportModelResource):
@@ -202,17 +187,12 @@ class ProjectResource(ImportExportModelResource):
 
 @admin.register(Profile)
 class ProfileAdmin(ImportExportModelAdmin):
-    list_display = ("__str__", "archived", "user")
+    list_display = ("__str__", "user")
 
 
 @admin.register(Project)
 class ProjectAdmin(ImportExportModelAdmin):
     resource_class = ProjectResource
-
-
-@admin.register(Report)
-class ReportAdmin(ImportExportModelAdmin):
-    actions = [item_inactive]
 
 
 class TaskResource(ImportExportModelResource):
@@ -280,7 +260,6 @@ class TimeResource(ImportExportModelResource):
 @admin.register(Time)
 class TimeAdmin(ImportExportModelAdmin):
     resource_class = TimeResource
-    actions = [item_inactive]
 
 
 class CustomUserAdmin(UserAdmin):

@@ -36,7 +36,6 @@ class Migration(migrations.Migration):
                 ("updated", models.DateTimeField(default=django.utils.timezone.now)),
                 ("name", models.CharField(blank=True, max_length=300, null=True)),
                 ("title", models.CharField(blank=True, max_length=300, null=True)),
-                ("archived", models.BooleanField(default=False)),
                 ("active", models.BooleanField(default=True)),
                 ("published", models.BooleanField(default=False)),
                 ("address", models.TextField(blank=True, null=True)),
@@ -75,7 +74,6 @@ class Migration(migrations.Migration):
                 ("updated", models.DateTimeField(default=django.utils.timezone.now)),
                 ("name", models.CharField(blank=True, max_length=300, null=True)),
                 ("title", models.CharField(blank=True, max_length=300, null=True)),
-                ("archived", models.BooleanField(default=False)),
                 ("active", models.BooleanField(default=True)),
                 ("published", models.BooleanField(default=False)),
                 ("address", models.TextField(blank=True, null=True)),
@@ -127,7 +125,6 @@ class Migration(migrations.Migration):
                 ("updated", models.DateTimeField(default=django.utils.timezone.now)),
                 ("name", models.CharField(blank=True, max_length=300, null=True)),
                 ("title", models.CharField(blank=True, max_length=300, null=True)),
-                ("archived", models.BooleanField(default=False)),
                 ("active", models.BooleanField(default=True)),
                 ("published", models.BooleanField(default=False)),
                 ("text", models.TextField(blank=True, null=True)),
@@ -167,7 +164,6 @@ class Migration(migrations.Migration):
                 ("updated", models.DateTimeField(default=django.utils.timezone.now)),
                 ("name", models.CharField(blank=True, max_length=300, null=True)),
                 ("title", models.CharField(blank=True, max_length=300, null=True)),
-                ("archived", models.BooleanField(default=False)),
                 ("active", models.BooleanField(default=True)),
                 ("published", models.BooleanField(default=False)),
                 ("first_name", models.CharField(blank=True, max_length=300, null=True)),
@@ -235,7 +231,6 @@ class Migration(migrations.Migration):
                 ("updated", models.DateTimeField(default=django.utils.timezone.now)),
                 ("name", models.CharField(blank=True, max_length=300, null=True)),
                 ("title", models.CharField(blank=True, max_length=300, null=True)),
-                ("archived", models.BooleanField(default=False)),
                 ("active", models.BooleanField(default=True)),
                 ("published", models.BooleanField(default=False)),
                 ("page_size", models.PositiveIntegerField(blank=True, null=True)),
@@ -310,7 +305,6 @@ class Migration(migrations.Migration):
                 ("updated", models.DateTimeField(default=django.utils.timezone.now)),
                 ("name", models.CharField(blank=True, max_length=300, null=True)),
                 ("title", models.CharField(blank=True, max_length=300, null=True)),
-                ("archived", models.BooleanField(default=False)),
                 ("active", models.BooleanField(default=True)),
                 ("published", models.BooleanField(default=False)),
                 ("start_date", models.DateField(blank=True, null=True)),
@@ -438,7 +432,6 @@ class Migration(migrations.Migration):
                 ("updated", models.DateTimeField(default=django.utils.timezone.now)),
                 ("name", models.CharField(blank=True, max_length=300, null=True)),
                 ("title", models.CharField(blank=True, max_length=300, null=True)),
-                ("archived", models.BooleanField(default=False)),
                 ("active", models.BooleanField(default=True)),
                 ("published", models.BooleanField(default=False)),
                 ("subject", models.CharField(blank=True, max_length=300, null=True)),
@@ -594,7 +587,6 @@ class Migration(migrations.Migration):
                 ("updated", models.DateTimeField(default=django.utils.timezone.now)),
                 ("name", models.CharField(blank=True, max_length=300, null=True)),
                 ("title", models.CharField(blank=True, max_length=300, null=True)),
-                ("archived", models.BooleanField(default=False)),
                 ("active", models.BooleanField(default=True)),
                 ("published", models.BooleanField(default=False)),
                 (
@@ -621,125 +613,6 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name="Report",
-            fields=[
-                (
-                    "id",
-                    django_mongodb_backend.fields.ObjectIdAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                (
-                    "created",
-                    models.DateTimeField(
-                        default=django.utils.timezone.now, editable=False
-                    ),
-                ),
-                ("updated", models.DateTimeField(default=django.utils.timezone.now)),
-                ("name", models.CharField(blank=True, max_length=300, null=True)),
-                ("title", models.CharField(blank=True, max_length=300, null=True)),
-                ("archived", models.BooleanField(default=False)),
-                ("active", models.BooleanField(default=True)),
-                ("published", models.BooleanField(default=False)),
-                ("date", models.DateField(default=django.utils.timezone.now)),
-                (
-                    "hours",
-                    models.DecimalField(
-                        blank=True, decimal_places=2, max_digits=12, null=True
-                    ),
-                ),
-                (
-                    "amount",
-                    models.DecimalField(
-                        blank=True, decimal_places=2, max_digits=12, null=True
-                    ),
-                ),
-                (
-                    "cost",
-                    models.DecimalField(
-                        blank=True, decimal_places=2, max_digits=12, null=True
-                    ),
-                ),
-                (
-                    "net",
-                    models.DecimalField(
-                        blank=True, decimal_places=2, max_digits=12, null=True
-                    ),
-                ),
-                ("clients", models.ManyToManyField(blank=True, to="db.client")),
-                (
-                    "company",
-                    models.ForeignKey(
-                        blank=True,
-                        null=True,
-                        on_delete=django.db.models.deletion.SET_NULL,
-                        to="db.company",
-                    ),
-                ),
-                ("invoices", models.ManyToManyField(blank=True, to="db.invoice")),
-                ("notes", models.ManyToManyField(blank=True, to="db.note")),
-                ("projects", models.ManyToManyField(blank=True, to="db.project")),
-                ("reports", models.ManyToManyField(blank=True, to="db.report")),
-                (
-                    "user",
-                    models.ForeignKey(
-                        blank=True,
-                        null=True,
-                        on_delete=django.db.models.deletion.SET_NULL,
-                        to=settings.AUTH_USER_MODEL,
-                    ),
-                ),
-                ("tasks", models.ManyToManyField(blank=True, to="db.task")),
-            ],
-            options={
-                "abstract": False,
-            },
-        ),
-        migrations.CreateModel(
-            name="Testimonial",
-            fields=[
-                (
-                    "id",
-                    django_mongodb_backend.fields.ObjectIdAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                (
-                    "created",
-                    models.DateTimeField(
-                        default=django.utils.timezone.now, editable=False
-                    ),
-                ),
-                ("updated", models.DateTimeField(default=django.utils.timezone.now)),
-                ("name", models.CharField(blank=True, max_length=300, null=True)),
-                ("title", models.CharField(blank=True, max_length=300, null=True)),
-                ("archived", models.BooleanField(default=False)),
-                ("active", models.BooleanField(default=True)),
-                ("published", models.BooleanField(default=False)),
-                ("slug", models.SlugField(blank=True, null=True)),
-                ("description", models.TextField(blank=True, null=True)),
-                (
-                    "issue_date",
-                    models.DateField(
-                        blank=True,
-                        default=django.utils.timezone.now,
-                        null=True,
-                        verbose_name="Issue Date",
-                    ),
-                ),
-                ("notes", models.ManyToManyField(blank=True, to="db.note")),
-            ],
-            options={
-                "abstract": False,
-            },
-        ),
-        migrations.CreateModel(
             name="Time",
             fields=[
                 (
@@ -760,7 +633,6 @@ class Migration(migrations.Migration):
                 ("updated", models.DateTimeField(default=django.utils.timezone.now)),
                 ("name", models.CharField(blank=True, max_length=300, null=True)),
                 ("title", models.CharField(blank=True, max_length=300, null=True)),
-                ("archived", models.BooleanField(default=False)),
                 ("active", models.BooleanField(default=True)),
                 ("published", models.BooleanField(default=False)),
                 ("invoiced", models.BooleanField(default=False)),

@@ -61,7 +61,6 @@ class TaskDetailView(BaseTaskView, DetailView):
         projects = Project.objects.filter(task=task)
         queryset_related = [q for q in [notes, projects] if q.exists()]
         queryset_related = list(chain(*queryset_related))
-        queryset_related = sorted(queryset_related, key=self.get_archived)
         self._queryset_related = queryset_related
         self.has_related = True
         context = super().get_context_data(**kwargs)

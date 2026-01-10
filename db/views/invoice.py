@@ -31,6 +31,8 @@ from .base import (
 from ..forms import InvoiceForm
 from ..models import Invoice, Project, Time
 
+locale.setlocale(locale.LC_ALL, "")
+
 
 class BaseInvoiceView(BaseView, SuperuserRequiredMixin):
     """Base view for Invoice model operations."""
@@ -115,14 +117,13 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
         notes = invoice.notes.all()
         times = invoice.times.all().order_by("-id")
         project = invoice.project
-        client = invoice.client
         queryset_related = [q for q in [notes, times] if q.exists()]
         if project:
             queryset_related.append([project])
-        if client:
-            queryset_related.append([client])
+            client = invoice.project.client
+            if client:
+                queryset_related.append([client])
         queryset_related = list(chain(*queryset_related))
-        queryset_related = sorted(queryset_related, key=self.get_archived)
         self._queryset_related = queryset_related
         self.has_related = True
         self.has_accordion = True

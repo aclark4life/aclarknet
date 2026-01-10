@@ -4,7 +4,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 
-from .models import Client, Company, Contact, Invoice, Note, Project, Report, Task, Time
+from .models import Client, Company, Contact, Invoice, Note, Project, Task, Time
 
 # Try to import Profile model - it may not exist in some configurations
 try:
@@ -47,13 +47,6 @@ class ClientForm(forms.ModelForm):
 
 
 class CompanyForm(forms.ModelForm):
-    client_set = forms.ModelMultipleChoiceField(
-        queryset=Client.objects.all(),
-        widget=forms.SelectMultiple(attrs={"class": "form-control"}),
-        required=False,
-        label="Clients",
-    )
-
     class Meta:
         model = Company
         fields = ("name", "url", "description")
@@ -76,9 +69,6 @@ class CompanyForm(forms.ModelForm):
             ),
             css_class="row",
         )
-
-        if self.instance.pk:
-            self.fields["client_set"].initial = self.instance.client_set.all()
 
 
 class ContactForm(forms.ModelForm):
@@ -146,32 +136,20 @@ class InvoiceForm(forms.ModelForm):
                 Field("subject", css_class="form-control bg-transparent border"),
                 css_class="col-sm-6",
             ),
-            Div(Field("user", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("start_date", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("end_date", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("issue_date", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("due_date", css_class="form-control"), css_class="col-sm-6"),
-            Div(Field("client", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("project", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("po_number", css_class="form-control"), css_class="col-sm-6"),
             css_class="row mx-1",
         )
 
-        # Sort client choices by name
-        choices = self.fields["client"].choices
-        # Skip the empty choice (first item) and sort the rest
-        if len(choices) > 1:
-            empty_choice = [choices[0]]
-            sorted_choices = sorted(choices[1:], key=lambda choice: choice[1])
-            self.fields["client"].choices = empty_choice + sorted_choices
-
     class Meta:
         model = Invoice
         fields = (
-            "user",
             "project",
             "subject",
-            "client",
             "issue_date",
             "start_date",
             "end_date",
@@ -270,46 +248,6 @@ class ProjectForm(forms.ModelForm):
             ),
             css_class="row",
         )
-
-
-class ReportForm(forms.ModelForm):
-    class Meta:
-        model = Report
-        fields = (
-            "name",
-            "date",
-            "hours",
-            "amount",
-            "cost",
-            "net",
-            "clients",
-            "invoices",
-            "projects",
-            "tasks",
-            "user",
-            "company",
-        )
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Div(
-            Div(
-                Field("name", css_class="form-control bg-transparent border"),
-                css_class="col-sm-4",
-            ),
-            Div(Field("date", css_class="form-control"), css_class="col-sm-4"),
-            Div(Field("hours", css_class="form-control"), css_class="col-sm-4"),
-            Div(Field("amount", css_class="form-control"), css_class="col-sm-4"),
-            css_class="row",
-        )
-
-    date = forms.DateField(
-        widget=forms.DateInput(attrs={"type": "date", "class": "col-2"}),
-        required=False,
-        initial=timezone.now,
-    )
 
 
 class TaskForm(forms.ModelForm):

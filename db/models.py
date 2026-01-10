@@ -9,7 +9,6 @@ class BaseModel(models.Model):
     updated = models.DateTimeField(default=timezone.now)
     name = models.CharField(max_length=300, blank=True, null=True)
     title = models.CharField(max_length=300, blank=True, null=True)
-    archived = models.BooleanField(default=False)
     active = models.BooleanField(default=True)
     published = models.BooleanField(default=False)
     notes = models.ManyToManyField("Note", blank=True)
@@ -86,7 +85,6 @@ class Contact(BaseModel):
     Fax
     """
 
-    client = models.ForeignKey(Client, blank=True, null=True, on_delete=models.SET_NULL)
     first_name = models.CharField(max_length=300, blank=True, null=True)
     last_name = models.CharField(max_length=300, blank=True, null=True)
     email = models.EmailField("E-Mail Address", blank=True, null=True)
@@ -121,7 +119,6 @@ class Invoice(BaseModel):
     )
     end_date = models.DateField("End Date", blank=True, default=timezone.now, null=True)
     po_number = models.CharField("PO Number", max_length=300, blank=True, null=True)
-    client = models.ForeignKey(Client, blank=True, null=True, on_delete=models.SET_NULL)
     amount = models.DecimalField(
         "Invoice Amount", blank=True, null=True, max_digits=12, decimal_places=2
     )
@@ -275,28 +272,6 @@ class Project(BaseModel):
         return reverse("project_view", args=[str(self.id)])
 
 
-class Report(BaseModel):
-    date = models.DateField(default=timezone.now)
-    hours = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
-    amount = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
-    cost = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
-    net = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
-    clients = models.ManyToManyField("Client", blank=True)
-    projects = models.ManyToManyField("Project", blank=True)
-    tasks = models.ManyToManyField("Task", blank=True)
-    invoices = models.ManyToManyField("Invoice", blank=True)
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, blank=True, null=True, on_delete=models.SET_NULL
-    )
-    reports = models.ManyToManyField("Report", blank=True)
-    company = models.ForeignKey(
-        "Company", blank=True, null=True, on_delete=models.SET_NULL
-    )
-
-    def get_absolute_url(self):
-        return reverse("report_view", args=[str(self.id)])
-
-
 class Task(BaseModel):
     rate = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     unit = models.DecimalField(
@@ -342,12 +317,6 @@ class Time(BaseModel):
     """
 
     invoiced = models.BooleanField(default=False)
-    client = models.ForeignKey(
-        Client,
-        blank=True,
-        null=True,
-        on_delete=models.SET_NULL,
-    )
     project = models.ForeignKey(
         Project,
         blank=True,
@@ -388,7 +357,11 @@ class Time(BaseModel):
             if self.project and self.project.default_task:
                 self.task = self.project.default_task
             # Check for user-specific default task
-            elif self.user and hasattr(self.user, 'profile') and self.user.profile.default_task:
+            elif (
+                self.user
+                and hasattr(self.user, "profile")
+                and self.user.profile.default_task
+            ):
                 self.task = self.user.profile.default_task
             # Fall back to global default task
             else:

@@ -7,7 +7,7 @@ from django.shortcuts import render, reverse
 from django.views.generic import ListView
 
 from .base import BaseView
-from ..models import Client, Company, Invoice, Note, Project, Report, Task, Time
+from ..models import Client, Company, Invoice, Note, Project, Task, Time
 
 User = get_user_model()
 
@@ -34,14 +34,8 @@ class DashboardView(BaseView, UserPassesTestMixin, ListView):
         context = super().get_context_data(**kwargs)
         context["overview_nav"] = True
 
-        user = self.request.user
-        is_admin = user.is_superuser
-
         def get_base_queryset(model):
-            """Helper to get a filtered queryset based on user status."""
-            if is_admin:
-                return model.objects.filter(archived=False)
-            return model.objects.filter(archived=False, user=user)
+            return model.objects.all()
 
         context.update(
             {
@@ -51,8 +45,7 @@ class DashboardView(BaseView, UserPassesTestMixin, ListView):
                 "notes": get_base_queryset(Note).order_by("-created"),
                 "tasks": get_base_queryset(Task).order_by("name"),
                 "clients": get_base_queryset(Client).order_by("name"),
-                "reports": get_base_queryset(Report).order_by("-created"),
-                "times": get_base_queryset(Time).order_by("-archived", "-date"),
+                "times": get_base_queryset(Time).order_by("-date"),
             }
         )
 

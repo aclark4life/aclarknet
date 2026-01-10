@@ -49,12 +49,11 @@ class UserDetailView(BaseUserMixin, BaseUserView, DetailView):
         invoices = Invoice.objects.filter(times__in=times)
 
         queryset_related = list(chain(projects, times, invoices))
-        queryset_related = sorted(queryset_related, key=self.get_archived)
         self._queryset_related = queryset_related
         self.has_related = True
         context = super().get_context_data(**kwargs)
 
-        times = Time.objects.filter(user=user, archived=False)
+        times = Time.objects.filter(user=user)
         entered = times.aggregate(total=Sum(F("hours")))
         approved = times.filter(invoice__isnull=False).aggregate(total=Sum(F("hours")))
 

@@ -43,13 +43,6 @@ from .views import (
     ProjectDetailView,
     ProjectListView,
     ProjectUpdateView,
-    ReportCopyView,
-    ReportCreateView,
-    ReportDeleteView,
-    ReportDetailView,
-    ReportEmailTextView,
-    ReportListView,
-    ReportUpdateView,
     SearchView,
     TaskCopyView,
     TaskCreateView,
@@ -69,7 +62,6 @@ from .views import (
     UserDetailView,
     UserListView,
     UserUpdateView,
-    archive,
     trigger_500,
     update_related_entries,
     update_selected_entries,
@@ -139,27 +131,6 @@ urlpatterns += [
     path("task/<object_id:pk>/update/", TaskUpdateView.as_view(), name="task_edit"),
     path("task/<object_id:pk>/delete/", TaskDeleteView.as_view(), name="task_delete"),
     path("task/<object_id:pk>/copy/", TaskCopyView.as_view(), name="task_copy"),
-]
-
-urlpatterns += [
-    path("report", ReportListView.as_view(), name="report_index"),
-    path("report", ReportListView.as_view(), name="report_cancel"),
-    path("report/create/", ReportCreateView.as_view(), name="report_create"),
-    path("report/<object_id:pk>/", ReportDetailView.as_view(), name="report_view"),
-    path(
-        "report/<object_id:pk>/update/", ReportUpdateView.as_view(), name="report_edit"
-    ),
-    path(
-        "report/<object_id:pk>/delete/",
-        ReportDeleteView.as_view(),
-        name="report_delete",
-    ),
-    path("report/<object_id:pk>/copy/", ReportCopyView.as_view(), name="report_copy"),
-    path(
-        "report/mail-text/<object_id:object_id>/",
-        ReportEmailTextView.as_view(),
-        name="report_email_text",
-    ),
 ]
 
 urlpatterns += [
@@ -286,7 +257,6 @@ urlpatterns += [
     path("search/", SearchView.as_view(), name="search"),
 ]
 
-urlpatterns += [path("archive/", archive, name="archive")]
 urlpatterns += [path("trigger_500/", trigger_500, name="trigger_500")]
 
 handler403 = "db.views.custom_403"

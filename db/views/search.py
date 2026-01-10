@@ -12,7 +12,6 @@ from ..models import (
     Invoice,
     Note,
     Project,
-    Report,
     Task,
     Time,
 )
@@ -25,7 +24,6 @@ SEARCH_MODELS = (
     Invoice,
     Note,
     Project,
-    Report,
     Task,
     Time,
     User,

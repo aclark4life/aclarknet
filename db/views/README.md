@@ -41,10 +41,6 @@ The views are organized as follows:
 - **`project.py`** - Project model CRUD views
   - `ProjectListView`, `ProjectCreateView`, `ProjectDetailView`, `ProjectUpdateView`, `ProjectDeleteView`, `ProjectCopyView`
 
-- **`report.py`** - Report model CRUD views
-  - `ReportListView`, `ReportCreateView`, `ReportDetailView`, `ReportUpdateView`, `ReportDeleteView`, `ReportCopyView`
-  - `ReportEmailTextView` - Email report as text
-
 - **`search.py`** - Search functionality
   - `SearchView` - Search across multiple models
 

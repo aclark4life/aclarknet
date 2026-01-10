@@ -4,40 +4,7 @@ from django.apps import apps
 from django.contrib import messages
 from django.db import transaction
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, reverse
-
-from ..utils import get_model_class
-
-
-def archive(request):
-    """
-    Archive or unarchive an object.
-
-    Handles archiving for both db models and users.
-    For invoices, also archives associated time entries.
-    """
-    archive = request.GET.get("archive", "true")
-    model = request.GET.get("model")
-    obj_id = request.GET.get("id")
-    obj = None
-    if model == "user":
-        ModelClass = get_model_class("User", app_label="siteuser")
-        archive_field = "is_active"
-    else:
-        ModelClass = get_model_class(model)
-        archive_field = "archived"
-    field_value = False if archive == "false" else True
-    obj = get_object_or_404(ModelClass, id=obj_id)
-    if model == "user":
-        field_value = not (field_value)
-    setattr(obj, archive_field, field_value)
-    if model == "invoice":
-        for time_entry in obj.times.all():
-            setattr(time_entry, archive_field, field_value)
-            time_entry.save()
-
-    obj.save()
-    return HttpResponseRedirect(request.headers.get("Referer"))
+from django.shortcuts import reverse
 
 
 def get_model_config(model_name):
@@ -48,65 +15,50 @@ def get_model_config(model_name):
     """
     from django.contrib.auth.models import User
 
-    # Configuration map: 'slug': {'model': Class, 'archive_field': 'field_name', 'has_user_field': bool}
+    # Configuration map: 'slug': {'model': Class, 'has_user_field': bool}
     config = {
         "user": {
             "model": User,
-            "archive_field": "is_active",
             "active_val": True,
             "has_user_field": False,
         },
-        "report": {
-            "model": apps.get_model("db", "Report"),
-            "archive_field": "archived",
-            "active_val": False,
-            "has_user_field": True,
-        },
         "invoice": {
             "model": apps.get_model("db", "Invoice"),
-            "archive_field": "archived",
             "active_val": False,
             "has_user_field": True,
         },
         "note": {
             "model": apps.get_model("db", "Note"),
-            "archive_field": "archived",
             "active_val": False,
             "has_user_field": True,
         },
         "time": {
             "model": apps.get_model("db", "Time"),
-            "archive_field": "archived",
             "active_val": False,
             "has_user_field": True,
         },
         "task": {
             "model": apps.get_model("db", "Task"),
-            "archive_field": "archived",
             "active_val": False,
             "has_user_field": False,
         },
         "client": {
             "model": apps.get_model("db", "Client"),
-            "archive_field": "archived",
             "active_val": False,
             "has_user_field": False,
         },
         "company": {
             "model": apps.get_model("db", "Company"),
-            "archive_field": "archived",
             "active_val": False,
             "has_user_field": False,
         },
         "contact": {
             "model": apps.get_model("db", "Contact"),
-            "archive_field": "archived",
             "active_val": False,
             "has_user_field": False,
         },
         "project": {
             "model": apps.get_model("db", "Project"),
-            "archive_field": "archived",
             "active_val": False,
             "has_user_field": False,
         },
@@ -171,49 +123,6 @@ def update_selected_entries(request):
             else:
                 messages.warning(request, f"No {model_name} entries were deleted.")
 
-        elif action == "archive":
-            target_field = model_conf["archive_field"]
-            target_value = not model_conf[
-                "active_val"
-            ]  # e.g., is_active=False or archived=True
-
-            entries.update(**{target_field: target_value})
-
-            # Handle Invoice specific relationship update
-            if model_name == "invoice":
-                # Optimization: Update related items in one query rather than looping
-                # Assuming 'times' is the related_name for a TimeEntry model
-                for invoice in entries:
-                    invoice.times.all().update(archived=True)
-
-            messages.success(
-                request, f"Successfully archived {count} {model_name} entries."
-            )
-
-        elif action == "unarchive":
-            target_field = model_conf["archive_field"]
-            target_value = model_conf[
-                "active_val"
-            ]  # e.g., is_active=True or archived=False
-
-            entries.update(**{target_field: target_value})
-
-            if model_name == "invoice":
-                for invoice in entries:
-                    invoice.times.all().update(archived=False)
-
-            messages.success(
-                request, f"Successfully unarchived {count} {model_name} entries."
-            )
-
-        elif action == "save":
-            # Iterate to trigger save() signals (bulk_update does not trigger signals)
-            for entry in entries:
-                entry.save()
-            messages.success(
-                request, f"Successfully saved {count} {model_name} entries."
-            )
-
         else:
             messages.error(request, "Invalid action requested.")
 
@@ -226,7 +135,7 @@ def update_selected_entries(request):
 
 def update_related_entries(request):
     """
-    Update multiple related entries (archive, delete, save, etc.).
+    Update multiple related entries (delete, save, etc.).
 
     Handles bulk operations on database entries from the dashboard.
     """
@@ -275,35 +184,6 @@ def update_related_entries(request):
                     messages.error(
                         request,
                         f"Failed to delete {model_name} entry {entry_id}: {str(e)}",
-                    )
-            elif action == "archive":
-                if model_name == "user":
-                    entry.is_active = False
-                else:
-                    entry.archived = True
-                entry.save()
-                summary_message += (
-                    f"Successfully archived {model_name} entry: {entry_id}\n"
-                )
-            elif action == "unarchive":
-                if model_name == "user":
-                    entry.is_active = True
-                else:
-                    entry.archived = False
-                entry.save()
-                summary_message += (
-                    f"Successfully unarchived {model_name} entry: {entry_id}\n"
-                )
-            elif action == "save":
-                try:
-                    entry.save()
-                    summary_message += (
-                        f"Successfully saved {model_name} entry: {entry_id}\n"
-                    )
-                except Exception as e:
-                    messages.error(
-                        request,
-                        f"Failed to save {model_name} entry {entry_id}: {str(e)}",
                     )
             else:
                 messages.error(request, "Invalid action requested.")

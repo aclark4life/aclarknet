@@ -3,16 +3,6 @@
 import locale
 
 from django import apps
-from django.db.models import BooleanField, Case, Value, When
-
-
-def get_archived_annotation():
-    """Return a Case annotation for checking if a user is archived."""
-    return Case(
-        When(is_active=False, then=Value(True)),
-        default=Value(False),
-        output_field=BooleanField(),
-    )
 
 
 def get_model_class(model_name, app_label="db"):

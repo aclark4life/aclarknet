@@ -1,6 +1,4 @@
-{% if model_name == "report" %}
-  <div class="btn-toolbar">{% include 'export/report/index.html' %}</div>
-{% elif model_name == "invoice" %}
+{% if model_name == "invoice" %}
   <div class="btn-toolbar">{% include 'export/invoice/index.html' %}</div>
 {% elif model_name == "user" %}
   <div class="btn-group">{% include 'export/user.html' %}</div>

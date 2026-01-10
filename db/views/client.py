@@ -15,7 +15,7 @@ from django.views.generic import (
 
 from .base import BaseView, SuperuserRequiredMixin
 from ..forms import ClientForm
-from ..models import Client, Company, Invoice, Task
+from ..models import Client, Company, Invoice
 
 
 class BaseClientView(BaseView, SuperuserRequiredMixin):
@@ -61,19 +61,14 @@ class ClientDetailView(BaseClientView, DetailView):
     def get_context_data(self, **kwargs):
         client = self.get_object()
         notes = client.notes.all()
-        projects = client.project_set.all().order_by("archived")
+        projects = client.project_set.all()
         company = client.company
         invoices = Invoice.objects.filter(project__in=projects)
-        reports = client.report_set.all().order_by("-created")
-        invoices = invoices.order_by("archived", "-created")
-        tasks = Task.objects.filter(project__in=projects)
-        queryset_related = [
-            q for q in [notes, projects, invoices, tasks, reports] if q.exists()
-        ]
+        invoices = invoices.order_by("-created")
+        queryset_related = [q for q in [notes, projects, invoices] if q.exists()]
         if company:
             queryset_related.insert(0, [company])
         queryset_related = list(chain(*queryset_related))
-        queryset_related = sorted(queryset_related, key=self.get_archived)
         self._queryset_related = queryset_related
         self.has_related = True
         context = super().get_context_data(**kwargs)

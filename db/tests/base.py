@@ -28,9 +28,6 @@ class BaseModelTest(TestCase):
         self.assertEqual(self.base_model.name, "Test Name")
         self.assertEqual(self.base_model.title, "Test Title")
 
-    def test_archived_field(self):
-        self.assertFalse(self.base_model.archived)
-
     def test_active_field(self):
         self.assertTrue(self.base_model.active)
 

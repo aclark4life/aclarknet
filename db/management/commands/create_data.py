@@ -112,7 +112,6 @@ class Command(BaseCommand):
         for _ in range(num_projects):
             project = Project.objects.create(
                 name=fake.sentence(),
-                client=random.choice(clients) if clients else None,
                 start_date=fake.date_this_decade(),
                 end_date=fake.date_this_decade(),
                 code=fake.random_int(min=1000, max=9999),
@@ -131,7 +130,6 @@ class Command(BaseCommand):
                 subject=fake.sentence(),
                 issue_date=fake.date_this_decade(),
                 due_date=fake.date_this_decade(),
-                client=random.choice(clients) if clients else None,
                 amount=0,
                 paid_amount=0,
                 currency="USD",
@@ -140,41 +138,45 @@ class Command(BaseCommand):
         self.stdout.write(
             self.style.SUCCESS(f"Successfully created {num_invoices} invoices")
         )
-        
+
         # Create Time Entries with calculated amounts
         for _ in range(num_times):
             task = random.choice(tasks)
             hours = fake.random_int(min=1, max=40)  # More realistic hours
             # Calculate amount from task rate * hours
-            amount = Decimal(str(task.rate)) * Decimal(str(hours)) if task.rate else Decimal('0')
-            
+            amount = (
+                Decimal(str(task.rate)) * Decimal(str(hours))
+                if task.rate
+                else Decimal("0")
+            )
+
             Time.objects.create(
                 date=fake.date_this_decade(),
                 hours=hours,
-                client=random.choice(clients) if clients else None,
+                # client=random.choice(clients) if clients else None,
                 project=random.choice(projects) if projects else None,
                 task=task,
                 user=random.choice(users),
                 invoice=random.choice(invoices) if invoices else None,
                 amount=amount,
+                description=fake.sentence(),
             )
         self.stdout.write(
             self.style.SUCCESS(f"Successfully created {num_times} time entries")
         )
-        
+
         # Update invoice amounts from their time entries
         for invoice in invoices:
             # Sum all time entries for this invoice
             time_entries = Time.objects.filter(invoice=invoice)
-            total_amount = sum((time.amount or Decimal('0')) for time in time_entries)
+            total_amount = sum((time.amount or Decimal("0")) for time in time_entries)
             invoice.amount = total_amount
-            # Set paid_amount to a random portion of total (0% to 100%)
             if total_amount > 0:
-                invoice.paid_amount = total_amount * Decimal(str(fake.random.uniform(0, 1)))
+                invoice.paid_amount = total_amount
             else:
-                invoice.paid_amount = Decimal('0')
+                invoice.paid_amount = Decimal("0")
             invoice.save()
-        
+
         self.stdout.write(
-            self.style.SUCCESS(f"Successfully updated invoice amounts from time entries")
+            self.style.SUCCESS("Successfully updated invoice amounts from time entries")
         )

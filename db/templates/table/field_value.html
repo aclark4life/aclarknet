@@ -1,9 +1,6 @@
 {% load babel humanize tz %}
 {% if field_name == "is_active" and field_value == False %}
-    {# Show archived icon if inactive user #}
-  <i class="fa-solid fa-box-archive"></i>
-{% elif field_name == "archived" and field_value == True %}
-    {# Show archived icon if item archived #}
+    {# Show icon if inactive user #}
   <i class="fa-solid fa-box-archive"></i>
 {% elif field_name == "is_active" and field_value == True %}
     {# Show nothing if active user #}
