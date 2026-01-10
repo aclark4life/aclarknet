@@ -36,12 +36,10 @@ class TagListSerializerField(serializers.Field):
     default_error_messages = {
         "not_a_list": _('Expected a list of items but got type "{input_type}".'),
         "invalid_json": _(
-            "Invalid json list. A tag list submitted in string"
-            " form must be valid json."
+            "Invalid json list. A tag list submitted in string form must be valid json."
         ),
         "not_a_str": _("All list items must be of string type."),
     }
-    order_by = None
 
     def __init__(self, **kwargs):
         pretty_print = kwargs.pop("pretty_print", True)
@@ -71,18 +69,6 @@ class TagListSerializerField(serializers.Field):
                 self.fail("not_a_str")
 
             self.child.run_validation(s)
-
-        return value
-
-    def to_representation(self, value):
-        if not isinstance(value, TagList):
-            if not isinstance(value, list):
-                if self.order_by:
-                    tags = value.all().order_by(*self.order_by)
-                else:
-                    tags = value.all()
-                value = [tag.name for tag in tags]
-            value = TagList(value, pretty_print=self.pretty_print)
 
         return value
 

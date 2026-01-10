@@ -55,7 +55,7 @@ from .forms import (
     UserForm,
 )
 from .models import Client, Company, Contact, Invoice, Note, Project, Report, Task, Time
-from .utils import get_archived_annotation, get_model_class, get_queryset
+from .utils import get_archived_annotation, get_model_class
 
 
 class BaseView:
@@ -81,10 +81,6 @@ class BaseView:
     # ---- Model-dependent helpers ----
     def _if_model(self, value):
         return value if self.model is not None else None
-
-    @property
-    def order_by(self):
-        return self._if_model(["archived", "-created"])
 
     @property
     def search(self):
@@ -194,10 +190,6 @@ class BaseView:
             context["has_related"] = True
             queryset = self.queryset_related
             related = True
-
-        # Only call order_by if it's a QuerySet, not a list
-        if hasattr(queryset, "order_by") and not self.search:
-            queryset = queryset.order_by(*self.order_by)
 
         if self.has_preview:
             context["has_preview"] = True
@@ -458,7 +450,6 @@ class BaseClientView(BaseView, SuperuserRequiredMixin):
     model = Client
     form_model = ClientForm
     form_class = ClientForm
-    order_by = ["archived", "name"]
 
 
 class ClientListView(BaseClientView, ListView):
@@ -569,7 +560,6 @@ class BaseCompanyView(BaseView, SuperuserRequiredMixin):
     model = Company
     form_model = CompanyForm
     form_class = CompanyForm
-    order_by = ["archived", "name"]
 
 
 class CompanyListView(BaseCompanyView, ListView):
@@ -670,7 +660,6 @@ class BaseContactView(BaseView, SuperuserRequiredMixin):
     form_model = ContactForm
     form_class = ContactForm
     template_name = "edit.html"
-    order_by = ["archived", "name"]
 
 
 class ContactListView(BaseContactView, ListView):
@@ -771,40 +760,32 @@ class DashboardView(BaseView, UserPassesTestMixin, ListView):
 
         context["overview_nav"] = True
 
-        filter_by = {"archived": False}
+        context = super().get_context_data(**kwargs)
+        context["overview_nav"] = True
 
-        invoices = get_queryset(
-            Invoice,
-            filter_by={"archived": False},
-            order_by=["-created"],
-        )
+        # 1. Define the common filtering logic once
+        user = self.request.user
+        is_admin = user.is_superuser
 
+        # 2. Helper to get a filtered queryset based on user status
+        def get_base(model):
+            if is_admin:
+                return model.objects.filter(archived=False)
+            return model.objects.filter(archived=False, user=user)
+
+        # 3. Assign context variables using native Django chaining
+        invoices = get_base(Invoice)
         context["invoices"] = invoices
-        context["companies"] = get_queryset(
-            Company, filter_by=filter_by, order_by=["name"]
-        )
-        context["projects"] = get_queryset(
-            Project, filter_by=filter_by, order_by=["name"]
-        )
-        context["notes"] = get_queryset(
-            Note, filter_by=filter_by, order_by=["-created"]
-        )
-        context["tasks"] = get_queryset(Task, filter_by=filter_by, order_by=["name"])
-        context["contacts"] = get_queryset(
-            Contact, filter_by=filter_by, order_by=["last_name"]
-        )
-        context["clients"] = get_queryset(
-            Client, filter_by=filter_by, order_by=["name"]
-        )
-        context["reports"] = get_queryset(
-            Report, filter_by=filter_by, order_by=["-created"]
-        )
+        context["companies"] = get_base(Company).order_by("name")
+        context["projects"] = get_base(Project).order_by("name")
+        context["notes"] = get_base(Note).order_by("-created")
+        context["tasks"] = get_base(Task).order_by("name")
+        context["contacts"] = get_base(Contact).order_by("last_name")
+        context["clients"] = get_base(Client).order_by("name")
+        context["reports"] = get_base(Report).order_by("-created")
 
-        if not self.request.user.is_superuser:
-            filter_by = {"archived": False, "user": self.request.user}
-
-        times = get_queryset(Time, filter_by=filter_by, order_by=["-archived", "-date"])
-
+        # Handle specific ordering for 'times'
+        times = get_base(Time).order_by("-archived", "-date")
         context["times"] = times
 
         entered = times["queryset"].aggregate(total=Sum(F("hours")))
@@ -1308,7 +1289,6 @@ class BaseProjectView(BaseView, SuperuserRequiredMixin):
     form_model = ProjectForm
     form_class = ProjectForm
     template_name = "edit.html"
-    order_by = ["archived", "name", "-created"]
     url_cancel = f"{model_name.lower()}_cancel"
     url_copy = f"{model_name.lower()}_copy"
     url_create = f"{model_name.lower()}_create"
@@ -2136,7 +2116,6 @@ class BaseTaskView(BaseView, SuperuserRequiredMixin):
     form_model = TaskForm
     form_class = TaskForm
     template_name = "edit.html"
-    order_by = ["archived", "name", "-created"]
 
 
 class TaskListView(BaseTaskView, ListView):
@@ -2302,7 +2281,6 @@ class BaseUserView(BaseView):
     model = User
     form_class = UserForm
     form_model = UserForm
-    order_by = ["-is_active", "username"]
 
 
 class BaseUserMixin(SuperuserRequiredMixin):

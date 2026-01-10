@@ -15,31 +15,6 @@ def get_archived_annotation():
     )
 
 
-def get_queryset(model_class, filter_by=None, order_by=None):
-    """
-    Get a queryset for a model with optional filtering and ordering.
-
-    Args:
-        model_class: Django model class
-        filter_by: Dictionary of filter parameters
-        order_by: List of ordering fields
-
-    Returns:
-        Dictionary with 'queryset' key containing the filtered/ordered queryset
-    """
-    result = {}
-    queryset = model_class.objects.all()
-
-    if filter_by:
-        queryset = queryset.filter(**filter_by)
-
-    if order_by:
-        queryset = queryset.order_by(*order_by)
-
-    result["queryset"] = queryset
-    return result
-
-
 def get_model_class(model_name, app_label="db"):
     """
     Get a Django model class by name.
