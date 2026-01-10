@@ -5,13 +5,13 @@ from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
 from faker import Faker
 
-from db.models import Company, Client, Project, Invoice, Time, Task, Profile
+from db.models import Company, Client, Contact, Project, Invoice, Time, Task, Profile
 
 fake = Faker()
 
 
 class Command(BaseCommand):
-    help = "Creates fake data for Companies, Clients, Projects, Invoices, and Times"
+    help = "Creates fake data for Companies, Clients, Contacts, Projects, Invoices, and Times"
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -19,6 +19,9 @@ class Command(BaseCommand):
         )
         parser.add_argument(
             "--clients", type=int, default=20, help="Number of clients to create"
+        )
+        parser.add_argument(
+            "--contacts", type=int, default=30, help="Number of contacts to create"
         )
         parser.add_argument(
             "--projects", type=int, default=30, help="Number of projects to create"
@@ -36,6 +39,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         num_companies = options["companies"]
         num_clients = options["clients"]
+        num_contacts = options["contacts"]
         num_projects = options["projects"]
         num_invoices = options["invoices"]
         num_times = options["times"]
@@ -95,6 +99,24 @@ class Command(BaseCommand):
             clients.append(client)
         self.stdout.write(
             self.style.SUCCESS(f"Successfully created {num_clients} clients")
+        )
+
+        # Create Contacts
+        contacts = []
+        for _ in range(num_contacts):
+            contact = Contact.objects.create(
+                first_name=fake.first_name(),
+                last_name=fake.last_name(),
+                email=fake.email(),
+                address=fake.address(),
+                number=fake.phone_number(),
+                url=fake.url(),
+                title=fake.job(),
+                client=random.choice(clients),
+            )
+            contacts.append(contact)
+        self.stdout.write(
+            self.style.SUCCESS(f"Successfully created {num_contacts} contacts")
         )
 
         # Create Tasks

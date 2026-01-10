@@ -91,6 +91,9 @@ class Contact(BaseModel):
     address = models.TextField(blank=True, null=True)
     number = models.CharField(max_length=300, blank=True, null=True)
     url = models.URLField("URL", max_length=300, blank=True, null=True)
+    client = models.ForeignKey(
+        "Client", blank=True, null=True, on_delete=models.SET_NULL
+    )
 
     def get_absolute_url(self):
         return reverse("contact_view", args=[str(self.id)])
