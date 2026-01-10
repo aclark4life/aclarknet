@@ -293,6 +293,18 @@ class Task(BaseModel):
     def get_absolute_url(self):
         return reverse("task_view", args=[str(self.id)])
 
+    @classmethod
+    def get_default_task(cls):
+        """Get or create the default task for time entries."""
+        task, created = cls.objects.get_or_create(
+            name="Default Task",
+            defaults={
+                "rate": None,
+                "unit": 1.0,
+            },
+        )
+        return task
+
 
 class Testimonial(BaseModel):
     slug = models.SlugField(blank=True, null=True)
@@ -351,6 +363,12 @@ class Time(BaseModel):
     amount = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     cost = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     net = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
+
+    def save(self, *args, **kwargs):
+        # Assign default task if no task is specified
+        if not self.task_id:
+            self.task = Task.get_default_task()
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse("time_view", args=[str(self.id)])
