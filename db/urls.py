@@ -20,6 +20,7 @@ from .views import (
     ContactDetailView,
     ContactListView,
     ContactUpdateView,
+    DashboardView,
     InvoiceCopyView,
     InvoiceCreateView,
     InvoiceDeleteView,
@@ -49,6 +50,7 @@ from .views import (
     ReportEmailTextView,
     ReportListView,
     ReportUpdateView,
+    SearchView,
     TaskCopyView,
     TaskCreateView,
     TaskDeleteView,
@@ -67,13 +69,11 @@ from .views import (
     UserDetailView,
     UserListView,
     UserUpdateView,
+    archive,
+    trigger_500,
+    update_related_entries,
+    update_selected_entries,
 )
-from .views import DashboardView
-from .views import SearchView
-from .views import archive
-from .views import trigger_500
-from .views import update_related_entries
-from .views import update_selected_entries
 
 
 # Via timgraham
