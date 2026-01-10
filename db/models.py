@@ -2,7 +2,6 @@ from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
-from phonenumber_field.modelfields import PhoneNumberField
 
 
 class BaseModel(models.Model):
@@ -92,10 +91,6 @@ class Contact(BaseModel):
     first_name = models.CharField(max_length=300, blank=True, null=True)
     last_name = models.CharField(max_length=300, blank=True, null=True)
     email = models.EmailField("E-Mail Address", blank=True, null=True)
-    mobile_phone = PhoneNumberField("Mobile Phone", blank=True, null=True)
-    office_phone = PhoneNumberField("Office Phone", blank=True, null=True)
-    phone = models.CharField(max_length=300, blank=True, null=True)
-    fax = PhoneNumberField(blank=True, null=True)
     address = models.TextField(blank=True, null=True)
     number = models.CharField(max_length=300, blank=True, null=True)
     url = models.URLField("URL", max_length=300, blank=True, null=True)
@@ -122,15 +117,11 @@ class Invoice(BaseModel):
         "Issue Date", blank=True, default=timezone.now, null=True
     )
     due_date = models.DateField("Due", blank=True, null=True)
-    last_payment_date = models.DateField(blank=True, null=True)
     start_date = models.DateField(
         "Start Date", blank=True, default=timezone.now, null=True
     )
     end_date = models.DateField("End Date", blank=True, default=timezone.now, null=True)
     po_number = models.CharField("PO Number", max_length=300, blank=True, null=True)
-    sa_number = models.CharField(
-        "Subcontractor Agreement Number", max_length=300, blank=True, null=True
-    )
     client = models.ForeignKey(Client, blank=True, null=True, on_delete=models.SET_NULL)
     task = models.ForeignKey("Task", blank=True, null=True, on_delete=models.SET_NULL)
     amount = models.DecimalField(
@@ -142,20 +133,11 @@ class Invoice(BaseModel):
     balance = models.DecimalField(
         blank=True, null=True, max_digits=12, decimal_places=2
     )
-    subtotal = models.DecimalField(
-        blank=True, null=True, max_digits=12, decimal_places=2
-    )
-    discount = models.IntegerField(blank=True, null=True)
-    tax = models.IntegerField(blank=True, null=True)
-    tax2 = models.IntegerField(blank=True, null=True)
     project = models.ForeignKey(
         "Project", blank=True, null=True, on_delete=models.SET_NULL
     )
     currency = models.CharField(
         default="United States Dollar - USD", max_length=300, blank=True, null=True
-    )
-    currency_symbol = models.CharField(
-        default="$", max_length=300, blank=True, null=True
     )
 
     # https://stackoverflow.com/a/6062320/185820
@@ -382,28 +364,6 @@ class Time(BaseModel):
     description = models.TextField(blank=True, null=True)
 
     amount = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
-
-    # IGCE
-    quantity = models.DecimalField(
-        "Quantity", default=1.0, blank=True, null=True, max_digits=12, decimal_places=2
-    )
-    unit = models.CharField(max_length=2, blank=True, null=True)
-    unit_price = models.DecimalField(
-        "Unit Price",
-        default=1.0,
-        blank=True,
-        null=True,
-        max_digits=12,
-        decimal_places=2,
-    )
-    total_price = models.DecimalField(
-        "Total Price",
-        default=1.0,
-        blank=True,
-        null=True,
-        max_digits=12,
-        decimal_places=2,
-    )
     cost = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     net = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
 
