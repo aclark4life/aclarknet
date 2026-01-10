@@ -40,6 +40,18 @@
         <ul class="nav nav-pills nav-stacked flex-column mt-5">
           <li class="nav-header">Dashboards</li>
           <li class="nav-item">
+            <a class="nav-link{% if invoice_nav %} active{% endif %}"
+               href="{% url 'invoice_index' %}">Invoices</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link{% if time_nav %} active{% endif %}"
+               href="{% url 'time_index' %}">Times</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link{% if project_nav %} active{% endif %}"
+               href="{% url 'project_index' %}">Projects</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link{% if client_nav %} active{% endif %}"
                href="{% url 'client_index' %}">Clients</a>
           </li>
