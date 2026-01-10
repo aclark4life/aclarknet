@@ -1,0 +1,18 @@
+<div class="hr-divider mt-5 mb-3">
+  <h3 class="hr-divider-content hr-divider-heading bg-light text-dark">Related</h3>
+</div>
+<div>{% include 'pagination/index.html' %}</div>
+
+{% for field_values in field_values_page %}
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">{{ field_values.title }}</h5>
+      <p class="card-text">{{ field_values.excerpt }}</p>
+      <a href="{{ field_values.url }}" class="btn btn-primary">Read More</a>
+    </div>
+  </div>
+{% endfor %}
+
+
+
+<div>{% include 'pagination/index.html' %}</div>

@@ -127,7 +127,7 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
         self._queryset_related = queryset_related
         self.has_related = True
         self.has_accordion = True
-        
+
         # Define extra field values with formatted currency
         # Use safe formatting with None checks
         self.field_values_extra = [
@@ -151,7 +151,7 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
             ),
             ("Hours", invoice.hours if invoice.hours is not None else "N/A"),
         ]
-        
+
         context = super().get_context_data(**kwargs)
         context["is_detail_view"] = True
 

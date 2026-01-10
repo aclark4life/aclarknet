@@ -25,9 +25,7 @@ class AboutView(BaseCMSView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["company_name"] = getattr(
-            settings, "COMPANY_NAME", "ACLARK.NET, LLC"
-        )
+        context["company_name"] = getattr(settings, "COMPANY_NAME", "ACLARK.NET, LLC")
         context["founded_year"] = getattr(settings, "COMPANY_FOUNDED_YEAR", 2003)
         return context
 
@@ -91,7 +89,9 @@ class ContactView(BaseCMSView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["email"] = getattr(settings, "CONTACT_EMAIL", settings.DEFAULT_FROM_EMAIL)
+        context["email"] = getattr(
+            settings, "CONTACT_EMAIL", settings.DEFAULT_FROM_EMAIL
+        )
         context["phone"] = getattr(settings, "CONTACT_PHONE", "+1-202-555-0000")
         return context
 

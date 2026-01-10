@@ -30,7 +30,7 @@ class BaseView:
     has_related = False
     has_accordion = False
     dashboard = False
-    
+
     # ---- Field values customization ----
     # Subclasses can set these to customize which fields are shown in detail views
     field_values_include = None  # List of field names to include (None = all fields)
@@ -187,14 +187,14 @@ class BaseView:
 
     def get_field_values(self, page_obj=None, search=False, related=False):
         """Get field values for display in templates.
-        
+
         For list views (page_obj provided):
             Returns a list of field value tuples for each item.
             Supports customization options:
             - field_values_include: Only include these fields
             - field_values_exclude: Exclude these fields
             - field_values_extra: Additional (name, value) tuples to append
-            
+
         For detail views (no page_obj):
             Returns field values from form_class fields, with customization options:
             - field_values_include: Only include these fields
@@ -203,20 +203,24 @@ class BaseView:
         """
         if page_obj is not None:
             results = []
-            
+
             # Get form fields for list view customization
             if hasattr(self, "form_class"):
                 if not hasattr(self, "_cached_form_fields"):
                     self._cached_form_fields = list(self.form_class().fields.keys())
                 form_fields = self._cached_form_fields.copy()
-                
+
                 # Apply field_values_include filter if specified
                 if self.field_values_include is not None:
-                    form_fields = [f for f in form_fields if f in self.field_values_include]
-                
+                    form_fields = [
+                        f for f in form_fields if f in self.field_values_include
+                    ]
+
                 # Apply field_values_exclude filter if specified
                 if self.field_values_exclude is not None:
-                    form_fields = [f for f in form_fields if f not in self.field_values_exclude]
+                    form_fields = [
+                        f for f in form_fields if f not in self.field_values_exclude
+                    ]
             else:
                 # Fallback to hardcoded attributes if no form_class
                 form_fields = ["amount", "cost", "net", "hours"]
@@ -238,7 +242,7 @@ class BaseView:
                 for field_name in form_fields:
                     if hasattr(item, field_name):
                         field_values.append((field_name, getattr(item, field_name)))
-                
+
                 # Append any extra fields specified by the view
                 if self.field_values_extra is not None:
                     field_values.extend(self.field_values_extra)
@@ -252,25 +256,24 @@ class BaseView:
             if not hasattr(self, "_cached_form_fields"):
                 self._cached_form_fields = list(self.form_class().fields.keys())
             form_fields = self._cached_form_fields.copy()
-            
+
             # Apply field_values_include filter if specified
             if self.field_values_include is not None:
                 form_fields = [f for f in form_fields if f in self.field_values_include]
-            
+
             # Apply field_values_exclude filter if specified
             if self.field_values_exclude is not None:
-                form_fields = [f for f in form_fields if f not in self.field_values_exclude]
-            
+                form_fields = [
+                    f for f in form_fields if f not in self.field_values_exclude
+                ]
+
             # Build the base field values list
-            result = [
-                (f, getattr(self.object, f))
-                for f in form_fields
-            ]
-            
+            result = [(f, getattr(self.object, f)) for f in form_fields]
+
             # Append any extra fields specified by the view
             if self.field_values_extra is not None:
                 result.extend(self.field_values_extra)
-            
+
             return result
         except (AttributeError, TypeError):
             return []

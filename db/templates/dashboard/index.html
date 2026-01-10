@@ -36,9 +36,9 @@
 
                     {# Stat Cards #}
           {% if request.user.is_superuser %}
-            {% include 'dashboard/statcards/revenue.html' %}
+            {% include 'statcards/revenue.html' %}
           {% endif %}
-          {% include 'dashboard/statcards/time.html' %}
+          {% include 'statcards/time.html' %}
 
                     {# Invoices (Admin Only) #}
           {% if request.user.is_superuser %}
@@ -61,9 +61,4 @@
       </div>
     </div>
   </div>
-
-    {# Modals #}
-  {% include 'modal/lorem.html' %}
-  {% include 'modal/hijack.html' %}
-  {% include 'modal/fullscreen.html' %}
 {% endblock %}

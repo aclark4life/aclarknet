@@ -89,7 +89,7 @@ class InvoiceRecalculationSignalTest(TestCase):
         """Test that invoice amount is calculated when a time entry is created"""
         # Create a time entry associated with the invoice
         with patch("db.signals.EmailMultiAlternatives.send"):
-            time_entry = Time.objects.create(
+            Time.objects.create(
                 user=self.user,
                 task=self.task,
                 hours=Decimal("5.0"),
@@ -146,7 +146,7 @@ class InvoiceRecalculationSignalTest(TestCase):
                 invoice=self.invoice,
                 description="Test work 1",
             )
-            time_entry2 = Time.objects.create(
+            Time.objects.create(
                 user=self.user,
                 task=self.task,
                 hours=Decimal("3.0"),
@@ -289,4 +289,3 @@ class InvoiceRecalculationSignalTest(TestCase):
             Decimal("750.00"),
             "Invoice amount should be recalculated on save",
         )
-

@@ -152,13 +152,13 @@ class TimeProjectDefaultTaskTest(TestCase):
             email="test@example.com",
             password="testpass123",
         )
-        
+
         # Create a project-specific task
         self.project_task = Task.objects.create(
             name="Project Development",
             rate=150.00,
         )
-        
+
         # Create a project with a default task
         self.project = Project.objects.create(
             name="Test Project",
@@ -232,13 +232,13 @@ class TimeUserDefaultTaskTest(TestCase):
             email="test@example.com",
             password="testpass123",
         )
-        
+
         # Create a user-specific task
         self.user_task = Task.objects.create(
             name="User Consulting",
             rate=175.00,
         )
-        
+
         # Get or create profile and set default task
         self.profile, created = Profile.objects.get_or_create(user=self.user)
         self.profile.default_task = self.user_task
@@ -265,7 +265,7 @@ class TimeUserDefaultTaskTest(TestCase):
             name="Project Priority",
             rate=200.00,
         )
-        
+
         project = Project.objects.create(
             name="Priority Project",
             default_task=project_task,
@@ -303,4 +303,3 @@ class TimeUserDefaultTaskTest(TestCase):
         # Should use global default task
         self.assertIsNotNone(time_entry.task)
         self.assertEqual(time_entry.task.name, "Default Task")
-

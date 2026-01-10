@@ -40,9 +40,9 @@
           </td>
           <td style="text-align: left; padding: 3px 0 8px 3px; width: 30%;">
             <div>
-              {{ object.company }}
+              {{ object.project.client.company }}
               <br>
-              {{ object.company.address|default:""|linebreaksbr }}
+              {{ object.project.client.company.address|default:""|linebreaksbr }}
             </div>
           </td>
         </tr>

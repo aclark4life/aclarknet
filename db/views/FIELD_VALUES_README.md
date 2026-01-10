@@ -63,10 +63,10 @@ Add additional fields with computed/formatted values:
 ```python
 class InvoiceDetailView(BaseInvoiceView, DetailView):
     template_name = "view.html"
-    
+
     def get_context_data(self, **kwargs):
         invoice = self.get_object()
-        
+
         # Set extra fields with formatted values
         self.field_values_extra = [
             ("Total", locale.currency(invoice.amount, grouping=True)),
@@ -74,7 +74,7 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
             ("Net", locale.currency(invoice.net, grouping=True)),
             ("Hours", invoice.hours),
         ]
-        
+
         return super().get_context_data(**kwargs)
 ```
 
@@ -86,7 +86,7 @@ You can combine multiple customization options:
 class ClientDetailView(BaseClientView, DetailView):
     template_name = "view.html"
     field_values_include = ["name", "email", "phone"]
-    
+
     def get_context_data(self, **kwargs):
         client = self.get_object()
         self.field_values_extra = [
@@ -139,7 +139,7 @@ Add additional computed columns:
 ```python
 class InvoiceListView(BaseInvoiceView, ListView):
     template_name = "index.html"
-    
+
     def get_context_data(self, **kwargs):
         # Add a status column to all rows
         self.field_values_extra = [
@@ -154,7 +154,7 @@ class InvoiceListView(BaseInvoiceView, ListView):
 class InvoiceListView(BaseInvoiceView, ListView):
     template_name = "index.html"
     field_values_include = ["subject", "amount", "due_date"]
-    
+
     def get_context_data(self, **kwargs):
         self.field_values_extra = [
             ("Status", "Pending"),
@@ -236,7 +236,7 @@ Tests are available in `db/tests/test_field_values.py` covering:
 **Detail Views:**
 - Default behavior (all fields)
 - Include filter
-- Exclude filter  
+- Exclude filter
 - Extra fields
 - Combined customization
 

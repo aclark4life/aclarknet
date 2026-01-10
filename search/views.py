@@ -12,10 +12,10 @@ RESULTS_PER_PAGE = 10
 def search(request):
     """
     Handle search requests for Wagtail pages.
-    
+
     Args:
         request: HTTP request with optional 'query' and 'page' GET parameters
-        
+
     Returns:
         TemplateResponse with search results and pagination
     """

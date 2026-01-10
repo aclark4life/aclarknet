@@ -24,7 +24,7 @@ This code review examines the `db` app, which is the core data management layer 
 - **Location:** `BaseModel.__str__()` (lines 27-42)
 - **Issue:** Complex fallback logic with multiple try/except blocks checking for attributes that may not exist
 - **Impact:** Fragile, hard to maintain, potential performance issues
-- **Recommendation:** 
+- **Recommendation:**
   ```python
   def __str__(self):
       if self.name:
@@ -80,7 +80,7 @@ This code review examines the `db` app, which is the core data management layer 
 **1.8 Profile model method returns None**
 - **Location:** `Profile.is_staff()` (lines 205-208)
 - **Issue:** Method returns `True` or implicitly `None` instead of boolean
-- **Recommendation:** 
+- **Recommendation:**
   ```python
   def is_staff(self):
       return self.user.is_staff if self.user else False

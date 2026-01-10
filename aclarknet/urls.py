@@ -34,11 +34,7 @@ if settings.DEBUG:
 
     urlpatterns += debug_toolbar_urls()
 
-urlpatterns = (
-    urlpatterns
-    + [
-    ]
-)
+urlpatterns = urlpatterns + []
 
 urlpatterns = urlpatterns + [
     path("", include("cms.urls")),
