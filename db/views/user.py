@@ -8,7 +8,13 @@ from django.db.models import F, Sum
 from django.http import HttpResponseRedirect
 from django.shortcuts import reverse
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    UpdateView,
+)
 
 from .base import BaseView, SuperuserRequiredMixin
 from ..forms import UserForm

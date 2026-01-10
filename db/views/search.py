@@ -5,7 +5,17 @@ from django.db.models import Q
 from django.views.generic import ListView
 
 from .base import BaseView, SuperuserRequiredMixin
-from ..models import Client, Company, Contact, Invoice, Note, Project, Report, Task, Time
+from ..models import (
+    Client,
+    Company,
+    Contact,
+    Invoice,
+    Note,
+    Project,
+    Report,
+    Task,
+    Time,
+)
 
 
 SEARCH_MODELS = (

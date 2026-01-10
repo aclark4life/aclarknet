@@ -47,7 +47,7 @@ def get_model_config(model_name):
     Includes has_user_field to indicate if the model should be filtered by user.
     """
     from django.contrib.auth.models import User
-    
+
     # Configuration map: 'slug': {'model': Class, 'archive_field': 'field_name', 'has_user_field': bool}
     config = {
         "user": {

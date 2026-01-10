@@ -1,9 +1,21 @@
 """Time-related views."""
 
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    UpdateView,
+)
 
-from .base import AuthenticatedRequiredMixin, BaseView, FilterByUserMixin, ModelCopyMixin, RedirectToObjectViewMixin
+from .base import (
+    AuthenticatedRequiredMixin,
+    BaseView,
+    FilterByUserMixin,
+    ModelCopyMixin,
+    RedirectToObjectViewMixin,
+)
 from ..forms import TimeForm
 from ..models import Time
 

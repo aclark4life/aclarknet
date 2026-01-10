@@ -8,7 +8,17 @@ from django.views.generic import ListView
 
 from .base import BaseView
 from django.contrib.auth.mixins import UserPassesTestMixin
-from ..models import Client, Company, Contact, Invoice, Note, Project, Report, Task, Time
+from ..models import (
+    Client,
+    Company,
+    Contact,
+    Invoice,
+    Note,
+    Project,
+    Report,
+    Task,
+    Time,
+)
 
 
 class DashboardView(BaseView, UserPassesTestMixin, ListView):
@@ -118,7 +128,7 @@ def save_positions(request):
 def html_mode(request):
     from django.apps import apps
     from django.shortcuts import get_object_or_404
-    
+
     html = request.GET.get("html", "true")
     model = request.GET.get("model")
     obj_id = request.GET.get("id")

@@ -4,13 +4,11 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
-from django.db.models import F, Sum
 from django.shortcuts import render, reverse
 from django.urls import reverse_lazy
 from django.views.defaults import permission_denied
 
 # Standard library imports
-from itertools import chain
 
 
 class BaseView:

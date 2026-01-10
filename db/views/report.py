@@ -6,11 +6,18 @@ from itertools import chain
 from django.db.models import F, Sum
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView, View
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    UpdateView,
+    View,
+)
 
 from .base import BaseView, SuperuserRequiredMixin
 from ..forms import ReportForm
-from ..models import Client, Company, Invoice, Project, Report, Time
+from ..models import Client, Company, Invoice, Report, Time
 
 
 def get_queryset_related(self):
@@ -255,7 +262,7 @@ class ReportCopyView(BaseReportView, CreateView):
 # Placeholder for ReportEmailTextView - not in original views.py
 class ReportEmailTextView(BaseReportView, View):
     """Placeholder for email text functionality."""
-    
+
     def get(self, request, *args, **kwargs):
         # Implementation similar to NoteEmailTextView could be added here
         pass

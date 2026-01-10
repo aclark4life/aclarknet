@@ -12,10 +12,22 @@ from django.shortcuts import get_object_or_404, redirect
 from django.template.loader import get_template
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView, View
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    UpdateView,
+    View,
+)
 from xhtml2pdf import pisa
 
-from .base import BaseView, ModelCopyMixin, RedirectToObjectViewMixin, SuperuserRequiredMixin
+from .base import (
+    BaseView,
+    ModelCopyMixin,
+    RedirectToObjectViewMixin,
+    SuperuserRequiredMixin,
+)
 from ..forms import InvoiceForm
 from ..models import Company, Invoice, Project, Time
 
