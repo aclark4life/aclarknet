@@ -21,14 +21,9 @@ class ClientForm(forms.ModelForm):
     class Meta:
         model = Client
         fields = (
-            # "publish",
-            # "link",
             "name",
             "description",
-            # "address",
             "url",
-            # "company",
-            # "tags",
         )
 
     def __init__(self, *args, **kwargs):
@@ -94,7 +89,6 @@ class ContactForm(forms.ModelForm):
             "last_name",
             "name",
             "email",
-            # "client",
             "url",
             "number",
         )
@@ -374,17 +368,10 @@ class TimeForm(forms.ModelForm):
     class Meta:
         model = Time
         fields = [
-            # "user",
             "date",
             "hours",
             "description",
-            # "client",
-            # "project",
-            # "task",
             "invoice",
-            # "amount",
-            # "net",
-            # "cost",
         ]
 
     def __init__(self, *args, **kwargs):

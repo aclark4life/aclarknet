@@ -186,7 +186,6 @@ class ProjectResource(ImportExportModelResource):
 
     class Meta:
         model = Project
-        exclude = ("task", "team")
 
     def get_instance(self, instance_loaders, row):
         return False
@@ -219,7 +218,6 @@ class ReportAdmin(ImportExportModelAdmin):
 class TaskResource(ImportExportModelResource):
     class Meta:
         model = Task
-        exclude = ("unit", "billable", "archived")
 
     def get_instance(self, instance_loaders, row):
         return False

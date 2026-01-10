@@ -87,11 +87,6 @@ class BaseView:
         return self._if_model(["archived", "-created"])
 
     @property
-    def exclude(self):
-        # Return empty list by default, let subclasses override
-        return self._if_model([])
-
-    @property
     def search(self):
         return bool(self.model)
 
@@ -277,7 +272,7 @@ class BaseView:
             return [
                 (f, getattr(self.object, f))
                 for f in object_fields
-                if f not in self.exclude and self.request.user.is_superuser
+                if self.request.user.is_superuser
             ]
         except (AttributeError, TypeError):
             return []
@@ -392,8 +387,7 @@ class ModelCopyMixin:
         original = self.model.objects.get(pk=self.kwargs["pk"])
         initial = {}
         for field in original._meta.fields:
-            if field.name not in self.exclude:
-                initial[field.name] = getattr(original, field.name)
+            initial[field.name] = getattr(original, field.name)
         return initial
 
     def form_valid(self, form):
@@ -465,15 +459,6 @@ class BaseClientView(BaseView, SuperuserRequiredMixin):
     form_model = ClientForm
     form_class = ClientForm
     order_by = ["archived", "name"]
-    exclude = [
-        "publish",
-        "link",
-        "company",
-        "tags",
-        "address",
-        "url",
-        "description",
-    ]
 
 
 class ClientListView(BaseClientView, ListView):
@@ -585,7 +570,6 @@ class BaseCompanyView(BaseView, SuperuserRequiredMixin):
     form_model = CompanyForm
     form_class = CompanyForm
     order_by = ["archived", "name"]
-    exclude = ["client_set", "description", "url"]
 
 
 class CompanyListView(BaseCompanyView, ListView):
@@ -687,7 +671,6 @@ class BaseContactView(BaseView, SuperuserRequiredMixin):
     form_class = ContactForm
     template_name = "edit.html"
     order_by = ["archived", "name"]
-    exclude = ["first_name", "last_name", "url", "number"]
 
 
 class ContactListView(BaseContactView, ListView):
@@ -903,17 +886,6 @@ class BaseInvoiceView(BaseView, SuperuserRequiredMixin):
     form_model = InvoiceForm
     form_class = InvoiceForm
     template_name = "edit.html"
-    exclude = [
-        "contacts",
-        "company",
-        "start_date",
-        "end_date",
-        "due_date",
-        "client",
-        "project",
-        "task",
-        "issue_date",
-    ]
 
 
 class InvoiceListView(BaseInvoiceView, ListView):
@@ -1191,7 +1163,6 @@ class BaseNoteView(BaseView, SuperuserRequiredMixin):
     form_model = NoteForm
     form_class = NoteForm
     template_name = "edit.html"
-    exclude = ["html"]
 
 
 class NoteListView(BaseNoteView, ListView):
@@ -1345,7 +1316,6 @@ class BaseProjectView(BaseView, SuperuserRequiredMixin):
     url_edit = f"{model_name.lower()}_edit"
     url_index = f"{model_name.lower()}_index"
     url_view = f"{model_name.lower()}_view"
-    exclude = ["client", "start_date", "end_date", "team", "description"]
 
 
 class ProjectListView(BaseProjectView, ListView):
@@ -1590,22 +1560,6 @@ class BaseReportView(BaseView, SuperuserRequiredMixin):
     url_export_pdf = "report_export_pdf"
     url_email_pdf = "report_email_pdf"
     url_email_text = "report_email_text"
-
-    exclude = [
-        "date",
-        "hours",
-        "amount",
-        "cost",
-        "net",
-        "clients",
-        "invoices",
-        "projects",
-        "tasks",
-        "contacts",
-        "user",
-        "company",
-        "team",
-    ]
 
     def get_context_data(self, **kwargs):
         """Add export and email URLs to context."""
@@ -2281,8 +2235,6 @@ class BaseTimeView(BaseView, AuthenticatedRequiredMixin):
     form_class = TimeForm
     template_name = "edit.html"
 
-    _exclude = ["client", "project", "task", "invoice"]
-
 
 class TimeCreateView(
     BaseTimeView,
@@ -2351,7 +2303,6 @@ class BaseUserView(BaseView):
     form_class = UserForm
     form_model = UserForm
     order_by = ["-is_active", "username"]
-    exclude = ["rate", "mail", "address", "first_name", "last_name"]
 
 
 class BaseUserMixin(SuperuserRequiredMixin):
