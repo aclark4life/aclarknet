@@ -40,7 +40,6 @@ export default function getPageComponents (components) {
     const props = parseProps(rest);
     domEl.innerHTML = '';
 
-    // eslint-disable-next-line no-unused-vars
     const { ErrorBoundary } = components;
     return createPortal(
       <ErrorBoundary>
