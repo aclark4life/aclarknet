@@ -59,11 +59,8 @@ class Command(BaseCommand):
                 job_title=fake.job(),
                 twitter_username=fake.user_name(),
                 slug=fake.slug(),
-                lounge_password=fake.password(),
-                lounge_username=fake.user_name(),
                 mail=fake.boolean(),
                 dark=fake.boolean(),
-                github_access_token=fake.bothify(text="github-token-##########"),
             )
             users.append(user)
         self.stdout.write(
