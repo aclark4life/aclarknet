@@ -146,7 +146,6 @@ class Invoice(BaseModel):
         blank=True, null=True, max_digits=12, decimal_places=2
     )
     discount = models.IntegerField(blank=True, null=True)
-    ein = models.IntegerField("EIN", blank=True, null=True)
     tax = models.IntegerField(blank=True, null=True)
     tax2 = models.IntegerField(blank=True, null=True)
     project = models.ForeignKey(
