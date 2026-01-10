@@ -48,7 +48,7 @@ se:
     nvim aclarknet/settings/base.py
 
 o:
-    open http://localhost:8000/admin/
+    open http://localhost:8000/dashboard/
 
 t:
     pytest db/tests/base.py
@@ -62,3 +62,6 @@ w:
 b:
     docker build -t aclarknet .
     aws ecr create-repository --repository-name aclarknet
+
+cd:
+    python manage.py create_data
