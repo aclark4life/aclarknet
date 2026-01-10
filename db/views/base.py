@@ -190,6 +190,10 @@ class BaseView:
         
         For list views (page_obj provided):
             Returns a list of field value tuples for each item.
+            Supports customization options:
+            - field_values_include: Only include these fields
+            - field_values_exclude: Exclude these fields
+            - field_values_extra: Additional (name, value) tuples to append
             
         For detail views (no page_obj):
             Returns field values from form_class fields, with customization options:
@@ -199,7 +203,23 @@ class BaseView:
         """
         if page_obj is not None:
             results = []
-            attrs_to_check = ["amount", "cost", "net", "hours"]
+            
+            # Get form fields for list view customization
+            if hasattr(self, "form_class"):
+                if not hasattr(self, "_cached_form_fields"):
+                    self._cached_form_fields = list(self.form_class().fields.keys())
+                form_fields = self._cached_form_fields.copy()
+                
+                # Apply field_values_include filter if specified
+                if self.field_values_include is not None:
+                    form_fields = [f for f in form_fields if f in self.field_values_include]
+                
+                # Apply field_values_exclude filter if specified
+                if self.field_values_exclude is not None:
+                    form_fields = [f for f in form_fields if f not in self.field_values_exclude]
+            else:
+                # Fallback to hardcoded attributes if no form_class
+                form_fields = ["amount", "cost", "net", "hours"]
 
             for item in page_obj:
                 if item is None:
@@ -214,10 +234,14 @@ class BaseView:
                 if not hasattr(page_obj, "object_list"):
                     field_values.append(("item", item))
 
-                # Dynamically add specific attributes if they exist
-                for attr in attrs_to_check:
-                    if hasattr(item, attr):
-                        field_values.append((attr, getattr(item, attr)))
+                # Add form fields that exist on the item
+                for field_name in form_fields:
+                    if hasattr(item, field_name):
+                        field_values.append((field_name, getattr(item, field_name)))
+                
+                # Append any extra fields specified by the view
+                if self.field_values_extra is not None:
+                    field_values.extend(self.field_values_extra)
 
                 results.append(field_values)
             return results
