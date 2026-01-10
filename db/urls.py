@@ -47,7 +47,6 @@ from .views import (
     ReportCreateView,
     ReportDeleteView,
     ReportDetailView,
-    ReportEmailTextView,
     ReportListView,
     ReportUpdateView,
     SearchView,
@@ -155,11 +154,6 @@ urlpatterns += [
         name="report_delete",
     ),
     path("report/<object_id:pk>/copy/", ReportCopyView.as_view(), name="report_copy"),
-    path(
-        "report/mail-text/<object_id:object_id>/",
-        ReportEmailTextView.as_view(),
-        name="report_email_text",
-    ),
 ]
 
 urlpatterns += [

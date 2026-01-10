@@ -1,7 +1,6 @@
 """Views for the db app."""
 
 # Standard library imports
-import ast
 import decimal
 import io
 import locale
@@ -18,7 +17,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 # Import your models explicitly or use apps.get_model safely
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
-from django.core.mail import EmailMessage, EmailMultiAlternatives
+from django.core.mail import EmailMessage
 from django.core.paginator import Paginator
 from django.db import transaction
 from django.db.models import F, Q, Sum
@@ -38,7 +37,6 @@ from django.views.generic import (
 )
 
 # Third-party imports
-from texttable import Texttable
 from xhtml2pdf import pisa
 
 # Local imports
@@ -789,11 +787,7 @@ class DashboardView(BaseView, UserPassesTestMixin, ListView):
         context["times"] = times
 
         entered = times.aggregate(total=Sum(F("hours")))
-        approved = (
-            times
-            .filter(invoice__isnull=False)
-            .aggregate(total=Sum(F("hours")))
-        )
+        approved = times.filter(invoice__isnull=False).aggregate(total=Sum(F("hours")))
 
         context["statcard"]["times"]["entered"] = entered
         context["statcard"]["times"]["approved"] = approved
@@ -1741,144 +1735,6 @@ class ReportCopyView(BaseReportView, CreateView):
         new_report.pk = None
         new_report.save()
         return super().form_valid(form)
-
-
-class ReportEmailTextView(BaseReportView, View):
-    def get(self, request, *args, **kwargs):
-        object_id = self.kwargs["object_id"]
-        obj = get_object_or_404(self.model, id=object_id)
-
-        subject = f"{obj.name} Report"
-
-        text_content = f"{self.model_name.upper()}\n\n"
-
-        header = Texttable()
-        header.set_deco(Texttable.VLINES)
-        header.set_cols_align(["r", "l", "r", "l"])
-
-        net, cost, amount = 0, 0, 0
-        if obj.net:
-            net = obj.net
-        if obj.cost:
-            cost = obj.cost
-        if obj.amount:
-            amount = obj.amount
-
-        contacts = obj.contacts.all()
-
-        header.add_rows(
-            [
-                ["", "", "", ""],
-                ["Id:", obj.id, "Issue Date:", f"{obj.date.strftime('%B %d, %Y')}"],
-                ["Name:", obj.name, "From:", obj.company or "Some company"],
-                ["Hours:", obj.hours, "Net:", locale.currency(net, grouping=True)],
-                [
-                    "Gross:",
-                    locale.currency(amount, grouping=True),
-                    "Cost:",
-                    locale.currency(cost, grouping=True),
-                ],
-                ["", "", "", ""] if contacts else ["", "", "", ""],
-                ["", "", "", ""],
-            ]
-        )
-
-        text_content += f"{header.draw()}\n\n"
-
-        table = Texttable()
-        table.set_deco(Texttable.HEADER)
-        table.add_row(
-            ["Invoice", "Issue Date", "Hourly Rate", "Hours", "Gross", "Cost", "Net"]
-        )
-
-        for invoice in obj.invoices.all():
-            rate = 0
-            cost = 0
-            net = 0
-            if invoice.project:
-                if invoice.project.task:
-                    rate = invoice.project.task.rate
-            if invoice.cost:
-                cost = invoice.cost
-            if invoice.net:
-                net = invoice.net
-            table.add_row(
-                [
-                    invoice.subject,
-                    f"{invoice.issue_date.strftime('%B %d, %Y')}",
-                    locale.currency(rate, grouping=True),
-                    invoice.hours,
-                    locale.currency(invoice.amount, grouping=True),
-                    locale.currency(cost, grouping=True),
-                    locale.currency(net, grouping=True),
-                ]
-            )
-            if obj.team:
-                for project in obj.team:
-                    team_member_data = ast.literal_eval(obj.team[project]).items()
-                    if invoice.project:
-                        if invoice.project.name == project:
-                            for field in team_member_data:
-                                user = User.objects.get(username=field[0])
-                                full_name = "↳ " + " ".join(
-                                    [user.first_name, user.last_name]
-                                )
-                                try:
-                                    table.add_row(
-                                        [
-                                            full_name or user.username,
-                                            "",
-                                            locale.currency(float(field[1]["rate"])),
-                                            float(field[1]["hours"]),
-                                            locale.currency(float(field[1]["gross"])),
-                                            locale.currency(float(field[1]["net"])),
-                                            locale.currency(float(field[1]["cost"])),
-                                        ]
-                                    )
-                                except ValueError:
-                                    table.add_row(
-                                        [
-                                            full_name or user.username,
-                                            "",
-                                            locale.currency(float(0)),
-                                            float(field[1]["hours"]),
-                                            locale.currency(float(field[1]["gross"])),
-                                            locale.currency(float(field[1]["net"])),
-                                            locale.currency(float(field[1]["cost"])),
-                                        ]
-                                    )
-
-        text_content += table.draw()
-
-        html_content = f"<pre>{text_content}</pre>"
-
-        contact_emails = [
-            contact.email for contact in contacts if contact.email is not None
-        ]
-
-        if contact_emails:
-            for contact_email in contact_emails:
-                email = EmailMultiAlternatives(
-                    subject, text_content, settings.DEFAULT_FROM_EMAIL, [contact_email]
-                )
-                email.attach_alternative(html_content, "text/html")
-                email.send()
-                messages.success(
-                    request, f"Email sent successfully to: {contact_email}"
-                )
-        else:
-            email = EmailMultiAlternatives(
-                subject,
-                text_content,
-                settings.DEFAULT_FROM_EMAIL,
-                [settings.DEFAULT_FROM_EMAIL],
-            )
-            email.attach_alternative(html_content, "text/html")
-            email.send()
-            messages.success(
-                request, f"Email sent successfully to: {settings.DEFAULT_FROM_EMAIL}"
-            )
-        return redirect(obj)
 
 
 SEARCH_MODELS = (
