@@ -248,7 +248,7 @@ class ProjectForm(forms.ModelForm):
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ("name", "rate", "unit")
+        fields = ("name", "project", "rate", "unit")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -261,6 +261,7 @@ class TaskForm(forms.ModelForm):
                 Field("name", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",
             ),
+            Div(Field("project", css_class="form-control"), css_class="col-sm-12"),
             Div(Field("rate", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("unit", css_class="form-control"), css_class="col-sm-6"),
             css_class="row",

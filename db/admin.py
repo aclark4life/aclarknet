@@ -215,6 +215,9 @@ class TaskResource(ImportExportModelResource):
 @admin.register(Task)
 class TaskAdmin(ImportExportModelAdmin):
     resource_class = TaskResource
+    list_display = ["name", "project", "rate", "unit"]
+    list_filter = ["project"]
+    search_fields = ["name", "project__name"]
 
 
 class TimeResource(ImportExportModelResource):
