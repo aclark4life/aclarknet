@@ -4,15 +4,30 @@
 <div>{% include 'pagination/index.html' %}</div>
 
 {% for field_values in field_values_page %}
-  <div class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title">{{ field_values.title }}</h5>
-      <p class="card-text">{{ field_values.excerpt }}</p>
-      <a href="{{ field_values.url }}" class="btn btn-primary">Read More</a>
-    </div>
-  </div>
+  {% if field_values %}
+    {% with model_name=field_values.0.1 object_id=field_values.1.1 %}
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">
+            <span class="badge bg-secondary">{{ model_name|title }}</span>
+            {% for field_name, field_value in field_values %}
+              {% if field_name == "name" or field_name == "title" or field_name == "subject" %}
+                {{ field_value }}
+              {% endif %}
+            {% endfor %}
+          </h5>
+          <div class="card-text">
+            {% for field_name, field_value in field_values %}
+              {% if field_name != "type" and field_name != "id" and field_name != "item" and field_value %}
+                <strong>{{ field_name|title }}:</strong> {{ field_value|truncatewords:10 }}<br>
+              {% endif %}
+            {% endfor %}
+          </div>
+          <a href="{% url model_name|add:'_view' object_id %}" class="btn btn-primary mt-2">View Details</a>
+        </div>
+      </div>
+    {% endwith %}
+  {% endif %}
 {% endfor %}
-
-
 
 <div>{% include 'pagination/index.html' %}</div>
