@@ -13,7 +13,7 @@ from django.views.generic import (
 
 from .base import BaseView, RedirectToObjectViewMixin, SuperuserRequiredMixin
 from ..forms import CompanyForm
-from ..models import Company, Project
+from ..models import Company, Project, Client
 
 
 class BaseCompanyView(BaseView, SuperuserRequiredMixin):
@@ -39,7 +39,7 @@ class CompanyCreateView(
         form.instance.creator = self.request.user
         company = form.save(commit=False)
         company.save()
-        company.client_set.set(form.cleaned_data["client_set"])
+        # company.client_set.set(form.cleaned_data["client_set"])
         form.save_m2m()
         return super().form_valid(form)
 
@@ -49,7 +49,8 @@ class CompanyDetailView(BaseCompanyView, DetailView):
 
     def get_context_data(self, **kwargs):
         company = self.get_object()
-        clients = company.client_set.all().order_by("name")
+        # clients = company.client_set.all().order_by("name")
+        clients = Client.objects.filter(company=company).order_by("name")
         projects = Project.objects.filter(client__in=clients).order_by("name")
         notes = company.notes.all()
         queryset_related = [q for q in [clients, notes, projects] if q.exists()]
@@ -70,7 +71,7 @@ class CompanyUpdateView(
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        form.instance.client_set.set(form.cleaned_data["client_set"])
+        # form.instance.client_set.set(form.cleaned_data["client_set"])
         return response
 
     def get_queryset(self):
