@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.contrib.auth.signals import user_logged_in
 from django.core.mail import EmailMultiAlternatives
 from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
@@ -8,7 +7,6 @@ from django.urls import reverse
 from django.utils.html import strip_tags
 
 from .models import Invoice
-from .models import Profile
 from .models import Time
 
 
@@ -17,36 +15,29 @@ def send_email_on_time_creation(sender, instance, created, **kwargs):
     if created:
         user = instance.user
         username = user.username if user else "Unknown User"
-        if user and user.profile:
-            if user.profile.mail:
-                subject = f"New Time object created by {username}"
-                time_object_url = "https://aclark.net" + reverse(
-                    "time_view", kwargs={"pk": instance.pk}
-                )
-                from_email = settings.DEFAULT_FROM_EMAIL
-                html_content = render_to_string(
-                    "email_template.html",
-                    {
-                        "time_object_url": time_object_url,
-                        "username": username,
-                        "from_email": from_email,
-                    },
-                )
-                plain_message = strip_tags(html_content)
-                email = EmailMultiAlternatives(
-                    subject,
-                    plain_message,
-                    settings.DEFAULT_FROM_EMAIL,
-                    [settings.DEFAULT_FROM_EMAIL],
-                )
-                email.attach_alternative(html_content, "text/html")
-                email.send()
-
-
-@receiver(user_logged_in)
-def create_profile(sender, user, request, **kwargs):
-    if not hasattr(user, "profile"):
-        Profile.objects.create(user=user)
+        if user:
+            subject = f"New Time object created by {username}"
+            time_object_url = "https://aclark.net" + reverse(
+                "time_view", kwargs={"pk": instance.pk}
+            )
+            from_email = settings.DEFAULT_FROM_EMAIL
+            html_content = render_to_string(
+                "email_template.html",
+                {
+                    "time_object_url": time_object_url,
+                    "username": username,
+                    "from_email": from_email,
+                },
+            )
+            plain_message = strip_tags(html_content)
+            email = EmailMultiAlternatives(
+                subject,
+                plain_message,
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.DEFAULT_FROM_EMAIL],
+            )
+            email.attach_alternative(html_content, "text/html")
+            email.send()
 
 
 @receiver(post_save, sender=Invoice)

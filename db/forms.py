@@ -1,20 +1,9 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field
 from django import forms
-from django.contrib.auth import get_user_model
 from django.utils import timezone
 
 from .models import Client, Company, Contact, Invoice, Note, Project, Task, Time
-
-# Try to import Profile model - it may not exist in some configurations
-try:
-    from .models import Profile
-
-    HAS_PROFILE = True
-except ImportError:
-    HAS_PROFILE = False
-
-User = get_user_model()
 
 
 class ClientForm(forms.ModelForm):
@@ -304,84 +293,3 @@ class TimeForm(forms.ModelForm):
         required=False,
         initial=timezone.now,
     )
-
-
-class UserForm(forms.ModelForm):
-    rate = forms.FloatField(required=False)
-    mail = forms.BooleanField(required=False)
-    address = forms.CharField(
-        required=False, widget=forms.Textarea(attrs={"rows": 4, "cols": 40})
-    )
-
-    class Meta:
-        model = User
-        fields = [
-            "username",
-            "first_name",
-            "last_name",
-            "email",
-            "rate",
-            "mail",
-            "address",
-            "is_active",
-        ]
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        profile = getattr(self.instance, "profile", None)
-        if profile:
-            self.fields["rate"].initial = profile.rate
-            self.fields["mail"].initial = profile.mail
-            self.fields["address"].initial = profile.address
-
-        self.helper = FormHelper()
-        self.helper.form_method = "post"
-        self.helper.form_class = "form-inline"
-        self.helper.form_tag = False
-        self.helper.layout = Div(
-            Div(Field("is_active"), css_class="col-sm-3"),
-            Div(Field("mail", css_class=""), css_class="col-sm-9"),
-            Div(
-                Field("username", css_class="form-control bg-transparent border"),
-                css_class="col-sm-4",
-            ),
-            Div(Field("email", css_class="form-control"), css_class="col-sm-4"),
-            Div(Field("rate", css_class="form-control"), css_class="col-sm-4"),
-            Div(
-                Field("first_name", css_class="form-control bg-transparent border"),
-                css_class="col-sm-6",
-            ),
-            Div(
-                Field("last_name", css_class="form-control bg-transparent border"),
-                css_class="col-sm-6",
-            ),
-            Div(
-                Field("address", css_class="form-control bg-transparent border"),
-                css_class="col-sm-12",
-            ),
-            css_class="row",
-        )
-
-    def save(self, commit=True):
-        user = super().save(commit=commit)
-
-        # Get or create profile for the user if Profile model is available
-        profile = getattr(user, "profile", None)
-        if not profile and HAS_PROFILE:
-            if commit:
-                profile, created = Profile.objects.get_or_create(user=user)
-            else:
-                # If not committing, we can't create the profile yet
-                profile = None
-
-        if profile:
-            profile.rate = self.cleaned_data.get("rate")
-            profile.address = self.cleaned_data.get("address")
-            profile.mail = self.cleaned_data.get("mail")
-            if commit:
-                profile.save()
-
-        if commit:
-            user.save()
-
-        return user

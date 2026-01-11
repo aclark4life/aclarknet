@@ -1,11 +1,12 @@
 import random
 from decimal import Decimal
 
-from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
 from faker import Faker
 
-from db.models import Company, Client, Contact, Project, Invoice, Time, Task, Profile
+from db.models import Company, Client, Contact, Project, Invoice, Time, Task
+
+from siteuser.models import SiteUser
 
 fake = Faker()
 
@@ -48,27 +49,11 @@ class Command(BaseCommand):
         # Create Users and Profiles
         users = []
         for _ in range(num_users):
-            user = User.objects.create_user(
+            user = SiteUser.objects.create_user(
                 username=fake.user_name(), email=fake.email(), password=fake.password()
             )
-            Profile.objects.create(
-                user=user,
-                page_size=fake.random_int(min=10, max=100),
-                rate=100,
-                unit=1,
-                avatar_url=fake.image_url(),
-                bio=fake.text(),
-                address=fake.address(),
-                job_title=fake.job(),
-                twitter_username=fake.user_name(),
-                slug=fake.slug(),
-                mail=fake.boolean(),
-                dark=fake.boolean(),
-            )
             users.append(user)
-        self.stdout.write(
-            self.style.SUCCESS(f"Successfully created {num_users} users and profiles")
-        )
+        self.stdout.write(self.style.SUCCESS(f"Successfully created {num_users} users"))
 
         # Create Companies
         companies = []

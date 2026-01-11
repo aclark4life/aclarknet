@@ -111,16 +111,6 @@ from .time import (
     TimeUpdateView,
 )
 
-# User views
-from .user import (
-    UserCopyView,
-    UserCreateView,
-    UserDeleteView,
-    UserDetailView,
-    UserListView,
-    UserUpdateView,
-)
-
 # Utility functions
 from .utils import (
     update_related_entries,

@@ -41,16 +41,6 @@ from .views import (
     ProjectUpdateView,
 )
 
-# User Views
-from .views import (
-    UserCopyView,
-    UserCreateView,
-    UserDeleteView,
-    UserDetailView,
-    UserListView,
-    UserUpdateView,
-)
-
 # Contact Views
 from .views import (
     ContactCopyView,
@@ -186,16 +176,6 @@ urlpatterns += [
     path(
         "project/<object_id:pk>/copy/", ProjectCopyView.as_view(), name="project_copy"
     ),
-]
-
-urlpatterns += [
-    path("user", UserListView.as_view(), name="user_index"),
-    path("user", UserListView.as_view(), name="user_cancel"),
-    path("user/create/", UserCreateView.as_view(), name="user_create"),
-    path("user/<object_id:pk>/", UserDetailView.as_view(), name="user_view"),
-    path("user/<object_id:pk>/update/", UserUpdateView.as_view(), name="user_edit"),
-    path("user/<object_id:pk>/delete/", UserDeleteView.as_view(), name="user_delete"),
-    path("user/<object_id:pk>/copy/", UserCopyView.as_view(), name="user_copy"),
 ]
 
 urlpatterns += [

@@ -1,8 +1,6 @@
 from decimal import Decimal
 
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.models import User
 from import_export import fields, widgets
 from import_export.admin import ImportExportModelAdmin
 from import_export.resources import ModelResource as ImportExportModelResource
@@ -12,7 +10,6 @@ from .models import Company
 from .models import Contact
 from .models import Invoice
 from .models import Note
-from .models import Profile
 from .models import Project
 from .models import Task
 from .models import Time
@@ -38,11 +35,6 @@ class DecimalWidget(widgets.Widget):
             return Decimal(value.replace(",", ""))
         else:
             return Decimal(0)
-
-
-class UserWidget(widgets.Widget):
-    def clean(self, value):
-        return value
 
 
 class ClientResource(ImportExportModelResource):
@@ -185,11 +177,6 @@ class ProjectResource(ImportExportModelResource):
             dataset.headers.append("id")
 
 
-@admin.register(Profile)
-class ProfileAdmin(ImportExportModelAdmin):
-    list_display = ("__str__", "user")
-
-
 @admin.register(Project)
 class ProjectAdmin(ImportExportModelAdmin):
     resource_class = ProjectResource
@@ -242,7 +229,6 @@ class TimeResource(ImportExportModelResource):
         attribute="task",
         widget=widgets.ForeignKeyWidget(Task, "name"),
     )
-    user = fields.Field(column_name="user", attribute="user", widget=UserWidget())
 
     class Meta:
         model = Time
@@ -263,19 +249,3 @@ class TimeResource(ImportExportModelResource):
 @admin.register(Time)
 class TimeAdmin(ImportExportModelAdmin):
     resource_class = TimeResource
-
-
-class CustomUserAdmin(UserAdmin):
-    list_display = (
-        "username",
-        "email",
-        "first_name",
-        "last_name",
-        "is_active",
-        "is_staff",
-        "is_superuser",
-    )
-
-
-admin.site.unregister(User)
-admin.site.register(User, CustomUserAdmin)

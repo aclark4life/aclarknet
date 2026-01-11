@@ -24,12 +24,14 @@ r:
 m:
     python manage.py migrate
 
-mm:
+mm: d
     rm -rvf aclarknet/migrations/
     rm -rvf cms/migrations/
     rm -rvf db/migrations/
     rm -rvf home/migrations/
-    python manage.py makemigrations admin auth contenttypes wagtailcore taggit db account socialaccount cms wagtailadmin wagtaildocs wagtailimages wagtailembeds wagtailforms wagtailredirects wagtailsearch home wagtailusers
+    rm -rvf siteuser/migrations/
+    python manage.py makemigrations admin auth contenttypes siteuser wagtailcore taggit db account socialaccount cms wagtailadmin wagtaildocs wagtailimages wagtailembeds wagtailforms wagtailredirects wagtailsearch home wagtailusers
+    python manage.py migrate
 
 d:
     mongosh ${MONGODB_URI:-mongodb://localhost:27017} --eval 'db.getSiblingDB("aclarknet").dropDatabase()'
@@ -42,7 +44,7 @@ s:
     python manage.py runserver
 
 su:
-    export DJANGO_SUPERUSER_PASSWORD=admin && python manage.py createsuperuser --noinput --username=admin --email=admin@example.com
+    export DJANGO_SUPERUSER_PASSWORD=admin && python manage.py createsuperuser --noinput --username=admin
 
 se:
     nvim aclarknet/settings/base.py
