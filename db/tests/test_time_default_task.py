@@ -182,7 +182,7 @@ class TimeProjectDefaultTaskTest(TestCase):
         self.assertEqual(time_entry.task.name, "Project Development")
 
     def test_explicit_task_overrides_project_default(self):
-        """Test that explicitly setting a task overrides the project default."""
+        """Test that project default takes priority over explicitly set task."""
         custom_task = Task.objects.create(
             name="Custom Task",
             rate=200.00,
@@ -198,9 +198,10 @@ class TimeProjectDefaultTaskTest(TestCase):
 
         time_entry.refresh_from_db()
 
-        # Should use the explicitly set task
-        self.assertEqual(time_entry.task, custom_task)
-        self.assertNotEqual(time_entry.task, self.project_task)
+        # Should use the project's default task, not the explicitly set task
+        # because project task takes priority
+        self.assertEqual(time_entry.task, self.project_task)
+        self.assertNotEqual(time_entry.task, custom_task)
 
     def test_project_without_default_uses_global_default(self):
         """Test that a project without a default task uses global default."""
@@ -245,7 +246,7 @@ class TimeUserDefaultTaskTest(TestCase):
         self.profile.save()
 
     def test_time_entry_uses_user_default_task(self):
-        """Test that a Time entry uses the user's default task."""
+        """Test that a Time entry uses the global default task when no project."""
         time_entry = Time.objects.create(
             user=self.user,
             hours=8.0,
@@ -254,10 +255,10 @@ class TimeUserDefaultTaskTest(TestCase):
 
         time_entry.refresh_from_db()
 
-        # Should use user's default task
+        # Should use global default task (user defaults no longer in priority chain)
         self.assertIsNotNone(time_entry.task)
-        self.assertEqual(time_entry.task, self.user_task)
-        self.assertEqual(time_entry.task.name, "User Consulting")
+        self.assertEqual(time_entry.task.name, "Default Task")
+        self.assertNotEqual(time_entry.task, self.user_task)
 
     def test_project_default_takes_priority_over_user_default(self):
         """Test that project default task takes priority over user default."""

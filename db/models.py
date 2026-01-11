@@ -274,6 +274,14 @@ class Project(BaseModel):
 
 
 class Task(BaseModel):
+    project = models.ForeignKey(
+        "Project",
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name="tasks",
+        help_text="Project this task belongs to (optional)",
+    )
     rate = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     unit = models.DecimalField(
         "Unit", default=1.0, blank=True, null=True, max_digits=12, decimal_places=2
@@ -351,22 +359,18 @@ class Time(BaseModel):
     net = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
 
     def save(self, *args, **kwargs):
-        # Assign default task if no task is specified
-        # Priority: explicit task > project default > user default > global default
-        if not self.task_id:
-            # Check for project-specific default task
-            if self.project and self.project.default_task:
-                self.task = self.project.default_task
-            # Check for user-specific default task
-            elif (
-                self.user
-                and hasattr(self.user, "profile")
-                and self.user.profile.default_task
-            ):
-                self.task = self.user.profile.default_task
-            # Fall back to global default task
-            else:
-                self.task = Task.get_default_task()
+        # Assign task with priority: project task > time task > default task
+        # Priority: project default > explicit task > global default
+        
+        # Check for project-specific default task (highest priority)
+        if self.project and self.project.default_task:
+            self.task = self.project.default_task
+        # If no project default but task is explicitly set, keep it
+        elif self.task_id:
+            pass  # Keep the explicit task
+        # Fall back to global default task
+        else:
+            self.task = Task.get_default_task()
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
