@@ -58,7 +58,7 @@ class TaskDetailView(BaseTaskView, DetailView):
     def get_context_data(self, **kwargs):
         task = self.get_object()
         notes = task.notes.all()
-        projects = Project.objects.filter(task=task)
+        projects = Project.objects.all()
         queryset_related = [q for q in [notes, projects] if q.exists()]
         queryset_related = list(chain(*queryset_related))
         self._queryset_related = queryset_related
