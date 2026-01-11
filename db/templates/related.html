@@ -6,7 +6,12 @@
 {% for field_values in field_values_page %}
   {% if field_values %}
     {% with model_name=field_values.0.1 object_id=field_values.1.1 %}
-      <div class="card mb-3">
+      <div
+        class="card mb-3"
+        onclick="window.location='{% url model_name|add:'_view' object_id %}'"
+        style="cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;"
+        onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)';"
+        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
         <div class="card-body">
           <h5 class="card-title">
             <span class="badge bg-secondary">{{ model_name|title }}</span>
@@ -23,7 +28,6 @@
               {% endif %}
             {% endfor %}
           </div>
-          <a href="{% url model_name|add:'_view' object_id %}" class="btn btn-primary mt-2">View Details</a>
         </div>
       </div>
     {% endwith %}
