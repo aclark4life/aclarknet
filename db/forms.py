@@ -278,6 +278,7 @@ class TimeForm(forms.ModelForm):
             "hours",
             "description",
             "invoice",
+            "task",
         ]
 
     def __init__(self, *args, **kwargs):
@@ -290,6 +291,7 @@ class TimeForm(forms.ModelForm):
             Div(Field("date", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("hours", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("invoice", css_class="form-control"), css_class="col-sm-4"),
+            Div(Field("task", css_class="form-control"), css_class="col-sm-4"),
             Div(
                 Field("description", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",
