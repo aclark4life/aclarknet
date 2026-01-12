@@ -53,7 +53,7 @@ o:
     open http://localhost:8000/dashboard/
 
 t:
-    pytest db/tests/base.py
+    pytest db/tests/
 
 n:
     npm install
