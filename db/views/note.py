@@ -14,7 +14,7 @@ from django.views.generic import (
     View,
 )
 
-from .base import BaseView, SuperuserRequiredMixin
+from .base import BaseView, FakeDataMixin, SuperuserRequiredMixin
 from ..forms import NoteForm
 from ..models import Note
 
@@ -38,10 +38,11 @@ class NoteListFullScreen(NoteListView, ListView):
     template_name = "notes/fullscreen.html"
 
 
-class NoteCreateView(BaseNoteView, CreateView):
+class NoteCreateView(FakeDataMixin, BaseNoteView, CreateView):
     model = Note
     form_model = NoteForm
     success_url = reverse_lazy("note_view")
+    fake_data_function = 'get_fake_note_data'
 
     def get_success_url(self):
         return reverse_lazy("note_view", args=[self.object.pk])

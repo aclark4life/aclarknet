@@ -14,7 +14,7 @@ from django.views.generic import (
     UpdateView,
 )
 
-from .base import BaseView, SuperuserRequiredMixin
+from .base import BaseView, FakeDataMixin, SuperuserRequiredMixin
 from ..forms import ProjectForm
 from ..models import Client, Invoice, Project
 
@@ -48,10 +48,11 @@ class ProjectListView(BaseProjectView, ListView):
         return context
 
 
-class ProjectCreateView(BaseProjectView, CreateView):
+class ProjectCreateView(FakeDataMixin, BaseProjectView, CreateView):
     model = Project
     form_model = ProjectForm
     success_url = reverse_lazy("project_view")
+    fake_data_function = 'get_fake_project_data'
 
     def get_success_url(self):
         client_id = self.request.GET.get("client_id")

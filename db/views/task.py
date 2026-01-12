@@ -13,7 +13,7 @@ from django.views.generic import (
     UpdateView,
 )
 
-from .base import BaseView, SuperuserRequiredMixin
+from .base import BaseView, FakeDataMixin, SuperuserRequiredMixin
 from ..forms import TaskForm
 from ..models import Project, Task
 
@@ -31,9 +31,10 @@ class TaskListView(BaseTaskView, ListView):
     template_name = "index.html"
 
 
-class TaskCreateView(BaseTaskView, CreateView):
+class TaskCreateView(FakeDataMixin, BaseTaskView, CreateView):
     form_model = TaskForm
     success_url = reverse_lazy("task_view")
+    fake_data_function = 'get_fake_task_data'
 
     def get_success_url(self):
         return reverse_lazy("task_view", args=[self.object.pk])

@@ -1,6 +1,7 @@
 """Base views, mixins, and error handlers for the db app."""
 
 # Django imports
+from django.conf import settings
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
@@ -9,6 +10,44 @@ from django.urls import reverse_lazy
 from django.views.defaults import permission_denied
 
 # Standard library imports
+
+
+class FakeDataMixin:
+    """Mixin to populate form initial data with fake values in DEBUG mode.
+    
+    Usage:
+        class MyCreateView(FakeDataMixin, CreateView):
+            fake_data_function = 'get_fake_client_data'  # Name of function from faker_utils
+    """
+    
+    fake_data_function = None  # Subclasses should set this to the function name
+    
+    def get_initial(self):
+        """Get initial form data, with fake data added if in DEBUG mode."""
+        initial = super().get_initial()
+        
+        # Only add fake data if in DEBUG mode and function is specified
+        if settings.DEBUG and self.fake_data_function:
+            try:
+                from ..faker_utils import get_faker
+                
+                # Only proceed if faker is available
+                if get_faker() is not None:
+                    # Import the module and get the function
+                    from .. import faker_utils
+                    fake_data_func = getattr(faker_utils, self.fake_data_function, None)
+                    
+                    if fake_data_func and callable(fake_data_func):
+                        fake_data = fake_data_func()
+                        # Only add fake values for fields that aren't already set
+                        for key, value in fake_data.items():
+                            if key not in initial or initial[key] is None:
+                                initial[key] = value
+            except (ImportError, AttributeError):
+                # Silently skip if Faker is not available or function not found
+                pass
+        
+        return initial
 
 
 class BaseView:

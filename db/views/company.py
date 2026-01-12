@@ -11,7 +11,7 @@ from django.views.generic import (
     UpdateView,
 )
 
-from .base import BaseView, RedirectToObjectViewMixin, SuperuserRequiredMixin
+from .base import BaseView, FakeDataMixin, RedirectToObjectViewMixin, SuperuserRequiredMixin
 from ..forms import CompanyForm
 from ..models import Company, Project, Client
 
@@ -29,11 +29,13 @@ class CompanyListView(BaseCompanyView, ListView):
 
 
 class CompanyCreateView(
+    FakeDataMixin,
     BaseCompanyView,
     RedirectToObjectViewMixin,
     CreateView,
 ):
     template_name = "edit.html"
+    fake_data_function = 'get_fake_company_data'
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
