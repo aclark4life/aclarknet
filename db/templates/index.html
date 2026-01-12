@@ -27,7 +27,7 @@
                   </th>
                 {% endif %}
                 {% for field_name in table_headers %}
-                  <th>{% include 'field_name.html' %}</th>
+                  <th>{{ field_name }}</th>
                 {% endfor %}
               </tr>
             </thead>
