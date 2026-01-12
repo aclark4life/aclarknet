@@ -9,7 +9,7 @@ from django.views.generic import (
     UpdateView,
 )
 
-from .base import BaseView, RedirectToObjectViewMixin, SuperuserRequiredMixin
+from .base import BaseView, FakeDataMixin, RedirectToObjectViewMixin, SuperuserRequiredMixin
 from ..forms import ContactForm
 from ..models import Contact
 
@@ -28,11 +28,12 @@ class ContactListView(BaseContactView, ListView):
 
 
 class ContactCreateView(
+    FakeDataMixin,
     BaseContactView,
     RedirectToObjectViewMixin,
     CreateView,
 ):
-    pass
+    fake_data_function = 'get_fake_contact_data'
 
 
 class ContactDetailView(BaseContactView, DetailView):

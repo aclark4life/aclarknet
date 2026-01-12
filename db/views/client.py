@@ -13,7 +13,7 @@ from django.views.generic import (
     UpdateView,
 )
 
-from .base import BaseView, SuperuserRequiredMixin
+from .base import BaseView, FakeDataMixin, SuperuserRequiredMixin
 from ..forms import ClientForm
 from ..models import Client, Company, Invoice
 
@@ -31,8 +31,9 @@ class ClientListView(BaseClientView, ListView):
     template_name = "index.html"
 
 
-class ClientCreateView(BaseClientView, CreateView):
+class ClientCreateView(FakeDataMixin, BaseClientView, CreateView):
     template_name = "edit.html"
+    fake_data_function = 'get_fake_client_data'
 
     def get_success_url(self):
         return reverse_lazy("client_view", args=[self.object.pk])

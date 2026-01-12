@@ -24,6 +24,7 @@ from xhtml2pdf import pisa
 
 from .base import (
     BaseView,
+    FakeDataMixin,
     ModelCopyMixin,
     RedirectToObjectViewMixin,
     SuperuserRequiredMixin,
@@ -48,10 +49,13 @@ class InvoiceListView(BaseInvoiceView, ListView):
 
 
 class InvoiceCreateView(
+    FakeDataMixin,
     BaseInvoiceView,
     RedirectToObjectViewMixin,
     CreateView,
 ):
+    fake_data_function = 'get_fake_invoice_data'
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         project_id = self.request.GET.get("project_id")

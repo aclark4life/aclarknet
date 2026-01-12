@@ -13,6 +13,7 @@ from django.views.generic import (
 from .base import (
     AuthenticatedRequiredMixin,
     BaseView,
+    FakeDataMixin,
     FilterByUserMixin,
     ModelCopyMixin,
     RedirectToObjectViewMixin,
@@ -31,10 +32,13 @@ class BaseTimeView(BaseView, AuthenticatedRequiredMixin):
 
 
 class TimeCreateView(
+    FakeDataMixin,
     BaseTimeView,
     RedirectToObjectViewMixin,
     CreateView,
 ):
+    fake_data_function = 'get_fake_time_data'
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         invoice_id = self.request.GET.get("invoice_id")
