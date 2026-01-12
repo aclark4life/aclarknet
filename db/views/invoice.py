@@ -126,7 +126,6 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
         queryset_related = list(chain(*queryset_related))
         self._queryset_related = queryset_related
         self.has_related = True
-        self.has_accordion = True
 
         # Define extra field values with formatted currency
         # Use safe formatting with None checks

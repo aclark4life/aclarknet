@@ -28,7 +28,6 @@ class BaseView:
     paginated = False
     page_number = 1
     has_related = False
-    has_accordion = False
     dashboard = False
 
     # ---- Field values customization ----
@@ -145,9 +144,6 @@ class BaseView:
             context["has_related"] = True
             queryset = self.queryset_related
             related = True
-
-        if self.has_accordion:
-            context["has_accordion"] = True
 
         # 4. Pagination
         paginator = Paginator(queryset, self.per_page)
