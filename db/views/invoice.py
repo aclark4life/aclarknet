@@ -131,6 +131,37 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
         self._queryset_related = queryset_related
         self.has_related = True
 
+        # Calculate user-based statistics
+        from collections import defaultdict
+        user_stats = defaultdict(lambda: {'hours': Decimal('0'), 'amount': Decimal('0'), 'rate': None})
+        
+        for time_entry in times:
+            if time_entry.user:
+                user_key = time_entry.user.username
+                user_stats[user_key]['hours'] += time_entry.hours or Decimal('0')
+                user_stats[user_key]['amount'] += time_entry.amount or Decimal('0')
+                user_stats[user_key]['rate'] = time_entry.user.rate
+                user_stats[user_key]['user'] = time_entry.user
+        
+        # Convert to list for template iteration
+        user_calculations = []
+        total_hours = Decimal('0')
+        total_amount = Decimal('0')
+        
+        for username, stats in user_stats.items():
+            user_calculations.append({
+                'user': stats['user'],
+                'username': username,
+                'hours': stats['hours'],
+                'rate': stats['rate'],
+                'amount': stats['amount'],
+            })
+            total_hours += stats['hours']
+            total_amount += stats['amount']
+        
+        # Sort by username for consistent display
+        user_calculations.sort(key=lambda x: x['username'])
+
         # Define extra field values with formatted currency
         # Use safe formatting with None checks
         # self.field_values_extra = [
@@ -160,6 +191,9 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
 
         context["times"] = times
         context["notes"] = notes
+        context["user_calculations"] = user_calculations
+        context["calc_total_hours"] = total_hours
+        context["calc_total_amount"] = total_amount
         context["url_export_doc"] = self.url_export_doc
         context["url_export_pdf"] = self.url_export_pdf
         context["url_email_doc"] = self.url_email_doc
