@@ -54,8 +54,8 @@ class InvoiceCreateView(
     RedirectToObjectViewMixin,
     CreateView,
 ):
-    fake_data_function = 'get_fake_invoice_data'
-    
+    fake_data_function = "get_fake_invoice_data"
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         project_id = self.request.GET.get("project_id")
@@ -133,27 +133,27 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
 
         # Define extra field values with formatted currency
         # Use safe formatting with None checks
-        self.field_values_extra = [
-            (
-                "Total",
-                locale.currency(invoice.amount, grouping=True)
-                if invoice.amount is not None
-                else "N/A",
-            ),
-            (
-                "Cost",
-                locale.currency(invoice.cost, grouping=True)
-                if invoice.cost is not None
-                else "N/A",
-            ),
-            (
-                "Net",
-                locale.currency(invoice.net, grouping=True)
-                if invoice.net is not None
-                else "N/A",
-            ),
-            ("Hours", invoice.hours if invoice.hours is not None else "N/A"),
-        ]
+        # self.field_values_extra = [
+        #     (
+        #         "Total",
+        #         locale.currency(invoice.amount, grouping=True)
+        #         if invoice.amount is not None
+        #         else "N/A",
+        #     ),
+        #     (
+        #         "Cost",
+        #         locale.currency(invoice.cost, grouping=True)
+        #         if invoice.cost is not None
+        #         else "N/A",
+        #     ),
+        #     (
+        #         "Net",
+        #         locale.currency(invoice.net, grouping=True)
+        #         if invoice.net is not None
+        #         else "N/A",
+        #     ),
+        #     ("Hours", invoice.hours if invoice.hours is not None else "N/A"),
+        # ]
 
         context = super().get_context_data(**kwargs)
         context["is_detail_view"] = True
