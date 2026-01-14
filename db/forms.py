@@ -122,7 +122,7 @@ class InvoiceForm(forms.ModelForm):
         self.helper.form_tag = False
         self.helper.layout = Div(
             Div(
-                Field("subject", css_class="form-control bg-transparent border"),
+                Field("name", css_class="form-control bg-transparent border"),
                 css_class="col-sm-6",
             ),
             Div(Field("start_date", css_class="form-control"), css_class="col-sm-6"),
@@ -137,7 +137,7 @@ class InvoiceForm(forms.ModelForm):
         model = Invoice
         fields = (
             "project",
-            "subject",
+            "name",
             "issue_date",
             "start_date",
             "end_date",

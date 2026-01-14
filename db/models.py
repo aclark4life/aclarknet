@@ -30,8 +30,8 @@ class BaseModel(models.Model):
             return f"{self.title}"
         else:
             try:
-                if self.subject:
-                    return f"{self.subject}"
+                if self.name:
+                    return f"{self.name}"
             except AttributeError:
                 try:
                     if self.description:
@@ -112,7 +112,7 @@ class Invoice(BaseModel):
     Currency, Currency Symbol
     """
 
-    subject = models.CharField(max_length=300, blank=True, null=True)
+    name = models.CharField(max_length=300, blank=True, null=True)
     issue_date = models.DateField(
         "Issue Date", blank=True, default=timezone.now, null=True
     )
@@ -138,7 +138,7 @@ class Invoice(BaseModel):
     )
 
     class Meta:
-        ordering = ["subject"]
+        ordering = ["name"]
 
     gross = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     net = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
@@ -156,8 +156,8 @@ class Invoice(BaseModel):
         return reverse("invoice_view", args=[str(self.id)])
 
     def save(self, *args, **kwargs):
-        if not self.subject:
-            self.subject = self.__str__()
+        if not self.name:
+            self.name = self.__str__()
         super().save(*args, **kwargs)
 
 
@@ -281,6 +281,7 @@ class Time(BaseModel):
     """
 
     invoiced = models.BooleanField(default=False)
+    name = models.CharField(max_length=300, blank=True, null=True)
     project = models.ForeignKey(
         Project,
         blank=True,
