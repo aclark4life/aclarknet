@@ -238,3 +238,6 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 LOGIN_REDIRECT_URL = "/dashboard/"
 
 AUTH_USER_MODEL = "siteuser.SiteUser"
+
+# Email settings
+DEFAULT_FROM_EMAIL = "aclark@aclark.net"
