@@ -35,6 +35,19 @@ class SiteUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     email = models.EmailField(blank=True)
+    rate = models.DecimalField(
+        "Hourly Rate",
+        blank=True,
+        null=True,
+        max_digits=12,
+        decimal_places=2,
+        help_text="User's hourly cost rate for time tracking",
+    )
+    mail = models.BooleanField(
+        "Email Notifications",
+        default=False,
+        help_text="Send email notifications for time entries",
+    )
 
     objects = SiteUserManager()
 

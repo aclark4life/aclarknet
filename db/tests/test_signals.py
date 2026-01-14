@@ -4,7 +4,7 @@ from unittest.mock import patch
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from db.models import Time, Profile, Invoice, Task, Project, Client
+from db.models import Time, Invoice, Task, Project, Client
 
 User = get_user_model()
 
@@ -15,9 +15,8 @@ class TimeSignalTest(TestCase):
     def setUp(self):
         """Set up test data"""
         self.user = User.objects.create_user(
-            username="testuser", email="test@example.com", password="testpass123"
+            username="testuser", email="test@example.com", password="testpass123", mail=True
         )
-        self.profile = Profile.objects.create(user=self.user, mail=True)
 
     def test_time_creation_with_user_and_profile(self):
         """Test that creating a time entry with a user and profile works correctly"""
@@ -30,19 +29,22 @@ class TimeSignalTest(TestCase):
             self.assertIsNotNone(time_entry.id)
 
     def test_time_creation_with_user_no_profile(self):
-        """Test that creating a time entry with a user but no profile doesn't crash"""
-        # Create a user without a profile
-        user_no_profile = User.objects.create_user(
-            username="noprofileuser",
-            email="noprofile@example.com",
+        """Test that creating a time entry with a user but without mail enabled doesn't send email"""
+        # Create a user without mail enabled
+        user_no_mail = User.objects.create_user(
+            username="nomailuser",
+            email="nomail@example.com",
             password="testpass123",
+            mail=False,
         )
 
-        # This should not raise an AttributeError
-        time_entry = Time.objects.create(
-            user=user_no_profile, hours=8.0, description="Test work without profile"
-        )
-        self.assertIsNotNone(time_entry.id)
+        # This should not send email
+        with patch("db.signals.EmailMultiAlternatives.send") as mock_send:
+            time_entry = Time.objects.create(
+                user=user_no_mail, hours=8.0, description="Test work without mail"
+            )
+            mock_send.assert_not_called()
+            self.assertIsNotNone(time_entry.id)
 
     def test_time_creation_with_none_user(self):
         """Test that creating a time entry with user=None doesn't crash"""
@@ -53,16 +55,16 @@ class TimeSignalTest(TestCase):
         self.assertIsNotNone(time_entry.id)
 
     def test_time_creation_with_user_profile_mail_false(self):
-        """Test that creating a time entry with profile.mail=False doesn't send email"""
-        # Update profile to disable email
-        self.profile.mail = False
-        self.profile.save()
+        """Test that creating a time entry with mail=False doesn't send email"""
+        # Update user to disable email
+        self.user.mail = False
+        self.user.save()
 
         with patch("db.signals.EmailMultiAlternatives.send") as mock_send:
             time_entry = Time.objects.create(
                 user=self.user, hours=8.0, description="Test work without email"
             )
-            # Email should not be sent since profile.mail=False
+            # Email should not be sent since user.mail=False
             mock_send.assert_not_called()
             self.assertIsNotNone(time_entry.id)
 
@@ -73,10 +75,11 @@ class InvoiceRecalculationSignalTest(TestCase):
     def setUp(self):
         """Set up test data"""
         self.user = User.objects.create_user(
-            username="testuser", email="test@example.com", password="testpass123"
-        )
-        self.profile = Profile.objects.create(
-            user=self.user, rate=Decimal("100.00"), mail=False
+            username="testuser",
+            email="test@example.com",
+            password="testpass123",
+            rate=Decimal("100.00"),
+            mail=False,
         )
         self.client = Client.objects.create(name="Test Client")
         self.project = Project.objects.create(name="Test Project", client=self.client)
