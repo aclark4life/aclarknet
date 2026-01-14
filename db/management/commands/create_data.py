@@ -57,7 +57,8 @@ class Command(BaseCommand):
                 username=fake.user_name(), 
                 email=fake.email(), 
                 password=fake.password(),
-                rate=rate
+                rate=rate,
+                mail=True
             )
             users.append(user)
         self.stdout.write(self.style.SUCCESS(f"Successfully created {num_users} users with rates"))

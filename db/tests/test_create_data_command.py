@@ -3,10 +3,13 @@
 from decimal import Decimal
 from io import StringIO
 
+from django.contrib.auth import get_user_model
 from django.core.management import call_command
 from django.test import TestCase
 
 from db.models import Task, Invoice, Time, Client, Contact
+
+User = get_user_model()
 
 
 class CreateDataCommandTest(TestCase):
@@ -152,3 +155,28 @@ class CreateDataCommandTest(TestCase):
                 "Contact should have at least first or last name",
             )
             self.assertIsNotNone(contact.email, "Contact should have email")
+
+    def test_users_created_with_mail_enabled(self):
+        """Test that users are created with mail=True to enable email notifications."""
+        # Run the command with minimal data
+        call_command(
+            "create_data",
+            "--companies=1",
+            "--clients=1",
+            "--projects=1",
+            "--invoices=1",
+            "--times=1",
+            "--users=3",
+            stdout=StringIO(),
+        )
+
+        # Check that users were created with mail=True
+        users = User.objects.all()
+        self.assertGreaterEqual(users.count(), 3, "Should create at least 3 users")
+
+        # Verify all users have mail enabled
+        for user in users:
+            self.assertTrue(
+                user.mail,
+                f"User {user.username} should have mail=True to receive email notifications",
+            )
