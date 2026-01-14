@@ -2,6 +2,7 @@
 
 import io
 import locale
+from decimal import Decimal
 from itertools import chain
 
 from django.conf import settings
@@ -133,34 +134,39 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
 
         # Calculate user-based statistics
         from collections import defaultdict
-        user_stats = defaultdict(lambda: {'hours': Decimal('0'), 'amount': Decimal('0'), 'rate': None})
-        
+
+        user_stats = defaultdict(
+            lambda: {"hours": Decimal("0"), "amount": Decimal("0"), "rate": None}
+        )
+
         for time_entry in times:
             if time_entry.user:
                 user_key = time_entry.user.username
-                user_stats[user_key]['hours'] += time_entry.hours or Decimal('0')
-                user_stats[user_key]['amount'] += time_entry.amount or Decimal('0')
-                user_stats[user_key]['rate'] = time_entry.user.rate
-                user_stats[user_key]['user'] = time_entry.user
-        
+                user_stats[user_key]["hours"] += time_entry.hours or Decimal("0")
+                user_stats[user_key]["amount"] += time_entry.amount or Decimal("0")
+                user_stats[user_key]["rate"] = time_entry.user.rate
+                user_stats[user_key]["user"] = time_entry.user
+
         # Convert to list for template iteration
         user_calculations = []
-        total_hours = Decimal('0')
-        total_amount = Decimal('0')
-        
+        total_hours = Decimal("0")
+        total_amount = Decimal("0")
+
         for username, stats in user_stats.items():
-            user_calculations.append({
-                'user': stats['user'],
-                'username': username,
-                'hours': stats['hours'],
-                'rate': stats['rate'],
-                'amount': stats['amount'],
-            })
-            total_hours += stats['hours']
-            total_amount += stats['amount']
-        
+            user_calculations.append(
+                {
+                    "user": stats["user"],
+                    "username": username,
+                    "hours": stats["hours"],
+                    "rate": stats["rate"],
+                    "amount": stats["amount"],
+                }
+            )
+            total_hours += stats["hours"]
+            total_amount += stats["amount"]
+
         # Sort by username for consistent display
-        user_calculations.sort(key=lambda x: x['username'])
+        user_calculations.sort(key=lambda x: x["username"])
 
         # Define extra field values with formatted currency
         # Use safe formatting with None checks

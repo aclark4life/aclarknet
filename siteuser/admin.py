@@ -21,6 +21,7 @@ class SiteUserAdmin(BaseUserAdmin):
                     "groups",
                     "user_permissions",
                     "email",
+                    "rate",
                 )
             },
         ),
