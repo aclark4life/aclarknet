@@ -15,7 +15,7 @@ def send_email_on_time_creation(sender, instance, created, **kwargs):
     if created:
         user = instance.user
         username = user.username if user else "Unknown User"
-        if user:
+        if user and user.mail:  # Only send email if user has mail enabled
             subject = f"New Time object created by {username}"
             time_object_url = "https://aclark.net" + reverse(
                 "time_view", kwargs={"pk": instance.pk}
@@ -61,7 +61,7 @@ def update_invoice(sender, instance, **kwargs):
             time.net = 0
         else:
             try:
-                time.cost = time.user.profile.rate * time.hours
+                time.cost = time.user.rate * time.hours
             except (AttributeError, TypeError):
                 time.cost = 0
             try:
