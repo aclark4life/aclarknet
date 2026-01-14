@@ -46,14 +46,21 @@ class Command(BaseCommand):
         num_times = options["times"]
         num_users = options["users"]
 
-        # Create Users and Profiles
+        # Create Users and Profiles with different rates
         users = []
-        for _ in range(num_users):
+        # Define a set of different rates for users
+        rates = [Decimal("75.00"), Decimal("100.00"), Decimal("125.00"), Decimal("150.00"), Decimal("200.00")]
+        for i in range(num_users):
+            # Cycle through rates to ensure users have different rates
+            rate = rates[i % len(rates)]
             user = SiteUser.objects.create_user(
-                username=fake.user_name(), email=fake.email(), password=fake.password()
+                username=fake.user_name(), 
+                email=fake.email(), 
+                password=fake.password(),
+                rate=rate
             )
             users.append(user)
-        self.stdout.write(self.style.SUCCESS(f"Successfully created {num_users} users"))
+        self.stdout.write(self.style.SUCCESS(f"Successfully created {num_users} users with rates"))
 
         # Create Companies
         companies = []
@@ -147,23 +154,21 @@ class Command(BaseCommand):
             self.style.SUCCESS(f"Successfully created {num_invoices} invoices")
         )
 
-        # Create Time Entries with calculated amounts
+        # Create Time Entries with calculated amounts based on user rates
         for _ in range(num_times):
             task = random.choice(tasks)
+            user = random.choice(users)
             hours = fake.random_int(min=1, max=40)  # More realistic hours
-            # Calculate amount from task rate * hours
-            amount = (
-                Decimal(str(task.rate)) * Decimal(str(hours))
-                if task.rate
-                else Decimal("0")
-            )
+            # Calculate amount from user rate * hours (prioritize user rate over task rate)
+            rate = user.rate if user.rate else (task.rate if task.rate else Decimal("0"))
+            amount = Decimal(str(rate)) * Decimal(str(hours))
 
             Time.objects.create(
                 date=fake.date_this_decade(),
                 hours=hours,
                 project=random.choice(projects),
                 task=task,
-                user=random.choice(users),
+                user=user,
                 invoice=random.choice(invoices) if invoices else None,
                 amount=amount,
                 description=fake.sentence(),
