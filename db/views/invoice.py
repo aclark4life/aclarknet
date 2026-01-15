@@ -126,6 +126,9 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
             client = invoice.project.client
             if client:
                 queryset_related.append([client])
+                # Add company through client if exists
+                if client.company:
+                    queryset_related.append([client.company])
         queryset_related = list(chain(*queryset_related))
         self._queryset_related = queryset_related
         self.has_related = True

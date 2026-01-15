@@ -1,5 +1,7 @@
 """Contact-related views."""
 
+from itertools import chain
+
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -45,6 +47,22 @@ class ContactDetailView(BaseContactView, DetailView):
     template_name = "view.html"
 
     def get_context_data(self, **kwargs):
+        contact = self.get_object()
+        queryset_related = []
+        
+        # Add client if exists
+        if contact.client:
+            queryset_related.append([contact.client])
+            
+            # Add company through client if exists
+            if contact.client.company:
+                queryset_related.append([contact.client.company])
+        
+        # Flatten the list and set as related queryset
+        if queryset_related:
+            self._queryset_related = list(chain(*queryset_related))
+            self.has_related = True
+        
         context = super().get_context_data(**kwargs)
         context["is_detail_view"] = True
         return context
