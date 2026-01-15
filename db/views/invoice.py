@@ -12,7 +12,6 @@ from django.http import FileResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.template.loader import get_template
 from django.urls import reverse_lazy
-from django.utils import timezone
 from django.views.generic import (
     CreateView,
     DeleteView,
@@ -57,47 +56,47 @@ class InvoiceCreateView(
 ):
     fake_data_function = "get_fake_invoice_data"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        project_id = self.request.GET.get("project_id")
-        now = timezone.now()
-        year = now.year
-        month = now.month
-        start_date = timezone.datetime(year, month, 1)
-        end_date = (
-            timezone.datetime(year, month, 1) + timezone.timedelta(days=32)
-        ).replace(day=1) - timezone.timedelta(days=1)
-        month = now.month + 2
-        if month > 12:
-            year += 1
-            month -= 12
-        due_date = timezone.datetime(year, month, 1)
-        month = now.month + 1
-        if month > 12:
-            year += 1
-            month -= 12
-        if month == 12:
-            year += 1
-            month = 1
-        issue_date = timezone.datetime(year, month, 1)
-        context["form"].initial = {
-            "start_date": start_date,
-            "end_date": end_date,
-            "issue_date": issue_date,
-            "due_date": due_date,
-        }
-        if project_id:
-            project = Project.objects.get(pk=project_id)
-            client = project.client
-            subject = f"{project} {now.strftime('%B %Y')}"
-            context["form"].initial.update(
-                {
-                    "subject": subject,
-                    "client": client,
-                    "project": project,
-                }
-            )
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     project_id = self.request.GET.get("project_id")
+    #     now = timezone.now()
+    #     year = now.year
+    #     month = now.month
+    #     start_date = timezone.datetime(year, month, 1)
+    #     end_date = (
+    #         timezone.datetime(year, month, 1) + timezone.timedelta(days=32)
+    #     ).replace(day=1) - timezone.timedelta(days=1)
+    #     month = now.month + 2
+    #     if month > 12:
+    #         year += 1
+    #         month -= 12
+    #     due_date = timezone.datetime(year, month, 1)
+    #     month = now.month + 1
+    #     if month > 12:
+    #         year += 1
+    #         month -= 12
+    #     if month == 12:
+    #         year += 1
+    #         month = 1
+    #     issue_date = timezone.datetime(year, month, 1)
+    #     context["form"].initial = {
+    #         "start_date": start_date,
+    #         "end_date": end_date,
+    #         "issue_date": issue_date,
+    #         "due_date": due_date,
+    #     }
+    #     if project_id:
+    #         project = Project.objects.get(pk=project_id)
+    #         client = project.client
+    #         subject = f"{project} {now.strftime('%B %Y')}"
+    #         context["form"].initial.update(
+    #             {
+    #                 "subject": subject,
+    #                 "client": client,
+    #                 "project": project,
+    #             }
+    #         )
+    #     return context
 
     def form_valid(self, form):
         self.object = form.save()
