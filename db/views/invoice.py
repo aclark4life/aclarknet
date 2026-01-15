@@ -119,10 +119,9 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
 
     def get_context_data(self, **kwargs):
         invoice = self.get_object()
-        notes = invoice.notes.all()
         times = invoice.times.all().order_by("-id")
         project = invoice.project
-        queryset_related = [q for q in [notes, times] if q.exists()]
+        queryset_related = [q for q in [times] if q.exists()]
         if project:
             queryset_related.append([project])
             client = invoice.project.client
@@ -196,7 +195,6 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
         context["is_detail_view"] = True
 
         context["times"] = times
-        context["notes"] = notes
         context["user_calculations"] = user_calculations
         context["calc_total_hours"] = total_hours
         context["calc_total_amount"] = total_amount

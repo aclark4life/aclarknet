@@ -34,7 +34,7 @@ class TaskListView(BaseTaskView, ListView):
 class TaskCreateView(FakeDataMixin, BaseTaskView, CreateView):
     form_model = TaskForm
     success_url = reverse_lazy("task_view")
-    fake_data_function = 'get_fake_task_data'
+    fake_data_function = "get_fake_task_data"
 
     def get_success_url(self):
         return reverse_lazy("task_view", args=[self.object.pk])
@@ -57,10 +57,8 @@ class TaskDetailView(BaseTaskView, DetailView):
     template_name = "view.html"
 
     def get_context_data(self, **kwargs):
-        task = self.get_object()
-        notes = task.notes.all()
         projects = Project.objects.all()
-        queryset_related = [q for q in [notes, projects] if q.exists()]
+        queryset_related = [q for q in [projects] if q.exists()]
         queryset_related = list(chain(*queryset_related))
         self._queryset_related = queryset_related
         self.has_related = True

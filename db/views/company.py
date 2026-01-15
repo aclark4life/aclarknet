@@ -11,7 +11,12 @@ from django.views.generic import (
     UpdateView,
 )
 
-from .base import BaseView, FakeDataMixin, RedirectToObjectViewMixin, SuperuserRequiredMixin
+from .base import (
+    BaseView,
+    FakeDataMixin,
+    RedirectToObjectViewMixin,
+    SuperuserRequiredMixin,
+)
 from ..forms import CompanyForm
 from ..models import Company, Project, Client
 
@@ -35,7 +40,7 @@ class CompanyCreateView(
     CreateView,
 ):
     template_name = "edit.html"
-    fake_data_function = 'get_fake_company_data'
+    fake_data_function = "get_fake_company_data"
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
@@ -54,8 +59,7 @@ class CompanyDetailView(BaseCompanyView, DetailView):
         # clients = company.client_set.all().order_by("name")
         clients = Client.objects.filter(company=company).order_by("name")
         projects = Project.objects.filter(client__in=clients).order_by("name")
-        notes = company.notes.all()
-        queryset_related = [q for q in [clients, notes, projects] if q.exists()]
+        queryset_related = [q for q in [clients, projects] if q.exists()]
         queryset_related = list(chain(*queryset_related))
         self._queryset_related = queryset_related
         self.has_related = True

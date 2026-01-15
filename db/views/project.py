@@ -89,13 +89,12 @@ class ProjectDetailView(BaseProjectView, DetailView):
 
     def get_context_data(self, **kwargs):
         project = self.get_object()
-        notes = project.notes.all()
         client = project.client
         company = None
         if client:
             company = client.company
         invoices = Invoice.objects.filter(project=project).order_by("-created")
-        queryset_related = [q for q in [notes, invoices] if q.exists()]
+        queryset_related = [q for q in [invoices] if q.exists()]
         queryset_related = list(chain(*queryset_related))
         if company:
             queryset_related.insert(0, company)

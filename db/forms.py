@@ -173,7 +173,7 @@ class InvoiceForm(forms.ModelForm):
 class NoteForm(forms.ModelForm):
     class Meta:
         model = Note
-        fields = ("text", "title")
+        fields = ("name", "text")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

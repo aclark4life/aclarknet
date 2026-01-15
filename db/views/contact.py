@@ -9,7 +9,12 @@ from django.views.generic import (
     UpdateView,
 )
 
-from .base import BaseView, FakeDataMixin, RedirectToObjectViewMixin, SuperuserRequiredMixin
+from .base import (
+    BaseView,
+    FakeDataMixin,
+    RedirectToObjectViewMixin,
+    SuperuserRequiredMixin,
+)
 from ..forms import ContactForm
 from ..models import Contact
 
@@ -33,21 +38,13 @@ class ContactCreateView(
     RedirectToObjectViewMixin,
     CreateView,
 ):
-    fake_data_function = 'get_fake_contact_data'
+    fake_data_function = "get_fake_contact_data"
 
 
 class ContactDetailView(BaseContactView, DetailView):
     template_name = "view.html"
 
     def get_context_data(self, **kwargs):
-        contact = self.get_object()
-        notes = contact.notes.all()
-        client = contact.client
-        queryset_related = [q for q in [notes] if q.exists()]
-        if client:
-            queryset_related.insert(0, client)
-        self._queryset_related = queryset_related
-        self.has_related = True
         context = super().get_context_data(**kwargs)
         context["is_detail_view"] = True
         return context

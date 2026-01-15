@@ -112,7 +112,6 @@ class Command(BaseCommand):
                 address=fake.address(),
                 number=fake.phone_number(),
                 url=fake.url(),
-                title=fake.job(),
                 client=random.choice(clients),
             )
             contacts.append(contact)

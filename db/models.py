@@ -8,10 +8,6 @@ class BaseModel(models.Model):
     created = models.DateTimeField(default=timezone.now, editable=False)
     updated = models.DateTimeField(default=timezone.now)
     name = models.CharField(max_length=300, blank=True, null=True)
-    title = models.CharField(max_length=300, blank=True, null=True)
-    active = models.BooleanField(default=True)
-    published = models.BooleanField(default=False)
-    notes = models.ManyToManyField("Note", blank=True)
 
     class Meta:
         abstract = True
@@ -24,20 +20,6 @@ class BaseModel(models.Model):
         return self._meta.verbose_name
 
     def __str__(self):
-        if self.name:
-            return f"{self.name}"
-        elif self.title:
-            return f"{self.title}"
-        else:
-            try:
-                if self.name:
-                    return f"{self.name}"
-            except AttributeError:
-                try:
-                    if self.description:
-                        return f"{self.description}"
-                except AttributeError:
-                    pass
         return f"{self.__class__.__name__.lower()}-{self.pk}"
 
     def get_absolute_url(self):

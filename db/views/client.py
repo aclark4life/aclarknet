@@ -33,7 +33,7 @@ class ClientListView(BaseClientView, ListView):
 
 class ClientCreateView(FakeDataMixin, BaseClientView, CreateView):
     template_name = "edit.html"
-    fake_data_function = 'get_fake_client_data'
+    fake_data_function = "get_fake_client_data"
 
     def get_success_url(self):
         return reverse_lazy("client_view", args=[self.object.pk])
@@ -61,12 +61,11 @@ class ClientDetailView(BaseClientView, DetailView):
 
     def get_context_data(self, **kwargs):
         client = self.get_object()
-        notes = client.notes.all()
         projects = client.project_set.all()
         company = client.company
         invoices = Invoice.objects.filter(project__in=projects)
         invoices = invoices.order_by("-created")
-        queryset_related = [q for q in [notes, projects, invoices] if q.exists()]
+        queryset_related = [q for q in [projects, invoices] if q.exists()]
         if company:
             queryset_related.insert(0, [company])
         queryset_related = list(chain(*queryset_related))
