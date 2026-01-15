@@ -5,14 +5,16 @@ from import_export import fields, widgets
 from import_export.admin import ImportExportModelAdmin
 from import_export.resources import ModelResource as ImportExportModelResource
 
-from .models import Client
-from .models import Company
-from .models import Contact
-from .models import Invoice
-from .models import Note
-from .models import Project
-from .models import Task
-from .models import Time
+from .models import (
+    Client,
+    Company,
+    Contact,
+    Invoice,
+    Note,
+    Project,
+    Task,
+    Time,
+)
 
 
 class BooleanWidget(widgets.Widget):
