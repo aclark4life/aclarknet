@@ -145,23 +145,6 @@ class ProjectResource(ImportExportModelResource):
         attribute="client",
         widget=widgets.ForeignKeyWidget(Client, "name"),
     )
-    billable_amount = fields.Field(
-        column_name="billable_amount",
-        attribute="billable_amount",
-        widget=DecimalWidget(),
-    )
-    budget = fields.Field(
-        column_name="budget", attribute="budget", widget=DecimalWidget()
-    )
-    budget_spent = fields.Field(
-        column_name="budget_spent", attribute="budget_spent", widget=DecimalWidget()
-    )
-    team_costs = fields.Field(
-        column_name="team_costs", attribute="team_costs", widget=DecimalWidget()
-    )
-    total_costs = fields.Field(
-        column_name="total_costs", attribute="total_costs", widget=DecimalWidget()
-    )
 
     class Meta:
         model = Project

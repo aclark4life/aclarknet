@@ -32,7 +32,6 @@ class Client(BaseModel):
     address = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     url = models.URLField("Website", blank=True, null=True)
-    email = models.EmailField(blank=True, null=True, default="aclark@aclark.net")
 
     class Meta:
         ordering = ["name"]
@@ -107,7 +106,6 @@ class Invoice(BaseModel):
     class Meta:
         ordering = ["name"]
 
-    gross = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     net = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     cost = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     hours = models.DecimalField(
@@ -144,28 +142,8 @@ class Project(BaseModel):
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
     code = models.IntegerField("Project Code", blank=True, null=True)
-    total_hours = models.FloatField(blank=True, null=True)
-    billable_hours = models.FloatField(blank=True, null=True)
     amount = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
-    budget = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
-    budget_spent = models.DecimalField(
-        blank=True, null=True, max_digits=12, decimal_places=2
-    )
-    budget_remaining = models.DecimalField(
-        blank=True, null=True, max_digits=12, decimal_places=2
-    )
-    total_costs = models.DecimalField(
-        blank=True, null=True, max_digits=12, decimal_places=2
-    )
-    team_costs = models.DecimalField(
-        blank=True, null=True, max_digits=12, decimal_places=2
-    )
-    cost = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
-    expenses = models.DecimalField(
-        blank=True, null=True, max_digits=12, decimal_places=2
-    )
     description = models.TextField(blank=True, null=True)
-    companies = models.ManyToManyField(Company)
     default_task = models.ForeignKey(
         "Task",
         blank=True,
