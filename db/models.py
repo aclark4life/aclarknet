@@ -10,6 +10,9 @@ class BaseModel(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False)
     updated = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=300, blank=True, null=True)
+    title = models.CharField(max_length=300, blank=True, null=True)
+    active = models.BooleanField(default=True)
+    published = models.BooleanField(default=False)
 
     class Meta:
         abstract = True
@@ -18,7 +21,10 @@ class BaseModel(models.Model):
         return self._meta.verbose_name
 
     def __str__(self):
-        return self.name or f"{self._meta.model_name}-{self.pk}"
+        return self.name or self.title or f"{self._meta.model_name}-{self.pk}"
+
+    def get_absolute_url(self):
+        raise NotImplementedError("Subclasses must implement get_absolute_url()")
 
 
 class ContactInfoMixin(models.Model):
