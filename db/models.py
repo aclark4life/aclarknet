@@ -32,8 +32,6 @@ class Client(BaseModel):
     address = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     url = models.URLField("Website", blank=True, null=True)
-    publish = models.BooleanField(default=False)
-    link = models.BooleanField(default=False)
     email = models.EmailField(blank=True, null=True, default="aclark@aclark.net")
 
     class Meta:
@@ -51,7 +49,6 @@ class Company(BaseModel):
     address = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     url = models.URLField("Website", blank=True, null=True)
-    ein = models.CharField("EIN", max_length=300, blank=True, null=True)
 
     class Meta:
         ordering = ["name"]
@@ -187,13 +184,6 @@ class Project(BaseModel):
     )
     description = models.TextField(blank=True, null=True)
     companies = models.ManyToManyField(Company)
-    draggable_positions = models.JSONField(null=True, blank=True)
-    github_project = models.CharField(
-        "GitHub Project", max_length=300, blank=True, null=True
-    )
-    github_repository = models.CharField(
-        "GitHub Repository", max_length=300, blank=True, null=True
-    )
     default_task = models.ForeignKey(
         "Task",
         blank=True,
@@ -244,7 +234,6 @@ class Task(BaseModel):
 
 
 class Testimonial(BaseModel):
-    slug = models.SlugField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     issue_date = models.DateField(
         "Issue Date", blank=True, null=True, default=timezone.now

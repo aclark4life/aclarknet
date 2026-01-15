@@ -63,9 +63,7 @@ class ClientsView(BaseCMSView):
         try:
             from db.models import Client
 
-            clients = Client.objects.filter(publish=True, archived=False).order_by(
-                "name"
-            )
+            clients = Client.objects.all().order_by("name")
             context["clients"] = clients
         except (ImportError, Exception):
             context["clients"] = getattr(
