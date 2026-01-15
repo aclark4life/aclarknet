@@ -141,7 +141,6 @@ class Project(BaseModel):
     team = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
-    code = models.IntegerField("Project Code", blank=True, null=True)
     amount = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     description = models.TextField(blank=True, null=True)
     default_task = models.ForeignKey(

@@ -134,7 +134,6 @@ class Command(BaseCommand):
                 name=fake.sentence(),
                 start_date=fake.date_this_decade(),
                 end_date=fake.date_this_decade(),
-                code=fake.random_int(min=1000, max=9999),
                 description=fake.text(),
                 client=random.choice(clients),
             )
