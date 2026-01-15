@@ -14,7 +14,7 @@
   {% if model_name == 'invoice' %}
     {% include 'accordion.html' %}
   {% endif %}
-  {% load babel humanize tz %}
+  {% load babel humanize tz text_filters %}
   <div class="accordion my-3" id="accordionDetail">
     <div class="accordion-item">
       <h2 class="accordion-header">
@@ -33,10 +33,10 @@
             <tbody>
               {% for field_name, field_value in field_values %}
                 <tr>
-                  <th>{{ field_name }}</th>
+                  <th>{{ field_name|title_case }}</th>
                   <td>
                     {% include 'field_value.html' %}
-                  </th>
+                  </td>
                 </tr>
               {% endfor %}
             </tbody>

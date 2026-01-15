@@ -1,4 +1,5 @@
 {% extends 'dashboard/index.html' %}
+{% load text_filters %}
 {% block dashboard_title %}
   <a class="text-decoration-none text-secondary"
      href="{% url urls.url_index %}">{{ model_name_plural|title }}</a>
@@ -27,7 +28,7 @@
                   </th>
                 {% endif %}
                 {% for field_name in table_headers %}
-                  <th>{{ field_name }}</th>
+                  <th>{{ field_name|title_case }}</th>
                 {% endfor %}
               </tr>
             </thead>
