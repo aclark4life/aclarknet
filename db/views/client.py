@@ -51,7 +51,8 @@ class ClientCreateView(FakeDataMixin, BaseClientView, CreateView):
         obj = form.save()
         if company_id:
             company = Company.objects.get(pk=company_id)
-            company.client_set.add(obj)
+            obj.company = company
+            obj.save()
             return HttpResponseRedirect(reverse("company_view", args=[company_id]))
         return super().form_valid(form)
 
@@ -61,7 +62,7 @@ class ClientDetailView(BaseClientView, DetailView):
 
     def get_context_data(self, **kwargs):
         client = self.get_object()
-        projects = client.project_set.all()
+        projects = client.projects.all()
         company = client.company
         invoices = Invoice.objects.filter(project__in=projects)
         invoices = invoices.order_by("-created")

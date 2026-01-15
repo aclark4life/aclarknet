@@ -79,7 +79,8 @@ class ProjectCreateView(FakeDataMixin, BaseProjectView, CreateView):
         obj = form.save()
         if client_id:
             client = Client.objects.get(pk=client_id)
-            client.project_set.add(obj)
+            obj.client = client
+            obj.save()
             return HttpResponseRedirect(reverse("client_view", args=[client_id]))
         return super().form_valid(form)
 

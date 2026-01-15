@@ -48,7 +48,8 @@ class TaskCreateView(FakeDataMixin, BaseTaskView, CreateView):
         obj = form.save()
         if project_id:
             project = Project.objects.get(pk=project_id)
-            obj.project_set.add(project)
+            obj.project = project
+            obj.save()
             return HttpResponseRedirect(reverse("project_view", args=[project_id]))
         return super().form_valid(form)
 
