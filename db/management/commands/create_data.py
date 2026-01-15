@@ -93,7 +93,6 @@ class Command(BaseCommand):
                 address=fake.address(),
                 description=fake.text(),
                 url=fake.url(),
-                email=fake.email(),
                 company=random.choice(companies),
             )
             clients.append(client)
