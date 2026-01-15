@@ -52,7 +52,9 @@ class TimeDetailViewRelatedObjectsTest(TestCase):
         context = view.get_context_data()
         
         self.assertTrue(context['has_related'])
-        self.assertIn(self.invoice, context.get('page_obj', []))
+        page_obj = context.get('page_obj', [])
+        # page_obj is a list when not paginated
+        self.assertIn(self.invoice, page_obj)
 
     def test_time_shows_project(self):
         """Test that Time detail view includes related project."""
@@ -67,7 +69,8 @@ class TimeDetailViewRelatedObjectsTest(TestCase):
         context = view.get_context_data()
         
         self.assertTrue(context['has_related'])
-        self.assertIn(self.project, context.get('page_obj', []))
+        page_obj = context.get('page_obj', [])
+        self.assertIn(self.project, page_obj)
 
     def test_time_shows_client(self):
         """Test that Time detail view includes related client."""
@@ -82,7 +85,8 @@ class TimeDetailViewRelatedObjectsTest(TestCase):
         context = view.get_context_data()
         
         self.assertTrue(context['has_related'])
-        self.assertIn(self.client, context.get('page_obj', []))
+        page_obj = context.get('page_obj', [])
+        self.assertIn(self.client, page_obj)
 
     def test_time_shows_company(self):
         """Test that Time detail view includes related company."""
@@ -97,7 +101,8 @@ class TimeDetailViewRelatedObjectsTest(TestCase):
         context = view.get_context_data()
         
         self.assertTrue(context['has_related'])
-        self.assertIn(self.company, context.get('page_obj', []))
+        page_obj = context.get('page_obj', [])
+        self.assertIn(self.company, page_obj)
 
     def test_time_without_relationships_shows_no_related(self):
         """Test that Time without relationships shows no related objects."""
@@ -151,7 +156,8 @@ class TaskDetailViewRelatedObjectsTest(TestCase):
         context = view.get_context_data()
         
         self.assertTrue(context['has_related'])
-        self.assertIn(self.project, context.get('page_obj', []))
+        page_obj = context.get('page_obj', [])
+        self.assertIn(self.project, page_obj)
 
     def test_task_shows_client(self):
         """Test that Task detail view includes related client."""
@@ -166,7 +172,8 @@ class TaskDetailViewRelatedObjectsTest(TestCase):
         context = view.get_context_data()
         
         self.assertTrue(context['has_related'])
-        self.assertIn(self.client, context.get('page_obj', []))
+        page_obj = context.get('page_obj', [])
+        self.assertIn(self.client, page_obj)
 
     def test_task_shows_company(self):
         """Test that Task detail view includes related company."""
@@ -181,7 +188,8 @@ class TaskDetailViewRelatedObjectsTest(TestCase):
         context = view.get_context_data()
         
         self.assertTrue(context['has_related'])
-        self.assertIn(self.company, context.get('page_obj', []))
+        page_obj = context.get('page_obj', [])
+        self.assertIn(self.company, page_obj)
 
 
 class InvoiceDetailViewRelatedObjectsTest(TestCase):
@@ -215,7 +223,8 @@ class InvoiceDetailViewRelatedObjectsTest(TestCase):
         context = view.get_context_data()
         
         self.assertTrue(context['has_related'])
-        self.assertIn(self.company, context.get('page_obj', []))
+        page_obj = context.get('page_obj', [])
+        self.assertIn(self.company, page_obj)
 
 
 class ContactDetailViewRelatedObjectsTest(TestCase):
@@ -253,7 +262,8 @@ class ContactDetailViewRelatedObjectsTest(TestCase):
         context = view.get_context_data()
         
         self.assertTrue(context['has_related'])
-        self.assertIn(self.client, context.get('page_obj', []))
+        page_obj = context.get('page_obj', [])
+        self.assertIn(self.client, page_obj)
 
     def test_contact_shows_company(self):
         """Test that Contact detail view includes related company."""
@@ -268,4 +278,5 @@ class ContactDetailViewRelatedObjectsTest(TestCase):
         context = view.get_context_data()
         
         self.assertTrue(context['has_related'])
-        self.assertIn(self.company, context.get('page_obj', []))
+        page_obj = context.get('page_obj', [])
+        self.assertIn(self.company, page_obj)
