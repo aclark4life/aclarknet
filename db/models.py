@@ -205,7 +205,6 @@ class Time(BaseModel):
     hours = models.DecimalField("Hours", default=1.0, max_digits=12, decimal_places=2)
     description = models.TextField(blank=True, null=True)
 
-    # Restoring missing fields for the Time model
     amount = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     cost = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     net = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
