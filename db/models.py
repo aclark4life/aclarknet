@@ -59,11 +59,6 @@ class Company(BaseModel):
 
 
 class Contact(BaseModel):
-    """
-    Client, First Name, Last Name, Title, Email, Office Phone, Mobile Phone,
-    Fax
-    """
-
     first_name = models.CharField(max_length=300, blank=True, null=True)
     last_name = models.CharField(max_length=300, blank=True, null=True)
     email = models.EmailField("E-Mail Address", blank=True, null=True)
@@ -85,13 +80,6 @@ class Contact(BaseModel):
 
 
 class Invoice(BaseModel):
-    """
-    Issue Date, Last Payment Date, Invoice ID, PO Number, Client, Subject,
-    Invoice Amount, Paid Amount, Balance, Subtotal, Discount, Tax, Tax2,
-    Currency, Currency Symbol
-    """
-
-    name = models.CharField(max_length=300, blank=True, null=True)
     issue_date = models.DateField(
         "Issue Date", blank=True, default=timezone.now, null=True
     )
@@ -151,12 +139,6 @@ class Note(BaseModel):
 
 
 class Project(BaseModel):
-    """
-    Client, Project, Project Code, Start Date, End Date,
-    Total Hours, Billable Hours, Billable Amount, Budget, Budget Spent,
-    Budget Remaining, Total Costs, Team Costs, Expenses
-    """
-
     client = models.ForeignKey(Client, blank=True, null=True, on_delete=models.SET_NULL)
     team = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
     start_date = models.DateField(blank=True, null=True)
@@ -244,15 +226,6 @@ class Testimonial(BaseModel):
 
 
 class Time(BaseModel):
-    """
-    Date, Client, Project, Project Code, Task, Hours, Billable?,
-    Invoiced?, First Name, Last Name, Department, Employee?, Billable
-    Rate, Billable Amount, Cost Rate, Cost Amount, Currency,
-    External Reference URL
-    """
-
-    invoiced = models.BooleanField(default=False)
-    name = models.CharField(max_length=300, blank=True, null=True)
     project = models.ForeignKey(
         Project,
         blank=True,
