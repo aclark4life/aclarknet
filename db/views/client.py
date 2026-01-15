@@ -62,7 +62,7 @@ class ClientDetailView(BaseClientView, DetailView):
 
     def get_context_data(self, **kwargs):
         client = self.get_object()
-        projects = client.project_set.all()
+        projects = client.projects.all()
         company = client.company
         invoices = Invoice.objects.filter(project__in=projects)
         invoices = invoices.order_by("-created")
