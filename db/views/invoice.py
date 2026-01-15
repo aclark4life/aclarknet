@@ -99,12 +99,10 @@ class InvoiceCreateView(
     #     return context
 
     def form_valid(self, form):
-        self.object = form.save()
         project_id = self.request.GET.get("project_id")
         if project_id:
             project = Project.objects.get(pk=project_id)
-            self.object.project = project
-            self.object.save()
+            form.instance.project = project
         return super().form_valid(form)
 
 
@@ -232,7 +230,6 @@ class InvoiceUpdateView(
         return queryset.filter(pk=self.kwargs["pk"])
 
     def form_valid(self, form):
-        self.object = form.save()
         return super().form_valid(form)
 
 
