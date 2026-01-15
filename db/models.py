@@ -3,242 +3,239 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 
+# --- Base Classes & Mixins ---
+
 
 class BaseModel(models.Model):
-    created = models.DateTimeField(default=timezone.now, editable=False)
-    updated = models.DateTimeField(default=timezone.now)
+    created = models.DateTimeField(auto_now_add=True, editable=False)
+    updated = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=300, blank=True, null=True)
 
     class Meta:
         abstract = True
 
-    def save(self, *args, **kwargs):
-        self.updated = timezone.now()
-        super(BaseModel, self).save(*args, **kwargs)
-
     def get_model_name(self):
         return self._meta.verbose_name
 
     def __str__(self):
-        return f"{self.__class__.__name__.lower()}-{self.pk}"
-
-    def get_absolute_url(self):
-        raise NotImplementedError(
-            "Subclass of ModelWithUrl must define get_absolute_url()"
-        )
+        return self.name or f"{self._meta.model_name}-{self.pk}"
 
 
-class Client(BaseModel):
+class ContactInfoMixin(models.Model):
     address = models.TextField(blank=True, null=True)
     description = models.TextField(blank=True, null=True)
-    url = models.URLField("Website", blank=True, null=True)
+    url = models.URLField("Website/URL", max_length=300, blank=True, null=True)
 
     class Meta:
-        ordering = ["name"]
-
-    company = models.ForeignKey(
-        "Company", blank=True, null=True, on_delete=models.SET_NULL
-    )
-
-    def get_absolute_url(self):
-        return reverse("client_view", args=[str(self.id)])
+        abstract = True
 
 
-class Company(BaseModel):
-    address = models.TextField(blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    url = models.URLField("Website", blank=True, null=True)
+# --- Concrete Models ---
 
+
+class Company(BaseModel, ContactInfoMixin):
     class Meta:
         ordering = ["name"]
         verbose_name_plural = "companies"
 
     def get_absolute_url(self):
-        return reverse("company_view", args=[str(self.id)])
+        return reverse("company_view", args=[self.id])
 
 
-class Contact(BaseModel):
-    first_name = models.CharField(max_length=300, blank=True, null=True)
-    last_name = models.CharField(max_length=300, blank=True, null=True)
-    email = models.EmailField("E-Mail Address", blank=True, null=True)
-    address = models.TextField(blank=True, null=True)
-    number = models.CharField(max_length=300, blank=True, null=True)
-    url = models.URLField("URL", max_length=300, blank=True, null=True)
-    client = models.ForeignKey(
-        "Client", blank=True, null=True, on_delete=models.SET_NULL
-    )
-
-    def get_absolute_url(self):
-        return reverse("contact_view", args=[str(self.id)])
-
-    def save(self, *args, **kwargs):
-        if not self.name:
-            if self.first_name and self.last_name:
-                self.name = f"{self.first_name} {self.last_name}"
-        super().save(*args, **kwargs)
-
-
-class Invoice(BaseModel):
-    issue_date = models.DateField(
-        "Issue Date", blank=True, default=timezone.now, null=True
-    )
-    due_date = models.DateField("Due", blank=True, null=True)
-    start_date = models.DateField(
-        "Start Date", blank=True, default=timezone.now, null=True
-    )
-    end_date = models.DateField("End Date", blank=True, default=timezone.now, null=True)
-    amount = models.DecimalField(
-        "Invoice Amount", blank=True, null=True, max_digits=12, decimal_places=2
-    )
-    paid_amount = models.DecimalField(
-        blank=True, null=True, max_digits=12, decimal_places=2
-    )
-    balance = models.DecimalField(
-        blank=True, null=True, max_digits=12, decimal_places=2
-    )
-    project = models.ForeignKey(
-        "Project", blank=True, null=True, on_delete=models.SET_NULL
-    )
-    currency = models.CharField(
-        default="United States Dollar - USD", max_length=300, blank=True, null=True
+class Client(BaseModel, ContactInfoMixin):
+    company = models.ForeignKey(
+        Company,
+        related_name="clients",
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
     )
 
     class Meta:
         ordering = ["name"]
 
-    net = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
-    cost = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
-    hours = models.DecimalField(
-        "Hours", default=1.0, blank=True, null=True, max_digits=12, decimal_places=2
-    )
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, blank=True, null=True, on_delete=models.SET_NULL
-    )
-
-    reset = models.BooleanField(default=False)
-
     def get_absolute_url(self):
-        return reverse("invoice_view", args=[str(self.id)])
+        return reverse("client_view", args=[self.id])
+
+
+class Contact(BaseModel, ContactInfoMixin):
+    first_name = models.CharField(max_length=300, blank=True, null=True)
+    last_name = models.CharField(max_length=300, blank=True, null=True)
+    email = models.EmailField("E-Mail Address", blank=True, null=True)
+    number = models.CharField(max_length=300, blank=True, null=True)
+    client = models.ForeignKey(
+        Client,
+        related_name="contacts",
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+    )
 
     def save(self, *args, **kwargs):
-        if not self.name:
-            self.name = self.__str__()
+        if not self.name and (self.first_name or self.last_name):
+            self.name = f"{self.first_name or ''} {self.last_name or ''}".strip()
         super().save(*args, **kwargs)
 
-
-class Note(BaseModel):
-    text = models.TextField(blank=True, null=True)
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, blank=True, null=True, on_delete=models.SET_NULL
-    )
-
     def get_absolute_url(self):
-        return reverse("note_view", args=[str(self.id)])
+        return reverse("contact_view", args=[self.id])
 
 
-class Project(BaseModel):
-    client = models.ForeignKey(Client, blank=True, null=True, on_delete=models.SET_NULL)
-    team = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
+class Project(BaseModel, ContactInfoMixin):
+    client = models.ForeignKey(
+        Client,
+        related_name="projects",
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+    )
+    team = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, related_name="projects", blank=True
+    )
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
     amount = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
-    description = models.TextField(blank=True, null=True)
     default_task = models.ForeignKey(
         "Task",
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
-        related_name="project_defaults",
-        help_text="Default task for this project's time entries",
+        related_name="default_for_projects",
     )
 
     class Meta:
         ordering = ["name"]
 
     def get_absolute_url(self):
-        return reverse("project_view", args=[str(self.id)])
+        return reverse("project_view", args=[self.id])
 
 
 class Task(BaseModel):
     project = models.ForeignKey(
-        "Project",
-        blank=True,
-        null=True,
-        on_delete=models.SET_NULL,
-        related_name="tasks",
-        help_text="Project this task belongs to (optional)",
+        Project, related_name="tasks", blank=True, null=True, on_delete=models.SET_NULL
     )
     rate = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
-    unit = models.DecimalField(
-        "Unit", default=1.0, blank=True, null=True, max_digits=12, decimal_places=2
-    )
+    unit = models.DecimalField("Unit", default=1.0, max_digits=12, decimal_places=2)
 
     class Meta:
         ordering = ["name"]
 
     def get_absolute_url(self):
-        return reverse("task_view", args=[str(self.id)])
+        return reverse("task_view", args=[self.id])
 
     @classmethod
     def get_default_task(cls):
-        """Get or create the default task for time entries."""
-        task, created = cls.objects.get_or_create(
+        task, _ = cls.objects.get_or_create(
             name="Default Task",
-            defaults={
-                "rate": 100.0,
-                "unit": 1.0,
-            },
+            defaults={"rate": 100.0, "unit": 1.0},
         )
         return task
+
+
+class Invoice(BaseModel):
+    issue_date = models.DateField("Issue Date", default=timezone.now)
+    due_date = models.DateField("Due", blank=True, null=True)
+    amount = models.DecimalField(
+        "Invoice Amount", blank=True, null=True, max_digits=12, decimal_places=2
+    )
+    paid_amount = models.DecimalField(default=0, max_digits=12, decimal_places=2)
+    balance = models.DecimalField(
+        blank=True, null=True, max_digits=12, decimal_places=2
+    )
+    net = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
+    cost = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
+    hours = models.DecimalField(
+        "Hours", default=1.0, blank=True, null=True, max_digits=12, decimal_places=2
+    )
+    project = models.ForeignKey(
+        Project,
+        related_name="invoices",
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+    )
+    currency = models.CharField(default="USD", max_length=50)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name="invoices",
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+    )
+
+    class Meta:
+        ordering = ["-issue_date", "name"]
+
+    def save(self, *args, **kwargs):
+        if not self.name:
+            self.name = f"INV-{self.issue_date}-{self.pk or 'NEW'}"
+        if self.amount is not None:
+            self.balance = self.amount - (self.paid_amount or 0)
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("invoice_view", args=[self.id])
 
 
 class Time(BaseModel):
     project = models.ForeignKey(
         Project,
+        related_name="time_entries",
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
     )
     task = models.ForeignKey(
         Task,
+        related_name="time_entries",
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
     )
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, blank=True, null=True, on_delete=models.SET_NULL
-    )
-    invoice = models.ForeignKey(
-        Invoice,
+        settings.AUTH_USER_MODEL,
+        related_name="time_entries",
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
-        related_name="times",
     )
-    date = models.DateField(default=timezone.now, blank=True, null=True)
-    hours = models.DecimalField(
-        "Hours", default=1.0, blank=True, null=True, max_digits=12, decimal_places=2
+    invoice = models.ForeignKey(
+        Invoice, related_name="times", blank=True, null=True, on_delete=models.SET_NULL
     )
+    date = models.DateField(default=timezone.now)
+    hours = models.DecimalField("Hours", default=1.0, max_digits=12, decimal_places=2)
     description = models.TextField(blank=True, null=True)
 
+    # Restoring missing fields for the Time model
     amount = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     cost = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     net = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
 
     def save(self, *args, **kwargs):
-        # Assign task with priority: project task > time task > default task
-        # Priority: project default > explicit task > global default
-
-        # Check for project-specific default task (highest priority)
-        if self.project and self.project.default_task:
-            self.task = self.project.default_task
-        # If no project default but task is explicitly set, keep it
-        elif self.task_id:
-            pass  # Keep the explicit task
-        # Fall back to global default task
-        else:
-            self.task = Task.get_default_task()
+        if not self.task:
+            if self.project and self.project.default_task:
+                self.task = self.project.default_task
+            else:
+                self.task = Task.get_default_task()
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse("time_view", args=[str(self.id)])
+        return reverse("time_view", args=[self.id])
+
+
+class Note(BaseModel):
+    text = models.TextField(blank=True, null=True)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name="notes",
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+    )
+
+    def __str__(self):
+        if self.name:
+            return self.name
+        return (self.text[:30] + "...") if self.text else f"Note {self.id}"
+
+    def get_absolute_url(self):
+        return reverse("note_view", args=[self.id])

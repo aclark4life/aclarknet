@@ -55,21 +55,16 @@ def update_invoice(sender, instance, **kwargs):
     instance.cost = 0
     instance.hours = 0
     for time in times:
-        if instance.reset:
-            time.amount = 0
+        try:
+            time.cost = time.user.rate * time.hours
+        except (AttributeError, TypeError):
             time.cost = 0
-            time.net = 0
-        else:
-            try:
-                time.cost = time.user.rate * time.hours
-            except (AttributeError, TypeError):
-                time.cost = 0
-            try:
-                time.amount = time.task.rate * time.hours
-                time.net = time.amount - time.cost
-            except (AttributeError, TypeError):
-                time.amount = 0
-                time.net = -time.cost
+        try:
+            time.amount = time.task.rate * time.hours
+            time.net = time.amount - time.cost
+        except (AttributeError, TypeError):
+            time.amount = 0
+            time.net = -time.cost
 
         time.save()
 
