@@ -51,7 +51,8 @@ class ClientCreateView(FakeDataMixin, BaseClientView, CreateView):
         obj = form.save()
         if company_id:
             company = Company.objects.get(pk=company_id)
-            company.client_set.add(obj)
+            obj.company = company
+            obj.save()
             return HttpResponseRedirect(reverse("company_view", args=[company_id]))
         return super().form_valid(form)
 
