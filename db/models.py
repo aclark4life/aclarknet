@@ -193,16 +193,6 @@ class Task(BaseModel):
         return task
 
 
-class Testimonial(BaseModel):
-    description = models.TextField(blank=True, null=True)
-    issue_date = models.DateField(
-        "Issue Date", blank=True, null=True, default=timezone.now
-    )
-
-    def get_absolute_url(self):
-        return reverse("testimonial_view", args=[str(self.id)])
-
-
 class Time(BaseModel):
     project = models.ForeignKey(
         Project,
