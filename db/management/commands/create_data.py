@@ -79,7 +79,6 @@ class Command(BaseCommand):
                 address=fake.address(),
                 description=fake.text(),
                 url=fake.url(),
-                ein=fake.bothify(text="EIN-##########"),
             )
             companies.append(company)
         self.stdout.write(
