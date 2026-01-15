@@ -58,11 +58,26 @@ class TaskDetailView(BaseTaskView, DetailView):
     template_name = "view.html"
 
     def get_context_data(self, **kwargs):
-        projects = Project.objects.all()
-        queryset_related = [q for q in [projects] if q.exists()]
-        queryset_related = list(chain(*queryset_related))
-        self._queryset_related = queryset_related
-        self.has_related = True
+        task = self.get_object()
+        queryset_related = []
+        
+        # Add project if exists
+        if task.project:
+            queryset_related.append([task.project])
+            
+            # Add client through project if exists
+            if task.project.client:
+                queryset_related.append([task.project.client])
+                
+                # Add company through client if exists
+                if task.project.client.company:
+                    queryset_related.append([task.project.client.company])
+        
+        # Flatten the list and set as related queryset
+        if queryset_related:
+            self._queryset_related = list(chain(*queryset_related))
+            self.has_related = True
+        
         context = super().get_context_data(**kwargs)
         context["is_detail_view"] = True
         return context
