@@ -108,12 +108,6 @@ class ContactForm(forms.ModelForm):
 
 
 class InvoiceForm(forms.ModelForm):
-    """
-    Issue Date, Last Payment Date, Invoice ID, PO Number, Client, Subject,
-    Invoice Amount, Paid Amount, Balance, Subtotal, Discount, Tax, Tax2,
-    Currency, Currency Symbol, Document Type
-    """
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
