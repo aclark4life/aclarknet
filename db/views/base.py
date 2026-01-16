@@ -217,6 +217,10 @@ class BaseView:
                 context["field_values"] = self.get_field_values()
             if self.model:
                 context["page_obj_detail_view"] = self.get_page_obj_detail_view()
+            # Add notes if they exist for this object
+            notes = self._get_notes_for_object()
+            if notes:
+                context["object_notes"] = notes
 
         return context
 
@@ -340,6 +344,30 @@ class BaseView:
             "last_object": objects.last(),
             "count": count,
         }
+
+    def _get_notes_for_object(self):
+        """Get notes attached to the current object via generic foreign key.
+        
+        Returns:
+            List of Note objects or None if no object or no notes exist
+        """
+        if not hasattr(self, 'object') or self.object is None:
+            return None
+        
+        try:
+            from django.contrib.contenttypes.models import ContentType
+            from ..models import Note
+            
+            content_type = ContentType.objects.get_for_model(self.object.__class__)
+            notes = list(Note.objects.filter(
+                content_type=content_type,
+                object_id=str(self.object.pk)
+            ).order_by('-created'))
+            
+            return notes if notes else None
+        except Exception:
+            # Silently fail if Note model doesn't exist or other issues
+            return None
 
     def get_statcards(self):
         """Get statistics cards data (stub)."""
