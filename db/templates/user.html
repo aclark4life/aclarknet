@@ -1,0 +1,51 @@
+<div class="accordion my-3" id="accordionCalculations">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="list-group-item list-group-item-action justify-content-between d-flex fw-semibold p-3 accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseCalculations"
+              aria-expanded="true"
+              aria-controls="collapseCalculations">User Rate Calculations</button>
+    </h2>
+    <div id="collapseCalculations"
+         class="accordion-collapse collapse"
+         data-bs-parent="#accordionCalculations">
+      <div class="accordion-body p-0">
+        <table class="table table-striped my-0">
+          <thead>
+            <tr>
+              <th>User</th>
+              <th class="text-end">Hours</th>
+              <th class="text-end">Rate</th>
+              <th class="text-end">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for calc in user_calculations %}
+              <tr>
+                <td>{{ calc.username }}</td>
+                <td class="text-end">{{ calc.hours|floatformat:2 }}</td>
+                <td class="text-end">
+                  {% load babel %}
+                  {% if calc.rate %}
+                    {{ calc.rate|currencyfmt:"USD" }}
+                  {% else %}
+                    N/A
+                  {% endif %}
+                </td>
+                <td class="text-end">{{ calc.amount|currencyfmt:"USD" }}</td>
+              </tr>
+            {% endfor %}
+            <tr class="fw-bold">
+              <td>Total</td>
+              <td class="text-end">{{ calc_total_hours|floatformat:2 }}</td>
+              <td class="text-end">-</td>
+              <td class="text-end">{{ calc_total_amount|currencyfmt:"USD" }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
