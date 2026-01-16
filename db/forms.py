@@ -11,8 +11,13 @@ class ClientForm(forms.ModelForm):
         model = Client
         fields = (
             "name",
+            "title",
+            "company",
+            "address",
             "description",
             "url",
+            "active",
+            "published",
         )
 
     def __init__(self, *args, **kwargs):
@@ -38,7 +43,15 @@ class ClientForm(forms.ModelForm):
 class CompanyForm(forms.ModelForm):
     class Meta:
         model = Company
-        fields = ("name", "url", "description")
+        fields = (
+            "name",
+            "title",
+            "address",
+            "description",
+            "url",
+            "active",
+            "published",
+        )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -67,9 +80,15 @@ class ContactForm(forms.ModelForm):
             "first_name",
             "last_name",
             "name",
+            "title",
             "email",
-            "url",
             "number",
+            "client",
+            "address",
+            "description",
+            "url",
+            "active",
+            "published",
         )
         labels = {
             "name": "Full name",
@@ -108,67 +127,46 @@ class ContactForm(forms.ModelForm):
 
 
 class InvoiceForm(forms.ModelForm):
-    pass
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.helper = FormHelper()
-    #     self.helper.form_method = "post"
-    #     self.helper.form_class = "form-inline"
-    #     self.helper.form_tag = False
-    #     self.helper.layout = Div(
-    #         Div(
-    #             Field("name", css_class="form-control bg-transparent border"),
-    #             css_class="col-sm-6",
-    #         ),
-    #         Div(Field("start_date", css_class="form-control"), css_class="col-sm-6"),
-    #         Div(Field("end_date", css_class="form-control"), css_class="col-sm-6"),
-    #         Div(Field("issue_date", css_class="form-control"), css_class="col-sm-6"),
-    #         Div(Field("due_date", css_class="form-control"), css_class="col-sm-6"),
-    #         Div(Field("project", css_class="form-control"), css_class="col-sm-6"),
-    #         css_class="row mx-1",
-    #     )
-
     class Meta:
         model = Invoice
         fields = (
-            "project",
             "name",
+            "title",
+            "project",
+            "user",
             "issue_date",
             "start_date",
             "end_date",
             "due_date",
+            "amount",
             "paid_amount",
+            "balance",
+            "net",
+            "cost",
+            "hours",
+            "currency",
+            "active",
+            "published",
         )
 
-    # issue_date = forms.DateField(
-    #     widget=forms.DateInput(attrs={"type": "date"}),
-    #     required=False,
-    #     initial=timezone.now,
-    # )
-
-    # start_date = forms.DateField(
-    #     widget=forms.DateInput(attrs={"type": "date"}),
-    #     required=False,
-    #     initial=timezone.now,
-    # )
-
-    # end_date = forms.DateField(
-    #     widget=forms.DateInput(attrs={"type": "date"}),
-    #     required=False,
-    #     initial=timezone.now,
-    # )
-
-    # due_date = forms.DateField(
-    #     widget=forms.DateInput(attrs={"type": "date"}),
-    #     required=False,
-    #     initial=timezone.now,
-    # )
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Make balance read-only since it's calculated from amount - paid_amount
+        if 'balance' in self.fields:
+            self.fields['balance'].disabled = True
 
 
 class NoteForm(forms.ModelForm):
     class Meta:
         model = Note
-        fields = ("name", "text")
+        fields = (
+            "name",
+            "title",
+            "text",
+            "user",
+            "active",
+            "published",
+        )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -194,10 +192,18 @@ class ProjectForm(forms.ModelForm):
         model = Project
         fields = (
             "name",
-            "description",
+            "title",
             "client",
+            "team",
+            "address",
+            "description",
+            "url",
             "start_date",
             "end_date",
+            "amount",
+            "default_task",
+            "active",
+            "published",
         )
         widgets = {
             "start_date": forms.DateInput(attrs={"type": "date"}),
@@ -232,7 +238,15 @@ class ProjectForm(forms.ModelForm):
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ("name", "project", "rate", "unit")
+        fields = (
+            "name",
+            "title",
+            "project",
+            "rate",
+            "unit",
+            "active",
+            "published",
+        )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -258,11 +272,20 @@ class TimeForm(forms.ModelForm):
     class Meta:
         model = Time
         fields = [
+            "name",
+            "title",
+            "project",
+            "task",
+            "user",
+            "invoice",
             "date",
             "hours",
             "description",
-            "invoice",
-            "task",
+            "amount",
+            "cost",
+            "net",
+            "active",
+            "published",
         ]
 
     def __init__(self, *args, **kwargs):
