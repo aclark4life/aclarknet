@@ -2,6 +2,7 @@
 
 from django.apps import apps
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 from django.db import transaction
 from django.http import HttpResponseRedirect
 from django.shortcuts import reverse
@@ -13,7 +14,7 @@ def get_model_config(model_name):
     Maps string names to Model Class and specific field settings.
     Includes has_user_field to indicate if the model should be filtered by user.
     """
-    from django.contrib.auth.models import User
+    User = get_user_model()
 
     # Configuration map: 'slug': {'model': Class, 'has_user_field': bool}
     config = {
@@ -155,7 +156,7 @@ def update_related_entries(request):
                 return HttpResponseRedirect(reverse("dashboard"))
 
             if model_name == "user":
-                ModelClass = apps.get_model(app_label="auth", model_name="User")
+                ModelClass = get_user_model()
             else:
                 try:
                     ModelClass = apps.get_model(

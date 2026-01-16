@@ -1,6 +1,6 @@
 """Search views."""
 
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django.views.generic import ListView
 
@@ -16,6 +16,7 @@ from ..models import (
     Time,
 )
 
+User = get_user_model()
 
 SEARCH_MODELS = (
     Client,
