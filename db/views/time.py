@@ -41,13 +41,18 @@ class TimeCreateView(
 ):
     fake_data_function = 'get_fake_time_data'
     
+    def get_initial(self):
+        """Set initial values for the form."""
+        initial = super().get_initial()
+        # Set the user to the logged-in user by default
+        initial['user'] = self.request.user
+        return initial
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         invoice_id = self.request.GET.get("invoice_id")
         if invoice_id:
-            context["form"].initial = {
-                "invoice": invoice_id,
-            }
+            context["form"].initial["invoice"] = invoice_id
         return context
 
     def form_valid(self, form):

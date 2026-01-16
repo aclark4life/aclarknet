@@ -270,6 +270,9 @@ class TimeForm(forms.ModelForm):
             "cost",
             "net",
         ]
+        widgets = {
+            "user": forms.HiddenInput(),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -282,7 +285,6 @@ class TimeForm(forms.ModelForm):
             Div(Field("hours", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("invoice", css_class="form-control"), css_class="col-sm-4"),
             Div(Field("task", css_class="form-control"), css_class="col-sm-4"),
-            Div(Field("user", css_class="form-control"), css_class="col-sm-4"),
             Div(
                 Field("description", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",
