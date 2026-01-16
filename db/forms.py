@@ -11,13 +11,10 @@ class ClientForm(forms.ModelForm):
         model = Client
         fields = (
             "name",
-            "title",
             "company",
             "address",
             "description",
             "url",
-            "active",
-            "published",
         )
 
     def __init__(self, *args, **kwargs):
@@ -45,12 +42,9 @@ class CompanyForm(forms.ModelForm):
         model = Company
         fields = (
             "name",
-            "title",
             "address",
             "description",
             "url",
-            "active",
-            "published",
         )
 
     def __init__(self, *args, **kwargs):
@@ -66,6 +60,10 @@ class CompanyForm(forms.ModelForm):
             ),
             Div(Field("url", css_class="form-control"), css_class="col-sm-6"),
             Div(
+                Field("address", css_class="form-control bg-transparent border"),
+                css_class="col-sm-12",
+            ),
+            Div(
                 Field("description", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",
             ),
@@ -80,15 +78,12 @@ class ContactForm(forms.ModelForm):
             "first_name",
             "last_name",
             "name",
-            "title",
             "email",
             "number",
             "client",
             "address",
             "description",
             "url",
-            "active",
-            "published",
         )
         labels = {
             "name": "Full name",
@@ -131,7 +126,6 @@ class InvoiceForm(forms.ModelForm):
         model = Invoice
         fields = (
             "name",
-            "title",
             "project",
             "user",
             "issue_date",
@@ -145,15 +139,13 @@ class InvoiceForm(forms.ModelForm):
             "cost",
             "hours",
             "currency",
-            "active",
-            "published",
         )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Make balance read-only since it's calculated from amount - paid_amount
-        if 'balance' in self.fields:
-            self.fields['balance'].disabled = True
+        if "balance" in self.fields:
+            self.fields["balance"].disabled = True
 
 
 class NoteForm(forms.ModelForm):
@@ -161,11 +153,8 @@ class NoteForm(forms.ModelForm):
         model = Note
         fields = (
             "name",
-            "title",
             "text",
             "user",
-            "active",
-            "published",
         )
 
     def __init__(self, *args, **kwargs):
@@ -175,10 +164,6 @@ class NoteForm(forms.ModelForm):
         self.helper.form_class = "form-inline"
         self.helper.form_tag = False
         self.helper.layout = Div(
-            Div(
-                Field("title", css_class="form-control bg-transparent border"),
-                css_class="col-sm-12",
-            ),
             Div(
                 Field("text", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",
@@ -192,7 +177,6 @@ class ProjectForm(forms.ModelForm):
         model = Project
         fields = (
             "name",
-            "title",
             "client",
             "team",
             "address",
@@ -202,8 +186,6 @@ class ProjectForm(forms.ModelForm):
             "end_date",
             "amount",
             "default_task",
-            "active",
-            "published",
         )
         widgets = {
             "start_date": forms.DateInput(attrs={"type": "date"}),
@@ -240,12 +222,9 @@ class TaskForm(forms.ModelForm):
         model = Task
         fields = (
             "name",
-            "title",
             "project",
             "rate",
             "unit",
-            "active",
-            "published",
         )
 
     def __init__(self, *args, **kwargs):
@@ -273,7 +252,6 @@ class TimeForm(forms.ModelForm):
         model = Time
         fields = [
             "name",
-            "title",
             "project",
             "task",
             "user",
@@ -284,8 +262,6 @@ class TimeForm(forms.ModelForm):
             "amount",
             "cost",
             "net",
-            "active",
-            "published",
         ]
 
     def __init__(self, *args, **kwargs):

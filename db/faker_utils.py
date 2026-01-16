@@ -37,6 +37,7 @@ def get_fake_company_data():
 
     return {
         "name": fake.company(),
+        "address": fake.address(),
         "description": fake.catch_phrase(),
         "url": fake.url(),
     }
