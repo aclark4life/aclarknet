@@ -1,8 +1,7 @@
 """Tests for faker_utils module."""
 
-from django.conf import settings
 from django.test import TestCase, override_settings
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
 from db.faker_utils import (
     get_faker,
@@ -32,11 +31,11 @@ class GetFakerTest(TestCase):
         result = get_faker()
         self.assertIsNotNone(result)
         # Check that it's a Faker instance by verifying it has common methods
-        self.assertTrue(hasattr(result, 'name'))
-        self.assertTrue(hasattr(result, 'email'))
+        self.assertTrue(hasattr(result, "name"))
+        self.assertTrue(hasattr(result, "email"))
 
     @override_settings(DEBUG=True)
-    @patch('db.faker_utils.Faker', side_effect=ImportError)
+    @patch("db.faker_utils.Faker", side_effect=ImportError)
     def test_get_faker_returns_none_when_import_error(self, mock_faker):
         """get_faker should return None when Faker import fails."""
         result = get_faker()
@@ -59,7 +58,7 @@ class FakeDataFunctionsTest(TestCase):
             get_fake_time_data,
             get_fake_note_data,
         ]
-        
+
         for func in functions:
             with self.subTest(function=func.__name__):
                 result = func()
@@ -70,76 +69,76 @@ class FakeDataFunctionsTest(TestCase):
         """get_fake_client_data should return dict with expected keys."""
         result = get_fake_client_data()
         self.assertIsInstance(result, dict)
-        self.assertIn('name', result)
-        self.assertIn('description', result)
-        self.assertIn('url', result)
+        self.assertIn("name", result)
+        self.assertIn("description", result)
+        self.assertIn("url", result)
         # Verify values are not empty
-        self.assertTrue(result['name'])
-        self.assertTrue(result['description'])
-        self.assertTrue(result['url'])
+        self.assertTrue(result["name"])
+        self.assertTrue(result["description"])
+        self.assertTrue(result["url"])
 
     @override_settings(DEBUG=True)
     def test_get_fake_company_data_returns_valid_data(self):
         """get_fake_company_data should return dict with expected keys."""
         result = get_fake_company_data()
         self.assertIsInstance(result, dict)
-        self.assertIn('name', result)
-        self.assertIn('description', result)
-        self.assertIn('url', result)
+        self.assertIn("name", result)
+        self.assertIn("description", result)
+        self.assertIn("url", result)
 
     @override_settings(DEBUG=True)
     def test_get_fake_contact_data_returns_valid_data(self):
         """get_fake_contact_data should return dict with expected keys."""
         result = get_fake_contact_data()
         self.assertIsInstance(result, dict)
-        self.assertIn('first_name', result)
-        self.assertIn('last_name', result)
-        self.assertIn('email', result)
-        self.assertIn('number', result)
-        self.assertIn('url', result)
+        self.assertIn("first_name", result)
+        self.assertIn("last_name", result)
+        self.assertIn("email", result)
+        self.assertIn("number", result)
+        self.assertIn("url", result)
 
     @override_settings(DEBUG=True)
     def test_get_fake_project_data_returns_valid_data(self):
         """get_fake_project_data should return dict with expected keys."""
         result = get_fake_project_data()
         self.assertIsInstance(result, dict)
-        self.assertIn('name', result)
-        self.assertIn('description', result)
+        self.assertIn("name", result)
+        self.assertIn("description", result)
 
     @override_settings(DEBUG=True)
     def test_get_fake_task_data_returns_valid_data(self):
         """get_fake_task_data should return dict with expected keys."""
         result = get_fake_task_data()
         self.assertIsInstance(result, dict)
-        self.assertIn('name', result)
-        self.assertIn('rate', result)
-        self.assertIn('unit', result)
+        self.assertIn("name", result)
+        self.assertIn("rate", result)
+        self.assertIn("unit", result)
         # Verify rate is a reasonable number
-        self.assertGreaterEqual(result['rate'], 50)
-        self.assertLessEqual(result['rate'], 200)
+        self.assertGreaterEqual(result["rate"], 50)
+        self.assertLessEqual(result["rate"], 200)
 
     @override_settings(DEBUG=True)
     def test_get_fake_invoice_data_returns_valid_data(self):
         """get_fake_invoice_data should return dict with expected keys."""
         result = get_fake_invoice_data()
         self.assertIsInstance(result, dict)
-        self.assertIn('subject', result)
+        self.assertIn("subject", result)
 
     @override_settings(DEBUG=True)
     def test_get_fake_time_data_returns_valid_data(self):
         """get_fake_time_data should return dict with expected keys."""
         result = get_fake_time_data()
         self.assertIsInstance(result, dict)
-        self.assertIn('description', result)
-        self.assertIn('hours', result)
+        self.assertIn("description", result)
+        self.assertIn("hours", result)
         # Verify hours is a reasonable number
-        self.assertGreaterEqual(result['hours'], 1)
-        self.assertLessEqual(result['hours'], 8)
+        self.assertGreaterEqual(result["hours"], 1)
+        self.assertLessEqual(result["hours"], 8)
 
     @override_settings(DEBUG=True)
     def test_get_fake_note_data_returns_valid_data(self):
         """get_fake_note_data should return dict with expected keys."""
         result = get_fake_note_data()
         self.assertIsInstance(result, dict)
-        self.assertIn('title', result)
-        self.assertIn('text', result)
+        self.assertIn("name", result)
+        self.assertIn("text", result)

@@ -13,7 +13,6 @@ class BaseModelTest(TestCase):
     def setUp(self):
         self.base_model = TestModel.objects.create(
             name="Test Name",
-            title="Test Title",
         )
 
     def test_created_field(self):
@@ -24,9 +23,8 @@ class BaseModelTest(TestCase):
         self.assertIsInstance(self.base_model.updated, timezone.datetime)
         # self.assertGreaterEqual(self.base_model.updated, timezone.now())
 
-    def test_name_and_title_fields(self):
+    def test_name_field(self):
         self.assertEqual(self.base_model.name, "Test Name")
-        self.assertEqual(self.base_model.title, "Test Title")
 
     def test_active_field(self):
         self.assertTrue(self.base_model.active)
@@ -49,11 +47,6 @@ class BaseModelTest(TestCase):
         self.base_model.name = None
         self.base_model.save()
         self.assertEqual(str(self.base_model), "Test Title")
-
-        # Test when both name and title are None
-        self.base_model.title = None
-        self.base_model.save()
-        # self.assertEqual(str(self.base_model), "testmodel-1")
 
     def test_get_absolute_url_raises_notimplementederror(self):
         with self.assertRaises(NotImplementedError):

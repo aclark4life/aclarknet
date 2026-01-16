@@ -20,7 +20,7 @@ class BaseModel(models.Model):
         return self._meta.verbose_name
 
     def __str__(self):
-        return self.name or self.title or f"{self._meta.model_name}-{self.pk}"
+        return self.name or f"{self._meta.model_name}-{self.pk}"
 
     def get_absolute_url(self):
         raise NotImplementedError("Subclasses must implement get_absolute_url()")
