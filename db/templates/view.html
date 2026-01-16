@@ -65,7 +65,7 @@
             {% if user.is_superuser %}
               <div class="mb-3">
                 <a href="{% url 'note_add_to_object' %}?content_type={{ content_type.id }}&object_id={{ object.pk }}"
-                   class="btn btn-primary btn-sm">
+                   class="btn btn-outline-dashboard btn-sm">
                   <i class="fa-solid fa-plus"></i> Add Note
                 </a>
               </div>
