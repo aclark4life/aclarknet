@@ -155,6 +155,8 @@ class NoteForm(forms.ModelForm):
             "name",
             "text",
             "user",
+            "content_type",
+            "object_id",
         )
 
     def __init__(self, *args, **kwargs):
