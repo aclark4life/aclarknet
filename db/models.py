@@ -139,6 +139,8 @@ class Task(BaseModel):
 
 class Invoice(BaseModel):
     issue_date = models.DateField("Issue Date", default=timezone.now)
+    start_date = models.DateField("Start Date", blank=True, null=True)
+    end_date = models.DateField("End Date", blank=True, null=True)
     due_date = models.DateField("Due", blank=True, null=True)
     amount = models.DecimalField(
         "Invoice Amount", blank=True, null=True, max_digits=12, decimal_places=2
