@@ -180,9 +180,7 @@ class ProjectForm(forms.ModelForm):
         fields = (
             "name",
             "client",
-            "address",
             "description",
-            "url",
             "start_date",
             "end_date",
             "amount",
