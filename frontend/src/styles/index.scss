@@ -19,6 +19,11 @@ $theme-colors: (
 @import "theme-aclarknet/index";
 @import "puput";
 
+// Custom button outline styles for dashboard color
+.btn-outline-dashboard {
+    --bs-btn-bg: #fff;
+}
+
 #theme-toggler-authenticated:hover {
     cursor: pointer; /* Change cursor to pointer on hover */
     color: #007bff; /* Change color on hover */
