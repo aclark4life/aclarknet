@@ -4,9 +4,9 @@
 {% block dashboard %}
   {% if search_results %}
     {% include 'pagination/index.html' %}
-    {% include 'table/index.html' %}
+    {% include 'view.html' %}
     {% include 'pagination/index.html' %}
   {% else %}
-    {% include 'table/empty.html' %}
+    {% include 'empty.html' %}
   {% endif %}
 {% endblock %}
