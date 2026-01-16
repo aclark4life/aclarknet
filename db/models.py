@@ -93,9 +93,6 @@ class Project(BaseModel, ContactInfoMixin):
         null=True,
         on_delete=models.SET_NULL,
     )
-    team = models.ManyToManyField(
-        settings.AUTH_USER_MODEL, related_name="projects", blank=True
-    )
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
     amount = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
@@ -245,7 +242,7 @@ class Note(BaseModel):
         null=True,
     )
     object_id = models.CharField(max_length=255, blank=True, null=True)
-    content_object = GenericForeignKey('content_type', 'object_id')
+    content_object = GenericForeignKey("content_type", "object_id")
 
     def __str__(self):
         if self.name:
