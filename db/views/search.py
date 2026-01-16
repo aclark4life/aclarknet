@@ -36,6 +36,7 @@ class SearchView(SuperuserRequiredMixin, BaseView, ListView):
     search = True
     template_name = "search.html"
     url_index = "search_index"
+    dashboard = True
 
     def get_context_data(self, **kwargs):
         """Add search query to context."""
