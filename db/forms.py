@@ -158,6 +158,11 @@ class NoteForm(forms.ModelForm):
             "content_type",
             "object_id",
         )
+        widgets = {
+            'content_type': forms.HiddenInput(),
+            'object_id': forms.HiddenInput(),
+            'user': forms.HiddenInput(),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

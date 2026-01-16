@@ -45,7 +45,7 @@
       </div>
     </div>
   </div>
-  {% if object_notes %}
+  {% if object_notes or user.is_superuser %}
     <div class="accordion my-3" id="accordionNotes">
       <div class="accordion-item">
         <h2 class="accordion-header">
@@ -55,29 +55,41 @@
                   data-bs-target="#collapseNotes"
                   aria-expanded="true"
                   aria-controls="collapseNotes">
-            Notes ({{ object_notes|length }})
+            Notes ({{ object_notes|length|default:"0" }})
           </button>
         </h2>
         <div id="collapseNotes"
              class="accordion-collapse show"
              data-bs-parent="#accordionNotes">
           <div class="accordion-body">
-            {% for note in object_notes %}
-              <div class="card mb-3">
-                <div class="card-body">
-                  {% if note.name %}
-                    <h5 class="card-title">{{ note.name }}</h5>
-                  {% endif %}
-                  <p class="card-text">{{ note.text|linebreaks }}</p>
-                  <div class="text-muted small">
-                    {% if note.user %}
-                      <i class="fa-solid fa-user"></i> {{ note.user.username }} •
+            {% if user.is_superuser %}
+              <div class="mb-3">
+                <a href="{% url 'note_add_to_object' %}?content_type={{ content_type.id }}&object_id={{ object.pk }}"
+                   class="btn btn-primary btn-sm">
+                  <i class="fa-solid fa-plus"></i> Add Note
+                </a>
+              </div>
+            {% endif %}
+            {% if object_notes %}
+              {% for note in object_notes %}
+                <div class="card mb-3">
+                  <div class="card-body">
+                    {% if note.name %}
+                      <h5 class="card-title">{{ note.name }}</h5>
                     {% endif %}
-                    <i class="fa-solid fa-clock"></i> {{ note.created|date:"SHORT_DATETIME_FORMAT" }}
+                    <p class="card-text">{{ note.text|linebreaks }}</p>
+                    <div class="text-muted small">
+                      {% if note.user %}
+                        <i class="fa-solid fa-user"></i> {{ note.user.username }} •
+                      {% endif %}
+                      <i class="fa-solid fa-clock"></i> {{ note.created|date:"SHORT_DATETIME_FORMAT" }}
+                    </div>
                   </div>
                 </div>
-              </div>
-            {% endfor %}
+              {% endfor %}
+            {% else %}
+              <p class="text-muted">No notes yet. Click "Add Note" to create one.</p>
+            {% endif %}
           </div>
         </div>
       </div>

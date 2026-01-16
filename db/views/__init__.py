@@ -68,6 +68,7 @@ from .invoice import (
 
 # Note views
 from .note import (
+    NoteAddToObjectView,
     NoteCopyView,
     NoteCreateView,
     NoteDeleteView,
@@ -166,6 +167,7 @@ __all__ = [
     "InvoiceListView",
     "InvoiceUpdateView",
     # Note views
+    "NoteAddToObjectView",
     "NoteCopyView",
     "NoteCreateView",
     "NoteDeleteView",
