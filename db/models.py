@@ -10,9 +10,6 @@ class BaseModel(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False)
     updated = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=300, blank=True, null=True)
-    title = models.CharField(max_length=300, blank=True, null=True)
-    active = models.BooleanField(default=True)
-    published = models.BooleanField(default=False)
 
     class Meta:
         abstract = True
