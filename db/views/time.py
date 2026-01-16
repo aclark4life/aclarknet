@@ -52,7 +52,10 @@ class TimeCreateView(
 
     def form_valid(self, form):
         invoice_id = self.request.GET.get("invoice_id")
-        obj = form.save()
+        obj = form.save(commit=False)
+        # Always assign the logged-in user to new time entries
+        obj.user = self.request.user
+        obj.save()
         if invoice_id:
             invoice = Invoice.objects.get(pk=invoice_id)
             invoice.times.add(obj)
@@ -122,7 +125,14 @@ class TimeCopyView(
     RedirectToObjectViewMixin,
     CreateView,
 ):
-    pass
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        # Always assign the logged-in user to copied time entries
+        obj.user = self.request.user
+        obj.pk = None
+        obj.save()
+        self.object = obj
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class TimeDeleteView(BaseTimeView, FilterByUserMixin, DeleteView):
