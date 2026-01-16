@@ -127,7 +127,6 @@ class InvoiceForm(forms.ModelForm):
         fields = (
             "name",
             "project",
-            "user",
             "issue_date",
             "start_date",
             "end_date",
