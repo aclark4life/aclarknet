@@ -221,6 +221,10 @@ class BaseView:
             notes = self._get_notes_for_object()
             if notes:
                 context["object_notes"] = notes
+            # Add content_type for the "Add Note" button
+            if self.object:
+                from django.contrib.contenttypes.models import ContentType
+                context["content_type"] = ContentType.objects.get_for_model(self.object.__class__)
 
         return context
 

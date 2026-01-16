@@ -53,6 +53,7 @@ from .views import (
 
 # Note Views
 from .views import (
+    NoteAddToObjectView,
     NoteCopyView,
     NoteCreateView,
     NoteDeleteView,
@@ -203,6 +204,7 @@ urlpatterns += [
     path("note", NoteListView.as_view(), name="note_cancel"),
     path("note/fullscreen", NoteListFullScreen.as_view(), name="note-fullscreen"),
     path("note/create/", NoteCreateView.as_view(), name="note_create"),
+    path("note/add-to-object/", NoteAddToObjectView.as_view(), name="note_add_to_object"),
     path("note/<object_id:pk>/", NoteDetailView.as_view(), name="note_view"),
     path("note/<object_id:pk>/update/", NoteUpdateView.as_view(), name="note_edit"),
     path("note/<object_id:pk>/delete/", NoteDeleteView.as_view(), name="note_delete"),

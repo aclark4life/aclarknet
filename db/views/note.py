@@ -2,6 +2,7 @@
 
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.contenttypes.models import ContentType
 from django.core.mail import EmailMessage
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
@@ -149,3 +150,41 @@ class NoteEmailTextView(BaseNoteView, View):
             )
 
         return redirect(obj)
+
+
+class NoteAddToObjectView(BaseNoteView, CreateView):
+    """View to add a note to any object via generic foreign key."""
+    
+    model = Note
+    form_class = NoteForm
+    template_name = "note_add_inline.html"
+    
+    def get_initial(self):
+        """Pre-populate content_type and object_id from URL parameters."""
+        initial = super().get_initial()
+        
+        content_type_id = self.request.GET.get('content_type')
+        object_id = self.request.GET.get('object_id')
+        
+        if content_type_id:
+            initial['content_type'] = content_type_id
+        if object_id:
+            initial['object_id'] = object_id
+            
+        return initial
+    
+    def form_valid(self, form):
+        """Set the user on the note before saving."""
+        if not form.instance.user:
+            form.instance.user = self.request.user
+        return super().form_valid(form)
+    
+    def get_success_url(self):
+        """Redirect back to the object's detail page."""
+        note = self.object
+        if note.content_object:
+            try:
+                return note.content_object.get_absolute_url()
+            except AttributeError:
+                pass
+        return reverse_lazy("note_view", args=[self.object.pk])

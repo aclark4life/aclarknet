@@ -1,0 +1,38 @@
+{% extends 'dashboard/index.html' %}
+{% load crispy_forms_tags %}
+{% block dashboard_title %}
+  {% include 'title_block.html' %}
+{% endblock %}
+{% block dashhead_title %}
+  <h2 class="dashhead-title">
+    <i class="fa-solid fa-note-sticky"></i> Add Note
+  </h2>
+{% endblock %}
+{% block dashboard %}
+  <div class="row">
+    <div class="col-12">
+      <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="id_name" class="form-label">Title (Optional)</label>
+          <input type="text" name="name" class="form-control" id="id_name" value="{{ form.name.value|default:'' }}">
+        </div>
+        <div class="mb-3">
+          <label for="id_text" class="form-label">Note Text</label>
+          <textarea name="text" class="form-control" id="id_text" rows="5" required>{{ form.text.value|default:'' }}</textarea>
+        </div>
+        <input type="hidden" name="content_type" value="{{ form.content_type.value }}">
+        <input type="hidden" name="object_id" value="{{ form.object_id.value }}">
+        <input type="hidden" name="user" value="{{ form.user.value|default:request.user.id }}">
+        <div class="d-flex gap-2">
+          <button type="submit" class="btn btn-primary">
+            <i class="fa-solid fa-save"></i> Save Note
+          </button>
+          <a href="javascript:history.back()" class="btn btn-secondary">
+            <i class="fa-solid fa-times"></i> Cancel
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
