@@ -20,11 +20,7 @@ from django.views.generic import (
     UpdateView,
     View,
 )
-
-try:
-    from xhtml2pdf import pisa
-except ModuleNotFoundError:
-    pisa = None
+from xhtml2pdf import pisa
 
 from .base import (
     BaseView,
