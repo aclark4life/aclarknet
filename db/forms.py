@@ -108,24 +108,25 @@ class ContactForm(forms.ModelForm):
 
 
 class InvoiceForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_method = "post"
-        self.helper.form_class = "form-inline"
-        self.helper.form_tag = False
-        self.helper.layout = Div(
-            Div(
-                Field("name", css_class="form-control bg-transparent border"),
-                css_class="col-sm-6",
-            ),
-            Div(Field("start_date", css_class="form-control"), css_class="col-sm-6"),
-            Div(Field("end_date", css_class="form-control"), css_class="col-sm-6"),
-            Div(Field("issue_date", css_class="form-control"), css_class="col-sm-6"),
-            Div(Field("due_date", css_class="form-control"), css_class="col-sm-6"),
-            Div(Field("project", css_class="form-control"), css_class="col-sm-6"),
-            css_class="row mx-1",
-        )
+    pass
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.helper = FormHelper()
+    #     self.helper.form_method = "post"
+    #     self.helper.form_class = "form-inline"
+    #     self.helper.form_tag = False
+    #     self.helper.layout = Div(
+    #         Div(
+    #             Field("name", css_class="form-control bg-transparent border"),
+    #             css_class="col-sm-6",
+    #         ),
+    #         Div(Field("start_date", css_class="form-control"), css_class="col-sm-6"),
+    #         Div(Field("end_date", css_class="form-control"), css_class="col-sm-6"),
+    #         Div(Field("issue_date", css_class="form-control"), css_class="col-sm-6"),
+    #         Div(Field("due_date", css_class="form-control"), css_class="col-sm-6"),
+    #         Div(Field("project", css_class="form-control"), css_class="col-sm-6"),
+    #         css_class="row mx-1",
+    #     )
 
     class Meta:
         model = Invoice
@@ -139,29 +140,29 @@ class InvoiceForm(forms.ModelForm):
             "paid_amount",
         )
 
-    issue_date = forms.DateField(
-        widget=forms.DateInput(attrs={"type": "date"}),
-        required=False,
-        initial=timezone.now,
-    )
+    # issue_date = forms.DateField(
+    #     widget=forms.DateInput(attrs={"type": "date"}),
+    #     required=False,
+    #     initial=timezone.now,
+    # )
 
-    start_date = forms.DateField(
-        widget=forms.DateInput(attrs={"type": "date"}),
-        required=False,
-        initial=timezone.now,
-    )
+    # start_date = forms.DateField(
+    #     widget=forms.DateInput(attrs={"type": "date"}),
+    #     required=False,
+    #     initial=timezone.now,
+    # )
 
-    end_date = forms.DateField(
-        widget=forms.DateInput(attrs={"type": "date"}),
-        required=False,
-        initial=timezone.now,
-    )
+    # end_date = forms.DateField(
+    #     widget=forms.DateInput(attrs={"type": "date"}),
+    #     required=False,
+    #     initial=timezone.now,
+    # )
 
-    due_date = forms.DateField(
-        widget=forms.DateInput(attrs={"type": "date"}),
-        required=False,
-        initial=timezone.now,
-    )
+    # due_date = forms.DateField(
+    #     widget=forms.DateInput(attrs={"type": "date"}),
+    #     required=False,
+    #     initial=timezone.now,
+    # )
 
 
 class NoteForm(forms.ModelForm):
