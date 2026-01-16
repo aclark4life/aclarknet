@@ -43,6 +43,7 @@ class SearchView(SuperuserRequiredMixin, BaseView, ListView):
         context = super().get_context_data(**kwargs)
         query = self.request.GET.get("q")
         context["q"] = query
+        context["dashboard"] = self.dashboard
         return context
 
     def get_queryset(self):
