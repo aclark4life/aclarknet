@@ -11,8 +11,13 @@ class ClientForm(forms.ModelForm):
         model = Client
         fields = (
             "name",
+            "title",
+            "company",
+            "address",
             "description",
             "url",
+            "active",
+            "published",
         )
 
     def __init__(self, *args, **kwargs):
@@ -38,7 +43,15 @@ class ClientForm(forms.ModelForm):
 class CompanyForm(forms.ModelForm):
     class Meta:
         model = Company
-        fields = ("name", "url", "description")
+        fields = (
+            "name",
+            "title",
+            "address",
+            "description",
+            "url",
+            "active",
+            "published",
+        )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -67,9 +80,15 @@ class ContactForm(forms.ModelForm):
             "first_name",
             "last_name",
             "name",
+            "title",
             "email",
-            "url",
             "number",
+            "client",
+            "address",
+            "description",
+            "url",
+            "active",
+            "published",
         )
         labels = {
             "name": "Full name",
@@ -131,13 +150,23 @@ class InvoiceForm(forms.ModelForm):
     class Meta:
         model = Invoice
         fields = (
-            "project",
             "name",
+            "title",
+            "project",
+            "user",
             "issue_date",
             "start_date",
             "end_date",
             "due_date",
+            "amount",
             "paid_amount",
+            "balance",
+            "net",
+            "cost",
+            "hours",
+            "currency",
+            "active",
+            "published",
         )
 
     # issue_date = forms.DateField(
@@ -168,7 +197,14 @@ class InvoiceForm(forms.ModelForm):
 class NoteForm(forms.ModelForm):
     class Meta:
         model = Note
-        fields = ("name", "text")
+        fields = (
+            "name",
+            "title",
+            "text",
+            "user",
+            "active",
+            "published",
+        )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -194,10 +230,18 @@ class ProjectForm(forms.ModelForm):
         model = Project
         fields = (
             "name",
-            "description",
+            "title",
             "client",
+            "team",
+            "address",
+            "description",
+            "url",
             "start_date",
             "end_date",
+            "amount",
+            "default_task",
+            "active",
+            "published",
         )
         widgets = {
             "start_date": forms.DateInput(attrs={"type": "date"}),
@@ -232,7 +276,15 @@ class ProjectForm(forms.ModelForm):
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ("name", "project", "rate", "unit")
+        fields = (
+            "name",
+            "title",
+            "project",
+            "rate",
+            "unit",
+            "active",
+            "published",
+        )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -258,11 +310,20 @@ class TimeForm(forms.ModelForm):
     class Meta:
         model = Time
         fields = [
+            "name",
+            "title",
+            "project",
+            "task",
+            "user",
+            "invoice",
             "date",
             "hours",
             "description",
-            "invoice",
-            "task",
+            "amount",
+            "cost",
+            "net",
+            "active",
+            "published",
         ]
 
     def __init__(self, *args, **kwargs):
