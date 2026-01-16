@@ -145,6 +145,10 @@ class InvoiceForm(forms.ModelForm):
         # Make balance read-only since it's calculated from amount - paid_amount
         if "balance" in self.fields:
             self.fields["balance"].disabled = True
+        self.helper = FormHelper()
+        self.helper.form_method = "post"
+        self.helper.form_class = "form-inline"
+        self.helper.form_tag = False
 
 
 class NoteForm(forms.ModelForm):

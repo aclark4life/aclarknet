@@ -21,7 +21,7 @@ from .base import (
     RedirectToObjectViewMixin,
 )
 from ..forms import TimeForm
-from ..models import Time, Invoice
+from ..models import Time, Invoice, Task
 
 
 class BaseTimeView(BaseView, AuthenticatedRequiredMixin):
@@ -39,21 +39,24 @@ class TimeCreateView(
     RedirectToObjectViewMixin,
     CreateView,
 ):
-    fake_data_function = 'get_fake_time_data'
-    
+    fake_data_function = "get_fake_time_data"
+
     def get_initial(self):
         """Set initial values for the form."""
         initial = super().get_initial()
         # Set the user to the logged-in user by default
-        initial['user'] = self.request.user
+        initial["user"] = self.request.user
         return initial
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         invoice_id = self.request.GET.get("invoice_id")
         if invoice_id:
             if "form" in context and hasattr(context["form"], "initial"):
                 context["form"].initial["invoice"] = invoice_id
+
+        default_task = Task.get_default_task()
+        context["form"].initial["task"] = default_task
         return context
 
     def form_valid(self, form):
@@ -87,28 +90,28 @@ class TimeDetailView(BaseTimeView, DetailView):
     def get_context_data(self, **kwargs):
         time = self.get_object()
         queryset_related = []
-        
+
         # Add invoice if exists
         if time.invoice:
             queryset_related.append([time.invoice])
-        
+
         # Add project if exists
         if time.project:
             queryset_related.append([time.project])
-            
+
             # Add client through project if exists
             if time.project.client:
                 queryset_related.append([time.project.client])
-                
+
                 # Add company through client if exists
                 if time.project.client.company:
                     queryset_related.append([time.project.client.company])
-        
+
         # Flatten the list and set as related queryset
         if queryset_related:
             self._queryset_related = list(chain(*queryset_related))
             self.has_related = True
-        
+
         context = super().get_context_data(**kwargs)
         context["is_detail_view"] = True
         return context

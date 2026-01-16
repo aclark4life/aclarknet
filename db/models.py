@@ -127,8 +127,8 @@ class Task(BaseModel):
     @classmethod
     def get_default_task(cls):
         task, _ = cls.objects.get_or_create(
-            name="Default Task",
-            defaults={"rate": 100.0, "unit": 1.0},
+            name="Software Development",
+            defaults={"rate": 187.50, "unit": 1.0},
         )
         return task
 

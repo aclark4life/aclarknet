@@ -149,6 +149,8 @@ class Command(BaseCommand):
                 name=fake.sentence(),
                 issue_date=fake.date_this_decade(),
                 due_date=fake.date_this_decade(),
+                start_date=fake.date_this_decade(),
+                end_date=fake.date_this_decade(),
                 amount=0,
                 paid_amount=0,
                 currency="USD",
