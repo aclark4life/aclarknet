@@ -17,11 +17,29 @@
           <input class="form-control border bg-transparent"
                  name="q"
                  type="text"
-                 placeholder="Search...">
+                 placeholder="Search..."
+                 id="search-input">
           <button type="submit" class="btn btn-link" style="color: #A2A9B1">
             <i class="fa-solid fa-magnifying-glass"></i><span class="visually-hidden">Link text</span>
           </button>
         </form>
+        {% if debug %}
+        <script>
+          (function() {
+            // List of random words to populate the search form in debug mode
+            const words = [
+              'invoice', 'client', 'project', 'task', 'time', 'contact', 
+              'company', 'note', 'meeting', 'report', 'budget', 'deadline',
+              'payment', 'contract', 'milestone', 'deliverable', 'proposal'
+            ];
+            const searchInput = document.getElementById('search-input');
+            if (searchInput && !searchInput.value) {
+              const randomWord = words[Math.floor(Math.random() * words.length)];
+              searchInput.value = randomWord;
+            }
+          })();
+        </script>
+        {% endif %}
       {% endif %}
       {% if request.user.is_authenticated and not request.user.is_superuser %}
         <ul class="nav nav-pills nav-stacked flex-column">
