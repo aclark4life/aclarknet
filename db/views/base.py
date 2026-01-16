@@ -349,7 +349,7 @@ class BaseView:
         """Get notes attached to the current object via generic foreign key.
         
         Returns:
-            QuerySet of Note objects or None if no object or no notes exist
+            List of Note objects or None if no object or no notes exist
         """
         if not hasattr(self, 'object') or self.object is None:
             return None
@@ -359,12 +359,12 @@ class BaseView:
             from ..models import Note
             
             content_type = ContentType.objects.get_for_model(self.object.__class__)
-            notes = Note.objects.filter(
+            notes = list(Note.objects.filter(
                 content_type=content_type,
                 object_id=str(self.object.pk)
-            ).order_by('-created')
+            ).order_by('-created'))
             
-            return notes if notes.exists() else None
+            return notes if notes else None
         except Exception:
             # Silently fail if Note model doesn't exist or other issues
             return None

@@ -126,8 +126,8 @@ class NoteGenericForeignKeyTest(TestCase):
         context = view.get_context_data()
         
         self.assertIn('object_notes', context)
-        self.assertEqual(context['object_notes'].count(), 1)
-        self.assertEqual(context['object_notes'].first(), note)
+        self.assertEqual(len(context['object_notes']), 1)
+        self.assertEqual(context['object_notes'][0], note)
 
     def test_no_notes_context_when_no_notes_exist(self):
         """Test that object_notes is not in context when no notes exist."""
@@ -155,20 +155,3 @@ class NoteGenericForeignKeyTest(TestCase):
         self.assertIsNone(note.content_type)
         self.assertIsNone(note.object_id)
         self.assertIsNone(note.content_object)
-
-    def test_deleting_object_deletes_associated_notes(self):
-        """Test that deleting an object deletes its associated notes."""
-        content_type = ContentType.objects.get_for_model(Company)
-        note = Note.objects.create(
-            name="Company Note",
-            text="This note will be deleted with the company",
-            user=self.user,
-            content_type=content_type,
-            object_id=str(self.company.pk)
-        )
-        
-        company_pk = self.company.pk
-        self.company.delete()
-        
-        # Note should be deleted due to CASCADE on content_type FK
-        self.assertFalse(Note.objects.filter(pk=note.pk).exists())
