@@ -159,9 +159,9 @@ class NoteForm(forms.ModelForm):
             "object_id",
         )
         widgets = {
-            'content_type': forms.HiddenInput(),
-            'object_id': forms.HiddenInput(),
-            'user': forms.HiddenInput(),
+            "content_type": forms.HiddenInput(),
+            "object_id": forms.HiddenInput(),
+            "user": forms.HiddenInput(),
         }
 
     def __init__(self, *args, **kwargs):
@@ -171,6 +171,10 @@ class NoteForm(forms.ModelForm):
         self.helper.form_class = "form-inline"
         self.helper.form_tag = False
         self.helper.layout = Div(
+            Div(
+                Field("name", css_class="form-control bg-transparent border"),
+                css_class="col-sm-12",
+            ),
             Div(
                 Field("text", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",
@@ -279,6 +283,7 @@ class TimeForm(forms.ModelForm):
             Div(Field("hours", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("invoice", css_class="form-control"), css_class="col-sm-4"),
             Div(Field("task", css_class="form-control"), css_class="col-sm-4"),
+            Div(Field("user", css_class="form-control"), css_class="col-sm-4"),
             Div(
                 Field("description", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",

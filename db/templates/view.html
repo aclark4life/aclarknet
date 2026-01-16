@@ -12,7 +12,7 @@
 {% block dashboard %}
   {% include 'toolbars/index.html' %}
   {% if model_name == 'invoice' %}
-    {% include 'accordion.html' %}
+    {% include 'accordion-invoice.html' %}
   {% endif %}
   {% load babel humanize tz text_filters %}
   <div class="accordion my-3" id="accordionDetail">
@@ -59,7 +59,7 @@
           </button>
         </h2>
         <div id="collapseNotes"
-             class="accordion-collapse show"
+             class="accordion-collapse collapse"
              data-bs-parent="#accordionNotes">
           <div class="accordion-body">
             {% if user.is_superuser %}
