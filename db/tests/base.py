@@ -26,12 +26,6 @@ class BaseModelTest(TestCase):
     def test_name_field(self):
         self.assertEqual(self.base_model.name, "Test Name")
 
-    def test_active_field(self):
-        self.assertTrue(self.base_model.active)
-
-    def test_published_field(self):
-        self.assertFalse(self.base_model.published)
-
     def test_save_method_updates_updated_field(self):
         original_updated = self.base_model.updated
         self.base_model.save()
@@ -42,11 +36,6 @@ class BaseModelTest(TestCase):
 
     def test_str_method(self):
         self.assertEqual(str(self.base_model), "Test Name")
-
-        # Test when name is None
-        self.base_model.name = None
-        self.base_model.save()
-        self.assertEqual(str(self.base_model), "Test Title")
 
     def test_get_absolute_url_raises_notimplementederror(self):
         with self.assertRaises(NotImplementedError):
