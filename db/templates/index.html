@@ -44,7 +44,7 @@
                         </td>
                       {% endif %}
                       {% for field_name, field_value in field_values %}
-                        <td>{% include 'field_value.html' %}</td>
+                        <td>{{ field_value|format_field_value:field_name }}</td>
                       {% endfor %}
                     </tr>
                   {% endwith %}
