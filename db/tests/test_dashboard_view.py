@@ -25,6 +25,11 @@ class DashboardViewTest(TestCase):
             email="user2@example.com",
             password="testpass123",
         )
+        self.superuser = User.objects.create_superuser(
+            username="admin",
+            email="admin@example.com",
+            password="adminpass123",
+        )
 
         # Create time entries for both users
         self.time1_user1 = Time.objects.create(
@@ -84,6 +89,27 @@ class DashboardViewTest(TestCase):
         self.assertIn(self.time1_user2, times)
         self.assertNotIn(self.time1_user1, times)
         self.assertNotIn(self.time2_user1, times)
+
+    def test_dashboard_superuser_sees_all_times(self):
+        """Test that superuser sees all time entries in the dashboard."""
+        # Create a request as superuser
+        request = self.factory.get('/dashboard/')
+        request.user = self.superuser
+
+        # Create the view and get context
+        view = DashboardView()
+        view.request = request
+        view.object_list = []
+        context = view.get_context_data()
+
+        # Get the times queryset from context
+        times = context['times']
+
+        # Verify all time entries are in the queryset for superuser
+        self.assertEqual(times.count(), 3)
+        self.assertIn(self.time1_user1, times)
+        self.assertIn(self.time2_user1, times)
+        self.assertIn(self.time1_user2, times)
 
     def test_dashboard_time_stats_calculated_for_session_user_only(self):
         """Test that time statistics are calculated only from session user's entries."""
