@@ -53,6 +53,13 @@
                href="{% url 'time_index' %}">Times</a>
           </li>
         </ul>
+        <ul class="nav nav-pills nav-stacked flex-column mt-3">
+          <li class="nav-header">Account</li>
+          <li class="nav-item">
+            <a class="nav-link{% if profile_nav %} active{% endif %}"
+               href="{% url 'profile_view' %}">Profile</a>
+          </li>
+        </ul>
       {% endif %}
       {% if request.user.is_superuser %}
         <ul class="nav nav-pills nav-stacked flex-column mt-5">
@@ -88,6 +95,13 @@
           <li class="nav-item">
             <a class="nav-link{% if company_nav %} active{% endif %}"
                href="{% url 'company_index' %}">Companies</a>
+          </li>
+        </ul>
+        <ul class="nav nav-pills nav-stacked flex-column mt-3">
+          <li class="nav-header">Account</li>
+          <li class="nav-item">
+            <a class="nav-link{% if profile_nav %} active{% endif %}"
+               href="{% url 'profile_view' %}">Profile</a>
           </li>
         </ul>
       {% endif %}
