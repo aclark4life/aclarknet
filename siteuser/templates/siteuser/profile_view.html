@@ -1,0 +1,78 @@
+{% extends 'dashboard/index.html' %}
+{% load static %}
+
+{% block title %}ACLARK.NET &middot; User Profile{% endblock %}
+
+{% block dashhead_title %}
+  <h2 class="dashhead-title">
+    <a class="text-decoration-none text-secondary" href="{% url 'dashboard' %}">Dashboard</a>
+    <i class="fa-solid fa-angle-right"></i>
+    User Profile
+  </h2>
+{% endblock %}
+
+{% block dashhead_toolbar %}
+  <div class="btn-toolbar dashhead-toolbar">
+    <a class="btn btn-outline-primary" href="{% url 'profile_edit' %}">
+      <i class="fa-solid fa-edit"></i> Edit Profile
+    </a>
+  </div>
+{% endblock %}
+
+{% block dashboard %}
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Profile Information</h5>
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <th scope="row" class="text-muted" style="width: 200px;">Username:</th>
+                <td>{{ profile_user.username }}</td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-muted">First Name:</th>
+                <td>{{ profile_user.first_name|default:"Not set" }}</td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-muted">Last Name:</th>
+                <td>{{ profile_user.last_name|default:"Not set" }}</td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-muted">Email:</th>
+                <td>{{ profile_user.email|default:"Not set" }}</td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-muted">Hourly Rate:</th>
+                <td>
+                  {% if profile_user.rate %}
+                    ${{ profile_user.rate }}
+                  {% else %}
+                    Not set
+                  {% endif %}
+                </td>
+              </tr>
+              <tr>
+                <th scope="row" class="text-muted">Staff Status:</th>
+                <td>
+                  {% if profile_user.is_staff %}
+                    <span class="badge bg-success">Staff</span>
+                  {% else %}
+                    <span class="badge bg-secondary">Regular User</span>
+                  {% endif %}
+                </td>
+              </tr>
+              {% if profile_user.is_superuser %}
+              <tr>
+                <th scope="row" class="text-muted">Superuser:</th>
+                <td><span class="badge bg-danger">Superuser</span></td>
+              </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

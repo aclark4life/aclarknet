@@ -18,6 +18,7 @@ urlpatterns += [
     path("search/", search_views.search, name="search"),
     path("dashboard/", include("db.urls")),
     path("accounts/", include("allauth.urls")),
+    path("user/", include("siteuser.urls")),
 ]
 
 

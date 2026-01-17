@@ -1,0 +1,41 @@
+{% extends 'dashboard/index.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}ACLARK.NET &middot; Edit Profile{% endblock %}
+
+{% block dashhead_title %}
+  <h2 class="dashhead-title">
+    <a class="text-decoration-none text-secondary" href="{% url 'dashboard' %}">Dashboard</a>
+    <i class="fa-solid fa-angle-right"></i>
+    <a class="text-decoration-none text-secondary" href="{% url 'profile_view' %}">User Profile</a>
+    <i class="fa-solid fa-angle-right"></i>
+    Edit
+  </h2>
+{% endblock %}
+
+{% block dashhead_toolbar %}{% endblock %}
+
+{% block dashboard %}
+  <div class="row">
+    <div class="col-12">
+      <form method="post">
+        {% csrf_token %}
+        <div class="d-flex justify-content-between my-1">
+          <div class="ms-auto">
+            <a class="m-3 align-middle link-secondary link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-25-hover"
+               href="{% url 'profile_view' %}">Cancel</a>
+            <input class="btn btn-outline-primary" type="submit" value="Save">
+          </div>
+        </div>
+        {% crispy form %}
+        <div class="d-flex justify-content-between my-1">
+          <div class="ms-auto">
+            <a class="m-3 align-middle link-secondary link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-25-hover"
+               href="{% url 'profile_view' %}">Cancel</a>
+            <input class="btn btn-outline-primary" type="submit" value="Save">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
