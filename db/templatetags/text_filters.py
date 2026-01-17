@@ -42,7 +42,8 @@ def format_field_value(field_value, field_name):
         field_name (str): The name of the field (used to determine formatting).
         
     Returns:
-        str: The formatted field value.
+        Formatted field value. Currency fields return a string with formatting,
+        hours field returns int/float, other fields return the value as-is or empty string.
     
     Examples:
         {{ field_value|format_field_value:field_name }}
