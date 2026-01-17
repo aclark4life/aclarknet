@@ -21,12 +21,10 @@
           <table class="table table-striped table-hover" id="table-select">
             <thead>
               <tr>
-                {% if request.user.is_superuser %}
-                  <th scope="col" class="not-sortable">
-                    <input type="checkbox" id="select-all"/>
-                    <span class="visually-hidden">Link text</span>
-                  </th>
-                {% endif %}
+                <th scope="col" class="not-sortable">
+                  <input type="checkbox" id="select-all"/>
+                  <span class="visually-hidden">Link text</span>
+                </th>
                 {% for field_name in table_headers %}
                   <th>{{ field_name|title_case }}</th>
                 {% endfor %}
@@ -38,11 +36,9 @@
                   {% with model_name=field_values.0.1 object_id=field_values.1.1 %}
                     <tr onclick="window.location='{% url model_name|add:"_view" object_id %}'"
                         style="cursor: pointer">
-                      {% if request.user.is_superuser %}
-                        <td onclick="event.stopPropagation();">
-                          <input type="checkbox" name="entry_id" value="{{ object_id }}"/>
-                        </td>
-                      {% endif %}
+                      <td onclick="event.stopPropagation();">
+                        <input type="checkbox" name="entry_id" value="{{ object_id }}"/>
+                      </td>
                       {% for field_name, field_value in field_values %}
                         <td>{{ field_value|format_field_value:field_name }}</td>
                       {% endfor %}
