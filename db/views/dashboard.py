@@ -45,7 +45,7 @@ class DashboardView(BaseView, UserPassesTestMixin, ListView):
                 "notes": get_base_queryset(Note).order_by("-created"),
                 "tasks": get_base_queryset(Task).order_by("name"),
                 "clients": get_base_queryset(Client).order_by("name"),
-                "times": get_base_queryset(Time).order_by("-date"),
+                "times": Time.objects.filter(user=self.request.user).order_by("-date"),
             }
         )
 
