@@ -60,6 +60,11 @@ class NoteDetailView(BaseNoteView, DetailView):
     url_email_text = "note_email_text"
 
     def get_context_data(self, **kwargs):
+        note = self.get_object()
+        # Show the object this note is attached to in the Related section
+        if note.content_object:
+            self._queryset_related = [note.content_object]
+            self.has_related = True
         context = super().get_context_data(**kwargs)
         context["url_export_pdf"] = self.url_export_pdf
         context["url_email_pdf"] = self.url_email_pdf
