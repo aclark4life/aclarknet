@@ -47,7 +47,9 @@
             {% include 'dashboard/invoice.html' %}
           {% endif %}
 
-          {% include 'dashboard/project.html' %}
+          {% if request.user.is_superuser %}
+            {% include 'dashboard/project.html' %}
+          {% endif %}
 
                     {# Time Tracking (All Users) #}
           {% include 'dashboard/time.html' %}
