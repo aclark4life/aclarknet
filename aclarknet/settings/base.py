@@ -55,7 +55,6 @@ INSTALLED_APPS = [
     "django_extensions",
     "cms",
     "webpack_boilerplate",
-    "hijack",
     "crispy_forms",
     "crispy_bootstrap5",
     "allauth",
@@ -72,7 +71,6 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
     "allauth.account.middleware.AccountMiddleware",
-    "hijack.middleware.HijackUserMiddleware",
 ]
 
 ROOT_URLCONF = "aclarknet.urls"

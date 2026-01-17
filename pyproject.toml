@@ -24,6 +24,7 @@ dependencies = [
 dev = [
   "Faker",
   "django-debug-toolbar",
+  "django-hijack",
   "prek",
 ]
 test = [

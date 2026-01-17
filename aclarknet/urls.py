@@ -17,7 +17,6 @@ urlpatterns += [
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
     path("dashboard/", include("db.urls")),
-    path("hijack/", include("hijack.urls")),
     path("accounts/", include("allauth.urls")),
 ]
 
@@ -34,7 +33,9 @@ if settings.DEBUG:
 
     urlpatterns += debug_toolbar_urls()
 
-urlpatterns = urlpatterns + []
+    urlpatterns += urlpatterns + [
+        path("hijack/", include("hijack.urls")),
+    ]
 
 urlpatterns = urlpatterns + [
     path("", include("cms.urls")),
