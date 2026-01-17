@@ -245,7 +245,9 @@ class Note(BaseModel):
     def __str__(self):
         if self.name:
             return self.name
-        return (self.text[:30] + "...") if self.text else f"Note {self.id}"
+        return (
+            (self.description[:30] + "...") if self.description else f"Note {self.id}"
+        )
 
     def get_absolute_url(self):
         return reverse("note_view", args=[self.id])

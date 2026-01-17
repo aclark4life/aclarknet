@@ -114,6 +114,6 @@ def get_fake_note_data():
         return {}
 
     return {
-        "title": fake.sentence(nb_words=4),
-        "text": fake.text(max_nb_chars=500),
+        "name": fake.sentence(nb_words=4),
+        "description": fake.text(max_nb_chars=500),
     }

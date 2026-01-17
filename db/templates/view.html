@@ -70,7 +70,11 @@
             {% endif %}
             {% if object_notes %}
               {% for note in object_notes %}
-                <div class="card mb-3">
+                <div class="card mb-3"
+                     onclick="window.location='{% url 'note_view' note.id %}'"
+                     style="cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;"
+                     onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)';"
+                     onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
                   <div class="card-body">
                     {% if note.name %}
                       <h5 class="card-title">{{ note.name }}</h5>

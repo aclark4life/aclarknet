@@ -18,14 +18,14 @@
           <input type="text" name="name" class="form-control" id="id_name" value="{{ form.name.value|default:'' }}">
         </div>
         <div class="mb-3">
-          <label for="id_text" class="form-label">Text</label>
-          <textarea name="text" class="form-control" id="id_text" rows="5">{{ form.text.value|default:'' }}</textarea>
+          <label for="id_description" class="form-label">Description</label>
+          <textarea name="text" class="form-control" id="id_description" rows="5">{{ form.description.value|default:'' }}</textarea>
         </div>
         <input type="hidden" name="content_type" value="{{ form.content_type.value }}">
         <input type="hidden" name="object_id" value="{{ form.object_id.value }}">
         <input type="hidden" name="user" value="{{ form.user.value|default:request.user.id }}">
         <div class="d-flex gap-2">
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" class="btn btn-dashboard">
             <i class="fa-solid fa-save"></i> Save Note
           </button>
           <a href="javascript:history.back()" class="btn btn-secondary">

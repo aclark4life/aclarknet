@@ -2,7 +2,6 @@
 
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.contenttypes.models import ContentType
 from django.core.mail import EmailMessage
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
@@ -43,7 +42,7 @@ class NoteCreateView(FakeDataMixin, BaseNoteView, CreateView):
     model = Note
     form_model = NoteForm
     success_url = reverse_lazy("note_view")
-    fake_data_function = 'get_fake_note_data'
+    fake_data_function = "get_fake_note_data"
 
     def get_success_url(self):
         return reverse_lazy("note_view", args=[self.object.pk])
@@ -152,33 +151,34 @@ class NoteEmailTextView(BaseNoteView, View):
         return redirect(obj)
 
 
-class NoteAddToObjectView(BaseNoteView, CreateView):
+class NoteAddToObjectView(FakeDataMixin, BaseNoteView, CreateView):
     """View to add a note to any object via generic foreign key."""
-    
+
     model = Note
     form_class = NoteForm
     template_name = "note_add_inline.html"
-    
+    fake_data_function = "get_fake_note_data"
+
     def get_initial(self):
         """Pre-populate content_type and object_id from URL parameters."""
         initial = super().get_initial()
-        
-        content_type_id = self.request.GET.get('content_type')
-        object_id = self.request.GET.get('object_id')
-        
+
+        content_type_id = self.request.GET.get("content_type")
+        object_id = self.request.GET.get("object_id")
+
         if content_type_id:
-            initial['content_type'] = content_type_id
+            initial["content_type"] = content_type_id
         if object_id:
-            initial['object_id'] = object_id
-            
+            initial["object_id"] = object_id
+
         return initial
-    
+
     def form_valid(self, form):
         """Set the user on the note before saving."""
         if not form.instance.user:
             form.instance.user = self.request.user
         return super().form_valid(form)
-    
+
     def get_success_url(self):
         """Redirect back to the object's detail page."""
         note = self.object
