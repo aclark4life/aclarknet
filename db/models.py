@@ -12,6 +12,7 @@ class BaseModel(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False)
     updated = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=300, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
 
     class Meta:
         abstract = True
@@ -28,7 +29,6 @@ class BaseModel(models.Model):
 
 class ContactInfoMixin(models.Model):
     address = models.TextField(blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
     url = models.URLField("Website/URL", max_length=300, blank=True, null=True)
 
     class Meta:
@@ -207,7 +207,6 @@ class Time(BaseModel):
     )
     date = models.DateField(default=timezone.now)
     hours = models.DecimalField("Hours", default=1.0, max_digits=12, decimal_places=2)
-    description = models.TextField(blank=True, null=True)
 
     amount = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
     cost = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
@@ -226,7 +225,6 @@ class Time(BaseModel):
 
 
 class Note(BaseModel):
-    text = models.TextField(blank=True, null=True)
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name="notes",

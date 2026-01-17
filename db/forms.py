@@ -156,7 +156,7 @@ class NoteForm(forms.ModelForm):
         model = Note
         fields = (
             "name",
-            "text",
+            "description",
             "user",
             "content_type",
             "object_id",
@@ -179,7 +179,7 @@ class NoteForm(forms.ModelForm):
                 css_class="col-sm-12",
             ),
             Div(
-                Field("text", css_class="form-control bg-transparent border"),
+                Field("description", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",
             ),
             css_class="row",

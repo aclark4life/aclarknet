@@ -136,10 +136,17 @@ class InvoiceAdmin(ImportExportModelAdmin):
 
 @admin.register(Note)
 class NoteAdmin(ImportExportModelAdmin):
-    list_display = ['name', 'text', 'content_type', 'object_id', 'user', 'created']
-    list_filter = ['content_type', 'created']
-    search_fields = ['name', 'text']
-    raw_id_fields = ['user']
+    list_display = [
+        "name",
+        "description",
+        "content_type",
+        "object_id",
+        "user",
+        "created",
+    ]
+    list_filter = ["content_type", "created"]
+    search_fields = ["name", "text"]
+    raw_id_fields = ["user"]
 
 
 class ProjectResource(ImportExportModelResource):
