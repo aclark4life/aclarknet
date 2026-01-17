@@ -155,3 +155,55 @@ class NoteGenericForeignKeyTest(TestCase):
         self.assertIsNone(note.content_type)
         self.assertIsNone(note.object_id)
         self.assertIsNone(note.content_object)
+
+    def test_note_detail_view_shows_related_object(self):
+        """Test that note detail view shows the object it's attached to in related section."""
+        from db.views.note import NoteDetailView
+        
+        content_type = ContentType.objects.get_for_model(Company)
+        note = Note.objects.create(
+            name="Company Note",
+            text="This is a note about the company",
+            user=self.user,
+            content_type=content_type,
+            object_id=str(self.company.pk)
+        )
+        
+        request = self.factory.get(f'/note/{note.pk}/')
+        request.user = self.user
+        
+        view = NoteDetailView()
+        view.request = request
+        view.object = note
+        view.kwargs = {'pk': note.pk}
+        
+        context = view.get_context_data()
+        
+        # has_related should be True
+        self.assertTrue(context.get('has_related'))
+        # The related object should be in the queryset
+        self.assertIsNotNone(view._queryset_related)
+        self.assertIn(self.company, view._queryset_related)
+
+    def test_note_detail_view_no_related_when_not_attached(self):
+        """Test that note detail view doesn't show related when note has no attachment."""
+        from db.views.note import NoteDetailView
+        
+        note = Note.objects.create(
+            name="Standalone Note",
+            text="This note is not attached to any object",
+            user=self.user
+        )
+        
+        request = self.factory.get(f'/note/{note.pk}/')
+        request.user = self.user
+        
+        view = NoteDetailView()
+        view.request = request
+        view.object = note
+        view.kwargs = {'pk': note.pk}
+        
+        context = view.get_context_data()
+        
+        # has_related should not be in context or should be False
+        self.assertFalse(context.get('has_related', False))
