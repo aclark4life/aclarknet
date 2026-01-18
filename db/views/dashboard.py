@@ -37,6 +37,11 @@ class DashboardView(BaseView, UserPassesTestMixin, ListView):
         def get_base_queryset(model):
             return model.objects.all()
 
+        # Filter times by user - non-superusers only see their own time entries
+        times_queryset = get_base_queryset(Time).order_by("-date")
+        if not self.request.user.is_superuser:
+            times_queryset = times_queryset.filter(user=self.request.user)
+
         context.update(
             {
                 "invoices": get_base_queryset(Invoice),
@@ -45,7 +50,7 @@ class DashboardView(BaseView, UserPassesTestMixin, ListView):
                 "notes": get_base_queryset(Note).order_by("-created"),
                 "tasks": get_base_queryset(Task).order_by("name"),
                 "clients": get_base_queryset(Client).order_by("name"),
-                "times": get_base_queryset(Time).order_by("-date"),
+                "times": times_queryset,
             }
         )
 
