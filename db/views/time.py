@@ -59,12 +59,15 @@ class TimeCreateView(
         invoice_id = self.request.GET.get("invoice_id")
         if invoice_id:
             if "form" in context and hasattr(context["form"], "initial"):
-                context["form"].initial["invoice"] = invoice_id
+                # Only set invoice initial if field exists (admin users)
+                if "invoice" in context["form"].fields:
+                    context["form"].initial["invoice"] = invoice_id
 
         # Only set default task if user is admin and task field is available
-        if self.request.user.is_superuser:
-            default_task = Task.get_default_task()
-            context["form"].initial["task"] = default_task
+        if self.request.user.is_superuser and "form" in context:
+            if "task" in context["form"].fields:
+                default_task = Task.get_default_task()
+                context["form"].initial["task"] = default_task
         return context
 
     def form_valid(self, form):

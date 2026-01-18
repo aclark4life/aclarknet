@@ -284,6 +284,7 @@ class TimeForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         
         # Remove invoice and task fields for non-admin users
+        # Admin users are identified by is_superuser flag
         if user and not user.is_superuser:
             self.fields.pop('invoice', None)
             self.fields.pop('task', None)
