@@ -207,6 +207,9 @@ class Time(BaseModel):
     )
     date = models.DateField(default=timezone.now)
     hours = models.DecimalField("Hours", default=1.0, max_digits=12, decimal_places=2)
+    amount = models.DecimalField(
+        "Amount", blank=True, null=True, max_digits=12, decimal_places=2
+    )
 
     def save(self, *args, **kwargs):
         if not self.task:
