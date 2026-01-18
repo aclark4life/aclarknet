@@ -8,10 +8,7 @@ from wagtail.documents import urls as wagtaildocs_urls
 from search import views as search_views
 
 
-# MongoDB Wagtail fixes
-urlpatterns = []
-
-urlpatterns += [
+urlpatterns = [
     path("admin/", admin.site.urls),
     path("wagtail/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
@@ -34,10 +31,10 @@ if settings.DEBUG:
 
     urlpatterns += debug_toolbar_urls()
 
-    urlpatterns += urlpatterns + [
+    urlpatterns += [
         path("hijack/", include("hijack.urls")),
     ]
 
-urlpatterns = urlpatterns + [
+urlpatterns += [
     path("", include("cms.urls")),
 ]

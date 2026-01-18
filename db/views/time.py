@@ -71,6 +71,9 @@ class TimeCreateView(
             return HttpResponseRedirect(reverse("invoice_view", args=[invoice_id]))
         return super().form_valid(form)
 
+    def get_success_url(self):
+        return reverse_lazy("time_index")
+
 
 class TimeListView(
     BaseTimeView,

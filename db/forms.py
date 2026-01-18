@@ -270,9 +270,6 @@ class TimeForm(forms.ModelForm):
             "date",
             "hours",
             "description",
-            "amount",
-            "cost",
-            "net",
         ]
         widgets = {
             "user": forms.HiddenInput(),
