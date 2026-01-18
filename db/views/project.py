@@ -5,6 +5,7 @@ from itertools import chain
 from django.http import HttpResponseRedirect
 from django.shortcuts import reverse
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.views.generic import (
     CreateView,
     DeleteView,
@@ -60,19 +61,23 @@ class ProjectCreateView(FakeDataMixin, BaseProjectView, CreateView):
         else:
             return reverse_lazy("project_view", args=[self.object.pk])
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     now = timezone.now()
-    #     client = None
-    #     client_id = self.request.GET.get("client_id")
-    #     if client_id:
-    #         client = Client.objects.get(id=client_id)
-    #     context["form"].initial = {
-    #         "start_date": now,
-    #         "end_date": now + timezone.timedelta(days=366),
-    #         "client": client,
-    #     }
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        now = timezone.now()
+        client = None
+        client_id = self.request.GET.get("client_id")
+        if client_id:
+            client = Client.objects.get(id=client_id)
+        name = context["form"].initial.get("name", "")
+        description = context["form"].initial.get("description", "")
+        context["form"].initial = {
+            "start_date": now,
+            "end_date": now + timezone.timedelta(days=366),
+            "client": client,
+            "name": name,
+            "description": description,
+        }
+        return context
 
     def form_valid(self, form):
         client_id = self.request.GET.get("client_id")
