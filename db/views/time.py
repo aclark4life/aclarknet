@@ -41,6 +41,12 @@ class TimeCreateView(
 ):
     fake_data_function = "get_fake_time_data"
 
+    def get_form_kwargs(self):
+        """Pass the user to the form."""
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     def get_initial(self):
         """Set initial values for the form."""
         initial = super().get_initial()
@@ -53,10 +59,15 @@ class TimeCreateView(
         invoice_id = self.request.GET.get("invoice_id")
         if invoice_id:
             if "form" in context and hasattr(context["form"], "initial"):
-                context["form"].initial["invoice"] = invoice_id
+                # Only set invoice initial if field exists (admin users)
+                if "invoice" in context["form"].fields:
+                    context["form"].initial["invoice"] = invoice_id
 
-        default_task = Task.get_default_task()
-        context["form"].initial["task"] = default_task
+        # Only set default task if user is admin and task field is available
+        if (self.request.user.is_superuser and "form" in context 
+            and "task" in context["form"].fields):
+            default_task = Task.get_default_task()
+            context["form"].initial["task"] = default_task
         return context
 
     def form_valid(self, form):
@@ -125,6 +136,12 @@ class TimeUpdateView(
     RedirectToObjectViewMixin,
     UpdateView,
 ):
+    def get_form_kwargs(self):
+        """Pass the user to the form."""
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     def form_valid(self, form):
         # User field should already be on the instance or in cleaned_data
         # No need to manually set it from initial values
@@ -137,6 +154,12 @@ class TimeCopyView(
     RedirectToObjectViewMixin,
     CreateView,
 ):
+    def get_form_kwargs(self):
+        """Pass the user to the form."""
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     def form_valid(self, form):
         obj = form.save(commit=False)
         # Always assign the logged-in user to copied time entries
