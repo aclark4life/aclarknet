@@ -40,7 +40,7 @@
           {% if request.user.is_superuser %}
             {% include 'statcards/revenue.html' %}
           {% endif %}
-          {% include 'statcards/time.html' %}
+          {% include 'statcards/clock.html' %}
 
                     {# Invoices (Admin Only) #}
           {% if request.user.is_superuser %}
