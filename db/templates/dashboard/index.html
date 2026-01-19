@@ -7,9 +7,7 @@
   <div class="container my-5 py-4">
     <div class="row">
       {% include 'dashboard/sidebar.html' %}
-
       <div class="col-md-9 content">
-                {# Dashboard Header #}
         <div class="dashhead">
           <div class="dashhead-title">
             <h6 class="dashhead-subtitle">Dashboards</h6>
@@ -24,43 +22,18 @@
             {% endblock %}
           </div>
         </div>
-
-
-                {# Main Dashboard Content #}
         {% block dashboard %}
-                    {# Admin Charts #}
           {% if request.user.is_superuser %}
             <div class="row my-3">
               {% include 'charts/revenue.html' %}
               {% include 'charts/time.html' %}
             </div>
           {% endif %}
-
-                    {# Stat Cards #}
           {% if request.user.is_superuser %}
             {% include 'statcards/revenue.html' %}
           {% endif %}
           {% include 'statcards/clock.html' %}
-
-                    {# Invoices (Admin Only) #}
-          {% if request.user.is_superuser %}
-            {% include 'dashboard/invoice.html' %}
-          {% endif %}
-
-          {% if request.user.is_superuser %}
-            {% include 'dashboard/project.html' %}
-          {% endif %}
-
-                    {# Time Tracking (All Users) #}
           {% include 'dashboard/time.html' %}
-
-                    {# Admin Data Grids #}
-          {% if request.user.is_superuser %}
-            <div class="row">
-              {% include 'dashboard/client.html' %}
-              {% include 'dashboard/task.html' %}
-            </div>
-          {% endif %}
         {% endblock %}
       </div>
     </div>
