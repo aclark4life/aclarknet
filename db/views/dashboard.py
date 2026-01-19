@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
-from django.db.models import F, Sum
+from django.db.models import F, Q, Sum
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, reverse
 from django.views.generic import ListView
@@ -38,7 +38,10 @@ class DashboardView(BaseView, UserPassesTestMixin, ListView):
             return model.objects.all()
 
         # Filter times by user - non-superusers only see their own time entries
-        times_queryset = get_base_queryset(Time).order_by("-date")
+        # Exclude time entries from paid invoices (where balance = 0)
+        times_queryset = get_base_queryset(Time).order_by("-date").filter(
+            Q(invoice__isnull=True) | Q(invoice__balance__gt=0)
+        )
         if not self.request.user.is_superuser:
             times_queryset = times_queryset.filter(user=self.request.user)
 
