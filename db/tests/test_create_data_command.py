@@ -180,3 +180,87 @@ class CreateDataCommandTest(TestCase):
                 user.mail,
                 f"User {user.username} should have mail=True to receive email notifications",
             )
+
+    def test_users_only_flag(self):
+        """Test that --users-only flag creates only users."""
+        # Run the command with --users-only flag
+        call_command(
+            "create_data",
+            "--users-only=5",
+            stdout=StringIO(),
+        )
+
+        # Check that only users were created
+        users = User.objects.all()
+        self.assertEqual(users.count(), 5, "Should create 5 users")
+        
+        # Verify no other models were created
+        from db.models import Company, Client, Project, Invoice, Time
+        self.assertEqual(Company.objects.count(), 0, "Should not create companies")
+        self.assertEqual(Client.objects.count(), 0, "Should not create clients")
+        self.assertEqual(Project.objects.count(), 0, "Should not create projects")
+        self.assertEqual(Invoice.objects.count(), 0, "Should not create invoices")
+        self.assertEqual(Time.objects.count(), 0, "Should not create time entries")
+
+    def test_companies_only_flag(self):
+        """Test that --companies-only flag creates only companies."""
+        # Run the command with --companies-only flag
+        call_command(
+            "create_data",
+            "--companies-only=3",
+            stdout=StringIO(),
+        )
+
+        # Check that only companies were created
+        from db.models import Company, Client, Project, Invoice, Time
+        self.assertEqual(Company.objects.count(), 3, "Should create 3 companies")
+        
+        # Verify no other models were created
+        self.assertEqual(User.objects.count(), 0, "Should not create users")
+        self.assertEqual(Client.objects.count(), 0, "Should not create clients")
+        self.assertEqual(Project.objects.count(), 0, "Should not create projects")
+        self.assertEqual(Invoice.objects.count(), 0, "Should not create invoices")
+        self.assertEqual(Time.objects.count(), 0, "Should not create time entries")
+
+    def test_clients_only_flag_creates_dependencies(self):
+        """Test that --clients-only flag creates clients and required companies."""
+        # Run the command with --clients-only flag
+        call_command(
+            "create_data",
+            "--clients-only=4",
+            stdout=StringIO(),
+        )
+
+        # Check that clients were created
+        from db.models import Company, Client, Project, Invoice, Time
+        self.assertEqual(Client.objects.count(), 4, "Should create 4 clients")
+        
+        # Verify companies were created as dependencies
+        self.assertGreater(Company.objects.count(), 0, "Should create companies as dependencies")
+        
+        # Verify other models were not created
+        self.assertEqual(User.objects.count(), 0, "Should not create users")
+        self.assertEqual(Project.objects.count(), 0, "Should not create projects")
+        self.assertEqual(Invoice.objects.count(), 0, "Should not create invoices")
+        self.assertEqual(Time.objects.count(), 0, "Should not create time entries")
+
+    def test_times_only_flag_creates_dependencies(self):
+        """Test that --times-only flag creates time entries and all required dependencies."""
+        # Run the command with --times-only flag
+        call_command(
+            "create_data",
+            "--times-only=10",
+            stdout=StringIO(),
+        )
+
+        # Check that time entries were created
+        from db.models import Company, Client, Project, Invoice, Time
+        self.assertEqual(Time.objects.count(), 10, "Should create 10 time entries")
+        
+        # Verify all dependencies were created
+        self.assertGreater(Company.objects.count(), 0, "Should create companies as dependencies")
+        self.assertGreater(Client.objects.count(), 0, "Should create clients as dependencies")
+        self.assertGreater(Project.objects.count(), 0, "Should create projects as dependencies")
+        self.assertGreater(Invoice.objects.count(), 0, "Should create invoices as dependencies")
+        self.assertGreater(User.objects.count(), 0, "Should create users as dependencies")
+        self.assertGreater(Task.objects.count(), 0, "Should create tasks as dependencies")
