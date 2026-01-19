@@ -13,6 +13,36 @@ fake = Faker()
 
 class Command(BaseCommand):
     help = "Creates fake data for Companies, Clients, Contacts, Projects, Invoices, and Times"
+    
+    """
+    Django management command to create fake data for testing and development.
+    
+    Usage Examples:
+        # Create all model types with default counts
+        python manage.py create_data
+        
+        # Create only 50 users
+        python manage.py create_data --users-only=50
+        
+        # Create only 20 companies
+        python manage.py create_data --companies-only=20
+        
+        # Create only 100 time entries (automatically creates required dependencies)
+        python manage.py create_data --times-only=100
+        
+    Dependency Handling:
+        When using --*-only flags, the command automatically creates minimum required dependencies:
+        - users: no dependencies
+        - companies: no dependencies
+        - clients: requires companies
+        - contacts: requires clients and companies
+        - projects: requires clients and companies
+        - invoices: requires projects, clients, and companies
+        - times: requires all of the above plus tasks and users
+        
+    If required dependencies don't exist in the database, the command will create them
+    automatically (minimum 1 of each) and display a warning message.
+    """
 
     def add_arguments(self, parser):
         parser.add_argument(
