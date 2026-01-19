@@ -12,10 +12,10 @@ fake = Faker()
 
 
 class Command(BaseCommand):
-    help = "Creates fake data for Companies, Clients, Contacts, Projects, Invoices, and Times"
-    
     """
     Django management command to create fake data for testing and development.
+    
+    Creates fake data for Companies, Clients, Contacts, Projects, Invoices, and Times.
     
     Usage Examples:
         # Create all model types with default counts
@@ -43,6 +43,11 @@ class Command(BaseCommand):
     If required dependencies don't exist in the database, the command will create them
     automatically (minimum 1 of each) and display a warning message.
     """
+    help = "Creates fake data for Companies, Clients, Contacts, Projects, Invoices, and Times"
+
+    def _needs_dependency(self, *dependent_flags):
+        """Check if any of the dependent flags are set (not None)."""
+        return any(flag is not None for flag in dependent_flags)
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -137,14 +142,20 @@ class Command(BaseCommand):
             create_companies = True
         else:
             num_companies = options["companies"]
-            create_companies = not any_only_flag or clients_only is not None or contacts_only is not None or projects_only is not None or invoices_only is not None or times_only is not None
+            # Companies are needed as dependency for several other models
+            create_companies = not any_only_flag or self._needs_dependency(
+                clients_only, contacts_only, projects_only, invoices_only, times_only
+            )
         
         if clients_only is not None:
             num_clients = clients_only
             create_clients = True
         else:
             num_clients = options["clients"]
-            create_clients = not any_only_flag or contacts_only is not None or projects_only is not None or invoices_only is not None or times_only is not None
+            # Clients are needed as dependency for several other models
+            create_clients = not any_only_flag or self._needs_dependency(
+                contacts_only, projects_only, invoices_only, times_only
+            )
         
         if contacts_only is not None:
             num_contacts = contacts_only
@@ -158,13 +169,17 @@ class Command(BaseCommand):
             create_projects = True
         else:
             num_projects = options["projects"]
-            create_projects = not any_only_flag or invoices_only is not None or times_only is not None
+            # Projects are needed as dependency for invoices and times
+            create_projects = not any_only_flag or self._needs_dependency(
+                invoices_only, times_only
+            )
         
         if invoices_only is not None:
             num_invoices = invoices_only
             create_invoices = True
         else:
             num_invoices = options["invoices"]
+            # Invoices are needed as dependency for times
             create_invoices = not any_only_flag or times_only is not None
         
         if times_only is not None:
@@ -232,7 +247,7 @@ class Command(BaseCommand):
         else:
             # If not creating companies, get existing ones for clients
             companies = list(Company.objects.all())
-            if not companies and (clients_only is not None or contacts_only is not None or projects_only is not None or invoices_only is not None or times_only is not None):
+            if not companies and self._needs_dependency(clients_only, contacts_only, projects_only, invoices_only, times_only):
                 self.stdout.write(
                     self.style.WARNING("No companies found. Creating 1 company for dependencies.")
                 )
@@ -262,7 +277,7 @@ class Command(BaseCommand):
         else:
             # If not creating clients, get existing ones for contacts/projects
             clients = list(Client.objects.all())
-            if not clients and (contacts_only is not None or projects_only is not None or invoices_only is not None or times_only is not None):
+            if not clients and self._needs_dependency(contacts_only, projects_only, invoices_only, times_only):
                 self.stdout.write(
                     self.style.WARNING("No clients found. Creating 1 client for dependencies.")
                 )
@@ -335,7 +350,7 @@ class Command(BaseCommand):
         else:
             # If not creating projects, get existing ones for invoices
             projects = list(Project.objects.all())
-            if not projects and (invoices_only is not None or times_only is not None):
+            if not projects and self._needs_dependency(invoices_only, times_only):
                 self.stdout.write(
                     self.style.WARNING("No projects found. Creating 1 project for dependencies.")
                 )

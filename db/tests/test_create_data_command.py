@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 from django.core.management import call_command
 from django.test import TestCase
 
-from db.models import Task, Invoice, Time, Client, Contact
+from db.models import Task, Invoice, Time, Client, Contact, Company, Project
 
 User = get_user_model()
 
@@ -195,7 +195,6 @@ class CreateDataCommandTest(TestCase):
         self.assertEqual(users.count(), 5, "Should create 5 users")
         
         # Verify no other models were created
-        from db.models import Company, Client, Project, Invoice, Time
         self.assertEqual(Company.objects.count(), 0, "Should not create companies")
         self.assertEqual(Client.objects.count(), 0, "Should not create clients")
         self.assertEqual(Project.objects.count(), 0, "Should not create projects")
@@ -212,7 +211,6 @@ class CreateDataCommandTest(TestCase):
         )
 
         # Check that only companies were created
-        from db.models import Company, Client, Project, Invoice, Time
         self.assertEqual(Company.objects.count(), 3, "Should create 3 companies")
         
         # Verify no other models were created
@@ -232,7 +230,6 @@ class CreateDataCommandTest(TestCase):
         )
 
         # Check that clients were created
-        from db.models import Company, Client, Project, Invoice, Time
         self.assertEqual(Client.objects.count(), 4, "Should create 4 clients")
         
         # Verify companies were created as dependencies
@@ -254,7 +251,6 @@ class CreateDataCommandTest(TestCase):
         )
 
         # Check that time entries were created
-        from db.models import Company, Client, Project, Invoice, Time
         self.assertEqual(Time.objects.count(), 10, "Should create 10 time entries")
         
         # Verify all dependencies were created
