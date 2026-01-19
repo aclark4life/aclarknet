@@ -136,6 +136,10 @@ class TimeUpdateView(
     RedirectToObjectViewMixin,
     UpdateView,
 ):
+    def test_func(self):
+        time = self.get_object()
+        return self.request.user.is_superuser or self.request.user == time.user
+
     def get_form_kwargs(self):
         """Pass the user to the form."""
         kwargs = super().get_form_kwargs()
