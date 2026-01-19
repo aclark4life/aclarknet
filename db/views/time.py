@@ -98,6 +98,8 @@ class TimeDetailView(BaseTimeView, DetailView):
     template_name = "view.html"
 
     def test_func(self):
+        if not self.request.user.is_authenticated:
+            return False
         time = self.get_object()
         return self.request.user.is_superuser or self.request.user == time.user
 
@@ -137,6 +139,8 @@ class TimeUpdateView(
     UpdateView,
 ):
     def test_func(self):
+        if not self.request.user.is_authenticated:
+            return False
         time = self.get_object()
         return self.request.user.is_superuser or self.request.user == time.user
 
@@ -179,6 +183,8 @@ class TimeDeleteView(BaseTimeView, FilterByUserMixin, DeleteView):
     template_name = "delete.html"
 
     def test_func(self):
+        if not self.request.user.is_authenticated:
+            return False
         time = self.get_object()
         return self.request.user.is_superuser or self.request.user == time.user
 
