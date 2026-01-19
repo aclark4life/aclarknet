@@ -3,7 +3,6 @@
 # Django imports
 from django.conf import settings
 from django.contrib.auth.mixins import UserPassesTestMixin
-from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
 from django.shortcuts import render, reverse
 from django.urls import reverse_lazy
@@ -408,9 +407,6 @@ class SuperuserRequiredMixin(UserPassesTestMixin):
 
     def test_func(self):
         return self.request.user.is_superuser
-
-    def handle_no_permission(self):
-        raise PermissionDenied
 
 
 class AuthenticatedRequiredMixin(SuperuserRequiredMixin):
