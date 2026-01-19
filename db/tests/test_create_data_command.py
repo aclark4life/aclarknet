@@ -193,7 +193,7 @@ class CreateDataCommandTest(TestCase):
         # Check that only users were created
         users = User.objects.all()
         self.assertEqual(users.count(), 5, "Should create 5 users")
-        
+
         # Verify no other models were created
         self.assertEqual(Company.objects.count(), 0, "Should not create companies")
         self.assertEqual(Client.objects.count(), 0, "Should not create clients")
@@ -212,7 +212,7 @@ class CreateDataCommandTest(TestCase):
 
         # Check that only companies were created
         self.assertEqual(Company.objects.count(), 3, "Should create 3 companies")
-        
+
         # Verify no other models were created
         self.assertEqual(User.objects.count(), 0, "Should not create users")
         self.assertEqual(Client.objects.count(), 0, "Should not create clients")
@@ -231,10 +231,10 @@ class CreateDataCommandTest(TestCase):
 
         # Check that clients were created
         self.assertEqual(Client.objects.count(), 4, "Should create 4 clients")
-        
+
         # Verify companies were created as dependencies
         self.assertGreater(Company.objects.count(), 0, "Should create companies as dependencies")
-        
+
         # Verify other models were not created
         self.assertEqual(User.objects.count(), 0, "Should not create users")
         self.assertEqual(Project.objects.count(), 0, "Should not create projects")
@@ -252,7 +252,7 @@ class CreateDataCommandTest(TestCase):
 
         # Check that time entries were created
         self.assertEqual(Time.objects.count(), 10, "Should create 10 time entries")
-        
+
         # Verify all dependencies were created
         self.assertGreater(Company.objects.count(), 0, "Should create companies as dependencies")
         self.assertGreater(Client.objects.count(), 0, "Should create clients as dependencies")
