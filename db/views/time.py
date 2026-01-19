@@ -151,8 +151,15 @@ class TimeUpdateView(
         return kwargs
 
     def form_valid(self, form):
-        # User field should already be on the instance or in cleaned_data
-        # No need to manually set it from initial values
+        # Preserve the original user - the user field may not be in the form for non-admins
+        # Get the instance before saving to preserve the user field
+        obj = form.save(commit=False)
+        # If user is not set (likely because it wasn't in the form), use the original value
+        if obj.user is None:
+            original_obj = self.get_object()
+            obj.user = original_obj.user
+        obj.save()
+        self.object = obj
         return super().form_valid(form)
 
 

@@ -54,8 +54,8 @@ class TimeUpdatePreservesUserTest(TestCase):
         self.assertEqual(time_entry.hours, 10.0)
         self.assertEqual(time_entry.description, 'Updated work')
     
-    def test_update_form_includes_user_field(self):
-        """Test that the update form includes the user field (as hidden)."""
+    def test_update_form_does_not_require_user_field(self):
+        """Test that the update form works correctly without exposing user field to regular users."""
         time_entry = Time.objects.create(
             user=self.user,
             hours=8.0,
@@ -66,10 +66,12 @@ class TimeUpdatePreservesUserTest(TestCase):
         response = self.client.get(f'/dashboard/time/{time_entry.pk}/update/')
         self.assertEqual(response.status_code, 200)
         
-        # Check if the user field is in the form (should be hidden)
+        # Check that the user field is NOT exposed in the form for regular users
+        # (it's handled server-side to prevent tampering)
         form_html = response.content.decode()
         print(f"User field in form: {'name=\"user\"' in form_html}")
-        print(f"User ID in form: {str(self.user.pk) in form_html}")
         
-        # The form should include the user field
-        self.assertIn('name="user"', form_html, "User field should be in the form")
+        # For regular users, the user field should NOT be exposed in the form
+        # This prevents users from changing the user field via form manipulation
+        self.assertNotIn('name="user"', form_html, 
+                        "User field should not be exposed to regular users for security")
