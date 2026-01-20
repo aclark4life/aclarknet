@@ -65,6 +65,14 @@ Updated `related.html` to use the view configuration instead of hardcoded values
 {% if field_name not in related_excluded_fields and field_name not in related_title_fields and field_value %}
 ```
 
+**Note on Django Template `in` Operator:**
+Django's template language supports the `in` and `not in` operators for list/sequence membership testing. This has been a built-in feature since Django 1.2+. The operators work with lists passed from the view context:
+- `{% if item in list %}` - checks if item is in the list
+- `{% if item not in list %}` - checks if item is not in the list
+
+This is well-documented Django functionality and is used throughout Django projects.
+```
+
 ## Benefits
 
 1. **Maintainability**: Field display rules are centralized in view classes rather than scattered in templates

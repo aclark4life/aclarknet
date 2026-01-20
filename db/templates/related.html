@@ -1,3 +1,10 @@
+{% comment %}
+  Related items display template
+  Uses view configuration from BaseView:
+  - related_title_fields: list of field names to show in card title
+  - related_excluded_fields: list of field names to never show
+  Note: Django's 'in' and 'not in' operators work with lists in templates
+{% endcomment %}
 {% load text_filters %}
 <div class="hr-divider mt-5 mb-3">
   <h3 class="hr-divider-content hr-divider-heading bg-light text-dark">Related</h3>
