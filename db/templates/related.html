@@ -17,7 +17,7 @@
           <h5 class="card-title">
             <span class="badge" style="background-color: #1997C6">{{ model_name|title }}</span>
             {% for field_name, field_value in field_values %}
-              {% if field_name == "name" or field_name == "title" or field_name == "subject" %}
+              {% if field_name == "name" or field_name == "title" or field_name == "subject" or field_name == "description" %}
                 {{ field_value|default:"" }}
               {% endif %}
             {% endfor %}
