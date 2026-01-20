@@ -196,11 +196,13 @@ class ProjectForm(forms.ModelForm):
             "start_date",
             "end_date",
             "amount",
+            "progress",
             "default_task",
         )
         widgets = {
             "start_date": forms.DateInput(attrs={"type": "date"}),
             "end_date": forms.DateInput(attrs={"type": "date"}),
+            "progress": forms.NumberInput(attrs={"min": "0", "max": "100", "step": "1"}),
         }
 
     def __init__(self, *args, **kwargs):

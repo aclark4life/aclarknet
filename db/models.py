@@ -96,6 +96,11 @@ class Project(BaseModel, ContactInfoMixin):
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
     amount = models.DecimalField(blank=True, null=True, max_digits=12, decimal_places=2)
+    progress = models.IntegerField(
+        "Progress (%)",
+        default=0,
+        help_text="Project completion percentage (0-100)",
+    )
     default_task = models.ForeignKey(
         "Task",
         blank=True,
