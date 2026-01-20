@@ -128,34 +128,60 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
         from collections import defaultdict
 
         user_stats = defaultdict(
-            lambda: {"hours": Decimal("0"), "amount": Decimal("0"), "rate": None}
+            lambda: {
+                "hours": Decimal("0"),
+                "amount": Decimal("0"),
+                "cost": Decimal("0"),
+                "rate": None,
+            }
         )
 
         for time_entry in times:
             if time_entry.user:
                 user_key = time_entry.user.username
-                user_stats[user_key]["hours"] += time_entry.hours or Decimal("0")
-                user_stats[user_key]["amount"] += time_entry.amount or Decimal("0")
+                hours = time_entry.hours or Decimal("0")
+                amount = time_entry.amount or Decimal("0")
+                
+                user_stats[user_key]["hours"] += hours
+                user_stats[user_key]["amount"] += amount
                 user_stats[user_key]["rate"] = time_entry.user.rate
                 user_stats[user_key]["user"] = time_entry.user
+                
+                # Calculate cost (user rate * hours)
+                if time_entry.user.rate:
+                    user_stats[user_key]["cost"] += time_entry.user.rate * hours
 
         # Convert to list for template iteration
         user_calculations = []
         total_hours = Decimal("0")
         total_amount = Decimal("0")
+        total_cost = Decimal("0")
 
         for username, stats in user_stats.items():
+            cost = stats["cost"]
+            amount = stats["amount"]
+            difference = amount - cost
+            
+            # Calculate average task rate (amount / hours) after all entries are summed
+            task_rate = None
+            if stats["hours"] > 0:
+                task_rate = stats["amount"] / stats["hours"]
+            
             user_calculations.append(
                 {
                     "user": stats["user"],
                     "username": username,
                     "hours": stats["hours"],
-                    "rate": stats["rate"],
-                    "amount": stats["amount"],
+                    "user_rate": stats["rate"],
+                    "task_rate": task_rate,
+                    "cost": cost,
+                    "amount": amount,
+                    "difference": difference,
                 }
             )
             total_hours += stats["hours"]
-            total_amount += stats["amount"]
+            total_amount += amount
+            total_cost += cost
 
         # Sort by username for consistent display
         user_calculations.sort(key=lambda x: x["username"])
@@ -191,6 +217,8 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
         context["user_calculations"] = user_calculations
         context["calc_total_hours"] = total_hours
         context["calc_total_amount"] = total_amount
+        context["calc_total_cost"] = total_cost
+        context["calc_total_difference"] = total_amount - total_cost
         context["url_export_doc"] = self.url_export_doc
         context["url_export_pdf"] = self.url_export_pdf
         context["url_email_doc"] = self.url_email_doc

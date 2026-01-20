@@ -17,8 +17,11 @@
             <tr>
               <th>User</th>
               <th class="text-end">Hours</th>
-              <th class="text-end">Rate</th>
-              <th class="text-end">Amount</th>
+              <th class="text-end">Task Rate</th>
+              <th class="text-end">User Rate</th>
+              <th class="text-end">Billed Amount</th>
+              <th class="text-end">User Cost</th>
+              <th class="text-end">Difference</th>
             </tr>
           </thead>
           <tbody>
@@ -28,20 +31,32 @@
                 <td class="text-end">{{ calc.hours|floatformat:2 }}</td>
                 <td class="text-end">
                   {% load babel %}
-                  {% if calc.rate %}
-                    {{ calc.rate|currencyfmt:"USD" }}
+                  {% if calc.task_rate %}
+                    {{ calc.task_rate|currencyfmt:"USD" }}
+                  {% else %}
+                    N/A
+                  {% endif %}
+                </td>
+                <td class="text-end">
+                  {% if calc.user_rate %}
+                    {{ calc.user_rate|currencyfmt:"USD" }}
                   {% else %}
                     N/A
                   {% endif %}
                 </td>
                 <td class="text-end">{{ calc.amount|currencyfmt:"USD" }}</td>
+                <td class="text-end">{{ calc.cost|currencyfmt:"USD" }}</td>
+                <td class="text-end">{{ calc.difference|currencyfmt:"USD" }}</td>
               </tr>
             {% endfor %}
             <tr class="fw-bold">
               <td>Total</td>
               <td class="text-end">{{ calc_total_hours|floatformat:2 }}</td>
               <td class="text-end">-</td>
+              <td class="text-end">-</td>
               <td class="text-end">{{ calc_total_amount|currencyfmt:"USD" }}</td>
+              <td class="text-end">{{ calc_total_cost|currencyfmt:"USD" }}</td>
+              <td class="text-end">{{ calc_total_difference|currencyfmt:"USD" }}</td>
             </tr>
           </tbody>
         </table>

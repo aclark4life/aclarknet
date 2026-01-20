@@ -111,16 +111,21 @@ class InvoiceUserRatesTest(TestCase):
             "Should have user calculations in context"
         )
 
-        # Each calculation should have the required fields
+        # Each calculation should have the required fields including new ones
         for calc in user_calculations:
             self.assertIn("username", calc)
             self.assertIn("hours", calc)
-            self.assertIn("rate", calc)
+            self.assertIn("user_rate", calc)
+            self.assertIn("task_rate", calc)
             self.assertIn("amount", calc)
+            self.assertIn("cost", calc)
+            self.assertIn("difference", calc)
 
-        # Check that totals are in the context
+        # Check that totals are in the context including new ones
         self.assertIn("calc_total_hours", response.context)
         self.assertIn("calc_total_amount", response.context)
+        self.assertIn("calc_total_cost", response.context)
+        self.assertIn("calc_total_difference", response.context)
 
     def test_user_calculations_sum_correctly(self):
         """Test that user calculations sum to invoice total."""
@@ -165,4 +170,76 @@ class InvoiceUserRatesTest(TestCase):
             calc_total_amount,
             expected_amount,
             f"Total amount mismatch: expected {expected_amount}, got {calc_total_amount}",
+        )
+
+    def test_user_rate_calculations_show_task_and_user_rates(self):
+        """Test that user calculations show both task rates and user rates with difference."""
+        # Create test data
+        call_command(
+            "create_data",
+            "--companies=1",
+            "--clients=1",
+            "--projects=1",
+            "--invoices=1",
+            "--times=10",
+            "--users=3",
+            stdout=StringIO(),
+        )
+
+        # Get an invoice
+        invoice = Invoice.objects.first()
+
+        # Login and get the page
+        superuser = SiteUser.objects.create_superuser(
+            username="testadmin", 
+            password="testpass"
+        )
+        self.client.force_login(superuser)
+        response = self.client.get(f"/invoice/{invoice.id}/")
+
+        # Get user calculations from context
+        user_calculations = response.context["user_calculations"]
+        
+        # Verify each user calculation has the new fields
+        for calc in user_calculations:
+            # Should have task_rate (average billing rate)
+            self.assertIn("task_rate", calc)
+            
+            # Should have user_rate (cost rate)
+            self.assertIn("user_rate", calc)
+            
+            # Should have cost (user_rate * hours)
+            self.assertIn("cost", calc)
+            
+            # Should have difference (amount - cost)
+            self.assertIn("difference", calc)
+            
+            # If user has a rate, verify cost calculation
+            if calc["user_rate"] is not None:
+                expected_cost = calc["user_rate"] * calc["hours"]
+                self.assertEqual(
+                    calc["cost"],
+                    expected_cost,
+                    f"User {calc['username']}: expected cost {expected_cost}, got {calc['cost']}"
+                )
+            
+            # Verify difference calculation
+            expected_difference = calc["amount"] - calc["cost"]
+            self.assertEqual(
+                calc["difference"],
+                expected_difference,
+                f"User {calc['username']}: expected difference {expected_difference}, got {calc['difference']}"
+            )
+        
+        # Verify total calculations
+        calc_total_cost = response.context["calc_total_cost"]
+        calc_total_difference = response.context["calc_total_difference"]
+        calc_total_amount = response.context["calc_total_amount"]
+        
+        # Total difference should equal total amount - total cost
+        expected_total_difference = calc_total_amount - calc_total_cost
+        self.assertEqual(
+            calc_total_difference,
+            expected_total_difference,
+            f"Expected total difference {expected_total_difference}, got {calc_total_difference}"
         )
