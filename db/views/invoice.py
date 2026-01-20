@@ -133,7 +133,6 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
                 "amount": Decimal("0"),
                 "cost": Decimal("0"),
                 "rate": None,
-                "task_rate": None,
             }
         )
 
@@ -151,12 +150,6 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
                 # Calculate cost (user rate * hours)
                 if time_entry.user.rate:
                     user_stats[user_key]["cost"] += time_entry.user.rate * hours
-                
-                # Calculate average task rate (amount / hours)
-                if user_stats[user_key]["hours"] > 0:
-                    user_stats[user_key]["task_rate"] = (
-                        user_stats[user_key]["amount"] / user_stats[user_key]["hours"]
-                    )
 
         # Convert to list for template iteration
         user_calculations = []
@@ -169,13 +162,18 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
             amount = stats["amount"]
             difference = amount - cost
             
+            # Calculate average task rate (amount / hours) after all entries are summed
+            task_rate = None
+            if stats["hours"] > 0:
+                task_rate = stats["amount"] / stats["hours"]
+            
             user_calculations.append(
                 {
                     "user": stats["user"],
                     "username": username,
                     "hours": stats["hours"],
                     "user_rate": stats["rate"],
-                    "task_rate": stats["task_rate"],
+                    "task_rate": task_rate,
                     "cost": cost,
                     "amount": amount,
                     "difference": difference,
