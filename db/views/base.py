@@ -73,6 +73,11 @@ class BaseView:
     field_values_include = None  # List of field names to include (None = all fields)
     field_values_exclude = None  # List of field names to exclude
     field_values_extra = None  # List of (field_name, value) tuples to append
+    
+    # ---- Related items display customization ----
+    # These control how related items are displayed in related.html template
+    related_title_fields = ["name", "title", "subject", "description"]  # Fields shown in card title
+    related_excluded_fields = ["type", "id", "item"]  # Fields never shown in related cards
 
     # ---- Model-dependent helpers ----
     def _if_model(self, value):
@@ -180,6 +185,8 @@ class BaseView:
 
         if self.has_related and self.queryset_related is not None:
             context["has_related"] = True
+            context["related_title_fields"] = self.related_title_fields
+            context["related_excluded_fields"] = self.related_excluded_fields
             queryset = self.queryset_related
             related = True
 
