@@ -1,3 +1,10 @@
+{% comment %}
+  Related items display template
+  Uses view configuration from BaseView:
+  - related_title_fields: list of field names to show in card title
+  - related_excluded_fields: list of field names to never show
+  Note: Django's 'in' and 'not in' operators work with lists in templates
+{% endcomment %}
 {% load text_filters %}
 <div class="hr-divider mt-5 mb-3">
   <h3 class="hr-divider-content hr-divider-heading bg-light text-dark">Related</h3>
@@ -17,14 +24,14 @@
           <h5 class="card-title">
             <span class="badge" style="background-color: #1997C6">{{ model_name|title }}</span>
             {% for field_name, field_value in field_values %}
-              {% if field_name == "name" or field_name == "title" or field_name == "subject" or field_name == "description" %}
+              {% if field_name in related_title_fields %}
                 {{ field_value|default:"" }}
               {% endif %}
             {% endfor %}
           </h5>
           <div class="card-text">
             {% for field_name, field_value in field_values %}
-              {% if field_name != "type" and field_name != "id" and field_name != "item" and field_name != "name" and field_name != "title" and field_name != "subject" and field_name != "description" and field_value %}
+              {% if field_name not in related_excluded_fields and field_name not in related_title_fields and field_value %}
                 <strong>{{ field_name|title_case }}:</strong> {{ field_value|truncatewords:10 }}<br>
               {% endif %}
             {% endfor %}
