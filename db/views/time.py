@@ -31,6 +31,12 @@ class BaseTimeView(BaseView, AuthenticatedRequiredMixin):
     form_model = TimeForm
     form_class = TimeForm
     template_name = "edit.html"
+    field_values_exclude = [
+        "invoice",
+        "name",
+        "project",
+        "task",
+    ]
 
 
 class TimeCreateView(
@@ -44,7 +50,7 @@ class TimeCreateView(
     def get_form_kwargs(self):
         """Pass the user to the form."""
         kwargs = super().get_form_kwargs()
-        kwargs['user'] = self.request.user
+        kwargs["user"] = self.request.user
         return kwargs
 
     def get_initial(self):
@@ -64,8 +70,11 @@ class TimeCreateView(
                     context["form"].initial["invoice"] = invoice_id
 
         # Only set default task if user is admin and task field is available
-        if (self.request.user.is_superuser and "form" in context 
-            and "task" in context["form"].fields):
+        if (
+            self.request.user.is_superuser
+            and "form" in context
+            and "task" in context["form"].fields
+        ):
             default_task = Task.get_default_task()
             context["form"].initial["task"] = default_task
         return context
@@ -147,7 +156,7 @@ class TimeUpdateView(
     def get_form_kwargs(self):
         """Pass the user to the form."""
         kwargs = super().get_form_kwargs()
-        kwargs['user'] = self.request.user
+        kwargs["user"] = self.request.user
         return kwargs
 
     def form_valid(self, form):
@@ -172,7 +181,7 @@ class TimeCopyView(
     def get_form_kwargs(self):
         """Pass the user to the form."""
         kwargs = super().get_form_kwargs()
-        kwargs['user'] = self.request.user
+        kwargs["user"] = self.request.user
         return kwargs
 
     def form_valid(self, form):
