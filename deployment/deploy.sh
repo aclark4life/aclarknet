@@ -67,7 +67,7 @@ setup_repository() {
 setup_virtualenv() {
     echo -e "${GREEN}Setting up Python virtual environment...${NC}"
     if [ ! -d "${DEPLOY_DIR}/venv" ]; then
-        python3 -m venv ${DEPLOY_DIR}/venv
+        python3.13 -m venv ${DEPLOY_DIR}/venv
     fi
     chown -R ${DEPLOY_USER}:${DEPLOY_GROUP} ${DEPLOY_DIR}/venv
 }
