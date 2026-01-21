@@ -6,11 +6,8 @@ from decimal import Decimal
 from itertools import chain
 
 from dateutil.relativedelta import relativedelta
-from django.conf import settings
-from django.contrib import messages
-from django.core.mail import EmailMessage
 from django.http import FileResponse
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404
 from django.template.loader import get_template
 from django.urls import reverse_lazy
 from django.utils import timezone
@@ -102,9 +99,6 @@ class InvoiceCreateView(
 class InvoiceDetailView(BaseInvoiceView, DetailView):
     url_export_doc = "invoice_export_doc"
     url_export_pdf = "invoice_export_pdf"
-    url_email_doc = "invoice_email_doc"
-    url_email_pdf = "invoice_email_pdf"
-    url_email_text = "invoice_email_text"
     template_name = "view.html"
 
     def get_context_data(self, **kwargs):
@@ -141,12 +135,12 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
                 user_key = time_entry.user.username
                 hours = time_entry.hours or Decimal("0")
                 amount = time_entry.amount or Decimal("0")
-                
+
                 user_stats[user_key]["hours"] += hours
                 user_stats[user_key]["amount"] += amount
                 user_stats[user_key]["rate"] = time_entry.user.rate
                 user_stats[user_key]["user"] = time_entry.user
-                
+
                 # Calculate cost (user rate * hours)
                 if time_entry.user.rate:
                     user_stats[user_key]["cost"] += time_entry.user.rate * hours
@@ -161,12 +155,12 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
             cost = stats["cost"]
             amount = stats["amount"]
             difference = amount - cost
-            
+
             # Calculate average task rate (amount / hours) after all entries are summed
             task_rate = None
             if stats["hours"] > 0:
                 task_rate = stats["amount"] / stats["hours"]
-            
+
             user_calculations.append(
                 {
                     "user": stats["user"],
@@ -221,9 +215,6 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
         context["calc_total_difference"] = total_amount - total_cost
         context["url_export_doc"] = self.url_export_doc
         context["url_export_pdf"] = self.url_export_pdf
-        context["url_email_doc"] = self.url_email_doc
-        context["url_email_pdf"] = self.url_email_pdf
-        context["url_email_text"] = self.url_email_text
 
         return context
 
@@ -291,39 +282,3 @@ class InvoiceExportPDFView(BaseInvoiceView, View):
         )
 
         return response
-
-
-class InvoiceEmailPDFView(BaseInvoiceView, View):
-    model = Invoice
-    template_name = None
-
-    def get(self, request, *args, **kwargs):
-        object_id = self.kwargs["object_id"]
-        obj = get_object_or_404(self.model, id=object_id)
-        self.template_name = "invoice.html"
-        context = {}
-        context["pdf"] = True
-        context["object"] = obj
-        context["times"] = obj.times.all().order_by("date")
-        template = get_template(self.template_name)
-        html_content = template.render(context)
-        pdf_file = io.BytesIO()
-        pisa.pisaDocument(io.BytesIO(html_content.encode("UTF-8")), pdf_file)
-        pdf_file.seek(0)
-        subject = obj.subject
-        email = EmailMessage(
-            subject=subject,
-            body="Please find attached, thank you!",
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            to=[settings.DEFAULT_FROM_EMAIL],
-        )
-        email.attach(
-            f"{subject.replace(' ', '_')}.pdf",
-            pdf_file.getvalue(),
-            "application/pdf",
-        )
-        email.send()
-        messages.success(
-            request, f"Email sent successfully to: {settings.DEFAULT_FROM_EMAIL}"
-        )
-        return redirect(obj)

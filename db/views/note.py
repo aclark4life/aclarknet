@@ -1,9 +1,5 @@
 """Note-related views."""
 
-from django.conf import settings
-from django.contrib import messages
-from django.core.mail import EmailMessage
-from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -11,7 +7,6 @@ from django.views.generic import (
     DetailView,
     ListView,
     UpdateView,
-    View,
 )
 
 from .base import BaseView, FakeDataMixin, SuperuserRequiredMixin
@@ -56,8 +51,6 @@ class NoteDetailView(BaseNoteView, DetailView):
     model = Note
     template_name = "view.html"
     url_export_pdf = "note_export_pdf"
-    url_email_pdf = "note_email_pdf"
-    url_email_text = "note_email_text"
 
     def get_context_data(self, **kwargs):
         note = self.get_object()
@@ -67,8 +60,6 @@ class NoteDetailView(BaseNoteView, DetailView):
             self.has_related = True
         context = super().get_context_data(**kwargs)
         context["url_export_pdf"] = self.url_export_pdf
-        context["url_email_pdf"] = self.url_email_pdf
-        context["url_email_text"] = self.url_email_text
         context["is_detail_view"] = True
         return context
 
@@ -121,39 +112,6 @@ class NoteCopyView(BaseNoteView, CreateView):
         new_note.pk = None
         new_note.save()
         return super().form_valid(form)
-
-
-class NoteEmailTextView(BaseNoteView, View):
-    def get(self, request, *args, **kwargs):
-        object_id = self.kwargs["object_id"]
-        obj = get_object_or_404(self.model, id=object_id)
-
-        email = EmailMessage(
-            subject=obj.title,
-            body=obj.text,
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            to=[settings.DEFAULT_FROM_EMAIL],
-        )
-
-        successes = []
-        failures = []
-
-        try:
-            email.send()
-        except Exception:
-            failures.append(settings.DEFAULT_FROM_EMAIL)
-        else:
-            successes.append(settings.DEFAULT_FROM_EMAIL)
-        if successes:
-            messages.success(
-                request, f"Email sent successfully to: {', '.join(successes)}."
-            )
-        if failures:
-            messages.warning(
-                request, f"Failed to send email to: {', '.join(failures)}."
-            )
-
-        return redirect(obj)
 
 
 class NoteAddToObjectView(FakeDataMixin, BaseNoteView, CreateView):

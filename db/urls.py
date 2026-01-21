@@ -58,7 +58,6 @@ from .views import (
     NoteCreateView,
     NoteDeleteView,
     NoteDetailView,
-    NoteEmailTextView,
     NoteListFullScreen,
     NoteListView,
     NoteUpdateView,
@@ -80,7 +79,6 @@ from .views import (
     InvoiceCreateView,
     InvoiceDeleteView,
     InvoiceDetailView,
-    InvoiceEmailPDFView,
     InvoiceExportPDFView,
     InvoiceListView,
     InvoiceUpdateView,
@@ -204,16 +202,13 @@ urlpatterns += [
     path("note", NoteListView.as_view(), name="note_cancel"),
     path("note/fullscreen", NoteListFullScreen.as_view(), name="note-fullscreen"),
     path("note/create/", NoteCreateView.as_view(), name="note_create"),
-    path("note/add-to-object/", NoteAddToObjectView.as_view(), name="note_add_to_object"),
+    path(
+        "note/add-to-object/", NoteAddToObjectView.as_view(), name="note_add_to_object"
+    ),
     path("note/<object_id:pk>/", NoteDetailView.as_view(), name="note_view"),
     path("note/<object_id:pk>/update/", NoteUpdateView.as_view(), name="note_edit"),
     path("note/<object_id:pk>/delete/", NoteDeleteView.as_view(), name="note_delete"),
     path("note/<object_id:pk>/copy/", NoteCopyView.as_view(), name="note_copy"),
-    path(
-        "note/mail-text/<object_id:object_id>/",
-        NoteEmailTextView.as_view(),
-        name="note_email_text",
-    ),
 ]
 
 urlpatterns += [
@@ -254,11 +249,6 @@ urlpatterns += [
         "invoice/export-pdf/<object_id:object_id>",
         InvoiceExportPDFView.as_view(),
         name="invoice_export_pdf",
-    ),
-    path(
-        "invoice/mail-pdf/<object_id:object_id>/",
-        InvoiceEmailPDFView.as_view(),
-        name="invoice_email_pdf",
     ),
 ]
 
