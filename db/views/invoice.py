@@ -223,17 +223,21 @@ class InvoiceUpdateView(
     UpdateView,
 ):
     template_name = "invoice_edit.html"
-    
+
+    def get_time_formset(self):
+        """Get the time entry formset for the invoice."""
+        if self.request.POST:
+            return TimeEntryFormSet(self.request.POST, instance=self.object)
+        return TimeEntryFormSet(instance=self.object)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["url_cancel"] = f"{self.model_name}_view"
         context["pk"] = self.kwargs["pk"]
         
         # Add the formset to the context
-        if self.request.POST:
-            context['time_formset'] = TimeEntryFormSet(self.request.POST, instance=self.object)
-        else:
-            context['time_formset'] = TimeEntryFormSet(instance=self.object)
+        if 'time_formset' not in kwargs:
+            context['time_formset'] = self.get_time_formset()
         
         return context
 
@@ -249,8 +253,7 @@ class InvoiceUpdateView(
         return queryset.filter(pk=self.kwargs["pk"])
 
     def form_valid(self, form):
-        context = self.get_context_data()
-        time_formset = context['time_formset']
+        time_formset = self.get_time_formset()
         
         if time_formset.is_valid():
             self.object = form.save()
@@ -258,7 +261,9 @@ class InvoiceUpdateView(
             time_formset.save()
             return super().form_valid(form)
         else:
-            return self.form_invalid(form)
+            return self.render_to_response(
+                self.get_context_data(form=form, time_formset=time_formset)
+            )
 
 
 
