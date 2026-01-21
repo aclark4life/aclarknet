@@ -101,4 +101,4 @@ sudo systemctl restart aclarknet.service
 - Systemd Service: `/etc/systemd/system/aclarknet.service`
 - nginx Config: `/etc/nginx/conf.d/aclarknet.conf`
 
-For detailed documentation, see [DEPLOYMENT.md](DEPLOYMENT.md)
+For detailed documentation, see [Deployment Guide](deployment_guide)
