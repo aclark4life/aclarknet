@@ -98,7 +98,7 @@
     </div>
   {% endif %}
   {% if model_name == 'invoice' and user_calculations %}
-    {% include 'user.html' %}
+    {% include 'total.html' %}
   {% endif %}
   {% if has_related and user.is_superuser %}
     {% include 'related.html' %}
