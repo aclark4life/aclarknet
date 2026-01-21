@@ -7,6 +7,8 @@ Welcome to the aclarknet documentation! This is a Django-based web application u
    :maxdepth: 2
    :caption: Contents:
 
+   deployment
+   deployment_quick
    invoice_time_formset
    db_views
    frontend
@@ -28,7 +30,7 @@ Backend
 * **Wagtail**: CMS framework for content management
 * **MongoDB**: Database backend using ``django-mongodb-backend``
 * **Django Allauth**: Authentication and social account management
-* **Python 3.14**: Target Python version
+* **Python 3.13**: Target Python version
 
 Frontend
 ~~~~~~~~
