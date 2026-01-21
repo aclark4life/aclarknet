@@ -10,6 +10,7 @@ This is a project that includes various configuration files and directories for 
 - [Getting Started](#getting-started)
 - [Configuration Files](#configuration-files)
 - [Directory Structure](#directory-structure)
+- [Production Deployment](#production-deployment)
 - [License](#license)
 - [Deployment Commands Summary](#deployment-commands-summary)
 
@@ -84,6 +85,70 @@ To get started with this project, follow these steps:
 
 3. **Run the project**:
     Instructions for running the project will vary based on the type of project (e.g., web application, backend service).
+
+## Production Deployment
+
+This project includes comprehensive deployment configuration for deploying to a production server with nginx and systemd.
+
+### Quick Start
+
+For deploying to m.aclark.net (or any Amazon Linux 2023 server):
+
+**Using `just` (Recommended):**
+
+```bash
+# On your server
+git clone https://github.com/aclark4life/aclarknet.git /tmp/aclarknet-deploy
+cd /tmp/aclarknet-deploy
+
+# Install just if needed
+curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --to /usr/local/bin
+
+# Initial deployment
+just deploy-initial  # or: just di
+
+# Subsequent deployments
+just deploy  # or: just dp
+```
+
+**Alternative (using deployment script directly):**
+
+```bash
+# On your server
+git clone https://github.com/aclark4life/aclarknet.git /tmp/aclarknet-deploy
+cd /tmp/aclarknet-deploy
+sudo cp deployment/deploy.sh /usr/local/bin/aclarknet-deploy
+sudo chmod +x /usr/local/bin/aclarknet-deploy
+sudo aclarknet-deploy --initial
+```
+
+### Documentation
+
+- **[Quick Start Guide](deployment/README.md)** - Quick reference for deployment
+- **[Comprehensive Deployment Guide](deployment/DEPLOYMENT.md)** - Detailed deployment instructions, troubleshooting, and maintenance
+
+### What's Included
+
+The deployment configuration includes:
+
+- **Gunicorn systemd service** - Production WSGI server configuration
+- **nginx configuration** - Reverse proxy with HTTPS support
+- **Deployment script** - Automated deployment and updates
+- **Environment configuration** - Production settings template
+- **Production Django settings** - Security hardened configuration
+- **`just` commands** - Convenient deployment commands (`just deploy`, `just deploy-status`, etc.)
+
+All deployment files are located in the `deployment/` directory.
+
+### Common Deployment Commands (via `just`)
+
+```bash
+just deploy-initial  # Initial deployment (alias: just di)
+just deploy          # Update deployment (alias: just dp)
+just deploy-status   # Check service status (alias: just ds)
+just deploy-logs     # View logs (alias: just dl)
+just deploy-restart  # Restart service (alias: just dr)
+```
 
 ## Deployment Commands Summary
 

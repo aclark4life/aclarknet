@@ -1,0 +1,26 @@
+[Unit]
+Description=aclarknet gunicorn daemon
+Requires=aclarknet.socket
+After=network.target
+
+[Service]
+Type=notify
+User=nginx
+Group=nginx
+RuntimeDirectory=gunicorn
+WorkingDirectory=/srv/aclarknet
+EnvironmentFile=/srv/aclarknet/.env
+ExecStart=/srv/aclarknet/venv/bin/gunicorn \
+          --workers 3 \
+          --bind unix:/run/gunicorn/aclarknet.sock \
+          --access-logfile /srv/aclarknet/logs/gunicorn-access.log \
+          --error-logfile /srv/aclarknet/logs/gunicorn-error.log \
+          --log-level info \
+          aclarknet.wsgi:application
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=5
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

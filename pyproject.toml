@@ -18,6 +18,8 @@ dependencies = [
   "babel",
   "django-extensions",
   "django-hijack",
+  "gunicorn",
+  "python-dotenv",
 ]
 
 [project.optional-dependencies]

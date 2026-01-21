@@ -1,0 +1,11 @@
+[Unit]
+Description=aclarknet gunicorn socket
+
+[Socket]
+ListenStream=/run/gunicorn/aclarknet.sock
+SocketUser=nginx
+SocketGroup=nginx
+SocketMode=0660
+
+[Install]
+WantedBy=sockets.target

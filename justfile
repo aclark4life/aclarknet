@@ -122,3 +122,44 @@ docs:
 # Clean and rebuild Sphinx documentation
 docs-clean:
     cd docs && make clean && make html
+
+# Deploy to production server (initial deployment)
+deploy-initial:
+    #!/usr/bin/env bash
+    echo "Running initial deployment to /srv/aclarknet..."
+    sudo deployment/deploy.sh --initial
+
+alias di := deploy-initial
+
+# Deploy to production server (update deployment)
+deploy:
+    #!/usr/bin/env bash
+    echo "Deploying updates to /srv/aclarknet..."
+    sudo deployment/deploy.sh
+
+alias dp := deploy
+
+# Check production service status
+deploy-status:
+    sudo systemctl status aclarknet.service
+
+alias ds := deploy-status
+
+# View production logs
+deploy-logs:
+    sudo journalctl -u aclarknet.service -n 50
+
+alias dl := deploy-logs
+
+# Restart production service
+deploy-restart:
+    sudo systemctl restart aclarknet.service
+
+alias dr := deploy-restart
+
+# Build production static files
+build-prod:
+    npm run build
+    python manage.py collectstatic --noinput
+
+alias bp := build-prod
