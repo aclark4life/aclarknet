@@ -66,8 +66,17 @@ setup_repository() {
 # Setup Python virtual environment
 setup_virtualenv() {
     echo -e "${GREEN}Setting up Python virtual environment...${NC}"
+    
+    # Check if Python 3.13 is installed
+    if ! command -v python3.13 &> /dev/null; then
+        echo -e "${RED}Python 3.13 is not installed!${NC}"
+        echo -e "${YELLOW}On Amazon Linux 2023, install it with:${NC}"
+        echo -e "  sudo dnf install python3.13 python3.13-pip python3.13-devel"
+        exit 1
+    fi
+    
     if [ ! -d "${DEPLOY_DIR}/venv" ]; then
-        python3 -m venv ${DEPLOY_DIR}/venv
+        python3.13 -m venv ${DEPLOY_DIR}/venv
     fi
     chown -R ${DEPLOY_USER}:${DEPLOY_GROUP} ${DEPLOY_DIR}/venv
 }
