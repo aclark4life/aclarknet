@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-from django.db import models
+from django.db import models, transaction
 from django.urls import reverse
 from django.utils import timezone
 
@@ -173,11 +173,12 @@ class Invoice(BaseModel):
     def save(self, *args, **kwargs):
         # Auto-generate invoice number if not set
         if self.invoice_number is None:
-            # Get the highest invoice number and increment
-            max_invoice = Invoice.objects.aggregate(
-                models.Max('invoice_number')
-            )['invoice_number__max']
-            self.invoice_number = (max_invoice or 0) + 1
+            with transaction.atomic():
+                # Use select_for_update to prevent race conditions
+                max_invoice = Invoice.objects.select_for_update().aggregate(
+                    models.Max('invoice_number')
+                )['invoice_number__max']
+                self.invoice_number = (max_invoice or 0) + 1
         
         if not self.name:
             self.name = f"INV-{self.issue_date}-{self.invoice_number or self.pk or 'NEW'}"

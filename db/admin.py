@@ -109,8 +109,8 @@ class InvoiceResource(ImportExportModelResource):
     balance = fields.Field(
         column_name="balance", attribute="balance", widget=DecimalWidget()
     )
-    document_id = fields.Field(
-        column_name="invoice_id", attribute="document_id", widget=DecimalWidget()
+    invoice_number = fields.Field(
+        column_name="invoice_number", attribute="invoice_number"
     )
 
     class Meta:
