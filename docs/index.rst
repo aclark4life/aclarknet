@@ -7,10 +7,33 @@ Welcome to the aclarknet documentation! This is a Django-based web application u
    :maxdepth: 2
    :caption: Contents:
 
-   deployment
-   deployment_quick
-   invoice_time_formset
+Deployment
+----------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Deployment:
+
+   deployment_guide
+   deployment_quickstart
+
+Database
+--------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Database:
+
    db_views
+   invoice_time_formset
+
+Frontend
+--------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Frontend:
+
    frontend
    frontend_application
    frontend_components

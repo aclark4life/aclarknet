@@ -124,8 +124,9 @@ sudo aclarknet-deploy --initial
 
 ### Documentation
 
-- **[Quick Start Guide](deployment/README.md)** - Quick reference for deployment
-- **[Comprehensive Deployment Guide](deployment/DEPLOYMENT.md)** - Detailed deployment instructions, troubleshooting, and maintenance
+- **[Quick Start Guide](docs/deployment_quickstart.md)** - Quick reference for deployment
+- **[Comprehensive Deployment Guide](docs/deployment_guide.md)** - Detailed deployment instructions, troubleshooting, and maintenance
+- **[Full Documentation](docs/)** - Complete Sphinx documentation
 
 ### What's Included
 
