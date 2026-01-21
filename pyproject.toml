@@ -26,6 +26,9 @@ dev = [
   "django-debug-toolbar",
   "django-hijack",
   "prek",
+  "sphinx",
+  "furo",
+  "myst-parser",
 ]
 test = [
   "pytest",
