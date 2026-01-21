@@ -5,3 +5,8 @@ node_modules/
 venv/
 frontend/build/
 docs/_build/
+.env
+.env.local
+*.log
+static/
+media/
