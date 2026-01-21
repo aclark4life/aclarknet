@@ -26,14 +26,13 @@
           {% if request.user.is_superuser %}
             <div class="row my-3">
               {% include 'charts/revenue.html' %}
-              {% include 'charts/time.html' %}
             </div>
           {% endif %}
           {% if request.user.is_superuser %}
             {% include 'statcards/revenue.html' %}
           {% endif %}
           {% include 'statcards/clock.html' %}
-          {% include 'dashboard/time.html' %}
+          {% include 'dashboard/times.html' %}
         {% endblock %}
       </div>
     </div>
