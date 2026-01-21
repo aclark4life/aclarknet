@@ -19,6 +19,9 @@ REPO_URL="https://github.com/aclark4life/aclarknet.git"
 SYSTEMD_DIR="/etc/systemd/system"
 NGINX_CONF_DIR="/etc/nginx/conf.d"
 
+# Use production settings
+export DJANGO_SETTINGS_MODULE="aclarknet.settings.production"
+
 echo -e "${GREEN}Starting deployment of ${APP_NAME}...${NC}"
 
 # Check if this is an initial deployment
@@ -66,7 +69,7 @@ setup_repository() {
 # Setup Python virtual environment
 setup_virtualenv() {
     echo -e "${GREEN}Setting up Python virtual environment...${NC}"
-    
+
     # Check if Python 3.13 is installed
     if ! command -v python3.13 &> /dev/null; then
         echo -e "${RED}Python 3.13 is not installed!${NC}"
@@ -74,7 +77,7 @@ setup_virtualenv() {
         echo -e "  sudo dnf install python3.13 python3.13-pip python3.13-devel"
         exit 1
     fi
-    
+
     if [ ! -d "${DEPLOY_DIR}/venv" ]; then
         python3.13 -m venv ${DEPLOY_DIR}/venv
     fi
@@ -107,12 +110,12 @@ setup_env_file() {
 build_frontend() {
     echo -e "${GREEN}Building frontend assets...${NC}"
     cd ${DEPLOY_DIR}/repo
-    
+
     # Install Node.js dependencies if not already installed
     if [ ! -d "node_modules" ]; then
         npm install
     fi
-    
+
     # Build production assets
     npm run build
 }
@@ -145,7 +148,7 @@ setup_systemd() {
 setup_nginx() {
     echo -e "${GREEN}Setting up nginx configuration...${NC}"
     cp ${DEPLOY_DIR}/repo/deployment/nginx-aclarknet.conf ${NGINX_CONF_DIR}/aclarknet.conf
-    
+
     echo -e "${YELLOW}NOTE: Update SSL certificate paths in ${NGINX_CONF_DIR}/aclarknet.conf${NC}"
     echo -e "${YELLOW}Then run: nginx -t && systemctl reload nginx${NC}"
 }
@@ -155,7 +158,7 @@ restart_services() {
     echo -e "${GREEN}Restarting services...${NC}"
     systemctl restart aclarknet.socket
     systemctl restart aclarknet.service
-    
+
     # Check status
     if systemctl is-active --quiet aclarknet.service; then
         echo -e "${GREEN}aclarknet service is running${NC}"
@@ -173,17 +176,17 @@ main() {
     setup_virtualenv
     install_dependencies
     setup_env_file
-    
+
     if [ "$INITIAL_DEPLOY" = true ]; then
         setup_systemd
         setup_nginx
     fi
-    
+
     build_frontend
     collect_static
     run_migrations
     restart_services
-    
+
     echo -e "${GREEN}Deployment complete!${NC}"
     echo -e "${GREEN}Next steps:${NC}"
     echo -e "  1. Edit ${DEPLOY_DIR}/.env with your production settings"
