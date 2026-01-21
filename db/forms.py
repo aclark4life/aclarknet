@@ -325,3 +325,40 @@ class TimeForm(forms.ModelForm):
         required=False,
         initial=timezone.now,
     )
+
+
+class TimeEntryForm(forms.ModelForm):
+    """Simplified form for Time entries in the invoice formset."""
+    
+    class Meta:
+        model = Time
+        fields = ['date', 'hours', 'description', 'project', 'task', 'user']
+        widgets = {
+            'date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'hours': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.25'}),
+            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 2}),
+            'project': forms.Select(attrs={'class': 'form-control'}),
+            'task': forms.Select(attrs={'class': 'form-control'}),
+            'user': forms.Select(attrs={'class': 'form-control'}),
+        }
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['date'].initial = timezone.now
+        self.fields['description'].required = False
+        self.fields['project'].required = False
+        self.fields['task'].required = False
+        self.fields['user'].required = False
+
+
+# Create the inline formset for Time entries on Invoice
+from django.forms import inlineformset_factory
+
+TimeEntryFormSet = inlineformset_factory(
+    Invoice,
+    Time,
+    form=TimeEntryForm,
+    extra=3,  # Number of empty forms to display
+    can_delete=True,
+    fields=['date', 'hours', 'description', 'project', 'task', 'user']
+)

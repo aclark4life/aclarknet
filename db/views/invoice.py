@@ -28,7 +28,7 @@ from .base import (
     RedirectToObjectViewMixin,
     SuperuserRequiredMixin,
 )
-from ..forms import InvoiceForm
+from ..forms import InvoiceForm, TimeEntryFormSet
 from ..models import Invoice, Project, Time
 
 locale.setlocale(locale.LC_ALL, "")
@@ -222,10 +222,19 @@ class InvoiceUpdateView(
     RedirectToObjectViewMixin,
     UpdateView,
 ):
+    template_name = "invoice_edit.html"
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["url_cancel"] = f"{self.model_name}_view"
         context["pk"] = self.kwargs["pk"]
+        
+        # Add the formset to the context
+        if self.request.POST:
+            context['time_formset'] = TimeEntryFormSet(self.request.POST, instance=self.object)
+        else:
+            context['time_formset'] = TimeEntryFormSet(instance=self.object)
+        
         return context
 
     def get_initial(self):
@@ -240,7 +249,18 @@ class InvoiceUpdateView(
         return queryset.filter(pk=self.kwargs["pk"])
 
     def form_valid(self, form):
-        return super().form_valid(form)
+        context = self.get_context_data()
+        time_formset = context['time_formset']
+        
+        if time_formset.is_valid():
+            self.object = form.save()
+            time_formset.instance = self.object
+            time_formset.save()
+            return super().form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+
 
 
 class InvoiceDeleteView(BaseInvoiceView, DeleteView):

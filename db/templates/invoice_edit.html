@@ -1,0 +1,107 @@
+{% extends 'dashboard/index.html' %}
+{% load crispy_forms_tags %}
+{% block dashboard_title %}
+  {% include 'title_block.html' %}
+{% endblock %}
+{% block dashhead_title %}
+  <h2 class="dashhead-title">
+    <a class="text-decoration-none text-secondary"
+       href="{% url model_name|add:'_index' %}">{{ model_name_plural|title }}</a> <i
+      class="fa-solid fa-angle-right"></i>
+    {% if object %}
+      <a class="text-decoration-none text-secondary"
+         href="{% url urls.url_view object.id %}">{{ model_name|title }}</a>
+    {% else %}
+      {{ model_name|title }}
+    {% endif %}
+    <i class="fa-solid fa-angle-right"></i> Edit
+  </h2>
+{% endblock %}
+{% block dashhead_toolbar %}{% endblock %}
+{% block dashboard %}
+  <div class="row">
+    <div class="col-12">
+      <form method="post">
+        {% csrf_token %}
+        {% include 'save.html' %}
+        <input type="hidden" name="context_type" value="{{ context_type }}">
+        <input type="hidden" name="model_name" value="{{ model_name }}">
+        
+        {# Main Invoice Form #}
+        {% crispy form %}
+        
+        {# Time Entries Formset #}
+        <div class="mt-4">
+          <h3>Time Entries</h3>
+          {{ time_formset.management_form }}
+          
+          <div id="time-entries-container">
+            {% for time_form in time_formset %}
+              <div class="time-entry-form border rounded p-3 mb-3">
+                <div class="row">
+                  <div class="col-md-2">
+                    {{ time_form.date.label_tag }}
+                    {{ time_form.date }}
+                  </div>
+                  <div class="col-md-2">
+                    {{ time_form.hours.label_tag }}
+                    {{ time_form.hours }}
+                  </div>
+                  <div class="col-md-3">
+                    {{ time_form.project.label_tag }}
+                    {{ time_form.project }}
+                  </div>
+                  <div class="col-md-3">
+                    {{ time_form.task.label_tag }}
+                    {{ time_form.task }}
+                  </div>
+                  <div class="col-md-2">
+                    {{ time_form.user.label_tag }}
+                    {{ time_form.user }}
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col-md-10">
+                    {{ time_form.description.label_tag }}
+                    {{ time_form.description }}
+                  </div>
+                  <div class="col-md-2 d-flex align-items-end">
+                    {% if time_form.instance.pk %}
+                      {{ time_form.DELETE }}
+                      <label for="{{ time_form.DELETE.id_for_label }}" class="form-check-label">Delete</label>
+                    {% endif %}
+                  </div>
+                </div>
+                {{ time_form.id }}
+                {% if time_form.errors %}
+                  <div class="alert alert-danger mt-2">
+                    {{ time_form.errors }}
+                  </div>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+          
+          {% if time_formset.non_form_errors %}
+            <div class="alert alert-danger">
+              {{ time_formset.non_form_errors }}
+            </div>
+          {% endif %}
+        </div>
+        
+        {% include 'save.html' %}
+      </form>
+    </div>
+  </div>
+  
+  <script>
+    // Add dynamic formset functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get the total forms count
+      const totalFormsInput = document.querySelector('#id_times-TOTAL_FORMS');
+      
+      // Optional: Add a button to add more forms dynamically
+      // This is a basic implementation - can be enhanced with better UX
+    });
+  </script>
+{% endblock %}
