@@ -2,7 +2,30 @@
 
 This is a quick reference for deploying aclarknet to m.aclark.net.
 
-## Initial Deployment (First Time)
+## Using `just` Commands (Recommended)
+
+If you have `just` installed, you can use these convenient commands:
+
+```bash
+# Initial deployment
+just deploy-initial  # or: just di
+
+# Update deployment
+just deploy  # or: just dp
+
+# Check service status
+just deploy-status  # or: just ds
+
+# View logs
+just deploy-logs  # or: just dl
+
+# Restart service
+just deploy-restart  # or: just dr
+```
+
+## Manual Deployment
+
+### Initial Deployment (First Time)
 
 ```bash
 # 1. SSH to server

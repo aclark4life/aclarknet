@@ -42,6 +42,23 @@ sudo systemctl status nginx
 
 ### 2. Clone the Repository and Run Deployment
 
+**Option A: Using `just` (Recommended)**
+
+```bash
+# Clone the repository
+git clone https://github.com/aclark4life/aclarknet.git /tmp/aclarknet-deploy
+cd /tmp/aclarknet-deploy
+
+# Install just if not already installed
+curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --to /usr/local/bin
+
+# Run initial deployment
+just deploy-initial
+# or use the short alias: just di
+```
+
+**Option B: Using the deployment script directly**
+
 ```bash
 # Clone the repository to a temporary location
 git clone https://github.com/aclark4life/aclarknet.git /tmp/aclarknet-deploy
@@ -136,6 +153,16 @@ sudo tail -f /srv/aclarknet/logs/django.log
 
 For updating the application after the initial deployment:
 
+**Option A: Using `just` (Recommended)**
+
+```bash
+# Deploy updates
+just deploy
+# or use the short alias: just dp
+```
+
+**Option B: Using the deployment script directly**
+
 ```bash
 sudo aclarknet-deploy
 ```
@@ -147,6 +174,24 @@ This will:
 4. Collect static files
 5. Run database migrations
 6. Restart the application
+
+## Useful `just` Commands
+
+Once deployed, you can use these commands for common tasks:
+
+```bash
+# Check service status
+just deploy-status  # or: just ds
+
+# View recent logs
+just deploy-logs  # or: just dl
+
+# Restart the service
+just deploy-restart  # or: just dr
+
+# Build production assets locally (before deploying)
+just build-prod  # or: just bp
+```
 
 ## Manual Deployment Steps
 
