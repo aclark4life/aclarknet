@@ -1,3 +1,5 @@
+# Frontend Application
+
 When Webpacker compiles your JavaScript code, it scans the `src/application` directory for files with the .js extension and automatically includes them as entry points for the Webpack bundling process.
 
 For the `application/app.js`, you can import it in template like this:

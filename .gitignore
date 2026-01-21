@@ -4,3 +4,4 @@ __pycache__/
 node_modules/
 venv/
 frontend/build/
+sphinx_docs/_build/

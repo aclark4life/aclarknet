@@ -67,3 +67,11 @@ b:
 
 cd:
     python manage.py create_data
+
+# Build Sphinx documentation
+docs:
+    cd sphinx_docs && make html
+
+# Clean Sphinx documentation build
+docs-clean:
+    cd sphinx_docs && make clean
