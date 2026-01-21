@@ -208,4 +208,4 @@ The project uses custom app configurations in `aclarknet/apps.py` for Wagtail an
 
 ## Dependency Restrictions
 
-- Never suggest installing cairo or adding libcairo2-dev to any setup scripts or Dockerfiles.
+- Never install cairo or libcairo2-dev.
