@@ -1,6 +1,7 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field
 from django import forms
+from django.forms import inlineformset_factory
 from django.utils import timezone
 
 from .models import Client, Company, Contact, Invoice, Note, Project, Task, Time
@@ -352,8 +353,6 @@ class TimeEntryForm(forms.ModelForm):
 
 
 # Create the inline formset for Time entries on Invoice
-from django.forms import inlineformset_factory
-
 TimeEntryFormSet = inlineformset_factory(
     Invoice,
     Time,
