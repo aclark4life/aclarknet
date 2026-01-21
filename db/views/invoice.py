@@ -283,7 +283,7 @@ class InvoiceExportPDFView(BaseInvoiceView, View):
         template = get_template(self.template_name)
         html_content = template.render(context)
         pdf_file = io.BytesIO()
-        pisa.CreatePDF(io.BytesIO(html_content.encode("UTF-8")), pdf_file)
+        pisa.pisaDocument(io.BytesIO(html_content.encode("UTF-8")), pdf_file)
         pdf_file.seek(0)
         response = FileResponse(pdf_file, content_type="application/pdf")
         response["Content-Disposition"] = (
@@ -308,7 +308,7 @@ class InvoiceEmailPDFView(BaseInvoiceView, View):
         template = get_template(self.template_name)
         html_content = template.render(context)
         pdf_file = io.BytesIO()
-        pisa.CreatePDF(io.BytesIO(html_content.encode("UTF-8")), pdf_file)
+        pisa.pisaDocument(io.BytesIO(html_content.encode("UTF-8")), pdf_file)
         pdf_file.seek(0)
         subject = obj.subject
         email = EmailMessage(
