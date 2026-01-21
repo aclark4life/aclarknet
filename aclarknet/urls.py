@@ -27,9 +27,12 @@ if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-    from debug_toolbar.toolbar import debug_toolbar_urls
+    try:
+        from debug_toolbar.toolbar import debug_toolbar_urls
 
-    urlpatterns += debug_toolbar_urls()
+        urlpatterns += debug_toolbar_urls()
+    except ImportError:
+        pass
 
     urlpatterns += [
         path("hijack/", include("hijack.urls")),
