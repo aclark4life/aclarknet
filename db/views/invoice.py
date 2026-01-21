@@ -264,6 +264,7 @@ class InvoiceExportPDFView(BaseInvoiceView, View):
     def get(self, request, *args, **kwargs):
         object_id = self.kwargs["object_id"]
         obj = get_object_or_404(self.model, id=object_id)
+        invoice_number = obj.invoice_number
         self.template_name = "invoice.html"
         context = {}
         context["pdf"] = True
@@ -276,7 +277,7 @@ class InvoiceExportPDFView(BaseInvoiceView, View):
         pdf_file.seek(0)
         response = FileResponse(pdf_file, content_type="application/pdf")
         response["Content-Disposition"] = (
-            f'attachment; filename="{self.model_name}_{object_id}.pdf"'
+            f'attachment; filename="{self.model_name}_{invoice_number}.pdf"'
         )
 
         return response
