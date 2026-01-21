@@ -9,22 +9,34 @@
 default:
     echo 'Hello, world!'
 
-# uv pip install
-i:
+# Install dependencies (Python, Node, and pre-commit)
+install:
     uv pip install -e '.[dev,test]'
     npm install
     prek install
 
-p:
+alias i := install
+
+# Edit pyproject.toml
+edit-pyproject:
     nvim pyproject.toml
 
-r:
+alias p := edit-pyproject
+
+# Edit README.md
+edit-readme:
     nvim README.md
 
-m:
+alias r := edit-readme
+
+# Run Django migrations
+migrate:
     python manage.py migrate
 
-mm: d
+alias m := migrate
+
+# Make and run migrations (drops database first)
+make-migrations: drop-database
     rm -rvf aclarknet/migrations/
     rm -rvf cms/migrations/
     rm -rvf db/migrations/
@@ -33,40 +45,75 @@ mm: d
     python manage.py makemigrations admin auth contenttypes siteuser wagtailcore taggit db account socialaccount cms wagtailadmin wagtaildocs wagtailimages wagtailembeds wagtailforms wagtailredirects wagtailsearch home wagtailusers
     python manage.py migrate
 
-d:
+alias mm := make-migrations
+
+# Drop MongoDB database
+drop-database:
     mongosh ${MONGODB_URI:-mongodb://localhost:27017} --eval 'db.getSiblingDB("aclarknet").dropDatabase()'
 
-pc:
+alias d := drop-database
+
+# Run pre-commit on all files
+pre-commit:
     prek --all-files
 
-s:
+alias pc := pre-commit
+
+# Run development server with webpack watch
+server:
     npm run watch &
     python manage.py runserver
 
-su:
+alias s := server
+
+# Create Django superuser (admin/admin)
+create-superuser:
     export DJANGO_SUPERUSER_PASSWORD=admin && python manage.py createsuperuser --noinput --username=admin
 
-se:
+alias su := create-superuser
+
+# Edit Django settings
+edit-settings:
     nvim aclarknet/settings/base.py
 
-o:
+alias se := edit-settings
+
+# Open Django admin dashboard in browser
+open-dashboard:
     open http://localhost:8000/dashboard/
 
-t:
+alias o := open-dashboard
+
+# Run tests
+test:
     pytest db/tests/
 
-n:
+alias t := test
+
+# Install npm packages
+npm-install:
     npm install
 
-w:
+alias n := npm-install
+
+# Open Wagtail admin in browser
+open-wagtail:
     open http://localhost:8000/wagtail/
 
-b:
+alias w := open-wagtail
+
+# Build Docker image and create ECR repository
+build-docker:
     docker build -t aclarknet .
     aws ecr create-repository --repository-name aclarknet
 
-cd:
+alias b := build-docker
+
+# Create initial data
+create-data:
     python manage.py create_data
+
+alias cd := create-data
 
 # Build Sphinx documentation
 docs:
