@@ -97,7 +97,6 @@ class InvoiceCreateView(
 
 
 class InvoiceDetailView(BaseInvoiceView, DetailView):
-    url_export_doc = "invoice_export_doc"
     url_export_pdf = "invoice_export_pdf"
     template_name = "view.html"
 
@@ -213,7 +212,6 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
         context["calc_total_amount"] = total_amount
         context["calc_total_cost"] = total_cost
         context["calc_total_difference"] = total_amount - total_cost
-        context["url_export_doc"] = self.url_export_doc
         context["url_export_pdf"] = self.url_export_pdf
 
         return context
