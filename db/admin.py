@@ -132,6 +132,8 @@ class InvoiceResource(ImportExportModelResource):
 @admin.register(Invoice)
 class InvoiceAdmin(ImportExportModelAdmin):
     resource_class = InvoiceResource
+    list_display = ["invoice_number", "name", "issue_date", "amount", "balance"]
+    search_fields = ["invoice_number", "name"]
 
 
 @admin.register(Note)

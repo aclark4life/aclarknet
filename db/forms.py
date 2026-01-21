@@ -125,6 +125,7 @@ class InvoiceForm(forms.ModelForm):
     class Meta:
         model = Invoice
         fields = (
+            "invoice_number",
             "name",
             "project",
             "issue_date",
@@ -145,6 +146,9 @@ class InvoiceForm(forms.ModelForm):
         # Make balance read-only since it's calculated from amount - paid_amount
         if "balance" in self.fields:
             self.fields["balance"].disabled = True
+        # Make invoice_number read-only since it's auto-generated
+        if "invoice_number" in self.fields:
+            self.fields["invoice_number"].disabled = True
         self.helper = FormHelper()
         self.helper.form_method = "post"
         self.helper.form_class = "form-inline"

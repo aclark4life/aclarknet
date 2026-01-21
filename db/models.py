@@ -134,6 +134,7 @@ class Task(BaseModel):
 
 
 class Invoice(BaseModel):
+    invoice_number = models.IntegerField("Invoice Number", unique=True, null=True, blank=True)
     issue_date = models.DateField("Issue Date", default=timezone.now)
     start_date = models.DateField("Start Date", blank=True, null=True)
     end_date = models.DateField("End Date", blank=True, null=True)
@@ -170,8 +171,16 @@ class Invoice(BaseModel):
         ordering = ["-issue_date", "name"]
 
     def save(self, *args, **kwargs):
+        # Auto-generate invoice number if not set
+        if self.invoice_number is None:
+            # Get the highest invoice number and increment
+            max_invoice = Invoice.objects.aggregate(
+                models.Max('invoice_number')
+            )['invoice_number__max']
+            self.invoice_number = (max_invoice or 0) + 1
+        
         if not self.name:
-            self.name = f"INV-{self.issue_date}-{self.pk or 'NEW'}"
+            self.name = f"INV-{self.issue_date}-{self.invoice_number or self.pk or 'NEW'}"
         if self.amount is not None:
             self.balance = self.amount - (self.paid_amount or 0)
         super().save(*args, **kwargs)
