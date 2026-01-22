@@ -10,7 +10,8 @@ Group=nginx
 RuntimeDirectory=gunicorn
 WorkingDirectory=/srv/aclarknet
 EnvironmentFile=/srv/aclarknet/.env
-ExecStart=/srv/aclarknet/venv/bin/gunicorn \
+Environment="PYTHONPATH=/srv/aclarknet"
+ExecStart=/srv/aclarknet/.venv/bin/gunicorn \
           --workers 3 \
           --bind unix:/run/gunicorn/aclarknet.sock \
           --access-logfile /srv/aclarknet/logs/gunicorn-access.log \

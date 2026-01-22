@@ -52,18 +52,31 @@ create_directories() {
 setup_repository() {
     if [ "$INITIAL_DEPLOY" = true ]; then
         echo -e "${GREEN}Cloning repository...${NC}"
-        if [ -d "${DEPLOY_DIR}/repo" ]; then
-            echo -e "${YELLOW}Repository directory already exists. Removing...${NC}"
-            rm -rf ${DEPLOY_DIR}/repo
+        # Clone to a temporary directory first
+        if [ -d "/tmp/aclarknet-deploy" ]; then
+            rm -rf /tmp/aclarknet-deploy
         fi
-        git clone ${REPO_URL} ${DEPLOY_DIR}/repo
+        git clone ${REPO_URL} /tmp/aclarknet-deploy
+        
+        # Copy files to deploy directory (excluding .git)
+        rsync -av --exclude='.git' --exclude='node_modules' --exclude='.venv' --exclude='venv' \
+              /tmp/aclarknet-deploy/ ${DEPLOY_DIR}/
+        rm -rf /tmp/aclarknet-deploy
     else
         echo -e "${GREEN}Updating repository...${NC}"
-        cd ${DEPLOY_DIR}/repo
-        git fetch origin
-        git reset --hard origin/main  # or your production branch
+        # Clone to temp and rsync
+        if [ -d "/tmp/aclarknet-deploy" ]; then
+            rm -rf /tmp/aclarknet-deploy
+        fi
+        git clone ${REPO_URL} /tmp/aclarknet-deploy
+        
+        # Sync files (excluding virtual environments and node_modules)
+        rsync -av --exclude='.git' --exclude='node_modules' --exclude='.venv' --exclude='venv' \
+              --exclude='logs' --exclude='static' --exclude='media' --exclude='.env' \
+              /tmp/aclarknet-deploy/ ${DEPLOY_DIR}/
+        rm -rf /tmp/aclarknet-deploy
     fi
-    chown -R ${DEPLOY_USER}:${DEPLOY_GROUP} ${DEPLOY_DIR}/repo
+    chown -R ${DEPLOY_USER}:${DEPLOY_GROUP} ${DEPLOY_DIR}
 }
 
 # Setup Python virtual environment
@@ -78,25 +91,25 @@ setup_virtualenv() {
         exit 1
     fi
 
-    if [ ! -d "${DEPLOY_DIR}/venv" ]; then
-        python3.13 -m venv ${DEPLOY_DIR}/venv
+    if [ ! -d "${DEPLOY_DIR}/.venv" ]; then
+        python3.13 -m venv ${DEPLOY_DIR}/.venv
     fi
-    chown -R ${DEPLOY_USER}:${DEPLOY_GROUP} ${DEPLOY_DIR}/venv
+    chown -R ${DEPLOY_USER}:${DEPLOY_GROUP} ${DEPLOY_DIR}/.venv
 }
 
 # Install Python dependencies
 install_dependencies() {
     echo -e "${GREEN}Installing Python dependencies...${NC}"
-    cd ${DEPLOY_DIR}/repo
-    ${DEPLOY_DIR}/venv/bin/pip install --upgrade pip
-    ${DEPLOY_DIR}/venv/bin/pip install -e .
+    cd ${DEPLOY_DIR}
+    ${DEPLOY_DIR}/.venv/bin/pip install --upgrade pip
+    ${DEPLOY_DIR}/.venv/bin/pip install -e .
 }
 
 # Setup environment file
 setup_env_file() {
     if [ ! -f "${DEPLOY_DIR}/.env" ]; then
         echo -e "${YELLOW}Creating .env file from example...${NC}"
-        cp ${DEPLOY_DIR}/repo/deployment/.env.example ${DEPLOY_DIR}/.env
+        cp ${DEPLOY_DIR}/deployment/.env.example ${DEPLOY_DIR}/.env
         echo -e "${RED}IMPORTANT: Edit ${DEPLOY_DIR}/.env with your production settings!${NC}"
         echo -e "${RED}Especially: DJANGO_SECRET_KEY, DJANGO_ALLOWED_HOSTS, and database settings${NC}"
         chown ${DEPLOY_USER}:${DEPLOY_GROUP} ${DEPLOY_DIR}/.env
@@ -109,7 +122,7 @@ setup_env_file() {
 # Build frontend assets
 build_frontend() {
     echo -e "${GREEN}Building frontend assets...${NC}"
-    cd ${DEPLOY_DIR}/repo
+    cd ${DEPLOY_DIR}
 
     # Install Node.js dependencies if not already installed
     if [ ! -d "node_modules" ]; then
@@ -123,22 +136,22 @@ build_frontend() {
 # Collect static files
 collect_static() {
     echo -e "${GREEN}Collecting static files...${NC}"
-    cd ${DEPLOY_DIR}/repo
-    ${DEPLOY_DIR}/venv/bin/python manage.py collectstatic --noinput
+    cd ${DEPLOY_DIR}
+    ${DEPLOY_DIR}/.venv/bin/python manage.py collectstatic --noinput
 }
 
 # Run migrations
 run_migrations() {
     echo -e "${GREEN}Running database migrations...${NC}"
-    cd ${DEPLOY_DIR}/repo
-    ${DEPLOY_DIR}/venv/bin/python manage.py migrate --noinput
+    cd ${DEPLOY_DIR}
+    ${DEPLOY_DIR}/.venv/bin/python manage.py migrate --noinput
 }
 
 # Setup systemd services
 setup_systemd() {
     echo -e "${GREEN}Setting up systemd services...${NC}"
-    cp ${DEPLOY_DIR}/repo/deployment/aclarknet.service ${SYSTEMD_DIR}/
-    cp ${DEPLOY_DIR}/repo/deployment/aclarknet.socket ${SYSTEMD_DIR}/
+    cp ${DEPLOY_DIR}/deployment/aclarknet.service ${SYSTEMD_DIR}/
+    cp ${DEPLOY_DIR}/deployment/aclarknet.socket ${SYSTEMD_DIR}/
     systemctl daemon-reload
     systemctl enable aclarknet.socket
     systemctl enable aclarknet.service
@@ -147,7 +160,7 @@ setup_systemd() {
 # Setup nginx configuration
 setup_nginx() {
     echo -e "${GREEN}Setting up nginx configuration...${NC}"
-    cp ${DEPLOY_DIR}/repo/deployment/nginx-aclarknet.conf ${NGINX_CONF_DIR}/aclarknet.conf
+    cp ${DEPLOY_DIR}/deployment/nginx-aclarknet.conf ${NGINX_CONF_DIR}/aclarknet.conf
 
     echo -e "${YELLOW}NOTE: Update SSL certificate paths in ${NGINX_CONF_DIR}/aclarknet.conf${NC}"
     echo -e "${YELLOW}Then run: nginx -t && systemctl reload nginx${NC}"
@@ -194,7 +207,7 @@ main() {
     echo -e "  3. Test nginx config: nginx -t"
     echo -e "  4. Reload nginx: systemctl reload nginx"
     echo -e "  5. Check application: https://m.aclark.net"
-    echo -e "  6. Create superuser: ${DEPLOY_DIR}/venv/bin/python ${DEPLOY_DIR}/repo/manage.py createsuperuser"
+    echo -e "  6. Create superuser: ${DEPLOY_DIR}/.venv/bin/python ${DEPLOY_DIR}/manage.py createsuperuser"
 }
 
 main
