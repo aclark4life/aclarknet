@@ -10,3 +10,4 @@ docs/_build/
 *.log
 static/
 media/
+build/
