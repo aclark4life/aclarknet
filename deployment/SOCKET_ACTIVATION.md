@@ -63,9 +63,12 @@ SocketMode=0660                             # Permissions: rw-rw----
 
 ### Permissions Explained
 
-- **SocketUser=nginx**: nginx process needs to write to this socket
-- **SocketGroup=nginx**: Gunicorn (also running as nginx user) needs to read from it
-- **SocketMode=0660**: Read/write for owner and group, no access for others
+- **SocketUser=nginx**: The socket file is owned by the nginx user
+- **SocketGroup=nginx**: The socket file is in the nginx group (Gunicorn also runs as nginx user)
+- **SocketMode=0660**: Read/write permissions for both owner and group, enabling bidirectional communication:
+  - nginx writes requests to the socket and reads responses
+  - Gunicorn reads requests from the socket and writes responses back
+  - No access for other users (security)
 
 ## Why We Need This File
 
