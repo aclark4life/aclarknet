@@ -50,6 +50,9 @@ create_directories() {
 
 # Clone or update repository
 setup_repository() {
+    # Define rsync exclude patterns
+    local RSYNC_EXCLUDES="--exclude='.git' --exclude='node_modules' --exclude='.venv' --exclude='venv'"
+    
     if [ "$INITIAL_DEPLOY" = true ]; then
         echo -e "${GREEN}Cloning repository...${NC}"
         # Clone to a temporary directory first
@@ -58,8 +61,8 @@ setup_repository() {
         fi
         git clone ${REPO_URL} /tmp/aclarknet-deploy
         
-        # Copy files to deploy directory (excluding .git)
-        rsync -av --exclude='.git' --exclude='node_modules' --exclude='.venv' --exclude='venv' \
+        # Copy files to deploy directory (excluding .git, node_modules, and venv directories)
+        rsync -av $RSYNC_EXCLUDES \
               /tmp/aclarknet-deploy/ ${DEPLOY_DIR}/
         rm -rf /tmp/aclarknet-deploy
     else
@@ -70,8 +73,8 @@ setup_repository() {
         fi
         git clone ${REPO_URL} /tmp/aclarknet-deploy
         
-        # Sync files (excluding virtual environments and node_modules)
-        rsync -av --exclude='.git' --exclude='node_modules' --exclude='.venv' --exclude='venv' \
+        # Sync files (excluding virtual environments, node_modules, and existing runtime data)
+        rsync -av $RSYNC_EXCLUDES \
               --exclude='logs' --exclude='static' --exclude='media' --exclude='.env' \
               /tmp/aclarknet-deploy/ ${DEPLOY_DIR}/
         rm -rf /tmp/aclarknet-deploy

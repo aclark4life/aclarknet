@@ -49,7 +49,7 @@ else
     exit 1
 fi
 
-if grep -q "/srv/aclarknet/\.venv/bin/gunicorn" "${SCRIPT_DIR}/aclarknet.service"; then
+if grep -q "/srv/aclarknet/.venv/bin/gunicorn" "${SCRIPT_DIR}/aclarknet.service"; then
     echo "  ✓ Gunicorn path uses .venv"
 else
     echo "  ✗ Gunicorn path does not use .venv"
