@@ -17,7 +17,6 @@ dependencies = [
   "xhtml2pdf",
   "babel",
   "django-extensions",
-  "django-hijack",
   "gunicorn",
   "python-dotenv",
 ]
