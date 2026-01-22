@@ -4,7 +4,7 @@ This guide explains how to deploy the aclarknet Django application to a producti
 
 ## Quick Reference
 
-- **[SOCKET_ACTIVATION.md](SOCKET_ACTIVATION.md)** - Understanding systemd socket activation and the `aclarknet.socket` file
+- **[Socket Activation Guide](../docs/SOCKET_ACTIVATION.md)** - Understanding systemd socket activation and the `aclarknet.socket` file
 - **[deploy.sh](deploy.sh)** - Automated deployment script
 - **[.env.example](.env.example)** - Environment variables template
 
@@ -277,7 +277,7 @@ The deployment uses the `nginx` user and group for running the application. Impo
 
 1. **nginx**: Reverse proxy, handles SSL termination, serves static/media files
 2. **gunicorn**: WSGI server, runs Django application
-3. **systemd socket activation**: Manages Unix socket for nginx-gunicorn communication (see [SOCKET_ACTIVATION.md](SOCKET_ACTIVATION.md))
+3. **systemd socket activation**: Manages Unix socket for nginx-gunicorn communication (see [Socket Activation Guide](../docs/SOCKET_ACTIVATION.md))
 4. **systemd**: Service manager, manages gunicorn process lifecycle
 5. **MongoDB**: Database backend
 6. **Django**: Web application framework
@@ -298,7 +298,7 @@ Client Request (HTTPS)
 ```
 
 **Note**: The Unix socket is managed by `aclarknet.socket` systemd unit, which provides socket activation.
-This enables graceful restarts and on-demand service activation. See [SOCKET_ACTIVATION.md](SOCKET_ACTIVATION.md) for details.
+This enables graceful restarts and on-demand service activation. See [Socket Activation Guide](../docs/SOCKET_ACTIVATION.md) for details.
 
 ## Development vs Production
 
