@@ -16,6 +16,7 @@ Deployment
 
    deployment_guide
    deployment_quickstart
+   SOCKET_ACTIVATION
 
 Database
 --------

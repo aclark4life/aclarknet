@@ -2,6 +2,12 @@
 
 This guide explains how to deploy the aclarknet Django application to a production server.
 
+## Quick Reference
+
+- **[Socket Activation Guide](../docs/SOCKET_ACTIVATION.md)** - Understanding systemd socket activation and the `aclarknet.socket` file
+- **[deploy.sh](deploy.sh)** - Automated deployment script
+- **[.env.example](.env.example)** - Environment variables template
+
 ## Deployment Structure
 
 The deployment uses the following structure:
@@ -271,10 +277,11 @@ The deployment uses the `nginx` user and group for running the application. Impo
 
 1. **nginx**: Reverse proxy, handles SSL termination, serves static/media files
 2. **gunicorn**: WSGI server, runs Django application
-3. **systemd**: Service manager, manages gunicorn process
-4. **MongoDB**: Database backend
-5. **Django**: Web application framework
-6. **Wagtail**: CMS framework
+3. **systemd socket activation**: Manages Unix socket for nginx-gunicorn communication (see [Socket Activation Guide](../docs/SOCKET_ACTIVATION.md))
+4. **systemd**: Service manager, manages gunicorn process lifecycle
+5. **MongoDB**: Database backend
+6. **Django**: Web application framework
+7. **Wagtail**: CMS framework
 
 ### Request Flow
 
@@ -283,11 +290,15 @@ Client Request (HTTPS)
   → nginx (port 443)
     → Static files: Served directly from /srv/aclarknet/static/
     → Media files: Served directly from /srv/aclarknet/media/
-    → Application requests: Proxied to gunicorn
-      → gunicorn (unix socket)
-        → Django/Wagtail application
-          → MongoDB database
+    → Application requests: Proxied to gunicorn via Unix socket
+      → Unix socket (/run/gunicorn/aclarknet.sock)
+        → gunicorn (managed by systemd)
+          → Django/Wagtail application
+            → MongoDB database
 ```
+
+**Note**: The Unix socket is managed by `aclarknet.socket` systemd unit, which provides socket activation.
+This enables graceful restarts and on-demand service activation. See [Socket Activation Guide](../docs/SOCKET_ACTIVATION.md) for details.
 
 ## Development vs Production
 
