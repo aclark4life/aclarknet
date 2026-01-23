@@ -24,16 +24,6 @@ $theme-colors: (
     --bs-btn-bg: #fff;
 }
 
-#theme-toggler-authenticated:hover {
-    cursor: pointer; /* Change cursor to pointer on hover */
-    color: #007bff; /* Change color on hover */
-}
-
-#theme-toggler-anonymous:hover {
-    cursor: pointer; /* Change cursor to pointer on hover */
-    color: #007bff; /* Change color on hover */
-}
-
 .accordion-button {
     background: transparent !important;
 }
