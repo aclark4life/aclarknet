@@ -146,7 +146,6 @@ class NoteAdmin(ImportExportModelAdmin):
         "description",
         "is_testimonial",
         "is_featured",
-        "title",
         "content_type",
         "object_id",
         "user",

@@ -10,9 +10,9 @@
              href="/clients/#testimonials"
              id="highpraise-block">Testimonials</a>
         </div>
-        <h2 class="mb-4">"{{ testimonial.description|default:"He did good stuff!" }}"</h2>
+        <h2 class="mb-4">"{{ testimonial.description }}"</h2>
         <p class="mb-4 text-muted">
-          &mdash;{{ testimonial|default:"A Customer" }}, {{ testimonial.title|default:"Head of Stuff" }}
+          &mdash;{{ testimonial.name }}
         </p>
       </div>
     </div>

@@ -153,7 +153,9 @@ class Task(BaseModel):
 
 
 class Invoice(BaseModel):
-    invoice_number = models.IntegerField("Invoice Number", unique=True, null=True, blank=True)
+    invoice_number = models.IntegerField(
+        "Invoice Number", unique=True, null=True, blank=True
+    )
     issue_date = models.DateField("Issue Date", default=timezone.now)
     start_date = models.DateField("Start Date", blank=True, null=True)
     end_date = models.DateField("End Date", blank=True, null=True)
@@ -195,12 +197,14 @@ class Invoice(BaseModel):
             with transaction.atomic():
                 # Use select_for_update to prevent race conditions
                 max_invoice = Invoice.objects.select_for_update().aggregate(
-                    models.Max('invoice_number')
-                )['invoice_number__max']
+                    models.Max("invoice_number")
+                )["invoice_number__max"]
                 self.invoice_number = (max_invoice or 0) + 1
-        
+
         if not self.name:
-            self.name = f"INV-{self.issue_date}-{self.invoice_number or self.pk or 'NEW'}"
+            self.name = (
+                f"INV-{self.issue_date}-{self.invoice_number or self.pk or 'NEW'}"
+            )
         if self.amount is not None:
             self.balance = self.amount - (self.paid_amount or 0)
         super().save(*args, **kwargs)
@@ -273,12 +277,6 @@ class Note(BaseModel):
     is_testimonial = models.BooleanField(
         default=False,
         help_text="Check to display this note as a testimonial on the public site",
-    )
-    title = models.CharField(
-        max_length=300,
-        blank=True,
-        null=True,
-        help_text="Title/position of the person giving the testimonial (e.g., 'CEO', 'Project Manager')",
     )
     is_featured = models.BooleanField(
         default=False,

@@ -97,6 +97,9 @@
             <a class="nav-link{% if profile_nav %} active{% endif %}"
                href="{% url 'profile_view' %}">Profile</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+          </li>
         </ul>
       {% endif %}
       <hr class="visible-xs mt-3">

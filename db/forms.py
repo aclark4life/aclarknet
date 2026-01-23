@@ -170,6 +170,8 @@ class NoteForm(forms.ModelForm):
             "user",
             "content_type",
             "object_id",
+            "is_testimonial",
+            "is_featured",
         )
         widgets = {
             "content_type": forms.HiddenInput(),
@@ -191,6 +193,14 @@ class NoteForm(forms.ModelForm):
             Div(
                 Field("description", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",
+            ),
+            Div(
+                Field("is_testimonial"),
+                css_class="col-sm-6",
+            ),
+            Div(
+                Field("is_featured"),
+                css_class="col-sm-6",
             ),
             css_class="row",
         )

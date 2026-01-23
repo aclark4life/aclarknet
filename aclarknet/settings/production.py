@@ -17,7 +17,9 @@ if not SECRET_KEY:
 # SECURITY WARNING: define the correct hosts in production!
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(",")
 if not ALLOWED_HOSTS or ALLOWED_HOSTS == [""]:
-    raise ValueError("DJANGO_ALLOWED_HOSTS environment variable must be set in production")
+    raise ValueError(
+        "DJANGO_ALLOWED_HOSTS environment variable must be set in production"
+    )
 
 # CSRF trusted origins for HTTPS
 CSRF_TRUSTED_ORIGINS = os.environ.get("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",")
@@ -71,7 +73,9 @@ LOGGING = {
         "file": {
             "level": "ERROR",
             "class": "logging.FileHandler",
-            "filename": os.environ.get("DJANGO_LOG_FILE", "/srv/aclarknet/logs/django.log"),
+            "filename": os.environ.get(
+                "DJANGO_LOG_FILE", "/srv/aclarknet/logs/django.log"
+            ),
         },
     },
     "loggers": {
@@ -87,3 +91,15 @@ try:
     from .local import *  # noqa: F401, F403
 except ImportError:
     pass
+
+INSTALLED_APPS += ["allauth.socialaccount.providers.github"]  # noqa F405
+SOCIALACCOUNT_PROVIDERS = {
+    "github": {
+        "APP": {
+            "client_id": os.environ.get("GITHUB_CLIENT_ID"),
+            "secret": os.environ.get("GITHUB_SECRET"),
+            "key": os.environ.get("GITHUB_KEY"),
+        }
+    },
+}
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"

@@ -1,7 +1,8 @@
 from django.contrib.admin.apps import AdminConfig
 from django.contrib.auth.apps import AuthConfig
 from django.contrib.contenttypes.apps import ContentTypesConfig
-from django.contrib.sites.apps import SitesConfig
+
+# from django.contrib.sites.apps import SitesConfig
 from wagtail.apps import WagtailAppConfig
 from taggit.apps import TaggitAppConfig
 from allauth.account.apps import AccountConfig
@@ -28,8 +29,8 @@ class ContentTypesConfig(ContentTypesConfig):
     default_auto_field = "django_mongodb_backend.fields.ObjectIdAutoField"
 
 
-class SitesConfig(SitesConfig):
-    default_auto_field = "django_mongodb_backend.fields.ObjectIdAutoField"
+# class SitesConfig(SitesConfig):
+#     default_auto_field = "django_mongodb_backend.fields.ObjectIdAutoField"
 
 
 class WagtailConfig(WagtailAppConfig):
