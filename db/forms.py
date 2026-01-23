@@ -36,8 +36,9 @@ class ClientForm(forms.ModelForm):
                 Field("description", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",
             ),
-            Div(Field("featured", css_class="form-check-input"), css_class="col-sm-6"),
-            Div(Field("category", css_class="form-control"), css_class="col-sm-6"),
+            Div(Field("featured", css_class="form-check-input"), css_class="col-sm-4"),
+            Div(Field("category", css_class="form-control"), css_class="col-sm-4"),
+            Div(Field("company", css_class="form-control"), css_class="col-sm-4"),
             css_class="row",
         )
 
@@ -286,43 +287,43 @@ class TimeForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         # Extract user from kwargs (if provided)
-        user = kwargs.pop('user', None)
+        user = kwargs.pop("user", None)
         super().__init__(*args, **kwargs)
-        
+
         # Remove invoice and task fields for non-admin users
         # Admin users are identified by is_superuser flag
         if user and not user.is_superuser:
-            self.fields.pop('invoice', None)
-            self.fields.pop('task', None)
-        
+            self.fields.pop("invoice", None)
+            self.fields.pop("task", None)
+
         self.helper = FormHelper()
         self.helper.form_method = "post"
         self.helper.form_class = "form-inline"
         self.helper.form_tag = False
-        
+
         # Build layout conditionally based on available fields
         layout_fields = [
             Div(Field("date", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("hours", css_class="form-control"), css_class="col-sm-6"),
         ]
-        
+
         # Only add invoice and task fields if they exist (i.e., for admins)
-        if 'invoice' in self.fields:
+        if "invoice" in self.fields:
             layout_fields.append(
                 Div(Field("invoice", css_class="form-control"), css_class="col-sm-6")
             )
-        if 'task' in self.fields:
+        if "task" in self.fields:
             layout_fields.append(
                 Div(Field("task", css_class="form-control"), css_class="col-sm-6")
             )
-        
+
         layout_fields.append(
             Div(
                 Field("description", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",
             )
         )
-        
+
         self.helper.layout = Div(*layout_fields, css_class="row")
 
     date = forms.DateField(
@@ -334,26 +335,26 @@ class TimeForm(forms.ModelForm):
 
 class TimeEntryForm(forms.ModelForm):
     """Simplified form for Time entries in the invoice formset."""
-    
+
     class Meta:
         model = Time
-        fields = ['date', 'hours', 'description', 'project', 'task', 'user']
+        fields = ["date", "hours", "description", "project", "task", "user"]
         widgets = {
-            'date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
-            'hours': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.25'}),
-            'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 2}),
-            'project': forms.Select(attrs={'class': 'form-control'}),
-            'task': forms.Select(attrs={'class': 'form-control'}),
-            'user': forms.Select(attrs={'class': 'form-control'}),
+            "date": forms.DateInput(attrs={"type": "date", "class": "form-control"}),
+            "hours": forms.NumberInput(attrs={"class": "form-control", "step": "0.25"}),
+            "description": forms.Textarea(attrs={"class": "form-control", "rows": 2}),
+            "project": forms.Select(attrs={"class": "form-control"}),
+            "task": forms.Select(attrs={"class": "form-control"}),
+            "user": forms.Select(attrs={"class": "form-control"}),
         }
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['date'].initial = timezone.now
-        self.fields['description'].required = False
-        self.fields['project'].required = False
-        self.fields['task'].required = False
-        self.fields['user'].required = False
+        self.fields["date"].initial = timezone.now
+        self.fields["description"].required = False
+        self.fields["project"].required = False
+        self.fields["task"].required = False
+        self.fields["user"].required = False
 
 
 # Create the inline formset for Time entries on Invoice
@@ -363,5 +364,5 @@ TimeEntryFormSet = inlineformset_factory(
     form=TimeEntryForm,
     extra=3,  # Number of empty forms to display
     can_delete=True,
-    fields=['date', 'hours', 'description', 'project', 'task', 'user']
+    fields=["date", "hours", "description", "project", "task", "user"],
 )
