@@ -44,13 +44,7 @@ create_directories() {
     echo -e "${GREEN}Creating necessary directories...${NC}"
     mkdir -p ${DEPLOY_DIR}/{logs,static,media}
     
-    # Create /run/gunicorn directory
-    # Note: The aclarknet.service unit will also create this directory automatically
-    # via RuntimeDirectory=gunicorn, but we create it here for backwards compatibility
-    # and to ensure it exists even if the service hasn't started yet
-    mkdir -p /run/gunicorn
     chown -R ${DEPLOY_USER}:${DEPLOY_GROUP} ${DEPLOY_DIR}
-    chown -R ${DEPLOY_USER}:${DEPLOY_GROUP} /run/gunicorn
 }
 
 # Clone or update repository

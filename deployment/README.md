@@ -234,12 +234,11 @@ Ensure all files are owned by the nginx user:
 
 ```bash
 sudo chown -R nginx:nginx /srv/aclarknet
-sudo chown -R nginx:nginx /run/gunicorn
 ```
 
 ### Nginx Cannot Connect to Gunicorn Socket
 
-If you see errors like `connect() to unix:/run/gunicorn/aclarknet.sock failed (2: No such file or directory)`:
+If you see errors like `connect() to unix:/srv/aclarknet/aclarknet.sock failed (2: No such file or directory)`:
 
 1. Check if the gunicorn service is running:
    ```bash
@@ -248,13 +247,13 @@ If you see errors like `connect() to unix:/run/gunicorn/aclarknet.sock failed (2
 
 2. Verify the socket file exists:
    ```bash
-   ls -la /run/gunicorn/
+   ls -la /srv/aclarknet/aclarknet.sock
    ```
 
 3. Check socket permissions - the socket should be accessible by the nginx group:
    ```bash
    # Should show: srwxrwx--- (group-accessible)
-   ls -la /run/gunicorn/aclarknet.sock
+   ls -la /srv/aclarknet/aclarknet.sock
    ```
 
 4. Verify gunicorn is configured with `--umask 0007` (this allows group access):
@@ -263,7 +262,7 @@ If you see errors like `connect() to unix:/run/gunicorn/aclarknet.sock failed (2
    # Should show: --umask 0007
    ```
 
-5. If the socket directory doesn't exist, the service will create it automatically via `RuntimeDirectory=gunicorn`. Restart the service:
+5. Restart the service:
    ```bash
    sudo systemctl restart aclarknet.service
    ```
@@ -291,8 +290,7 @@ The deployment uses the `nginx` user and group for running the application. Impo
 - `/srv/aclarknet/logs`: Owned by `nginx:nginx`
 - `/srv/aclarknet/static`: Owned by `nginx:nginx`
 - `/srv/aclarknet/media`: Owned by `nginx:nginx`
-- `/run/gunicorn`: Owned by `nginx:nginx`, mode `755` (auto-created by systemd)
-- `/run/gunicorn/aclarknet.sock`: Owned by `nginx:nginx`, mode `770` (created with umask 0007 for group access)
+- `/srv/aclarknet/aclarknet.sock`: Owned by `nginx:nginx`, mode `770` (created with umask 0007 for group access)
 
 ## Security Notes
 
@@ -321,13 +319,13 @@ Client Request (HTTPS)
     → Static files: Served directly from /srv/aclarknet/static/
     → Media files: Served directly from /srv/aclarknet/media/
     → Application requests: Proxied to gunicorn via Unix socket
-      → Unix socket (/run/gunicorn/aclarknet.sock)
+      → Unix socket (/srv/aclarknet/aclarknet.sock)
         → gunicorn (managed by systemd)
           → Django/Wagtail application
             → MongoDB database
 ```
 
-**Note**: The Unix socket is created by gunicorn when the `aclarknet.service` starts. The `/run/gunicorn` directory is automatically created by systemd via the `RuntimeDirectory` directive. The socket is created with umask 0007 to ensure the nginx process (which runs as the nginx user/group) can connect to it.
+**Note**: The Unix socket is created by gunicorn when the `aclarknet.service` starts in the `/srv/aclarknet` directory. The socket is created with umask 0007 to ensure the nginx process (which runs as the nginx user/group) can connect to it.
 
 ## Development vs Production
 

@@ -107,20 +107,13 @@ else
     exit 1
 fi
 
-# Test 7: Check service RuntimeDirectory configuration
+# Test 7: Check service socket configuration
 echo ""
-echo "✓ Test 7: Checking systemd service RuntimeDirectory configuration..."
-if grep -q "RuntimeDirectory=gunicorn" "${SCRIPT_DIR}/aclarknet.service"; then
-    echo "  ✓ aclarknet.service has RuntimeDirectory=gunicorn"
+echo "✓ Test 7: Checking systemd service socket configuration..."
+if grep -q "unix:/srv/aclarknet/aclarknet.sock" "${SCRIPT_DIR}/aclarknet.service"; then
+    echo "  ✓ aclarknet.service configured to use /srv/aclarknet/aclarknet.sock"
 else
-    echo "  ✗ aclarknet.service missing RuntimeDirectory=gunicorn"
-    exit 1
-fi
-
-if grep -q "RuntimeDirectoryMode=0755" "${SCRIPT_DIR}/aclarknet.service"; then
-    echo "  ✓ RuntimeDirectoryMode is correctly configured"
-else
-    echo "  ✗ RuntimeDirectoryMode is not correctly configured"
+    echo "  ✗ aclarknet.service not using correct socket path"
     exit 1
 fi
 
@@ -144,13 +137,12 @@ echo "  • Virtual environment: /srv/aclarknet/.venv"
 echo "  • Django project: /srv/aclarknet"
 echo "  • PYTHONPATH: /srv/aclarknet"
 echo "  • Working directory: /srv/aclarknet"
-echo "  • Socket directory: /run/gunicorn (auto-created by service unit)"
-echo "  • Socket path: /run/gunicorn/aclarknet.sock"
+echo "  • Socket directory: /srv/aclarknet"
+echo "  • Socket path: /srv/aclarknet/aclarknet.sock"
 echo "  • Socket permissions: Created with umask 0007 (group-accessible)"
 echo ""
 echo "The configuration should resolve common issues by:"
 echo "  1. Setting PYTHONPATH=/srv/aclarknet in systemd service"
 echo "  2. Setting WorkingDirectory=/srv/aclarknet in systemd service"
 echo "  3. Using /srv/aclarknet/.venv for the virtual environment"
-echo "  4. Auto-creating /run/gunicorn via RuntimeDirectory in service unit"
-echo "  5. Setting gunicorn --umask 0007 to allow nginx group access to socket"
+echo "  4. Setting gunicorn --umask 0007 to allow nginx group access to socket"
