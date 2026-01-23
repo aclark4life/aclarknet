@@ -236,33 +236,28 @@ Ensure all files are owned by the nginx user:
 sudo chown -R nginx:nginx /srv/aclarknet
 ```
 
-### Nginx Cannot Connect to Gunicorn Socket
+### Nginx Cannot Connect to Gunicorn
 
-If you see errors like `connect() to unix:/srv/aclarknet/aclarknet.sock failed (2: No such file or directory)`:
+If you see errors like `connect() to 127.0.0.1:8000 failed` or connection refused:
 
 1. Check if the gunicorn service is running:
    ```bash
    sudo systemctl status aclarknet.service
    ```
 
-2. Verify the socket file exists:
+2. Verify gunicorn is listening on port 8000:
    ```bash
-   ls -la /srv/aclarknet/aclarknet.sock
+   sudo netstat -tulpn | grep :8000
+   # or
+   sudo ss -tulpn | grep :8000
    ```
 
-3. Check socket permissions - the socket should be accessible by the nginx group:
+3. Check if port 8000 is already in use by another process:
    ```bash
-   # Should show: srwxrwx--- (group-accessible)
-   ls -la /srv/aclarknet/aclarknet.sock
+   sudo lsof -i :8000
    ```
 
-4. Verify gunicorn is configured with `--umask 0007` (this allows group access):
-   ```bash
-   grep umask /etc/systemd/system/aclarknet.service
-   # Should show: --umask 0007
-   ```
-
-5. Restart the service:
+4. Restart the service:
    ```bash
    sudo systemctl restart aclarknet.service
    ```
@@ -290,7 +285,6 @@ The deployment uses the `nginx` user and group for running the application. Impo
 - `/srv/aclarknet/logs`: Owned by `nginx:nginx`
 - `/srv/aclarknet/static`: Owned by `nginx:nginx`
 - `/srv/aclarknet/media`: Owned by `nginx:nginx`
-- `/srv/aclarknet/aclarknet.sock`: Owned by `nginx:nginx`, mode `770` (created with umask 0007 for group access)
 
 ## Security Notes
 
@@ -306,7 +300,7 @@ The deployment uses the `nginx` user and group for running the application. Impo
 
 1. **nginx**: Reverse proxy, handles SSL termination, serves static/media files
 2. **gunicorn**: WSGI server, runs Django application
-3. **systemd**: Service manager, manages gunicorn process lifecycle and Unix socket
+3. **systemd**: Service manager, manages gunicorn process lifecycle
 4. **MongoDB**: Database backend
 5. **Django**: Web application framework
 6. **Wagtail**: CMS framework
@@ -318,14 +312,14 @@ Client Request (HTTPS)
   → nginx (port 443)
     → Static files: Served directly from /srv/aclarknet/static/
     → Media files: Served directly from /srv/aclarknet/media/
-    → Application requests: Proxied to gunicorn via Unix socket
-      → Unix socket (/srv/aclarknet/aclarknet.sock)
+    → Application requests: Proxied to gunicorn via TCP
+      → TCP connection (127.0.0.1:8000)
         → gunicorn (managed by systemd)
           → Django/Wagtail application
             → MongoDB database
 ```
 
-**Note**: The Unix socket is created by gunicorn when the `aclarknet.service` starts in the `/srv/aclarknet` directory. The socket is created with umask 0007 to ensure the nginx process (which runs as the nginx user/group) can connect to it.
+**Note**: Gunicorn binds to 127.0.0.1:8000 (localhost only) for security, which nginx proxies to via TCP connection.
 
 ## Development vs Production
 

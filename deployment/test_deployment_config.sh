@@ -107,23 +107,23 @@ else
     exit 1
 fi
 
-# Test 7: Check service socket configuration
+# Test 7: Check service port configuration
 echo ""
-echo "✓ Test 7: Checking systemd service socket configuration..."
-if grep -q "unix:/srv/aclarknet/aclarknet.sock" "${SCRIPT_DIR}/aclarknet.service"; then
-    echo "  ✓ aclarknet.service configured to use /srv/aclarknet/aclarknet.sock"
+echo "✓ Test 7: Checking systemd service port configuration..."
+if grep -q "bind 127.0.0.1:8000" "${SCRIPT_DIR}/aclarknet.service"; then
+    echo "  ✓ aclarknet.service configured to bind to 127.0.0.1:8000"
 else
-    echo "  ✗ aclarknet.service not using correct socket path"
+    echo "  ✗ aclarknet.service not using correct port configuration"
     exit 1
 fi
 
-# Test 8: Check gunicorn umask configuration for socket permissions
+# Test 8: Check nginx upstream configuration
 echo ""
-echo "✓ Test 8: Checking gunicorn socket permissions configuration..."
-if grep -q "\-\-umask 0007" "${SCRIPT_DIR}/aclarknet.service"; then
-    echo "  ✓ gunicorn configured with --umask 0007 for proper socket permissions"
+echo "✓ Test 8: Checking nginx upstream port configuration..."
+if grep -q "server 127.0.0.1:8000" "${SCRIPT_DIR}/nginx-aclarknet.conf"; then
+    echo "  ✓ nginx configured to proxy to 127.0.0.1:8000"
 else
-    echo "  ✗ gunicorn missing --umask configuration for socket permissions"
+    echo "  ✗ nginx not configured with correct upstream port"
     exit 1
 fi
 
@@ -137,12 +137,10 @@ echo "  • Virtual environment: /srv/aclarknet/.venv"
 echo "  • Django project: /srv/aclarknet"
 echo "  • PYTHONPATH: /srv/aclarknet"
 echo "  • Working directory: /srv/aclarknet"
-echo "  • Socket directory: /srv/aclarknet"
-echo "  • Socket path: /srv/aclarknet/aclarknet.sock"
-echo "  • Socket permissions: Created with umask 0007 (group-accessible)"
+echo "  • Application port: 127.0.0.1:8000"
 echo ""
 echo "The configuration should resolve common issues by:"
 echo "  1. Setting PYTHONPATH=/srv/aclarknet in systemd service"
 echo "  2. Setting WorkingDirectory=/srv/aclarknet in systemd service"
 echo "  3. Using /srv/aclarknet/.venv for the virtual environment"
-echo "  4. Setting gunicorn --umask 0007 to allow nginx group access to socket"
+echo "  4. Binding gunicorn to 127.0.0.1:8000 for nginx proxy access"
