@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
-    # "aclarknet.apps.SitesConfig",
+    "allauth",
     "aclarknet.apps.AccountConfig",
     "aclarknet.apps.SocialAccountConfig",
     "db",
@@ -58,8 +58,6 @@ INSTALLED_APPS = [
     "webpack_boilerplate",
     "crispy_forms",
     "crispy_bootstrap5",
-    "allauth",
-    "allauth.socialaccount.providers.github",
     "siteuser",
     "import_export",
 ]
@@ -214,7 +212,6 @@ MIGRATION_MODULES = {
     "auth": "aclarknet.migrations.auth",
     "admin": "aclarknet.migrations.admin",
     "contenttypes": "aclarknet.migrations.contenttypes",
-    # "sites": "aclarknet.migrations.sites",
     "wagtailcore": "aclarknet.migrations.wagtailcore",
     "taggit": "aclarknet.migrations.taggit",
     "db": "db.migrations",
@@ -258,14 +255,3 @@ SITE_ID = 1
 ACCOUNT_EMAIL_VERIFICATION = "optional"
 ACCOUNT_LOGIN_METHODS = ["username", "email"]
 ACCOUNT_SIGNUP_FIELDS = ["email", "username", "password1", "password2"]
-
-# Social account provider settings
-SOCIALACCOUNT_PROVIDERS = {
-    "github": {
-        "SCOPE": [
-            "user",
-            "user:email",
-        ],
-        "VERIFIED_EMAIL": True,
-    }
-}
