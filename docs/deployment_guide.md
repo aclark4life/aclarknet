@@ -288,7 +288,7 @@ sudo systemctl status aclarknet.service
 
 2. Check socket file:
 ```bash
-ls -la /run/gunicorn/aclarknet.sock
+ls -la /srv/aclarknet/aclarknet.sock
 ```
 
 3. Restart service:
