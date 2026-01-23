@@ -16,8 +16,10 @@ import sys
 
 def main():
     """Main entry point for the dm CLI."""
-    # Set Django settings module
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "aclarknet.settings.dev")
+    # Set Django settings module if not already set
+    # Allows users to override with DJANGO_SETTINGS_MODULE env var
+    if "DJANGO_SETTINGS_MODULE" not in os.environ:
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "aclarknet.settings.dev")
 
     try:
         from django.core.management import execute_from_command_line

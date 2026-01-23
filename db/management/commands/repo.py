@@ -6,7 +6,6 @@ syncing with upstream repositories.
 """
 
 import subprocess
-import sys
 
 from django.core.management.base import BaseCommand, CommandError
 
@@ -71,13 +70,18 @@ class Command(BaseCommand):
                 capture_output=True,
                 text=True,
                 check=True,
+                timeout=10,
             )
             branch = result.stdout.strip()
             self.stdout.write(f"Current branch: {branch}")
 
         # Check if upstream remote exists
         result = subprocess.run(
-            ["git", "remote"], capture_output=True, text=True, check=True
+            ["git", "remote"],
+            capture_output=True,
+            text=True,
+            check=True,
+            timeout=10,
         )
         remotes = result.stdout.strip().split("\n")
 
@@ -88,7 +92,7 @@ class Command(BaseCommand):
 
         # Fetch from upstream
         self.stdout.write(f"Fetching from {upstream}...")
-        subprocess.run(["git", "fetch", upstream], check=True)
+        subprocess.run(["git", "fetch", upstream], check=True, timeout=300)
         self.stdout.write(self.style.SUCCESS(f"✓ Fetched from {upstream}"))
 
         # Rebase on upstream branch
@@ -97,18 +101,15 @@ class Command(BaseCommand):
             ["git", "rebase", f"{upstream}/{branch}"],
             capture_output=True,
             text=True,
+            timeout=300,
         )
 
         if result.returncode != 0:
-            self.stdout.write(
-                self.style.ERROR(f"✗ Rebase failed:\n{result.stderr}")
+            error_msg = (
+                f"✗ Rebase failed:\n{result.stderr}\n\n"
+                "To abort the rebase, run: git rebase --abort"
             )
-            self.stdout.write(
-                self.style.WARNING(
-                    "\nTo abort the rebase, run: git rebase --abort"
-                )
-            )
-            sys.exit(1)
+            raise CommandError(error_msg)
 
         self.stdout.write(
             self.style.SUCCESS(f"✓ Rebased {branch} on {upstream}/{branch}")

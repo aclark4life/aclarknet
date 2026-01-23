@@ -165,6 +165,8 @@ class RepoCommandTest(TestCase):
             mock_rebase_result,  # git rebase
         ]
         
-        # The command should exit with code 1 on rebase failure
-        with self.assertRaises(SystemExit):
+        # The command should raise CommandError on rebase failure
+        with self.assertRaises(CommandError) as cm:
             call_command("repo", "sync", stdout=StringIO(), stderr=StringIO())
+        
+        self.assertIn("rebase", str(cm.exception).lower())
