@@ -83,7 +83,11 @@ class Command(BaseCommand):
         if result.returncode != 0:
             raise CommandError(f"Failed to list remotes: {result.stderr}")
         
-        remotes = result.stdout.strip().split("\n")
+        remotes_output = result.stdout.strip()
+        if not remotes_output:
+            raise CommandError("No git remotes configured in this repository")
+        
+        remotes = remotes_output.split("\n")
 
         if upstream not in remotes:
             raise CommandError(
