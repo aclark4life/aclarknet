@@ -63,7 +63,7 @@ class ClientsView(BaseCMSView):
         try:
             from collections import defaultdict
 
-            from db.models import Client
+            from db.models import Client, Note
 
             # Get only featured clients
             featured_clients = Client.objects.filter(featured=True).order_by(
@@ -84,6 +84,11 @@ class ClientsView(BaseCMSView):
             # Convert to regular dict and pass to context
             context["categories"] = dict(categories)
             context["clients"] = featured_clients
+            
+            # Get testimonials (Notes marked as testimonials)
+            context["testimonials"] = Note.objects.filter(
+                is_testimonial=True
+            ).order_by("-created")
         except (ImportError, Exception):
             # Fallback to settings if database is not available
             context["categories"] = {
@@ -98,6 +103,7 @@ class ClientsView(BaseCMSView):
                     ],
                 )
             }
+            context["testimonials"] = []
         return context
 
 
@@ -127,6 +133,19 @@ class HomeView(BaseCMSView):
         context["message"] = getattr(
             settings, "HOMEPAGE_MESSAGE", "Welcome to ACLARK.NET!"
         )
+        
+        # Get featured testimonial for homepage
+        try:
+            from db.models import Note
+            
+            # Get the most recently created featured testimonial
+            testimonial = Note.objects.filter(
+                is_testimonial=True, is_featured=True
+            ).order_by("-created").first()
+            context["testimonial"] = testimonial
+        except (ImportError, Exception):
+            context["testimonial"] = None
+            
         return context
 
 

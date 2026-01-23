@@ -144,13 +144,16 @@ class NoteAdmin(ImportExportModelAdmin):
     list_display = [
         "name",
         "description",
+        "is_testimonial",
+        "is_featured",
+        "title",
         "content_type",
         "object_id",
         "user",
         "created",
     ]
-    list_filter = ["content_type", "created"]
-    search_fields = ["name", "text"]
+    list_filter = ["content_type", "created", "is_testimonial", "is_featured"]
+    search_fields = ["name", "description"]
     raw_id_fields = ["user"]
 
 
