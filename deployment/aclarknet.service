@@ -1,6 +1,5 @@
 [Unit]
 Description=aclarknet gunicorn daemon
-Requires=aclarknet.socket
 After=network.target
 
 [Service]
@@ -8,6 +7,7 @@ Type=notify
 User=nginx
 Group=nginx
 RuntimeDirectory=gunicorn
+RuntimeDirectoryMode=0755
 WorkingDirectory=/srv/aclarknet
 EnvironmentFile=/srv/aclarknet/.env
 Environment="PYTHONPATH=/srv/aclarknet"
