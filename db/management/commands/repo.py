@@ -92,7 +92,14 @@ class Command(BaseCommand):
 
         # Fetch from upstream
         self.stdout.write(f"Fetching from {upstream}...")
-        subprocess.run(["git", "fetch", upstream], check=True, timeout=300)
+        result = subprocess.run(
+            ["git", "fetch", upstream],
+            capture_output=True,
+            text=True,
+            timeout=300,
+        )
+        if result.returncode != 0:
+            raise CommandError(f"Failed to fetch from {upstream}: {result.stderr}")
         self.stdout.write(self.style.SUCCESS(f"✓ Fetched from {upstream}"))
 
         # Rebase on upstream branch
