@@ -53,13 +53,8 @@ class Command(BaseCommand):
         upstream = options["upstream"]
         branch = options["branch"]
 
-        try:
-            if action == "sync":
-                self._sync_repo(upstream, branch)
-        except subprocess.CalledProcessError as e:
-            raise CommandError(f"Git command failed: {e}")
-        except Exception as e:
-            raise CommandError(f"Error: {e}")
+        if action == "sync":
+            self._sync_repo(upstream, branch)
 
     def _sync_repo(self, upstream, branch):
         """Fetch from upstream and rebase the current/specified branch."""
@@ -69,9 +64,12 @@ class Command(BaseCommand):
                 ["git", "rev-parse", "--abbrev-ref", "HEAD"],
                 capture_output=True,
                 text=True,
-                check=True,
                 timeout=10,
             )
+            if result.returncode != 0:
+                raise CommandError(
+                    f"Failed to get current branch: {result.stderr}"
+                )
             branch = result.stdout.strip()
             self.stdout.write(f"Current branch: {branch}")
 
@@ -80,9 +78,11 @@ class Command(BaseCommand):
             ["git", "remote"],
             capture_output=True,
             text=True,
-            check=True,
             timeout=10,
         )
+        if result.returncode != 0:
+            raise CommandError(f"Failed to list remotes: {result.stderr}")
+        
         remotes = result.stdout.strip().split("\n")
 
         if upstream not in remotes:
