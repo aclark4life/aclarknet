@@ -10,6 +10,7 @@ This is a project that includes various configuration files and directories for 
 - [Getting Started](#getting-started)
 - [Configuration Files](#configuration-files)
 - [Directory Structure](#directory-structure)
+- [Django Management Commands](#django-management-commands)
 - [Production Deployment](#production-deployment)
 - [License](#license)
 - [Deployment Commands Summary](#deployment-commands-summary)
@@ -85,6 +86,33 @@ To get started with this project, follow these steps:
 
 3. **Run the project**:
     Instructions for running the project will vary based on the type of project (e.g., web application, backend service).
+
+## Django Management Commands
+
+This project includes custom Django management commands for common tasks.
+
+### Repository Management (`repo`)
+
+The `repo` command helps manage git repository operations.
+
+**Sync with upstream:**
+```bash
+# Using dm wrapper (short syntax)
+dm repo sync
+
+# Or using manage.py directly
+python manage.py repo sync
+
+# Sync with custom upstream remote
+dm repo sync --upstream origin
+
+# Sync specific branch
+dm repo sync --branch develop
+```
+
+The `sync` action fetches from the upstream remote and rebases your current branch on top of it. This is useful for keeping your fork up to date with the upstream repository.
+
+**Note:** Make sure you have an `upstream` remote configured, or specify a different remote with `--upstream`.
 
 ## GitHub Social Authentication
 
