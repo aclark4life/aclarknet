@@ -11,8 +11,7 @@ EnvironmentFile=/srv/aclarknet/.env
 Environment="PYTHONPATH=/srv/aclarknet"
 ExecStart=/srv/aclarknet/.venv/bin/gunicorn \
           --workers 3 \
-          --bind unix:/srv/aclarknet/aclarknet.sock \
-          --umask 0007 \
+          --bind 127.0.0.1:8000 \
           --access-logfile /srv/aclarknet/logs/gunicorn-access.log \
           --error-logfile /srv/aclarknet/logs/gunicorn-error.log \
           --log-level info \
