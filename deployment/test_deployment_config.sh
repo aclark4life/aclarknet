@@ -107,27 +107,20 @@ else
     exit 1
 fi
 
-# Test 7: Check socket configuration
+# Test 7: Check service RuntimeDirectory configuration
 echo ""
-echo "✓ Test 7: Checking systemd socket configuration..."
-if grep -q "RuntimeDirectory=gunicorn" "${SCRIPT_DIR}/aclarknet.socket"; then
-    echo "  ✓ aclarknet.socket has RuntimeDirectory=gunicorn"
+echo "✓ Test 7: Checking systemd service RuntimeDirectory configuration..."
+if grep -q "RuntimeDirectory=gunicorn" "${SCRIPT_DIR}/aclarknet.service"; then
+    echo "  ✓ aclarknet.service has RuntimeDirectory=gunicorn"
 else
-    echo "  ✗ aclarknet.socket missing RuntimeDirectory=gunicorn"
+    echo "  ✗ aclarknet.service missing RuntimeDirectory=gunicorn"
     exit 1
 fi
 
-if grep -q "ListenStream=/run/gunicorn/aclarknet.sock" "${SCRIPT_DIR}/aclarknet.socket"; then
-    echo "  ✓ Socket path is correctly configured"
+if grep -q "RuntimeDirectoryMode=0755" "${SCRIPT_DIR}/aclarknet.service"; then
+    echo "  ✓ RuntimeDirectoryMode is correctly configured"
 else
-    echo "  ✗ Socket path is not correctly configured"
-    exit 1
-fi
-
-if grep -q "SocketUser=nginx" "${SCRIPT_DIR}/aclarknet.socket" && grep -q "SocketGroup=nginx" "${SCRIPT_DIR}/aclarknet.socket"; then
-    echo "  ✓ Socket ownership is correctly set to nginx"
-else
-    echo "  ✗ Socket ownership is not correctly configured"
+    echo "  ✗ RuntimeDirectoryMode is not correctly configured"
     exit 1
 fi
 
@@ -141,11 +134,11 @@ echo "  • Virtual environment: /srv/aclarknet/.venv"
 echo "  • Django project: /srv/aclarknet"
 echo "  • PYTHONPATH: /srv/aclarknet"
 echo "  • Working directory: /srv/aclarknet"
-echo "  • Socket directory: /run/gunicorn (auto-created by socket unit)"
+echo "  • Socket directory: /run/gunicorn (auto-created by service unit)"
 echo "  • Socket path: /run/gunicorn/aclarknet.sock"
 echo ""
 echo "The configuration should resolve common issues by:"
 echo "  1. Setting PYTHONPATH=/srv/aclarknet in systemd service"
 echo "  2. Setting WorkingDirectory=/srv/aclarknet in systemd service"
 echo "  3. Using /srv/aclarknet/.venv for the virtual environment"
-echo "  4. Auto-creating /run/gunicorn via RuntimeDirectory in socket unit"
+echo "  4. Auto-creating /run/gunicorn via RuntimeDirectory in service unit"

@@ -45,9 +45,9 @@ create_directories() {
     mkdir -p ${DEPLOY_DIR}/{logs,static,media}
     
     # Create /run/gunicorn directory
-    # Note: The aclarknet.socket unit will also create this directory automatically
+    # Note: The aclarknet.service unit will also create this directory automatically
     # via RuntimeDirectory=gunicorn, but we create it here for backwards compatibility
-    # and to ensure it exists even if the socket unit hasn't started yet
+    # and to ensure it exists even if the service hasn't started yet
     mkdir -p /run/gunicorn
     chown -R ${DEPLOY_USER}:${DEPLOY_GROUP} ${DEPLOY_DIR}
     chown -R ${DEPLOY_USER}:${DEPLOY_GROUP} /run/gunicorn
@@ -159,9 +159,7 @@ run_migrations() {
 setup_systemd() {
     echo -e "${GREEN}Setting up systemd services...${NC}"
     cp ${DEPLOY_DIR}/deployment/aclarknet.service ${SYSTEMD_DIR}/
-    cp ${DEPLOY_DIR}/deployment/aclarknet.socket ${SYSTEMD_DIR}/
     systemctl daemon-reload
-    systemctl enable aclarknet.socket
     systemctl enable aclarknet.service
 }
 
@@ -177,7 +175,6 @@ setup_nginx() {
 # Restart services
 restart_services() {
     echo -e "${GREEN}Restarting services...${NC}"
-    systemctl restart aclarknet.socket
     systemctl restart aclarknet.service
 
     # Check status

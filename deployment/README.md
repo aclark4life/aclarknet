@@ -4,7 +4,6 @@ This guide explains how to deploy the aclarknet Django application to a producti
 
 ## Quick Reference
 
-- **[Socket Activation Guide](../docs/SOCKET_ACTIVATION.md)** - Understanding systemd socket activation and the `aclarknet.socket` file
 - **[deploy.sh](deploy.sh)** - Automated deployment script
 - **[.env.example](.env.example)** - Environment variables template
 
@@ -277,11 +276,10 @@ The deployment uses the `nginx` user and group for running the application. Impo
 
 1. **nginx**: Reverse proxy, handles SSL termination, serves static/media files
 2. **gunicorn**: WSGI server, runs Django application
-3. **systemd socket activation**: Manages Unix socket for nginx-gunicorn communication (see [Socket Activation Guide](../docs/SOCKET_ACTIVATION.md))
-4. **systemd**: Service manager, manages gunicorn process lifecycle
-5. **MongoDB**: Database backend
-6. **Django**: Web application framework
-7. **Wagtail**: CMS framework
+3. **systemd**: Service manager, manages gunicorn process lifecycle and Unix socket
+4. **MongoDB**: Database backend
+5. **Django**: Web application framework
+6. **Wagtail**: CMS framework
 
 ### Request Flow
 
@@ -297,8 +295,7 @@ Client Request (HTTPS)
             → MongoDB database
 ```
 
-**Note**: The Unix socket is managed by `aclarknet.socket` systemd unit, which provides socket activation.
-This enables graceful restarts and on-demand service activation. See [Socket Activation Guide](../docs/SOCKET_ACTIVATION.md) for details.
+**Note**: The Unix socket is created by gunicorn when the `aclarknet.service` starts. The `/run/gunicorn` directory is automatically created by systemd via the `RuntimeDirectory` directive.
 
 ## Development vs Production
 

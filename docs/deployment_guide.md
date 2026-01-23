@@ -134,7 +134,6 @@ sudo -u nginx /srv/aclarknet/venv/bin/python manage.py createsuperuser
 1. Check service status:
 ```bash
 sudo systemctl status aclarknet.service
-sudo systemctl status aclarknet.socket
 ```
 
 2. Check logs if there are issues:
@@ -292,9 +291,8 @@ sudo systemctl status aclarknet.service
 ls -la /run/gunicorn/aclarknet.sock
 ```
 
-3. Restart services:
+3. Restart service:
 ```bash
-sudo systemctl restart aclarknet.socket
 sudo systemctl restart aclarknet.service
 ```
 
