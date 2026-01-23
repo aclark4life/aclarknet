@@ -110,7 +110,7 @@ fi
 # Test 7: Check service port configuration
 echo ""
 echo "✓ Test 7: Checking systemd service port configuration..."
-if grep -q "bind 127.0.0.1:8000" "${SCRIPT_DIR}/aclarknet.service"; then
+if grep -q "\-\-bind 127.0.0.1:8000" "${SCRIPT_DIR}/aclarknet.service"; then
     echo "  ✓ aclarknet.service configured to bind to 127.0.0.1:8000"
 else
     echo "  ✗ aclarknet.service not using correct port configuration"
