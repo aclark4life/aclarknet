@@ -256,8 +256,8 @@ AUTHENTICATION_BACKENDS = [
 SITE_ID = 1
 
 ACCOUNT_EMAIL_VERIFICATION = "optional"
-ACCOUNT_LOGIN_METHODS = {"username", "email"}
-ACCOUNT_SIGNUP_FIELDS = ["email*", "username*", "password1*", "password2*"]
+ACCOUNT_LOGIN_METHODS = ["username", "email"]
+ACCOUNT_SIGNUP_FIELDS = ["email", "username", "password1", "password2"]
 
 # Social account provider settings
 SOCIALACCOUNT_PROVIDERS = {
