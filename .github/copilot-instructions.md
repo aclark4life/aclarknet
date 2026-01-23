@@ -205,6 +205,7 @@ The project uses custom app configurations in `aclarknet/apps.py` for Wagtail an
 - MongoDB is used instead of PostgreSQL/MySQL, so ORM usage may differ slightly
 - The `justfile` is the primary way developers interact with the project - reference it for common tasks
 - Pre-commit hooks are mandatory - all code must pass Ruff linting/formatting before commit
+- Do not create any .md documentation files. Instead, add .rst documentation to Sphinx in docs/.
 
 ## Dependency Restrictions
 
