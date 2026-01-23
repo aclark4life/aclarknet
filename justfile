@@ -153,7 +153,10 @@ alias dl := deploy-logs
 
 # Restart production service
 deploy-restart:
+    sudo systemctl reload aclarknet.service
     sudo systemctl restart aclarknet.service
+    sudo systemctl reload nginx.service
+    sudo systemctl restart nginx.service
 
 alias dr := deploy-restart
 
