@@ -180,7 +180,7 @@ Notes
 -----
 
 - Non-testimonial notes (``is_testimonial=False``) will NOT appear on public pages
-- Multiple featured testimonials can exist, but only the most recent will be shown
+- While the system allows multiple featured testimonials, only the most recent will be displayed on the homepage. Best practice is to feature only one testimonial at a time.
 - The feature is backward compatible - existing notes default to ``is_testimonial=False``
 - Notes can still be attached to other objects via the generic foreign key
 - Testimonials don't require a ``content_object`` - they can be standalone
