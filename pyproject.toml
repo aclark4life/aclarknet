@@ -21,6 +21,9 @@ dependencies = [
   "python-dotenv",
 ]
 
+[project.scripts]
+dm = "dm:main"
+
 [project.optional-dependencies]
 dev = [
   "Faker",
