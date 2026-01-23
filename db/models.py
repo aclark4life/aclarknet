@@ -269,6 +269,21 @@ class Note(BaseModel):
     )
     object_id = models.CharField(max_length=255, blank=True, null=True)
     content_object = GenericForeignKey("content_type", "object_id")
+    # Testimonial fields
+    is_testimonial = models.BooleanField(
+        default=False,
+        help_text="Check to display this note as a testimonial on the public site",
+    )
+    title = models.CharField(
+        max_length=300,
+        blank=True,
+        null=True,
+        help_text="Title/position of the person giving the testimonial (e.g., 'CEO', 'Project Manager')",
+    )
+    is_featured = models.BooleanField(
+        default=False,
+        help_text="Check to feature this testimonial on the homepage",
+    )
 
     def __str__(self):
         if self.name:
