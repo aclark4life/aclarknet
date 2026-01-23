@@ -28,6 +28,16 @@ Database
    db_views
    invoice_time_formset
 
+Features
+--------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Features:
+
+   notes_testimonials
+   testimonials_quickstart
+
 Frontend
 --------
 
