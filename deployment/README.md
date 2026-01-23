@@ -262,7 +262,7 @@ If you see errors like `connect() to unix:/srv/aclarknet/aclarknet.sock failed (
    # Should show: --umask 0007
    ```
 
-5. If the socket directory doesn't exist, the service will create it automatically via `RuntimeDirectory=gunicorn`. Restart the service:
+5. Restart the service:
    ```bash
    sudo systemctl restart aclarknet.service
    ```
