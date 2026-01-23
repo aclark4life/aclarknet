@@ -22,6 +22,11 @@ Description=aclarknet gunicorn socket
 # Create Unix socket for nginx to communicate with Gunicorn
 ListenStream=/run/gunicorn/aclarknet.sock
 
+# Create the /run/gunicorn directory with correct permissions
+# This ensures the parent directory exists before the socket is created
+RuntimeDirectory=gunicorn
+RuntimeDirectoryMode=0755
+
 # Set ownership to nginx user/group so nginx can read/write to the socket
 SocketUser=nginx
 SocketGroup=nginx

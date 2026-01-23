@@ -56,6 +56,8 @@ MongoDB Database
 ```ini
 [Socket]
 ListenStream=/run/gunicorn/aclarknet.sock  # Unix socket location
+RuntimeDirectory=gunicorn                   # Creates /run/gunicorn directory
+RuntimeDirectoryMode=0755                   # Directory permissions: rwxr-xr-x
 SocketUser=nginx                            # Socket owned by nginx
 SocketGroup=nginx                           # Socket group is nginx
 SocketMode=0660                             # Permissions: rw-rw----
@@ -63,6 +65,8 @@ SocketMode=0660                             # Permissions: rw-rw----
 
 ### Permissions Explained
 
+- **RuntimeDirectory=gunicorn**: systemd automatically creates `/run/gunicorn` directory when the socket unit starts
+- **RuntimeDirectoryMode=0755**: The directory has read/write/execute for owner, read/execute for group and others
 - **SocketUser=nginx**: The socket file is owned by the nginx user
 - **SocketGroup=nginx**: The socket file is in the nginx group (Gunicorn also runs as nginx user)
 - **SocketMode=0660**: Read/write permissions for both owner and group, enabling bidirectional communication:
@@ -157,7 +161,13 @@ sudo systemctl status aclarknet.socket
 # View socket logs
 sudo journalctl -u aclarknet.socket -n 50
 
-# Verify /run/gunicorn directory exists
+# The socket unit should automatically create /run/gunicorn
+# If it doesn't exist after starting the socket, check logs for errors
+sudo systemctl restart aclarknet.socket
+sudo ls -la /run/gunicorn/
+
+# Manual directory creation should not be necessary with RuntimeDirectory
+# but if needed for troubleshooting:
 sudo mkdir -p /run/gunicorn
 sudo chown nginx:nginx /run/gunicorn
 sudo systemctl restart aclarknet.socket
