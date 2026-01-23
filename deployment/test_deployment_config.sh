@@ -124,6 +124,16 @@ else
     exit 1
 fi
 
+# Test 8: Check gunicorn umask configuration for socket permissions
+echo ""
+echo "✓ Test 8: Checking gunicorn socket permissions configuration..."
+if grep -q "\-\-umask 0007" "${SCRIPT_DIR}/aclarknet.service"; then
+    echo "  ✓ gunicorn configured with --umask 0007 for proper socket permissions"
+else
+    echo "  ✗ gunicorn missing --umask configuration for socket permissions"
+    exit 1
+fi
+
 echo ""
 echo "=========================================="
 echo "✓ All deployment configuration tests passed!"
@@ -136,9 +146,11 @@ echo "  • PYTHONPATH: /srv/aclarknet"
 echo "  • Working directory: /srv/aclarknet"
 echo "  • Socket directory: /run/gunicorn (auto-created by service unit)"
 echo "  • Socket path: /run/gunicorn/aclarknet.sock"
+echo "  • Socket permissions: Created with umask 0007 (group-accessible)"
 echo ""
 echo "The configuration should resolve common issues by:"
 echo "  1. Setting PYTHONPATH=/srv/aclarknet in systemd service"
 echo "  2. Setting WorkingDirectory=/srv/aclarknet in systemd service"
 echo "  3. Using /srv/aclarknet/.venv for the virtual environment"
 echo "  4. Auto-creating /run/gunicorn via RuntimeDirectory in service unit"
+echo "  5. Setting gunicorn --umask 0007 to allow nginx group access to socket"
