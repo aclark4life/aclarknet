@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    "aclarknet.apps.SitesConfig",
     "aclarknet.apps.AccountConfig",
     "aclarknet.apps.SocialAccountConfig",
     "db",
@@ -58,6 +59,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
     "allauth",
+    "allauth.socialaccount.providers.github",
     "siteuser",
     "import_export",
 ]
@@ -212,6 +214,7 @@ MIGRATION_MODULES = {
     "auth": "aclarknet.migrations.auth",
     "admin": "aclarknet.migrations.admin",
     "contenttypes": "aclarknet.migrations.contenttypes",
+    "sites": "aclarknet.migrations.sites",
     "wagtailcore": "aclarknet.migrations.wagtailcore",
     "taggit": "aclarknet.migrations.taggit",
     "db": "db.migrations",
@@ -240,3 +243,29 @@ AUTH_USER_MODEL = "siteuser.SiteUser"
 
 # Email settings
 DEFAULT_FROM_EMAIL = "aclark@aclark.net"
+
+# Django Allauth settings
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+
+# Allauth site and account settings
+SITE_ID = 1
+
+ACCOUNT_EMAIL_VERIFICATION = "optional"
+ACCOUNT_LOGIN_METHODS = {"username", "email"}
+ACCOUNT_SIGNUP_FIELDS = ["email*", "username*", "password1*", "password2*"]
+
+# Social account provider settings
+SOCIALACCOUNT_PROVIDERS = {
+    "github": {
+        "SCOPE": [
+            "user",
+            "user:email",
+        ],
+        "VERIFIED_EMAIL": True,
+    }
+}
