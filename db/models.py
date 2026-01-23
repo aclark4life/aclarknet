@@ -48,12 +48,31 @@ class Company(BaseModel, ContactInfoMixin):
 
 
 class Client(BaseModel, ContactInfoMixin):
+    class ClientCategory(models.TextChoices):
+        GOVERNMENT = "government", "Government"
+        NONPROFIT = "non-profit", "Non-Profit"
+        PRIVATE = "private", "Private Sector"
+        EDUCATION = "education", "Education"
+        HEALTHCARE = "healthcare", "Healthcare"
+        OTHER = "other", "Other"
+
     company = models.ForeignKey(
         Company,
         related_name="clients",
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
+    )
+    featured = models.BooleanField(
+        default=False,
+        help_text="Check to display this client on the public clients page",
+    )
+    category = models.CharField(
+        max_length=50,
+        choices=ClientCategory.choices,
+        blank=True,
+        null=True,
+        help_text="Client category for grouping on the public clients page",
     )
 
     class Meta:

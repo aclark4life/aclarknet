@@ -61,21 +61,43 @@ class ClientsView(BaseCMSView):
         context = super().get_context_data(**kwargs)
         # Try to get clients from database first, fall back to settings
         try:
+            from collections import defaultdict
+
             from db.models import Client
 
-            clients = Client.objects.all().order_by("name")
-            context["clients"] = clients
-        except (ImportError, Exception):
-            context["clients"] = getattr(
-                settings,
-                "FEATURED_CLIENTS",
-                [
-                    "Client A",
-                    "Client B",
-                    "Client C",
-                    "Client D",
-                ],
+            # Get only featured clients
+            featured_clients = Client.objects.filter(featured=True).order_by(
+                "category", "name"
             )
+
+            # Group clients by category
+            categories = defaultdict(list)
+            for client in featured_clients:
+                # Get the display name for the category, or use "Other" if not set
+                category_display = (
+                    client.get_category_display()
+                    if client.category
+                    else "Other"
+                )
+                categories[category_display].append(client)
+
+            # Convert to regular dict and pass to context
+            context["categories"] = dict(categories)
+            context["clients"] = featured_clients
+        except (ImportError, Exception):
+            # Fallback to settings if database is not available
+            context["categories"] = {
+                "Featured": getattr(
+                    settings,
+                    "FEATURED_CLIENTS",
+                    [
+                        "Client A",
+                        "Client B",
+                        "Client C",
+                        "Client D",
+                    ],
+                )
+            }
         return context
 
 

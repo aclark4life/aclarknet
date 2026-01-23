@@ -16,6 +16,8 @@ class ClientForm(forms.ModelForm):
             "address",
             "description",
             "url",
+            "featured",
+            "category",
         )
 
     def __init__(self, *args, **kwargs):
@@ -34,6 +36,8 @@ class ClientForm(forms.ModelForm):
                 Field("description", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",
             ),
+            Div(Field("featured", css_class="form-check-input"), css_class="col-sm-6"),
+            Div(Field("category", css_class="form-control"), css_class="col-sm-6"),
             css_class="row",
         )
 
