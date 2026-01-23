@@ -86,6 +86,58 @@ To get started with this project, follow these steps:
 3. **Run the project**:
     Instructions for running the project will vary based on the type of project (e.g., web application, backend service).
 
+## GitHub Social Authentication
+
+This project supports GitHub OAuth authentication using django-allauth. To enable GitHub login:
+
+### 1. Create a GitHub OAuth App
+
+1. Go to GitHub Settings → Developer settings → [OAuth Apps](https://github.com/settings/developers)
+2. Click "New OAuth App"
+3. Fill in the application details:
+   - **Application name**: Your app name (e.g., "AClark.net")
+   - **Homepage URL**: `http://localhost:8000` (for development) or your production URL
+   - **Authorization callback URL**: `http://localhost:8000/accounts/github/login/callback/` (for development)
+4. Click "Register application"
+5. Note your **Client ID** and generate a **Client Secret**
+
+### 2. Configure the Django Admin
+
+1. Start your development server:
+    ```bash
+    python manage.py runserver
+    ```
+
+2. Log in to the Django admin at `http://localhost:8000/admin/`
+
+3. Navigate to **Sites** and ensure you have a site configured:
+   - Domain name: `localhost:8000` (for development)
+   - Display name: Your site name
+
+4. Navigate to **Social applications** under the "Social Accounts" section
+
+5. Click "Add social application" and configure:
+   - **Provider**: GitHub
+   - **Name**: GitHub (or any name you prefer)
+   - **Client id**: Paste your GitHub OAuth App Client ID
+   - **Secret key**: Paste your GitHub OAuth App Client Secret
+   - **Sites**: Select your site from "Available sites" and move it to "Chosen sites"
+
+6. Save the configuration
+
+### 3. Test the Login
+
+1. Navigate to `http://localhost:8000/accounts/login/`
+2. You should see a "Sign in with GitHub" button
+3. Click it to test the GitHub OAuth flow
+
+### Production Configuration
+
+For production, update:
+- GitHub OAuth App callback URL to: `https://yourdomain.com/accounts/github/login/callback/`
+- Site domain in Django admin to your production domain
+- Ensure `ALLOWED_HOSTS` in settings includes your production domain
+
 ## Production Deployment
 
 This project includes comprehensive deployment configuration for deploying to a production server with nginx and systemd.
