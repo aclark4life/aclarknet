@@ -17,7 +17,7 @@
         <ul class="list-unstyled text-xs-left">
           {% for client in clients %}
             <li class="py-1">
-              {% if client.link %}
+              {% if client.url %}
                 <a class="text-decoration-none" target="_blank" href="{{ client.url }}">{{ client }}</a>
               {% else %}
                 {{ client }}

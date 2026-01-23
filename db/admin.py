@@ -59,6 +59,9 @@ class ClientResource(ImportExportModelResource):
 @admin.register(Client)
 class ClientAdmin(ImportExportModelAdmin):
     resource_class = ClientResource
+    list_display = ["name", "company", "category", "featured"]
+    list_filter = ["featured", "category"]
+    search_fields = ["name", "company__name"]
 
 
 @admin.register(Company)
