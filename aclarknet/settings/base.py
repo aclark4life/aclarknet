@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     "allauth",
     "siteuser",
+    "import_export",
 ]
 
 MIDDLEWARE = [
