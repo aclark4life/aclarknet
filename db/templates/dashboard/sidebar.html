@@ -1,108 +1,160 @@
+{% comment %}
+Sidebar navigation component for the dashboard.
+Displays different navigation options based on user role (superuser vs regular user).
+{% endcomment %}
+
 <div class="col-md-3 sidebar">
-  <nav class="sidebar-nav">
+  <nav class="sidebar-nav" aria-label="Dashboard navigation">
+    {# Sidebar Header #}
     <div class="sidebar-header">
       <button class="nav-toggler nav-toggler-md sidebar-toggler"
               type="button"
               data-bs-toggle="collapse"
-              data-bs-target="#nav-toggleable-md">
-        <span class="sr-only">Toggle nav</span>
+              data-bs-target="#nav-toggleable-md"
+              aria-expanded="false"
+              aria-controls="nav-toggleable-md">
+        <span class="sr-only">Toggle navigation</span>
       </button>
-      <a class="sidebar-brand img-responsive" href="{% url 'dashboard' %}">
-        <i class="fa-solid fa-leaf fa-2x"></i><span class="visually-hidden">Link text</span>
+      <a class="sidebar-brand img-responsive" href="{% url 'dashboard' %}" aria-label="Dashboard home">
+        <i class="fa-solid fa-leaf fa-2x" aria-hidden="true"></i>
+        <span class="visually-hidden">Dashboard Home</span>
       </a>
     </div>
+
+    {# Collapsible Navigation Content #}
     <div class="collapse nav-toggleable-md" id="nav-toggleable-md">
+
+      {# Search Form - Superuser Only #}
       {% if request.user.is_superuser %}
-        <form class="sidebar-form" action="{% url 'search_index' %}" method="get">
-          <input class="form-control border bg-transparent"
-                 name="q"
-                 type="text"
-                 placeholder="Search..."
-                 id="search-input">
-          <button type="submit" class="btn btn-link" style="color: #A2A9B1">
-            <i class="fa-solid fa-magnifying-glass"></i><span class="visually-hidden">Link text</span>
-          </button>
+        <form class="sidebar-form" action="{% url 'search_index' %}" method="get" role="search">
+          <div class="input-group">
+            <input class="form-control border bg-transparent"
+                   name="q"
+                   type="search"
+                   placeholder="Search..."
+                   aria-label="Search"
+                   id="search-input">
+            <button type="submit" class="btn btn-link" style="color: #A2A9B1" aria-label="Submit search">
+              <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            </button>
+          </div>
         </form>
-        {% if debug %}
-          <script>
-            (function() {
-            // List of random words to populate the search form in debug mode
-              const words = [
-                't',
-              ];
-              const searchInput = document.getElementById('search-input');
-              if (searchInput && !searchInput.value) {
-                const randomWord = words[Math.floor(Math.random() * words.length)];
-                searchInput.value = randomWord;
-              }
-            })();
-          </script>
-        {% endif %}
       {% endif %}
-      {% if request.user.is_authenticated and not request.user.is_superuser %}
-        <ul class="nav nav-pills nav-stacked flex-column">
+
+      {# Navigation Menus #}
+      {% if request.user.is_authenticated %}
+
+        {# Dashboards Section #}
+        <ul class="nav nav-pills nav-stacked flex-column {% if request.user.is_superuser %}mt-5{% endif %}">
           <li class="nav-header">Dashboards</li>
-          <li class="nav-item">
-            <a class="nav-link{% if time_nav %} active{% endif %}"
-               href="{% url 'time_index' %}">Times</a>
-          </li>
+
+          {% if request.user.is_superuser %}
+            {# Superuser Dashboard Links #}
+            <li class="nav-item">
+              <a class="nav-link{% if invoice_nav %} active{% endif %}"
+                 href="{% url 'invoice_index' %}"
+                 {% if invoice_nav %}aria-current="page"{% endif %}>
+                Invoices
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link{% if time_nav %} active{% endif %}"
+                 href="{% url 'time_index' %}"
+                 {% if time_nav %}aria-current="page"{% endif %}>
+                Times
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link{% if project_nav %} active{% endif %}"
+                 href="{% url 'project_index' %}"
+                 {% if project_nav %}aria-current="page"{% endif %}>
+                Projects
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link{% if client_nav %} active{% endif %}"
+                 href="{% url 'client_index' %}"
+                 {% if client_nav %}aria-current="page"{% endif %}>
+                Clients
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link{% if note_nav %} active{% endif %}"
+                 href="{% url 'note_index' %}"
+                 {% if note_nav %}aria-current="page"{% endif %}>
+                Notes
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link{% if task_nav %} active{% endif %}"
+                 href="{% url 'task_index' %}"
+                 {% if task_nav %}aria-current="page"{% endif %}>
+                Tasks
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link{% if contact_nav %} active{% endif %}"
+                 href="{% url 'contact_index' %}"
+                 {% if contact_nav %}aria-current="page"{% endif %}>
+                Contacts
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link{% if company_nav %} active{% endif %}"
+                 href="{% url 'company_index' %}"
+                 {% if company_nav %}aria-current="page"{% endif %}>
+                Companies
+              </a>
+            </li>
+          {% else %}
+            {# Regular User Dashboard Links #}
+            <li class="nav-item">
+              <a class="nav-link{% if time_nav %} active{% endif %}"
+                 href="{% url 'time_index' %}"
+                 {% if time_nav %}aria-current="page"{% endif %}>
+                Times
+              </a>
+            </li>
+          {% endif %}
         </ul>
+
+        {# Account Section #}
         <ul class="nav nav-pills nav-stacked flex-column mt-3">
           <li class="nav-header">Account</li>
           <li class="nav-item">
             <a class="nav-link{% if profile_nav %} active{% endif %}"
-               href="{% url 'profile_view' %}">Profile</a>
+               href="{% url 'profile_view' %}"
+               {% if profile_nav %}aria-current="page"{% endif %}>
+              Profile
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_logout' %}">
+              Logout
+            </a>
           </li>
         </ul>
+
       {% endif %}
-      {% if request.user.is_superuser %}
-        <ul class="nav nav-pills nav-stacked flex-column mt-5">
-          <li class="nav-header">Dashboards</li>
-          <li class="nav-item">
-            <a class="nav-link{% if invoice_nav %} active{% endif %}"
-               href="{% url 'invoice_index' %}">Invoices</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link{% if time_nav %} active{% endif %}"
-               href="{% url 'time_index' %}">Times</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link{% if project_nav %} active{% endif %}"
-               href="{% url 'project_index' %}">Projects</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link{% if client_nav %} active{% endif %}"
-               href="{% url 'client_index' %}">Clients</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link{% if note_nav %} active{% endif %}"
-               href="{% url 'note_index' %}">Notes</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link{% if task_nav %} active{% endif %}"
-               href="{% url 'task_index' %}">Tasks</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link{% if contact_nav %} active{% endif %}"
-               href="{% url 'contact_index' %}">Contacts</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link{% if company_nav %} active{% endif %}"
-               href="{% url 'company_index' %}">Companies</a>
-          </li>
-        </ul>
-        <ul class="nav nav-pills nav-stacked flex-column mt-3">
-          <li class="nav-header">Account</li>
-          <li class="nav-item">
-            <a class="nav-link{% if profile_nav %} active{% endif %}"
-               href="{% url 'profile_view' %}">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
-          </li>
-        </ul>
-      {% endif %}
+
       <hr class="visible-xs mt-3">
     </div>
   </nav>
 </div>
+
+{% if request.user.is_superuser and debug %}
+  {# Debug mode: Auto-populate search field #}
+  <script>
+    (function() {
+      'use strict';
+      // List of random words to populate the search form in debug mode
+      const words = ['t'];
+      const searchInput = document.getElementById('search-input');
+
+      if (searchInput && !searchInput.value) {
+        const randomWord = words[Math.floor(Math.random() * words.length)];
+        searchInput.value = randomWord;
+      }
+    })();
+  </script>
+{% endif %}
