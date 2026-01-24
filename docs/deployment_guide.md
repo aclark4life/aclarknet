@@ -14,11 +14,11 @@ This guide provides instructions for deploying the aclarknet Django/Wagtail appl
 
 ## Prerequisites
 
-1. SSH access to the server (m.aclark.net)
+1. SSH access to the server (aclark.net)
 2. sudo/root access
 3. MongoDB instance available
 4. SSL certificates configured in nginx
-5. DNS configured to point m.aclark.net to your server
+5. DNS configured to point aclark.net, www.aclark.net, and m.aclark.net to your server
 
 ## Initial Deployment
 
@@ -26,7 +26,7 @@ This guide provides instructions for deploying the aclarknet Django/Wagtail appl
 
 SSH into your server:
 ```bash
-ssh user@m.aclark.net
+ssh user@aclark.net
 ```
 
 Install required system packages:
@@ -86,10 +86,10 @@ sudo nano /srv/aclarknet/.env
 DJANGO_SECRET_KEY=your-actual-secret-key-here
 
 # Set allowed hosts
-DJANGO_ALLOWED_HOSTS=m.aclark.net,www.m.aclark.net
+DJANGO_ALLOWED_HOSTS=aclark.net,www.aclark.net,m.aclark.net
 
 # Set CSRF trusted origins
-DJANGO_CSRF_TRUSTED_ORIGINS=https://m.aclark.net,https://www.m.aclark.net
+DJANGO_CSRF_TRUSTED_ORIGINS=https://aclark.net,https://www.aclark.net,https://m.aclark.net
 
 # MongoDB configuration (adjust if using remote MongoDB)
 MONGODB_URI=mongodb://localhost:27017
@@ -144,9 +144,9 @@ sudo tail -f /srv/aclarknet/logs/django.log
 ```
 
 3. Visit your site:
-- Main site: https://m.aclark.net
-- Admin: https://m.aclark.net/admin/
-- Wagtail Admin: https://m.aclark.net/wagtail/
+- Main site: https://aclark.net
+- Admin: https://aclark.net/admin/
+- Wagtail Admin: https://aclark.net/wagtail/
 
 ## Subsequent Deployments
 

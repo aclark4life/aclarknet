@@ -55,7 +55,7 @@ STORAGES["staticfiles"]["BACKEND"] = (  # noqa: F405
 )
 
 # Wagtail base URL for production
-WAGTAILADMIN_BASE_URL = os.environ.get("WAGTAIL_BASE_URL", "https://m.aclark.net")
+WAGTAILADMIN_BASE_URL = os.environ.get("WAGTAIL_BASE_URL", "https://aclark.net")
 
 # Email configuration for production
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"

@@ -73,11 +73,11 @@ sudo dnf install rsync
    ```bash
    # Clone the repository to a temporary location
    git clone https://github.com/aclark4life/aclarknet.git /tmp/aclarknet-deploy
-   
+
    # Copy the deployment script
    sudo cp /tmp/aclarknet-deploy/deployment/deploy.sh /tmp/
    sudo chmod +x /tmp/deploy.sh
-   
+
    # Run initial deployment
    sudo /tmp/deploy.sh --initial
    ```
@@ -105,25 +105,27 @@ sudo dnf install rsync
    sudo -e /etc/nginx/conf.d/aclarknet.conf
    ```
 
-   Or use Let's Encrypt to obtain certificates:
+   Or use Let's Encrypt to obtain certificates for all domains:
 
    ```bash
    sudo dnf install certbot python3-certbot-nginx
-   sudo certbot --nginx -d m.aclark.net
+   sudo certbot --nginx -d aclark.net -d www.aclark.net -d m.aclark.net
    ```
+
+   This will obtain a single certificate that covers all three domains (aclark.net, www.aclark.net, and m.aclark.net).
 
 4. **Test and Start Services**
 
    ```bash
    # Test nginx configuration
    sudo nginx -t
-   
+
    # Reload nginx
    sudo systemctl reload nginx
-   
+
    # Check aclarknet service status
    sudo systemctl status aclarknet.service
-   
+
    # View logs if needed
    sudo journalctl -u aclarknet.service -n 50
    ```

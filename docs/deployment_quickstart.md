@@ -1,6 +1,6 @@
 # Quick Deployment Guide
 
-This is a quick reference for deploying aclarknet to m.aclark.net.
+This is a quick reference for deploying aclarknet to aclark.net (including www.aclark.net and m.aclark.net).
 
 ## Using `just` Commands (Recommended)
 
@@ -29,7 +29,7 @@ just deploy-restart  # or: just dr
 
 ```bash
 # 1. SSH to server
-ssh user@m.aclark.net
+ssh user@aclark.net
 
 # 2. Install system dependencies
 sudo dnf update -y
@@ -50,9 +50,9 @@ sudo /usr/local/bin/aclarknet-deploy --initial
 sudo nano /srv/aclarknet/.env
 # Update: DJANGO_SECRET_KEY, DJANGO_ALLOWED_HOSTS, DJANGO_CSRF_TRUSTED_ORIGINS
 
-# 6. Configure nginx SSL certificates
-sudo nano /etc/nginx/conf.d/aclarknet.conf
-# Update: ssl_certificate and ssl_certificate_key paths
+# 6. Obtain SSL certificates for all domains
+sudo dnf install certbot python3-certbot-nginx
+sudo certbot --nginx -d aclark.net -d www.aclark.net -d m.aclark.net
 
 # 7. Test and reload nginx
 sudo nginx -t
@@ -70,7 +70,7 @@ sudo systemctl status aclarknet.service
 
 ```bash
 # SSH to server
-ssh user@m.aclark.net
+ssh user@aclark.net
 
 # Run deployment script
 sudo aclarknet-deploy

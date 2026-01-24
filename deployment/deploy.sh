@@ -43,7 +43,7 @@ check_root() {
 create_directories() {
     echo -e "${GREEN}Creating necessary directories...${NC}"
     mkdir -p ${DEPLOY_DIR}/{logs,static,media}
-    
+
     chown -R ${DEPLOY_USER}:${DEPLOY_GROUP} ${DEPLOY_DIR}
 }
 
@@ -51,7 +51,7 @@ create_directories() {
 setup_repository() {
     # Define rsync exclude patterns
     local RSYNC_EXCLUDES="--exclude='.git' --exclude='node_modules' --exclude='.venv' --exclude='venv'"
-    
+
     if [ "$INITIAL_DEPLOY" = true ]; then
         echo -e "${GREEN}Cloning repository...${NC}"
         # Clone to a temporary directory first
@@ -59,7 +59,7 @@ setup_repository() {
             rm -rf /tmp/aclarknet-deploy
         fi
         git clone ${REPO_URL} /tmp/aclarknet-deploy
-        
+
         # Copy files to deploy directory (excluding .git, node_modules, and venv directories)
         rsync -av $RSYNC_EXCLUDES \
               /tmp/aclarknet-deploy/ ${DEPLOY_DIR}/
@@ -71,7 +71,7 @@ setup_repository() {
             rm -rf /tmp/aclarknet-deploy
         fi
         git clone ${REPO_URL} /tmp/aclarknet-deploy
-        
+
         # Sync files (excluding virtual environments, node_modules, and existing runtime data)
         rsync -av $RSYNC_EXCLUDES \
               --exclude='logs' --exclude='static' --exclude='media' --exclude='.env' \
@@ -202,10 +202,11 @@ main() {
     echo -e "${GREEN}Deployment complete!${NC}"
     echo -e "${GREEN}Next steps:${NC}"
     echo -e "  1. Edit ${DEPLOY_DIR}/.env with your production settings"
-    echo -e "  2. Update SSL certificate paths in ${NGINX_CONF_DIR}/aclarknet.conf"
+    echo -e "  2. Obtain SSL certificates for all domains:"
+    echo -e "     certbot --nginx -d aclark.net -d www.aclark.net -d m.aclark.net"
     echo -e "  3. Test nginx config: nginx -t"
     echo -e "  4. Reload nginx: systemctl reload nginx"
-    echo -e "  5. Check application: https://m.aclark.net"
+    echo -e "  5. Check application: https://aclark.net"
     echo -e "  6. Create superuser: ${DEPLOY_DIR}/.venv/bin/python ${DEPLOY_DIR}/manage.py createsuperuser"
 }
 
