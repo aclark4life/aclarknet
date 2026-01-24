@@ -25,6 +25,9 @@ The deployment uses the following structure:
 ├── cms/                     # CMS app
 ├── search/                  # Search app
 ├── siteuser/                # Site user app
+├── lounge/                  # The Lounge IRC client
+│   ├── .thelounge/          # The Lounge configuration
+│   └── node_modules/        # Node.js dependencies
 ├── frontend/                # Frontend assets
 ├── deployment/              # Deployment configuration
 └── ...                      # Other project files
@@ -191,6 +194,69 @@ sudo journalctl -u aclarknet.service -f
 sudo tail -f /srv/aclarknet/logs/nginx-access.log
 sudo tail -f /srv/aclarknet/logs/nginx-error.log
 ```
+
+## The Lounge IRC Client
+
+The Lounge is a self-hosted web IRC client that runs as a separate service alongside the main Django application.
+
+### Service Management
+
+```bash
+# Start The Lounge
+sudo systemctl start thelounge.service
+
+# Stop The Lounge
+sudo systemctl stop thelounge.service
+
+# Restart The Lounge
+sudo systemctl restart thelounge.service
+
+# Check service status
+sudo systemctl status thelounge.service
+
+# View logs
+sudo journalctl -u thelounge.service -f
+```
+
+### User Management
+
+The Lounge runs in private mode, which requires user accounts. To create users:
+
+```bash
+# Create a new user
+cd /srv/aclarknet/lounge
+sudo -u nginx node_modules/.bin/thelounge add <username>
+
+# List users
+sudo -u nginx node_modules/.bin/thelounge list
+
+# Remove a user
+sudo -u nginx node_modules/.bin/thelounge remove <username>
+
+# Reset a user's password
+sudo -u nginx node_modules/.bin/thelounge reset <username>
+```
+
+### Accessing The Lounge
+
+Once deployed, The Lounge is accessible at:
+- **URL**: https://aclark.net/lounge/
+- **Port**: Runs on port 9000 (proxied through nginx)
+
+### Configuration
+
+The Lounge configuration is located at:
+- `/srv/aclarknet/lounge/.thelounge/config.js`
+
+Key settings:
+- **Private mode**: Enabled (requires user authentication)
+- **Reverse proxy**: Enabled (for nginx integration)
+- **Default network**: Libera.Chat IRC network
+- **Port**: 9000 (localhost only)
+
+To modify configuration:
+1. Edit the config file
+2. Restart the service: `sudo systemctl restart thelounge.service`
 
 ## Troubleshooting
 

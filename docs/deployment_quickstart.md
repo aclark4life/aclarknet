@@ -59,11 +59,16 @@ sudo nginx -t
 sudo systemctl reload nginx
 
 # 8. Create superuser
-cd /srv/aclarknet/repo
-sudo -u nginx /srv/aclarknet/venv/bin/python manage.py createsuperuser
+cd /srv/aclarknet
+sudo -u nginx /srv/aclarknet/.venv/bin/python manage.py createsuperuser
 
-# 9. Check status
+# 9. Create The Lounge users
+cd /srv/aclarknet/lounge
+sudo -u nginx node_modules/.bin/thelounge add <username>
+
+# 10. Check status
 sudo systemctl status aclarknet.service
+sudo systemctl status thelounge.service
 ```
 
 ## Subsequent Deployments
@@ -81,24 +86,44 @@ sudo aclarknet-deploy
 ```bash
 # Check service status
 sudo systemctl status aclarknet.service
+sudo systemctl status thelounge.service
 
 # View logs
 sudo journalctl -u aclarknet.service -n 50
+sudo journalctl -u thelounge.service -n 50
 sudo tail -f /srv/aclarknet/logs/gunicorn-error.log
 
-# Restart service
+# Restart services
 sudo systemctl restart aclarknet.service
+sudo systemctl restart thelounge.service
+```
+
+## The Lounge IRC Client
+
+The Lounge is accessible at: **https://aclark.net/lounge/**
+
+```bash
+# Create a user
+cd /srv/aclarknet/lounge
+sudo -u nginx node_modules/.bin/thelounge add <username>
+
+# List users
+sudo -u nginx node_modules/.bin/thelounge list
+
+# Check service
+sudo systemctl status thelounge.service
 ```
 
 ## File Locations
 
-- Application: `/srv/aclarknet/repo`
-- Virtual Environment: `/srv/aclarknet/venv`
+- Application: `/srv/aclarknet`
+- Virtual Environment: `/srv/aclarknet/.venv`
 - Environment Config: `/srv/aclarknet/.env`
 - Logs: `/srv/aclarknet/logs/`
 - Static Files: `/srv/aclarknet/static/`
 - Media Files: `/srv/aclarknet/media/`
-- Systemd Service: `/etc/systemd/system/aclarknet.service`
+- The Lounge: `/srv/aclarknet/lounge`
+- Systemd Services: `/etc/systemd/system/aclarknet.service`, `/etc/systemd/system/thelounge.service`
 - nginx Config: `/etc/nginx/conf.d/aclarknet.conf`
 
 For detailed documentation, see [Deployment Guide](deployment_guide)

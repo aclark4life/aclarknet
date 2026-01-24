@@ -149,12 +149,37 @@ run_migrations() {
     ${DEPLOY_DIR}/.venv/bin/python manage.py migrate --noinput
 }
 
+# Setup The Lounge IRC client
+setup_thelounge() {
+    echo -e "${GREEN}Setting up The Lounge IRC client...${NC}"
+
+    # Install Node.js dependencies
+    cd ${DEPLOY_DIR}/lounge
+    if [ ! -d "node_modules" ]; then
+        echo -e "${GREEN}Installing The Lounge dependencies...${NC}"
+        npm install
+    else
+        echo -e "${YELLOW}The Lounge dependencies already installed${NC}"
+    fi
+
+    # Ensure .thelounge directory exists
+    if [ ! -d "${DEPLOY_DIR}/lounge/.thelounge" ]; then
+        echo -e "${RED}Error: .thelounge configuration directory not found${NC}"
+        exit 1
+    fi
+
+    # Set proper ownership
+    chown -R nginx:nginx ${DEPLOY_DIR}/lounge
+}
+
 # Setup systemd services
 setup_systemd() {
     echo -e "${GREEN}Setting up systemd services...${NC}"
     cp ${DEPLOY_DIR}/deployment/aclarknet.service ${SYSTEMD_DIR}/
+    cp ${DEPLOY_DIR}/deployment/thelounge.service ${SYSTEMD_DIR}/
     systemctl daemon-reload
     systemctl enable aclarknet.service
+    systemctl enable thelounge.service
 }
 
 # Setup nginx configuration
@@ -170,6 +195,7 @@ setup_nginx() {
 restart_services() {
     echo -e "${GREEN}Restarting services...${NC}"
     systemctl restart aclarknet.service
+    systemctl restart thelounge.service
 
     # Check status
     if systemctl is-active --quiet aclarknet.service; then
@@ -177,6 +203,12 @@ restart_services() {
     else
         echo -e "${RED}aclarknet service failed to start. Check logs with: journalctl -u aclarknet.service -n 50${NC}"
         exit 1
+    fi
+
+    if systemctl is-active --quiet thelounge.service; then
+        echo -e "${GREEN}thelounge service is running${NC}"
+    else
+        echo -e "${YELLOW}WARNING: thelounge service failed to start. Check logs with: journalctl -u thelounge.service -n 50${NC}"
     fi
 }
 
@@ -188,6 +220,7 @@ main() {
     setup_virtualenv
     install_dependencies
     setup_env_file
+    setup_thelounge
 
     if [ "$INITIAL_DEPLOY" = true ]; then
         setup_systemd
@@ -208,6 +241,9 @@ main() {
     echo -e "  4. Reload nginx: systemctl reload nginx"
     echo -e "  5. Check application: https://aclark.net"
     echo -e "  6. Create superuser: ${DEPLOY_DIR}/.venv/bin/python ${DEPLOY_DIR}/manage.py createsuperuser"
+    echo -e "  7. Create The Lounge users:"
+    echo -e "     cd ${DEPLOY_DIR}/lounge && node_modules/.bin/thelounge add <username>"
+    echo -e "  8. Access The Lounge: https://aclark.net/lounge/"
 }
 
 main

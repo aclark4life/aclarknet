@@ -125,20 +125,33 @@ sudo systemctl reload nginx
 ### 5. Create Django Superuser
 
 ```bash
-cd /srv/aclarknet/repo
-sudo -u nginx /srv/aclarknet/venv/bin/python manage.py createsuperuser
+cd /srv/aclarknet
+sudo -u nginx /srv/aclarknet/.venv/bin/python manage.py createsuperuser
 ```
 
-### 6. Verify Deployment
+### 6. Setup The Lounge IRC Client
+
+Create users for The Lounge:
+
+```bash
+cd /srv/aclarknet/lounge
+sudo -u nginx node_modules/.bin/thelounge add <username>
+```
+
+You'll be prompted to set a password for the user. Repeat for each user you want to create.
+
+### 7. Verify Deployment
 
 1. Check service status:
 ```bash
 sudo systemctl status aclarknet.service
+sudo systemctl status thelounge.service
 ```
 
 2. Check logs if there are issues:
 ```bash
 sudo journalctl -u aclarknet.service -n 50
+sudo journalctl -u thelounge.service -n 50
 sudo tail -f /srv/aclarknet/logs/gunicorn-error.log
 sudo tail -f /srv/aclarknet/logs/django.log
 ```
@@ -147,6 +160,7 @@ sudo tail -f /srv/aclarknet/logs/django.log
 - Main site: https://aclark.net
 - Admin: https://aclark.net/admin/
 - Wagtail Admin: https://aclark.net/wagtail/
+- The Lounge IRC: https://aclark.net/lounge/
 
 ## Subsequent Deployments
 
@@ -230,7 +244,60 @@ sudo -u nginx /srv/aclarknet/venv/bin/python manage.py migrate
 ### Restart Services
 ```bash
 sudo systemctl restart aclarknet.service
+sudo systemctl restart thelounge.service
 ```
+
+## The Lounge IRC Client
+
+The Lounge is a self-hosted web IRC client that runs alongside the main Django application.
+
+### Configuration
+
+The Lounge configuration is located at `/srv/aclarknet/lounge/.thelounge/config.js`.
+
+Key configuration settings:
+- **Mode**: Private (requires user authentication)
+- **Port**: 9000 (localhost only, proxied through nginx)
+- **Reverse Proxy**: Enabled
+- **Default Network**: Libera.Chat
+
+### User Management
+
+```bash
+# Create a new user
+cd /srv/aclarknet/lounge
+sudo -u nginx node_modules/.bin/thelounge add <username>
+
+# List all users
+sudo -u nginx node_modules/.bin/thelounge list
+
+# Remove a user
+sudo -u nginx node_modules/.bin/thelounge remove <username>
+
+# Reset user password
+sudo -u nginx node_modules/.bin/thelounge reset <username>
+```
+
+### Service Management
+
+```bash
+# Check status
+sudo systemctl status thelounge.service
+
+# Start/stop/restart
+sudo systemctl start thelounge.service
+sudo systemctl stop thelounge.service
+sudo systemctl restart thelounge.service
+
+# View logs
+sudo journalctl -u thelounge.service -f
+```
+
+### Accessing The Lounge
+
+Once deployed, access The Lounge at: **https://aclark.net/lounge/**
+
+Log in with the username and password you created using the `thelounge add` command.
 
 ## Troubleshooting
 

@@ -1,0 +1,21 @@
+[Unit]
+Description=The Lounge IRC client
+Documentation=https://thelounge.chat/
+After=network.target
+
+[Service]
+Type=simple
+User=nginx
+Group=nginx
+WorkingDirectory=/srv/aclarknet/lounge
+Environment="THELOUNGE_HOME=/srv/aclarknet/lounge/.thelounge"
+ExecStart=/srv/aclarknet/lounge/node_modules/.bin/thelounge start
+Restart=on-failure
+RestartSec=5s
+
+# Security settings
+PrivateTmp=true
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
