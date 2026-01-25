@@ -1,5 +1,0 @@
-{
-	"private": true,
-	"description": "Packages for The Lounge. Use `thelounge install <package>` command to add a package.",
-	"dependencies": {}
-}

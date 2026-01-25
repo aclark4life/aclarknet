@@ -155,6 +155,7 @@ alias dl := deploy-logs
 deploy-restart:
     sudo systemctl reload aclarknet.service
     sudo systemctl restart aclarknet.service
+    sudo systemctl restart thelounge.service
     sudo systemctl reload nginx.service
     sudo systemctl restart nginx.service
 
