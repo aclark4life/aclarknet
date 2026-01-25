@@ -251,12 +251,15 @@ The Lounge configuration is located at:
 Key settings:
 - **Private mode**: Enabled (requires user authentication)
 - **Reverse proxy**: Enabled (for nginx integration)
+- **Reverse proxy path**: `/lounge/` (required for subpath deployment)
 - **Default network**: Libera.Chat IRC network
 - **Port**: 9000 (localhost only)
 
 To modify configuration:
 1. Edit the config file
 2. Restart the service: `sudo systemctl restart thelounge.service`
+
+**Important**: The `reverseProxyPath` setting must be set to `/lounge/` to match the nginx proxy configuration. Without this setting, The Lounge will not work properly when accessed through the reverse proxy at https://aclark.net/lounge/.
 
 ## Troubleshooting
 

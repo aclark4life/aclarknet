@@ -259,7 +259,10 @@ Key configuration settings:
 - **Mode**: Private (requires user authentication)
 - **Port**: 9000 (localhost only, proxied through nginx)
 - **Reverse Proxy**: Enabled
+- **Reverse Proxy Path**: `/lounge/` (required for subpath deployment)
 - **Default Network**: Libera.Chat
+
+**Important**: The `reverseProxyPath` setting in the config file must be set to `/lounge/` to match the nginx proxy path. This ensures all assets and websocket connections use the correct path when accessed through https://aclark.net/lounge/.
 
 ### User Management
 
