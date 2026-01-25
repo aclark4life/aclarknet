@@ -386,7 +386,7 @@ If The Lounge works via SSH tunnel (`ssh -L 9000:localhost:9000 aclark.net`) but
    grep -A 15 "location.*lounge" /etc/nginx/conf.d/aclarknet.conf
    ```
    
-   The location block should proxy to `http://127.0.0.1:9000/` with WebSocket support.
+   The location block should proxy to `http://127.0.0.1:9000/`.
 
 6. **Check nginx error logs**:
    ```bash
@@ -396,7 +396,6 @@ If The Lounge works via SSH tunnel (`ssh -L 9000:localhost:9000 aclark.net`) but
 7. **Browser console errors**:
    Open the browser developer console (F12) when accessing https://aclark.net/lounge/ and look for:
    - 404 errors on assets (indicates missing `reverseProxyPath`)
-   - WebSocket connection errors (indicates proxy configuration issue)
    - CORS errors (indicates `reverseProxy` setting may be disabled)
 
 ## File Permissions
