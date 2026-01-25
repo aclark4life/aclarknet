@@ -44,6 +44,16 @@ module.exports = {
     //
     // This value is set to `false` by default.
     reverseProxy: true,
+    // ### `reverseProxyPath`
+    //
+    // When The Lounge is served behind a reverse proxy at a subpath (e.g., /lounge/),
+    // this setting should be set to that subpath. This ensures all assets and
+    // websocket connections use the correct path.
+    //
+    // For example, if accessed at https://example.com/lounge/, set this to "/lounge/".
+    //
+    // This value is set to `""` by default.
+    reverseProxyPath: "/lounge/",
     // ### `maxHistory`
     //
     // Defines the maximum number of history lines that will be kept in memory per
