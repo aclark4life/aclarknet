@@ -102,6 +102,8 @@ sudo systemctl restart thelounge.service
 
 The Lounge is accessible at: **https://aclark.net/lounge/**
 
+**Important**: The Lounge configuration at `/srv/aclarknet/lounge/.thelounge/config.js` must have `reverseProxyPath: "/lounge/"` set for proper operation behind the nginx reverse proxy.
+
 ```bash
 # Create a user
 cd /srv/aclarknet/lounge
@@ -112,6 +114,10 @@ sudo -u nginx node_modules/.bin/thelounge list
 
 # Check service
 sudo systemctl status thelounge.service
+
+# If The Lounge is not working, verify the configuration:
+grep reverseProxyPath /srv/aclarknet/lounge/.thelounge/config.js
+# Should show: reverseProxyPath: "/lounge/",
 ```
 
 ## File Locations

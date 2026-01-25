@@ -346,6 +346,59 @@ If you see errors like `connect() to 127.0.0.1:8000 failed` or connection refuse
    sudo ls -la /srv/aclarknet/static/
    ```
 
+### The Lounge Not Working in Production
+
+If The Lounge works via SSH tunnel (`ssh -L 9000:localhost:9000 aclark.net`) but not at https://aclark.net/lounge/:
+
+1. **Check reverseProxyPath configuration**:
+   ```bash
+   grep reverseProxyPath /srv/aclarknet/lounge/.thelounge/config.js
+   # Should show: reverseProxyPath: "/lounge/",
+   ```
+   
+   If missing or incorrect, edit `/srv/aclarknet/lounge/.thelounge/config.js` and add:
+   ```javascript
+   reverseProxyPath: "/lounge/",
+   ```
+   Then restart: `sudo systemctl restart thelounge.service`
+
+2. **Verify The Lounge service is running**:
+   ```bash
+   sudo systemctl status thelounge.service
+   sudo journalctl -u thelounge.service -n 50
+   ```
+
+3. **Check if The Lounge is listening on port 9000**:
+   ```bash
+   sudo netstat -tulpn | grep :9000
+   # or
+   sudo ss -tulpn | grep :9000
+   ```
+
+4. **Test local access**:
+   ```bash
+   curl http://127.0.0.1:9000/
+   # Should return HTML content
+   ```
+
+5. **Verify nginx proxy configuration**:
+   ```bash
+   grep -A 15 "location.*lounge" /etc/nginx/conf.d/aclarknet.conf
+   ```
+   
+   The location block should proxy to `http://127.0.0.1:9000/` with WebSocket support.
+
+6. **Check nginx error logs**:
+   ```bash
+   sudo tail -f /srv/aclarknet/logs/nginx-error.log
+   ```
+
+7. **Browser console errors**:
+   Open the browser developer console (F12) when accessing https://aclark.net/lounge/ and look for:
+   - 404 errors on assets (indicates missing `reverseProxyPath`)
+   - WebSocket connection errors (indicates proxy configuration issue)
+   - CORS errors (indicates `reverseProxy` setting may be disabled)
+
 ## File Permissions
 
 The deployment uses the `nginx` user and group for running the application. Important directories and their permissions:
