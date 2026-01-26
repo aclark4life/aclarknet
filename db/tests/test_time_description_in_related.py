@@ -96,7 +96,7 @@ class TimeDescriptionInRelatedTemplateTest(TestCase):
               <h5 class="card-title">
                 <span class="badge">{{ model_name|title }}</span>
                 {% for field_name, field_value in field_values %}
-                  {% if field_name == "name" or field_name == "title" or field_name == "subject" %}
+                  {% if field_name in related_title_fields %}
                     {{ field_value|default:"" }}
                   {% endif %}
                 {% endfor %}
@@ -125,7 +125,7 @@ class TimeDescriptionInRelatedTemplateTest(TestCase):
             ]
         ]
         
-        # Time view uses these configurations
+        # Time view uses these configurations (from BaseTimeView)
         related_title_fields = ["name", "title", "subject"]  # description NOT in title
         related_excluded_fields = ["type", "id", "item"]
         
