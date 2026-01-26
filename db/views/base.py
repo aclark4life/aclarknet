@@ -287,8 +287,13 @@ class BaseView:
                 if not hasattr(page_obj, "object_list"):
                     field_values.append(("item", item))
 
+                # For related views, use the item's model-specific form to get fields
+                item_form_fields = form_fields
+                if related:
+                    item_form_fields = self._get_model_form_fields(item)
+
                 # Add form fields that exist on the item
-                for field_name in form_fields:
+                for field_name in item_form_fields:
                     if hasattr(item, field_name):
                         field_values.append((field_name, getattr(item, field_name)))
 
@@ -326,6 +331,40 @@ class BaseView:
             return result
         except (AttributeError, TypeError):
             return []
+
+    def _get_model_form_fields(self, item):
+        """Get form fields for a specific model instance.
+        
+        Args:
+            item: A model instance
+            
+        Returns:
+            List of field names from the item's corresponding form
+        """
+        from .. import forms
+        
+        # Map model names to their form classes
+        model_name = item._meta.model_name
+        form_class_name = f"{model_name.capitalize()}Form"
+        
+        # Try to get the form class from the forms module
+        form_class = getattr(forms, form_class_name, None)
+        
+        if form_class is not None:
+            try:
+                return list(form_class().fields.keys())
+            except Exception:
+                # If form instantiation fails, fall back to default
+                pass
+        
+        # Fallback to using the view's form_class if available
+        if hasattr(self, "form_class"):
+            if not hasattr(self, "_cached_form_fields"):
+                self._cached_form_fields = list(self.form_class().fields.keys())
+            return self._cached_form_fields.copy()
+        
+        # Final fallback to basic fields
+        return ["amount", "cost", "net", "hours"]
 
     def get_page_obj_detail_view(self):
         """Get pagination context for detail view navigation."""
