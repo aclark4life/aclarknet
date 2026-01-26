@@ -1,7 +1,11 @@
 """Views for the CMS app."""
 
 from django.conf import settings
-from django.views.generic import TemplateView
+from django.contrib import messages
+from django.urls import reverse_lazy
+from django.views.generic import FormView, TemplateView
+
+from .forms import ContactFormPublic
 
 
 class BaseCMSView(TemplateView):
@@ -107,19 +111,47 @@ class ClientsView(BaseCMSView):
         return context
 
 
-class ContactView(BaseCMSView):
-    """Contact page view displaying contact information."""
+class ContactView(FormView):
+    """Contact page view displaying contact information and handling form submissions."""
 
     template_name = "contact.html"
+    form_class = ContactFormPublic
+    success_url = reverse_lazy("contact")
     page_name = "contact"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["page_name"] = self.page_name
         context["email"] = getattr(
             settings, "CONTACT_EMAIL", settings.DEFAULT_FROM_EMAIL
         )
         context["phone"] = getattr(settings, "CONTACT_PHONE", "+1-202-555-0000")
         return context
+
+    def form_valid(self, form):
+        """Handle successful form submission."""
+        # Get form data
+        name = form.cleaned_data.get("name")
+        email = form.cleaned_data.get("email")
+        how_did_you_hear = form.cleaned_data.get("how_did_you_hear_about_us")
+        message_text = form.cleaned_data.get("how_can_we_help")
+
+        # TODO: Send email or save to database
+        # For now, just display a success message
+        messages.success(
+            self.request,
+            f"Thank you for contacting us, {name}! We'll get back to you at {email} soon.",
+        )
+        
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        """Handle invalid form submission."""
+        messages.error(
+            self.request,
+            "There was an error with your submission. Please check the form and try again.",
+        )
+        return super().form_invalid(form)
 
 
 class HomeView(BaseCMSView):

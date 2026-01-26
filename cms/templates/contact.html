@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% block title %}Contact Us - MyApp{% endblock %}
 {% block content %}
   <div class="app-iphone-block" id="contact-us">
@@ -7,47 +8,18 @@
         <div class="col-md-6 col-sm-12 me-auto border rounded">
           <h5 class="text-uppercase text-center my-3">Contact Us</h5>
 
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
+          {% endif %}
+
           <form class="bg-transparent" action="/contact-us/" method="POST">
-            <input type="hidden" name="csrfmiddlewaretoken" value="p0a1VHkuxmkISuWGycUrSBO6ywS0I96ggBdXEJvevpXhA8LiDCMsC0HSqij6JbX3">
-
-
-            <div id="div_id_name" class="mb-3"> <label
-              for="id_name" class="form-label requiredField">
-              Name<span class="asteriskField">*</span> </label> <input type="text" name="name" maxlength="255" class="textinput form-control" required id="id_name"> </div> <div id="div_id_email" class="mb-3"> <label
-                for="id_email" class="form-label requiredField">
-                Email<span class="asteriskField">*</span> </label> <input type="email" name="email" maxlength="320" class="emailinput form-control" required id="id_email"> </div> <div id="div_id_how_did_you_hear_about_us" class="mb-3"> <label
-                  for="id_how_did_you_hear_about_us" class="form-label requiredField">
-                  How did you hear about us?<span class="asteriskField">*</span> </label> <select name="how_did_you_hear_about_us" class="select form-select" id="id_how_did_you_hear_about_us"> <option value="Internet search engine">Internet search engine</option> <option value="Social media">Social media</option> <option value="Referral from a friend or family member">Referral from a friend or family member</option> <option value="Advertisement">Advertisement</option> <option value="Email marketing">Email marketing</option> <option value="Website or blog">Website or blog</option> <option value="Event or conference">Event or conference</option> <option value="Other">Other</option>
-
-                  </select> </div> <div id="div_id_how_can_we_help" class="mb-3"> <label
-                    for="id_how_can_we_help" class="form-label requiredField">
-                    How can we help?<span class="asteriskField">*</span> </label> <textarea name="how_can_we_help" cols="40" rows="10" class="textarea form-control" required id="id_how_can_we_help">
-                    </textarea> </div> <script src="https://www.google.com/recaptcha/api.js?render=6Ldzt44UAAAAALpMIY01cLzcd3ezCIveYWpIOp4-"></script>
-            <script type="text/javascript">
-              var element
-              grecaptcha.ready(function() {
-                element = document.querySelector('.g-recaptcha[data-widget-uuid="f0b07f41ddc44bc9a0a341adc65800a1"]');
-                element.form.addEventListener('submit', recaptchaFormSubmit);
-              });
-              function recaptchaFormSubmit(event) {
-                event.preventDefault();
-
-                grecaptcha.execute('6Ldzt44UAAAAALpMIY01cLzcd3ezCIveYWpIOp4-', {})
-
-                  .then(function(token) {
-                    console.log("reCAPTCHA validated for 'data-widget-uuid=\"f0b07f41ddc44bc9a0a341adc65800a1\"'. Setting input value...")
-                    element.value = token;
-                    element.form.submit();
-                  });
-              }
-            </script>
-
-            <input
-              type="hidden"
-              name="wagtailcaptcha"
-              class="g-recaptcha" required_score="None" data-sitekey="6Ldzt44UAAAAALpMIY01cLzcd3ezCIveYWpIOp4-" id="id_wagtailcaptcha" data-widget-uuid="f0b07f41ddc44bc9a0a341adc65800a1" data-callback="onSubmit_f0b07f41ddc44bc9a0a341adc65800a1" data-size="normal"
-            >
-
+            {% csrf_token %}
+            {{ form|crispy }}
             <button class="btn btn-light block text-center border my-3" type="submit">Submit</button>
           </form>
         </div>
