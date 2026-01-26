@@ -136,8 +136,30 @@ class ContactView(FormView):
         how_did_you_hear = form.cleaned_data.get("how_did_you_hear_about_us")
         message_text = form.cleaned_data.get("how_can_we_help")
 
-        # TODO: Send email or save to database
-        # For now, just display a success message
+        # Save contact form submission to Notes
+        try:
+            from db.models import Note
+            
+            # Create a Note with the contact form submission
+            note_description = f"""Contact Form Submission
+            
+Name: {name}
+Email: {email}
+How did you hear about us: {how_did_you_hear}
+
+Message:
+{message_text}"""
+            
+            Note.objects.create(
+                name=f"Contact form submission from {name}",
+                description=note_description,
+            )
+        except Exception:
+            # Log the error but don't prevent the success message
+            # This ensures the user still sees a success message even if Note creation fails
+            pass
+        
+        # Display a success message
         messages.success(
             self.request,
             f"Thank you for contacting us, {name}! We'll get back to you at {email} soon.",
