@@ -343,8 +343,14 @@ class BaseView:
         """
         from .. import forms
         
-        # Map model names to their form classes
+        # Cache form fields per model to avoid repeated lookups
         model_name = item._meta.model_name
+        cache_key = f"_form_fields_{model_name}"
+        
+        if hasattr(self, cache_key):
+            return getattr(self, cache_key)
+        
+        # Map model names to their form classes
         form_class_name = f"{model_name.capitalize()}Form"
         
         # Try to get the form class from the forms module
@@ -352,8 +358,10 @@ class BaseView:
         
         if form_class is not None:
             try:
-                return list(form_class().fields.keys())
-            except Exception:
+                fields = list(form_class().fields.keys())
+                setattr(self, cache_key, fields)
+                return fields
+            except (TypeError, AttributeError, ValueError):
                 # If form instantiation fails, fall back to default
                 pass
         
@@ -361,10 +369,14 @@ class BaseView:
         if hasattr(self, "form_class"):
             if not hasattr(self, "_cached_form_fields"):
                 self._cached_form_fields = list(self.form_class().fields.keys())
-            return self._cached_form_fields.copy()
+            fields = self._cached_form_fields.copy()
+            setattr(self, cache_key, fields)
+            return fields
         
         # Final fallback to basic fields
-        return ["amount", "cost", "net", "hours"]
+        fields = ["amount", "cost", "net", "hours"]
+        setattr(self, cache_key, fields)
+        return fields
 
     def get_page_obj_detail_view(self):
         """Get pagination context for detail view navigation."""
