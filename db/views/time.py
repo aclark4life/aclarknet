@@ -37,6 +37,9 @@ class BaseTimeView(BaseView, AuthenticatedRequiredMixin):
         "project",
         "task",
     ]
+    # Override related_title_fields to exclude description
+    # This allows description to appear in the card text with a label
+    related_title_fields = ["name", "title", "subject"]
 
 
 class TimeCreateView(
