@@ -1,11 +1,16 @@
 """Views for the CMS app."""
 
+import logging
+
 from django.conf import settings
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views.generic import FormView, TemplateView
 
+from db.models import Note
 from .forms import ContactFormPublic
+
+logger = logging.getLogger(__name__)
 
 
 class BaseCMSView(TemplateView):
@@ -138,8 +143,6 @@ class ContactView(FormView):
 
         # Save contact form submission to Notes
         try:
-            from db.models import Note
-            
             # Create a Note with the contact form submission
             note_description = f"""Contact Form Submission
             
@@ -154,10 +157,10 @@ Message:
                 name=f"Contact form submission from {name}",
                 description=note_description,
             )
-        except Exception:
+        except Exception as e:
             # Log the error but don't prevent the success message
             # This ensures the user still sees a success message even if Note creation fails
-            pass
+            logger.exception("Failed to create Note from contact form submission: %s", e)
         
         # Display a success message
         messages.success(
