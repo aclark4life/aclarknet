@@ -83,9 +83,11 @@ class TimeDescriptionInRelatedTemplateTest(TestCase):
         self.assertIn("description", field_dict)
         self.assertEqual(field_dict["description"], "Implemented feature X")
 
-    def test_related_template_renders_description_in_title(self):
-        """Test that related.html template renders description in card title."""
+    def test_related_template_renders_description_in_card_text(self):
+        """Test that related.html template renders description in card text with label."""
         # Simulate the template rendering with time entry field values
+        # Time entries use related_title_fields = ["name", "title", "subject"]
+        # so description should appear in card text, not title
         template_string = """
         {% load text_filters %}
         {% for field_values in field_values_page %}
@@ -94,11 +96,18 @@ class TimeDescriptionInRelatedTemplateTest(TestCase):
               <h5 class="card-title">
                 <span class="badge">{{ model_name|title }}</span>
                 {% for field_name, field_value in field_values %}
-                  {% if field_name == "name" or field_name == "title" or field_name == "subject" or field_name == "description" %}
+                  {% if field_name == "name" or field_name == "title" or field_name == "subject" %}
                     {{ field_value|default:"" }}
                   {% endif %}
                 {% endfor %}
               </h5>
+              <div class="card-text">
+                {% for field_name, field_value in field_values %}
+                  {% if field_name not in related_excluded_fields and field_name not in related_title_fields and field_value %}
+                    <strong>{{ field_name|title }}:</strong> {{ field_value|truncatewords:10 }}<br>
+                  {% endif %}
+                {% endfor %}
+              </div>
             {% endwith %}
           {% endif %}
         {% endfor %}
@@ -116,13 +125,23 @@ class TimeDescriptionInRelatedTemplateTest(TestCase):
             ]
         ]
         
+        # Time view uses these configurations
+        related_title_fields = ["name", "title", "subject"]  # description NOT in title
+        related_excluded_fields = ["type", "id", "item"]
+        
         template = Template(template_string)
-        context = Context({"field_values_page": field_values_page})
+        context = Context({
+            "field_values_page": field_values_page,
+            "related_title_fields": related_title_fields,
+            "related_excluded_fields": related_excluded_fields,
+        })
         rendered = template.render(context)
         
-        # Check that description appears in the rendered output
+        # Check that description appears in the card text (not title)
         self.assertIn("Implemented feature X", rendered)
         self.assertIn('<span class="badge">Time</span>', rendered)
+        # Check that description has a label in card-text
+        self.assertIn("Description:", rendered)
 
     def test_time_entries_with_and_without_description(self):
         """Test that both time entries appear in invoice view."""
