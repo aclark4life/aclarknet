@@ -92,3 +92,31 @@ class ContactViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertFormError(response.context["form"], "name", "This field is required.")
 
+    def test_contact_form_submission_creates_note(self):
+        """Test that contact form submission creates a Note."""
+        from db.models import Note
+        
+        # Get initial count of notes
+        initial_count = Note.objects.count()
+        
+        form_data = {
+            "name": "Jane Smith",
+            "email": "jane@example.com",
+            "how_did_you_hear_about_us": "Social media",
+            "how_can_we_help": "I would like to discuss a potential project",
+        }
+        response = self.client.post(reverse("contact"), data=form_data)
+        
+        # Should redirect after successful submission
+        self.assertEqual(response.status_code, 302)
+        
+        # Check that a Note was created
+        self.assertEqual(Note.objects.count(), initial_count + 1)
+        
+        # Verify the Note contains the correct information
+        note = Note.objects.latest("created")
+        self.assertIn("Jane Smith", note.name)
+        self.assertIn("jane@example.com", note.description)
+        self.assertIn("Social media", note.description)
+        self.assertIn("I would like to discuss a potential project", note.description)
+

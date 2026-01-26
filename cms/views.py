@@ -1,11 +1,16 @@
 """Views for the CMS app."""
 
+import logging
+
 from django.conf import settings
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views.generic import FormView, TemplateView
 
+from db.models import Note
 from .forms import ContactFormPublic
+
+logger = logging.getLogger(__name__)
 
 
 class BaseCMSView(TemplateView):
@@ -136,8 +141,28 @@ class ContactView(FormView):
         how_did_you_hear = form.cleaned_data.get("how_did_you_hear_about_us")
         message_text = form.cleaned_data.get("how_can_we_help")
 
-        # TODO: Send email or save to database
-        # For now, just display a success message
+        # Save contact form submission to Notes
+        try:
+            # Create a Note with the contact form submission
+            note_description = f"""Contact Form Submission
+            
+Name: {name}
+Email: {email}
+How did you hear about us: {how_did_you_hear}
+
+Message:
+{message_text}"""
+            
+            Note.objects.create(
+                name=f"Contact form submission from {name}",
+                description=note_description,
+            )
+        except Exception as e:
+            # Log the error but don't prevent the success message
+            # This ensures the user still sees a success message even if Note creation fails
+            logger.exception("Failed to create Note from contact form submission: %s", e)
+        
+        # Display a success message
         messages.success(
             self.request,
             f"Thank you for contacting us, {name}! We'll get back to you at {email} soon.",
