@@ -364,8 +364,8 @@ class BaseView:
                 fields = list(form_instance.fields.keys())
                 setattr(self, cache_key, fields)
                 return fields
-            except Exception:
-                # If instantiation fails for any reason, try accessing Meta.fields directly
+            except (TypeError, ValueError, AttributeError, ImportError):
+                # If instantiation fails (e.g., missing required args), try accessing Meta.fields directly
                 try:
                     if hasattr(form_class, 'Meta') and hasattr(form_class.Meta, 'fields'):
                         meta_fields = form_class.Meta.fields
@@ -374,7 +374,8 @@ class BaseView:
                         if fields is not None:
                             setattr(self, cache_key, fields)
                             return fields
-                except Exception:
+                except (AttributeError, TypeError):
+                    # If Meta.fields access fails, continue to next fallback
                     pass
         
         # Fallback to using the view's form_class if available
