@@ -41,6 +41,9 @@ class BaseInvoiceView(BaseView, SuperuserRequiredMixin):
     form_model = InvoiceForm
     form_class = InvoiceForm
     template_name = "edit.html"
+    # Exclude description from title fields so it appears in card text with a label
+    # This is especially important for related Time entries which have descriptions
+    related_title_fields = ["name", "title", "subject"]
 
 
 class InvoiceListView(BaseInvoiceView, ListView):
