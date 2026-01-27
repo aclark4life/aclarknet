@@ -31,12 +31,9 @@ class BaseTimeView(BaseView, AuthenticatedRequiredMixin):
     form_model = TimeForm
     form_class = TimeForm
     template_name = "edit.html"
-    field_values_exclude = [
-        "invoice",
-        "name",
-        "project",
-        "task",
-    ]
+    # Show all fields in related items display - removed field_values_exclude
+    # to ensure all time entry fields (including description, task, project, etc.)
+    # are visible when viewing related items
     # Override related_title_fields to exclude description
     # This allows description to appear in the card text with a label
     related_title_fields = ["name", "title", "subject"]
