@@ -358,12 +358,24 @@ class BaseView:
         
         if form_class is not None:
             try:
-                fields = list(form_class().fields.keys())
+                # For forms that may need user context (like TimeForm), provide basic instantiation
+                # Most ModelForms should work fine with no arguments
+                form_instance = form_class()
+                fields = list(form_instance.fields.keys())
                 setattr(self, cache_key, fields)
                 return fields
-            except (TypeError, AttributeError, ValueError):
-                # If form instantiation fails, fall back to default
-                pass
+            except Exception:
+                # If instantiation fails for any reason, try accessing Meta.fields directly
+                try:
+                    if hasattr(form_class, 'Meta') and hasattr(form_class.Meta, 'fields'):
+                        meta_fields = form_class.Meta.fields
+                        # Handle both tuple and list
+                        fields = list(meta_fields) if meta_fields != '__all__' else None
+                        if fields is not None:
+                            setattr(self, cache_key, fields)
+                            return fields
+                except Exception:
+                    pass
         
         # Fallback to using the view's form_class if available
         if hasattr(self, "form_class"):
