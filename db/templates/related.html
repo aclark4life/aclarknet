@@ -14,30 +14,170 @@
 {% for field_values in field_values_page %}
   {% if field_values %}
     {% with model_name=field_values.0.1 object_id=field_values.1.1 %}
-      <div
-        class="card mb-3"
-        onclick="window.location='{% url model_name|add:'_view' object_id %}'"
-        style="cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;"
-        onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)';"
-        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
-        <div class="card-body">
-          <h5 class="card-title">
-            <span class="badge" style="background-color: #1997C6">{{ model_name|title }}</span>
-            {% for field_name, field_value in field_values %}
-              {% if field_name in related_title_fields %}
-                {{ field_value|default:"" }}
-              {% endif %}
-            {% endfor %}
-          </h5>
-          <div class="card-text">
-            {% for field_name, field_value in field_values %}
-              {% if field_name not in related_excluded_fields and field_name not in related_title_fields and field_value %}
-                <strong>{{ field_name|title_case }}:</strong> {{ field_value|truncatewords:10 }}<br>
-              {% endif %}
-            {% endfor %}
+      {% comment %}Define model-specific styling{% endcomment %}
+      {% if model_name == 'invoice' %}
+        <div
+          class="card mb-3 border-success"
+          onclick="window.location='{% url model_name|add:'_view' object_id %}'"
+          style="cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; background-color: #f8f9fa;"
+          onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)';"
+          onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
+          <div class="card-body">
+            <h5 class="card-title">
+              <span class="badge" style="background-color: #28a745">{{ model_name|title }}</span>
+              {% for field_name, field_value in field_values %}
+                {% if field_name in related_title_fields %}
+                  {{ field_value|default:"" }}
+                {% endif %}
+              {% endfor %}
+            </h5>
+            <div class="card-text">
+              {% for field_name, field_value in field_values %}
+                {% if field_name not in related_excluded_fields and field_name not in related_title_fields %}
+                  {% if field_name == 'date' or field_name == 'description' or field_name == 'hours' or field_value %}
+                    <strong>{{ field_name|title_case }}:</strong> {{ field_value|default:"—"|truncatewords:10 }}<br>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            </div>
           </div>
         </div>
-      </div>
+      {% elif model_name == 'project' %}
+        <div
+          class="card mb-3 border-primary"
+          onclick="window.location='{% url model_name|add:'_view' object_id %}'"
+          style="cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; background-color: #f8f9fa;"
+          onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)';"
+          onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
+          <div class="card-body">
+            <h5 class="card-title">
+              <span class="badge" style="background-color: #007bff">{{ model_name|title }}</span>
+              {% for field_name, field_value in field_values %}
+                {% if field_name in related_title_fields %}
+                  {{ field_value|default:"" }}
+                {% endif %}
+              {% endfor %}
+            </h5>
+            <div class="card-text">
+              {% for field_name, field_value in field_values %}
+                {% if field_name not in related_excluded_fields and field_name not in related_title_fields %}
+                  {% if field_name == 'date' or field_name == 'description' or field_name == 'hours' or field_value %}
+                    <strong>{{ field_name|title_case }}:</strong> {{ field_value|default:"—"|truncatewords:10 }}<br>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      {% elif model_name == 'client' %}
+        <div
+          class="card mb-3 border-info"
+          onclick="window.location='{% url model_name|add:'_view' object_id %}'"
+          style="cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; background-color: #f8f9fa;"
+          onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)';"
+          onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
+          <div class="card-body">
+            <h5 class="card-title">
+              <span class="badge" style="background-color: #6f42c1">{{ model_name|title }}</span>
+              {% for field_name, field_value in field_values %}
+                {% if field_name in related_title_fields %}
+                  {{ field_value|default:"" }}
+                {% endif %}
+              {% endfor %}
+            </h5>
+            <div class="card-text">
+              {% for field_name, field_value in field_values %}
+                {% if field_name not in related_excluded_fields and field_name not in related_title_fields %}
+                  {% if field_name == 'date' or field_name == 'description' or field_name == 'hours' or field_value %}
+                    <strong>{{ field_name|title_case }}:</strong> {{ field_value|default:"—"|truncatewords:10 }}<br>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      {% elif model_name == 'company' %}
+        <div
+          class="card mb-3 border-warning"
+          onclick="window.location='{% url model_name|add:'_view' object_id %}'"
+          style="cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; background-color: #f8f9fa;"
+          onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)';"
+          onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
+          <div class="card-body">
+            <h5 class="card-title">
+              <span class="badge" style="background-color: #fd7e14">{{ model_name|title }}</span>
+              {% for field_name, field_value in field_values %}
+                {% if field_name in related_title_fields %}
+                  {{ field_value|default:"" }}
+                {% endif %}
+              {% endfor %}
+            </h5>
+            <div class="card-text">
+              {% for field_name, field_value in field_values %}
+                {% if field_name not in related_excluded_fields and field_name not in related_title_fields %}
+                  {% if field_name == 'date' or field_name == 'description' or field_name == 'hours' or field_value %}
+                    <strong>{{ field_name|title_case }}:</strong> {{ field_value|default:"—"|truncatewords:10 }}<br>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      {% elif model_name == 'task' %}
+        <div
+          class="card mb-3 border-info"
+          onclick="window.location='{% url model_name|add:'_view' object_id %}'"
+          style="cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; background-color: #f8f9fa;"
+          onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)';"
+          onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
+          <div class="card-body">
+            <h5 class="card-title">
+              <span class="badge" style="background-color: #17a2b8">{{ model_name|title }}</span>
+              {% for field_name, field_value in field_values %}
+                {% if field_name in related_title_fields %}
+                  {{ field_value|default:"" }}
+                {% endif %}
+              {% endfor %}
+            </h5>
+            <div class="card-text">
+              {% for field_name, field_value in field_values %}
+                {% if field_name not in related_excluded_fields and field_name not in related_title_fields %}
+                  {% if field_name == 'date' or field_name == 'description' or field_name == 'hours' or field_value %}
+                    <strong>{{ field_name|title_case }}:</strong> {{ field_value|default:"—"|truncatewords:10 }}<br>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div
+          class="card mb-3"
+          onclick="window.location='{% url model_name|add:'_view' object_id %}'"
+          style="cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; border: 1px solid #1997C6;"
+          onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)';"
+          onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
+          <div class="card-body">
+            <h5 class="card-title">
+              <span class="badge" style="background-color: #1997C6">{{ model_name|title }}</span>
+              {% for field_name, field_value in field_values %}
+                {% if field_name in related_title_fields %}
+                  {{ field_value|default:"" }}
+                {% endif %}
+              {% endfor %}
+            </h5>
+            <div class="card-text">
+              {% for field_name, field_value in field_values %}
+                {% if field_name not in related_excluded_fields and field_name not in related_title_fields %}
+                  {% if field_name == 'date' or field_name == 'description' or field_name == 'hours' or field_value %}
+                    <strong>{{ field_name|title_case }}:</strong> {{ field_value|default:"—"|truncatewords:10 }}<br>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
     {% endwith %}
   {% endif %}
 {% endfor %}

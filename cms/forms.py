@@ -1,6 +1,8 @@
 """Forms for the CMS app."""
 
 from django import forms
+from django_recaptcha.fields import ReCaptchaField
+from django_recaptcha.widgets import ReCaptchaV3
 
 
 class ContactFormPublic(forms.Form):
@@ -21,7 +23,10 @@ class ContactFormPublic(forms.Form):
         choices=[
             ("Internet search engine", "Internet search engine"),
             ("Social media", "Social media"),
-            ("Referral from a friend or family member", "Referral from a friend or family member"),
+            (
+                "Referral from a friend or family member",
+                "Referral from a friend or family member",
+            ),
             ("Advertisement", "Advertisement"),
             ("Email marketing", "Email marketing"),
             ("Website or blog", "Website or blog"),
@@ -32,9 +37,15 @@ class ContactFormPublic(forms.Form):
     )
     how_can_we_help = forms.CharField(
         required=True,
-        widget=forms.Textarea(attrs={"class": "textarea form-control", "cols": "40", "rows": "10"}),
+        widget=forms.Textarea(
+            attrs={"class": "textarea form-control", "cols": "40", "rows": "10"}
+        ),
     )
-    wagtailcaptcha = forms.CharField(
-        required=False,
-        widget=forms.HiddenInput(attrs={"class": "g-recaptcha"}),
+    captcha = ReCaptchaField(
+        widget=ReCaptchaV3(
+            attrs={
+                "required_score": 0.5,
+            }
+        ),
+        label="",
     )

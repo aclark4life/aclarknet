@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     "webpack_boilerplate",
     "crispy_forms",
     "crispy_bootstrap5",
+    "django_recaptcha",
     "siteuser",
     "import_export",
 ]
@@ -240,6 +241,7 @@ AUTH_USER_MODEL = "siteuser.SiteUser"
 
 # Email settings
 DEFAULT_FROM_EMAIL = "aclark@aclark.net"
+CONTACT_EMAIL = "aclark@aclark.net"  # Email address to receive contact form submissions
 
 # Django Allauth settings
 AUTHENTICATION_BACKENDS = [
@@ -255,3 +257,7 @@ SITE_ID = 1
 ACCOUNT_EMAIL_VERIFICATION = "optional"
 ACCOUNT_LOGIN_METHODS = ["username", "email"]
 ACCOUNT_SIGNUP_FIELDS = ["email", "username", "password1", "password2"]
+
+# Disable signups - users can only login, not create new accounts
+ACCOUNT_ADAPTER = "aclarknet.adapters.NoSignupAccountAdapter"
+SOCIALACCOUNT_ADAPTER = "aclarknet.adapters.NoSignupSocialAccountAdapter"

@@ -21,6 +21,8 @@ class BaseNoteView(BaseView, SuperuserRequiredMixin):
     form_model = NoteForm
     form_class = NoteForm
     template_name = "edit.html"
+    # Exclude description from title fields so it appears in card text with a label
+    related_title_fields = ["name", "title", "subject"]
 
 
 class NoteListView(BaseNoteView, ListView):

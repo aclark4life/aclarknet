@@ -282,7 +282,6 @@ class TimeForm(forms.ModelForm):
     class Meta:
         model = Time
         fields = [
-            "name",
             "project",
             "task",
             "user",
@@ -300,11 +299,23 @@ class TimeForm(forms.ModelForm):
         user = kwargs.pop("user", None)
         super().__init__(*args, **kwargs)
 
-        # Remove invoice and task fields for non-admin users
-        # Admin users are identified by is_superuser flag
-        if user and not user.is_superuser:
+        # For admin users, make the user field visible (not hidden)
+        # For non-admin users, keep it hidden and remove admin-only fields
+        if user and user.is_superuser:
+            # Make user field visible for admins by replacing the HiddenInput widget
+            # with a Select widget. The ModelChoiceField already has the queryset set up.
+            from django.contrib.auth import get_user_model
+
+            User = get_user_model()
+            # Replace the widget while preserving the field's queryset
+            self.fields["user"].widget = forms.Select()
+            self.fields["user"].queryset = User.objects.all().order_by("username")
+        else:
+            # Remove invoice, task, name, and project fields for non-admin users
             self.fields.pop("invoice", None)
             self.fields.pop("task", None)
+            self.fields.pop("name", None)
+            self.fields.pop("project", None)
 
         self.helper = FormHelper()
         self.helper.form_method = "post"
@@ -317,7 +328,19 @@ class TimeForm(forms.ModelForm):
             Div(Field("hours", css_class="form-control"), css_class="col-sm-6"),
         ]
 
-        # Only add invoice and task fields if they exist (i.e., for admins)
+        # Only add admin-only fields if they exist (i.e., for admins)
+        if "name" in self.fields:
+            layout_fields.append(
+                Div(Field("name", css_class="form-control"), css_class="col-sm-6")
+            )
+        if "user" in self.fields and user and user.is_superuser:
+            layout_fields.append(
+                Div(Field("user", css_class="form-control"), css_class="col-sm-6")
+            )
+        if "project" in self.fields:
+            layout_fields.append(
+                Div(Field("project", css_class="form-control"), css_class="col-sm-6")
+            )
         if "invoice" in self.fields:
             layout_fields.append(
                 Div(Field("invoice", css_class="form-control"), css_class="col-sm-6")

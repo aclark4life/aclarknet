@@ -195,7 +195,6 @@ setup_nginx() {
 restart_services() {
     echo -e "${GREEN}Restarting services...${NC}"
     systemctl restart aclarknet.service
-    systemctl restart thelounge.service
 
     # Check status
     if systemctl is-active --quiet aclarknet.service; then
@@ -203,12 +202,6 @@ restart_services() {
     else
         echo -e "${RED}aclarknet service failed to start. Check logs with: journalctl -u aclarknet.service -n 50${NC}"
         exit 1
-    fi
-
-    if systemctl is-active --quiet thelounge.service; then
-        echo -e "${GREEN}thelounge service is running${NC}"
-    else
-        echo -e "${YELLOW}WARNING: thelounge service failed to start. Check logs with: journalctl -u thelounge.service -n 50${NC}"
     fi
 }
 

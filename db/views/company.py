@@ -27,6 +27,8 @@ class BaseCompanyView(BaseView, SuperuserRequiredMixin):
     model = Company
     form_model = CompanyForm
     form_class = CompanyForm
+    # Exclude description from title fields so it appears in card text with a label
+    related_title_fields = ["name", "title", "subject"]
 
 
 class CompanyListView(BaseCompanyView, ListView):

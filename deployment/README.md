@@ -99,6 +99,7 @@ sudo dnf install rsync
    - `DJANGO_CSRF_TRUSTED_ORIGINS`: Your HTTPS URLs
    - `MONGODB_URI`: MongoDB connection string (if not localhost)
    - `MONGODB_DB`: Database name
+   - Email settings: See [Email Configuration](#email-configuration) below
 
 3. **Configure SSL Certificates**
 
@@ -355,7 +356,7 @@ If The Lounge works via SSH tunnel (`ssh -L 9000:localhost:9000 aclark.net`) but
    grep reverseProxyPath /srv/aclarknet/lounge/.thelounge/config.js
    # Should show: reverseProxyPath: "/lounge/",
    ```
-   
+
    If missing or incorrect, edit `/srv/aclarknet/lounge/.thelounge/config.js` and add:
    ```javascript
    reverseProxyPath: "/lounge/",
@@ -385,7 +386,7 @@ If The Lounge works via SSH tunnel (`ssh -L 9000:localhost:9000 aclark.net`) but
    ```bash
    grep -A 15 "location.*lounge" /etc/nginx/conf.d/aclarknet.conf
    ```
-   
+
    The location block should proxy to `http://127.0.0.1:9000/`.
 
 6. **Check nginx error logs**:
@@ -460,9 +461,48 @@ Client Request (HTTPS)
 - Static files served by nginx
 - Run with: systemd service (gunicorn)
 
+## Email Configuration
+
+The application supports two email backends for production:
+
+### Option 1: AWS SES (Recommended)
+
+AWS Simple Email Service provides reliable, scalable email delivery with excellent deliverability.
+
+**Quick Setup:**
+1. Set `USE_SES=True` in your `.env` file
+2. Configure AWS credentials and region
+3. Verify your email addresses/domain in AWS SES Console
+
+**See the detailed guide**: [AWS SES Setup Guide](../docs/aws_ses_setup.md)
+
+**Environment Variables:**
+```bash
+USE_SES=True
+AWS_ACCESS_KEY_ID=your-aws-access-key-id
+AWS_SECRET_ACCESS_KEY=your-aws-secret-access-key
+AWS_SES_REGION_NAME=us-east-1
+```
+
+### Option 2: SMTP
+
+Use any SMTP server (Gmail, SendGrid, Mailgun, etc.):
+
+```bash
+USE_SES=False
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER=your-email@gmail.com
+EMAIL_HOST_PASSWORD=your-app-password
+```
+
+**Note**: For Gmail, you'll need to use an [App Password](https://support.google.com/accounts/answer/185833) instead of your regular password.
+
 ## Additional Resources
 
 - [Django Deployment Checklist](https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/)
 - [Gunicorn Documentation](https://docs.gunicorn.org/)
 - [nginx Documentation](https://nginx.org/en/docs/)
 - [Wagtail Documentation](https://docs.wagtail.org/)
+- [AWS SES Setup Guide](../docs/aws_ses_setup.md)

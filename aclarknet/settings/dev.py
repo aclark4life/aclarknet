@@ -11,6 +11,16 @@ ALLOWED_HOSTS = ["*"]
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
+# Google reCAPTCHA v3 test keys for development
+# These are official Google test keys that always pass validation
+RECAPTCHA_PUBLIC_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+RECAPTCHA_PRIVATE_KEY = "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
+RECAPTCHA_REQUIRED_SCORE = 0.5
+# Optionally disable reCAPTCHA validation in development (uncomment to disable)
+# RECAPTCHA_DISABLE = True
+# Silence the test key warning in development
+SILENCED_SYSTEM_CHECKS = ["django_recaptcha.recaptcha_test_key_error"]
+
 
 try:
     from .local import *  # noqa F403 F401

@@ -25,6 +25,8 @@ class BaseTaskView(BaseView, SuperuserRequiredMixin):
     form_model = TaskForm
     form_class = TaskForm
     template_name = "edit.html"
+    # Exclude description from title fields so it appears in card text with a label
+    related_title_fields = ["name", "title", "subject"]
 
 
 class TaskListView(BaseTaskView, ListView):
@@ -60,24 +62,24 @@ class TaskDetailView(BaseTaskView, DetailView):
     def get_context_data(self, **kwargs):
         task = self.get_object()
         queryset_related = []
-        
+
         # Add project if exists
         if task.project:
             queryset_related.append([task.project])
-            
+
             # Add client through project if exists
             if task.project.client:
                 queryset_related.append([task.project.client])
-                
+
                 # Add company through client if exists
                 if task.project.client.company:
                     queryset_related.append([task.project.client.company])
-        
+
         # Flatten the list and set as related queryset
         if queryset_related:
             self._queryset_related = list(chain(*queryset_related))
             self.has_related = True
-        
+
         context = super().get_context_data(**kwargs)
         context["is_detail_view"] = True
         return context

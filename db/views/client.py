@@ -24,6 +24,8 @@ class BaseClientView(BaseView, SuperuserRequiredMixin):
     model = Client
     form_model = ClientForm
     form_class = ClientForm
+    # Exclude description from title fields so it appears in card text with a label
+    related_title_fields = ["name", "title", "subject"]
 
 
 class ClientListView(BaseClientView, ListView):

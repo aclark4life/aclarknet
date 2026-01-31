@@ -35,6 +35,8 @@ class BaseProjectView(BaseView, SuperuserRequiredMixin):
     url_edit = f"{model_name.lower()}_edit"
     url_index = f"{model_name.lower()}_index"
     url_view = f"{model_name.lower()}_view"
+    # Exclude description from title fields so it appears in card text with a label
+    related_title_fields = ["name", "title", "subject"]
 
 
 class ProjectListView(BaseProjectView, ListView):

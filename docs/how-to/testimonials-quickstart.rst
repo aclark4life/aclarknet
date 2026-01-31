@@ -156,4 +156,4 @@ With the testimonials feature, you can:
 - ✅ Filter and search testimonials
 - ✅ Toggle visibility without deleting content
 
-For more technical details, see :doc:`notes_testimonials`.
+For more technical details, see :doc:`../explanation/notes-testimonials`.

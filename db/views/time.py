@@ -69,6 +69,15 @@ class TimeCreateView(
                 if "invoice" in context["form"].fields:
                     context["form"].initial["invoice"] = invoice_id
 
+                # If the invoice has a project, pre-populate the project field
+                if "project" in context["form"].fields:
+                    try:
+                        invoice = Invoice.objects.get(pk=invoice_id)
+                        if invoice.project:
+                            context["form"].initial["project"] = invoice.project
+                    except Invoice.DoesNotExist:
+                        pass
+
         # Only set default task if user is admin and task field is available
         if (
             self.request.user.is_superuser
@@ -163,7 +172,8 @@ class TimeUpdateView(
         # Preserve the original user - the user field may not be in the form for non-admins
         # Get the instance before saving to preserve the user field
         obj = form.save(commit=False)
-        # If user is not set (likely because it wasn't in the form), use the original value
+        # If user is not set (likely because it wasn't in the form for non-admins), use the original value
+        # Admins can change the user field, so we only preserve it if it's None
         if obj.user is None:
             original_obj = self.get_object()
             obj.user = original_obj.user
@@ -198,11 +208,18 @@ class TimeCopyView(
 class TimeDeleteView(BaseTimeView, FilterByUserMixin, DeleteView):
     template_name = "delete.html"
 
+    def post(self, request, *args, **kwargs):
+        """Override to bypass form handling and directly delete the object."""
+        return self.delete(request, *args, **kwargs)
+
     def test_func(self):
-        if not self.request.user.is_authenticated:
-            return False
-        time = self.get_object()
-        return self.request.user.is_superuser or self.request.user == time.user
+        """Check if user has permission to delete this time entry.
+
+        FilterByUserMixin already filters the queryset, so we just need to
+        verify the user is authenticated. The queryset filtering ensures
+        non-superusers can only access their own entries.
+        """
+        return self.request.user.is_authenticated
 
     def get_success_url(self):
         return (

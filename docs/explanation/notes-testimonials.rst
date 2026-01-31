@@ -15,18 +15,18 @@ Model Changes (``db/models.py``)
 Added three new fields to the ``Note`` model:
 
 - **is_testimonial** (BooleanField)
-  
+
   - Default: ``False``
   - Help text: "Check to display this note as a testimonial on the public site"
-  
+
 - **title** (CharField, max_length=300)
-  
+
   - Optional field for the testimonial author's position/title
   - Example: "CEO", "Project Manager", "Head of Operations"
   - Help text: "Title/position of the person giving the testimonial"
-  
+
 - **is_featured** (BooleanField)
-  
+
   - Default: ``False``
   - Help text: "Check to feature this testimonial on the homepage"
   - Only one testimonial should typically be featured at a time
@@ -71,14 +71,14 @@ Existing Templates (No Changes Required)
 The following templates already expect testimonial data:
 
 - **cms/templates/blocks/testimonials_block.html**
-  
+
   - Displays all testimonials on the ``/clients/`` page
   - Uses ``testimonial.description`` for the quote
   - Uses ``testimonial.name`` for the author name
   - Uses ``testimonial.title`` for the author's position
-  
+
 - **cms/templates/blocks/highpraise_block.html**
-  
+
   - Displays the featured testimonial on the homepage
   - Uses similar structure with description, name, and title
   - Includes fallback defaults if no testimonial is available
@@ -145,7 +145,7 @@ Example Usage
 
    # Query featured testimonial
    featured_testimonial = Note.objects.filter(
-       is_testimonial=True, 
+       is_testimonial=True,
        is_featured=True
    ).order_by("-created").first()
 

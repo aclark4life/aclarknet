@@ -159,12 +159,88 @@ This project supports GitHub OAuth authentication using django-allauth. To enabl
 2. You should see a "Sign in with GitHub" button
 3. Click it to test the GitHub OAuth flow
 
+### 4. GitHub Username Whitelist (Optional)
+
+You can restrict GitHub login to specific usernames by setting the `GITHUB_USERNAME_WHITELIST` environment variable:
+
+```bash
+# In your .env file or environment
+GITHUB_USERNAME_WHITELIST=username1,username2,username3
+```
+
+**How it works:**
+- If `GITHUB_USERNAME_WHITELIST` is not set or empty, all GitHub users can login (default behavior)
+- If set, only GitHub usernames in the comma-separated list can login
+- Usernames are case-sensitive and should match the GitHub username exactly
+- Whitespace around usernames is automatically trimmed
+
+**Example:**
+```bash
+# Only allow these three GitHub users to login
+GITHUB_USERNAME_WHITELIST=alice,bob,charlie
+```
+
+When a non-whitelisted user tries to login, they will see an error message and be redirected back to the login page.
+
+### 5. Signup Restrictions
+
+**Regular account signups are DISABLED** to prevent unauthorized access.
+
+**What this means:**
+- ❌ Users cannot self-register at `/accounts/signup/`
+- ✅ Whitelisted GitHub users can auto-create accounts on first login
+- ✅ Existing users can login normally
+- ✅ Admins can create new users via Django admin
+
+**How it works:**
+
+**For Regular Signups:**
+- The signup page at `/accounts/signup/` is disabled
+- Users cannot create accounts with username/password
+
+**For GitHub OAuth:**
+- If `GITHUB_USERNAME_WHITELIST` is configured:
+  - ✅ Whitelisted users can auto-create accounts on first GitHub login
+  - ❌ Non-whitelisted users are blocked
+- If `GITHUB_USERNAME_WHITELIST` is NOT configured:
+  - ❌ All GitHub signups are blocked (secure by default)
+
+**For Other Social Providers (Google, Facebook, etc.):**
+- ❌ All signups are disabled
+
+**Example Flow - Whitelisted GitHub User:**
+```bash
+# Set whitelist
+GITHUB_USERNAME_WHITELIST=alice,bob,charlie
+
+# When 'alice' clicks "Sign in with GitHub" for the first time:
+# 1. GitHub authenticates the user
+# 2. System checks: Is 'alice' in whitelist? YES ✓
+# 3. System checks: Does 'alice' have an account? NO
+# 4. System auto-creates account for 'alice' ✓
+# 5. 'alice' is logged in ✓
+```
+
+**To allow a new user to access the system:**
+
+**Option 1: Add to GitHub Whitelist (Recommended)**
+1. Add their GitHub username to `GITHUB_USERNAME_WHITELIST`
+2. User clicks "Sign in with GitHub"
+3. Account is auto-created on first login
+
+**Option 2: Manual Account Creation**
+1. Admin creates a user account via Django admin at `/admin/`
+2. User can login with their credentials or link their GitHub account
+
+This security feature ensures that only authorized users can access the system.
+
 ### Production Configuration
 
 For production, update:
 - GitHub OAuth App callback URL to: `https://yourdomain.com/accounts/github/login/callback/`
 - Site domain in Django admin to your production domain
 - Ensure `ALLOWED_HOSTS` in settings includes your production domain
+- Optionally set `GITHUB_USERNAME_WHITELIST` to restrict access
 
 ## Production Deployment
 

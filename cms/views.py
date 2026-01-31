@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views.generic import FormView, TemplateView
 
+from aclarknet.email_utils import send_email_with_headers
 from db.models import Note
 from .forms import ContactFormPublic
 
@@ -84,20 +85,18 @@ class ClientsView(BaseCMSView):
             for client in featured_clients:
                 # Get the display name for the category, or use "Other" if not set
                 category_display = (
-                    client.get_category_display()
-                    if client.category
-                    else "Other"
+                    client.get_category_display() if client.category else "Other"
                 )
                 categories[category_display].append(client)
 
             # Convert to regular dict and pass to context
             context["categories"] = dict(categories)
             context["clients"] = featured_clients
-            
+
             # Get testimonials (Notes marked as testimonials)
-            context["testimonials"] = Note.objects.filter(
-                is_testimonial=True
-            ).order_by("-created")
+            context["testimonials"] = Note.objects.filter(is_testimonial=True).order_by(
+                "-created"
+            )
         except (ImportError, Exception):
             # Fallback to settings if database is not available
             context["categories"] = {
@@ -145,14 +144,14 @@ class ContactView(FormView):
         try:
             # Create a Note with the contact form submission
             note_description = f"""Contact Form Submission
-            
+
 Name: {name}
 Email: {email}
 How did you hear about us: {how_did_you_hear}
 
 Message:
 {message_text}"""
-            
+
             Note.objects.create(
                 name=f"Contact form submission from {name}",
                 description=note_description,
@@ -160,14 +159,51 @@ Message:
         except Exception as e:
             # Log the error but don't prevent the success message
             # This ensures the user still sees a success message even if Note creation fails
-            logger.exception("Failed to create Note from contact form submission: %s", e)
-        
+            logger.exception(
+                "Failed to create Note from contact form submission: %s", e
+            )
+
+        # Send email notification to aclark@aclark.net
+        try:
+            contact_email = getattr(
+                settings, "CONTACT_EMAIL", settings.DEFAULT_FROM_EMAIL
+            )
+
+            email_subject = f"Contact Form Submission from {name}"
+            email_body = f"""You have received a new contact form submission:
+
+Name: {name}
+Email: {email}
+How did you hear about us: {how_did_you_hear}
+
+Message:
+{message_text}
+
+---
+This email was sent from the contact form at {self.request.build_absolute_uri('/')}
+"""
+
+            # Send email with improved headers for better deliverability
+            send_email_with_headers(
+                subject=email_subject,
+                plain_message=email_body,
+                recipient_list=[contact_email],
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                reply_to=email,  # Set reply-to to the contact form submitter
+                fail_silently=False,
+            )
+        except Exception as e:
+            # Log the error but don't prevent the success message
+            logger.exception(
+                "Failed to send email notification for contact form submission: %s", e
+            )
+
         # Display a success message
         messages.success(
             self.request,
             f"Thank you for contacting us, {name}! We'll get back to you at {email} soon.",
         )
-        
+
         return super().form_valid(form)
 
     def form_invalid(self, form):
@@ -190,19 +226,21 @@ class HomeView(BaseCMSView):
         context["message"] = getattr(
             settings, "HOMEPAGE_MESSAGE", "Welcome to ACLARK.NET!"
         )
-        
+
         # Get featured testimonial for homepage
         try:
             from db.models import Note
-            
+
             # Get the most recently created featured testimonial
-            testimonial = Note.objects.filter(
-                is_testimonial=True, is_featured=True
-            ).order_by("-created").first()
+            testimonial = (
+                Note.objects.filter(is_testimonial=True, is_featured=True)
+                .order_by("-created")
+                .first()
+            )
             context["testimonial"] = testimonial
         except (ImportError, Exception):
             context["testimonial"] = None
-            
+
         return context
 
 

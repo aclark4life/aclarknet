@@ -1,11 +1,11 @@
 from django.conf import settings
-from django.core.mail import EmailMultiAlternatives
 from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.html import strip_tags
 
+from aclarknet.email_utils import send_notification_email
 from .models import Invoice
 from .models import Time
 
@@ -30,14 +30,14 @@ def send_email_on_time_creation(sender, instance, created, **kwargs):
                 },
             )
             plain_message = strip_tags(html_content)
-            email = EmailMultiAlternatives(
-                subject,
-                plain_message,
-                settings.DEFAULT_FROM_EMAIL,
-                [settings.DEFAULT_FROM_EMAIL],
+
+            # Send email with improved headers for better deliverability
+            send_notification_email(
+                subject=subject,
+                plain_message=plain_message,
+                html_message=html_content,
+                from_email=from_email,
             )
-            email.attach_alternative(html_content, "text/html")
-            email.send()
 
 
 @receiver(post_save, sender=Invoice)

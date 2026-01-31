@@ -28,6 +28,8 @@ class BaseContactView(BaseView, SuperuserRequiredMixin):
     form_model = ContactForm
     form_class = ContactForm
     template_name = "edit.html"
+    # Exclude description from title fields so it appears in card text with a label
+    related_title_fields = ["name", "title", "subject"]
 
 
 class ContactListView(BaseContactView, ListView):
@@ -49,20 +51,20 @@ class ContactDetailView(BaseContactView, DetailView):
     def get_context_data(self, **kwargs):
         contact = self.get_object()
         queryset_related = []
-        
+
         # Add client if exists
         if contact.client:
             queryset_related.append([contact.client])
-            
+
             # Add company through client if exists
             if contact.client.company:
                 queryset_related.append([contact.client.company])
-        
+
         # Flatten the list and set as related queryset
         if queryset_related:
             self._queryset_related = list(chain(*queryset_related))
             self.has_related = True
-        
+
         context = super().get_context_data(**kwargs)
         context["is_detail_view"] = True
         return context

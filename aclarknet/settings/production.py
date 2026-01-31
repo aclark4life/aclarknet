@@ -58,12 +58,43 @@ STORAGES["staticfiles"]["BACKEND"] = (  # noqa: F405
 WAGTAILADMIN_BASE_URL = os.environ.get("WAGTAIL_BASE_URL", "https://aclark.net")
 
 # Email configuration for production
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = os.environ.get("EMAIL_HOST", "localhost")
-EMAIL_PORT = int(os.environ.get("EMAIL_PORT", "25"))
-EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS", "False") == "True"
-EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
+# Use AWS SES if configured, otherwise fall back to SMTP
+USE_SES = os.environ.get("USE_SES", "False") == "True"
+
+if USE_SES:
+    # AWS SES Configuration
+    EMAIL_BACKEND = "django_ses.SESBackend"
+
+    # AWS SES region (e.g., us-east-1, us-west-2, eu-west-1)
+    AWS_SES_REGION_NAME = os.environ.get("AWS_SES_REGION_NAME", "us-east-1")
+    AWS_SES_REGION_ENDPOINT = f"email.{AWS_SES_REGION_NAME}.amazonaws.com"
+
+    # AWS credentials (optional - only needed if NOT using IAM role)
+    # When running on EC2/ECS/Lambda with an IAM role attached, boto3 will
+    # automatically use the instance role credentials. Leave these empty to use IAM role.
+    # Only set these if running outside AWS or if you need to use specific IAM user credentials.
+    aws_access_key = os.environ.get("AWS_ACCESS_KEY_ID", "")
+    aws_secret_key = os.environ.get("AWS_SECRET_ACCESS_KEY", "")
+
+    if aws_access_key and aws_secret_key:
+        # Using explicit IAM user credentials
+        AWS_ACCESS_KEY_ID = aws_access_key
+        AWS_SECRET_ACCESS_KEY = aws_secret_key
+    # else: boto3 will automatically use IAM role credentials (recommended for EC2/ECS/Lambda)
+
+    # Optional: Configuration set for tracking
+    AWS_SES_CONFIGURATION_SET = os.environ.get("AWS_SES_CONFIGURATION_SET", "")
+
+    # Optional: Use SES v2 (recommended for new implementations)
+    USE_SES_V2 = os.environ.get("USE_SES_V2", "True") == "True"
+else:
+    # Standard SMTP Configuration (fallback)
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_HOST = os.environ.get("EMAIL_HOST", "localhost")
+    EMAIL_PORT = int(os.environ.get("EMAIL_PORT", "25"))
+    EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS", "False") == "True"
+    EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
+    EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
 
 # Logging configuration
 LOGGING = {
@@ -103,3 +134,8 @@ SOCIALACCOUNT_PROVIDERS = {
     },
 }
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
+
+RECAPTCHA_PRIVATE_KEY = os.environ.get("RECAPTCHA_PRIVATE_KEY")
+RECAPTCHA_PUBLIC_KEY = os.environ.get("RECAPTCHA_PUBLIC_KEY")
+# reCAPTCHA v3 score threshold (0.0 to 1.0, where 1.0 is very likely a human)
+RECAPTCHA_REQUIRED_SCORE = float(os.environ.get("RECAPTCHA_REQUIRED_SCORE", "0.5"))

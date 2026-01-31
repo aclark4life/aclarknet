@@ -105,7 +105,7 @@ class InvoiceDetailView(BaseInvoiceView, DetailView):
 
     def get_context_data(self, **kwargs):
         invoice = self.get_object()
-        times = invoice.times.all().order_by("-id")
+        times = invoice.times.all().order_by("date")
         project = invoice.project
         queryset_related = [q for q in [times] if q.exists()]
         if project:
@@ -230,18 +230,30 @@ class InvoiceUpdateView(
     def get_time_formset(self):
         """Get the time entry formset for the invoice."""
         if self.request.POST:
-            return TimeEntryFormSet(self.request.POST, instance=self.object)
-        return TimeEntryFormSet(instance=self.object)
+            formset = TimeEntryFormSet(self.request.POST, instance=self.object)
+        else:
+            # If the invoice has a project, set it as initial data for new forms
+            initial_data = []
+            if self.object.project:
+                # Create initial data for the 'extra' forms (new time entries)
+                # The number of extra forms is defined in TimeEntryFormSet (default is 3)
+                for _ in range(3):  # Match the 'extra' parameter in formset definition
+                    initial_data.append({"project": self.object.project})
+
+            formset = TimeEntryFormSet(
+                instance=self.object, initial=initial_data if initial_data else None
+            )
+        return formset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["url_cancel"] = f"{self.model_name}_view"
         context["pk"] = self.kwargs["pk"]
-        
+
         # Add the formset to the context
-        if 'time_formset' not in kwargs:
-            context['time_formset'] = self.get_time_formset()
-        
+        if "time_formset" not in kwargs:
+            context["time_formset"] = self.get_time_formset()
+
         return context
 
     def get_initial(self):
@@ -257,7 +269,7 @@ class InvoiceUpdateView(
 
     def form_valid(self, form):
         time_formset = self.get_time_formset()
-        
+
         if time_formset.is_valid():
             self.object = form.save()
             time_formset.instance = self.object
@@ -267,8 +279,6 @@ class InvoiceUpdateView(
             return self.render_to_response(
                 self.get_context_data(form=form, time_formset=time_formset)
             )
-
-
 
 
 class InvoiceDeleteView(BaseInvoiceView, DeleteView):

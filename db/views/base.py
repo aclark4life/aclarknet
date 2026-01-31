@@ -13,29 +13,30 @@ from django.views.defaults import permission_denied
 
 class FakeDataMixin:
     """Mixin to populate form initial data with fake values in DEBUG mode.
-    
+
     Usage:
         class MyCreateView(FakeDataMixin, CreateView):
             fake_data_function = 'get_fake_client_data'  # Name of function from faker_utils
     """
-    
+
     fake_data_function = None  # Subclasses should set this to the function name
-    
+
     def get_initial(self):
         """Get initial form data, with fake data added if in DEBUG mode."""
         initial = super().get_initial()
-        
+
         # Only add fake data if in DEBUG mode and function is specified
         if settings.DEBUG and self.fake_data_function:
             try:
                 from ..faker_utils import get_faker
-                
+
                 # Only proceed if faker is available
                 if get_faker() is not None:
                     # Import the module and get the function
                     from .. import faker_utils
+
                     fake_data_func = getattr(faker_utils, self.fake_data_function, None)
-                    
+
                     if fake_data_func and callable(fake_data_func):
                         fake_data = fake_data_func()
                         # Only add fake values for fields that aren't already set
@@ -45,7 +46,7 @@ class FakeDataMixin:
             except (ImportError, AttributeError):
                 # Silently skip if Faker is not available or function not found
                 pass
-        
+
         return initial
 
 
@@ -73,11 +74,20 @@ class BaseView:
     field_values_include = None  # List of field names to include (None = all fields)
     field_values_exclude = None  # List of field names to exclude
     field_values_extra = None  # List of (field_name, value) tuples to append
-    
+
     # ---- Related items display customization ----
     # These control how related items are displayed in related.html template
-    related_title_fields = ["name", "title", "subject", "description"]  # Fields shown in card title
-    related_excluded_fields = ["type", "id", "item"]  # Fields never shown in related cards
+    related_title_fields = [
+        "name",
+        "title",
+        "subject",
+        "description",
+    ]  # Fields shown in card title
+    related_excluded_fields = [
+        "type",
+        "id",
+        "item",
+    ]  # Fields never shown in related cards
 
     # ---- Model-dependent helpers ----
     def _if_model(self, value):
@@ -204,7 +214,9 @@ class BaseView:
         # Handle search-specific display
         if self.search:
             context["search"] = self.search
-            field_values_page = self.get_field_values(page_obj, search=True)
+            field_values_page = self.get_field_values(
+                page_obj, search=True, related=related
+            )
             context["search_results"] = len(field_values_page) > 0
             context["field_values_page"] = field_values_page
 
@@ -230,7 +242,10 @@ class BaseView:
             # Add content_type for the "Add Note" button
             if self.object:
                 from django.contrib.contenttypes.models import ContentType
-                context["content_type"] = ContentType.objects.get_for_model(self.object.__class__)
+
+                context["content_type"] = ContentType.objects.get_for_model(
+                    self.object.__class__
+                )
 
         return context
 
@@ -334,62 +349,54 @@ class BaseView:
 
     def _get_model_form_fields(self, item):
         """Get form fields for a specific model instance.
-        
+
         Args:
             item: A model instance
-            
+
         Returns:
             List of field names from the item's corresponding form
         """
         from .. import forms
-        
-        # Cache form fields per model to avoid repeated lookups
-        model_name = item._meta.model_name
-        cache_key = f"_form_fields_{model_name}"
-        
-        if hasattr(self, cache_key):
-            return getattr(self, cache_key)
-        
+
         # Map model names to their form classes
+        model_name = item._meta.model_name
         form_class_name = f"{model_name.capitalize()}Form"
-        
+
         # Try to get the form class from the forms module
         form_class = getattr(forms, form_class_name, None)
-        
+
         if form_class is not None:
+            # First, try accessing Meta.fields directly (most reliable)
+            try:
+                if hasattr(form_class, "Meta") and hasattr(form_class.Meta, "fields"):
+                    meta_fields = form_class.Meta.fields
+                    # Handle both tuple and list
+                    fields = list(meta_fields) if meta_fields != "__all__" else None
+                    if fields is not None:
+                        return fields
+            except (AttributeError, TypeError):
+                pass
+
+            # If Meta.fields didn't work, try instantiating the form
             try:
                 # For forms that may need user context (like TimeForm), provide basic instantiation
                 # Most ModelForms should work fine with no arguments
                 form_instance = form_class()
                 fields = list(form_instance.fields.keys())
-                setattr(self, cache_key, fields)
                 return fields
             except (TypeError, ValueError, AttributeError, ImportError):
-                # If instantiation fails (e.g., missing required args), try accessing Meta.fields directly
-                try:
-                    if hasattr(form_class, 'Meta') and hasattr(form_class.Meta, 'fields'):
-                        meta_fields = form_class.Meta.fields
-                        # Handle both tuple and list
-                        fields = list(meta_fields) if meta_fields != '__all__' else None
-                        if fields is not None:
-                            setattr(self, cache_key, fields)
-                            return fields
-                except (AttributeError, TypeError):
-                    # If Meta.fields access fails, continue to next fallback
-                    pass
-        
+                # If instantiation fails, we already tried Meta.fields above
+                pass
+
         # Fallback to using the view's form_class if available
-        if hasattr(self, "form_class"):
-            if not hasattr(self, "_cached_form_fields"):
-                self._cached_form_fields = list(self.form_class().fields.keys())
-            fields = self._cached_form_fields.copy()
-            setattr(self, cache_key, fields)
-            return fields
-        
+        # Only use this if the item's model matches the view's model
+        if hasattr(self, "form_class") and hasattr(self, "model"):
+            if item._meta.model == self.model:
+                fields = list(self.form_class().fields.keys())
+                return fields
+
         # Final fallback to basic fields
-        fields = ["amount", "cost", "net", "hours"]
-        setattr(self, cache_key, fields)
-        return fields
+        return ["amount", "cost", "net", "hours"]
 
     def get_page_obj_detail_view(self):
         """Get pagination context for detail view navigation."""
@@ -421,23 +428,24 @@ class BaseView:
 
     def _get_notes_for_object(self):
         """Get notes attached to the current object via generic foreign key.
-        
+
         Returns:
             List of Note objects or None if no object or no notes exist
         """
-        if not hasattr(self, 'object') or self.object is None:
+        if not hasattr(self, "object") or self.object is None:
             return None
-        
+
         try:
             from django.contrib.contenttypes.models import ContentType
             from ..models import Note
-            
+
             content_type = ContentType.objects.get_for_model(self.object.__class__)
-            notes = list(Note.objects.filter(
-                content_type=content_type,
-                object_id=str(self.object.pk)
-            ).order_by('-created'))
-            
+            notes = list(
+                Note.objects.filter(
+                    content_type=content_type, object_id=str(self.object.pk)
+                ).order_by("-created")
+            )
+
             return notes if notes else None
         except Exception:
             # Silently fail if Note model doesn't exist or other issues
