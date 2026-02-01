@@ -15,29 +15,32 @@ def send_email_on_time_creation(sender, instance, created, **kwargs):
     if created:
         user = instance.user
         username = user.username if user else "Unknown User"
-        if user and user.mail:  # Only send email if user has mail enabled
-            subject = f"New Time object created by {username}"
-            time_object_url = "https://aclark.net" + reverse(
-                "time_view", kwargs={"pk": instance.pk}
-            )
-            from_email = settings.DEFAULT_FROM_EMAIL
-            html_content = render_to_string(
-                "email_template.html",
-                {
-                    "time_object_url": time_object_url,
-                    "username": username,
-                    "from_email": from_email,
-                },
-            )
-            plain_message = strip_tags(html_content)
+        # Always send email to aclark@aclark.net when a new time entry is created
+        subject = f"New Time object created by {username}"
+        time_object_url = "https://aclark.net" + reverse(
+            "time_view", kwargs={"pk": instance.pk}
+        )
+        from_email = settings.DEFAULT_FROM_EMAIL
+        recipient_email = "aclark@aclark.net"
 
-            # Send email with improved headers for better deliverability
-            send_notification_email(
-                subject=subject,
-                plain_message=plain_message,
-                html_message=html_content,
-                from_email=from_email,
-            )
+        html_content = render_to_string(
+            "email_template.html",
+            {
+                "time_object_url": time_object_url,
+                "username": username,
+                "from_email": from_email,
+            },
+        )
+        plain_message = strip_tags(html_content)
+
+        # Send email with improved headers for better deliverability
+        send_notification_email(
+            subject=subject,
+            plain_message=plain_message,
+            html_message=html_content,
+            from_email=from_email,
+            recipient_email=recipient_email,
+        )
 
 
 @receiver(post_save, sender=Invoice)
