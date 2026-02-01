@@ -1,0 +1,84 @@
+{% extends 'dashboard/index.html' %}
+{% load humanize %}
+
+{% block title %}Payment Successful - ACLARK.NET{% endblock %}
+
+{% block dashhead_title %}
+  <h2 class="dashhead-title text-secondary">Payment Successful</h2>
+{% endblock %}
+
+{% block dashboard %}
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card border-success">
+          <div class="card-header bg-success text-white">
+            <h4 class="mb-0">
+              <i class="fa-solid fa-check-circle"></i> Payment Successful!
+            </h4>
+          </div>
+          <div class="card-body">
+            <div class="alert alert-success">
+              <h5>Thank you for your payment!</h5>
+              <p class="mb-0">Your payment has been processed successfully.</p>
+            </div>
+
+            {% if session %}
+              <div class="mt-4">
+                <h5>Payment Details</h5>
+                <table class="table table-bordered">
+                  <tbody>
+                    <tr>
+                      <th style="width: 30%;">Amount Paid</th>
+                      <td>${{ session.amount_total|floatformat:2|intcomma }}</td>
+                    </tr>
+                    <tr>
+                      <th>Payment Status</th>
+                      <td>
+                        <span class="badge bg-success">{{ session.payment_status|title }}</span>
+                      </td>
+                    </tr>
+                    {% if session.customer_details.email %}
+                      <tr>
+                        <th>Email</th>
+                        <td>{{ session.customer_details.email }}</td>
+                      </tr>
+                    {% endif %}
+                    {% if invoice_id %}
+                      <tr>
+                        <th>Invoice</th>
+                        <td>
+                          <a href="{% url 'invoice_view' invoice_id %}" class="btn btn-sm btn-outline-primary">
+                            View Invoice
+                          </a>
+                        </td>
+                      </tr>
+                    {% endif %}
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="mt-4">
+                <p class="text-muted">
+                  <i class="fa-solid fa-info-circle"></i>
+                  A confirmation email will be sent to {{ session.customer_details.email|default:"your email address" }}.
+                </p>
+              </div>
+            {% endif %}
+
+            <div class="mt-4">
+              <a href="{% url 'dashboard' %}" class="btn btn-primary">
+                <i class="fa-solid fa-home"></i> Return to Dashboard
+              </a>
+              {% if invoice_id %}
+                <a href="{% url 'invoice_view' invoice_id %}" class="btn btn-outline-secondary">
+                  <i class="fa-solid fa-file-invoice"></i> View Invoice
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

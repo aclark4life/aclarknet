@@ -37,11 +37,11 @@ alias m := migrate
 
 # Make and run migrations (drops database first)
 make-migrations: drop-database
-    rm -rvf aclarknet/migrations/
-    rm -rvf cms/migrations/
-    rm -rvf db/migrations/
-    rm -rvf home/migrations/
-    rm -rvf siteuser/migrations/
+    # rm -rvf aclarknet/migrations/
+    # rm -rvf cms/migrations/
+    # rm -rvf db/migrations/
+    # rm -rvf home/migrations/
+    # rm -rvf siteuser/migrations/
     python manage.py makemigrations admin auth contenttypes siteuser wagtailcore taggit db account socialaccount cms wagtailadmin wagtaildocs wagtailimages wagtailembeds wagtailforms wagtailredirects wagtailsearch home wagtailusers
     python manage.py migrate
 

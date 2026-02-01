@@ -261,3 +261,9 @@ ACCOUNT_SIGNUP_FIELDS = ["email", "username", "password1", "password2"]
 # Disable signups - users can only login, not create new accounts
 ACCOUNT_ADAPTER = "aclarknet.adapters.NoSignupAccountAdapter"
 SOCIALACCOUNT_ADAPTER = "aclarknet.adapters.NoSignupSocialAccountAdapter"
+
+# Stripe settings
+STRIPE_PUBLISHABLE_KEY = os.getenv("STRIPE_PUBLISHABLE_KEY", "")
+STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY", "")
+STRIPE_WEBHOOK_SECRET = os.getenv("STRIPE_WEBHOOK_SECRET", "")
+STRIPE_CURRENCY = "usd"  # Default currency for payments

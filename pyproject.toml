@@ -19,6 +19,7 @@ dependencies = [
   "python-docx",
   "python-dotenv",
   "python-webpack-boilerplate",
+  "stripe",
   "texttable",
   "wagtail",
   "xhtml2pdf",

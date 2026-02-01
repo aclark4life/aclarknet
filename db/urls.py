@@ -84,6 +84,13 @@ from .views import (
     InvoiceUpdateView,
 )
 
+# Payment Views
+from .views import (
+    CreateCheckoutSessionView,
+    PaymentSuccessView,
+    StripeWebhookView,
+)
+
 # Other Views
 from .views import DashboardView
 from .views import SearchView
@@ -262,6 +269,25 @@ urlpatterns += [
 
 urlpatterns += [
     path("search/", SearchView.as_view(), name="search"),
+]
+
+# Payment URLs
+urlpatterns += [
+    path(
+        "payment/create-checkout-session/<object_id:invoice_id>/",
+        CreateCheckoutSessionView.as_view(),
+        name="create_checkout_session",
+    ),
+    path(
+        "payment/success/",
+        PaymentSuccessView.as_view(),
+        name="payment_success",
+    ),
+    path(
+        "payment/webhook/",
+        StripeWebhookView.as_view(),
+        name="stripe_webhook",
+    ),
 ]
 
 urlpatterns += [path("trigger_500/", trigger_500, name="trigger_500")]

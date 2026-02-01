@@ -292,3 +292,61 @@ class Note(BaseModel):
 
     def get_absolute_url(self):
         return reverse("note_view", args=[self.id])
+
+
+class Payment(BaseModel):
+    """Track Stripe payments for invoices."""
+
+    invoice = models.ForeignKey(
+        Invoice,
+        related_name="payments",
+        on_delete=models.CASCADE,
+        help_text="Invoice this payment is for",
+    )
+    stripe_payment_intent_id = models.CharField(
+        max_length=255,
+        unique=True,
+        help_text="Stripe Payment Intent ID",
+    )
+    stripe_checkout_session_id = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True,
+        help_text="Stripe Checkout Session ID",
+    )
+    amount = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        help_text="Payment amount in dollars",
+    )
+    currency = models.CharField(
+        max_length=3,
+        default="usd",
+        help_text="Payment currency (e.g., usd, eur)",
+    )
+    status = models.CharField(
+        max_length=50,
+        default="pending",
+        help_text="Payment status (pending, succeeded, failed, canceled)",
+    )
+    customer_email = models.EmailField(
+        blank=True,
+        null=True,
+        help_text="Customer email from Stripe",
+    )
+    metadata = models.JSONField(
+        default=dict,
+        blank=True,
+        help_text="Additional metadata from Stripe",
+    )
+
+    class Meta:
+        ordering = ["-created"]
+
+    def __str__(self):
+        return (
+            f"Payment {self.stripe_payment_intent_id} - ${self.amount} ({self.status})"
+        )
+
+    def get_absolute_url(self):
+        return reverse("payment_view", args=[self.id])
