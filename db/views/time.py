@@ -110,6 +110,7 @@ class TimeListView(
     ListView,
 ):
     template_name = "index.html"
+    ordering = ["-date"]  # Newest entries first
 
 
 class TimeDetailView(BaseTimeView, DetailView):
