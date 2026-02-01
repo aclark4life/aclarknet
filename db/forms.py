@@ -33,6 +33,10 @@ class ClientForm(forms.ModelForm):
             ),
             Div(Field("url", css_class="form-control"), css_class="col-sm-6"),
             Div(
+                Field("address", css_class="form-control bg-transparent border"),
+                css_class="col-sm-12",
+            ),
+            Div(
                 Field("description", css_class="form-control bg-transparent border"),
                 css_class="col-sm-12",
             ),
