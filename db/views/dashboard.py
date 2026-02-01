@@ -7,7 +7,7 @@ from django.shortcuts import render, reverse
 from django.views.generic import ListView
 
 from .base import BaseView
-from ..models import Client, Company, Invoice, Note, Project, Task, Time
+from ..models import Invoice, Time
 
 User = get_user_model()
 
@@ -39,20 +39,20 @@ class DashboardView(BaseView, UserPassesTestMixin, ListView):
 
         # Filter times by user - non-superusers only see their own time entries
         # Exclude time entries from paid invoices (where balance = 0)
-        times_queryset = get_base_queryset(Time).order_by("-date").filter(
-            Q(invoice__isnull=True) | Q(invoice__balance__gt=0)
+        times_queryset = (
+            get_base_queryset(Time)
+            .order_by("-date")
+            .filter(Q(invoice__isnull=True) | Q(invoice__balance__gt=0))
         )
         if not self.request.user.is_superuser:
             times_queryset = times_queryset.filter(user=self.request.user)
 
+        # Get recent invoices ordered by issue date (newest first), limit to 10
+        invoices_queryset = get_base_queryset(Invoice).order_by("-issue_date")[:10]
+
         context.update(
             {
-                "invoices": get_base_queryset(Invoice),
-                "companies": get_base_queryset(Company).order_by("name"),
-                "projects": get_base_queryset(Project).order_by("name"),
-                "notes": get_base_queryset(Note).order_by("-created"),
-                "tasks": get_base_queryset(Task).order_by("name"),
-                "clients": get_base_queryset(Client).order_by("name"),
+                "invoices": invoices_queryset,
                 "times": times_queryset,
             }
         )

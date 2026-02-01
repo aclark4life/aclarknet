@@ -32,6 +32,9 @@
             {% include 'statcards/revenue.html' %}
           {% endif %}
           {% include 'statcards/clock.html' %}
+          {% if request.user.is_superuser %}
+            {% include 'dashboard/invoices.html' %}
+          {% endif %}
           {% include 'dashboard/times.html' %}
         {% endblock %}
       </div>
