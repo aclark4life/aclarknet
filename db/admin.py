@@ -139,8 +139,28 @@ class InvoiceAdmin(ImportExportModelAdmin):
     search_fields = ["invoice_number", "name"]
 
 
+class NoteResource(ImportExportModelResource):
+    class Meta:
+        model = Note
+        import_id_fields = ["id"]
+        fields = ("id", "created", "updated", "name", "description", "user")
+
+    def get_instance(self, instance_loaders, row):
+        return False
+
+    def before_import(self, dataset, dry_run, file_name=None, user=None):
+        if dataset.headers:
+            dataset.headers = [
+                str(header).lower().strip() for header in dataset.headers
+            ]
+
+        if "id" not in dataset.headers:
+            dataset.headers.append("id")
+
+
 @admin.register(Note)
 class NoteAdmin(ImportExportModelAdmin):
+    resource_class = NoteResource
     list_display = [
         "name",
         "description",
