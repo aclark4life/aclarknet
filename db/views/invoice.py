@@ -232,17 +232,7 @@ class InvoiceUpdateView(
         if self.request.POST:
             formset = TimeEntryFormSet(self.request.POST, instance=self.object)
         else:
-            # If the invoice has a project, set it as initial data for new forms
-            initial_data = []
-            if self.object.project:
-                # Create initial data for the 'extra' forms (new time entries)
-                # The number of extra forms is defined in TimeEntryFormSet (default is 3)
-                for _ in range(3):  # Match the 'extra' parameter in formset definition
-                    initial_data.append({"project": self.object.project})
-
-            formset = TimeEntryFormSet(
-                instance=self.object, initial=initial_data if initial_data else None
-            )
+            formset = TimeEntryFormSet(instance=self.object)
         return formset
 
     def get_context_data(self, **kwargs):

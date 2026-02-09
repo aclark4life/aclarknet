@@ -399,7 +399,7 @@ TimeEntryFormSet = inlineformset_factory(
     Invoice,
     Time,
     form=TimeEntryForm,
-    extra=3,  # Number of empty forms to display
+    extra=0,  # Number of empty forms to display
     can_delete=True,
     fields=["date", "hours", "description", "project", "task", "user"],
 )
