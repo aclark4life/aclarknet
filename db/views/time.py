@@ -111,6 +111,7 @@ class TimeListView(
 ):
     template_name = "index.html"
     ordering = ["-date"]  # Newest entries first
+    field_values_exclude = ["id"]  # Hide ID column from table
 
     def get_field_values(self, page_obj=None, search=False, related=False):
         """Override to pass user context when caching form fields.
