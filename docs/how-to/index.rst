@@ -14,6 +14,7 @@ These guides assume you're already familiar with aclarknet basics. They provide 
    fix-gmail-warning
    testimonials-quickstart
    manual-testing-guide
+   stripe-test-mode
 
 Deployment
 ----------
@@ -44,6 +45,12 @@ Testing
 
 :doc:`manual-testing-guide`
    Manually test the application to verify functionality. Covers testing contact forms, client categorization, testimonials, and admin features.
+
+Payments
+--------
+
+:doc:`stripe-test-mode`
+   Configure and test Stripe payments in production using test mode. Learn how to get test API keys, use test cards, and switch to live mode when ready.
 
 Need More Help?
 ---------------
