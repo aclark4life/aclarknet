@@ -17,16 +17,22 @@
           <div class="col-md-12">
             {% if object.balance and object.balance > 0 %}
               <div class="alert alert-info m-3">
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <strong>Balance Due:</strong> ${{ object.balance|intcomma }}
-                  </div>
-                  <form method="post" action="{% url 'create_checkout_session' object.id %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-primary">
-                      <i class="fa-brands fa-stripe"></i> Pay with Stripe
+                <div class="mb-3">
+                  <strong>Balance Due:</strong> ${{ object.balance|intcomma }}
+                </div>
+                <div>
+                  <label for="payment-link" class="form-label">
+                    <strong>Payment Link:</strong>
+                  </label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" id="payment-link"
+                           value="{{ request.scheme }}://{{ request.get_host }}{% url 'public_invoice_payment' object.id %}"
+                           readonly>
+                    <button class="btn btn-primary" type="button" id="copy-payment-link">
+                      <i class="fa-solid fa-copy"></i> Copy Link
                     </button>
-                  </form>
+                  </div>
+                  <small class="text-muted">Share this link with your client to allow them to pay the invoice.</small>
                 </div>
               </div>
             {% elif object.balance == 0 %}
@@ -41,3 +47,33 @@
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const copyButton = document.getElementById('copy-payment-link');
+    if (copyButton) {
+      copyButton.addEventListener('click', function() {
+        const paymentLink = document.getElementById('payment-link');
+        paymentLink.select();
+        paymentLink.setSelectionRange(0, 99999); // For mobile devices
+
+        navigator.clipboard.writeText(paymentLink.value).then(function() {
+        // Change button text temporarily to show success
+          const originalHTML = copyButton.innerHTML;
+          copyButton.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+          copyButton.classList.remove('btn-primary');
+          copyButton.classList.add('btn-success');
+
+          setTimeout(function() {
+            copyButton.innerHTML = originalHTML;
+            copyButton.classList.remove('btn-success');
+            copyButton.classList.add('btn-primary');
+          }, 2000);
+        }).catch(function(err) {
+          console.error('Failed to copy text: ', err);
+          alert('Failed to copy link. Please copy it manually.');
+        });
+      });
+    }
+  });
+</script>

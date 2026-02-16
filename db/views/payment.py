@@ -20,6 +20,17 @@ logger = logging.getLogger(__name__)
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
+class PublicInvoicePaymentView(View):
+    """Public view for invoice payment - no authentication required."""
+
+    def get(self, request, invoice_id):
+        invoice = get_object_or_404(Invoice, id=invoice_id)
+        context = {
+            "invoice": invoice,
+        }
+        return render(request, "payment/invoice.html", context)
+
+
 class CreateCheckoutSessionView(View):
     """Create a Stripe Checkout session for an invoice."""
 
@@ -29,7 +40,7 @@ class CreateCheckoutSessionView(View):
         # Check if invoice has a balance to pay
         if not invoice.balance or invoice.balance <= 0:
             messages.error(request, "This invoice has already been paid.")
-            return redirect("invoice_view", pk=invoice_id)
+            return redirect("public_invoice_payment", invoice_id=invoice_id)
 
         # Check if Stripe is configured
         if not settings.STRIPE_SECRET_KEY:
@@ -38,7 +49,7 @@ class CreateCheckoutSessionView(View):
                 request,
                 "Payment system is not configured. Please contact support.",
             )
-            return redirect("invoice_view", pk=invoice_id)
+            return redirect("public_invoice_payment", invoice_id=invoice_id)
 
         try:
             logger.info(
@@ -69,7 +80,7 @@ class CreateCheckoutSessionView(View):
                 success_url=request.build_absolute_uri(reverse("payment_success"))
                 + "?session_id={CHECKOUT_SESSION_ID}",
                 cancel_url=request.build_absolute_uri(
-                    reverse("invoice_view", args=[invoice_id])
+                    reverse("public_invoice_payment", args=[invoice_id])
                 ),
                 metadata={
                     "invoice_id": str(invoice.id),
@@ -86,21 +97,21 @@ class CreateCheckoutSessionView(View):
                 request,
                 "Payment system authentication failed. Please contact support.",
             )
-            return redirect("invoice_view", pk=invoice_id)
+            return redirect("public_invoice_payment", invoice_id=invoice_id)
         except stripe.error.InvalidRequestError as e:
             logger.error(f"Stripe invalid request error: {e}", exc_info=True)
             messages.error(
                 request,
                 f"Invalid payment request: {str(e)}",
             )
-            return redirect("invoice_view", pk=invoice_id)
+            return redirect("public_invoice_payment", invoice_id=invoice_id)
         except stripe.error.StripeError as e:
             logger.error(f"Stripe error: {e}", exc_info=True)
             messages.error(
                 request,
                 f"Payment system error: {str(e)}",
             )
-            return redirect("invoice_view", pk=invoice_id)
+            return redirect("public_invoice_payment", invoice_id=invoice_id)
         except Exception as e:
             logger.error(
                 f"Unexpected error creating Stripe checkout session: {e}", exc_info=True
@@ -109,7 +120,7 @@ class CreateCheckoutSessionView(View):
                 request,
                 f"An unexpected error occurred: {str(e)}",
             )
-            return redirect("invoice_view", pk=invoice_id)
+            return redirect("public_invoice_payment", invoice_id=invoice_id)
 
 
 class PaymentSuccessView(View):

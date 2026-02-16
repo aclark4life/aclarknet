@@ -88,6 +88,7 @@ from .views import (
 from .views import (
     CreateCheckoutSessionView,
     PaymentSuccessView,
+    PublicInvoicePaymentView,
     StripeWebhookView,
 )
 
@@ -273,6 +274,11 @@ urlpatterns += [
 
 # Payment URLs
 urlpatterns += [
+    path(
+        "payment/invoice/<object_id:invoice_id>/",
+        PublicInvoicePaymentView.as_view(),
+        name="public_invoice_payment",
+    ),
     path(
         "payment/create-checkout-session/<object_id:invoice_id>/",
         CreateCheckoutSessionView.as_view(),

@@ -81,6 +81,7 @@ from .note import (
 from .payment import (
     CreateCheckoutSessionView,
     PaymentSuccessView,
+    PublicInvoicePaymentView,
     StripeWebhookView,
 )
 
@@ -182,6 +183,7 @@ __all__ = [
     # Payment views
     "CreateCheckoutSessionView",
     "PaymentSuccessView",
+    "PublicInvoicePaymentView",
     "StripeWebhookView",
     # Project views
     "ProjectCopyView",
