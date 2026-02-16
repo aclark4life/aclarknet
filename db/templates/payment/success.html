@@ -9,12 +9,22 @@
 
 {% block dashboard %}
   <div class="container my-5">
+    {% if STRIPE_TEST_MODE %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <i class="fa-solid fa-flask"></i>
+        <strong>Test Mode:</strong> This was a test payment. No real money was charged.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endif %}
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card border-success">
           <div class="card-header bg-success text-white">
             <h4 class="mb-0">
               <i class="fa-solid fa-check-circle"></i> Payment Successful!
+              {% if STRIPE_TEST_MODE %}
+                <span class="badge bg-warning text-dark ms-2">TEST MODE</span>
+              {% endif %}
             </h4>
           </div>
           <div class="card-body">

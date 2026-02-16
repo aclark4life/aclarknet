@@ -267,3 +267,7 @@ STRIPE_PUBLISHABLE_KEY = os.getenv("STRIPE_PUBLISHABLE_KEY", "")
 STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY", "")
 STRIPE_WEBHOOK_SECRET = os.getenv("STRIPE_WEBHOOK_SECRET", "")
 STRIPE_CURRENCY = "usd"  # Default currency for payments
+# Detect if we're in test mode based on the secret key prefix
+STRIPE_TEST_MODE = (
+    STRIPE_SECRET_KEY.startswith("sk_test_") if STRIPE_SECRET_KEY else False
+)

@@ -27,6 +27,7 @@ class PublicInvoicePaymentView(View):
         invoice = get_object_or_404(Invoice, id=invoice_id)
         context = {
             "invoice": invoice,
+            "STRIPE_TEST_MODE": settings.STRIPE_TEST_MODE,
         }
         return render(request, "payment/invoice.html", context)
 
@@ -140,6 +141,7 @@ class PaymentSuccessView(View):
             context = {
                 "session": session,
                 "invoice_id": session.metadata.get("invoice_id"),
+                "STRIPE_TEST_MODE": settings.STRIPE_TEST_MODE,
             }
 
             return render(request, "payment/success.html", context)

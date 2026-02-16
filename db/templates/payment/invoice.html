@@ -5,12 +5,23 @@
 
 {% block content %}
   <div class="container my-5 py-4">
+    {% if STRIPE_TEST_MODE %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <i class="fa-solid fa-flask"></i>
+        <strong>Test Mode:</strong> This payment system is in test mode. Use test card number
+        <code>4242 4242 4242 4242</code> with any future expiry date and any 3-digit CVC.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endif %}
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card">
           <div class="card-header bg-primary text-white">
             <h4 class="mb-0">
               <i class="fa-solid fa-file-invoice-dollar"></i> Invoice Payment
+              {% if STRIPE_TEST_MODE %}
+                <span class="badge bg-warning text-dark ms-2">TEST MODE</span>
+              {% endif %}
             </h4>
           </div>
           <div class="card-body">
