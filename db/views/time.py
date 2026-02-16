@@ -112,6 +112,21 @@ class TimeListView(
     template_name = "index.html"
     ordering = ["-date"]  # Newest entries first
 
+    def get_field_values(self, page_obj=None, search=False, related=False):
+        """Override to pass user context when caching form fields.
+
+        This ensures that admin users see the invoice field in the table,
+        while non-admin users don't (since it's removed from their form).
+        """
+        # Cache form fields with user context for proper field visibility
+        if page_obj is not None and hasattr(self, "form_class"):
+            if not hasattr(self, "_cached_form_fields"):
+                # Pass user to form so it knows which fields to include
+                form = self.form_class(user=self.request.user)
+                self._cached_form_fields = list(form.fields.keys())
+
+        return super().get_field_values(page_obj, search, related)
+
 
 class TimeDetailView(BaseTimeView, DetailView):
     template_name = "view.html"
