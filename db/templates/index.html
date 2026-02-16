@@ -26,7 +26,9 @@
                   <span class="visually-hidden">Link text</span>
                 </th>
                 {% for field_name in table_headers %}
-                  <th>{{ field_name|title_case }}</th>
+                  {% if field_name != 'id' %}
+                    <th>{{ field_name|title_case }}</th>
+                  {% endif %}
                 {% endfor %}
               </tr>
             </thead>
@@ -40,7 +42,9 @@
                         <input type="checkbox" name="entry_id" value="{{ object_id }}"/>
                       </td>
                       {% for field_name, field_value in field_values %}
-                        <td>{{ field_value|format_field_value:field_name }}</td>
+                        {% if field_name != 'id' %}
+                          <td>{{ field_value|format_field_value:field_name }}</td>
+                        {% endif %}
                       {% endfor %}
                     </tr>
                   {% endwith %}
