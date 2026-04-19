@@ -2,6 +2,7 @@
 name = "aclarknet"
 version = "0.1.0"
 dependencies = [
+  "docutils",
   "babel",
   "boto3",
   "crispy-bootstrap5",

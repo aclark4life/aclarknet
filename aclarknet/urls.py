@@ -39,5 +39,6 @@ if settings.DEBUG:
     ]
 
 urlpatterns += [
+    path("blog/", include("blog.urls")),
     path("", include("cms.urls")),
 ]

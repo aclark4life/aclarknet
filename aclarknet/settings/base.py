@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     "django_recaptcha",
     "siteuser",
     "import_export",
+    "blog",
 ]
 
 MIDDLEWARE = [
@@ -226,6 +227,7 @@ MIGRATION_MODULES = {
     "wagtailredirects": "aclarknet.migrations.wagtailredirects",
     "wagtailsearch": "aclarknet.migrations.wagtailsearch",
     "wagtailusers": "aclarknet.migrations.wagtailusers",
+    "blog": "blog.migrations",
 }
 
 WEBPACK_LOADER = {
