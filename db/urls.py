@@ -1,5 +1,4 @@
-from bson import ObjectId
-from django.urls import include, path, register_converter
+from django.urls import include, path
 
 # Company Views
 from .views import (
@@ -99,19 +98,6 @@ from .views import trigger_500
 from .views import update_related_entries
 from .views import update_selected_entries
 
-
-# Via timgraham
-class ObjectIdConverter:
-    regex = "[a-fA-F0-9]{24}"
-
-    def to_python(self, value):
-        return ObjectId(value)
-
-    def to_url(self, value):
-        return str(value)
-
-
-register_converter(ObjectIdConverter, "object_id")
 
 urlpatterns = [
     path("", DashboardView.as_view(), name="dashboard"),
