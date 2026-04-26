@@ -97,6 +97,7 @@ from .views import SearchView
 from .views import trigger_500
 from .views import update_related_entries
 from .views import update_selected_entries
+from .views import time_api_invoice, time_api_project, time_api_task
 
 
 urlpatterns = [
@@ -252,6 +253,12 @@ urlpatterns += [
 
 urlpatterns += [
     path("update-related/", update_related_entries, name="update-related"),
+]
+
+urlpatterns += [
+    path("time/api/invoice/<str:pk>/", time_api_invoice, name="time_api_invoice"),
+    path("time/api/project/<str:pk>/", time_api_project, name="time_api_project"),
+    path("time/api/task/<str:pk>/", time_api_task, name="time_api_task"),
 ]
 
 urlpatterns += [

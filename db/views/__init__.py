@@ -120,6 +120,9 @@ from .time import (
 
 # Utility functions
 from .utils import (
+    time_api_invoice,
+    time_api_project,
+    time_api_task,
     update_related_entries,
     update_selected_entries,
 )
@@ -225,4 +228,7 @@ __all__ = [
     # Utility functions
     "update_related_entries",
     "update_selected_entries",
+    "time_api_invoice",
+    "time_api_project",
+    "time_api_task",
 ]

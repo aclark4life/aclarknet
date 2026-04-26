@@ -3,9 +3,11 @@
 from django.apps import apps
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.db import transaction
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import reverse
+from django.views.decorators.http import require_GET
 
 
 def get_model_config(model_name):
@@ -193,3 +195,65 @@ def update_related_entries(request):
             messages.success(request, summary_message)
 
     return HttpResponseRedirect(request.headers.get("Referer"))
+
+
+@login_required
+@require_GET
+def time_api_invoice(request, pk):
+    """Return project and default task info for an invoice (used by time form JS)."""
+    if not request.user.is_superuser:
+        return JsonResponse({"error": "Forbidden"}, status=403)
+    Invoice = apps.get_model("db", "Invoice")
+    try:
+        invoice = Invoice.objects.get(pk=pk)
+    except Invoice.DoesNotExist:
+        return JsonResponse({}, status=404)
+    data = {
+        "project_id": None,
+        "project_name": None,
+        "default_task_id": None,
+        "default_task_name": None,
+    }
+    if invoice.project:
+        data["project_id"] = str(invoice.project.pk)
+        data["project_name"] = str(invoice.project)
+        if invoice.project.default_task:
+            data["default_task_id"] = str(invoice.project.default_task.pk)
+            data["default_task_name"] = str(invoice.project.default_task)
+    return JsonResponse(data)
+
+
+@login_required
+@require_GET
+def time_api_project(request, pk):
+    """Return default task info for a project (used by time form JS)."""
+    if not request.user.is_superuser:
+        return JsonResponse({"error": "Forbidden"}, status=403)
+    Project = apps.get_model("db", "Project")
+    try:
+        project = Project.objects.get(pk=pk)
+    except Project.DoesNotExist:
+        return JsonResponse({}, status=404)
+    data = {"default_task_id": None, "default_task_name": None}
+    if project.default_task:
+        data["default_task_id"] = str(project.default_task.pk)
+        data["default_task_name"] = str(project.default_task)
+    return JsonResponse(data)
+
+
+@login_required
+@require_GET
+def time_api_task(request, pk):
+    """Return project info for a task (used by time form JS)."""
+    if not request.user.is_superuser:
+        return JsonResponse({"error": "Forbidden"}, status=403)
+    Task = apps.get_model("db", "Task")
+    try:
+        task = Task.objects.get(pk=pk)
+    except Task.DoesNotExist:
+        return JsonResponse({}, status=404)
+    data = {"project_id": None, "project_name": None}
+    if task.project:
+        data["project_id"] = str(task.project.pk)
+        data["project_name"] = str(task.project)
+    return JsonResponse(data)

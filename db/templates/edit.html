@@ -32,3 +32,15 @@
     </div>
   </div>
 {% endblock %}
+{% block extra_js %}
+  {{ block.super }}
+  {% if model_name == "time" %}
+    <script>
+      window.TIME_API_URLS = {
+        invoice: "{% url 'time_index' %}/api/invoice/",
+        project: "{% url 'time_index' %}/api/project/",
+        task:    "{% url 'time_index' %}/api/task/",
+      };
+    </script>
+  {% endif %}
+{% endblock %}
