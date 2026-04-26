@@ -7,3 +7,7 @@ class DBConfig(AppConfig):
 
     def ready(self):
         import db.signals  # noqa
+        from bson import ObjectId
+        from telepath import StringAdapter, register
+
+        register(StringAdapter(), ObjectId)
