@@ -1,0 +1,16 @@
+{% load i18n wagtailadmin_tags %}
+
+<li>
+    {% icon name="doc-empty" %}
+    {% if root_page and root_page.pk %}
+    <a href="{% url 'wagtailadmin_explore' root_page.pk %}">
+    {% else %}
+    <a href="{% url 'wagtailadmin_explore_root' %}">
+    {% endif %}
+        {% blocktrans trimmed count counter=total_pages with total_pages|intcomma as total %}
+            {{ total }} Page <span class="w-sr-only">created in {{ site_name }}</span>
+        {% plural %}
+            {{ total }} Pages <span class="w-sr-only">created in {{ site_name }}</span>
+        {% endblocktrans %}
+    </a>
+</li>
