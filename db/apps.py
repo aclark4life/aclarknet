@@ -8,6 +8,10 @@ class DBConfig(AppConfig):
     def ready(self):
         import db.signals  # noqa
         from bson import ObjectId
-        from telepath import StringAdapter, register
+        from telepath import BaseAdapter, ValueNode, register
 
-        register(StringAdapter(), ObjectId)
+        class ObjectIdAdapter(BaseAdapter):
+            def build_node(self, obj, context):
+                return ValueNode(str(obj))
+
+        register(ObjectIdAdapter(), ObjectId)
