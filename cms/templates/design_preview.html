@@ -44,20 +44,25 @@
       flex-direction: column;
       line-height: 1;
     }
+    /* entablature — the name sits on top */
     .brand-top {
       font-size: 1rem;
       font-weight: 700;
       letter-spacing: 0.01em;
       color: var(--dark);
+      padding-bottom: 3px;
+      border-bottom: 1.5px solid var(--dark);
     }
     .brand-top .brand-net { color: inherit; }
+    /* pillars — L L C as structural columns */
     .brand-llc {
       display: flex;
       justify-content: space-between;
-      font-size: 0.6rem;
-      font-weight: 600;
-      color: #6c757d;
+      font-size: 1rem;       /* same height as the name above */
+      font-weight: 700;
+      color: var(--brand);   /* brand colour to feel load-bearing */
       margin-top: 3px;
+      letter-spacing: 0.01em;
     }
     .preview-nav .nav-link {
       color: #495057;
@@ -178,9 +183,9 @@
     .preview-footer a { color: #adb5bd; text-decoration: none; transition: color 0.15s; }
     .preview-footer a:hover { color: #fff; }
     .preview-footer .footer-brand a { text-decoration: none; }
-    .preview-footer .brand-top { color: #dee2e6; }
-    .preview-footer .brand-top .brand-net { color: var(--brand); }
-    .preview-footer .brand-llc { color: #6c757d; }
+    .preview-footer .brand-top { color: #dee2e6; border-bottom-color: #dee2e6; }
+    .preview-footer .brand-top .brand-net { color: inherit; }
+    .preview-footer .brand-llc { color: var(--brand); }
     .preview-footer .social-icon { font-size: 1.3rem; margin: 0 0.35rem; }
   </style>
 </head>
