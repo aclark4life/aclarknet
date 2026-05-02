@@ -288,10 +288,28 @@ _TECHS = [
 ]
 
 
+_FONTS = [
+    ("font-inter",    "Inter (default)"),
+    ("font-grotesk",  "Space Grotesk"),
+    ("font-outfit",   "Outfit"),
+    ("font-ibm",      "IBM Plex Sans"),
+    ("font-syne",     "Syne"),
+    ("font-barlow",   "Barlow Condensed"),
+    ("font-rajdhani", "Rajdhani"),
+    ("font-bebas",    "Bebas Neue"),
+    ("font-oxanium",  "Oxanium"),
+]
+
+
 class LogoIdeasView(TemplateView):
     """Public logo ideas exploration page."""
 
     template_name = "logo_ideas.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["fonts"] = _FONTS
+        return context
 
 
 class DesignPreviewView(TemplateView):
