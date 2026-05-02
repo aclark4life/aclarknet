@@ -18,6 +18,7 @@
     {% include 'accordion-invoice.html' %}
   {% endif %}
   {% load babel humanize tz text_filters %}
+  {% if model_name != 'invoice' %}
   <div class="accordion my-3" id="accordionDetail">
     <div class="accordion-item">
       <h2 class="accordion-header">
@@ -29,7 +30,7 @@
                 aria-controls="collapseDetail">Detail</button>
       </h2>
       <div id="collapseDetail"
-           class="accordion-collapse {% if model_name == 'invoice' %}collapse{% else %}show{% endif %}"
+           class="accordion-collapse show"
            data-bs-parent="#accordionDetail">
         <div class="accordion-body p-0">
           <table class="table table-striped my-0">
@@ -57,6 +58,7 @@
       </div>
     </div>
   </div>
+  {% endif %}
   {% if object_notes or user.is_superuser %}
     <div class="accordion my-3" id="accordionNotes">
       <div class="accordion-item">
