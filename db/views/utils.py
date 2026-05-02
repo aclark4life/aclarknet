@@ -204,6 +204,7 @@ def time_api_invoice(request, pk):
     if not request.user.is_superuser:
         return JsonResponse({"error": "Forbidden"}, status=403)
     Invoice = apps.get_model("db", "Invoice")
+    Task = apps.get_model("db", "Task")
     try:
         invoice = Invoice.objects.get(pk=pk)
     except Invoice.DoesNotExist:
@@ -217,9 +218,9 @@ def time_api_invoice(request, pk):
     if invoice.project:
         data["project_id"] = str(invoice.project.pk)
         data["project_name"] = str(invoice.project)
-        if invoice.project.default_task:
-            data["default_task_id"] = str(invoice.project.default_task.pk)
-            data["default_task_name"] = str(invoice.project.default_task)
+        task = invoice.project.default_task or Task.get_default_task()
+        data["default_task_id"] = str(task.pk)
+        data["default_task_name"] = str(task)
     return JsonResponse(data)
 
 
@@ -230,14 +231,16 @@ def time_api_project(request, pk):
     if not request.user.is_superuser:
         return JsonResponse({"error": "Forbidden"}, status=403)
     Project = apps.get_model("db", "Project")
+    Task = apps.get_model("db", "Task")
     try:
         project = Project.objects.get(pk=pk)
     except Project.DoesNotExist:
         return JsonResponse({}, status=404)
-    data = {"default_task_id": None, "default_task_name": None}
-    if project.default_task:
-        data["default_task_id"] = str(project.default_task.pk)
-        data["default_task_name"] = str(project.default_task)
+    task = project.default_task or Task.get_default_task()
+    data = {
+        "default_task_id": str(task.pk),
+        "default_task_name": str(task),
+    }
     return JsonResponse(data)
 
 
