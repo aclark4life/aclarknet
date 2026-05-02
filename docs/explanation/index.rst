@@ -13,6 +13,7 @@ This section helps you understand how aclarknet works and why it's designed the 
    notes-testimonials
    client-categorization
    feature-visual-guide
+   invoice-dashboard-design
 
 Deployment
 ----------
@@ -37,6 +38,9 @@ Features
 
 :doc:`feature-visual-guide`
    Visual overview of the client categorization feature. See before-and-after examples and understand the user experience.
+
+:doc:`invoice-dashboard-design`
+   Design decisions behind the invoice accordion layout, time entry links, copy buttons, and PDF/web rendering.
 
 Need More Help?
 ---------------

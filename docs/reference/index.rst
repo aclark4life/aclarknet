@@ -15,6 +15,7 @@ This section contains accurate, complete technical information about aclarknet's
    frontend
    frontend-application
    frontend-components
+   design-system
 
 Database
 --------
@@ -45,6 +46,9 @@ Frontend
 
 :doc:`frontend-components`
    React component reference. Documents available components, their props, and usage patterns.
+
+:doc:`design-system`
+   Visual conventions, color palette, button styles, spacing, and icon usage across dashboard and public templates.
 
 Need More Help?
 ---------------

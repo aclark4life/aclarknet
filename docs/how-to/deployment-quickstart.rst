@@ -14,8 +14,11 @@ If you have ``just`` installed, you can use these convenient commands:
    # Initial deployment
    just deploy-initial  # or: just di
 
-   # Update deployment
+   # Update deployment (local, requires /srv write access)
    just deploy  # or: just dp
+
+   # Update deployment remotely via SSH (recommended from dev machine)
+   just deploy-remote  # or: just dpr
 
    # Check service status
    just deploy-status  # or: just ds

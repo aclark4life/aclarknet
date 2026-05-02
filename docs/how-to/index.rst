@@ -15,6 +15,8 @@ These guides assume you're already familiar with aclarknet basics. They provide 
    testimonials-quickstart
    manual-testing-guide
    stripe-test-mode
+   copy-invoice-data
+   managing-dependencies
 
 Deployment
 ----------
@@ -51,6 +53,12 @@ Payments
 
 :doc:`stripe-test-mode`
    Configure and test Stripe payments in production using test mode. Learn how to get test API keys, use test cards, and switch to live mode when ready.
+
+:doc:`copy-invoice-data`
+   Copy invoice row data to your clipboard as plain text for pasting into emails.
+
+:doc:`managing-dependencies`
+   Understand the Renovate automated dependency workflow and what to do when PRs arrive.
 
 Need More Help?
 ---------------
