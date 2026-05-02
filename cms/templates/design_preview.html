@@ -53,16 +53,21 @@
       margin-bottom: 4px;
     }
     .brand-top .brand-net { color: inherit; }
-    /* pillars container — beam as border-top so ticks share a column with their letter */
+    /* pillars container — beam built from bridge segments between columns */
     .brand-pillars {
       display: flex;
-      justify-content: space-between;
-      border-top: 2px solid var(--dark);
+      align-items: flex-start;
     }
-    .brand-pillars > span {
+    .brand-col {
       display: flex;
       flex-direction: column;
       align-items: center;
+    }
+    /* line segment connecting two adjacent ticks — sits flush between them */
+    .brand-bridge {
+      flex: 1;
+      border-top: 2px solid var(--dark);
+      margin-top: 0;
     }
     .brand-tick {
       width: 2px;
@@ -197,7 +202,8 @@
     .preview-footer .footer-brand a { text-decoration: none; }
     .preview-footer .brand-top { color: #dee2e6; }
     .preview-footer .brand-top .brand-net { color: inherit; }
-    .preview-footer .brand-pillars { border-top-color: #dee2e6; }
+    .preview-footer .brand-pillars { border-top: none; }
+    .preview-footer .brand-bridge { border-top-color: #dee2e6; }
     .preview-footer .brand-tick { background: #dee2e6; }
     .preview-footer .brand-letter { color: #dee2e6; }
     .preview-footer .social-icon { font-size: 1.3rem; margin: 0 0.35rem; }
@@ -218,9 +224,11 @@
         <span class="brand-wordmark">
           <span class="brand-top">ACLARK<span class="brand-net">.NET</span></span>
           <span class="brand-pillars">
-            <span><span class="brand-tick"></span><span class="brand-letter">L</span></span>
-            <span><span class="brand-tick"></span><span class="brand-letter">L</span></span>
-            <span><span class="brand-tick"></span><span class="brand-letter">C</span></span>
+            <span class="brand-col"><span class="brand-tick"></span><span class="brand-letter">L</span></span>
+            <span class="brand-bridge"></span>
+            <span class="brand-col"><span class="brand-tick"></span><span class="brand-letter">L</span></span>
+            <span class="brand-bridge"></span>
+            <span class="brand-col"><span class="brand-tick"></span><span class="brand-letter">C</span></span>
           </span>
         </span>
       </a>
@@ -346,9 +354,11 @@
             <span class="brand-wordmark">
               <span class="brand-top">ACLARK<span class="brand-net">.NET</span></span>
               <span class="brand-pillars">
-                <span><span class="brand-tick"></span><span class="brand-letter">L</span></span>
-                <span><span class="brand-tick"></span><span class="brand-letter">L</span></span>
-                <span><span class="brand-tick"></span><span class="brand-letter">C</span></span>
+                <span class="brand-col"><span class="brand-tick"></span><span class="brand-letter">L</span></span>
+                <span class="brand-bridge"></span>
+                <span class="brand-col"><span class="brand-tick"></span><span class="brand-letter">L</span></span>
+                <span class="brand-bridge"></span>
+                <span class="brand-col"><span class="brand-tick"></span><span class="brand-letter">C</span></span>
               </span>
             </span>
           </a>
