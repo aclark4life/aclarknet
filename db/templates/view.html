@@ -42,7 +42,7 @@
                     {% if field_name == 'description' and model_name == 'note' and field_value %}
                       <div class="d-flex align-items-start gap-2">
                         <div class="flex-grow-1" id="description-text">{{ field_value|format_field_value:field_name }}</div>
-                        <button class="btn btn-sm btn-outline-secondary" type="button" id="copy-description-btn" title="Copy description">
+                        <button class="btn btn-sm btn-outline-primary" type="button" id="copy-description-btn" title="Copy description">
                           <i class="fa-solid fa-copy"></i>
                         </button>
                       </div>
@@ -79,7 +79,7 @@
             {% if user.is_superuser %}
               <div class="mb-3">
                 <a href="{% url 'note_add_to_object' %}?content_type={{ content_type.id }}&object_id={{ object.pk }}"
-                   class="btn btn-outline-dashboard btn-sm">
+                   class="btn btn-outline-primary btn-sm">
                   <i class="fa-solid fa-plus"></i> Add Note
                 </a>
               </div>
@@ -88,12 +88,12 @@
               {% for note in object_notes %}
                 <div class="card mb-3"
                      onclick="window.location='{% url 'note_view' note.id %}'"
-                     style="cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;"
-                     onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)';"
+                     style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;"
+                     onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)';"
                      onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
                   <div class="card-body">
                     {% if note.name %}
-                      <h5 class="card-title">{{ note.name }}</h5>
+                      <h6 class="card-title">{{ note.name }}</h6>
                     {% endif %}
                     <p class="card-text">{{ note.text|linebreaks }}</p>
                     <div class="text-muted small">

@@ -28,7 +28,7 @@
                     <input type="text" class="form-control" id="payment-link"
                            value="{{ request.scheme }}://{{ request.get_host }}{% url 'public_invoice_payment' object.id %}"
                            readonly>
-                    <button class="btn btn-primary" type="button" id="copy-payment-link">
+                    <button class="btn btn-outline-primary" type="button" id="copy-payment-link">
                       <i class="fa-solid fa-copy"></i> Copy Link
                     </button>
                   </div>
@@ -61,13 +61,13 @@
         // Change button text temporarily to show success
           const originalHTML = copyButton.innerHTML;
           copyButton.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
-          copyButton.classList.remove('btn-primary');
+          copyButton.classList.remove('btn-outline-primary');
           copyButton.classList.add('btn-success');
 
           setTimeout(function() {
             copyButton.innerHTML = originalHTML;
             copyButton.classList.remove('btn-success');
-            copyButton.classList.add('btn-primary');
+            copyButton.classList.add('btn-outline-primary');
           }, 2000);
         }).catch(function(err) {
           console.error('Failed to copy text: ', err);

@@ -1,8 +1,8 @@
 {% load text_filters %}
 <div class="col-6 col-md-4 col-lg-3">
-  <div class="card h-100 {{ border }}"
+  <div class="card h-100 bg-light {{ border }}"
        onclick="window.location='{% url model_name|add:'_view' object_id %}'"
-       style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; background-color: #f8f9fa;"
+       style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;"
        onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)';"
        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
     <div class="card-body p-2">
