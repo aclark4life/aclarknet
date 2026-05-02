@@ -296,25 +296,28 @@
       color: #f8f9fa;
       margin-bottom: 4px;
     }
-    .logo-orig-beam .ob-beam {
+    .logo-orig-beam .ob-pillars {
       display: flex;
-      justify-content: space-between;
       align-items: flex-start;
-      height: 7px;
-      border-top: 2px solid #f8f9fa;
-      margin-bottom: 3px;
+      width: calc(100% - 8px);
+      margin: 0 auto;
     }
-    .logo-orig-beam .ob-beam span {
-      width: 2px; height: 5px;
-      background: #f8f9fa;
-      display: block;
-    }
-    .logo-orig-beam .ob-llc {
+    .logo-orig-beam .ob-col {
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      align-items: center;
+    }
+    .logo-orig-beam .ob-tick {
+      display: none;
+    }
+    .logo-orig-beam .ob-bridge {
+      flex: 1;
+      border-top: 1px solid #f8f9fa;
+      opacity: 0.45;
+    }
+    .logo-orig-beam .ob-letter {
       font-size: 0.6rem; font-weight: 700;
-      letter-spacing: 0.01em;
-      color: rgba(255,255,255,0.6);
+      color: #f8f9fa;
     }
   </style>
 </head>
@@ -572,8 +575,13 @@
         <div class="label" style="color:rgba(255,255,255,0.3);">★ Original — Beam in Middle</div>
         <div class="logo-orig-beam">
           <div class="ob-top">ACLARK.NET</div>
-          <div class="ob-beam"><span></span><span></span><span></span></div>
-          <div class="ob-llc"><span>L</span><span>L</span><span>C</span></div>
+          <div class="ob-pillars">
+            <span class="ob-col"><span class="ob-tick"></span><span class="ob-letter">L</span></span>
+            <span class="ob-bridge"></span>
+            <span class="ob-col"><span class="ob-tick"></span><span class="ob-letter">L</span></span>
+            <span class="ob-bridge"></span>
+            <span class="ob-col"><span class="ob-tick"></span><span class="ob-letter">C</span></span>
+          </div>
         </div>
       </div>
     </div>
