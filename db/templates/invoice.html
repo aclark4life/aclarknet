@@ -133,14 +133,14 @@
       </tr>
       {% for time_entry in times %}
         <tr>
-          <td style="border: 1px solid #ddd; padding: 8px; text-align: left; width: 80px;">
+          <td style="border: 1px solid #ddd; padding: 0; text-align: left; width: 80px;">
             {% if not pdf %}
-              {{ time_entry.date }}&nbsp;<a href="{% url 'time_view' time_entry.id %}" target="_blank"
-                 style="color: #adb5bd; text-decoration: none; vertical-align: middle; transition: color 0.15s;"
-                 onmouseover="this.style.color='#0d6efd';" onmouseout="this.style.color='#adb5bd';"
-                 title="Open time entry"><i class="fa-solid fa-arrow-up-right-from-square fa-2xs"></i></a>
+              <a href="{% url 'time_view' time_entry.id %}" target="_blank"
+                 style="display: block; padding: 8px; color: inherit; text-decoration: none; transition: background-color 0.15s;"
+                 onmouseover="this.style.backgroundColor='#e8f0fe'; this.style.color='#0d6efd';"
+                 onmouseout="this.style.backgroundColor=''; this.style.color='inherit';">{{ time_entry.date }}</a>
             {% else %}
-              {{ time_entry.date }}
+              <span style="display: block; padding: 8px;">{{ time_entry.date }}</span>
             {% endif %}
           </td>
           <td style="border: 1px solid #ddd; padding: 8px; text-align: left; width: 100px;">{{ time_entry.task }}</td>
