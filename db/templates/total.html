@@ -88,12 +88,12 @@
       const isTotalRow = values[0] === 'Total';
       const lines = [];
       if (!isTotalRow) {
-        lines.push('\u{1F464} ' + values[0]);       // User
-        lines.push('\u23F1 Hours: ' + values[1]);   // Hours
+        lines.push(values[0]);
+        lines.push('Hours: ' + values[1]);
       }
-      lines.push('\uD83D\uDCB0 Gross: ' + values[4]);
-      lines.push('\uD83D\uDCB8 Cost: '  + values[5]);
-      lines.push('\uD83D\uDCB9 Net: '   + values[6]);
+      lines.push('Gross: ' + values[4]);
+      lines.push('Cost: '  + values[5]);
+      lines.push('Net: '   + values[6]);
       return lines.join('\n');
     }
 
