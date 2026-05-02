@@ -283,6 +283,39 @@
       letter-spacing: 0.35em;
       color: rgba(255,255,255,0.45);
     }
+
+    /* ── ORIGINAL BEAM (beam in the middle, L L C spread below) ── */
+    .logo-orig-beam {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+    .logo-orig-beam .ob-top {
+      font-size: 1.25rem; font-weight: 700;
+      letter-spacing: 0.01em;
+      color: #f8f9fa;
+      margin-bottom: 4px;
+    }
+    .logo-orig-beam .ob-beam {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      height: 7px;
+      border-top: 2px solid #f8f9fa;
+      margin-bottom: 3px;
+    }
+    .logo-orig-beam .ob-beam span {
+      width: 2px; height: 5px;
+      background: #f8f9fa;
+      display: block;
+    }
+    .logo-orig-beam .ob-llc {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.01em;
+      color: rgba(255,255,255,0.6);
+    }
   </style>
 </head>
 <body>
@@ -533,6 +566,17 @@
 
   <h5 class="text-muted mb-4 text-uppercase" style="letter-spacing:.1em;font-size:.75rem;">Beam Design ⭐</h5>
   <div class="row g-4 mb-5">
+
+    <div class="col-md-4">
+      <div class="idea-card dark-bg" style="border: 1px solid rgba(25,151,198,0.35);">
+        <div class="label" style="color:rgba(255,255,255,0.3);">★ Original — Beam in Middle</div>
+        <div class="logo-orig-beam">
+          <div class="ob-top">ACLARK.NET</div>
+          <div class="ob-beam"><span></span><span></span><span></span></div>
+          <div class="ob-llc"><span>L</span><span>L</span><span>C</span></div>
+        </div>
+      </div>
+    </div>
 
     <div class="col-md-4">
       <div class="idea-card dark-bg">
