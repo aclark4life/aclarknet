@@ -1,0 +1,218 @@
+{% load static wagtailcore_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ACLARK.NET — Design Preview</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand: #1997C6;
+      --brand-dark: #136f93;
+    }
+    body { font-family: 'Inter', sans-serif; }
+
+    /* ── NAV ── */
+    .preview-nav {
+      background: #fff;
+      border-bottom: 1px solid #e9ecef;
+      padding: 0.75rem 0;
+    }
+    .preview-nav .navbar-brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.03em;
+      color: var(--brand);
+    }
+    .preview-nav .nav-link {
+      color: #495057;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.4rem 0.75rem;
+    }
+    .preview-nav .nav-link:hover { color: var(--brand); }
+
+    /* ── HERO ── */
+    .preview-hero {
+      background: linear-gradient(135deg, #0f2b3d 0%, var(--brand-dark) 60%, var(--brand) 100%);
+      min-height: 480px;
+      display: flex;
+      align-items: center;
+    }
+    .preview-hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; }
+    .preview-hero .lead { font-size: 1.15rem; opacity: 0.85; }
+    .preview-hero .btn-cta {
+      background: #fff;
+      color: var(--brand-dark);
+      border: none;
+      font-weight: 600;
+      padding: 0.65rem 1.75rem;
+      border-radius: 6px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .preview-hero .btn-cta:hover { background: var(--brand); color: #fff; }
+
+    /* ── MISSION ── */
+    .preview-mission { background: #f8f9fa; }
+
+    /* ── CLIENTS RIBBON ── */
+    .preview-ribbon {
+      background: var(--brand);
+    }
+    .preview-ribbon img { filter: brightness(0) invert(1); opacity: 0.7; }
+    .preview-ribbon img:hover { opacity: 1; }
+
+    /* ── TESTIMONIAL ── */
+    .preview-testimonial {
+      background: #0f2b3d;
+    }
+
+    /* ── TECH GRID ── */
+    .tech-item i { color: var(--brand); transition: transform 0.2s; }
+    .tech-item:hover i { transform: scale(1.15); }
+    .tech-item h6 { font-size: 0.8rem; font-weight: 600; color: #495057; margin-top: 0.5rem; }
+
+    /* ── FOOTER ── */
+    .preview-footer {
+      background: #0f2b3d;
+      color: #adb5bd;
+    }
+    .preview-footer a { color: #adb5bd; text-decoration: none; transition: color 0.15s; }
+    .preview-footer a:hover { color: #fff; }
+    .preview-footer .social-icon { font-size: 1.4rem; margin: 0 0.4rem; }
+
+    /* ── PREVIEW BANNER ── */
+    .preview-banner {
+      background: #fff3cd;
+      border-bottom: 2px solid #ffc107;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Preview notice -->
+  <div class="preview-banner py-2 text-center">
+    <i class="fa-solid fa-flask"></i>
+    <strong>Design Preview</strong> — This page is not live. <a href="/" class="text-decoration-underline">Back to live site</a>
+  </div>
+
+  <!-- NAV -->
+  <nav class="preview-nav navbar navbar-expand-md">
+    <div class="container">
+      <a class="navbar-brand" href="#">ACLARK.NET</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#previewNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="previewNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Clients</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Careers</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO (replaces carousel) -->
+  <section class="preview-hero text-white">
+    <div class="container py-5">
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+          <p class="text-uppercase small fw-semibold mb-2" style="letter-spacing:0.1em; opacity:0.7;">Open Source Experts Since 2004</p>
+          <h1 class="mb-4">Expert Consulting.<br>Quality Software.<br>Reliable Systems.</h1>
+          <p class="lead mb-4">We advance the use of open source technology through consulting, software development, and infrastructure engineering.</p>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="#" class="btn btn-cta">Consulting Services</a>
+            <a href="#" class="btn btn-outline-light">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION -->
+  <section class="preview-mission py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <p class="text-uppercase small fw-semibold mb-2" style="letter-spacing:0.1em; color:var(--brand);">Mission</p>
+          <p class="fs-5 text-secondary">
+            Since 2004, our goal has been to advance the use of open source and related software technology. From Amtrak to USAID, we develop and deliver quality, successful open source software, consulting, training, and support worldwide.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENTS RIBBON -->
+  <section class="preview-ribbon py-4">
+    <div class="container">
+      <p class="text-center text-uppercase small fw-semibold mb-3" style="letter-spacing:0.1em; color:rgba(255,255,255,0.6);">Clients</p>
+      <div class="d-flex justify-content-center align-items-center flex-wrap gap-4">
+        <img width="140" src="{% static 'img/startup-4.svg' %}" alt="Client">
+        <img width="140" src="{% static 'img/startup-5.webp' %}" alt="Client">
+        <img width="140" src="{% static 'img/startup-6.webp' %}" alt="Client">
+        <img width="140" src="{% static 'img/startup-7.webp' %}" alt="Client">
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="preview-testimonial py-5 text-white">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-7 text-center">
+          <i class="fa-solid fa-quote-left fa-2x mb-3" style="color:var(--brand); opacity:0.6;"></i>
+          <p class="fs-4 fst-italic mb-3">"Exceptional work, delivered on time and on budget."</p>
+          <p class="small text-muted">— A Satisfied Client</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH GRID -->
+  <section class="py-5">
+    <div class="container">
+      <p class="text-center text-uppercase small fw-semibold mb-4" style="letter-spacing:0.1em; color:var(--brand);">Technology</p>
+      <div class="row row-cols-3 row-cols-sm-4 row-cols-md-6 g-3 text-center">
+        {% for tech in techs %}
+        <div class="col tech-item">
+          <i class="{{ tech.icon }} fa-2x"></i>
+          <h6>{{ tech.name }}</h6>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="preview-footer py-4">
+    <div class="container text-center">
+      <div class="mb-3">
+        <a href="#" class="social-icon"><i class="fa-brands fa-linkedin"></i><span class="visually-hidden">LinkedIn</span></a>
+        <a href="#" class="social-icon"><i class="fa-brands fa-github"></i><span class="visually-hidden">GitHub</span></a>
+        <a href="#" class="social-icon"><i class="fa-solid fa-book"></i><span class="visually-hidden">Docs</span></a>
+      </div>
+      <ul class="list-inline mb-2">
+        <li class="list-inline-item"><a href="#">Home</a></li>
+        <li class="list-inline-item">·</li>
+        <li class="list-inline-item"><a href="#">About</a></li>
+        <li class="list-inline-item">·</li>
+        <li class="list-inline-item"><a href="#">Services</a></li>
+        <li class="list-inline-item">·</li>
+        <li class="list-inline-item"><a href="#">Contact</a></li>
+      </ul>
+      <p class="small mb-0">&copy; 2004 &ndash; {% now "Y" %} ACLARK.NET, LLC</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

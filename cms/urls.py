@@ -4,6 +4,7 @@ from .views import (
     CareersView,
     ClientsView,
     ContactView,
+    DesignPreviewView,
     HomeView,
     ServicesView,
 )
@@ -15,4 +16,5 @@ urlpatterns = [
     path("clients/", ClientsView.as_view(), name="clients"),
     path("contact-us/", ContactView.as_view(), name="contact"),
     path("services/", ServicesView.as_view(), name="services"),
+    path("design-preview/", DesignPreviewView.as_view(), name="design_preview"),
 ]

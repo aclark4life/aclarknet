@@ -4,6 +4,7 @@ import logging
 
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.views.generic import FormView, TemplateView
 
@@ -262,4 +263,34 @@ class ServicesView(BaseCMSView):
                 "Digital Marketing",
             ],
         )
+        return context
+
+
+_TECHS = [
+    {"name": "Amazon Web Services", "icon": "fab fa-aws"},
+    {"name": "Bootstrap", "icon": "fab fa-bootstrap"},
+    {"name": "CSS", "icon": "fab fa-css3"},
+    {"name": "Docker", "icon": "fab fa-docker"},
+    {"name": "Font Awesome", "icon": "fab fa-font-awesome"},
+    {"name": "GitHub", "icon": "fab fa-github"},
+    {"name": "HTML", "icon": "fab fa-html5"},
+    {"name": "JavaScript", "icon": "fab fa-js"},
+    {"name": "Linux", "icon": "fab fa-linux"},
+    {"name": "Python", "icon": "fab fa-python"},
+    {"name": "React", "icon": "fa-brands fa-react"},
+    {"name": "Sass", "icon": "fa-brands fa-sass"},
+]
+
+
+class DesignPreviewView(UserPassesTestMixin, TemplateView):
+    """Superuser-only design preview — not linked from any live page."""
+
+    template_name = "design_preview.html"
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["techs"] = _TECHS
         return context
