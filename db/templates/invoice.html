@@ -133,10 +133,10 @@
       </tr>
       {% for time_entry in times %}
         <tr>
-          <td style="border: 1px solid #ddd; padding: 0; text-align: left; width: 80px;">
+          <td style="border: 1px solid #ddd; padding: 0; text-align: left; width: 80px; height: 100%;">
             {% if not pdf %}
               <a href="{% url 'time_view' time_entry.id %}" target="_blank"
-                 style="display: block; padding: 8px; color: inherit; text-decoration: none; transition: background-color 0.15s;"
+                 style="display: flex; align-items: center; padding: 8px; height: 100%; color: inherit; text-decoration: none; transition: background-color 0.15s;"
                  onmouseover="this.style.backgroundColor='#e8f0fe'; this.style.color='#0d6efd';"
                  onmouseout="this.style.backgroundColor=''; this.style.color='inherit';">{{ time_entry.date }}</a>
             {% else %}
