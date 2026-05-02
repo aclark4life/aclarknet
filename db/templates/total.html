@@ -14,16 +14,17 @@
       <div class="accordion-body p-0">
         <table class="table table-striped my-0">
           <thead>
-            <tr>
-              <th>User</th>
-              <th class="text-end">Hours</th>
-              <th class="text-end">Task Rate</th>
-              <th class="text-end">User Rate</th>
-              <th class="text-end">Billed Amount</th>
-              <th class="text-end">User Cost</th>
-              <th class="text-end">Difference</th>
-            </tr>
-          </thead>
+             <tr>
+               <th>User</th>
+               <th class="text-end">Hours</th>
+               <th class="text-end">Task Rate</th>
+               <th class="text-end">User Rate</th>
+               <th class="text-end">Billed Amount</th>
+               <th class="text-end">User Cost</th>
+               <th class="text-end">Difference</th>
+               <th></th>
+             </tr>
+           </thead>
           <tbody>
             {% for calc in user_calculations %}
               <tr>
@@ -51,12 +52,17 @@
             {% endfor %}
             <tr class="fw-bold">
               <td>Total</td>
-              <td class="text-end">{{ calc_total_hours|floatformat:2 }}</td>
+              <td class="text-end" id="total-hours">{{ calc_total_hours|floatformat:2 }}</td>
               <td class="text-end">-</td>
               <td class="text-end">-</td>
-              <td class="text-end">{{ calc_total_amount|currencyfmt:"USD" }}</td>
-              <td class="text-end">{{ calc_total_cost|currencyfmt:"USD" }}</td>
-              <td class="text-end">{{ calc_total_difference|currencyfmt:"USD" }}</td>
+              <td class="text-end" id="total-amount">{{ calc_total_amount|currencyfmt:"USD" }}</td>
+              <td class="text-end" id="total-cost">{{ calc_total_cost|currencyfmt:"USD" }}</td>
+              <td class="text-end" id="total-difference">{{ calc_total_difference|currencyfmt:"USD" }}</td>
+              <td class="text-end">
+                <button class="btn btn-outline-primary btn-sm" id="copy-totals-btn" title="Copy totals">
+                  <i class="fa-solid fa-copy"></i>
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -64,3 +70,28 @@
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const btn = document.getElementById('copy-totals-btn');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      const hours = document.getElementById('total-hours').textContent.trim();
+      const amount = document.getElementById('total-amount').textContent.trim();
+      const cost = document.getElementById('total-cost').textContent.trim();
+      const diff = document.getElementById('total-difference').textContent.trim();
+      const text = ['Total', hours, '-', '-', amount, cost, diff].join('\t');
+      navigator.clipboard.writeText(text).then(function () {
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-check"></i>';
+        btn.classList.replace('btn-outline-primary', 'btn-success');
+        setTimeout(function () {
+          btn.innerHTML = orig;
+          btn.classList.replace('btn-success', 'btn-outline-primary');
+        }, 2000);
+      }).catch(function () {
+        alert('Failed to copy. Please copy manually.');
+      });
+    });
+  });
+</script>
