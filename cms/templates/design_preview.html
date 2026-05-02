@@ -37,28 +37,28 @@
     .brand-mark {
       display: inline-flex;
       align-items: center;
-      gap: 0.55rem;
       text-decoration: none;
     }
-    .brand-mark-icon {
-      flex-shrink: 0;
-    }
     .brand-wordmark {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+    .brand-top {
       font-size: 1rem;
       font-weight: 700;
       letter-spacing: 0.01em;
       color: var(--dark);
-      line-height: 1;
     }
-    .brand-wordmark .brand-net { color: var(--brand); }
-    .brand-wordmark .brand-llc {
-      display: block;
-      font-size: 0.62rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
+    .brand-top .brand-net { color: var(--brand); }
+    .brand-llc {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
       color: #6c757d;
-      margin-top: 1px;
-      text-transform: uppercase;
+      margin-top: 3px;
     }
     .preview-nav .nav-link {
       color: #495057;
@@ -179,9 +179,9 @@
     .preview-footer a { color: #adb5bd; text-decoration: none; transition: color 0.15s; }
     .preview-footer a:hover { color: #fff; }
     .preview-footer .footer-brand a { text-decoration: none; }
-    .preview-footer .brand-wordmark { color: #dee2e6; }
-    .preview-footer .brand-wordmark .brand-net { color: var(--brand); }
-    .preview-footer .brand-wordmark .brand-llc { color: #6c757d; }
+    .preview-footer .brand-top { color: #dee2e6; }
+    .preview-footer .brand-top .brand-net { color: var(--brand); }
+    .preview-footer .brand-llc { color: #6c757d; }
     .preview-footer .social-icon { font-size: 1.3rem; margin: 0 0.35rem; }
   </style>
 </head>
@@ -197,17 +197,9 @@
   <nav class="preview-nav navbar navbar-expand-md">
     <div class="container">
       <a class="navbar-brand p-0 brand-mark" href="#">
-        <!-- Rounded-square AC monogram mark -->
-        <svg class="brand-mark-icon" width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="34" height="34" rx="7" fill="#1997C6"/>
-          <!-- stylised "A" built from paths so it renders cleanly at small sizes -->
-          <text x="17" y="23" text-anchor="middle" fill="white"
-            font-family="Inter,system-ui,sans-serif" font-weight="700" font-size="16"
-            letter-spacing="-0.5">AC</text>
-        </svg>
         <span class="brand-wordmark">
-          ACLARK<span class="brand-net">.NET</span>
-          <span class="brand-llc">LLC</span>
+          <span class="brand-top">ACLARK<span class="brand-net">.NET</span></span>
+          <span class="brand-llc"><span>L</span><span>L</span><span>C</span></span>
         </span>
       </a>
       <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#previewNav">
@@ -329,15 +321,9 @@
       <div class="row align-items-center">
         <div class="col-md-4 text-center text-md-start footer-brand mb-3 mb-md-0">
           <a class="brand-mark" href="#">
-            <svg class="brand-mark-icon" width="30" height="30" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <rect width="34" height="34" rx="7" fill="#1997C6"/>
-              <text x="17" y="23" text-anchor="middle" fill="white"
-                font-family="Inter,system-ui,sans-serif" font-weight="700" font-size="16"
-                letter-spacing="-0.5">AC</text>
-            </svg>
             <span class="brand-wordmark">
-              ACLARK<span class="brand-net">.NET</span>
-              <span class="brand-llc">LLC</span>
+              <span class="brand-top">ACLARK<span class="brand-net">.NET</span></span>
+              <span class="brand-llc"><span>L</span><span>L</span><span>C</span></span>
             </span>
           </a>
         </div>
