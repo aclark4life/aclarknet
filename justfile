@@ -139,6 +139,12 @@ deploy:
 
 alias dp := deploy
 
+# Deploy to production server remotely via SSH
+deploy-remote:
+    ssh aclark.net "cd /srv/aclarknet && sudo deployment/deploy.sh"
+
+alias dpr := deploy-remote
+
 # Check production service status
 deploy-status:
     sudo systemctl status aclarknet.service
