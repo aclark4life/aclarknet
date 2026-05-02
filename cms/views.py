@@ -294,7 +294,7 @@ class LogoIdeasView(TemplateView):
     template_name = "logo_ideas.html"
 
 
-
+class DesignPreviewView(TemplateView):
     """Public design preview page."""
 
     template_name = "design_preview.html"
