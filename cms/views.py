@@ -288,13 +288,10 @@ _TECHS = [
 ]
 
 
-class DesignPreviewView(UserPassesTestMixin, TemplateView):
-    """Superuser-only design preview — not linked from any live page."""
+class DesignPreviewView(TemplateView):
+    """Public design preview page."""
 
     template_name = "design_preview.html"
-
-    def test_func(self):
-        return self.request.user.is_superuser
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
