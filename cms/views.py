@@ -288,7 +288,13 @@ _TECHS = [
 ]
 
 
-class DesignPreviewView(TemplateView):
+class LogoIdeasView(TemplateView):
+    """Public logo ideas exploration page."""
+
+    template_name = "logo_ideas.html"
+
+
+
     """Public design preview page."""
 
     template_name = "design_preview.html"

@@ -37,59 +37,41 @@
       .brand-mark {
         display: inline-flex;
         align-items: center;
+        gap: 10px;
         text-decoration: none;
+      }
+      .brand-icon svg {
+        display: block;
       }
       .brand-wordmark {
         display: flex;
         flex-direction: column;
         line-height: 1;
+        gap: 3px;
       }
-    /* the name — bigger to feel like it has weight to carry */
       .brand-top {
-        font-size: 1.25rem;
+        font-size: 1.15rem;
         font-weight: 700;
-        letter-spacing: 0.01em;
+        letter-spacing: 0.04em;
         color: var(--dark);
-        margin-bottom: 4px;
       }
-      .brand-top .brand-net { color: inherit; }
-    /* pillars container — beam built from bridge segments between columns */
-      .brand-pillars {
-        display: flex;
-        align-items: flex-start;
-        width: calc(100% - 8px);
-        margin: 0 auto;
-      }
-      .brand-col {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-    /* line segment connecting two adjacent ticks — sits flush between them */
-      .brand-bridge {
-        flex: 1;
-        border-top: 1px solid var(--dark);
-        opacity: 0.45;
-      }
-      .brand-tick { display: none; }
-      .brand-letter {
+      .brand-llc {
         font-size: 0.6rem;
-        font-weight: 700;
+        font-weight: 600;
+        letter-spacing: 0.18em;
         color: var(--dark);
+        opacity: 0.55;
+        text-transform: uppercase;
       }
-      .preview-nav .brand-mark {
-        padding: 0 !important;
-      }
-      .preview-nav .brand-top {
-        color: #f8f9fa;
-      }
-      .preview-nav .brand-letter {
-        color: #f8f9fa;
-      }
-      .preview-nav .brand-bridge {
-        border-top-color: #f8f9fa;
-        opacity: 0.5;
-      }
+      .preview-nav .brand-mark { padding: 0 !important; }
+      .preview-nav .brand-top  { color: #f8f9fa; }
+      .preview-nav .brand-llc  { color: #adb5bd; opacity: 1; }
+      .preview-nav .brand-icon .node { fill: var(--brand); }
+      .preview-nav .brand-icon .edge { stroke: rgba(255,255,255,0.35); }
+      .preview-footer .brand-top { color: #dee2e6; }
+      .preview-footer .brand-llc { color: #adb5bd; opacity: 1; }
+      .preview-footer .brand-icon .node { fill: var(--brand); }
+      .preview-footer .brand-icon .edge { stroke: rgba(255,255,255,0.25); }
       .preview-nav .nav-link {
         color: #adb5bd;
         font-size: 0.875rem;
@@ -209,11 +191,6 @@
       .preview-footer a { color: #adb5bd; text-decoration: none; transition: color 0.15s; }
       .preview-footer a:hover { color: #fff; }
       .preview-footer .footer-brand a { text-decoration: none; }
-      .preview-footer .brand-top { color: #dee2e6; }
-      .preview-footer .brand-top .brand-net { color: inherit; }
-      .preview-footer .brand-bridge { border-top-color: #dee2e6; }
-      .preview-footer .brand-tick { background: #dee2e6; }
-      .preview-footer .brand-letter { color: #dee2e6; }
       .preview-footer .social-icon { font-size: 1.3rem; margin: 0 0.35rem; }
     </style>
   </head>
@@ -222,7 +199,7 @@
   <!-- Preview notice -->
     <div class="preview-banner py-2 text-center">
       <i class="fa-solid fa-flask me-1"></i>
-      <strong>Design Preview</strong> — This page is not live. <a href="/" class="text-decoration-underline">Back to live site</a>
+      <strong>Design Preview</strong> — This page is not live. <a href="/" class="text-decoration-underline">Back to live site</a> &nbsp;·&nbsp; <a href="{% url 'logo_ideas' %}" class="text-decoration-underline">Logo Ideas</a>
     </div>
 
   <!-- NAV -->
