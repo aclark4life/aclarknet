@@ -16,18 +16,18 @@
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card">
-          <div class="card-header bg-primary text-white">
-            <h4 class="mb-0">
-              <i class="fa-solid fa-file-invoice-dollar"></i> Invoice Payment
+          <div class="card-header bg-light text-dark border-bottom">
+            <h5 class="mb-0">
+              <i class="fa-solid fa-file-invoice-dollar text-primary"></i> Invoice Payment
               {% if STRIPE_TEST_MODE %}
                 <span class="badge bg-warning text-dark ms-2">TEST MODE</span>
               {% endif %}
-            </h4>
+            </h5>
           </div>
           <div class="card-body">
             {% if invoice %}
               <div class="mb-4">
-                <h5>Invoice Details</h5>
+                <h6>Invoice Details</h6>
                 <table class="table table-bordered">
                   <tbody>
                     <tr>
@@ -72,7 +72,7 @@
 
                 <form method="post" action="{% url 'create_checkout_session' invoice.id %}">
                   {% csrf_token %}
-                  <button type="submit" class="btn btn-primary btn-lg w-100">
+                  <button type="submit" class="btn btn-outline-primary btn-lg w-100">
                     <i class="fa-brands fa-stripe"></i> Pay ${{ invoice.balance|floatformat:2|intcomma }} with Stripe
                   </button>
                 </form>
