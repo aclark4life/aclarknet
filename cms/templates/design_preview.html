@@ -44,24 +44,37 @@
       flex-direction: column;
       line-height: 1;
     }
-    /* entablature — the name sits on top */
+    /* the name — bigger to feel like it has weight to carry */
     .brand-top {
-      font-size: 1rem;
+      font-size: 1.25rem;
       font-weight: 700;
       letter-spacing: 0.01em;
       color: var(--dark);
-      padding-bottom: 3px;
-      border-bottom: 1.5px solid var(--dark);
+      margin-bottom: 4px;
     }
     .brand-top .brand-net { color: inherit; }
-    /* pillars — L L C as structural columns */
+    /* structural beam — full-width line with 3 downward ticks at pillar positions */
+    .brand-beam {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      height: 7px;
+      border-top: 2px solid var(--dark);
+      margin-bottom: 3px;
+    }
+    .brand-beam span {
+      width: 2px;
+      height: 5px;
+      background: var(--dark);
+      display: block;
+    }
+    /* pillars */
     .brand-llc {
       display: flex;
       justify-content: space-between;
-      font-size: 1rem;       /* same height as the name above */
+      font-size: 0.9rem;
       font-weight: 700;
-      color: var(--dark);   /* same color as the name */
-      margin-top: 3px;
+      color: var(--dark);
       letter-spacing: 0.01em;
     }
     .preview-nav .nav-link {
@@ -185,6 +198,8 @@
     .preview-footer .footer-brand a { text-decoration: none; }
     .preview-footer .brand-top { color: #dee2e6; border-bottom-color: #dee2e6; }
     .preview-footer .brand-top .brand-net { color: inherit; }
+    .preview-footer .brand-beam { border-top-color: #dee2e6; }
+    .preview-footer .brand-beam span { background: #dee2e6; }
     .preview-footer .brand-llc { color: #dee2e6; }
     .preview-footer .social-icon { font-size: 1.3rem; margin: 0 0.35rem; }
   </style>
@@ -203,6 +218,7 @@
       <a class="navbar-brand p-0 brand-mark" href="#">
         <span class="brand-wordmark">
           <span class="brand-top">ACLARK<span class="brand-net">.NET</span></span>
+          <span class="brand-beam"><span></span><span></span><span></span></span>
           <span class="brand-llc"><span>L</span><span>L</span><span>C</span></span>
         </span>
       </a>
@@ -327,6 +343,7 @@
           <a class="brand-mark" href="#">
             <span class="brand-wordmark">
               <span class="brand-top">ACLARK<span class="brand-net">.NET</span></span>
+              <span class="brand-beam"><span></span><span></span><span></span></span>
               <span class="brand-llc"><span>L</span><span>L</span><span>C</span></span>
             </span>
           </a>
