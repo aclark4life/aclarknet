@@ -1,0 +1,26 @@
+{% load text_filters %}
+<div class="col-6 col-md-4 col-lg-3">
+  <div class="card h-100 {{ border }}"
+       onclick="window.location='{% url model_name|add:'_view' object_id %}'"
+       style="cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; background-color: #f8f9fa;"
+       onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)';"
+       onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
+    <div class="card-body p-2">
+      <h6 class="card-title mb-1">
+        <span class="badge" style="background-color: {{ badge_color }}">{{ model_name|title }}</span>
+        {% for field_name, field_value in field_values %}
+          {% if field_name in related_title_fields %}{{ field_value|default:"" }}{% endif %}
+        {% endfor %}
+      </h6>
+      <div class="card-text small">
+        {% for field_name, field_value in field_values %}
+          {% if field_name not in related_excluded_fields and field_name not in related_title_fields %}
+            {% if field_name == 'date' or field_name == 'description' or field_name == 'hours' or field_value %}
+              <strong>{{ field_name|title_case }}:</strong> {{ field_value|default:"—"|truncatewords:10 }}<br>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
