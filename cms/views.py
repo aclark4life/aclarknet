@@ -269,16 +269,22 @@ class ServicesView(BaseCMSView):
 _TECHS = [
     {"name": "Amazon Web Services", "icon": "fab fa-aws"},
     {"name": "Bootstrap", "icon": "fab fa-bootstrap"},
+    {"name": "Claude AI", "icon": "fa-solid fa-brain"},
     {"name": "CSS", "icon": "fab fa-css3"},
     {"name": "Docker", "icon": "fab fa-docker"},
     {"name": "Font Awesome", "icon": "fab fa-font-awesome"},
+    {"name": "Git", "icon": "fab fa-git-alt"},
     {"name": "GitHub", "icon": "fab fa-github"},
+    {"name": "GitHub Copilot", "icon": "fa-solid fa-robot"},
     {"name": "HTML", "icon": "fab fa-html5"},
     {"name": "JavaScript", "icon": "fab fa-js"},
     {"name": "Linux", "icon": "fab fa-linux"},
+    {"name": "Node.js", "icon": "fab fa-node-js"},
+    {"name": "OpenAI", "icon": "fa-solid fa-microchip"},
     {"name": "Python", "icon": "fab fa-python"},
     {"name": "React", "icon": "fa-brands fa-react"},
     {"name": "Sass", "icon": "fa-brands fa-sass"},
+    {"name": "Webpack", "icon": "fa-solid fa-box-open"},
 ]
 
 
