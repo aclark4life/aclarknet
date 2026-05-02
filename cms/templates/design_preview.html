@@ -66,20 +66,22 @@
     /* line segment connecting two adjacent ticks — sits flush between them */
     .brand-bridge {
       flex: 1;
-      border-top: 2px solid #9ca3af;
+      border-top: 2px solid var(--dark);
       margin-top: 0;
     }
     .brand-tick {
-      width: 2px;
-      height: 4px;
-      background: #9ca3af;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--dark);
       display: block;
+      margin-top: -3px;   /* sit the circle centered on the beam line */
       margin-bottom: 2px;
     }
     .brand-letter {
       font-size: 0.9rem;
       font-weight: 700;
-      color: #b0b8c1;
+      color: var(--dark);
     }
     .preview-nav .nav-link {
       color: #495057;
@@ -202,7 +204,6 @@
     .preview-footer .footer-brand a { text-decoration: none; }
     .preview-footer .brand-top { color: #dee2e6; }
     .preview-footer .brand-top .brand-net { color: inherit; }
-    .preview-footer .brand-pillars { border-top: none; }
     .preview-footer .brand-bridge { border-top-color: #dee2e6; }
     .preview-footer .brand-tick { background: #dee2e6; }
     .preview-footer .brand-letter { color: #dee2e6; }
