@@ -78,21 +78,23 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    const HEADERS = ['User', 'Hours', 'Task Rate', 'User Rate', 'Billed Amount', 'User Cost', 'Difference'];
-
     function getRowValues(row) {
       return Array.from(row.querySelectorAll('td'))
         .slice(0, 7)
         .map(td => td.textContent.trim());
     }
 
-    function formatForEmail(headers, values) {
-      const colWidth = headers.map((h, i) => Math.max(h.length, (values[i] || '').length) + 2);
-      const pad = (s, w) => s + ' '.repeat(Math.max(0, w - s.length));
-      const divider = colWidth.map(w => '-'.repeat(w)).join('  ');
-      const headerRow = headers.map((h, i) => pad(h, colWidth[i])).join('  ');
-      const valueRow = values.map((v, i) => pad(v, colWidth[i])).join('  ');
-      return [headerRow, divider, valueRow].join('\n');
+    function formatForEmail(values) {
+      const isTotalRow = values[0] === 'Total';
+      const lines = [];
+      if (!isTotalRow) {
+        lines.push('\u{1F464} ' + values[0]);       // User
+        lines.push('\u23F1 Hours: ' + values[1]);   // Hours
+      }
+      lines.push('\uD83D\uDCB0 Gross: ' + values[4]);
+      lines.push('\uD83D\uDCB8 Cost: '  + values[5]);
+      lines.push('\uD83D\uDCB9 Net: '   + values[6]);
+      return lines.join('\n');
     }
 
     function flashBtn(btn) {
@@ -109,7 +111,7 @@
       btn.addEventListener('click', function () {
         const row = btn.closest('tr');
         const values = getRowValues(row);
-        const text = formatForEmail(HEADERS, values);
+        const text = formatForEmail(values);
         navigator.clipboard.writeText(text).then(function () {
           flashBtn(btn);
         }).catch(function () {
