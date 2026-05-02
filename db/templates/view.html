@@ -11,6 +11,9 @@
 {% endblock %}
 {% block dashboard %}
   {% include 'toolbars/index.html' %}
+  {% if model_name == 'invoice' and user_calculations %}
+    {% include 'total.html' %}
+  {% endif %}
   {% if model_name == 'invoice' %}
     {% include 'accordion-invoice.html' %}
   {% endif %}
@@ -107,9 +110,6 @@
         </div>
       </div>
     </div>
-  {% endif %}
-  {% if model_name == 'invoice' and user_calculations %}
-    {% include 'total.html' %}
   {% endif %}
   {% if has_related and user.is_superuser %}
     {% include 'related.html' %}
