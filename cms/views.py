@@ -298,6 +298,15 @@ _FONTS = [
     ("font-rajdhani", "Rajdhani"),
     ("font-bebas",    "Bebas Neue"),
     ("font-oxanium",  "Oxanium"),
+    ("font-exo2",     "Exo 2"),
+    ("font-russo",    "Russo One"),
+    ("font-titillium","Titillium Web"),
+    ("font-chakra",   "Chakra Petch"),
+    ("font-audiowide","Audiowide"),
+    ("font-saira",    "Saira Condensed"),
+    ("font-aldrich",  "Aldrich"),
+    ("font-sharetech","Share Tech Mono"),
+    ("font-orbitron", "Orbitron"),
 ]
 
 
