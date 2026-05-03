@@ -83,7 +83,17 @@
   .dash-footer a { color: #adb5bd; text-decoration: none; transition: color 0.15s; }
   .dash-footer a:hover { color: #fff; }
   .dash-footer .social-icon { font-size: 1.3rem; margin: 0 0.35rem; }
+  .dash-banner {
+    background: #fff3cd;
+    border-bottom: 2px solid #ffc107;
+    font-size: 0.85rem;
+  }
 </style>
+
+<div class="dash-banner py-2 text-center">
+  <i class="fa-solid fa-flask me-1"></i>
+  <strong>Design Preview</strong> — This page is not live. <a href="/" class="text-decoration-underline">Back to live site</a>
+</div>
 
 <nav class="dash-nav navbar navbar-expand-md">
   <div class="container-fluid px-4">
@@ -99,8 +109,20 @@
     <div class="collapse navbar-collapse" id="dashNav">
       <ul class="navbar-nav ms-auto align-items-center gap-1">
         <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="/clients/">Clients</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="/about/" data-bs-toggle="dropdown">About</a>
+          <ul class="dropdown-menu dropdown-menu-dark">
+            <li><a class="dropdown-item" href="/about/#team">Team</a></li>
+            <li><a class="dropdown-item" href="/about/#dcpython">Community</a></li>
+            <li><a class="dropdown-item" href="/about/#book">Publications</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="/clients/" data-bs-toggle="dropdown">Clients</a>
+          <ul class="dropdown-menu dropdown-menu-dark">
+            <li><a class="dropdown-item" href="/clients/#testimonials">Testimonials</a></li>
+          </ul>
+        </li>
         <li class="nav-item"><a class="nav-link" href="/services/">Services</a></li>
         <li class="nav-item"><a class="nav-link" href="/careers/">Careers</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'design_preview' %}">Design Preview</a></li>
