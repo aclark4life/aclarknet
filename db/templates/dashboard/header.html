@@ -66,6 +66,23 @@
     transition: background 0.15s, color 0.15s;
   }
   .dash-nav .btn-nav-cta:hover { background: #fff; color: var(--dark); }
+
+  .dash-footer { background: var(--dark); color: #adb5bd; padding: 1.5rem 0; }
+  .dash-footer .brand-mark { display: inline-flex; align-items: center; text-decoration: none; }
+  .dash-footer .brand-wordmark { display: flex; flex-direction: column; line-height: 1; gap: 5px; }
+  .dash-footer .brand-top {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem; font-weight: 800; letter-spacing: 0.06em; color: #dee2e6;
+  }
+  .dash-footer .brand-top .brand-net { color: var(--brand); }
+  .dash-footer .brand-llc {
+    display: flex; justify-content: space-between; width: 100%;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.55rem; font-weight: 700; color: rgba(255,255,255,0.4);
+  }
+  .dash-footer a { color: #adb5bd; text-decoration: none; transition: color 0.15s; }
+  .dash-footer a:hover { color: #fff; }
+  .dash-footer .social-icon { font-size: 1.3rem; margin: 0 0.35rem; }
 </style>
 
 <nav class="dash-nav navbar navbar-expand-md">
@@ -81,28 +98,13 @@
     </button>
     <div class="collapse navbar-collapse" id="dashNav">
       <ul class="navbar-nav ms-auto align-items-center gap-1">
-        <li class="nav-item">
-          <a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"
-             href="{% url 'dashboard' %}">Overview</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {% if time_nav %}active{% endif %}"
-             href="{% url 'time_index' %}">Times</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {% if project_nav %}active{% endif %}"
-             href="{% url 'project_index' %}">Projects</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {% if invoice_nav %}active{% endif %}"
-             href="{% url 'invoice_index' %}">Invoices</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'design_preview' %}">Design Preview</a>
-        </li>
-        <li class="nav-item ms-2">
-          <a class="btn-nav-cta" href="{% url 'account_logout' %}">Sign Out</a>
-        </li>
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="/clients/">Clients</a></li>
+        <li class="nav-item"><a class="nav-link" href="/services/">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="/careers/">Careers</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'design_preview' %}">Design Preview</a></li>
+        <li class="nav-item ms-2"><a class="btn-nav-cta" href="/contact-us/">Contact Us</a></li>
       </ul>
     </div>
   </div>
