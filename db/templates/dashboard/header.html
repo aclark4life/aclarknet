@@ -1,0 +1,106 @@
+{% load static %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand: #1997C6;
+    --dark:  #0f2b3d;
+  }
+  .dash-nav {
+    background: var(--dark);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 1.25rem 0;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .dash-nav .brand-mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    padding: 0 !important;
+  }
+  .dash-nav .brand-wordmark {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    gap: 5px;
+  }
+  .dash-nav .brand-top {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: #f8f9fa;
+  }
+  .dash-nav .brand-top .brand-net { color: var(--brand); }
+  .dash-nav .brand-llc {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+  }
+  .dash-nav .nav-link {
+    color: #adb5bd;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    transition: color 0.15s, background 0.15s;
+  }
+  .dash-nav .nav-link:hover,
+  .dash-nav .nav-link.active { color: #fff; background: rgba(255,255,255,0.08); }
+  .dash-nav .btn-nav-cta {
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.4rem 1.1rem;
+    border-radius: 4px;
+    border: 1.5px solid rgba(255,255,255,0.4);
+    color: #fff;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+  }
+  .dash-nav .btn-nav-cta:hover { background: #fff; color: var(--dark); }
+</style>
+
+<nav class="dash-nav navbar navbar-expand-md">
+  <div class="container-fluid px-4">
+    <a class="navbar-brand brand-mark" href="{% url 'dashboard' %}">
+      <span class="brand-wordmark">
+        <span class="brand-top">ACLARK<span class="brand-net">.NET</span></span>
+        <span class="brand-llc"><span>L</span><span>L</span><span>C</span></span>
+      </span>
+    </a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#dashNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="dashNav">
+      <ul class="navbar-nav ms-auto align-items-center gap-1">
+        <li class="nav-item">
+          <a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"
+             href="{% url 'dashboard' %}">Overview</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if time_nav %}active{% endif %}"
+             href="{% url 'time_index' %}">Times</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if project_nav %}active{% endif %}"
+             href="{% url 'project_index' %}">Projects</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if invoice_nav %}active{% endif %}"
+             href="{% url 'invoice_index' %}">Invoices</a>
+        </li>
+        <li class="nav-item ms-2">
+          <a class="btn-nav-cta" href="{% url 'account_logout' %}">Sign Out</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
