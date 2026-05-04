@@ -252,6 +252,10 @@
                 <li><a class="dropdown-item" href="{% url 'account_logout' %}"><i class="fa-solid fa-right-from-bracket me-2"></i>Sign Out</a></li>
               </ul>
             </li>
+            {% else %}
+            <li class="nav-item ms-3">
+              <a class="nav-link" href="{% url 'account_login' %}" title="Sign In"><i class="fa-solid fa-circle-user fs-5"></i></a>
+            </li>
             {% endif %}
           </ul>
         </div>
