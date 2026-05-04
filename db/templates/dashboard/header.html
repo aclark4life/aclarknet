@@ -88,23 +88,11 @@
     border-bottom: 2px solid #ffc107;
     font-size: 0.85rem;
   }
-  .dash-banner a {
-    text-decoration: none;
-    font-weight: 600;
-    color: inherit;
-    padding: 0.1rem 0.5rem;
-    border-radius: 4px;
-    transition: background 0.15s, color 0.15s;
-  }
-  .dash-banner a:hover {
-    background: rgba(0,0,0,0.08);
-    color: #000;
-  }
 </style>
 
 <div class="dash-banner py-2 text-center">
   <i class="fa-solid fa-flask me-1"></i>
-  <a href="{% url 'design_preview' %}" class="fw-bold">Design Preview</a>
+  <strong>Design Preview</strong> — <a href="{% url 'design_preview' %}" class="text-decoration-underline">Check it out</a> &nbsp;·&nbsp; <a href="{% url 'logo_ideas' %}" class="text-decoration-underline">Logo Ideas</a>
 </div>
 
 <nav class="dash-nav navbar navbar-expand-md">
