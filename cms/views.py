@@ -330,3 +330,9 @@ class DesignPreviewView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["techs"] = _TECHS
         return context
+
+
+class PythonPillowView(TemplateView):
+    """Python Pillow sponsorship page."""
+
+    template_name = "python_pillow.html"

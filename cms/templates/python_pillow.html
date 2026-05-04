@@ -1,0 +1,303 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Python Pillow — Sponsor the Team</title>
+  <link href="{% static 'img/favicon.ico' %}" rel="icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand: #1997c6;
+      --dark:  #0f2b3d;
+      --pillow: #f5a623;
+    }
+    body { font-family: 'Inter', sans-serif; color: #212529; }
+
+    /* NAV */
+    .pillow-nav {
+      background: var(--dark);
+      padding: 1.25rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      position: sticky; top: 0; z-index: 1000;
+    }
+    .pillow-nav .brand-mark { text-decoration: none; display: inline-flex; flex-direction: column; line-height: 1; gap: 5px; }
+    .pillow-nav .brand-top { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; font-weight: 800; letter-spacing: 0.06em; color: #f8f9fa; }
+    .pillow-nav .brand-top .brand-net { color: var(--brand); }
+    .pillow-nav .brand-llc { display: flex; justify-content: space-between; width: 100%; font-family: 'Orbitron', sans-serif; font-size: 0.5rem; font-weight: 700; color: rgba(255,255,255,0.45); }
+    .pillow-nav .nav-link { color: #adb5bd; font-size: 0.875rem; font-weight: 500; border-radius: 4px; transition: color 0.15s, background 0.15s; }
+    .pillow-nav .nav-link:hover { color: #fff; background: rgba(255,255,255,0.08); }
+
+    /* HERO */
+    .pillow-hero {
+      background: linear-gradient(135deg, var(--dark) 0%, #1a4a6b 60%, #1997c6 100%);
+      color: #fff;
+      padding: 5rem 0 4rem;
+    }
+    .pillow-hero .eyebrow { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--pillow); }
+    .pillow-hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; }
+    .pillow-hero .lead { font-size: 1.1rem; opacity: 0.85; }
+    .pillow-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; padding: 0.4rem 0.9rem; font-size: 0.85rem; }
+
+    /* STAT CARDS */
+    .stat-card { text-align: center; padding: 2rem 1rem; }
+    .stat-card .stat-num { font-size: 2.5rem; font-weight: 800; color: var(--brand); line-height: 1; }
+    .stat-card .stat-label { font-size: 0.85rem; color: #6c757d; margin-top: 0.4rem; }
+
+    /* STORY */
+    .section-eyebrow { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; color: var(--brand); }
+
+    /* TEAM */
+    .team-card { border: 1px solid #e9ecef; border-radius: 10px; padding: 1.5rem; text-align: center; }
+    .team-card .avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--dark); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; margin: 0 auto 1rem; }
+    .team-card h6 { font-weight: 700; margin-bottom: 0.25rem; }
+    .team-card .role { font-size: 0.8rem; color: #6c757d; }
+
+    /* SPONSOR CTA */
+    .sponsor-cta {
+      background: linear-gradient(135deg, var(--dark) 0%, #1a4a6b 100%);
+      color: #fff;
+      padding: 5rem 0;
+    }
+    .btn-sponsor {
+      background: var(--pillow);
+      color: #000;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.75rem 2rem;
+      border-radius: 6px;
+      border: none;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-sponsor:hover { background: #e09520; color: #000; transform: translateY(-1px); }
+    .btn-outline-sponsor {
+      background: transparent;
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.75rem 2rem;
+      border-radius: 6px;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-outline-sponsor:hover { background: #fff; color: var(--dark); }
+
+    /* FOOTER */
+    .pillow-footer { background: var(--dark); color: #adb5bd; padding: 2rem 0; font-size: 0.875rem; }
+    .pillow-footer a { color: #adb5bd; text-decoration: none; }
+    .pillow-footer a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="pillow-nav navbar navbar-expand-md">
+    <div class="container">
+      <a class="navbar-brand p-0 brand-mark" href="/">
+        <span class="brand-top">ACLARK<span class="brand-net">.NET</span></span>
+        <span class="brand-llc"><span>L</span><span>L</span><span>C</span></span>
+      </a>
+      <div class="ms-auto">
+        <a class="nav-link d-inline" href="/">Home</a>
+        <a class="nav-link d-inline ms-2" href="/about/">About</a>
+        <a class="nav-link d-inline ms-2" href="/services/">Services</a>
+        <a class="nav-link d-inline ms-2" href="/contact-us/">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="pillow-hero">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-7">
+          <p class="eyebrow mb-3">Open Source · Python Imaging</p>
+          <h1 class="mb-4">
+            <img src="https://python-pillow.org/images/pillow-logo-248x250.png" alt="Pillow" style="height:3rem;margin-right:0.75rem;vertical-align:middle;">
+            Pillow needs your support.
+          </h1>
+          <p class="lead mb-4">
+            Pillow is the most-downloaded Python imaging library — used in Django, Jupyter, machine learning pipelines, and scientific computing worldwide. A four-person volunteer team keeps it alive.
+          </p>
+          <div class="d-flex flex-wrap gap-2 mb-4">
+            <span class="pillow-badge"><i class="fa-brands fa-python"></i> #1 Python imaging library</span>
+            <span class="pillow-badge"><i class="fa-solid fa-code-fork"></i> Fork of PIL, created 2010</span>
+            <span class="pillow-badge"><i class="fa-solid fa-users"></i> 4 active maintainers</span>
+          </div>
+          <a href="https://github.com/sponsors/python-pillow" target="_blank" class="btn-sponsor">
+            <i class="fa-solid fa-heart"></i> Sponsor on GitHub
+          </a>
+        </div>
+        <div class="col-lg-5 text-center">
+          <img src="https://python-pillow.org/images/pillow-logo-248x250.png" alt="Pillow logo" style="max-width:220px;opacity:0.9;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="py-5 border-bottom">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-6 col-md-3">
+          <div class="stat-card">
+            <div class="stat-num">1B+</div>
+            <div class="stat-label">Downloads per year</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-card">
+            <div class="stat-num">14+</div>
+            <div class="stat-label">Years maintained</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-card">
+            <div class="stat-num">4</div>
+            <div class="stat-label">Core maintainers</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-card">
+            <div class="stat-num">500+</div>
+            <div class="stat-label">Contributors</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORIGIN STORY -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <p class="section-eyebrow mb-2">The Origin Story</p>
+          <h2 class="fw-bold mb-4">From abandoned fork to the Python imaging standard.</h2>
+          <p class="text-secondary lh-lg mb-3">
+            In 2010, PIL (Python Imaging Library) was effectively abandoned — no Python 3 support, no active development, no releases. Alex Clark forked it, named it <strong>Pillow</strong>, and shipped the first release.
+          </p>
+          <p class="text-secondary lh-lg mb-3">
+            Over the following years, Pillow became the de facto replacement for PIL across the entire Python ecosystem. Today it's a dependency of Django, Matplotlib, scikit-image, and thousands of other projects. It's installed billions of times per year.
+          </p>
+          <p class="text-secondary lh-lg">
+            A small, dedicated team of volunteers continues to maintain it — fixing security vulnerabilities, adding format support, shipping new releases, and keeping compatibility with every new Python and platform version.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY SPONSOR -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <p class="text-center section-eyebrow mb-2">Why Sponsor</p>
+      <h2 class="text-center fw-bold mb-5">Your sponsorship keeps critical infrastructure alive.</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="p-4 rounded-3 bg-white h-100">
+            <div class="mb-3 fs-2"><i class="fa-solid fa-shield-halved" style="color:var(--brand)"></i></div>
+            <h5 class="fw-bold mb-2">Security maintenance</h5>
+            <p class="text-muted small mb-0">CVEs, vulnerability patches, and security releases — keeping your apps safe when they process user-uploaded images.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-4 rounded-3 bg-white h-100">
+            <div class="mb-3 fs-2"><i class="fa-brands fa-python" style="color:var(--brand)"></i></div>
+            <h5 class="fw-bold mb-2">Python compatibility</h5>
+            <p class="text-muted small mb-0">Every new Python release requires testing and updates. Sponsors make it possible to stay current on all supported versions.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-4 rounded-3 bg-white h-100">
+            <div class="mb-3 fs-2"><i class="fa-solid fa-box-open" style="color:var(--brand)"></i></div>
+            <h5 class="fw-bold mb-2">Format &amp; platform support</h5>
+            <p class="text-muted small mb-0">New image formats, platform wheels, and ecosystem integrations — sponsored development that benefits the entire Python community.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="py-5">
+    <div class="container">
+      <p class="text-center section-eyebrow mb-2">The Team</p>
+      <h2 class="text-center fw-bold mb-5">Four volunteers. One critical library.</h2>
+      <div class="row g-4 justify-content-center">
+        <div class="col-6 col-md-3">
+          <div class="team-card">
+            <div class="avatar">AC</div>
+            <h6>Alex Clark</h6>
+            <div class="role">Founder &amp; Maintainer</div>
+            <div class="mt-2"><a href="https://github.com/aclark4life" target="_blank" class="text-muted small"><i class="fa-brands fa-github me-1"></i>aclark4life</a></div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="team-card">
+            <div class="avatar"><i class="fa-solid fa-user"></i></div>
+            <h6>Andrew Murray</h6>
+            <div class="role">Core Maintainer</div>
+            <div class="mt-2"><a href="https://github.com/radarhere" target="_blank" class="text-muted small"><i class="fa-brands fa-github me-1"></i>radarhere</a></div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="team-card">
+            <div class="avatar"><i class="fa-solid fa-user"></i></div>
+            <h6>wiredfool</h6>
+            <div class="role">Core Maintainer</div>
+            <div class="mt-2"><a href="https://github.com/wiredfool" target="_blank" class="text-muted small"><i class="fa-brands fa-github me-1"></i>wiredfool</a></div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="team-card">
+            <div class="avatar"><i class="fa-solid fa-user"></i></div>
+            <h6>homm</h6>
+            <div class="role">Core Maintainer</div>
+            <div class="mt-2"><a href="https://github.com/homm" target="_blank" class="text-muted small"><i class="fa-brands fa-github me-1"></i>homm</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPONSOR CTA -->
+  <section class="sponsor-cta text-center">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <p class="section-eyebrow mb-3" style="color:var(--pillow);">Support Open Source</p>
+          <h2 class="fw-bold mb-3">Sponsor Pillow today.</h2>
+          <p class="mb-5 opacity-75 lh-lg">
+            If your company or project depends on Pillow, consider sponsoring the team. Even small recurring sponsorships make a real difference to a volunteer-maintained project used by millions.
+          </p>
+          <div class="d-flex flex-wrap gap-3 justify-content-center">
+            <a href="https://github.com/sponsors/python-pillow" target="_blank" class="btn-sponsor">
+              <i class="fa-solid fa-heart"></i> Sponsor on GitHub
+            </a>
+            <a href="https://python-pillow.org" target="_blank" class="btn-outline-sponsor">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit python-pillow.org
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="pillow-footer">
+    <div class="container text-center">
+      <p class="mb-1">&copy; 2004 &ndash; {% now "Y" %} ACLARK.NET, LLC &nbsp;·&nbsp; <a href="/">Home</a> &nbsp;·&nbsp; <a href="/about/">About</a> &nbsp;·&nbsp; <a href="/services/">Services</a> &nbsp;·&nbsp; <a href="/contact-us/">Contact</a></p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
