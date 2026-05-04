@@ -186,6 +186,9 @@
       .tech-item i { color: var(--brand); transition: transform 0.2s; }
       .tech-item:hover i { transform: scale(1.15); }
       .tech-item h6 { font-size: 0.78rem; font-weight: 600; color: #495057; margin-top: 0.4rem; margin-bottom: 0; }
+      .tech-item img { transition: transform 0.2s; width: 2rem; height: 2rem; object-fit: contain; }
+      .tech-item:hover img { transform: scale(1.15); }
+      .tech-item a { text-decoration: none; color: inherit; }
 
     /* ── FOOTER ── */
       .preview-footer { background: var(--dark); color: #adb5bd; }
@@ -346,23 +349,11 @@
               <h6>{{ tech.name }}</h6>
             </div>
           {% endfor %}
-        </div>
-      </div>
-    </section>
-
-  <!-- PYTHON PILLOW -->
-    <section class="py-5">
-      <div class="container">
-        <div class="row align-items-center g-5">
-          <div class="col-lg-5 text-center">
-            <img src="https://raw.githubusercontent.com/python-pillow/pillow-logo/main/pillow-logo-dark-text-1280x640.png" alt="Pillow logo" style="max-width:100%;border-radius:8px;">
-          </div>
-          <div class="col-lg-7">
-            <p class="section-eyebrow mb-2">Open Source</p>
-            <h2 class="fw-bold mb-3">Python Pillow</h2>
-            <p class="text-secondary lh-lg mb-3">In 2010 Alex Clark created Pillow, a software development fork of the Python Imaging Library.</p>
-            <p class="text-secondary lh-lg mb-4">As of early 2017, Pillow has been downloaded over 15 million times, can be found in many major Linux distributions such as Ubuntu and Fedora Core, and is used by Fortune-100-serving companies like Atlassian. As of 2019, professional Pillow support is available from Sonar (formerly Tidelift).</p>
-            <a href="/python-pillow/" class="btn btn-outline-secondary">Learn more &rarr;</a>
+          <div class="col tech-item">
+            <a href="/python-pillow/">
+              <img src="https://raw.githubusercontent.com/python-pillow/pillow-logo/main/pillow-logo-248x250.png" alt="Pillow">
+              <h6>Pillow</h6>
+            </a>
           </div>
         </div>
       </div>
