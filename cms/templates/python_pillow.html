@@ -147,6 +147,20 @@
           <li class="nav-item"><a class="nav-link" href="https://aclark.net/services/">Services</a></li>
           <li class="nav-item"><a class="nav-link" href="https://aclark.net/careers/">Careers</a></li>
           <li class="nav-item ms-2"><a class="btn-nav-cta" href="https://aclark.net/contact-us/">Contact Us</a></li>
+          {% if user.is_authenticated %}
+          <li class="nav-item dropdown ms-3">
+            <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" data-bs-toggle="dropdown">
+              <i class="fa-solid fa-circle-user fs-5"></i>
+              <span>{{ request.user.get_short_name|default:request.user.username }}</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+              <li><a class="dropdown-item" href="{% url 'profile_view' %}"><i class="fa-solid fa-user me-2"></i>Profile</a></li>
+              <li><a class="dropdown-item" href="{% url 'dashboard' %}"><i class="fa-solid fa-gauge me-2"></i>Dashboard</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{% url 'account_logout' %}"><i class="fa-solid fa-right-from-bracket me-2"></i>Sign Out</a></li>
+            </ul>
+          </li>
+          {% endif %}
         </ul>
       </div>
     </div>
