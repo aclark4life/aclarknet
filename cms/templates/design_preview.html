@@ -186,7 +186,8 @@
       .tech-item i { color: var(--brand); transition: transform 0.2s; }
       .tech-item:hover i { transform: scale(1.15); }
       .tech-item h6 { font-size: 0.78rem; font-weight: 600; color: #495057; margin-top: 0.4rem; margin-bottom: 0; }
-      .tech-item img { transition: transform 0.2s; width: 2rem; height: 2rem; object-fit: contain; }
+      .btn-brand-outline { color: var(--brand); border: 1px solid var(--brand); background: transparent; transition: background 0.15s, color 0.15s; }
+      .btn-brand-outline:hover { background: var(--brand); color: #fff; }
       .tech-item:hover img { transform: scale(1.15); }
       .tech-item a { text-decoration: none; color: inherit; }
 
@@ -357,7 +358,7 @@
               <div class="flex-grow-1">
                 <p class="fw-bold mb-2">Pillow is the most-downloaded Python imaging library. A four-person developer team keeps it alive.</p>
                 <p class="mb-3 text-secondary small">In 2010 Alex Clark created Pillow, a software development fork of the Python Imaging Library. As of early 2017, Pillow has been downloaded over 15 million times, can be found in many major Linux distributions such as Ubuntu and Fedora Core, and is used by Fortune-100-serving companies like Atlassian. As of 2019, professional Pillow support is available from Sonar (formerly Tidelift).</p>
-                <a href="/python-pillow/" class="btn btn-sm" style="color:var(--brand);border-color:var(--brand);">Learn more &rarr;</a>
+                <a href="/python-pillow/" class="btn btn-sm btn-brand-outline">Learn more &rarr;</a>
               </div>
               <img src="https://raw.githubusercontent.com/python-pillow/pillow-logo/main/pillow-logo-dark-text-1280x640.png" alt="Pillow" style="height:100px;flex-shrink:0;">
             </div>
