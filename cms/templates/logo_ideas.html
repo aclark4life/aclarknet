@@ -1,660 +1,681 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Logo Ideas — ACLARK.NET, LLC</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;700&family=DM+Mono:wght@400;500&family=Outfit:wght@400;600;700;800&family=Syne:wght@700;800&family=Bebas+Neue&family=Rajdhani:wght@600;700&family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;600;700&family=Oxanium:wght@600;700;800&family=Exo+2:wght@700;800&family=Russo+One&family=Titillium+Web:wght@600;700&family=Chakra+Petch:wght@600;700&family=Audiowide&family=Saira+Condensed:wght@700;800&family=Aldrich&family=Share+Tech+Mono&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    :root {
-      --brand: #1997c6;
-      --dark:  #0f2b3d;
-    }
-    body { font-family: 'Inter', sans-serif; background: #f8f9fa; color: var(--dark); }
-    .page-header {
-      background: var(--dark);
-      color: #fff;
-      padding: 3rem 0 2rem;
-    }
-    .page-header a { color: #adb5bd; text-decoration: none; font-size: 0.875rem; }
-    .page-header a:hover { color: #fff; }
-    .idea-card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 2.5rem 2rem;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-      margin-bottom: 1.5rem;
-      min-height: 220px;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1.5rem;
-    }
-    .idea-card .label {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #adb5bd;
-    }
-    .idea-card.dark-bg {
-      background: var(--dark);
-    }
-    .idea-card.brand-bg {
-      background: var(--brand);
-    }
-    .idea-card.mid-bg {
-      background: #1a3d52;
-    }
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Logo Ideas — ACLARK.NET, LLC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;700&family=DM+Mono:wght@400;500&family=Outfit:wght@400;600;700;800&family=Syne:wght@700;800&family=Bebas+Neue&family=Rajdhani:wght@600;700&family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Sans:wght@400;600;700&family=Oxanium:wght@600;700;800&family=Exo+2:wght@700;800&family=Russo+One&family=Titillium+Web:wght@600;700&family=Chakra+Petch:wght@600;700&family=Audiowide&family=Saira+Condensed:wght@700;800&family=Aldrich&family=Share+Tech+Mono&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      :root {
+        --brand: #1997c6;
+        --dark:  #0f2b3d;
+      }
+      body { font-family: 'Inter', sans-serif; background: #f8f9fa; color: var(--dark); }
+      .page-header {
+        background: var(--dark);
+        color: #fff;
+        padding: 3rem 0 2rem;
+      }
+      .page-header a { color: #adb5bd; text-decoration: none; font-size: 0.875rem; }
+      .page-header a:hover { color: #fff; }
+      .idea-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 2.5rem 2rem;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        margin-bottom: 1.5rem;
+        min-height: 220px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+      }
+      .idea-card .label {
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #adb5bd;
+      }
+      .idea-card.dark-bg {
+        background: var(--dark);
+      }
+      .idea-card.brand-bg {
+        background: var(--brand);
+      }
+      .idea-card.mid-bg {
+        background: #1a3d52;
+      }
 
     /* ── IDEA 1: Network icon + wordmark ── */
-    .logo-1 { display: flex; align-items: center; gap: 12px; }
-    .logo-1 .wordmark { display: flex; flex-direction: column; gap: 2px; }
-    .logo-1 .name { font-size: 1.3rem; font-weight: 800; letter-spacing: 0.02em; color: #fff; }
-    .logo-1 .sub  { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; color: rgba(255,255,255,0.45); }
+      .logo-1 { display: flex; align-items: center; gap: 12px; }
+      .logo-1 .wordmark { display: flex; flex-direction: column; gap: 2px; }
+      .logo-1 .name { font-size: 1.3rem; font-weight: 800; letter-spacing: 0.02em; color: #fff; }
+      .logo-1 .sub  { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; color: rgba(255,255,255,0.45); }
 
     /* ── IDEA 2: Bracket monogram ── */
-    .logo-2 { display: flex; align-items: center; gap: 14px; }
-    .logo-2 .mono {
-      font-family: 'DM Mono', monospace;
-      font-size: 1.6rem;
-      font-weight: 500;
-      color: var(--brand);
-      letter-spacing: -0.05em;
-    }
-    .logo-2 .wordmark { display: flex; flex-direction: column; gap: 2px; }
-    .logo-2 .name { font-size: 1.2rem; font-weight: 700; letter-spacing: 0.03em; color: #fff; }
-    .logo-2 .sub  { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; color: rgba(255,255,255,0.45); }
+      .logo-2 { display: flex; align-items: center; gap: 14px; }
+      .logo-2 .mono {
+        font-family: 'DM Mono', monospace;
+        font-size: 1.6rem;
+        font-weight: 500;
+        color: var(--brand);
+        letter-spacing: -0.05em;
+      }
+      .logo-2 .wordmark { display: flex; flex-direction: column; gap: 2px; }
+      .logo-2 .name { font-size: 1.2rem; font-weight: 700; letter-spacing: 0.03em; color: #fff; }
+      .logo-2 .sub  { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; color: rgba(255,255,255,0.45); }
 
     /* ── IDEA 3: Brand box monogram ── */
-    .logo-3 { display: flex; align-items: center; gap: 14px; }
-    .logo-3 .box {
-      width: 44px; height: 44px;
-      background: var(--brand);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .logo-3 .box span {
-      font-size: 1.1rem; font-weight: 800; color: #fff; letter-spacing: -0.03em;
-    }
-    .logo-3 .wordmark { display: flex; flex-direction: column; gap: 2px; }
-    .logo-3 .name { font-size: 1.2rem; font-weight: 700; letter-spacing: 0.03em; color: #fff; }
-    .logo-3 .sub  { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; color: rgba(255,255,255,0.45); }
+      .logo-3 { display: flex; align-items: center; gap: 14px; }
+      .logo-3 .box {
+        width: 44px; height: 44px;
+        background: var(--brand);
+        border-radius: 8px;
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+      }
+      .logo-3 .box span {
+        font-size: 1.1rem; font-weight: 800; color: #fff; letter-spacing: -0.03em;
+      }
+      .logo-3 .wordmark { display: flex; flex-direction: column; gap: 2px; }
+      .logo-3 .name { font-size: 1.2rem; font-weight: 700; letter-spacing: 0.03em; color: #fff; }
+      .logo-3 .sub  { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; color: rgba(255,255,255,0.45); }
 
     /* ── IDEA 4: Brand color box (lighter shade) ── */
-    .logo-4 { display: flex; align-items: center; gap: 14px; }
-    .logo-4 .box {
-      width: 44px; height: 44px;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .logo-4 .box span {
-      font-size: 1.1rem; font-weight: 800; color: #fff; letter-spacing: -0.03em;
-    }
-    .logo-4 .wordmark { display: flex; flex-direction: column; gap: 2px; }
-    .logo-4 .name { font-size: 1.2rem; font-weight: 700; letter-spacing: 0.03em; color: #fff; }
-    .logo-4 .sub  { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; color: rgba(255,255,255,0.45); }
+      .logo-4 { display: flex; align-items: center; gap: 14px; }
+      .logo-4 .box {
+        width: 44px; height: 44px;
+        background: rgba(255,255,255,0.15);
+        border: 1px solid rgba(255,255,255,0.25);
+        border-radius: 8px;
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+      }
+      .logo-4 .box span {
+        font-size: 1.1rem; font-weight: 800; color: #fff; letter-spacing: -0.03em;
+      }
+      .logo-4 .wordmark { display: flex; flex-direction: column; gap: 2px; }
+      .logo-4 .name { font-size: 1.2rem; font-weight: 700; letter-spacing: 0.03em; color: #fff; }
+      .logo-4 .sub  { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; color: rgba(255,255,255,0.45); }
 
     /* ── IDEA 5: All caps tight stacked ── */
-    .logo-5 { display: flex; flex-direction: column; gap: 0; line-height: 1; }
-    .logo-5 .name {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.5rem; font-weight: 700;
-      letter-spacing: 0.08em;
-      color: #fff;
-    }
-    .logo-5 .sub {
-      font-size: 0.6rem; font-weight: 600;
-      letter-spacing: 0.35em;
-      color: var(--brand);
-      margin-top: 3px;
-    }
+      .logo-5 { display: flex; flex-direction: column; gap: 0; line-height: 1; }
+      .logo-5 .name {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.5rem; font-weight: 700;
+        letter-spacing: 0.08em;
+        color: #fff;
+      }
+      .logo-5 .sub {
+        font-size: 0.6rem; font-weight: 600;
+        letter-spacing: 0.35em;
+        color: var(--brand);
+        margin-top: 3px;
+      }
 
     /* ── spread sub LLC (replaces stacked .sub) ── */
-    .sub-llc {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      font-size: 0.6rem; font-weight: 700;
-      color: rgba(255,255,255,0.45);
-    }
+      .sub-llc {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        font-size: 0.6rem; font-weight: 700;
+        color: rgba(255,255,255,0.45);
+      }
 
     /* ── IDEA 6: Dot accent ── */
-    .logo-6 { display: flex; align-items: center; gap: 10px; }
-    .logo-6 .dot {
-      width: 10px; height: 10px;
-      background: var(--brand);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .logo-6 .wordmark { display: flex; flex-direction: column; gap: 2px; }
-    .logo-6 .name { font-size: 1.25rem; font-weight: 800; letter-spacing: 0.02em; color: #fff; }
-    .logo-6 .sub  { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; color: rgba(255,255,255,0.5); }
+      .logo-6 { display: flex; align-items: center; gap: 10px; }
+      .logo-6 .dot {
+        width: 10px; height: 10px;
+        background: var(--brand);
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .logo-6 .wordmark { display: flex; flex-direction: column; gap: 2px; }
+      .logo-6 .name { font-size: 1.25rem; font-weight: 800; letter-spacing: 0.02em; color: #fff; }
+      .logo-6 .sub  { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; color: rgba(255,255,255,0.5); }
 
     /* ── IDEA 7: Slash separator ── */
-    .logo-7 { display: flex; align-items: baseline; gap: 6px; }
-    .logo-7 .name { font-size: 1.3rem; font-weight: 800; letter-spacing: 0.01em; color: #fff; }
-    .logo-7 .slash { font-size: 1.3rem; font-weight: 300; color: var(--brand); }
-    .logo-7 .sub  { font-size: 1.3rem; font-weight: 800; letter-spacing: 0.01em; color: #fff; }
+      .logo-7 { display: flex; align-items: baseline; gap: 6px; }
+      .logo-7 .name { font-size: 1.3rem; font-weight: 800; letter-spacing: 0.01em; color: #fff; }
+      .logo-7 .slash { font-size: 1.3rem; font-weight: 300; color: var(--brand); }
+      .logo-7 .sub  { font-size: 1.3rem; font-weight: 800; letter-spacing: 0.01em; color: #fff; }
 
     /* ── IDEA 8: Outlined box ── */
-    .logo-8 { display: flex; align-items: center; gap: 14px; }
-    .logo-8 .box {
-      width: 44px; height: 44px;
-      border: 2px solid var(--brand);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .logo-8 .box span {
-      font-size: 1.1rem; font-weight: 800; color: var(--brand); letter-spacing: -0.03em;
-    }
-    .logo-8 .wordmark { display: flex; flex-direction: column; gap: 2px; }
-    .logo-8 .name { font-size: 1.2rem; font-weight: 700; letter-spacing: 0.03em; color: #fff; }
-    .logo-8 .sub  { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; color: rgba(255,255,255,0.45); }
+      .logo-8 { display: flex; align-items: center; gap: 14px; }
+      .logo-8 .box {
+        width: 44px; height: 44px;
+        border: 2px solid var(--brand);
+        border-radius: 8px;
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+      }
+      .logo-8 .box span {
+        font-size: 1.1rem; font-weight: 800; color: var(--brand); letter-spacing: -0.03em;
+      }
+      .logo-8 .wordmark { display: flex; flex-direction: column; gap: 2px; }
+      .logo-8 .name { font-size: 1.2rem; font-weight: 700; letter-spacing: 0.03em; color: #fff; }
+      .logo-8 .sub  { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; color: rgba(255,255,255,0.45); }
 
     /* ── IDEA 9: Minimal just the name ── */
-    .logo-9 .name {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.4rem; font-weight: 700;
-      letter-spacing: 0.04em;
-      color: #fff;
-    }
-    .logo-9 .name .net { color: var(--brand); }
-    .logo-9 .sub {
-      font-size: 0.6rem; font-weight: 500;
-      letter-spacing: 0.25em;
-      color: rgba(255,255,255,0.4);
-      margin-top: 4px;
-    }
+      .logo-9 .name {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 1.4rem; font-weight: 700;
+        letter-spacing: 0.04em;
+        color: #fff;
+      }
+      .logo-9 .name .net { color: var(--brand); }
+      .logo-9 .sub {
+        font-size: 0.6rem; font-weight: 500;
+        letter-spacing: 0.25em;
+        color: rgba(255,255,255,0.4);
+        margin-top: 4px;
+      }
 
     /* ── IDEA 10: Rounded pill ── */
-    .logo-10 { display: flex; align-items: center; gap: 12px; }
-    .logo-10 .pill {
-      background: var(--brand);
-      border-radius: 100px;
-      padding: 6px 14px;
-      font-size: 0.85rem;
-      font-weight: 800;
-      color: #fff;
-      letter-spacing: 0.04em;
-      flex-shrink: 0;
-    }
-    .logo-10 .wordmark { display: flex; flex-direction: column; gap: 2px; }
-    .logo-10 .name { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.03em; color: #fff; }
-    .logo-10 .sub  { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; color: rgba(255,255,255,0.45); }
+      .logo-10 { display: flex; align-items: center; gap: 12px; }
+      .logo-10 .pill {
+        background: var(--brand);
+        border-radius: 100px;
+        padding: 6px 14px;
+        font-size: 0.85rem;
+        font-weight: 800;
+        color: #fff;
+        letter-spacing: 0.04em;
+        flex-shrink: 0;
+      }
+      .logo-10 .wordmark { display: flex; flex-direction: column; gap: 2px; }
+      .logo-10 .name { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.03em; color: #fff; }
+      .logo-10 .sub  { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; color: rgba(255,255,255,0.45); }
 
     /* ── IDEA 11: Network SVG large ── */
-    .logo-11 { display: flex; align-items: center; gap: 16px; }
-    .logo-11 .wordmark { display: flex; flex-direction: column; gap: 3px; }
-    .logo-11 .name { font-size: 1.3rem; font-weight: 800; letter-spacing: 0.02em; color: #fff; }
-    .logo-11 .sub  { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; color: rgba(255,255,255,0.45); }
+      .logo-11 { display: flex; align-items: center; gap: 16px; }
+      .logo-11 .wordmark { display: flex; flex-direction: column; gap: 3px; }
+      .logo-11 .name { font-size: 1.3rem; font-weight: 800; letter-spacing: 0.02em; color: #fff; }
+      .logo-11 .sub  { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; color: rgba(255,255,255,0.45); }
 
     /* ── IDEA 13: inline LLC same line ── */
-    .logo-13 .name {
-      font-size: 1.2rem; font-weight: 800;
-      letter-spacing: 0.02em;
-      color: #fff;
-    }
-    .logo-13 .name .sep { color: var(--brand); font-weight: 300; margin: 0 6px; }
-    .logo-13 .name .llc { font-size: 1.2rem; font-weight: 800; color: #fff; }
+      .logo-13 .name {
+        font-size: 1.2rem; font-weight: 800;
+        letter-spacing: 0.02em;
+        color: #fff;
+      }
+      .logo-13 .name .sep { color: var(--brand); font-weight: 300; margin: 0 6px; }
+      .logo-13 .name .llc { font-size: 1.2rem; font-weight: 800; color: #fff; }
 
     /* ── IDEA 14: inline comma LLC ── */
-    .logo-14 .name {
-      font-size: 1.2rem; font-weight: 800;
-      letter-spacing: 0.02em;
-      color: #fff;
-    }
-    .logo-14 .name .llc { font-size: 1.2rem; font-weight: 800; color: #fff; margin-left: 4px; }
+      .logo-14 .name {
+        font-size: 1.2rem; font-weight: 800;
+        letter-spacing: 0.02em;
+        color: #fff;
+      }
+      .logo-14 .name .llc { font-size: 1.2rem; font-weight: 800; color: #fff; margin-left: 4px; }
 
     /* ── IDEA 15: inline dot LLC dark ── */
-    .logo-15 .name {
-      font-size: 1.2rem; font-weight: 800;
-      letter-spacing: 0.02em;
-      color: #fff;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .logo-15 .name .dot { width: 4px; height: 4px; background: var(--brand); border-radius: 50%; display: inline-block; }
-    .logo-15 .name .llc { font-size: 1.2rem; font-weight: 800; color: #fff; }
+      .logo-15 .name {
+        font-size: 1.2rem; font-weight: 800;
+        letter-spacing: 0.02em;
+        color: #fff;
+        display: flex; align-items: center; gap: 8px;
+      }
+      .logo-15 .name .dot { width: 4px; height: 4px; background: var(--brand); border-radius: 50%; display: inline-block; }
+      .logo-15 .name .llc { font-size: 1.2rem; font-weight: 800; color: #fff; }
 
     /* ── IDEA 16: inline slash LLC dark ── */
-    .logo-16 .name {
-      font-size: 1.2rem; font-weight: 800;
-      letter-spacing: 0.02em;
-      color: #fff;
-    }
-    .logo-16 .name .sep { color: var(--brand); font-weight: 300; margin: 0 6px; font-size: 1rem; }
-    .logo-16 .name .llc { font-size: 1.2rem; font-weight: 800; color: #fff; }
+      .logo-16 .name {
+        font-size: 1.2rem; font-weight: 800;
+        letter-spacing: 0.02em;
+        color: #fff;
+      }
+      .logo-16 .name .sep { color: var(--brand); font-weight: 300; margin: 0 6px; font-size: 1rem; }
+      .logo-16 .name .llc { font-size: 1.2rem; font-weight: 800; color: #fff; }
 
     /* ── IDEA 10B: Minimal inline LLC with 3rd color ── */
-    .logo-10b {
-      font-family: 'Space Grotesk', sans-serif;
-      display: flex; align-items: baseline; gap: 0;
-    }
-    .logo-10b .main { font-size: 1.4rem; font-weight: 700; letter-spacing: 0.04em; color: #fff; }
-    .logo-10b .main .net { color: var(--brand); }
-    .logo-10b .sep { font-size: 1rem; font-weight: 300; color: rgba(255,255,255,0.3); margin: 0 7px; }
-    .logo-10b .llc { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.18em; color: #f0a500; }
+      .logo-10b {
+        font-family: 'Space Grotesk', sans-serif;
+        display: flex; align-items: baseline; gap: 0;
+      }
+      .logo-10b .main { font-size: 1.4rem; font-weight: 700; letter-spacing: 0.04em; color: #fff; }
+      .logo-10b .main .net { color: var(--brand); }
+      .logo-10b .sep { font-size: 1rem; font-weight: 300; color: #f0a500; margin: 0; }
+      .logo-10b .llc { font-size: 1.4rem; font-weight: 700; letter-spacing: 0.18em; color: #f0a500; }
 
-    /* ── IDEA 17 & 18: original L L C beam ── */
-    .logo-beam {
-      display: flex;
-      flex-direction: column;
-      line-height: 1;
-    }
-    .logo-beam .beam-top {
-      font-size: 1.25rem; font-weight: 700;
-      letter-spacing: 0.01em;
-    }
-    .logo-beam .beam-pillars {
-      display: flex;
-      align-items: flex-start;
-      width: calc(100% - 6px);
-      margin: 3px auto 0;
-    }
-    .logo-beam .beam-bridge {
-      flex: 1;
-      border-top: 1px solid currentColor;
-      opacity: 0.4;
-      margin-top: 7px;
-    }
-    .logo-beam .beam-letter {
-      font-size: 0.6rem; font-weight: 700;
-      padding: 0 5px;
-    }
-    .logo-beam.light .beam-top    { color: #f8f9fa; }
-    .logo-beam.light .beam-letter { color: #f8f9fa; }
-    .logo-beam.light .beam-bridge { border-top-color: #f8f9fa; }
-    .logo-beam.dark  .beam-top    { color: #f8f9fa; }
-    .logo-beam.dark  .beam-letter { color: #f8f9fa; }
-    .logo-beam.dark  .beam-bridge { border-top-color: #f8f9fa; }
+    /* ── IDEA 10C: Orbitron inline LLC ── */
+      .logo-10c {
+        font-family: 'Orbitron', sans-serif;
+        display: flex; align-items: baseline; gap: 0;
+      }
+      .logo-10c .main { font-size: 1.4rem; font-weight: 700; letter-spacing: 0.04em; color: #fff; }
+      .logo-10c .main .net { color: var(--brand); }
+      .logo-10c .sep { font-size: 1rem; font-weight: 700; color: #f0a500; margin: 0; }
+      .logo-10c .llc { font-size: 1.4rem; font-weight: 700; letter-spacing: 0.18em; color: #f0a500; }
+
+
+      .logo-beam {
+        display: flex;
+        flex-direction: column;
+        line-height: 1;
+      }
+      .logo-beam .beam-top {
+        font-size: 1.25rem; font-weight: 700;
+        letter-spacing: 0.01em;
+      }
+      .logo-beam .beam-pillars {
+        display: flex;
+        align-items: flex-start;
+        width: calc(100% - 6px);
+        margin: 3px auto 0;
+      }
+      .logo-beam .beam-bridge {
+        flex: 1;
+        border-top: 1px solid currentColor;
+        opacity: 0.4;
+        margin-top: 7px;
+      }
+      .logo-beam .beam-letter {
+        font-size: 0.6rem; font-weight: 700;
+        padding: 0 5px;
+      }
+      .logo-beam.light .beam-top    { color: #f8f9fa; }
+      .logo-beam.light .beam-letter { color: #f8f9fa; }
+      .logo-beam.light .beam-bridge { border-top-color: #f8f9fa; }
+      .logo-beam.dark  .beam-top    { color: #f8f9fa; }
+      .logo-beam.dark  .beam-letter { color: #f8f9fa; }
+      .logo-beam.dark  .beam-bridge { border-top-color: #f8f9fa; }
     /* ── FONT VARIANTS ── */
-    .logo-beam.font-outfit    .beam-top { font-family: 'Outfit', sans-serif; }
-    .logo-beam.font-syne      .beam-top { font-family: 'Syne', sans-serif; font-weight: 800; }
-    .logo-beam.font-bebas     .beam-top { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.06em; }
-    .logo-beam.font-rajdhani  .beam-top { font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.08em; }
-    .logo-beam.font-barlow    .beam-top { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; letter-spacing: 0.06em; }
-    .logo-beam.font-ibm       .beam-top { font-family: 'IBM Plex Sans', sans-serif; font-weight: 700; }
-    .logo-beam.font-oxanium   .beam-top { font-family: 'Oxanium', sans-serif; font-weight: 700; letter-spacing: 0.04em; }
-    .logo-beam.font-grotesk   .beam-top { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
-    .logo-beam.font-exo2      .beam-top { font-family: 'Exo 2', sans-serif; font-weight: 800; letter-spacing: 0.04em; }
-    .logo-beam.font-russo     .beam-top { font-family: 'Russo One', sans-serif; letter-spacing: 0.04em; }
-    .logo-beam.font-titillium .beam-top { font-family: 'Titillium Web', sans-serif; font-weight: 700; letter-spacing: 0.06em; }
-    .logo-beam.font-chakra    .beam-top { font-family: 'Chakra Petch', sans-serif; font-weight: 700; letter-spacing: 0.05em; }
-    .logo-beam.font-audiowide .beam-top { font-family: 'Audiowide', sans-serif; font-size: 1.1rem; letter-spacing: 0.04em; }
-    .logo-beam.font-saira     .beam-top { font-family: 'Saira Condensed', sans-serif; font-weight: 800; letter-spacing: 0.06em; font-size: 1.5rem; }
-    .logo-beam.font-aldrich   .beam-top { font-family: 'Aldrich', sans-serif; letter-spacing: 0.06em; }
-    .logo-beam.font-sharetech .beam-top { font-family: 'Share Tech Mono', monospace; letter-spacing: 0.04em; }
-    .logo-beam.font-orbitron  .beam-top { font-family: 'Orbitron', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: 0.06em; }
+      .logo-beam.font-outfit    .beam-top { font-family: 'Outfit', sans-serif; }
+      .logo-beam.font-syne      .beam-top { font-family: 'Syne', sans-serif; font-weight: 800; }
+      .logo-beam.font-bebas     .beam-top { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.06em; }
+      .logo-beam.font-rajdhani  .beam-top { font-family: 'Rajdhani', sans-serif; font-weight: 700; letter-spacing: 0.08em; }
+      .logo-beam.font-barlow    .beam-top { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; letter-spacing: 0.06em; }
+      .logo-beam.font-ibm       .beam-top { font-family: 'IBM Plex Sans', sans-serif; font-weight: 700; }
+      .logo-beam.font-oxanium   .beam-top { font-family: 'Oxanium', sans-serif; font-weight: 700; letter-spacing: 0.04em; }
+      .logo-beam.font-grotesk   .beam-top { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+      .logo-beam.font-exo2      .beam-top { font-family: 'Exo 2', sans-serif; font-weight: 800; letter-spacing: 0.04em; }
+      .logo-beam.font-russo     .beam-top { font-family: 'Russo One', sans-serif; letter-spacing: 0.04em; }
+      .logo-beam.font-titillium .beam-top { font-family: 'Titillium Web', sans-serif; font-weight: 700; letter-spacing: 0.06em; }
+      .logo-beam.font-chakra    .beam-top { font-family: 'Chakra Petch', sans-serif; font-weight: 700; letter-spacing: 0.05em; }
+      .logo-beam.font-audiowide .beam-top { font-family: 'Audiowide', sans-serif; font-size: 1.1rem; letter-spacing: 0.04em; }
+      .logo-beam.font-saira     .beam-top { font-family: 'Saira Condensed', sans-serif; font-weight: 800; letter-spacing: 0.06em; font-size: 1.5rem; }
+      .logo-beam.font-aldrich   .beam-top { font-family: 'Aldrich', sans-serif; letter-spacing: 0.06em; }
+      .logo-beam.font-sharetech .beam-top { font-family: 'Share Tech Mono', monospace; letter-spacing: 0.04em; }
+      .logo-beam.font-orbitron  .beam-top { font-family: 'Orbitron', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: 0.06em; }
 
     /* ── IDEA 12: Wide spaced all caps ── */
-    .logo-12 .name {
-      font-size: 1.1rem; font-weight: 700;
-      letter-spacing: 0.25em;
-      color: #fff;
-    }
-    .logo-12 .rule {
-      height: 2px; width: 100%;
-      background: var(--brand);
-      border-radius: 2px;
-    }
-    .logo-12 .sub {
-      font-size: 0.6rem; font-weight: 600;
-      letter-spacing: 0.35em;
-      color: rgba(255,255,255,0.45);
-    }
+      .logo-12 .name {
+        font-size: 1.1rem; font-weight: 700;
+        letter-spacing: 0.25em;
+        color: #fff;
+      }
+      .logo-12 .rule {
+        height: 2px; width: 100%;
+        background: var(--brand);
+        border-radius: 2px;
+      }
+      .logo-12 .sub {
+        font-size: 0.6rem; font-weight: 600;
+        letter-spacing: 0.35em;
+        color: rgba(255,255,255,0.45);
+      }
 
     /* ── ORIGINAL BEAM (beam in the middle, L L C spread below) ── */
-    .logo-orig-beam {
-      display: flex;
-      flex-direction: column;
-      line-height: 1;
-    }
-    .logo-orig-beam .ob-top {
-      font-size: 1.25rem; font-weight: 700;
-      letter-spacing: 0.01em;
-      color: #f8f9fa;
-      margin-bottom: 4px;
-    }
-    .logo-orig-beam .ob-pillars {
-      display: flex;
-      align-items: flex-start;
-      width: calc(100% - 8px);
-      margin: 0 auto;
-    }
-    .logo-orig-beam .ob-col {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .logo-orig-beam .ob-tick {
-      display: none;
-    }
-    .logo-orig-beam .ob-bridge {
-      flex: 1;
-      border-top: 1px solid #f8f9fa;
-      opacity: 0.45;
-    }
-    .logo-orig-beam .ob-letter {
-      font-size: 0.6rem; font-weight: 700;
-      color: #f8f9fa;
-    }
+      .logo-orig-beam {
+        display: flex;
+        flex-direction: column;
+        line-height: 1;
+      }
+      .logo-orig-beam .ob-top {
+        font-size: 1.25rem; font-weight: 700;
+        letter-spacing: 0.01em;
+        color: #f8f9fa;
+        margin-bottom: 4px;
+      }
+      .logo-orig-beam .ob-pillars {
+        display: flex;
+        align-items: flex-start;
+        width: calc(100% - 8px);
+        margin: 0 auto;
+      }
+      .logo-orig-beam .ob-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .logo-orig-beam .ob-tick {
+        display: none;
+      }
+      .logo-orig-beam .ob-bridge {
+        flex: 1;
+        border-top: 1px solid #f8f9fa;
+        opacity: 0.45;
+      }
+      .logo-orig-beam .ob-letter {
+        font-size: 0.6rem; font-weight: 700;
+        color: #f8f9fa;
+      }
 
     /* ── spread L L C under name in wordmark ── */
-    .card-llc {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      font-size: 0.6rem; font-weight: 700;
-      color: rgba(255,255,255,0.45);
-    }
-  </style>
-</head>
-<body>
+      .card-llc {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        font-size: 0.6rem; font-weight: 700;
+        color: rgba(255,255,255,0.45);
+      }
+    </style>
+  </head>
+  <body>
 
-<div class="page-header">
-  <div class="container">
-    <a href="/design-preview/"><i class="fa-solid fa-arrow-left me-1"></i> Back to Design Preview</a>
-    <h1 class="fw-bold mt-3 mb-1">Logo Ideas</h1>
-    <p class="text-white-50 mb-0">Exploring directions for the ACLARK.NET, LLC brand mark.</p>
-  </div>
-</div>
+    <div class="page-header">
+      <div class="container">
+        <a href="/design-preview/"><i class="fa-solid fa-arrow-left me-1"></i> Back to Design Preview</a>
+        <h1 class="fw-bold mt-3 mb-1">Logo Ideas</h1>
+        <p class="text-white-50 mb-0">Exploring directions for the ACLARK.NET, LLC brand mark.</p>
+      </div>
+    </div>
 
-<div class="container py-5">
+    <div class="container py-5">
 
-  <h5 class="text-muted mb-4 text-uppercase" style="letter-spacing:.1em;font-size:.75rem;">Icon + Mark</h5>
-  <div class="row g-4 mb-5">
+      <h5 class="text-muted mb-4 text-uppercase" style="letter-spacing:.1em;font-size:.75rem;">Icon + Mark</h5>
+      <div class="row g-4 mb-5">
 
-    <div class="col-md-4">
-      <div class="idea-card dark-bg">
-        <div class="label" style="color:rgba(255,255,255,0.3);">01 — Network Icon</div>
-        <div class="logo-1">
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="18" cy="7"  r="3.5" fill="#1997c6"/>
-            <circle cx="7"  cy="27" r="3.5" fill="#1997c6"/>
-            <circle cx="29" cy="27" r="3.5" fill="#1997c6"/>
-            <circle cx="18" cy="18" r="2.5" fill="white" opacity=".2"/>
-            <line x1="18" y1="10" x2="18" y2="15.5" stroke="white" stroke-width="1" opacity=".2"/>
-            <line x1="15.8" y1="19.5" x2="9"  y2="24.5" stroke="white" stroke-width="1" opacity=".2"/>
-            <line x1="20.2" y1="19.5" x2="27" y2="24.5" stroke="white" stroke-width="1" opacity=".2"/>
-          </svg>
-          <div class="wordmark">
-            <div class="name">ACLARK.NET</div>
-            <div class="card-llc"><span>L</span><span>L</span><span>C</span></div>
+        <div class="col-md-4">
+          <div class="idea-card dark-bg">
+            <div class="label" style="color:rgba(255,255,255,0.3);">01 — Network Icon</div>
+            <div class="logo-1">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="18" cy="7"  r="3.5" fill="#1997c6"/>
+                <circle cx="7"  cy="27" r="3.5" fill="#1997c6"/>
+                <circle cx="29" cy="27" r="3.5" fill="#1997c6"/>
+                <circle cx="18" cy="18" r="2.5" fill="white" opacity=".2"/>
+                <line x1="18" y1="10" x2="18" y2="15.5" stroke="white" stroke-width="1" opacity=".2"/>
+                <line x1="15.8" y1="19.5" x2="9"  y2="24.5" stroke="white" stroke-width="1" opacity=".2"/>
+                <line x1="20.2" y1="19.5" x2="27" y2="24.5" stroke="white" stroke-width="1" opacity=".2"/>
+              </svg>
+              <div class="wordmark">
+                <div class="name">ACLARK.NET</div>
+                <div class="card-llc"><span>L</span><span>L</span><span>C</span></div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="col-md-4">
-      <div class="idea-card dark-bg">
-        <div class="label" style="color:rgba(255,255,255,0.3);">02 — Code Bracket</div>
-        <div class="logo-2">
-          <div class="mono">&lt;AC/&gt;</div>
-          <div class="wordmark">
-            <div class="name">ACLARK.NET</div>
-            <div class="card-llc"><span>L</span><span>L</span><span>C</span></div>
+        <div class="col-md-4">
+          <div class="idea-card dark-bg">
+            <div class="label" style="color:rgba(255,255,255,0.3);">02 — Code Bracket</div>
+            <div class="logo-2">
+              <div class="mono">&lt;AC/&gt;</div>
+              <div class="wordmark">
+                <div class="name">ACLARK.NET</div>
+                <div class="card-llc"><span>L</span><span>L</span><span>C</span></div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="col-md-4">
-      <div class="idea-card dark-bg">
-        <div class="label" style="color:rgba(255,255,255,0.3);">03 — Monogram Box</div>
-        <div class="logo-3">
-          <div class="box"><span>AC</span></div>
-          <div class="wordmark">
-            <div class="name">ACLARK.NET</div>
-            <div class="card-llc"><span>L</span><span>L</span><span>C</span></div>
+        <div class="col-md-4">
+          <div class="idea-card dark-bg">
+            <div class="label" style="color:rgba(255,255,255,0.3);">03 — Monogram Box</div>
+            <div class="logo-3">
+              <div class="box"><span>AC</span></div>
+              <div class="wordmark">
+                <div class="name">ACLARK.NET</div>
+                <div class="card-llc"><span>L</span><span>L</span><span>C</span></div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="col-md-4">
-      <div class="idea-card dark-bg">
-        <div class="label" style="color:rgba(255,255,255,0.3);">04 — Ghost Box</div>
-        <div class="logo-4">
-          <div class="box"><span>AC</span></div>
-          <div class="wordmark">
-            <div class="name">ACLARK.NET</div>
-            <div class="card-llc"><span>L</span><span>L</span><span>C</span></div>
+        <div class="col-md-4">
+          <div class="idea-card dark-bg">
+            <div class="label" style="color:rgba(255,255,255,0.3);">04 — Ghost Box</div>
+            <div class="logo-4">
+              <div class="box"><span>AC</span></div>
+              <div class="wordmark">
+                <div class="name">ACLARK.NET</div>
+                <div class="card-llc"><span>L</span><span>L</span><span>C</span></div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="col-md-4">
-      <div class="idea-card dark-bg">
-        <div class="label" style="color:rgba(255,255,255,0.3);">05 — Outlined Box</div>
-        <div class="logo-8">
-          <div class="box"><span>AC</span></div>
-          <div class="wordmark">
-            <div class="name">ACLARK.NET</div>
-            <div class="card-llc"><span>L</span><span>L</span><span>C</span></div>
+        <div class="col-md-4">
+          <div class="idea-card dark-bg">
+            <div class="label" style="color:rgba(255,255,255,0.3);">05 — Outlined Box</div>
+            <div class="logo-8">
+              <div class="box"><span>AC</span></div>
+              <div class="wordmark">
+                <div class="name">ACLARK.NET</div>
+                <div class="card-llc"><span>L</span><span>L</span><span>C</span></div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="col-md-4">
-      <div class="idea-card dark-bg">
-        <div class="label" style="color:rgba(255,255,255,0.3);">06 — Pill</div>
-        <div class="logo-10">
-          <div class="pill">AC</div>
-          <div class="wordmark">
-            <div class="name">ACLARK.NET</div>
-            <div class="card-llc"><span>L</span><span>L</span><span>C</span></div>
+        <div class="col-md-4">
+          <div class="idea-card dark-bg">
+            <div class="label" style="color:rgba(255,255,255,0.3);">06 — Pill</div>
+            <div class="logo-10">
+              <div class="pill">AC</div>
+              <div class="wordmark">
+                <div class="name">ACLARK.NET</div>
+                <div class="card-llc"><span>L</span><span>L</span><span>C</span></div>
+              </div>
+            </div>
           </div>
         </div>
+
       </div>
-    </div>
 
-  </div>
+      <h5 class="text-muted mb-4 text-uppercase" style="letter-spacing:.1em;font-size:.75rem;">Typographic</h5>
+      <div class="row g-4 mb-5">
 
-  <h5 class="text-muted mb-4 text-uppercase" style="letter-spacing:.1em;font-size:.75rem;">Typographic</h5>
-  <div class="row g-4 mb-5">
-
-    <div class="col-md-4">
-      <div class="idea-card dark-bg">
-        <div class="label" style="color:rgba(255,255,255,0.3);">07 — Stacked Caps</div>
-        <div class="logo-5">
-          <div class="name">ACLARK.NET</div>
-          <div class="sub-llc"><span>L</span><span>L</span><span>C</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="idea-card dark-bg">
-        <div class="label" style="color:rgba(255,255,255,0.3);">08 — Dot Accent</div>
-        <div class="logo-6">
-          <div class="dot"></div>
-          <div class="wordmark">
-            <div class="name">ACLARK.NET</div>
-            <div class="sub-llc"><span>L</span><span>L</span><span>C</span></div>
+        <div class="col-md-4">
+          <div class="idea-card dark-bg">
+            <div class="label" style="color:rgba(255,255,255,0.3);">07 — Stacked Caps</div>
+            <div class="logo-5">
+              <div class="name">ACLARK.NET</div>
+              <div class="sub-llc"><span>L</span><span>L</span><span>C</span></div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="col-md-4">
-      <div class="idea-card dark-bg">
-        <div class="label" style="color:rgba(255,255,255,0.3);">09 — Slash</div>
-        <div class="logo-7">
-          <div class="name">ACLARK</div>
-          <div class="slash">/</div>
-          <div class="name">NET</div>
-          <div class="slash">/</div>
-          <div class="name">LLC</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="idea-card dark-bg">
-        <div class="label" style="color:rgba(255,255,255,0.3);">10 — Minimal</div>
-        <div class="logo-9">
-          <div class="name">ACLARK<span class="net">.NET</span></div>
-          <div class="sub-llc"><span>L</span><span>L</span><span>C</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="idea-card dark-bg" style="border:1px solid rgba(240,165,0,0.3);">
-        <div class="label" style="color:rgba(255,255,255,0.3);">10B — Minimal + Inline LLC ⭐</div>
-        <div class="logo-10b">
-          <span class="main">ACLARK<span class="net">.NET</span></span>
-          <span class="sep">·</span>
-          <span class="llc">LLC</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="idea-card dark-bg">
-        <div class="label" style="color:rgba(255,255,255,0.3);">11 — Network + Name</div>
-        <div class="logo-11">
-          <svg width="40" height="40" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="18" cy="7"  r="3.5" fill="#1997c6"/>
-            <circle cx="7"  cy="27" r="3.5" fill="#1997c6"/>
-            <circle cx="29" cy="27" r="3.5" fill="#1997c6"/>
-            <circle cx="18" cy="18" r="2.5" fill="white" opacity=".2"/>
-            <line x1="18" y1="10" x2="18" y2="15.5" stroke="white" stroke-width="1" opacity=".2"/>
-            <line x1="15.8" y1="19.5" x2="9"  y2="24.5" stroke="white" stroke-width="1" opacity=".2"/>
-            <line x1="20.2" y1="19.5" x2="27" y2="24.5" stroke="white" stroke-width="1" opacity=".2"/>
-          </svg>
-          <div class="wordmark">
-            <div class="name">ACLARK.NET</div>
-            <div class="sub-llc"><span>L</span><span>L</span><span>C</span></div>
+        <div class="col-md-4">
+          <div class="idea-card dark-bg">
+            <div class="label" style="color:rgba(255,255,255,0.3);">08 — Dot Accent</div>
+            <div class="logo-6">
+              <div class="dot"></div>
+              <div class="wordmark">
+                <div class="name">ACLARK.NET</div>
+                <div class="sub-llc"><span>L</span><span>L</span><span>C</span></div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="col-md-4">
-      <div class="idea-card dark-bg">
-        <div class="label" style="color:rgba(255,255,255,0.3);">12 — Wide Spaced</div>
-        <div class="logo-12">
-          <div class="name">ACLARK.NET</div>
-          <div class="rule"></div>
-          <div class="sub-llc"><span>L</span><span>L</span><span>C</span></div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <h5 class="text-muted mb-4 text-uppercase" style="letter-spacing:.1em;font-size:.75rem;">LLC Inline</h5>
-  <div class="row g-4 mb-5">
-
-    <div class="col-md-4">
-      <div class="idea-card dark-bg">
-        <div class="label" style="color:rgba(255,255,255,0.3);">13 — Dot Separator</div>
-        <div class="logo-13">
-          <div class="name">ACLARK.NET<span class="sep">·</span><span class="llc">LLC</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="idea-card dark-bg">
-        <div class="label" style="color:rgba(255,255,255,0.3);">14 — Comma</div>
-        <div class="logo-14">
-          <div class="name">ACLARK.NET,<span class="llc">LLC</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="idea-card dark-bg">
-        <div class="label" style="color:rgba(255,255,255,0.3);">15 — Wide + LLC</div>
-        <div class="logo-12">
-          <div class="name" style="display:flex;align-items:baseline;gap:10px;">ACLARK.NET <span style="font-size:1.1rem;font-weight:700;color:#fff;">LLC</span></div>
-          <div class="rule"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="idea-card dark-bg">
-        <div class="label" style="color:rgba(255,255,255,0.3);">16 — Dot Accent</div>
-        <div class="logo-15">
-          <div class="name">ACLARK.NET <span class="dot"></span> <span class="llc">LLC</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="idea-card dark-bg">
-        <div class="label" style="color:rgba(255,255,255,0.3);">17 — Slash</div>
-        <div class="logo-16">
-          <div class="name">ACLARK.NET<span class="sep">/</span><span class="llc">LLC</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="idea-card dark-bg">
-        <div class="label" style="color:rgba(255,255,255,0.3);">18 — Bracket</div>
-        <div class="logo-16">
-          <div class="name">ACLARK.NET<span class="sep" style="margin:0 4px;">[</span><span class="llc">LLC</span><span class="sep" style="margin:0 2px;">]</span></div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <h5 class="text-muted mb-4 text-uppercase" style="letter-spacing:.1em;font-size:.75rem;">Beam Design ⭐</h5>
-  <div class="row g-4 mb-5">
-
-    <div class="col-md-4">
-      <div class="idea-card dark-bg" style="border: 1px solid rgba(25,151,198,0.35);">
-        <div class="label" style="color:rgba(255,255,255,0.3);">★ Original — Beam in Middle</div>
-        <div class="logo-orig-beam">
-          <div class="ob-top">ACLARK.NET</div>
-          <div class="ob-pillars">
-            <span class="ob-col"><span class="ob-tick"></span><span class="ob-letter">L</span></span>
-            <span class="ob-bridge"></span>
-            <span class="ob-col"><span class="ob-tick"></span><span class="ob-letter">L</span></span>
-            <span class="ob-bridge"></span>
-            <span class="ob-col"><span class="ob-tick"></span><span class="ob-letter">C</span></span>
+        <div class="col-md-4">
+          <div class="idea-card dark-bg">
+            <div class="label" style="color:rgba(255,255,255,0.3);">09 — Slash</div>
+            <div class="logo-7">
+              <div class="name">ACLARK</div>
+              <div class="slash">/</div>
+              <div class="name">NET</div>
+              <div class="slash">/</div>
+              <div class="name">LLC</div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-  </div>
-
-  <h5 class="text-muted mb-4 text-uppercase" style="letter-spacing:.1em;font-size:.75rem;">Font Explorations</h5>
-  <div class="row g-4 mb-5">
-
-    {% for font_class, font_label in fonts %}
-    <div class="col-md-4">
-      <div class="idea-card dark-bg">
-        <div class="label" style="color:rgba(255,255,255,0.3);">{{ font_label }}</div>
-        <div class="logo-beam dark {{ font_class }}">
-          <div class="beam-top">ACLARK.NET</div>
+        <div class="col-md-4">
+          <div class="idea-card dark-bg">
+            <div class="label" style="color:rgba(255,255,255,0.3);">10 — Minimal</div>
+            <div class="logo-9">
+              <div class="name">ACLARK<span class="net">.NET</span></div>
+              <div class="sub-llc"><span>L</span><span>L</span><span>C</span></div>
+            </div>
+          </div>
         </div>
+
+        <div class="col-md-4">
+          <div class="idea-card dark-bg" style="border:1px solid rgba(240,165,0,0.3);">
+            <div class="label" style="color:rgba(255,255,255,0.3);">10B — Minimal + Inline LLC ⭐</div>
+            <div class="logo-10b">
+              <span class="main">ACLARK<span class="net">.NET</span></span>
+              <span class="sep">,</span>
+              <span class="llc">LLC</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="idea-card dark-bg" style="border:1px solid rgba(240,165,0,0.3);">
+            <div class="label" style="color:rgba(255,255,255,0.3);">10C — Orbitron + Inline LLC ⭐</div>
+            <div class="logo-10c">
+              <span class="main">ACLARK<span class="net">.NET</span></span>
+              <span class="sep">,</span>
+              <span class="llc">LLC</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="idea-card dark-bg">
+            <div class="label" style="color:rgba(255,255,255,0.3);">11 — Network + Name</div>
+            <div class="logo-11">
+              <svg width="40" height="40" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="18" cy="7"  r="3.5" fill="#1997c6"/>
+                <circle cx="7"  cy="27" r="3.5" fill="#1997c6"/>
+                <circle cx="29" cy="27" r="3.5" fill="#1997c6"/>
+                <circle cx="18" cy="18" r="2.5" fill="white" opacity=".2"/>
+                <line x1="18" y1="10" x2="18" y2="15.5" stroke="white" stroke-width="1" opacity=".2"/>
+                <line x1="15.8" y1="19.5" x2="9"  y2="24.5" stroke="white" stroke-width="1" opacity=".2"/>
+                <line x1="20.2" y1="19.5" x2="27" y2="24.5" stroke="white" stroke-width="1" opacity=".2"/>
+              </svg>
+              <div class="wordmark">
+                <div class="name">ACLARK.NET</div>
+                <div class="sub-llc"><span>L</span><span>L</span><span>C</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="idea-card dark-bg">
+            <div class="label" style="color:rgba(255,255,255,0.3);">12 — Wide Spaced</div>
+            <div class="logo-12">
+              <div class="name">ACLARK.NET</div>
+              <div class="rule"></div>
+              <div class="sub-llc"><span>L</span><span>L</span><span>C</span></div>
+            </div>
+          </div>
+        </div>
+
       </div>
+
+      <h5 class="text-muted mb-4 text-uppercase" style="letter-spacing:.1em;font-size:.75rem;">LLC Inline</h5>
+      <div class="row g-4 mb-5">
+
+        <div class="col-md-4">
+          <div class="idea-card dark-bg">
+            <div class="label" style="color:rgba(255,255,255,0.3);">13 — Dot Separator</div>
+            <div class="logo-13">
+              <div class="name">ACLARK.NET<span class="sep">·</span><span class="llc">LLC</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="idea-card dark-bg">
+            <div class="label" style="color:rgba(255,255,255,0.3);">14 — Comma</div>
+            <div class="logo-14">
+              <div class="name">ACLARK.NET,<span class="llc">LLC</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="idea-card dark-bg">
+            <div class="label" style="color:rgba(255,255,255,0.3);">15 — Wide + LLC</div>
+            <div class="logo-12">
+              <div class="name" style="display:flex;align-items:baseline;gap:10px;">ACLARK.NET <span style="font-size:1.1rem;font-weight:700;color:#fff;">LLC</span></div>
+              <div class="rule"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="idea-card dark-bg">
+            <div class="label" style="color:rgba(255,255,255,0.3);">16 — Dot Accent</div>
+            <div class="logo-15">
+              <div class="name">ACLARK.NET <span class="dot"></span> <span class="llc">LLC</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="idea-card dark-bg">
+            <div class="label" style="color:rgba(255,255,255,0.3);">17 — Slash</div>
+            <div class="logo-16">
+              <div class="name">ACLARK.NET<span class="sep">/</span><span class="llc">LLC</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="idea-card dark-bg">
+            <div class="label" style="color:rgba(255,255,255,0.3);">18 — Bracket</div>
+            <div class="logo-16">
+              <div class="name">ACLARK.NET<span class="sep" style="margin:0 4px;">[</span><span class="llc">LLC</span><span class="sep" style="margin:0 2px;">]</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <h5 class="text-muted mb-4 text-uppercase" style="letter-spacing:.1em;font-size:.75rem;">Beam Design ⭐</h5>
+      <div class="row g-4 mb-5">
+
+        <div class="col-md-4">
+          <div class="idea-card dark-bg" style="border: 1px solid rgba(25,151,198,0.35);">
+            <div class="label" style="color:rgba(255,255,255,0.3);">★ Original — Beam in Middle</div>
+            <div class="logo-orig-beam">
+              <div class="ob-top">ACLARK.NET</div>
+              <div class="ob-pillars">
+                <span class="ob-col"><span class="ob-tick"></span><span class="ob-letter">L</span></span>
+                <span class="ob-bridge"></span>
+                <span class="ob-col"><span class="ob-tick"></span><span class="ob-letter">L</span></span>
+                <span class="ob-bridge"></span>
+                <span class="ob-col"><span class="ob-tick"></span><span class="ob-letter">C</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <h5 class="text-muted mb-4 text-uppercase" style="letter-spacing:.1em;font-size:.75rem;">Font Explorations</h5>
+      <div class="row g-4 mb-5">
+
+        {% for font_class, font_label in fonts %}
+          <div class="col-md-4">
+            <div class="idea-card dark-bg">
+              <div class="label" style="color:rgba(255,255,255,0.3);">{{ font_label }}</div>
+              <div class="logo-beam dark {{ font_class }}">
+                <div class="beam-top">ACLARK.NET</div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
+      </div>
+
     </div>
-    {% endfor %}
 
-  </div>
-
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>
