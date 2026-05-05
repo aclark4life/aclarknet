@@ -7,51 +7,33 @@
     --dark:  #0f2b3d;
   }
   .dash-nav {
-    background: var(--dark) !important;
+    background: #0f2b3d !important;
     border-bottom: 1px solid rgba(255,255,255,0.08);
     padding: 1.75rem 0;
     box-shadow: 0 1px 6px rgba(0,0,0,0.2);
     position: sticky;
     top: 0;
     z-index: 1000;
-    --bs-navbar-color: #8d959d;
-    --bs-navbar-hover-color: #d0d5db;
-    --bs-navbar-active-color: #d0d5db;
-    --bs-navbar-brand-color: #f8f9fa;
-    --bs-navbar-toggler-border-color: rgba(255,255,255,0.1);
   }
   .dash-nav .brand-mark {
     display: inline-flex;
-    align-items: center;
-    gap: 10px;
+    align-items: baseline;
+    gap: 0;
     text-decoration: none;
     padding: 0 !important;
-  }
-  .dash-nav .brand-wordmark {
-    display: flex;
-    flex-direction: column;
-    line-height: 1;
-    gap: 5px;
+    font-family: 'Orbitron', sans-serif;
   }
   .dash-nav .brand-top {
-    font-family: 'Orbitron', sans-serif;
     font-size: 1.1rem;
-    font-weight: 800;
-    letter-spacing: 0.06em;
+    font-weight: 700;
+    letter-spacing: 0.04em;
     color: #f8f9fa;
   }
   .dash-nav .brand-top .brand-net { color: var(--brand); }
-  .dash-nav .brand-llc {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.55rem;
-    font-weight: 700;
-    color: rgba(255,255,255,0.5);
-  }
+  .dash-nav .brand-sep { font-size: 1.1rem; font-weight: 700; color: #f0a500; }
+  .dash-nav .brand-llc { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.18em; color: #f0a500; }
   .dash-nav .nav-link {
-    color: #8d959d;
+    color: #adb5bd !important;
     font-size: 0.875rem;
     font-weight: 500;
     padding: 0.4rem 0.8rem;
@@ -59,32 +41,27 @@
     transition: color 0.15s, background 0.15s;
   }
   .dash-nav .nav-link:hover,
-  .dash-nav .nav-link.active { color: #d0d5db; background: rgba(255,255,255,0.08); }
+  .dash-nav .nav-link.active { color: #fff !important; background: rgba(255,255,255,0.08); }
   .dash-nav .btn-nav-cta {
     font-size: 0.875rem;
     font-weight: 600;
     padding: 0.4rem 1.1rem;
     border-radius: 4px;
-    border: 1.5px solid rgba(255,255,255,0.3);
-    color: rgba(255,255,255,0.85);
+    border: 1.5px solid rgba(255,255,255,0.4);
+    color: #fff !important;
     text-decoration: none;
     transition: background 0.15s, color 0.15s;
   }
   .dash-nav .btn-nav-cta:hover { background: rgba(255,255,255,0.9); color: var(--dark); }
 
   .dash-footer { background: var(--dark); color: #adb5bd; padding: 1.5rem 0; }
-  .dash-footer .brand-mark { display: inline-flex; align-items: center; text-decoration: none; }
-  .dash-footer .brand-wordmark { display: flex; flex-direction: column; line-height: 1; gap: 5px; }
+  .dash-footer .brand-mark { display: inline-flex; align-items: baseline; gap: 0; text-decoration: none; font-family: 'Orbitron', sans-serif; }
   .dash-footer .brand-top {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.1rem; font-weight: 800; letter-spacing: 0.06em; color: #dee2e6;
+    font-size: 1.1rem; font-weight: 700; letter-spacing: 0.04em; color: #dee2e6;
   }
   .dash-footer .brand-top .brand-net { color: var(--brand); }
-  .dash-footer .brand-llc {
-    display: flex; justify-content: space-between; width: 100%;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.55rem; font-weight: 700; color: rgba(255,255,255,0.4);
-  }
+  .dash-footer .brand-sep { font-size: 1.1rem; font-weight: 700; color: #f0a500; }
+  .dash-footer .brand-llc { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.18em; color: #f0a500; }
   .dash-footer a { color: #adb5bd; text-decoration: none; transition: color 0.15s; }
   .dash-footer a:hover { color: #fff; }
   .dash-footer .social-icon { font-size: 1.3rem; margin: 0 0.35rem; }
@@ -100,13 +77,10 @@
   <strong>Design Preview</strong> — <a href="{% url 'design_preview' %}" class="text-decoration-underline">Try it out</a> &nbsp;·&nbsp; <a href="{% url 'logo_ideas' %}" class="text-decoration-underline">Logo Ideas</a>
 </div>
 
-<nav class="dash-nav navbar navbar-expand-md" data-bs-theme="dark">
+<nav class="dash-nav navbar navbar-expand-md">
   <div class="container">
     <a class="navbar-brand brand-mark" href="/">
-      <span class="brand-wordmark">
-        <span class="brand-top">ACLARK<span class="brand-net">.NET</span></span>
-        <span class="brand-llc"><span>L</span><span>L</span><span>C</span></span>
-      </span>
+      <span class="brand-top">ACLARK<span class="brand-net">.NET</span></span><span class="brand-sep">,</span><span class="brand-llc">LLC</span>
     </a>
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#dashNav">
       <span class="navbar-toggler-icon"></span>
