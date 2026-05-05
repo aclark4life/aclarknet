@@ -32,11 +32,11 @@
         box-shadow: 0 1px 6px rgba(0,0,0,0.2);
         position: sticky; top: 0; z-index: 1000;
       }
-      .pillow-nav .brand-mark { text-decoration: none; display: inline-flex; align-items: center; gap: 10px; padding: 0 !important; }
-      .pillow-nav .brand-wordmark { display: flex; flex-direction: column; line-height: 1; gap: 5px; }
-      .pillow-nav .brand-top { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 800; letter-spacing: 0.06em; color: #f8f9fa; }
+      .pillow-nav .brand-mark { text-decoration: none; display: inline-flex; align-items: baseline; gap: 0; padding: 0 !important; font-family: 'Orbitron', sans-serif; }
+      .pillow-nav .brand-top { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.04em; color: #f8f9fa; }
       .pillow-nav .brand-top .brand-net { color: var(--brand); }
-      .pillow-nav .brand-llc { display: flex; justify-content: space-between; width: 100%; font-family: 'Orbitron', sans-serif; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.1em; color: rgba(255,255,255,0.5); }
+      .pillow-nav .brand-sep { font-size: 1.1rem; font-weight: 700; color: #f0a500; }
+      .pillow-nav .brand-llc { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.18em; color: #f0a500; }
       .pillow-nav .nav-link { color: #adb5bd; font-size: 0.875rem; font-weight: 500; padding: 0.4rem 0.8rem; border-radius: 4px; transition: color 0.15s, background 0.15s; }
       .pillow-nav .nav-link:hover { color: #fff; background: rgba(255,255,255,0.08); }
       .pillow-nav .btn-nav-cta { font-size: 0.875rem; font-weight: 600; padding: 0.4rem 1.1rem; border-radius: 4px; border: 1.5px solid rgba(255,255,255,0.4); color: #fff; text-decoration: none; transition: background 0.15s, color 0.15s; }
@@ -119,10 +119,7 @@
     <nav class="pillow-nav navbar navbar-expand-md">
       <div class="container">
         <a class="navbar-brand p-0 brand-mark" href="https://aclark.net/">
-          <span class="brand-wordmark">
-            <span class="brand-top">ACLARK<span class="brand-net">.NET</span></span>
-            <span class="brand-llc"><span>L</span><span>L</span><span>C</span></span>
-          </span>
+          <span class="brand-top">ACLARK<span class="brand-net">.NET</span></span><span class="brand-sep">,</span><span class="brand-llc">LLC</span>
         </a>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#pillowNav">
           <span class="navbar-toggler-icon"></span>
