@@ -266,23 +266,25 @@
       .logo-10d .sep { font-size: 1rem; font-weight: 700; color: #f0a500; margin: 0; }
       .logo-10d .llc { font-size: 1.4rem; font-weight: 700; letter-spacing: 0.18em; color: #f0a500; }
 
-      /* 10D color varieties */
-      /* cyan */
-      .logo-10d.cv-cyan .main .net { color: #00d4ff; }
-      .logo-10d.cv-cyan .sep { color: #00d4ff; }
-      .logo-10d.cv-cyan .llc { color: #00d4ff; }
-      /* emerald */
-      .logo-10d.cv-emerald .main .net { color: #00e096; }
-      .logo-10d.cv-emerald .sep { color: #00e096; }
-      .logo-10d.cv-emerald .llc { color: #00e096; }
-      /* violet */
-      .logo-10d.cv-violet .main .net { color: #b06aff; }
-      .logo-10d.cv-violet .sep { color: #b06aff; }
-      .logo-10d.cv-violet .llc { color: #b06aff; }
-      /* crimson */
-      .logo-10d.cv-crimson .main .net { color: #ff4466; }
-      .logo-10d.cv-crimson .sep { color: #ff4466; }
-      .logo-10d.cv-crimson .llc { color: #ff4466; }
+      /* 10D color varieties — use CSS vars so mix-and-match is one line per card */
+      .logo-10d { --net-color: var(--brand); --llc-color: #f0a500; }
+      .logo-10d .main .net { color: var(--net-color); }
+      .logo-10d .sep       { color: var(--llc-color); }
+      .logo-10d .llc       { color: var(--llc-color); }
+      /* solid varieties */
+      .logo-10d.cv-cyan    { --net-color: #00d4ff; --llc-color: #00d4ff; }
+      .logo-10d.cv-emerald { --net-color: #00e096; --llc-color: #00e096; }
+      .logo-10d.cv-violet  { --net-color: #b06aff; --llc-color: #b06aff; }
+      .logo-10d.cv-crimson { --net-color: #ff4466; --llc-color: #ff4466; }
+      /* mix-and-match varieties */
+      .logo-10d.cv-cyan-gold    { --net-color: #00d4ff; --llc-color: #f0a500; }
+      .logo-10d.cv-gold-cyan    { --net-color: #f0a500; --llc-color: #00d4ff; }
+      .logo-10d.cv-emerald-violet { --net-color: #00e096; --llc-color: #b06aff; }
+      .logo-10d.cv-violet-emerald { --net-color: #b06aff; --llc-color: #00e096; }
+      .logo-10d.cv-crimson-cyan { --net-color: #ff4466; --llc-color: #00d4ff; }
+      .logo-10d.cv-cyan-crimson { --net-color: #00d4ff; --llc-color: #ff4466; }
+      .logo-10d.cv-gold-violet  { --net-color: #f0a500; --llc-color: #b06aff; }
+      .logo-10d.cv-crimson-gold { --net-color: #ff4466; --llc-color: #f0a500; }
 
 
       display: flex;
@@ -611,6 +613,78 @@
           <div class="idea-card dark-bg" style="border:1px solid rgba(255,68,102,0.3);">
             <div class="label" style="color:rgba(255,255,255,0.3);">10D — Crimson</div>
             <div class="logo-10d cv-crimson">
+              <span class="main">ACLARK<span class="net">.NET</span></span><span class="sep">,&nbsp;</span><span class="llc">LLC</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="idea-card dark-bg" style="border:1px solid rgba(0,212,255,0.3);">
+            <div class="label" style="color:rgba(255,255,255,0.3);">10D — .NET cyan · LLC gold</div>
+            <div class="logo-10d cv-cyan-gold">
+              <span class="main">ACLARK<span class="net">.NET</span></span><span class="sep">,&nbsp;</span><span class="llc">LLC</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="idea-card dark-bg" style="border:1px solid rgba(240,165,0,0.3);">
+            <div class="label" style="color:rgba(255,255,255,0.3);">10D — .NET gold · LLC cyan</div>
+            <div class="logo-10d cv-gold-cyan">
+              <span class="main">ACLARK<span class="net">.NET</span></span><span class="sep">,&nbsp;</span><span class="llc">LLC</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="idea-card dark-bg" style="border:1px solid rgba(0,224,150,0.3);">
+            <div class="label" style="color:rgba(255,255,255,0.3);">10D — .NET emerald · LLC violet</div>
+            <div class="logo-10d cv-emerald-violet">
+              <span class="main">ACLARK<span class="net">.NET</span></span><span class="sep">,&nbsp;</span><span class="llc">LLC</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="idea-card dark-bg" style="border:1px solid rgba(176,106,255,0.3);">
+            <div class="label" style="color:rgba(255,255,255,0.3);">10D — .NET violet · LLC emerald</div>
+            <div class="logo-10d cv-violet-emerald">
+              <span class="main">ACLARK<span class="net">.NET</span></span><span class="sep">,&nbsp;</span><span class="llc">LLC</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="idea-card dark-bg" style="border:1px solid rgba(255,68,102,0.3);">
+            <div class="label" style="color:rgba(255,255,255,0.3);">10D — .NET crimson · LLC cyan</div>
+            <div class="logo-10d cv-crimson-cyan">
+              <span class="main">ACLARK<span class="net">.NET</span></span><span class="sep">,&nbsp;</span><span class="llc">LLC</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="idea-card dark-bg" style="border:1px solid rgba(0,212,255,0.3);">
+            <div class="label" style="color:rgba(255,255,255,0.3);">10D — .NET cyan · LLC crimson</div>
+            <div class="logo-10d cv-cyan-crimson">
+              <span class="main">ACLARK<span class="net">.NET</span></span><span class="sep">,&nbsp;</span><span class="llc">LLC</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="idea-card dark-bg" style="border:1px solid rgba(240,165,0,0.3);">
+            <div class="label" style="color:rgba(255,255,255,0.3);">10D — .NET gold · LLC violet</div>
+            <div class="logo-10d cv-gold-violet">
+              <span class="main">ACLARK<span class="net">.NET</span></span><span class="sep">,&nbsp;</span><span class="llc">LLC</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="idea-card dark-bg" style="border:1px solid rgba(255,68,102,0.3);">
+            <div class="label" style="color:rgba(255,255,255,0.3);">10D — .NET crimson · LLC gold</div>
+            <div class="logo-10d cv-crimson-gold">
               <span class="main">ACLARK<span class="net">.NET</span></span><span class="sep">,&nbsp;</span><span class="llc">LLC</span>
             </div>
           </div>
