@@ -173,3 +173,35 @@ build-prod:
     python manage.py collectstatic --noinput
 
 alias bp := build-prod
+
+# Import blog entries from data/blog_entries.csv (use --update to overwrite existing)
+import-blog:
+    python manage.py import_entries --csv data/blog_entries.csv
+
+alias ib := import-blog
+
+# Import blog entries with --update flag (overwrites existing entries)
+import-blog-update:
+    python manage.py import_entries --csv data/blog_entries.csv --update
+
+alias ibu := import-blog-update
+
+# Regenerate data/blog_entries.csv from cloned blog repos (requires repos cloned in /tmp/blog-import/)
+generate-blog-csv:
+    python manage.py blog_to_csv --repo-path /tmp/blog-import/blog-2017 --source blog-2017 --output /tmp/blog-import/csvs/blog-2017.csv
+    python manage.py blog_to_csv --repo-path /tmp/blog-import/blog-2020 --source blog-2020 --output /tmp/blog-import/csvs/blog-2020.csv
+    python manage.py blog_to_csv --repo-path /tmp/blog-import/pelican-blog --source pelican-blog --output /tmp/blog-import/csvs/pelican-blog.csv
+    python manage.py blog_to_csv --repo-path /tmp/blog-import/blog --source blog --output /tmp/blog-import/csvs/blog.csv
+    python manage.py blog_to_csv --merge /tmp/blog-import/csvs/blog-2017.csv /tmp/blog-import/csvs/blog-2020.csv /tmp/blog-import/csvs/pelican-blog.csv /tmp/blog-import/csvs/blog.csv --output data/blog_entries.csv
+
+alias gbc := generate-blog-csv
+
+# Clone blog source repos to /tmp/blog-import/ for CSV regeneration
+clone-blog-repos:
+    mkdir -p /tmp/blog-import
+    gh repo clone aclark4life/blog /tmp/blog-import/blog || true
+    gh repo clone aclark4life/blog-2017 /tmp/blog-import/blog-2017 || true
+    gh repo clone aclark4life/blog-2020 /tmp/blog-import/blog-2020 || true
+    gh repo clone aclark4life/pelican-blog /tmp/blog-import/pelican-blog || true
+
+alias cbr := clone-blog-repos
