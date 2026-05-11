@@ -243,7 +243,7 @@
       }
       .logo-10b .main { font-size: 1.4rem; font-weight: 700; letter-spacing: 0.04em; color: #fff; }
       .logo-10b .main .net { color: var(--brand); letter-spacing: normal; }
-      .logo-10b .main .sep { font-size: 0.75em; color: #fff; letter-spacing: 0; }
+      .logo-10b .main .sep { font-size: 0.75em; color: #f0a500; letter-spacing: 0; }
       .logo-10b .llc { font-size: 1.4rem; font-weight: 700; letter-spacing: 0.18em; color: #f0a500; }
 
     /* ── IDEA 10C: Orbitron inline LLC ── */
@@ -253,7 +253,7 @@
       }
       .logo-10c .main { font-size: 1.4rem; font-weight: 700; letter-spacing: 0.04em; color: #fff; }
       .logo-10c .main .net { color: var(--brand); letter-spacing: normal; }
-      .logo-10c .main .sep { font-size: 0.75em; color: #fff; letter-spacing: 0; }
+      .logo-10c .main .sep { font-size: 0.75em; color: #f0a500; letter-spacing: 0; }
       .logo-10c .llc { font-size: 1.4rem; font-weight: 700; letter-spacing: 0.18em; color: #f0a500; }
 
     /* ── IDEA 10D: Orbitron inline LLC with space after comma ── */
@@ -262,12 +262,13 @@
         display: flex; align-items: baseline; gap: 0;
       }
       .logo-10d .main { font-size: 1.4rem; font-weight: 700; letter-spacing: 0.04em; color: #fff; }
-      .logo-10d .main .sep { font-size: 0.75em; color: #fff; letter-spacing: 0; }
+      .logo-10d .main .sep { font-size: 0.75em; letter-spacing: 0; }
       .logo-10d .llc { font-size: 1.4rem; font-weight: 700; letter-spacing: 0.18em; color: #f0a500; }
 
       /* 10D color varieties — use CSS vars so mix-and-match is one line per card */
       .logo-10d { --net-color: var(--brand); --llc-color: #f0a500; }
       .logo-10d .main .net { color: var(--net-color); letter-spacing: normal; }
+      .logo-10d .main .sep { color: var(--llc-color); }
       .logo-10d .llc       { color: var(--llc-color); }
       /* solid varieties */
       .logo-10d.cv-cyan    { --net-color: #00d4ff; --llc-color: #00d4ff; }
@@ -576,7 +577,7 @@
           <div class="idea-card dark-bg" style="border:1px solid rgba(240,165,0,0.3);">
             <div class="label" style="color:rgba(255,255,255,0.3);">10C — Orbitron + Inline LLC ⭐</div>
             <div class="logo-10c">
-              <span class="main">ACLARK<span class="net">.NET</span><span class="sep">,</span></span>
+              <span class="main">ACLARK<span class="net">.NET</span><span class="sep">,</span>&nbsp;</span>
               <span class="llc">LLC</span>
             </div>
           </div>
@@ -848,7 +849,7 @@
           <div class="idea-card dark-bg">
             <div class="label" style="color:rgba(255,255,255,0.3);">14 — Comma</div>
             <div class="logo-14">
-              <div class="name">ACLARK.NET,<span class="llc">LLC</span></div>
+              <div class="name">ACLARK.NET,&nbsp;<span class="llc">LLC</span></div>
             </div>
           </div>
         </div>
