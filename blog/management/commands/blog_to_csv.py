@@ -53,12 +53,12 @@ def parse_rst_entry(content, path, source):
     """
     lines = content.splitlines()
 
-    # Extract title: first non-empty line whose next non-empty line is an underline
+    # Extract title: first non-empty, non-pipe line whose next non-empty line is an underline
     title = ""
     title_line_idx = None
     for i, line in enumerate(lines):
         stripped = line.strip()
-        if not stripped:
+        if not stripped or stripped == "|":
             continue
         for j in range(i + 1, len(lines)):
             next_line = lines[j].strip()
@@ -72,8 +72,9 @@ def parse_rst_entry(content, path, source):
 
     if not title:
         for line in lines:
-            if line.strip():
-                title = line.strip()
+            stripped = line.strip()
+            if stripped and stripped != "|":
+                title = stripped
                 break
 
     slug = _slug_from_path(path)

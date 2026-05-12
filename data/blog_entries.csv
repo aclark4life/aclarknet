@@ -1,10 +1,5 @@
 title,slug,pub_date,body,tags,source
-|,first-post,2007-03-16,"|
-
-First Post
-==========
-
-|
+First Post,first-post,2007-03-16,"|
 
 .. image:: /images/look-at-me.jpg
     :align: center
@@ -338,28 +333,7 @@ I primarily develop on Mac OS X and immediately install updates when they are re
 
 .. _Spaces.. Spaces.. Spaces..: http://www.scsc.no/products/spaces-spaces-spaces/",Misc,blog-2017
 Spaces.. Spaces.. Spaces.. fix for Spaces.app in Mac OS X Leopard // Alex Clark,spaces-spaces-spaces-fix-for-spacesapp-in-mac-os-x-leopard,2008-01-01,,,pelican-blog
-Spaces Fixed,spaces-fixed,2008-03-06,"**Thanks Apple.**
-
-For those of you using Spaces in Mac OS X I'd like to follow up my previous post with some exciting news regarding Spaces in Mac OS X 10.5.2: it's fixed! Thousands of former FVWM users can now rejoice as they enjoy sane desktop pager functionality again. As you know, I've been using ""Spaces... Spaces... Spaces..."" and I just noticed that the issue has actually been resolved by Apple. See this post on macosxhints.com for more information: http://www.macosxhints.com/article.php?story=2008021122525348. To alter the annoying spaces-follows-application behavior do this:
-
-.. raw:: html
-
-    <style>
-    pre:before { content: '$ ' }
-    </style>
-
-    <pre>
-    defaults write com.apple.dock workspaces-auto-swoosh -bool NO
-    </pre>
-    <pre>
-    sudo killall Dock
-    </pre>",Misc,blog-2017
-|,unix-tips-for-the-elderly,2008-03-06,"|
-
-UNIX Tips for the Elderly
-=========================
-
-|
+UNIX Tips for the Elderly,unix-tips-for-the-elderly,2008-03-06,"|
 
 .. image:: /images/huh.png
     :align: center
@@ -440,6 +414,22 @@ Or:
       ISO Media, MPEG v4 system, iTunes AAC-LC
 
 |",,blog
+Spaces Fixed,spaces-fixed,2008-03-06,"**Thanks Apple.**
+
+For those of you using Spaces in Mac OS X I'd like to follow up my previous post with some exciting news regarding Spaces in Mac OS X 10.5.2: it's fixed! Thousands of former FVWM users can now rejoice as they enjoy sane desktop pager functionality again. As you know, I've been using ""Spaces... Spaces... Spaces..."" and I just noticed that the issue has actually been resolved by Apple. See this post on macosxhints.com for more information: http://www.macosxhints.com/article.php?story=2008021122525348. To alter the annoying spaces-follows-application behavior do this:
+
+.. raw:: html
+
+    <style>
+    pre:before { content: '$ ' }
+    </style>
+
+    <pre>
+    defaults write com.apple.dock workspaces-auto-swoosh -bool NO
+    </pre>
+    <pre>
+    sudo killall Dock
+    </pre>",Misc,blog-2017
 Take Back The Tap,take-back-the-tap,2008-03-17,"**Promote tap water over bottled water**
 
 `ACLARK.NET, LLC <http://aclark.net>`_ is proud to announce http://www.takebackthetap.org.
@@ -1356,12 +1346,7 @@ In conclusion, great job Veda! Thank you very much for your efforts. I look forw
 .. _`http://pypi.python.org/pypi/collective.xdv`: http://pypi.python.org/pypi/collective.xdv
 .. _`http://www.packtpub.com/plone-3-theming-create-flexible-powerful-professional-templates`: http://www.packtpub.com/plone-3-theming-create-flexible-powerful-professional-templates/mid/220709943ki3?utm_source=aclark.net&utm_medium=affiliate&utm_content=blog&utm_campaign=mdb_001376","Buildout, Plone",blog-2017
 Review of Veda Williams' Plone 3 Theming // Alex Clark,review-of-veda-williams039-plone-3-theming,2009-09-22,,,pelican-blog
-|,new-years-python-meme,2009-12-31,"|
-
-New Year's Python Meme
-======================
-
-|
+New Year's Python Meme,new-years-python-meme,2009-12-31,"|
 
 .. image:: /images/lenin_packaging.png
     :align: center
@@ -1729,6 +1714,72 @@ Oh, I almost forgot, my updated resume is here: `http://aclark.net/team/aclark/r
 .. _wrote a book: http://aclark.net/plone-site-admin
 .. _`http://aclark.net/team/aclark/resume`: http://aclark.net/team/aclark/resume
 .. _`http://aclark.net/team/aclark/resume-pdf`: http://aclark.net/team/aclark/resume-pdf",Misc,blog-2017
+A New Plone Book,a-new-plone-book,2010-03-30,"|
+
+.. image:: /images/7047_plone20site20admincov.5ae6fff11a65.jpg
+    :align: center
+    :class: blog-image
+
+|
+
+Plone 3.3 Site Administration
+-----------------------------
+
+If |Plone Conference 2006| was my inspiration for |Plone Conference 2008|, then Professional Plone Development was my inspiration for this book: |Plone 3.3 Site Administration|.
+
+For the past 14 months or so, I have been writing a book aimed at end users of Plone: folks that have little knowledge of how to do much more than add content. It is intended to make them feel more comfortable performing various site administrator tasks. Topics like theming, maintenance, and optimization and more are covered.
+
+Lowering the Plone Bar for Python Users
+---------------------------------------
+
+This book aims to ``""lower the Plone bar for users of Python""``. What do I mean by that? Basically this: I love Python almost as much as I love Plone. It lets me translate my thoughts directly into code. I fantasize that with little more than a Python interpreter, one can forge a working Plone site within minutes. But it is not just a fantasy, it is (more or less) the status quo.
+
+So, this book begins at the beginning: by making sure folks are comfortable installing and using Python on there operating system of choice (or using the pre-installed Python). If you read Professional Plone Development, you may recall Martin Aspeli saying at the beginning of Chapter 3:
+
+    ""We will assume that Python 2.4 gets invoked when you run python on the command line.""
+
+This book does not make that assumption and tries to cover everything you may need to know after installing your operating system up to that point.
+
+In Chapter 1, we cover installing and running Python on three popular operating systems: Mac OS X 10.6, Windows 7, and Ubuntu 9.10.
+
+Buildout
+--------
+
+This book is largely a response to the ``""Oh no! I have to use Buildout to install Plone and its add-ons!""`` sentiment that has been prevalent since Buildout was first introduced to Plone several years ago. I don't know if Buildout was the ""right"" way to go, but I do know that I love using it and I would like to help others feel the same way.
+
+The bottom line is this: Plone made a conscious decision to ``""become more Pythonic""`` by using eggs. With that choice came more complexity from potential conflicts between eggs. Buildout is one solution to that problem. Unfortunately, it introduces other problems like cryptic error messages and a certain too-many-moving-parts-ness.
+
+Let me correct myself: I am fairly certain Buildout was the right way to go at the time. What I am not sure about is where to go from here. It would be nice to get back to a place where folks could just drop packages in to a directory (I don't literally mean going back to old-style products, but perhaps we could provide that type of functionality again somehow). But I don't have an answer for that. In the meantime, let's make everyone more comfortable with using Buildout.
+
+About the Rest
+--------------
+
+The book teaches you to find your way around Buildout and Plone. Whether you choose to follow along and build your site from scratch using only Buildout (and a paper clip) or if you use one of the Buildout-based installers (like the Unified Installer), this book aims to make you more competent and comfortable performing a variety of Buildout-related tasks.
+
+In Chapters 2-7, we present various buildout configuration files that correspond to specific tasks that are related to various subjects, e.g. theming, maintenance, and optimization. The reader is expected to ``""know how to write a buildout.cfg file""`` by the end.
+
+In the final Chapter 8, we cover new technologies like XDV and repoze.zope2 which may become more mainstream once you decide to start using them (although the latter seems more like a toy to keep us busy until the real fix arrives: full WSGI support in Zope 2.
+
+When Will it Arrive
+-------------------
+
+PACKT originally announced the book will arrive in March and I have been working non-stop since mid-March to make sure it gets out the door as quickly as possible. I expect it to be available sson. I apologize to those of you who have pre-ordered and are now waiting for it.
+
+So get ready! I plan to have over 200 pages of draft material submitted by the end of this month. I will continue to work with PACKT to address any concerns that arise during editing. They have promised to try to ship the book by May, so we will see how it goes. I encourage you to pre-order now as that will go a long way to inspire them to work just that much harder to get it done and out to you, ASAP.
+
+|
+
+.. |Plone Conference 2006| raw:: html
+
+   <a href=""http://plone.org/events/conferences/seattle-2006"" target=""_blank"">Plone Conference 2006</a>
+
+.. |Plone Conference 2008| raw:: html
+
+   <a href=""https://plone.org/events/plone-conferences/washington-dc-2008"" target=""_blank"">Plone Conference 2008</a>
+
+.. |Plone 3.3 Site Administration| raw:: html
+
+   <a href=""https://www.packtpub.com/product/plone-3-3-site-administration/9781847197047"" target=""_blank"">Plone 3.3 Site Administration</a>",,blog
 "Blood, Sweat, Tears and a New Plone Book",blood-sweat-tears-and-a-new-plone-book,2010-03-30,"**Plone 3.3 Site Administration**
 
 Well, no blood yet. But certainly sweat and tears. If `Plone Conference 2006`_ was my inspiration for `Plone Conference 2008`_, then `Professional Plone Development`_ was my inspiration for this book: `Plone 3.3 Site Administration`_.
@@ -1819,77 +1870,6 @@ Thank you, everyone, for the responses to `my previous blog entry`_. I have had 
 .. _my previous blog entry: http://blog.aclark.net/?p=170
 .. _get in touch.: mailto:aclark@aclark.net?subject=""Hire%20Alex%20Clark""
 .. _contact: http://aclark.net/contact-info","Buildout, Plone",blog-2017
-|,a-new-plone-book,2010-03-30,"|
-
-A New Plone Book
-================
-
-|
-
-.. image:: /images/7047_plone20site20admincov.5ae6fff11a65.jpg
-    :align: center
-    :class: blog-image
-
-|
-
-Plone 3.3 Site Administration
------------------------------
-
-If |Plone Conference 2006| was my inspiration for |Plone Conference 2008|, then Professional Plone Development was my inspiration for this book: |Plone 3.3 Site Administration|.
-
-For the past 14 months or so, I have been writing a book aimed at end users of Plone: folks that have little knowledge of how to do much more than add content. It is intended to make them feel more comfortable performing various site administrator tasks. Topics like theming, maintenance, and optimization and more are covered.
-
-Lowering the Plone Bar for Python Users
----------------------------------------
-
-This book aims to ``""lower the Plone bar for users of Python""``. What do I mean by that? Basically this: I love Python almost as much as I love Plone. It lets me translate my thoughts directly into code. I fantasize that with little more than a Python interpreter, one can forge a working Plone site within minutes. But it is not just a fantasy, it is (more or less) the status quo.
-
-So, this book begins at the beginning: by making sure folks are comfortable installing and using Python on there operating system of choice (or using the pre-installed Python). If you read Professional Plone Development, you may recall Martin Aspeli saying at the beginning of Chapter 3:
-
-    ""We will assume that Python 2.4 gets invoked when you run python on the command line.""
-
-This book does not make that assumption and tries to cover everything you may need to know after installing your operating system up to that point.
-
-In Chapter 1, we cover installing and running Python on three popular operating systems: Mac OS X 10.6, Windows 7, and Ubuntu 9.10.
-
-Buildout
---------
-
-This book is largely a response to the ``""Oh no! I have to use Buildout to install Plone and its add-ons!""`` sentiment that has been prevalent since Buildout was first introduced to Plone several years ago. I don't know if Buildout was the ""right"" way to go, but I do know that I love using it and I would like to help others feel the same way.
-
-The bottom line is this: Plone made a conscious decision to ``""become more Pythonic""`` by using eggs. With that choice came more complexity from potential conflicts between eggs. Buildout is one solution to that problem. Unfortunately, it introduces other problems like cryptic error messages and a certain too-many-moving-parts-ness.
-
-Let me correct myself: I am fairly certain Buildout was the right way to go at the time. What I am not sure about is where to go from here. It would be nice to get back to a place where folks could just drop packages in to a directory (I don't literally mean going back to old-style products, but perhaps we could provide that type of functionality again somehow). But I don't have an answer for that. In the meantime, let's make everyone more comfortable with using Buildout.
-
-About the Rest
---------------
-
-The book teaches you to find your way around Buildout and Plone. Whether you choose to follow along and build your site from scratch using only Buildout (and a paper clip) or if you use one of the Buildout-based installers (like the Unified Installer), this book aims to make you more competent and comfortable performing a variety of Buildout-related tasks.
-
-In Chapters 2-7, we present various buildout configuration files that correspond to specific tasks that are related to various subjects, e.g. theming, maintenance, and optimization. The reader is expected to ``""know how to write a buildout.cfg file""`` by the end.
-
-In the final Chapter 8, we cover new technologies like XDV and repoze.zope2 which may become more mainstream once you decide to start using them (although the latter seems more like a toy to keep us busy until the real fix arrives: full WSGI support in Zope 2.
-
-When Will it Arrive
--------------------
-
-PACKT originally announced the book will arrive in March and I have been working non-stop since mid-March to make sure it gets out the door as quickly as possible. I expect it to be available sson. I apologize to those of you who have pre-ordered and are now waiting for it.
-
-So get ready! I plan to have over 200 pages of draft material submitted by the end of this month. I will continue to work with PACKT to address any concerns that arise during editing. They have promised to try to ship the book by May, so we will see how it goes. I encourage you to pre-order now as that will go a long way to inspire them to work just that much harder to get it done and out to you, ASAP.
-
-|
-
-.. |Plone Conference 2006| raw:: html
-
-   <a href=""http://plone.org/events/conferences/seattle-2006"" target=""_blank"">Plone Conference 2006</a>
-
-.. |Plone Conference 2008| raw:: html
-
-   <a href=""https://plone.org/events/plone-conferences/washington-dc-2008"" target=""_blank"">Plone Conference 2008</a>
-
-.. |Plone 3.3 Site Administration| raw:: html
-
-   <a href=""https://www.packtpub.com/product/plone-3-3-site-administration/9781847197047"" target=""_blank"">Plone 3.3 Site Administration</a>",,blog
 The Apache Modules For XDV,the-apache-modules-for-xdv,2010-07-12,"**Apache Buildout**
 
 I was recently tasked with consolidating our various **business services** (website, software repository, mailing lists, ldap, etc.) on to a single virtual machine (ostensibly to save money, although it didn't quite work out that way). The Apache modules for XDV presented themselves as an attractive technique to use, in helping me achieve my goals.
@@ -7753,46 +7733,7 @@ That's it! I hope you will check out dotfiles and checkoutmanager for all your d
 .. [5] I also alias checkoutmanager to cm
 .. [6] I force because I want to replace the newly created .ssh dir with the one I keep in my Dotfiles repository.
 .. [7] Well, 2.4 through 3.3 at last count.","Misc, Python",blog-2017
-"Built with Plone, Powered by GitHub Pages",built-with-plone-powered-by-github-pages,2013-02-23,"**Is Plone the next great static website generator? Probably not, but it definitely could be.**
-
-I am always looking for ways to improve, streamline and otherwise hack my e-life. And this post is about all of the above.
-https://raw.github.com/ACLARKNET/blog/gh-pages/images/httrack.png
-Plone in the cloud
-
-Plone is still too ""heavy"" to easily run ""in the cloud"" (except via http://ploud.com, HT), but it's getting there. In particular, I find this effort by David Bain very inspiring:
-
-    https://github.com/pigeonflight/stack-python-plone
-
-And based on my experiments and research on Heroku:
-
-    https://github.com/aclark4life/zope2-heroku
-
-The only ""real"" remaining issue seems to be packaging; we need this PLIP to happen sooner, rather than later:
-
-    https://dev.plone.org/ticket/13283
-
-Cheating
-
-In the meantime, one way you can cheat is to export the contents of your Plone site with httrack then host the results for free on GitHub Pages (i.e. ""the cloud"")
-
-This process if far from perfect [1], but in a pinch it can work. And it recently worked very well for me so I thought I'd share. See:
-
-    http://aclark.net
-    https://github.com/ACLARKNET/aclarknet.github.com
-
-These links are my website, and GitHub Pages repository respectively. The website was created with Plone (https://github.com/ACLARKNET/new_style) then exported via httrack, then uploaded to GitHub Pages (to the gh-pages branch of any repo except <{org,user}>>.github.com repos).
-[1] httrack got ""stuck"" on my @@search links, and I've got a lot of duplicate content now. Fortunately I don't mind editing lots and lots of text files.
-Conclusion
-
-In doing this, I was able to turn off my $11/month ""website and IRC server"" which makes the CFO happy. And in a year or so with Plone 5, hopefully I'll be able to return to the cloud and edit content ""live"" again.
-
-What do you think about Plone as a static site generator and/or Plone in the cloud? Let me know in the comments below.",Plone,blog-2017
-|,trading-places-trading-scene-explained,2013-02-23,"|
-
-Trading Places Trading Scene Explained
-======================================
-
-|
+Trading Places Trading Scene Explained,trading-places-trading-scene-explained,2013-02-23,"|
 
 Every time I watch the movie |Trading Places| I have to search the internet for an explanation of the climactic commodities trading scene. It usually takes me about 20 minutes to (re-)understand it, then another 10 minutes to explain it to my wife. Although there are plenty of great explanations available, none of them really ""speak"" to me; so I decided to write my own. The goal for me is to be able to (re-)read my explanation and understand it enough to explain to someone else in less than 5 minutes.
 
@@ -7858,6 +7799,40 @@ Finally, the ""good guys"" are able to buy enough to contracts to fulfill the nu
 .. |cornering the market| raw:: html
 
    <a href=""http://en.wikipedia.org/wiki/Cornering_the_market"" target=""_blank"">cornering the market</a>",,blog
+"Built with Plone, Powered by GitHub Pages",built-with-plone-powered-by-github-pages,2013-02-23,"**Is Plone the next great static website generator? Probably not, but it definitely could be.**
+
+I am always looking for ways to improve, streamline and otherwise hack my e-life. And this post is about all of the above.
+https://raw.github.com/ACLARKNET/blog/gh-pages/images/httrack.png
+Plone in the cloud
+
+Plone is still too ""heavy"" to easily run ""in the cloud"" (except via http://ploud.com, HT), but it's getting there. In particular, I find this effort by David Bain very inspiring:
+
+    https://github.com/pigeonflight/stack-python-plone
+
+And based on my experiments and research on Heroku:
+
+    https://github.com/aclark4life/zope2-heroku
+
+The only ""real"" remaining issue seems to be packaging; we need this PLIP to happen sooner, rather than later:
+
+    https://dev.plone.org/ticket/13283
+
+Cheating
+
+In the meantime, one way you can cheat is to export the contents of your Plone site with httrack then host the results for free on GitHub Pages (i.e. ""the cloud"")
+
+This process if far from perfect [1], but in a pinch it can work. And it recently worked very well for me so I thought I'd share. See:
+
+    http://aclark.net
+    https://github.com/ACLARKNET/aclarknet.github.com
+
+These links are my website, and GitHub Pages repository respectively. The website was created with Plone (https://github.com/ACLARKNET/new_style) then exported via httrack, then uploaded to GitHub Pages (to the gh-pages branch of any repo except <{org,user}>>.github.com repos).
+[1] httrack got ""stuck"" on my @@search links, and I've got a lot of duplicate content now. Fortunately I don't mind editing lots and lots of text files.
+Conclusion
+
+In doing this, I was able to turn off my $11/month ""website and IRC server"" which makes the CFO happy. And in a year or so with Plone 5, hopefully I'll be able to return to the cloud and edit content ""live"" again.
+
+What do you think about Plone as a static site generator and/or Plone in the cloud? Let me know in the comments below.",Plone,blog-2017
 The Story of Pillow,the-story-of-pillow,2013-03-15,"**On March 4, 2013 I got an email from the Python Software Foundation**
 
 On March 4, 2013 I got an email from the Python Software Foundation (PSF):
@@ -10797,12 +10772,7 @@ With every release, there are notable contributions I must acknowledge:
 - Thanks to all the remaining unnamed contributors! We appreciate every commit.
 
 Enjoy Pillow 2.5.0 & please report issues here: https://github.com/python-imaging/Pillow/issues","Pillow, Python",blog-2017
-|,pillow-runs-itself,2014-10-02,"|
-
-Pillow Runs Itself
-==================
-
-|
+Pillow Runs Itself,pillow-runs-itself,2014-10-02,"|
 
 As of Pillow 2.6.0, the |Pillow project| runs itself. Of course when I say ""runs itself"" I mean ""runs without me"", which is what every open source project lead hopes for. For the first time ever, I was able to:
 
@@ -11676,6 +11646,67 @@ After years of using Pelican for blogging and Sphinx for everything else, I beca
 So late last year I began converting all my Pelican metadata to Sphinx directives, and did quite a bit of clean up as well. I'm finally finished, and now ready to present the results (**ta-da**). Thank you Pelican for all the years of service, and thank you ABlog for helping me use Sphinx for blogging!
 
 - https://github.com/aclark4life/blog",Python,blog-2017
+Project Makefile,project-makefile,2016-11-23,"|
+
+.. image:: /images/project-makefile-tweet.png
+    :align: center
+    :class: blog-image
+
+|
+
+A while back |I was asked| to present to the |cmwg|. From that moment on I had an excuse to finish and talk about the ``Makefile`` I'd been dragging around formally since January and informally for much longer.
+
+Finishing the Makefile
+----------------------
+
+I started writing slides on the impressive |slides| then I realized I had to finished the Makefile to finish the slides. This mostly involved deciding on target names and testing target execution.
+
+Finishing the Slides
+--------------------
+
+As I mentioned above, slides.com is very nice. I had hoped to be able to build the slides myself with reveal.js, but in lieu of JavaScript skills I settled on using the slides.com editor. Later I exported and converted them to PDF with pandoc, which was not as nice (through no fault of pandoc, I'm sure; I just wish I could get a better PDF copy from the slides.com HTML export.)
+
+Closed for Business
+-------------------
+
+For month after month as I continued to tweak, the project-makefile repository README contained the following::
+
+    **DO NOT USE THIS**
+
+    At some point I started using a ``Makefile`` in my development
+    projects. This repository contains that ``Makefile``.
+
+    **shrug**
+
+Open for Business
+-----------------
+
+Now it looks like this:
+
+.. image:: /images/project-makefile-open-for-biz.png
+    :class: blog-image
+
+I now invite everyone to use and contribute.
+
+|
+
+- |project-makefile|
+
+.. |cmwg| raw:: html
+
+    <a target=""_blank"" href=""http://www.cmwg.org/"">Configuration Management Working Group of DC</a>
+
+.. |slides| raw:: html
+
+    <a target=""_blank"" href=""http://slides.com/aclark/project-makefile"">slides.com</a>
+
+.. |project-makefile| raw:: html
+
+    <a target=""_blank"" href=""https://github.com/project-makefile/project-makefile"">https://github.com/project-makefile/project-makefile</a>
+
+.. |i was asked| raw:: html
+
+    <a href=""https://twitter.com/CMWorkingGrp/status/773228143939293185"" target=""_blank"">I was asked</a>",,blog
 Project Makefile Open for Business,project-makefile-open-business,2016-11-23,"**Makefile for Python Web Development & Related Projects**
 
 A while back I was asked to speak to the Configuration Management Working Group of DC:
@@ -11831,72 +11862,6 @@ Now I invite everyone to use and contribute!
 - https://github.com/aclark4life/project-makefile
 
 |","Plone, Python",blog-2017
-|,project-makefile,2016-11-23,"|
-
-Project Makefile
-================
-
-|
-
-.. image:: /images/project-makefile-tweet.png
-    :align: center
-    :class: blog-image
-
-|
-
-A while back |I was asked| to present to the |cmwg|. From that moment on I had an excuse to finish and talk about the ``Makefile`` I'd been dragging around formally since January and informally for much longer.
-
-Finishing the Makefile
-----------------------
-
-I started writing slides on the impressive |slides| then I realized I had to finished the Makefile to finish the slides. This mostly involved deciding on target names and testing target execution.
-
-Finishing the Slides
---------------------
-
-As I mentioned above, slides.com is very nice. I had hoped to be able to build the slides myself with reveal.js, but in lieu of JavaScript skills I settled on using the slides.com editor. Later I exported and converted them to PDF with pandoc, which was not as nice (through no fault of pandoc, I'm sure; I just wish I could get a better PDF copy from the slides.com HTML export.)
-
-Closed for Business
--------------------
-
-For month after month as I continued to tweak, the project-makefile repository README contained the following::
-
-    **DO NOT USE THIS**
-
-    At some point I started using a ``Makefile`` in my development
-    projects. This repository contains that ``Makefile``.
-
-    **shrug**
-
-Open for Business
------------------
-
-Now it looks like this:
-
-.. image:: /images/project-makefile-open-for-biz.png
-    :class: blog-image
-
-I now invite everyone to use and contribute.
-
-|
-
-- |project-makefile|
-
-.. |cmwg| raw:: html
-
-    <a target=""_blank"" href=""http://www.cmwg.org/"">Configuration Management Working Group of DC</a>
-
-.. |slides| raw:: html
-
-    <a target=""_blank"" href=""http://slides.com/aclark/project-makefile"">slides.com</a>
-
-.. |project-makefile| raw:: html
-
-    <a target=""_blank"" href=""https://github.com/project-makefile/project-makefile"">https://github.com/project-makefile/project-makefile</a>
-
-.. |i was asked| raw:: html
-
-    <a href=""https://twitter.com/CMWorkingGrp/status/773228143939293185"" target=""_blank"">I was asked</a>",,blog
 A Shout Out to Shout IRC,shout-out-to-shout-irc,2016-12-15,"**I'm back on IRC for the foreseeable future, and loving it. Thank you Shout IRC.**
 
 |
@@ -12126,18 +12091,10 @@ I found a bunch of cool Python tooling for dealing with all-things-SAML that I w
 - https://github.com/dlitz/pycrypto (secure hash functions!)
 
 TL;DR: Consider a commercial IdP like OneLogin or Auth0.","Django, Python",blog-2017
-Distancing my social,distancing-my-social,2020-03-30,".. image:: /images/distancing-my-social.jpg
-   :align: center
-
-Sung to `Loverboy's classic <https://www.youtube.com/watch?v=cxhj1Is7HpY>`_.
+Distancing my social,distancing-my-social,2020-03-30,"Sung to `Loverboy's classic <https://www.youtube.com/watch?v=cxhj1Is7HpY>`_.
 
 ""Everybody's distancing their social!""",,blog-2020
-|,selinux-0-alex-clark-1,2023-11-19,"|
-
-SELinux: 0, Alex Clark: 1
-=========================
-
-|
+"SELinux: 0, Alex Clark: 1",selinux-0-alex-clark-1,2023-11-19,"|
 
 .. image:: /images/selinux-0-alex-clark-1.jpg
     :align: center
