@@ -10,8 +10,6 @@
     :align: center
     :class: blog-image
 
-(work in progress)
-
 Introduction
 ------------
 
@@ -117,13 +115,44 @@ My experience with Homebrew on macOS led me to try running Samba on Linux via Ho
 What source have you compiled for me lately?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Next I tried compiling Samba from source. This is the kind of thing that sounds reasonable at 11pm after a long day of troubleshooting. I pulled the latest tarball, worked through the dependency chain (and there are many), and eventually got a build. It connected! But like the Homebrew attempt, I couldn't get systemd to manage it cleanly, and the whole exercise felt like I was solving the wrong problem.
+
+At this point I had spent the better part of two days on something that should have taken twenty minutes. I had a working Samba — just not one I could live with.
 
 Light Bulb
 ----------
 
-|
+I finally did what I should have done on day one: checked ``/var/log/audit/audit.log``.
+
+::
+
+    type=AVC msg=audit(1700340286.123:456): avc:  denied  { read } for  pid=1655
+    comm="smbd" name="shared" dev="sda1" ino=12345
+    scontext=system_u:system_r:smbd_t:s0
+    tcontext=unconfined_u:object_r:user_home_t:s0 tclass=dir permissive=0
+
+There it was. SELinux was silently blocking Samba from reading the share directory because it was labeled ``user_home_t`` instead of ``samba_share_t``. The service was running fine. The ports were open. SELinux was just quietly saying no.
+
+The fix was two commands:
+
+::
+
+    sudo semanage fcontext -a -t samba_share_t "/srv/shares(/.*)?"
+    sudo restorecon -R /srv/shares
+
+And then, for good measure:
+
+::
+
+    sudo setsebool -P samba_enable_home_dirs on
+
+Connection successful. Every machine on the network could see the share immediately.
 
 Conclusion
 ----------
 
-|
+The lesson, which I have now learned twice (see the `SAML post <https://blog.aclark.net/2017/06/26/saml-1-alex-clark-0.html>`_), is: **on RHEL-family systems, check SELinux first**. Not second, not after you've compiled software from source at midnight — first.
+
+SELinux gets a bad reputation for being opaque and frustrating, and I won't pretend the audit log is pleasant reading. But it is doing its job, and once you know where to look, the fix is usually straightforward. The real culprit here was my own tunnel vision.
+
+Score: SELinux 0, Alex Clark 1. But only just.
