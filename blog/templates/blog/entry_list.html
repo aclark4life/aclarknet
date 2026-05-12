@@ -18,7 +18,7 @@
         <!-- 2x2 tile grid for first 4 entries -->
         <div class="row g-4 mb-4">
           {% for entry in entries|slice:":4" %}
-            <div class="col-sm-6">
+            <div class="col-sm-6 d-flex">
               <a href="{{ entry.get_absolute_url }}" class="blog-tile">
                 {% with entry.first_image as thumb %}
                   {% if thumb %}
@@ -38,32 +38,26 @@
         </div>
       {% endif %}
 
-      <!-- Remaining entries as list -->
-      {% if entries|slice:"4:" or not is_paginated and entries|length > 4 %}
-        <div class="d-flex flex-column gap-3 mb-5">
+      <!-- Remaining entries as 2-per-row tiles -->
+      {% if entries|slice:"4:" %}
+        <div class="row g-4 mb-5">
           {% for entry in entries|slice:"4:" %}
-            <a href="{{ entry.get_absolute_url }}" class="blog-card">
-              <div class="d-flex w-100 align-items-center gap-3">
+            <div class="col-sm-6 d-flex">
+              <a href="{{ entry.get_absolute_url }}" class="blog-tile">
                 {% with entry.first_image as thumb %}
                   {% if thumb %}
-                    <img src="{{ thumb }}" alt="" class="blog-thumb" loading="lazy">
+                    <img src="{{ thumb }}" alt="" class="tile-img" loading="lazy">
                   {% else %}
-                    <div class="blog-thumb-placeholder">AC</div>
+                    <div class="tile-placeholder">AC</div>
                   {% endif %}
                 {% endwith %}
-                <div class="flex-grow-1">
-                  <div class="d-flex w-100 justify-content-between align-items-start gap-3">
-                    <div class="flex-grow-1">
-                      <div class="entry-title">{{ entry.title }}{% if user.is_staff and entry.status == 'draft' %} <span class="badge bg-warning text-dark ms-1" style="font-size:0.65rem;">Draft</span>{% endif %}</div>
-                      {% if entry.tags %}
-                        <div class="entry-tags mt-1">{{ entry.tags }}</div>
-                      {% endif %}
-                    </div>
-                    <div class="entry-meta text-nowrap">{{ entry.pub_date }}</div>
-                  </div>
+                <div class="tile-body">
+                  <div class="entry-title">{{ entry.title }}{% if user.is_staff and entry.status == 'draft' %} <span class="badge bg-warning text-dark ms-1" style="font-size:0.65rem;">Draft</span>{% endif %}</div>
+                  {% if entry.tags %}<div class="entry-tags mt-1">{{ entry.tags }}</div>{% endif %}
+                  <div class="entry-meta mt-auto pt-2">{{ entry.pub_date }}</div>
                 </div>
-              </div>
-            </a>
+              </a>
+            </div>
           {% endfor %}
         </div>
       {% endif %}
