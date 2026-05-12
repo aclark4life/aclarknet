@@ -3,7 +3,7 @@
 :slug: goodbye-plone
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 **I quit!**
 
