@@ -5,8 +5,6 @@
 :source: blog-2017
 :status: published
 
-**It seems I've inadvertently started another series of blog entry**
-
 It seems I've inadvertently started another series of blog entry: the "hello world" series, wherein I explain how to easily get started with `various exciting Python technologies`_.
 
 This time, in order to familiarize myself with `mod\_wsgi`_, I've created a buildout to automate some of the processes explained in:

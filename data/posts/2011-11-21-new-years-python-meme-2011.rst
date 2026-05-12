@@ -5,8 +5,6 @@
 :source: blog-2017
 :status: published
 
-**My response**
-
 My response to `http://blog.ziade.org/2011/12/20/new-year039s-python-meme-2011/`_.
 
 It was fun `answering in 2009`_, so I thought I'd play again.

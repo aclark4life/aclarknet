@@ -5,8 +5,6 @@
 :source: blog-2017
 :status: published
 
-**On March 4, 2013 I got an email from the Python Software Foundation**
-
 On March 4, 2013 I got an email from the Python Software Foundation (PSF):
 
     This email notification is being sent to you to inform you of the PSF Board’s decision to fund the facilitation of a Python 3 compatible release of the Python Imaging Library for the amount of $1,300 USD. Please see the resolution that was passed unanimously on March 4, 2013 via email below:

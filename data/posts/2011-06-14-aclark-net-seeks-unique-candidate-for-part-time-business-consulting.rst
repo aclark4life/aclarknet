@@ -5,8 +5,6 @@
 :source: blog-2017
 :status: published
 
-**We are looking for a unique and talented (but mostly non-technical) individual that is passionate about Plone**
-
 We are looking for a unique and talented (but mostly non-technical) individual that is passionate about Plone, and able to dedicate some small amount of time per month to generating new business for us[1].
 
 Plone is up and coming (again)! And we want to (1.) capitalize on that fact and (2.) scale our business accordingly. But to do so, we really need your help.

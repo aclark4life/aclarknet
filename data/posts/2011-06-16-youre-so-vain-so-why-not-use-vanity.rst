@@ -5,8 +5,6 @@
 :source: blog-2017
 :status: published
 
-**A few months ago I created a package called Vanity**
-
 A few months ago I created a package called **Vanity**\ [0] that provides easy access to package download statistics from **PyPI**. You can find the source code here: `https://github.com/aclark4life/vanity`_.
 
 I love this tool, and I use it all the time to gauge the value of a package. Of course, downloads are only one criteria you can use to judge the value of a package, and arguably not even a very good one.  **Vanity** itself is a good example of this phenomenon. I find it incredibly useful, but in it's history it has only been downloaded *130* times.

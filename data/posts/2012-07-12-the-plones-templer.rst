@@ -5,8 +5,6 @@
 :source: blog-2017
 :status: published
 
-**(c.f. Knights Templar)**
-
 (c.f. Knights Templar) I think we have a situation that could use the
 help of the Plone and Python communities at large. It goes something
 like this:

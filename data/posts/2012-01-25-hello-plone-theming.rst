@@ -5,8 +5,6 @@
 :source: blog-2017
 :status: published
 
-**In this post, we introduce a new tutorial.**
-
 In this post, we introduce a new tutorial aimed at bridging the gap between the **incredibly easy to use and enormously powerful Diazo theming engine for Plone**, and bootstrapping your first new theme. You do not need to have any Python skills whatsoever to perform these tasks. New Plone themes are:
 
 -  HTML/CSS/JavaScript/images (Sound familiar? You don't need to know any Plone to understand this part.)

@@ -5,8 +5,6 @@
 :source: blog-2017
 :status: published
 
-**This is a Plone "Hello, World!" style tutorial/application for Python programmers.**
-
 This is a Plone "Hello, World!" style tutorial/application for Python programmers. See https://github.com/aclark4life/hello_plone for more.
 
 .. Note:: This post has been edited post-publication to improve the wording.

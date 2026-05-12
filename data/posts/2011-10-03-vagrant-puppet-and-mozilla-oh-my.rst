@@ -5,8 +5,6 @@
 :source: blog-2017
 :status: published
 
-**This post is only loosely Python related and not at all Plone related.**
-
 This post is only loosely Python related and not at all Plone related, but I thought folks might enjoy hearing about Vagrant and Puppet because these tools may help you do your Plone and Python jobs better.
 
 For the past couple weeks I've been working on creating a virtual machine to bootstrap a kitsune environment. Kitsune is the Django site that powers support.mozilla.com. I've now reached what I call the **2nd milestone**.

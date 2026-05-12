@@ -5,8 +5,6 @@
 :source: blog-2017
 :status: published
 
-**Over two years ago I wrote a blog entry called "Hello, Plone!"**
-
 Over two years ago I wrote a blog entry called `"Hello, Plone!" <http://blog.aclark.net/2011/08/20/hello-plone/>`_.
 
 I've just updated it in order to:
