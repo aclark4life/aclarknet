@@ -1,0 +1,75 @@
+:title: Pillow 2.2.1 Released
+:date: 2013-09-02
+:slug: pillow-221-released
+:source: pelican-blog
+:status: published
+
+Pillow 2.2.1 Released
+ Tweet
+
+
+
+
+
+                Mon 02 September 2013
+
+
+
+                By  aclark
+
+ In  Blog .
+ tags:  Django Python Plone        Pillow is the "friendly" PIL fork. PIL is the Python Imaging Library.
+ The Pillow 2.2.1 source distribution is  now available on PyPI   [1] , featuring over 30 documented bug fixes and enhancements since 2.1.0 was released 3 months ago:
+
+ Fix  #254 : Bug in image transformations resulting from uninitialized memory [nikmolnar]
+ Fix for encoding of b_whitespace, similar to closed issue  #272  [mhogg]
+ Fix  #273 : Add numpy array interface support for 16 and 32 bit integer modes [cgohlke]
+ Partial fix for  #290 : Add preliminary support for TIFF tags. [wiredfool]
+ Fix  #251  and  #326 : circumvent classification of pngtest_bad.png as malware [cgohlke]
+ Add typedef uint64_t for MSVC. [cgohlke]
+ Fix  #329 : setup.py: better support for C_INCLUDE_PATH, LD_RUN_PATH, etc. [nu774]
+ Fix  #328 : _imagingcms.c: include windef.h to fix build issue on MSVC [nu774]
+ Automatically discover homebrew include/ and lib/ paths on OSX [donspaulding]
+ Fix bytes which should be bytearray [manisandro]
+ Add respective paths for C_INCLUDE_PATH, LD_RUN_PATH (rpath) to build if specified as environment variables. [seanupton]
+ Fix  #312  + gif optimize improvement [d-schmidt]
+ Be more tolerant of tag read failures [ericbuehl]
+ Fix  #318 : Catch truncated zTXt errors. [vytisb]
+ Fix IOError when saving progressive JPEGs. [e98cuenc]
+ Add RGBA support to ImageColor [yoavweiss]
+ Fix  #304 : test for str, not "utf-8". [mjpieters]
+ Fix missing import os in _util.py. [mnowotka]
+ Added missing exif tags. [freyes]
+ Fail on all import errors, fixes  #298 . [macfreek, wiredfool]
+ Fixed Windows fallback (wasn't using correct file in Windows fonts). [lmollea]
+ Moved ImageFile and ImageFileIO comments to docstrings. [freyes]
+ Restore compatibility with ISO C. [cgohlke]
+ Use correct format character for C int type. [cgohlke]
+ Allocate enough memory to hold pointers in encode.c. [cgohlke]
+ Fix  #279 , fillorder double shuffling bug when FillOrder ==2 and decoding using libtiff. [wiredfool]
+ Moved Image module comments to docstrings. [freyes]
+ Add 16-bit TIFF support, fixes  #274 . [wiredfool]
+ Ignore high ascii characters in string.whitespace, fixes  #272 . [wiredfool]
+ Added clean/build to tox to make it behave like travis. [freyes]
+ Adding support for metadata in webp images. [heynemann]
+
+ The Pillow Team  has really settled in to the groove of making Pillow releases every three months, and I am very proud to be a part it! Special thanks to Eric Soroos and Christopher Gohlke for their invaluable help in getting the 2.2.1 release completed.
+ If you use Pillow professionally, please consider  supporting its development .
+
+
+
+ [1] If there are no issues with 2.2.1 within 24 hours, Python Eggs and the first ever Pillow Wheel will be uploaded to PyPI.
+
+
+
+
+
+       Comments !
+
+
+        var disqus_identifier = "2013/09/02/pillow-221-released/";
+        (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://aclark-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();

@@ -1,0 +1,5 @@
+:title: Pillow 2015 Report // Alex Clark
+:date: 2015-04-05
+:slug: pillow-2015-report
+:source: pelican-blog
+:status: published

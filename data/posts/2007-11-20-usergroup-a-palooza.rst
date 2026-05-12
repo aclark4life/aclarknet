@@ -1,0 +1,13 @@
+:title: Zope User Groups
+:date: 2007-11-20
+:slug: usergroup-a-palooza
+:tags: Python, Zope
+:source: blog-2017
+:status: published
+
+**Updated Zope User Group Information**
+
+Today I updated http://www.zope.org/Resources/UserGroups. Most of the information came from `Chris Calloway`_. Now it's `better than the old one`_ and should be easier to maintain.
+
+.. _Chris Calloway: http://trizpug.org
+.. _better than the old one: http://www.zope.org/Resources/UserGroups/index_html_old
