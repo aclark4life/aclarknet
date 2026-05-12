@@ -12126,7 +12126,10 @@ I found a bunch of cool Python tooling for dealing with all-things-SAML that I w
 - https://github.com/dlitz/pycrypto (secure hash functions!)
 
 TL;DR: Consider a commercial IdP like OneLogin or Auth0.","Django, Python",blog-2017
-Distancing my social,distancing-my-social,2020-03-30,"Sung to `Loverboy's classic <https://www.youtube.com/watch?v=cxhj1Is7HpY>`_.
+Distancing my social,distancing-my-social,2020-03-30,".. image:: /images/distancing-my-social.jpg
+   :align: center
+
+Sung to `Loverboy's classic <https://www.youtube.com/watch?v=cxhj1Is7HpY>`_.
 
 ""Everybody's distancing their social!""",,blog-2020
 |,selinux-0-alex-clark-1,2023-11-19,"|
