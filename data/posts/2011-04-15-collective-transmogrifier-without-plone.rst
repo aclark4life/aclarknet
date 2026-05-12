@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Yes!**
+Yes!
+----------------------------------------
 
 Since I began drinking the `collective.transmogrifier`_ Kool Aid a few months back, I've gotten quite excited about the possibility of being able to use it outside Plone, i.e. like "regular" Python people would do.
 

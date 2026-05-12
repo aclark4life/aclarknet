@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Review all the chapters**
+Review all the chapters
+----------------------------------------
 
 First things first, I can't overstate enough how much I personally appreciate Veda's efforts to bring the (currently-and-unfortunately, but-not-for-long) complex world of Plone theming to the masses. It's an acquired taste, but once you get the hang of it you can use your powerful skills to create some very impressive sites – and make the world a better place like Veda and the crew at `Groundwire`_ are doing (formerly ONE/Northwest).
 
@@ -15,7 +16,7 @@ Since `PACKT`_ are well known for giving back to the communities that produce th
 
 With all that out of the way, I'd like to focus on a chapter by chapter review (`like`_ `everyone`_ `else`_ `does`_) of Plone 3 Theming. Like I said, I really liked this book so please don't take any of my (hopefully constructive) criticism negatively. I hope my comments will help the readers of this book, as well as Veda, if she dares to attempt a 2nd edition one day!
 
-**STANDARD DISCLAIMERS APPLY**: I'm a "paid" reviewer (in that I received a free copy of the book) and also, I know Veda personally.
+STANDARD DISCLAIMERS APPLY: I'm a "paid" reviewer (in that I received a free copy of the book) and also, I know Veda personally.
 
 Chapter 1
 ---------

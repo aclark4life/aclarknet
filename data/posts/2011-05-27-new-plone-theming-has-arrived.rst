@@ -5,11 +5,12 @@
 :source: blog-2017
 :status: published
 
-**Due to the new Diazo theming features now available, I am very excited about the recent release of Plone 4.1rc2**
+Due to the new Diazo theming features now available, I am very excited about the recent release of Plone 4.1rc2
+---------------------------------------------------------------------------------------------------------------
 
-**Edit2:**\ Enfold/Ploud.net looking for theme developers, see Alan Runyan's comment below.
+Edit2:\ Enfold/Ploud.net looking for theme developers, see Alan Runyan's comment below.
 
-**Edit**: Laurence Rowe made new Diazo and plone.app.theming releases so the `zip file`_\ now works! Thanks Laurence.
+Edit: Laurence Rowe made new Diazo and plone.app.theming releases so the `zip file`_\ now works! Thanks Laurence.
 
 Due to the new Diazo theming features now available, I am very excited about the recent release of `Plone 4.1rc2`_ and `plone.app.theming 1.0b2`_. So much so, I created a couple themes (in just a few hours) to demonstrate my `rapture [1]`_:
 

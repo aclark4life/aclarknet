@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**For anyone unfamiliar with Pillow, it is the friendly PIL fork: a fork of PIL that aims to remain a good citizen in the PIL community through its actions.**
+For anyone unfamiliar with Pillow, it is the friendly PIL fork: a fork of PIL that aims to remain a good citizen in the PIL community through its actions.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Warm and fluffy history
 -----------------------
@@ -21,7 +22,7 @@ Pillow is used in Plone's `UnifiedInstaller`_, and I know `folks from the Django
 Future creature comforts
 ------------------------
 
-All in all, a mild success. So what's next? **More of the same**. To `quote myself from a recent Stack Overflow answer`_:
+All in all, a mild success. So what's next? More of the same. To `quote myself from a recent Stack Overflow answer`_:
 
     If PIL ever does exactly what Pillow does, then the fork will die. Until that happens, we have Pillow.
 

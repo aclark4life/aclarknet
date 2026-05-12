@@ -5,11 +5,11 @@
 :source: blog-2017
 :status: published
 
-A few months ago I created a package called **Vanity**\ [0] that provides easy access to package download statistics from **PyPI**. You can find the source code here: `https://github.com/aclark4life/vanity`_.
+A few months ago I created a package called Vanity\ [0] that provides easy access to package download statistics from PyPI. You can find the source code here: `https://github.com/aclark4life/vanity`_.
 
-I love this tool, and I use it all the time to gauge the value of a package. Of course, downloads are only one criteria you can use to judge the value of a package, and arguably not even a very good one.  **Vanity** itself is a good example of this phenomenon. I find it incredibly useful, but in it's history it has only been downloaded *130* times.
+I love this tool, and I use it all the time to gauge the value of a package. Of course, downloads are only one criteria you can use to judge the value of a package, and arguably not even a very good one.  Vanity itself is a good example of this phenomenon. I find it incredibly useful, but in it's history it has only been downloaded *130* times.
 
-Other packages I have created with much less value have been downloaded more times, e.g. **plonetheme.aclark\_twitter** which has been downloaded  *674* times. But that package has also been around much longer. So obviously another useful metric would be the *time period* during which the downloads occurred.
+Other packages I have created with much less value have been downloaded more times, e.g. plonetheme.aclark\_twitter which has been downloaded  *674* times. But that package has also been around much longer. So obviously another useful metric would be the *time period* during which the downloads occurred.
 
 Anyway, here is how it works:
 
@@ -54,9 +54,9 @@ Some of my other favorites:
     $ vanity pyramid
     Package `pyramid` has been downloaded 26067 times!
 
-Another thing to consider is if hitting **PyPI** each time is really necessary. I'm told there is **PyPI** data living somewhere else, and in future versions I would like to make vanity use that data by default.
+Another thing to consider is if hitting PyPI each time is really necessary. I'm told there is PyPI data living somewhere else, and in future versions I would like to make vanity use that data by default.
 
-So, this post is simply to announce **Vanity** to a wider audience in the event that some folks may find it useful. Otherwise, I will be happy to continue to watch **Vanity** downloads crawl ever so slowly towards 200.
+So, this post is simply to announce Vanity to a wider audience in the event that some folks may find it useful. Otherwise, I will be happy to continue to watch Vanity downloads crawl ever so slowly towards 200.
 
 Notes
 -----

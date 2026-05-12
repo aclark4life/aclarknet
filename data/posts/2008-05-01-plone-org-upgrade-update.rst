@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Thank You**
+Thank You
+----------------------------------------
 
 Thanks again to everyone who contributed to my travel fund, I really appreciate it. Being able to work closely with Tarek Ziadé and Matthew Wilkes on PloneSoftwareCenter and PloneOrg was amazing, productive, and fun. Of course being in the company of all the sprinters was a pleasure, and thank you Christophe for the hospitality.
 

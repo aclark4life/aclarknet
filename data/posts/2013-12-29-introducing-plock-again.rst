@@ -5,9 +5,10 @@
 :source: blog-2017
 :status: published
 
-**A few months ago I introduced Plock: the Plone-installer for the Pip-loving crowd.**
+A few months ago I introduced Plock: the Plone-installer for the Pip-loving crowd.
+----------------------------------------------------------------------------------
 
-A few months ago I introduced **Plock: the Plone-installer for the Pip-loving crowd**. Then I got sidetracked with the next version of Plock lingering unreleased in master. With the holidays underway I had a chance to revisit Plock and discovered a few things:
+A few months ago I introduced Plock: the Plone-installer for the Pip-loving crowd. Then I got sidetracked with the next version of Plock lingering unreleased in master. With the holidays underway I had a chance to revisit Plock and discovered a few things:
 
 - I still like the idea of Plock.
 - I got carried away adding miscellaneous features to Plock, which only served to ruin the elegance of the idea.
@@ -20,7 +21,7 @@ So what is Plock today?
 
 - A Plone-installer for the Pip-loving crowd. That means someone with Python 2.7 and Pip should be able to install Plone in a matter of minutes with: ``pip install plock ; plock .``
 
-- A set of hosted configuration files for Plone called **Plock Pins**. [1]_
+- A set of hosted configuration files for Plone called Plock Pins. [1]_
 
 - A command line utility with a sharp focus.
 
@@ -79,7 +80,7 @@ will result in a ``buildout.cfg`` file that looks like this::
         Products.PloneFormGen
         collective.loremipsum
 
-Add-ons that don't install via Buildout **will not break your installation** e.g.::
+Add-ons that don't install via Buildout will not break your installation e.g.::
 
     $ plock -a asdf .
     Plock is installing Plone............. error: buildout failed.

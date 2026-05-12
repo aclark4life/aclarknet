@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**This information may eventually live within the DC Python corpus, but for now I prefer to post-it-now-move-it-later.**
+This information may eventually live within the DC Python corpus, but for now I prefer to post-it-now-move-it-later.
+--------------------------------------------------------------------------------------------------------------------
 
 DC Python, for those not familiar, is:
 
@@ -13,7 +14,7 @@ DC Python, for those not familiar, is:
 #. The name of a Meetup group with over 3,000 members.
 #. A name commonly used to refer to our 501(c)(3) organization whose legal name is "ZPUGDC, Inc".
 
-As the President & Executive Director of DC Python (see: #3), I try to be as helpful as possible with all aspects of Python activity in DC (along with many volunteers). **That includes helping Python programmers find jobs and employers find Python programmers.**
+As the President & Executive Director of DC Python (see: #3), I try to be as helpful as possible with all aspects of Python activity in DC (along with many volunteers). That includes helping Python programmers find jobs and employers find Python programmers.
 
 Ideally we'd have a professional job board, but that would require a lot of effort from a lot of volunteers. In the meantime, ever since it was suggested by Gloria W from the NYC Python Meetup, we've been using Meetup's message boards to perform a similar function.
 
@@ -31,7 +32,7 @@ I've always found it awkward to explain the procedure, but have gone several yea
 Instructions
 ------------
 
-**Please follow these rules to post to the DC Python Job Board**.
+Please follow these rules to post to the DC Python Job Board.
 
 1. Join the DC Python Meetup: http://www.meetup.com/DCPython/join/.
 
@@ -39,7 +40,7 @@ Instructions
 
 #. Send a link to your post to the DC Python mailing list: `DCPython-list@meetup.com <mailto:DCPython-list@meetup.com>`_.
 
-  - **Include [JOB] in the subject line, some brief introductory text, a link to your post & nothing else. E.g.**
+  - Include [JOB] in the subject line, some brief introductory text, a link to your post & nothing else. E.g.
 
 ::
 
@@ -60,11 +61,12 @@ Instructions
 
     Alex
 
-**In your email to the list please do not include:**
+In your email to the list please do not include:
+------------------------------------------------
 
-- **The full text of the job listing**
-- **Links to external job postings**
+- The full text of the job listing
+- Links to external job postings
 
-Also please send mail to the list with the **same email address** you used to join Meetup, else **Meetup won't accept it**.
+Also please send mail to the list with the same email address you used to join Meetup, else Meetup won't accept it.
 
 Good luck!

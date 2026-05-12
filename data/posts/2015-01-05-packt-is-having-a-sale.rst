@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Happy new year!**
+Happy new year!
+----------------------------------------
 
 .. image:: /images/packt-5.png
     :alt: Packt is having a sale!

@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**A command line news reader.**
+A command line news reader.
+----------------------------------------
 
 I've been meaning to write this blog entry about ``slrn`` ever since I started using it some time last year, finally here it is.
 

@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**On 7/30/2010 Pillow, the friendly PIL fork, was released.**
+On 7/30/2010 Pillow, the friendly PIL fork, was released.
+---------------------------------------------------------
 
 Since then, there have been a number of releases:
 

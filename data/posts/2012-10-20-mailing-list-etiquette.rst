@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**I read a lot of mailing lists.**
+I read a lot of mailing lists.
+----------------------------------------
 
 .. image:: /images/unison.png
     :alt: alternate text
@@ -14,7 +15,7 @@
 
 Also, I've been subscribing to, reading, and participating in discussions on mailing lists since about the time Mailman 1.0 was released circa 1999 [1]_. And I have fond memories of interacting administratively with MajorDomo and ListServ software. And by administratively, I mean sending the software commands and getting back a response. In fact, you might say I get along better with the software and machines than I do with the humans that use them. Which is not to say that I'm not a people person: I love people. But I do struggle with striking the right balance between hacking machines and communicating with humans.
 
-Anyway, as you can imagine: I have **VERY STRONG OPINIONS** about how folks should conduct themselves on mailing lists: call it a code of conduct. And regardless of what you might expect from a self-described "hack": I work **VERY HARD** to enforce that code of conduct on my own behavior. Do I occasionally step outside the lines? Of course. But make no mistake: I do not communicate in a vacuum. You can be as polite and courteous as The Pope and **STILL GET THE SMACKDOWN** through no fault of your own. Why? Because humans make mistakes. Context gets lost. Do you think you know what's going on enough to make a comment? You might be wrong [2]_:
+Anyway, as you can imagine: I have VERY STRONG OPINIONS about how folks should conduct themselves on mailing lists: call it a code of conduct. And regardless of what you might expect from a self-described "hack": I work VERY HARD to enforce that code of conduct on my own behavior. Do I occasionally step outside the lines? Of course. But make no mistake: I do not communicate in a vacuum. You can be as polite and courteous as The Pope and STILL GET THE SMACKDOWN through no fault of your own. Why? Because humans make mistakes. Context gets lost. Do you think you know what's going on enough to make a comment? You might be wrong [2]_:
 
     "The single biggest problem in communication is the illusion that it has taken place."
 
@@ -43,14 +44,14 @@ So what is a human to do? Well, guess what! There's actually a set of rules or, 
 
     …
 
-One belief that I've held for almost as long as I have been communicating electronically is: **IF I SAY SOMETHING ELECTRONICALLY I PROBABLY MEAN IT**. That means you can expect to hear the same information from me in person, as you would in an email or other electronic corresponence. That also means that I rarely look back and **CRINGE** and think to myself: "Oh my gosh I can't believe I wrote that." Do I make mistakes? Of course. But less and less as I get older and older. More frequently than not, I stand 100% behind my electronic correspondence.
+One belief that I've held for almost as long as I have been communicating electronically is: IF I SAY SOMETHING ELECTRONICALLY I PROBABLY MEAN IT. That means you can expect to hear the same information from me in person, as you would in an email or other electronic corresponence. That also means that I rarely look back and CRINGE and think to myself: "Oh my gosh I can't believe I wrote that." Do I make mistakes? Of course. But less and less as I get older and older. More frequently than not, I stand 100% behind my electronic correspondence.
 
 Is netiquette enough?
 ---------------------
 
 Netiquette covers almost everything you can think of. From trying to be sensitive to the context of the list (RULE #3 and #4) to helping guide the discussion the right way (RULE #7) to giving everyone the benefit of the doubt all the time (RULE #10).
 
-Still, sometimes **CRAZY THINGS HAPPEN** like someone forgets to mail the list directly and the direction of the membership "forks". Follow `this thread`_ to see me both issue a **SMACKDOWN** then **APOLOGIZE** when I realized I'd acted upon information only I and one other person was privy to.
+Still, sometimes CRAZY THINGS HAPPEN like someone forgets to mail the list directly and the direction of the membership "forks". Follow `this thread`_ to see me both issue a SMACKDOWN then APOLOGIZE when I realized I'd acted upon information only I and one other person was privy to.
 
 Policy makes perfect
 --------------------

@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Plone 3.3 Site Administration**
+Plone 3.3 Site Administration
+----------------------------------------
 
 Well, no blood yet. But certainly sweat and tears. If `Plone Conference 2006`_ was my inspiration for `Plone Conference 2008`_, then `Professional Plone Development`_ was my inspiration for this book: `Plone 3.3 Site Administration`_.
 
@@ -24,14 +25,14 @@ So, this book begins at the beginning: by making sure folks are comfortable inst
 
 This book does not make that assumption and tries to cover everything you may need to know after installing your operating system up to that point.
 
-In **Chapter 1**, we cover installing and running Python on three popular operating systems: Mac OS X 10.6 (my main squeeze), Windows 7, and Ubuntu 9.10 (Debian is my main production server squeeze). Other operating systems are welcome; your mileage may vary.
+In Chapter 1, we cover installing and running Python on three popular operating systems: Mac OS X 10.6 (my main squeeze), Windows 7, and Ubuntu 9.10 (Debian is my main production server squeeze). Other operating systems are welcome; your mileage may vary.
 
 #2
 --
 
 This book is largely a response to the whole "Oh no! I have to use Buildout to install Plone and its add-ons!" sentiment that has been prevalent since Buildout was first introduced to Plone several years ago. I don't know if Buildout was the "right" way to go, but I do know that I love using it and I would like to help others feel the same way.
 
-The bottom line is this: Plone made a conscious decision to "become more Pythonic" by using eggs. With that choice came more complexity from potential conflicts between eggs. Buildout is one solution to that problem. Unfortunately, it introduces other problems like cryptic error messages and a certain **too-many-moving-parts**-ness.
+The bottom line is this: Plone made a conscious decision to "become more Pythonic" by using eggs. With that choice came more complexity from potential conflicts between eggs. Buildout is one solution to that problem. Unfortunately, it introduces other problems like cryptic error messages and a certain too-many-moving-parts-ness.
 
 An aside…
 ---------
@@ -43,14 +44,14 @@ About the rest of the book…
 
 The book teaches you to find your way around Buildout and Plone. Whether you choose to follow along and build your site from scratch using only Buildout (and a paper clip) or if you use one of the Buildout-based installers (like the Unified Installer), this book aims to make you more competent and comfortable performing a variety of Buildout-related tasks.
 
-In **Chapters 2-7**, we present various buildout configuration files that correspond to specific tasks that are related to various subjects, e.g. theming, maintenance, and optimization. The reader is expected to "know how to write a buildout.cfg file" by the end. No one that reads the book is allowed in the #plone IRC channel afterward to ask about buildout (you can answer buildout questions though). Kidding… I kid…
+In Chapters 2-7, we present various buildout configuration files that correspond to specific tasks that are related to various subjects, e.g. theming, maintenance, and optimization. The reader is expected to "know how to write a buildout.cfg file" by the end. No one that reads the book is allowed in the #plone IRC channel afterward to ask about buildout (you can answer buildout questions though). Kidding… I kid…
 
-In the final **Chapter 8**, we cover new technologies like XDV and repoze.zope2 which may become more mainstream once you decide to start using them (although the latter seems more like a toy to keep us busy until the real fix arrives: `full WSGI support in Zope 2`_).
+In the final Chapter 8, we cover new technologies like XDV and repoze.zope2 which may become more mainstream once you decide to start using them (although the latter seems more like a toy to keep us busy until the real fix arrives: `full WSGI support in Zope 2`_).
 
 When will it arrive?
 --------------------
 
-PACKT originally announced the book will arrive in March and I have been working non-stop since mid-March to make sure it gets out the door as quickly as possible; I expect it to be available **Real Soon Now™**. I apologize to those of you who have pre-ordered and are now waiting for it!
+PACKT originally announced the book will arrive in March and I have been working non-stop since mid-March to make sure it gets out the door as quickly as possible; I expect it to be available Real Soon Now™. I apologize to those of you who have pre-ordered and are now waiting for it!
 
 So get ready! I plan to have over 200 pages of draft material submitted by the end of this month. I will continue to work with PACKT to address any concerns that arise during editing. They have promised to try to ship the book by May, so we will see how it goes. I encourage you to `pre-order now`_ as that will go a long way to inspire them to work just that much harder to get it done and out to you, ASAP!
 
@@ -68,7 +69,7 @@ Perhaps the biggest lesson I learned was this: stop thinking and start writing. 
 Should I write a book?
 ----------------------
 
-Possibly. I am sensitive to the phenomenon of "Plone book diarrhea" and I do think that there can be such a thing as too many Plone books. But I don't think we are there yet. To me, the more books published about Plone (by PACKT or any publisher) the better. I like to see what each individual author brings to the story, even if the stories they are telling tend to overlap sometimes. So for me the answer to that question both before and after writing my book is **yes**. I know I am a better writer having written it, and I certainly know more about Python, Zope, and Plone and many other technologies.
+Possibly. I am sensitive to the phenomenon of "Plone book diarrhea" and I do think that there can be such a thing as too many Plone books. But I don't think we are there yet. To me, the more books published about Plone (by PACKT or any publisher) the better. I like to see what each individual author brings to the story, even if the stories they are telling tend to overlap sometimes. So for me the answer to that question both before and after writing my book is yes. I know I am a better writer having written it, and I certainly know more about Python, Zope, and Plone and many other technologies.
 
 In either case, you should definitely take my class.
 ----------------------------------------------------

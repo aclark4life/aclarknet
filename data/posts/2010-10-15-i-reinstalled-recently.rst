@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**OS X Installation Notes**
+OS X Installation Notes
+----------------------------------------
 
 And for whatever it is worth here are the notes I took::
 

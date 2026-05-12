@@ -10,7 +10,8 @@
     :align: center
     :class: img-thumbnail
 
-**With pythonpackages.com winding down, I am now actively seeking projects for Q4 2012 and beyond.**
+With pythonpackages.com winding down, I am now actively seeking projects for Q4 2012 and beyond.
+------------------------------------------------------------------------------------------------
 
 I am good at:
 

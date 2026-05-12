@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**After a series of Django gigs in 2014, I had the urge to redevelop our company website in Django; I am very happy with the results.**
+After a series of Django gigs in 2014, I had the urge to redevelop our company website in Django; I am very happy with the results.
+-----------------------------------------------------------------------------------------------------------------------------------
 
 This overview is roughly in order of development from start to finish. And since I am a "packaging guy", I will take this opportunity to comment on miscellaneous packaging issues too*.
 

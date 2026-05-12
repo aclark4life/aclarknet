@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**The Plone community consists (roughly) of Founders, Contributors, and Users.**
+The Plone community consists (roughly) of Founders, Contributors, and Users.
+----------------------------------------------------------------------------
 
 Background
 ----------
@@ -20,7 +21,7 @@ Over the years, issues have been raised on the membership list that have led to 
 Fix
 ---
 
-While I am quite confident that folks can manage their own **INBOXES** (or should be able to), I'm not confident that folks (myself included) can resist engaging with others over issues like:
+While I am quite confident that folks can manage their own INBOXES (or should be able to), I'm not confident that folks (myself included) can resist engaging with others over issues like:
 
 - The "religious" aspect (The Plone community is better than this!)
 - The practical aspect (Everyone can just control themselves!)

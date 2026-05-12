@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Plock is a Plone Installer for the Pip-Loving Crowd.**
+Plock is a Plone Installer for the Pip-Loving Crowd.
+----------------------------------------------------
 
 I blogged about Plock after 0.0.1 was released and a lot of progress has been made since then, so I thought I'd give an update. But rather than a traditional list-the-changelog-style-blog-entry, I thought I'd walk you through what you can do with Plock as of version 0.1.2.
 
@@ -25,7 +26,7 @@ Plock exists to the eliminate cognitive dissonance experienced by Python program
 Run Plone
 ---------
 
-With Plock, you can **truly** run Plone because you are not running scripts with any of the following not-plone names: client, instance, zope.
+With Plock, you can truly run Plone because you are not running scripts with any of the following not-plone names: client, instance, zope.
 
 ::
 

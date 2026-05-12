@@ -151,7 +151,7 @@ Connection successful. Every machine on the network could see the share immediat
 Conclusion
 ----------
 
-The lesson, which I have now learned twice (see the `SAML post <https://aclark.net/blog/2017/06/26/saml-1-alex-clark-0/>`_), is: **on RHEL-family systems, check SELinux first**. Not second, not after you've compiled software from source at midnight — first.
+The lesson, which I have now learned twice (see the `SAML post <https://aclark.net/blog/2017/06/26/saml-1-alex-clark-0/>`_), is: on RHEL-family systems, check SELinux first. Not second, not after you've compiled software from source at midnight — first.
 
 SELinux gets a bad reputation for being opaque and frustrating, and I won't pretend the audit log is pleasant reading. But it is doing its job, and once you know where to look, the fix is usually straightforward. The real culprit here was my own tunnel vision.
 

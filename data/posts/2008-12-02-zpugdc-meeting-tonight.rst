@@ -5,6 +5,7 @@
 :source: blog-2017
 :status: published
 
-**ZPUGDC & DC Python Meetup: December Meeting**
+ZPUGDC & DC Python Meetup: December Meeting
+-------------------------------------------
 
 http://python-groups.blogspot.com/2008/12/zpugdc-dc-python-meetup-december.html

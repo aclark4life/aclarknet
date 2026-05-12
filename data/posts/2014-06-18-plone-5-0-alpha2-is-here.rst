@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**This post is long overdue since Plone 5 alpha 2 was released on 2014-04-20!**
+This post is long overdue since Plone 5 alpha 2 was released on 2014-04-20!
+---------------------------------------------------------------------------
 
 It is also too short. I may do a followup blog entry to review more features, depending on how well this one is received. I also want to talk more about Plock.
 

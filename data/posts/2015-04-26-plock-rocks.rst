@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Pip installs Plock. Plock installs Plone.**
+Pip installs Plock. Plock installs Plone.
+-----------------------------------------
 
 .. image:: /images/plock-meme.png
     :alt: Plock Meme
@@ -30,21 +31,21 @@ What is Plone, really?
 
 What is the complexity I mention above? Briefly, with as few loaded statements as possible:
 
-- **Zope2** "application server". This is something you can ``pip install`` but the results will not be usable [3]_.
+- Zope2 "application server". This is something you can ``pip install`` but the results will not be usable [3]_.
 
-- **Zope2 add-ons** AKA "products", most notably the Zope2 Content Management Framework (CMF). This is something you install on top of Zope2 (conceptually but not literally, ``pip install Products.CMFCore``) that provides typical content management features e.g. personalization, workflow, cataloging, etc.
+- Zope2 add-ons AKA "products", most notably the Zope2 Content Management Framework (CMF). This is something you install on top of Zope2 (conceptually but not literally, ``pip install Products.CMFCore``) that provides typical content management features e.g. personalization, workflow, cataloging, etc.
 
-- **Zope3** technologies e.g. the Zope Component Architecture (ZCA). These are things that are included-or-integrated with Zope2 and Plone. [4]_
+- Zope3 technologies e.g. the Zope Component Architecture (ZCA). These are things that are included-or-integrated with Zope2 and Plone. [4]_
 
-- **Buildout** technologies e.g. setuptools, console scripts, recipes, extensions, etc. You can't easily build Plone without them, so we may as well declare them as dependencies.
+- Buildout technologies e.g. setuptools, console scripts, recipes, extensions, etc. You can't easily build Plone without them, so we may as well declare them as dependencies.
 
-- **Plone** technologies. Plone was originally known as a "skin for CMF" but has become much more than that.
+- Plone technologies. Plone was originally known as a "skin for CMF" but has become much more than that.
 
-    - **Archetypes** Legacy content type framework.
+    - Archetypes Legacy content type framework.
 
-    - **Dexterity** Modern content type framework based on modern Zope concepts e.g. "Reuse over reinvention".
+    - Dexterity Modern content type framework based on modern Zope concepts e.g. "Reuse over reinvention".
 
-    - **Diazo** Modern theming engine based on XSLT that "maps Plone content to generic website themes."
+    - Diazo Modern theming engine based on XSLT that "maps Plone content to generic website themes."
 
 In total, if you ``pip install Plone`` over 200 Python packages are installed [5]_.
 
@@ -53,9 +54,9 @@ What is Plock, really?
 
 OK now it's time to explain Plock. Plock is something:
 
-- you **install from PyPI** via ``pip install plock``. "Pip installs packages. Plock installs Plone."
-- you use to **install Plone** without having to know about tarballs or Buildout.
-- you use to **install Plone add-ons** without having to know about Buildout.
+- you install from PyPI via ``pip install plock``. "Pip installs packages. Plock installs Plone."
+- you use to install Plone without having to know about tarballs or Buildout.
+- you use to install Plone add-ons without having to know about Buildout.
 
 In one sentence: Plock runs Buildout so you don't have to, at least initially.
 

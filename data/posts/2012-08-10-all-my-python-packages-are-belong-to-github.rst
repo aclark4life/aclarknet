@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Including many Plone add-ons.**
+Including many Plone add-ons.
+----------------------------------------
 
 Hi. My name is Alex "please don't call them products" Clark. But you may call me aclark or aclark4life. In the spirit of continuing the `great git migration`_, and in order to `beta test pythonpackages.com`_, I've just moved the last of my Subversion repositories to GitHub. This means `any package I have Owner or Maintainer permission for on PyPI`_ now lives in one of 8 GitHub organizations, or my personal GitHub account on github.com. Great Success!
 

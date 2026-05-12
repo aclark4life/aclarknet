@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**How many times have you seen this?**
+How many times have you seen this?
+----------------------------------------
 
 .. image:: /images/dont-sudo-pip-install.png
     :alt: Reddit thread

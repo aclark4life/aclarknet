@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Because plone.org should run the latest Plone**
+Because plone.org should run the latest Plone
+---------------------------------------------
 
 You may be wondering why plone.org is not running the latest version of Plone. Well wonder no more! By the end of this month, it will be. I have been `working on`_\ the various bits and pieces needed to upgrade for months, including:
 

@@ -21,7 +21,7 @@ As change in technology is constant, you can expect a few details to differ betw
 Buildout
 ~~~~~~~~
 
-Since "Hello, Plone!" was published Buildout 2.0.0 was released and **Buildout has given up on attempting to provide module isolation** in the same way Virtualenv that does. Why? Virtualenv does it better. So if you want to isolate your development from a larger Python installation, use Virtualenv. I routinely use both Buildout and Virtualenv.
+Since "Hello, Plone!" was published Buildout 2.0.0 was released and Buildout has given up on attempting to provide module isolation in the same way Virtualenv that does. Why? Virtualenv does it better. So if you want to isolate your development from a larger Python installation, use Virtualenv. I routinely use both Buildout and Virtualenv.
 
 Buildout hosting
 ~~~~~~~~~~~~~~~~

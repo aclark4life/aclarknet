@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Plock is a Plone Installer for the Pip-Loving Crowd. Plone is a Python-based CMS.**
+Plock is a Plone Installer for the Pip-Loving Crowd. Plone is a Python-based CMS.
+---------------------------------------------------------------------------------
 
 Installing Plone with `Plock <https://github.com/aclark4life/plock>`_ looks like this::
 

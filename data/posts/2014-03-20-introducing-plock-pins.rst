@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**"Plock Pins are the greatest thing to happen to Plone since Buildout" — Alex Clark**
+"Plock Pins are the greatest thing to happen to Plone since Buildout" — Alex Clark
+----------------------------------------------------------------------------------
 
 .. image:: /images/buildout-all-the-plones.jpg
     :alt: alternate text

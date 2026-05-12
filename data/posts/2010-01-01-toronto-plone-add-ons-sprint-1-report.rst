@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Via Toronto Plone Users Group**
+Via Toronto Plone Users Group
+----------------------------------------
 
 Last month, members of the `Toronto Plone user's group`_ helped with Plone.org maintenance. Here is the sprint "report out" from Jordan Baker:
 

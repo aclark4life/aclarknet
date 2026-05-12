@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Since Day 1 with Plone circa 2004, I've always taken pride in and greatly enjoyed refining my development environment.**
+Since Day 1 with Plone circa 2004, I've always taken pride in and greatly enjoyed refining my development environment.
+----------------------------------------------------------------------------------------------------------------------
 
 It's been stable for a while now (> 1 year or so) so I thought I'd share.
 
@@ -76,9 +77,9 @@ My typical workflow looks like this:
 
 -  Hang in #plone on irc.freenode.net and wait for questions
 -  Hear question and get inspired to run Plone
--  Run: **$ test-plone \`tmp\`**
+-  Run: $ test-plone \`tmp\`
 
-`~ 1 minute later`_ I'm browsing **http://localhost:8080/Plone** and can install add-ons, check ZMI settings, etc.
+`~ 1 minute later`_ I'm browsing http://localhost:8080/Plone and can install add-ons, check ZMI settings, etc.
 
 Enjoy.
 

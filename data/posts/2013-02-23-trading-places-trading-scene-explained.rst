@@ -16,16 +16,16 @@ Important Plot Detail #1: the Crop Reports, Real and Fake
 In the movie, the Dukes plan to cheat. But the "good guys" (Valentine and Winthrope) foil them by replacing their stolen, ill-gotten crop report with a fake. This allows the "good guys" to win. To understand the reverse-swindle, you must understand the crop reports (real and fake) and the market repercussions of each:
 
 +-----------------+------------+------------+
-|                 | **Report** | **Report** |
-|                 | **(FAKE)** | **(REAL)** |
+|                 | Report | Report |
+|                 | (FAKE) | (REAL) |
 +-----------------+------------+------------+
-| **Weather**     |  BAD       |  GOOD      |
+| Weather     |  BAD       |  GOOD      |
 +-----------------+------------+------------+
-| **Harvest**     |  LOW       |  HIGH      |
-| **(i.e. #**     |            |            |
-| **oranges)**    |            |            |
+| Harvest     |  LOW       |  HIGH      |
+| (i.e. #     |            |            |
+| oranges)    |            |            |
 +-----------------+------------+------------+
-| **Prices**      |  HIGH      |  LOW       |
+| Prices      |  HIGH      |  LOW       |
 +-----------------+------------+------------+
 
 Important Plot Detail #2: Cornering the Market

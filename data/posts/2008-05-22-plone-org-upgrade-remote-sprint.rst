@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Join us on IRC**
+Join us on IRC
+----------------------------------------
 
 Join us this Saturday in irc://irc.freenode.net#PxC at 4:00AM EDT to work on Plone.org upgrade issues, including:
 

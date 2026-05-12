@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Plone 2.1 Buildout**
+Plone 2.1 Buildout
+----------------------------------------
 
 Believe it or not, there are still Plone 2.1 sites in production. (And 1.0 sites too, for that matter. Just look for the tell-tale '/help' sign, e.g. `http://www.zope.org/help`_, if you suspect Plone 1).
 
@@ -19,7 +20,7 @@ As an aside: it was really bothering me lately that you couldn't (easily) find o
 Aside #2
 --------------------------------------------------------------------------------
 
-Another aside: I should mention here the advent of a tool that promises to simplify deployment of Python-based web applications to the cloud (or supported service, which technically does not have to be "cloud-based") via the use of APIs (in particular, the `Rackspace Cloud`_ API, which is the only one supported so far): `Silver Lining`_! The idea of using this tool got me so excited, I spent some time experimenting with setting up a new host with it (and purchasing their service). But when I realized it was not quite ready for production (i.e. "`if you want to use Silver Lining, Silver Lining is not for you`_\ "), I ended up using the Rackspace Cloud **web interface**.
+Another aside: I should mention here the advent of a tool that promises to simplify deployment of Python-based web applications to the cloud (or supported service, which technically does not have to be "cloud-based") via the use of APIs (in particular, the `Rackspace Cloud`_ API, which is the only one supported so far): `Silver Lining`_! The idea of using this tool got me so excited, I spent some time experimenting with setting up a new host with it (and purchasing their service). But when I realized it was not quite ready for production (i.e. "`if you want to use Silver Lining, Silver Lining is not for you`_\ "), I ended up using the Rackspace Cloud web interface.
 
 I was so impressed with it.
 

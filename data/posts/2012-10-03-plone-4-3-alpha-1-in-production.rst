@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**I love upgrading Plone. Given the choice between an afternoon in the sun and upgrading Plone… OK I'd probably pick the sun, but it'd be close.**
+I love upgrading Plone. Given the choice between an afternoon in the sun and upgrading Plone… OK I'd probably pick the sun, but it'd be close.
+----------------------------------------------------------------------------------------------------------------------------------------------
 
 Always upgrading?
 -----------------
@@ -31,7 +32,7 @@ Unfortunately we *still* get asked this question in IRC. The TLDR (short) explan
 
 - Run the upgrade for real i.e. with the Dry Run checkbox unselected. When it finishes (it could take a while depending on the size of your site) check Plone. If everything looks OK, rejoice! If not, don't worry. Check: ``Site Setup -> ZMI -> portal_skins -> custom``. If there is anything inside the custom folder, rename the custom folder to ``custom_X_X`` where ``X_X`` equals the previous Plone version e.g. ``custom_3_3``. Or, rename it to whatever you like. Or delete it if you don't care about any in-database customizations that have been made. You probably should care, but maybe you don't. Now check Plone again. If everything looks OK, you are done! If not… well you really should be done by now. So if not, please email me: aclark@aclark.net and I will try to help.
 
-That's still a lot to swallow for a summary. The key point is this: **test the upgrade away from the production site. Don't put yourself in an unpleasant situation you can easily avoid**. Once everything works as expected, make a copy of your Data.fs and perform the upgrade on the production site (by editing the buildout.cfg if you know how, or just make the new Plone installation the production site. Need help? Please feel free to email me: aclark@aclark.net to discuss professional assistance.)
+That's still a lot to swallow for a summary. The key point is this: test the upgrade away from the production site. Don't put yourself in an unpleasant situation you can easily avoid. Once everything works as expected, make a copy of your Data.fs and perform the upgrade on the production site (by editing the buildout.cfg if you know how, or just make the new Plone installation the production site. Need help? Please feel free to email me: aclark@aclark.net to discuss professional assistance.)
 
 How did I upgrade?
 ------------------

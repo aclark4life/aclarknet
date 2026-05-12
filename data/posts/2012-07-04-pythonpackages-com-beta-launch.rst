@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**After 9 months of development, pythonpackages.com has grand-ceremoniously flipped the switch from alpha to beta. Here is an overview of the beta release features.**
+After 9 months of development, pythonpackages.com has grand-ceremoniously flipped the switch from alpha to beta. Here is an overview of the beta release features.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Killer GitHub integration
 -------------------------

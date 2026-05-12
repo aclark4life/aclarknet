@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**And why it matters to tech people like me.**
+And why it matters to tech people like me.
+------------------------------------------
 
 (I hope my tech colleagues will indulge my thoughts on the recent passing of Beastie Boy Adam Yauch.)
 

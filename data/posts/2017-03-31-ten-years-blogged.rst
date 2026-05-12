@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**In March 2007, I published my first blog post.**
+In March 2007, I published my first blog post.
+----------------------------------------------
 
 .. image:: /images/so-doge-good-nostalgia-such-time-many-posts.jpeg
     :class: img-thumbnail
@@ -18,7 +19,7 @@ Unimaginatively, it was titled `First Post <https://aclark.net/blog/2007/10/17/f
 Since then, a lot has changed. To celebrate this milestone, allow me to recap some significant personal and professional events, then and now.
 
 +-----------------------------------------------------------------------------+------------------------------------------------------------------------------+
-| **Then (2007)**                                                             | **Now (2017)**                                                               |
+| Then (2007)                                                             | Now (2017)                                                               |
 +-----------------------------------------------------------------------------+------------------------------------------------------------------------------+
 | Blogging with Plone (via add-ons or core)                                   | Blogging with Sphinx (via `ablog <http://ablog.readthedocs.io/>`_).          |
 |                                                                             | In between: Wordpress, Pelican.                                              |
@@ -33,15 +34,15 @@ Since then, a lot has changed. To celebrate this milestone, allow me to recap so
 | Conference-hosting virgin.                                                  | Proud veteran organizer of                                                   |
 |                                                                             | `Plone Conference 2008 <http://old.plone.org/2008>`_.                        |
 +-----------------------------------------------------------------------------+------------------------------------------------------------------------------+
-| **Three years before Pillow**, my                                           | `Pillow <http://python-pillow.org>`_                                         |
+| Three years before Pillow, my                                           | `Pillow <http://python-pillow.org>`_                                         |
 | Python Imaging Library                                                      | included in major Linux distributions and downloaded over 15 million         |
 | fork, was born in 2010.                                                     | times.                                                                       |
 +-----------------------------------------------------------------------------+------------------------------------------------------------------------------+
-| **Four years before vanity**, my download statistics tool, was born in 2011.|                                                                              |
+| Four years before vanity, my download statistics tool, was born in 2011.|                                                                              |
 |                                                                             | Vanity `waiting for Warehouse                                                |
 |                                                                             | <https://github.com/aclark4life/vanity/issues/22>`_.                         |
 +-----------------------------------------------------------------------------+------------------------------------------------------------------------------+
-| **Five years before** my **busiest blogging year ever**,                    | Averaging 15 posts `per year                                                 |
+| Five years before my busiest blogging year ever,                    | Averaging 15 posts `per year                                                 |
 | 35 posts in 2012.                                                           | <https://aclark.net/blog/>`_.                                   |
 +-----------------------------------------------------------------------------+------------------------------------------------------------------------------+
 | Six years before plock made noise in 2013.                                  | Pip installs plock. `Plock <http://plock.github.io/>`_ installs Plone.       |

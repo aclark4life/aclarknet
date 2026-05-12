@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**This release features the ability to display per package download statistics.**
+This release features the ability to display per package download statistics.
+-----------------------------------------------------------------------------
 
 With all the Python `stats`_ `goodness`_ going on recently, I got inspired to make a new `vanity`_ release. This release features the ability to display per package download statistics via the \`-v\` or \`--verbose\` command line argument.
 

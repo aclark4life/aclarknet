@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Buildout all the things**
+Buildout all the things
+----------------------------------------
 
 A Buildout for PHP?
 -------------------

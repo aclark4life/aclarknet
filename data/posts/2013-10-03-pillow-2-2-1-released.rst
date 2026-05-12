@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Pillow is the "friendly" PIL fork. PIL is the Python Imaging Library.**
+Pillow is the "friendly" PIL fork. PIL is the Python Imaging Library.
+---------------------------------------------------------------------
 
 .. Note:: An earlier version of this entry was published yesterday with the wrong date. Apologies for any annoyance or confusion.
 

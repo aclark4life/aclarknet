@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**This just in from the production department: use Varnish. (And please forgive the heavily meme-laden approach to describing these techniques.)**
+This just in from the production department: use Varnish. (And please forgive the heavily meme-laden approach to describing these techniques.)
+----------------------------------------------------------------------------------------------------------------------------------------------
 
 Cache ALL the hosts
 -------------------
@@ -40,7 +41,8 @@ This environment variable is then passed to *varnishd* on the command line. Next
 
 Now on to Apache.
 
-***Please note that the syntax above is for Varnish 3.x and the syntax has (annoyingly) changed from 2.x to 3.x.***
+*Please note that the syntax above is for Varnish 3.x and the syntax has (annoyingly) changed from 2.x to 3.x.*
+---------------------------------------------------------------------------------------------------------------
 
 Apache
 ~~~~~~
@@ -83,7 +85,7 @@ This site has Varnish and Apache configured as described in this article. It als
 
 -  `http://plonechix.blogspot.com/2011/08/10-minute-caching-with-apache.html`_
 
-As a result, it's **PEPPY AS THE DICKENS™** on a 512MB "slice" (Cloud server) from Rackspace Cloud. And now you know yet another "Plone secret". Now go make your Plone sites faster, and let me know how it goes in the comments section below.
+As a result, it's PEPPY AS THE DICKENS™ on a 512MB "slice" (Cloud server) from Rackspace Cloud. And now you know yet another "Plone secret". Now go make your Plone sites faster, and let me know how it goes in the comments section below.
 
 Notes
 -----

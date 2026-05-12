@@ -5,9 +5,10 @@
 :source: blog-2017
 :status: published
 
-**Upgrade to Plone 3 before the conference**
+Upgrade to Plone 3 before the conference
+----------------------------------------
 
-`Plone Conference 2008`_ is fast approaching and to avoid embarrassment, disappointment and public outcry I'd like to declare **September 2008 The Month Of Plone.org**. I have created an OpenPlans project to help coordinate efforts:
+`Plone Conference 2008`_ is fast approaching and to avoid embarrassment, disappointment and public outcry I'd like to declare September 2008 The Month Of Plone.org. I have created an OpenPlans project to help coordinate efforts:
 
 - http://www.coactivate.org/projects/ploneorg-upgrade/project-home
 

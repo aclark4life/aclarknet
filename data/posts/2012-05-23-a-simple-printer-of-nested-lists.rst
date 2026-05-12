@@ -5,11 +5,12 @@
 :source: blog-2017
 :status: published
 
-**A rant**
+A rant
+----------------------------------------
 
 Do you ever get the urge to kill? How many of us cringe whenever we see these words? Lately I've been spending a lot of time developing `pythonpackages.com`_, (now running on heroku!) during which time I see a lot of these kinds of packages being released.
 
-I kid about the killing part, but seriously: **this is a problem**.  Fortunately for us, our PyPI overloads see fit to occasionally remove these packages, and for this I am grateful.
+I kid about the killing part, but seriously: this is a problem.  Fortunately for us, our PyPI overloads see fit to occasionally remove these packages, and for this I am grateful.
 
 I mean it makes me *dance-around-the-room* happy! Ahem. But are they really all gone? Close enough. A quick `crate.io search`_ now shows only 2 packages instead of 4 pages of results.
 

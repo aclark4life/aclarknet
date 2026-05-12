@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**The Plone community and software fit nicely within the larger Python ecosystem. Here's why.**
+The Plone community and software fit nicely within the larger Python ecosystem. Here's why.
+-------------------------------------------------------------------------------------------
 
 For almost as long as I have been involved in the `Plone`_ project, I've been interested in Plone's role in the Python ecosystem. Today as I look across the current landscape, I'm proud to announce a new milestone the Plone community can take pride in. But the change didn't happen overnight, so first let's take a quick look back.
 
@@ -19,7 +20,7 @@ This was a big step towards the "Pythonification" of Plone, mainly because Plone
 Collective docs at RTD
 ----------------------
 
-Just when you thought things couldn't get more exciting in Python land, along came `readthedocs.org`_ (a Django Dash production, IIRC). And to `join the fun in July 2011`_, I moved Mikko Ohtamaa's awesome **Plone Community Managed Developer Manual** to the `Github collective`_ and configured the RTD `service hook`_.
+Just when you thought things couldn't get more exciting in Python land, along came `readthedocs.org`_ (a Django Dash production, IIRC). And to `join the fun in July 2011`_, I moved Mikko Ohtamaa's awesome Plone Community Managed Developer Manual to the `Github collective`_ and configured the RTD `service hook`_.
 
 This means that whenever anyone commits a change to the developer manual, within a few minutes a new Sphinx build `gets published`_. It was so easy to set this up, I wish I had done it sooner.
 
@@ -32,9 +33,11 @@ Thanks to the good folks at `Cartwheel Web`_, makers of the fine `Open Compariso
 
 This is a site where folks can add packages hosted elsewhere (e.g. svn, github, pypi), vote on them, and add grid comparisons to compare similarly-featured add-ons, frameworks, and other related software.  Grids are the killer feature of this site, and personally I've been waiting to use them to answer questions like:
 
-    **Q: What's the best blogging add-on for Plone?**
+Q: What's the best blogging add-on for Plone?
+---------------------------------------------
 
-    **A: http://plone.opencomparison.org/grids/g/weblogs/**
+A: http://plone.opencomparison.org/grids/g/weblogs/
+---------------------------------------------------
 
 The content is entirely user driven (TTW only) so please head over to `plone.opencomparison.org`_, login with your github ID, and start adding packages! And while you are at it, please report any issues you find here: `https://github.com/opencomparison/opencomparison/issues`_. Lastly, let's all tweet a big thanks to `@pydanny`_\ and `@audreyr`_ for their hard work and generosity!
 

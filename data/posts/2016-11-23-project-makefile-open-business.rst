@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Makefile for Python Web Development & Related Projects**
+Makefile for Python Web Development & Related Projects
+------------------------------------------------------
 
 A while back I was asked to speak to the Configuration Management Working Group of DC:
 

@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Promote tap water over bottled water**
+Promote tap water over bottled water
+----------------------------------------
 
 `ACLARK.NET, LLC <http://aclark.net>`_ is proud to announce http://www.takebackthetap.org.
 

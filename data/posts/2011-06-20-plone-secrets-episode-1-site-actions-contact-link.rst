@@ -5,11 +5,12 @@
 :source: blog-2017
 :status: published
 
-**Today I am introducing a new category of blog entry called Plone secrets.**
+Today I am introducing a new category of blog entry called Plone secrets.
+-------------------------------------------------------------------------
 
 The goal is to describe a set of developer/integrator techniques that are extremely valuable, but completely non-obvious to newcomers.
 
-The first episode, called: **Site actions contact link**, is really just a technique that involves the Zope Management Interface, Plone interface, file system, Diazo, and quite possibly a few other technologies. This is no secret, but certainly convoluted. Noticeably absent is anything Python-related, unless you count the `plonetheme.aclarknet` namespace package.
+The first episode, called: Site actions contact link, is really just a technique that involves the Zope Management Interface, Plone interface, file system, Diazo, and quite possibly a few other technologies. This is no secret, but certainly convoluted. Noticeably absent is anything Python-related, unless you count the `plonetheme.aclarknet` namespace package.
 
 We begin by pointing your attention to the new "Contact us today!" link on aclark.net.
 

@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**The Slashdot effect**
+The Slashdot effect
+----------------------------------------
 
 My submission to Slashdot was published!
 

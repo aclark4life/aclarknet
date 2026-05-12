@@ -50,7 +50,7 @@ Steve McMahon (SteveM) was our host. Alex Limi (limi) provided general direction
 
 David Glick (davisagli) and Elizabeth Leddy (eleddy) wasted no time in diving in to the 150 or so open tickets in the (now defunct) `plone.org issue tracker`_.
 
-I (aclark) quickly fell into the role of the "deployment witch" (a role I enjoy), and suggested people simply push the **ACLARK** button (née Staples Easy Button) whenever they needed their code deployed to plone.org.
+I (aclark) quickly fell into the role of the "deployment witch" (a role I enjoy), and suggested people simply push the ACLARK button (née Staples Easy Button) whenever they needed their code deployed to plone.org.
 
 We closed a good number of tickets this way.
 

@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**As in "dominates", not a "list of rules"**
+As in "dominates", not a "list of rules"
+----------------------------------------
 
 I spent a long time avoiding `collective.hostout`_ for reasons I will
 call "technical stylistic differences" with the author Dylan Jay.

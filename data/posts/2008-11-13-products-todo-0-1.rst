@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**A project to jump start my return to Plone development.**
+A project to jump start my return to Plone development.
+-------------------------------------------------------
 
 I needed a project to jump start my return to Plone after spending months organizing `Plone Conference 2008`_, and wanted to see an add-on's development through from start to finish including:
 

@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Join 300-400 of your closest friends for a 7-day party**
+Join 300-400 of your closest friends for a 7-day party
+------------------------------------------------------
 
 `http://ploneconf2008.eventbrite.com/`_
 

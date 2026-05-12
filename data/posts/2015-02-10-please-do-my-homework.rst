@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Reminiscent of A Simple Printer of Nested Lists.**
+Reminiscent of A Simple Printer of Nested Lists.
+------------------------------------------------
 
 Reminiscent of `this phenomenon <https://aclark.net/blog/2012/05/23/a-simple-printer-of-nested-lists/>`_, I'm slowly being driven insane by Redditors asking `/r/Python <http://www.reddit.com/r/Python>`_ to do their homework for them. E.g.
 
@@ -44,7 +45,7 @@ Perhaps it is due to:
     :align: center
     :class: img-thumbnail
 
-So now I feel compelled to try and discourage such posts and **encourage more meaningful posts**. If you learn nothing else in school, you should **learn how to learn**. It's not the answer to the question that matters, it's **how you get there**. No other aspect of you answering a question or completing an assignment is as important as you **thinking for yourself about how to do it**. This is almost the entire point of higher education: to learn **how to function in the real world**.
+So now I feel compelled to try and discourage such posts and encourage more meaningful posts. If you learn nothing else in school, you should learn how to learn. It's not the answer to the question that matters, it's how you get there. No other aspect of you answering a question or completing an assignment is as important as you thinking for yourself about how to do it. This is almost the entire point of higher education: to learn how to function in the real world.
 
 .. image:: /images/homework6.png
     :alt: Question #6
@@ -55,4 +56,4 @@ In the real world, you cannot say to your friends and/or coworkers::
 
     My boss is such a jerk. If you could just give me a working example of how to do my job, that would be awesome! Lolz.
 
-So please, /r/Python, let's **start asking more meaningful questions**. And if there is anything I can do to help, please let me know.
+So please, /r/Python, let's start asking more meaningful questions. And if there is anything I can do to help, please let me know.

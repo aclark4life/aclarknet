@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**The website for Python egoists™**
+The website for Python egoists™
+----------------------------------------
 
 I have this overwhelming desire to know how many times my favorite Python packages have been downloaded. Don't you? If so, look no further than `pythonpackages.com`_.
 
@@ -17,7 +18,7 @@ Where you can enter a package like `Django`_ and find out the number of download
 Count favorites
 ---------------
 
-Or click on **Count favorites** to reveal how many times it has been favorited.
+Or click on Count favorites to reveal how many times it has been favorited.
 
 Find trash
 ----------

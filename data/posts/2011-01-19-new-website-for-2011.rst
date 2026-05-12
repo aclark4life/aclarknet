@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Edit: In addition to "cool overlays", I added a couple Plone-core todo items (that I may like to PLIP/implement)**
+Edit: In addition to "cool overlays", I added a couple Plone-core todo items (that I may like to PLIP/implement)
+----------------------------------------------------------------------------------------------------------------
 
 Purpose-driven
 --------------

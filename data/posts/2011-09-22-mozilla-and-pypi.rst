@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**VM setup for kitsune**
+VM setup for kitsune
+----------------------------------------
 
 The `last time I wrote about PyPI`_ some folks mistook the subject to be `PyPy`_, so let me be clear: this article is about the `Python Packaging Index`_.
 
@@ -28,7 +29,7 @@ I can recall some vague rumblings about git submodules prior to this incident, b
 Zamboni
 -------
 
-Then, in the Mozilla IRC channel #sumodev (**su**\ pport **mo**\ zilla) some nice Mozillian (willkg) pointed me to this gem:
+Then, in the Mozilla IRC channel #sumodev (su\ pport mo\ zilla) some nice Mozillian (willkg) pointed me to this gem:
 
 - `http://mozweb.readthedocs.org/en/latest/packaging.html`_
 
@@ -39,15 +40,18 @@ Which in turn led me to the following two links:
 
 Again, faint rumblings… this time about zamboni (not THAT Zamboni). I know I've heard of it, but I wouldn't call myself familiar with it. So, I innocently read the following:
 
-    **Python projects can incur a number of dependencies. ``pip`` can be handy, but we’ve had better luck with distributing a ``vendor`` library.**
+Python projects can incur a number of dependencies. ``pip`` can be handy, but we’ve had better luck with distributing a ``vendor`` library.
+-------------------------------------------------------------------------------------------------------------------------------------------
 
 At which point I immediately thought to myself:
 
-    **Yeah… I hear that.**
+Yeah… I hear that.
+----------------------------------------
 
 Followed a few seconds later by:
 
-    **Wait… what?!?**
+Wait… what?!?
+----------------------------------------
 
 Playdoh
 -------
@@ -59,7 +63,8 @@ PyPI
 
 While all of this is very, very interesting to me, I am primarily a "systems and processes" guy; and what ultimately stuck with me after two days of Mozilla-ing is the following blurb from the Playdoh packaging documentation:
 
-    **The ``/vendor`` library is supposed to contain all packages and repositories. It enables the project to be deployed as one package onto many machines, without relying on PyPI-based installations on each target machine.**
+The ``/vendor`` library is supposed to contain all packages and repositories. It enables the project to be deployed as one package onto many machines, without relying on PyPI-based installations on each target machine.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 "Nooooooooooooooo", I am now saying to myself over and over. "Without relying on PyPI-based installations on each target machine." Another "noooooooooooooooo!" I certainly don't fault Mozilla for taking this approach, but it makes me sad that large organizations like Mozilla are passing over PyPI in favor of alternative methods of distributing Python software.
 
@@ -96,7 +101,7 @@ Notes
 
 [5] More from kumar (emphasis is my own):
 
-    11:25 < kumar> **Playdoh is starting to stabilize** so it would be **good to see some use of it outside Mozilla**; this would probably help us catch Mozilla-specific things that need extraction
+    11:25 < kumar> Playdoh is starting to stabilize so it would be good to see some use of it outside Mozilla; this would probably help us catch Mozilla-specific things that need extraction
 
 [6] LARGE HINT ;-)
 

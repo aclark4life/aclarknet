@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**pythonpackages.com helps Python programmers package and release their software with just a few clicks.**
+pythonpackages.com helps Python programmers package and release their software with just a few clicks.
+------------------------------------------------------------------------------------------------------
 
 pyformance 0.2
 --------------

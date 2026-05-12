@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Bootstrap all the things, including Zope2.**
+Bootstrap all the things, including Zope2.
+------------------------------------------
 
 `zope2\_bootstrap`_ is a new Python package that `monkey patches`_ Zope2 in order to:
 

@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**This is a follow up to my 'Getting Excited about Plone as Eggs' post.**
+This is a follow up to my 'Getting Excited about Plone as Eggs' post.
+---------------------------------------------------------------------
 
 This is a follow up to my `Getting Excited about Plone as Eggs`_ post.
 

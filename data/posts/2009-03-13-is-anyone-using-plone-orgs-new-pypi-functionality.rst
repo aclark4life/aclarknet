@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**python setup.py upload -r plone.org**
+python setup.py upload -r plone.org
+----------------------------------------
 
 Lots of exciting things are happening with Plone.org!
 

@@ -40,7 +40,7 @@ Et voila!
     Location: /private/var/folders/1k/fmmlqcfn5jsbcqrqsw3q_slm0000gn/T/tmpE4vB1l/lib/python2.7/site-packages
     Requires:
 
-If you are a Buildout user, this should save you **endless frustration with Buildout attempting to upgrade Setuptools…**
+If you are a Buildout user, this should save you endless frustration with Buildout attempting to upgrade Setuptools…
 
 attempting to upgrade Setuptools…
 

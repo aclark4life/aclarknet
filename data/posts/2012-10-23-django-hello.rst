@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Django doesn't really need a hello world style introduction, its documentation speaks for itself.**
+Django doesn't really need a hello world style introduction, its documentation speaks for itself.
+-------------------------------------------------------------------------------------------------
 
 But this is what "Hello, world!" in Django looks like to me. I hate boilerplate and I love reducing software down to its core components; just enough to start the server.
 

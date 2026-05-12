@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Is Plone the next great static website generator? Probably not, but it definitely could be.**
+Is Plone the next great static website generator? Probably not, but it definitely could be.
+-------------------------------------------------------------------------------------------
 
 I am always looking for ways to improve, streamline and otherwise hack my e-life. And this post is about all of the above.
 https://raw.githubusercontent.com/ACLARKNET/blog/gh-pages/images/httrack.png

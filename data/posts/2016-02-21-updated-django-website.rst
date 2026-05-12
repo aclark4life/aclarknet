@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**One year later**
+One year later
+----------------------------------------
 
 .. image:: /images/aclarknet-website.png
     :align: center

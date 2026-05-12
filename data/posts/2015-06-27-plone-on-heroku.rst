@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Dear Plone, welcome to 2015**
+Dear Plone, welcome to 2015
+----------------------------------------
 
 Picture it. The year was 2014. I was incredibly moved and inspired by this blog entry:
 
@@ -13,7 +14,7 @@ Picture it. The year was 2014. I was incredibly moved and inspired by this blog 
 
 Someone had finally done it. (`zupo <https://github.com/zupo>`_ in this case, kudos!) Someone had finally beat me to implementing the dream of ``git push heroku plone``. And I could not have been happier.
 
-But something nagging would not let go: I still **didn't fully understand how the buildpack worked**. Today I'm happy to say: that nag is gone and I now fully understand how Heroku buildpacks work… thanks to… wait for it… a `Buildpack for Plock <https://github.com/plock/buildpack/blob/master/bin/compile>`_.
+But something nagging would not let go: I still didn't fully understand how the buildpack worked. Today I'm happy to say: that nag is gone and I now fully understand how Heroku buildpacks work… thanks to… wait for it… a `Buildpack for Plock <https://github.com/plock/buildpack/blob/master/bin/compile>`_.
 
 Plock Buildpack
 ---------------
@@ -23,7 +24,7 @@ There's a lot of the same things going on in both the `Plone Buildpack <https://
 Experimental
 ~~~~~~~~~~~~
 
-The **Plock buildpack is highly experimental, still in development and possibly innovative**. Here's what it currently does:
+The Plock buildpack is highly experimental, still in development and possibly innovative. Here's what it currently does:
 
 - Configures Python user site directory in Heroku cache
 - Installs setuptools in user site
@@ -32,7 +33,7 @@ The **Plock buildpack is highly experimental, still in development and possibly 
 - Installs Plone in cache
 - Copies cache to build directory
 - Installs a portion of "user Plone" (the Heroku app's buildout.cfg) in the build directory (not the cache)
-- Relies on the app to install the remainder (the Heroku app's heroku.cfg). **Most importantly the app runs Buildout which finishes quickly thanks to the cache & configures the port which is only available to the app (not the buildpack.)**
+- Relies on the app to install the remainder (the Heroku app's heroku.cfg). Most importantly the app runs Buildout which finishes quickly thanks to the cache & configures the port which is only available to the app (not the buildpack.)
 
 Here's `an example <https://github.com/ACLARKNET/plone-demo>`_:
 

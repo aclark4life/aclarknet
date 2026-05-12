@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**I'm back on IRC for the foreseeable future, and loving it. Thank you Shout IRC.**
+I'm back on IRC for the foreseeable future, and loving it. Thank you Shout IRC.
+-------------------------------------------------------------------------------
 
 |
 

@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Whenever I answer tech support questions, I usually begin with a clean slate**
+Whenever I answer tech support questions, I usually begin with a clean slate
+----------------------------------------------------------------------------
 
 E.g.::
 

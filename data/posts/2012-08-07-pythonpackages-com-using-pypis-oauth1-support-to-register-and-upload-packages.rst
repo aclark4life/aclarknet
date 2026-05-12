@@ -5,9 +5,10 @@
 :source: blog-2017
 :status: published
 
-**TL;DR PyPI has OAuth1 support; pythonpackages.com uses it to send your GitHub repos to PyPI.**
+TL;DR PyPI has OAuth1 support; pythonpackages.com uses it to send your GitHub repos to PyPI.
+--------------------------------------------------------------------------------------------
 
-Thanks in very large part to `Richard Jones`_, the Python Package Index now has support for registering and uploading packages via OAuth1. And using his `sample code`_ I was able to take advantage of it on pythonpackages.com. The result is a fairly **elegant approach to releasing packages** sans dirty hacks (I had been asking users for their username and password, then storing them in an encrypted session cookies so I could send them to PyPI.) Here's how it works now.
+Thanks in very large part to `Richard Jones`_, the Python Package Index now has support for registering and uploading packages via OAuth1. And using his `sample code`_ I was able to take advantage of it on pythonpackages.com. The result is a fairly elegant approach to releasing packages sans dirty hacks (I had been asking users for their username and password, then storing them in an encrypted session cookies so I could send them to PyPI.) Here's how it works now.
 
 Sign In With GitHub
 --------------------------------------------------------------------------------
@@ -17,7 +18,7 @@ GitHub provides an easy way to let folks sign in to pythonpackages.com with thei
 Select a package
 --------------------------------------------------------------------------------
 
-Once you are signed in, you can select a package. Selected packages can perform various actions, one of which is **Tag and Release**.  As soon as you select Tag and Release, you are required to authenticate with PyPI.
+Once you are signed in, you can select a package. Selected packages can perform various actions, one of which is Tag and Release.  As soon as you select Tag and Release, you are required to authenticate with PyPI.
 
 [STRIKEOUT:Enter your PyPI credentials]
 --------------------------------------------------------------------------------

@@ -11,7 +11,8 @@
     :align: center
     :class: img-thumbnail
 
-**For the first time in 10 years, http://aclark.net is not powered by Plone.**
+For the first time in 10 years, http://aclark.net is not powered by Plone.
+--------------------------------------------------------------------------
 
 Nothing against Plone: it's still one of the greatest loves of my life (inasmuch as you can love a software and community, as I do).
 
@@ -20,9 +21,9 @@ Why
 
 This was not the result of a revolutionary plan, rather more of an evolution. It happened like this:
 
-- As soon as Plone 4.3a1 was released (a year ago?) I deployed a new Plone site to aclark.net with it, featuring a **Diazo** (new Plone theming engine) theme.
-- Around the same time I became obsessed with deploying to Heroku, and also gained an interest in **Python 3**.
-- A few months ago, I got tired of paying $11/month to host my Plone site so I converted the site to **static HTML** and moved it to **GitHub pages**. But the result was flawed because maintenance involved editing duplicate copies of the website content (e.g. both clients.html and clients/foo.html contained the same text describing "foo").
+- As soon as Plone 4.3a1 was released (a year ago?) I deployed a new Plone site to aclark.net with it, featuring a Diazo (new Plone theming engine) theme.
+- Around the same time I became obsessed with deploying to Heroku, and also gained an interest in Python 3.
+- A few months ago, I got tired of paying $11/month to host my Plone site so I converted the site to static HTML and moved it to GitHub pages. But the result was flawed because maintenance involved editing duplicate copies of the website content (e.g. both clients.html and clients/foo.html contained the same text describing "foo").
 
 So when it came time to do more than a few casual edits, I knew I had to find a new approach. That's when various elements of the Universe conspired to lead me in a new direction.
 
@@ -217,9 +218,9 @@ I still ended up sending mail "the old way" via GMail. But now I send two mails:
 Who cares
 ---------
 
-The best thing about all of this being able to run the site **100% for free on Heroku**. Also:
+The best thing about all of this being able to run the site 100% for free on Heroku. Also:
 
 - Python 3 compat!
 - Free caching via CloudFlare
 - Free ping service from Pingdom keeps the site from "going to sleep" (HT: natea).
-- Updating the site fits my workflow. If I'm the content editor, I don't necessarily need or want to use Plone to edit my content. I can save Plone for my clients, and focus on **what makes them happy** with their CMS system.
+- Updating the site fits my workflow. If I'm the content editor, I don't necessarily need or want to use Plone to edit my content. I can save Plone for my clients, and focus on what makes them happy with their CMS system.

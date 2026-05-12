@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Updated Zope User Group Information**
+Updated Zope User Group Information
+----------------------------------------
 
 Today I updated http://www.zope.org/Resources/UserGroups. Most of the information came from `Chris Calloway`_. Now it's `better than the old one`_ and should be easier to maintain.
 

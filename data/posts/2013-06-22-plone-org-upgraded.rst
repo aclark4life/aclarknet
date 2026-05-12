@@ -5,14 +5,15 @@
 :source: blog-2017
 :status: published
 
-**Recently I upgraded plone.org from Plone 4.2 to Plone 4.3.**
+Recently I upgraded plone.org from Plone 4.2 to Plone 4.3.
+----------------------------------------------------------
 
 Recently at the behest of Liz Leddy, I `upgraded plone.org from Plone 4.2 to Plone 4.3 <https://github.com/plone/Products.PloneOrg/commit/b04105f7c9cacf3880c12effba5ffe261d4b5163>`_. It's been a while since I had the pleasure, so I thought I'd make some notes: for myself, the AI Team and anyone else interested in the process.
 
 Background
 ----------
 
-1. Plone.org is one of the **oldest Plone sites in existence**, having been launched circa Plone 1 and upgraded in place ever since.
+1. Plone.org is one of the oldest Plone sites in existence, having been launched circa Plone 1 and upgraded in place ever since.
 #. It functions remarkably well, given #1.
 #. It's not without its issues, but all of them are manageable — for some value of manageable.
 #. It's often very time consuming to work on.
@@ -97,7 +98,7 @@ Pre-Process
 Process
 -------
 
-We know from upgrading locally that the process will take about 45 minutes to an hour, so you should **allocate about 2 hours to do the upgrade**.
+We know from upgrading locally that the process will take about 45 minutes to an hour, so you should allocate about 2 hours to do the upgrade.
 
 #. Announce the upgrade: preferably a week or two in advance. The plone-developers and plone-users lists are probably sufficient, but you can create a plone.org news item too if you are feeling extra-ambitious. I only had a small window to perform this maintenance, so I skipped this step and proceeded directly to the next one.
 
@@ -115,7 +116,7 @@ We know from upgrading locally that the process will take about 45 minutes to an
     :align: center
     :class: img-thumbnail
 
-#. Run the upgrade. I forgot to mention earlier something very important: **On plone.org, you can't access Zope from the internet.** And you can't run the upgrade without accessing Zope. Hence run the following command to access the server, then access Plone via ``http://localhost:8080``::
+#. Run the upgrade. I forgot to mention earlier something very important: On plone.org, you can't access Zope from the internet. And you can't run the upgrade without accessing Zope. Hence run the following command to access the server, then access Plone via ``http://localhost:8080``::
 
     $ ssh -L 8080:10.57.0.107:5011 direct.plone.org
 

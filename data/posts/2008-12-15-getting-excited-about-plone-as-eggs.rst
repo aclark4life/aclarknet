@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Updated for 4.x**
+Updated for 4.x
+----------------------------------------
 
 I'm really excited about this because it greatly simplifies the development and deployment story for `Plone`_. For example you can now create a Plone ``buildout.cfg`` file like this:
 

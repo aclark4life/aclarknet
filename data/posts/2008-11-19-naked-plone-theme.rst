@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Products.naked_plone**
+Products.naked_plone
+----------------------------------------
 
 I've needed this for some time, but I'm finally getting around to `shipping it <https://pypi.org/project/Products.naked_plone/0.1>`_.
 

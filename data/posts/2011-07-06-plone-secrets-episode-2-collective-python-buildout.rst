@@ -11,7 +11,7 @@ You know who should use it? Everyone.
 
 *[dramatic pause…]*
 
-OK maybe not everyone, but at least everyone that regularly develops with **multiple versions of Python**. Here's why.
+OK maybe not everyone, but at least everyone that regularly develops with multiple versions of Python. Here's why.
 
 Actively maintained
 --------------------------------------------------------------------------------
@@ -86,7 +86,7 @@ Then you should see:
 Easy to configure
 --------------------------------------------------------------------------------
 
-Now you can add **/opt/local/bin** to your environment PATH variable.  This will make it easy to choose a particular Python, PIP, or Virtualenv at your leisure.
+Now you can add /opt/local/bin to your environment PATH variable.  This will make it easy to choose a particular Python, PIP, or Virtualenv at your leisure.
 
 Unfortunately, if you pip install something, it will end up in the checkout instead of */opt/local/bin*.
 

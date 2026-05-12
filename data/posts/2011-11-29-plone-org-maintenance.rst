@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**I am planning to do some work on the plone.org server and website by the end of the year.**
+I am planning to do some work on the plone.org server and website by the end of the year.
+-----------------------------------------------------------------------------------------
 
 Including:
 

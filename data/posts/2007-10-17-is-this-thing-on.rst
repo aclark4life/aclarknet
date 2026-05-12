@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Sorry about the duplicate posts.**
+Sorry about the duplicate posts.
+----------------------------------------
 
 .. image:: /images/is-this-thing-on.jpg
     :align: center

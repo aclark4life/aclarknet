@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**This is a follow-up to Martin Aspeli's introduction to repoze and Plone from last year**
+This is a follow-up to Martin Aspeli's introduction to repoze and Plone from last year
+--------------------------------------------------------------------------------------
 
 A Tale of Two Buildouts
 -----------------------

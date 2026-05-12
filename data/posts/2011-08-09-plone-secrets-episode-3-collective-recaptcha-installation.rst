@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Another one from the: "wow, this approach is totally and completely non-obvious to beginners" department.**
+Another one from the: "wow, this approach is totally and completely non-obvious to beginners" department.
+---------------------------------------------------------------------------------------------------------
 
 My kingdom for a (custom) contact form (with captcha)
 --------------------------------------------------------------------------------
@@ -28,13 +29,14 @@ We can do better
 
 Leaving this old stuff laying around, with no new stuff to point new users to does a huge disservice to *all* of our users. It flies *directly* in the face of one of our core missions: as `Wyn Williams`_ put it once, to be the
 
-    **"best damn enterprise content manage system on the planet".**
+"best damn enterprise content manage system on the planet".
+-----------------------------------------------------------
 
-Now, I've been around the block, so I am not suggesting we must fix everything at once. Legacy software can be supported for years and years and years (and `YEARS`_). What I am suggesting is that we need to make a very significant effort to **COMPLETELY HIDE** these implementation details to newcomers. I don't want to tell people in IRC to go to **portal\_skins** anymore. I want my "OS X Lion release for Plone", please (sans Vista overtones.)
+Now, I've been around the block, so I am not suggesting we must fix everything at once. Legacy software can be supported for years and years and years (and `YEARS`_). What I am suggesting is that we need to make a very significant effort to COMPLETELY HIDE these implementation details to newcomers. I don't want to tell people in IRC to go to portal\_skins anymore. I want my "OS X Lion release for Plone", please (sans Vista overtones.)
 
-So how do we get there? Well, in the case of portal\_skins there is talk of decommissioning **portal\_view\_customizations,** which was supposed to be the "new portal\_skins" as I understand it. But since half of our templates are still in CMF skin layers, *and* because this feature was not technically well received (i.e. it needs *more* features and development), *and* because **portal\_resources** came along around the same time as `plone.app.theming`_, folks are considering removing portal\_view\_customizations. I have no strong opinion about it (other than I hate the name, too long) and I trust the Framework Team to handle it. What I do care about is that whatever remains in the ZMI be very clearly designated as either "new style" or "old style". We can't get away from the ZMI yet, but portal tools do have title attributes so let's use them.
+So how do we get there? Well, in the case of portal\_skins there is talk of decommissioning portal\_view\_customizations, which was supposed to be the "new portal\_skins" as I understand it. But since half of our templates are still in CMF skin layers, *and* because this feature was not technically well received (i.e. it needs *more* features and development), *and* because portal\_resources came along around the same time as `plone.app.theming`_, folks are considering removing portal\_view\_customizations. I have no strong opinion about it (other than I hate the name, too long) and I trust the Framework Team to handle it. What I do care about is that whatever remains in the ZMI be very clearly designated as either "new style" or "old style". We can't get away from the ZMI yet, but portal tools do have title attributes so let's use them.
 
-Now, we can't ditch **portal\_skins** just yet, and who knows what will happen with **portal\_view\_customizations**, but the \*minute\* we know some technology is out of date, we should reveal it in the user interface (even in the ZMI user interface). E.g.:
+Now, we can't ditch portal\_skins just yet, and who knows what will happen with portal\_view\_customizations, but the \*minute\* we know some technology is out of date, we should reveal it in the user interface (even in the ZMI user interface). E.g.:
 
     Curiously, the attribute that holds this string is lowercase "title"
     (I'd expect camel case Description, though I'm not entirely sure why

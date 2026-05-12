@@ -5,20 +5,21 @@
 :source: blog-2017
 :status: published
 
-**I owe PACKT a review of this book, so here it is.**
+I owe PACKT a review of this book, so here it is.
+-------------------------------------------------
 
-First: I liked it. Second: I appreciate Aspeli writing it. Third: Like many others, I couldn't wait for it to come out. Fourth: I know that it was a **TON OF WORK** and **PROBABLY NOT WORTH THE MONEY** to write it. So why write a Plone book? A few reasons (other than money):
+First: I liked it. Second: I appreciate Aspeli writing it. Third: Like many others, I couldn't wait for it to come out. Fourth: I know that it was a TON OF WORK and PROBABLY NOT WORTH THE MONEY to write it. So why write a Plone book? A few reasons (other than money):
 
 - It's good for you
 - It's good for the community
 - It's good for Plone
 
-So if you care about Plone: please go buy both an electronic and paper version of this book **RIGHT NOW** [0]_. While you are at it, please pick up a copy of **Plone 3.3 Site Administration**. It's quite good, and I hear the author is a **swell guy** who would appreciate your generosity [1]_ [2]_.
+So if you care about Plone: please go buy both an electronic and paper version of this book RIGHT NOW [0]_. While you are at it, please pick up a copy of Plone 3.3 Site Administration. It's quite good, and I hear the author is a swell guy who would appreciate your generosity [1]_ [2]_.
 
 What I like
 -----------
 
-First let me cover what I **ABSOLUTELY LOVE** about this book.
+First let me cover what I ABSOLUTELY LOVE about this book.
 
 buildout:eggs
 ~~~~~~~~~~~~~
@@ -28,7 +29,7 @@ buildout:eggs
     :align: center
     :class: img-thumbnail
 
-Aspeli correctly addresses one of my biggest pet peeves (concerns) about what I believe to be an **ANTI-PATTERN** in almost every Plone buildout: buildout:eggs (referring to the eggs parameter of the buildout section; it does not exist, other than as a convenient variable setting).
+Aspeli correctly addresses one of my biggest pet peeves (concerns) about what I believe to be an ANTI-PATTERN in almost every Plone buildout: buildout:eggs (referring to the eggs parameter of the buildout section; it does not exist, other than as a convenient variable setting).
 
 If you know me, you know I've spoken about this before and whilst I've moved on from harping on it I will say this: with most software that uses ini-style configuration files when you set a parameter you expect something to happen. But since Buildout is more complicated than the average software that uses ini-style configuration, that expectation is not always met.
 
@@ -40,7 +41,7 @@ Add-ons
     :align: center
     :class: img-thumbnail
 
-Did you see? You might have missed it. No mention of **Products** WHAT-SO-EVER. "Product" was a term that Zope2 used for Python libraries that enhanced the functionality of Zope2, and it stuck. Now, it should die in favor of a term everyone else in the world is familiar with (in this context): add-on. Well played, Aspeli. Well played.
+Did you see? You might have missed it. No mention of Products WHAT-SO-EVER. "Product" was a term that Zope2 used for Python libraries that enhanced the functionality of Zope2, and it stuck. Now, it should die in favor of a term everyone else in the world is familiar with (in this context): add-on. Well played, Aspeli. Well played.
 
 The Review
 ----------
@@ -134,8 +135,8 @@ I hope you have enjoyed this review; and I hope you'll consider purchasing a cop
 
 .. [0] Disclaimer: I was given a copy of both versions in exchange for this review.
 
-.. [1] Seriously though, whilst PACKT literally forces you to include a software version number in your title, **Plone 3.3 Site Administration** is still relevant to today's Plone. I expect it will be relevant through at least Plone 5.
+.. [1] Seriously though, whilst PACKT literally forces you to include a software version number in your title, Plone 3.3 Site Administration is still relevant to today's Plone. I expect it will be relevant through at least Plone 5.
 
-.. [2] The financial details of (at least) my contract for writing a book with PACKT **CLEARLY FAVORED PACKT**. That said, I think they are a great organization and I am proud to be a PACKT author. But according to my statements, I still need to earn about $1K more in royalties before I have paid back my advance. Notice what I just said there: **earn in royalties** i.e. I have to sell enough books in order to get PACKT to pay out enough money to meet the terms of the contract. I won't pretend to have any idea why PACKT does what it does with its contracts, except to say that I assume they expect to make money. I'll also assume everything is on the up and up. But unfortunately sometimes the "up and up" can look like this: http://www.techdirt.com/articles/20121018/01054720744/hollywood-accounting-how-19-million-movie-makes-150-million-still-isnt-profitable.shtml.
+.. [2] The financial details of (at least) my contract for writing a book with PACKT CLEARLY FAVORED PACKT. That said, I think they are a great organization and I am proud to be a PACKT author. But according to my statements, I still need to earn about $1K more in royalties before I have paid back my advance. Notice what I just said there: earn in royalties i.e. I have to sell enough books in order to get PACKT to pay out enough money to meet the terms of the contract. I won't pretend to have any idea why PACKT does what it does with its contracts, except to say that I assume they expect to make money. I'll also assume everything is on the up and up. But unfortunately sometimes the "up and up" can look like this: http://www.techdirt.com/articles/20121018/01054720744/hollywood-accounting-how-19-million-movie-makes-150-million-still-isnt-profitable.shtml.
 
 .. [3] ``$ pip install Plone`` support may be available soon which may blow the lid off the Python popularity shack (raise the level of interest from generic Python developers interested in Python CMS applications).

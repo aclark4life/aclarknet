@@ -5,7 +5,7 @@
 :source: blog-2017
 :status: published
 
-**This is a reiteration of Carlos de la Guardia's recent post on the subject**.
+This is a reiteration of Carlos de la Guardia's recent post on the subject.
 
 You should probably be using `Supervisor`_ because:
 

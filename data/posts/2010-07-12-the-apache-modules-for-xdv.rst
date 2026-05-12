@@ -5,9 +5,10 @@
 :source: blog-2017
 :status: published
 
-**Apache Buildout**
+Apache Buildout
+----------------------------------------
 
-I was recently tasked with consolidating our various **business services** (website, software repository, mailing lists, ldap, etc.) on to a single virtual machine (ostensibly to save money, although it didn't quite work out that way). The Apache modules for XDV presented themselves as an attractive technique to use, in helping me achieve my goals.
+I was recently tasked with consolidating our various business services (website, software repository, mailing lists, ldap, etc.) on to a single virtual machine (ostensibly to save money, although it didn't quite work out that way). The Apache modules for XDV presented themselves as an attractive technique to use, in helping me achieve my goals.
 
 Background
 ----------
@@ -51,7 +52,7 @@ Second problem
 
 It's hard to create such a buildout for a variety of reasons, but most noticeably in my mind is the "library soup" you may encounter on any modern system. For example, I started off by trying to include all the dependencies in the buildout. But I ended up leaving things out, like libxml2 and libxslt relying instead on the operating system vendor packages. Because even though I tried desperately to tell every other dependency about the included libxml2 and libxslt2, I still ended up with an annoying "missing symbols" error at the end (meaning I likely missed a compiler flag along the way).
 
-These errors can be very frustrating, and even worse: **sporadic**.  Sometimes you may inadvertently add or remove a system dependency during the build process. So you could be relying on a system package and not even know it until later when it is too late (i.e. when you are enjoying some unplanned and unexpected down time).
+These errors can be very frustrating, and even worse: sporadic.  Sometimes you may inadvertently add or remove a system dependency during the build process. So you could be relying on a system package and not even know it until later when it is too late (i.e. when you are enjoying some unplanned and unexpected down time).
 
 So there I went again. It took several days I didn't really have, and the results were not what I expected, but I'm still somewhat happy with them. Now, I want to share this buildout particularly with folks considering using the Apache modules for XDV (`http://code.google.com/p/html-xslt/`_). Because while it would be much easier if the Apache modules Just Worked™ with OS vendor packages, in the event that they don't (which is what I experienced) folks may find this buildout helpful. (That, and Jon Stahl requested it on Facebook :-D).
 

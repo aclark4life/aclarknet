@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**I have yet to finish my obligations to Plone Conference 2008 until NOW.**
+I have yet to finish my obligations to Plone Conference 2008 until NOW.
+-----------------------------------------------------------------------
 
 I have yet to finish my obligations to `Plone Conference 2008`_ until NOW: approximately 2 years, 6 months, and 23 days after the end of the post-conference sprint.
 
@@ -26,7 +27,7 @@ As such, if anyone in the community has the time and expertise to convert these 
 -  `Relational database applications with Plone and SQLAlchemy`_
 -  `Reaching Deployment Nirvana Using Buildout`_
 
-Remarkably, some of these newly added videos are *still* relevant **and** enjoyable to watch, as are many of the ones already available in the easily browsable `archive`_.
+Remarkably, some of these newly added videos are *still* relevant and enjoyable to watch, as are many of the ones already available in the easily browsable `archive`_.
 
 My sincerest apologies to the community and especially to those whose videos were amongst this group for the delay, you should not have had to wait 2 days let alone over 2 years!
 

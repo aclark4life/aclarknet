@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Now even easier to use Supervisor**
+Now even easier to use Supervisor
+----------------------------------------
 
 Since I `last wrote about supervisor <https://aclark.net/blog/2008/05/15/supervisor-rocks/>`_ it's become easier to use thanks to `collective.recipe.supervisor`_. Now it's as simple as editing your ``buildout.cfg``.
 

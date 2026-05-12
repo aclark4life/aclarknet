@@ -5,7 +5,7 @@
 :source: blog-2017
 :status: published
 
-**An ode to my OS X development workstation setup** [1]_
+An ode to my OS X development workstation setup [1]_
 
 I am big on setting up my development environment, and enjoying the environment I work in. And I'm very thankful to the folks who make my life easier, including the authors of:
 
@@ -13,12 +13,12 @@ I am big on setting up my development environment, and enjoying the environment 
 - `dotfiles <https://pypi.org/project/dotfiles>`_: Jon Bernard
 - `checkoutmanager <https://pypi.org/project/checkoutmanager>`_: Reinout Van Rees
 
-I also love **repetition**. So picture if you will, a new **Macbook Air or Pro** ready to serve as my development workstation. I like to perform, and study, the steps required to turn a new laptop in to my development workstation. So here we go. In this article, I will walk through the steps required to turn a new machine in to my developer workstation. Do follow along!
+I also love repetition. So picture if you will, a new Macbook Air or Pro ready to serve as my development workstation. I like to perform, and study, the steps required to turn a new laptop in to my development workstation. So here we go. In this article, I will walk through the steps required to turn a new machine in to my developer workstation. Do follow along!
 
 Shell
 -----
 
-One of the first things I do on a new system is change my shell to **Zsh** in ``System Preferences -> Users & Groups -> Current User -> Right Click -> Advanced Options...``. Don't forget to ``Click the lock to make changes`` first.
+One of the first things I do on a new system is change my shell to Zsh in ``System Preferences -> Users & Groups -> Current User -> Right Click -> Advanced Options...``. Don't forget to ``Click the lock to make changes`` first.
 
 .. image:: /images/zsh.png
     :alt: alternate text
@@ -28,12 +28,12 @@ One of the first things I do on a new system is change my shell to **Zsh** in ``
 Zsh
 ~~~
 
-Why **Zsh**? One of my favorite features is **shared history between open sessions**. So I can run a command in one window, and then run the same command from another window by fetching it from the history (with CTRL-R).
+Why Zsh? One of my favorite features is shared history between open sessions. So I can run a command in one window, and then run the same command from another window by fetching it from the history (with CTRL-R).
 
 XCode
 -----
 
-After I take possession of my new laptop (running **Mountain Lion**, the newest OS X at the time of this writing), I head to the App Store to download XCode. [2]_ Among many other things, XCode gives me the GNU C Compiler and allows me to type "gcc" in my ``Applications -> Utilities -> Terminal``.
+After I take possession of my new laptop (running Mountain Lion, the newest OS X at the time of this writing), I head to the App Store to download XCode. [2]_ Among many other things, XCode gives me the GNU C Compiler and allows me to type "gcc" in my ``Applications -> Utilities -> Terminal``.
 
 .. image:: /images/gcc.png
     :alt: alternate text
@@ -76,7 +76,7 @@ Which reminds me, don't forget that installing the command line utilities in Mou
 Dotfiles
 --------
 
-At this point, I can begin to get serious about turning this new machine in to my developer workstation. And that means: **installing my private ssh key** so I can check out code without typing a password, of course. Normally this would be tedious, but with git and dotfiles it's not so bad. This is what I do from my home directory::
+At this point, I can begin to get serious about turning this new machine in to my developer workstation. And that means: installing my private ssh key so I can check out code without typing a password, of course. Normally this would be tedious, but with git and dotfiles it's not so bad. This is what I do from my home directory::
 
     $ git clone https://super_secret_url/dotfiles.git Dotfiles
 
@@ -290,7 +290,7 @@ This creates and populates my ``~/Developer`` directory with code. And it "just 
         git@github.com:aclark4life/django-hello.git
     vcs = git
 
-Now it's time to bootstrap the Collective Python Buildout, which gives me **all versions of Python, ever** [7]_. And off we go::
+Now it's time to bootstrap the Collective Python Buildout, which gives me all versions of Python, ever [7]_. And off we go::
 
     $ cd Developer/buildout.python
     $ python bootstrap.py

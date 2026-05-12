@@ -50,7 +50,7 @@ leave it as an exercise to the reader to explore.
 See: http://slrn.sourceforge.net/manual/slrn-manual.html  for more
 information. I hope this post helps someone get started
 using *slrn !*
- Next, in Part II, I will cover **slrnpull* ; the program I use
+ Next, in Part II, I will cover slrnpull* ; the program I use
 (distributed with slrn) to download news. I never "read it live" and I
 will explain why ;-)*
 

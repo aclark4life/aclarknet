@@ -7,16 +7,16 @@
 
 This post is only loosely Python related and not at all Plone related, but I thought folks might enjoy hearing about Vagrant and Puppet because these tools may help you do your Plone and Python jobs better.
 
-For the past couple weeks I've been working on creating a virtual machine to bootstrap a kitsune environment. Kitsune is the Django site that powers support.mozilla.com. I've now reached what I call the **2nd milestone**.
+For the past couple weeks I've been working on creating a virtual machine to bootstrap a kitsune environment. Kitsune is the Django site that powers support.mozilla.com. I've now reached what I call the 2nd milestone.
 
 Milestones
 ----------
 
 The milestones are as follows:
 
-#. Get the VM running to the point where one can type **./manage.py** and receive the help output (and not a traceback). This sounds trivial but there is actually a lot of work involved to get to this point. Namely, figuring out how to make `Puppet`_ execute each of the required steps successfully, together. (You would expect to be able to just define the steps in order, but those with this expectation will be disappointed. I assume Puppet has their reasons, and they are probably even good ones.)
-#. **Get the VM running to the point where one can open http://33.33.33.10:8000 from the host to see kitsune running. Once step #1 is done, this is actually easier than it sounds because I'm "cheating". Test data has been imported and a syncdb has been run, but I'm using supervisor to manage the runserver process (for now).**
-#. Get the VM running like it does in production. This will involve configuring **Apache**\ and **mod\_wsgi** as well as resolving any issues that remain with the app. I'll rely on the kitsune team to help with this, as I'm still learning the app. This is the "exciting" part for me because I get to learn something new. While Vagrant and Puppet are also new to me, I consider these technologies part of my "past life" (as a system administrator) and Django sites part of my "future life" (as a web developer).
+#. Get the VM running to the point where one can type ./manage.py and receive the help output (and not a traceback). This sounds trivial but there is actually a lot of work involved to get to this point. Namely, figuring out how to make `Puppet`_ execute each of the required steps successfully, together. (You would expect to be able to just define the steps in order, but those with this expectation will be disappointed. I assume Puppet has their reasons, and they are probably even good ones.)
+#. Get the VM running to the point where one can open http://33.33.33.10:8000 from the host to see kitsune running. Once step #1 is done, this is actually easier than it sounds because I'm "cheating". Test data has been imported and a syncdb has been run, but I'm using supervisor to manage the runserver process (for now).
+#. Get the VM running like it does in production. This will involve configuring Apache\ and mod\_wsgi as well as resolving any issues that remain with the app. I'll rely on the kitsune team to help with this, as I'm still learning the app. This is the "exciting" part for me because I get to learn something new. While Vagrant and Puppet are also new to me, I consider these technologies part of my "past life" (as a system administrator) and Django sites part of my "future life" (as a web developer).
 
 Now about the technologies.
 
@@ -48,7 +48,7 @@ Puppet
 
 My knowledge of Puppet is currently quite limited. Specifically, I only know how to create a manifest file. (Vagrant does the rest!) I imagine there is much more to Puppet, especially with regard to doing actual configuration management on production servers. But I have not explored any of that yet.
 
-However, I did learn quite a bit about Puppet just from writing the manifest. The first most important thing I learned is this: **Puppet is in charge**. It does things the way it wants to and you need to follow its rules. The first and biggest challenge is to achieve a linear execution of tasks.
+However, I did learn quite a bit about Puppet just from writing the manifest. The first most important thing I learned is this: Puppet is in charge. It does things the way it wants to and you need to follow its rules. The first and biggest challenge is to achieve a linear execution of tasks.
 
 You cannot write rules in order and hope for the best. This will fail spectacularly when something executes before something else was supposed to. The way around this is via \`require =>\` statements.
 

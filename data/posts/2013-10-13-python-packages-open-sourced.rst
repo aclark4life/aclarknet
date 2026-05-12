@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Today I am open sourcing the code that ran pythonpackages.com from late 2011 to late 2012.**
+Today I am open sourcing the code that ran pythonpackages.com from late 2011 to late 2012.
+------------------------------------------------------------------------------------------
 
 You can find it here:
 

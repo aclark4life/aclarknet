@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**Tarek Ziadé's New Year's Python Meme**
+Tarek Ziadé's New Year's Python Meme
+----------------------------------------
 
 What’s the coolest Python application, framework or library you discovered this year?
 -------------------------------------------------------------------------------------------------

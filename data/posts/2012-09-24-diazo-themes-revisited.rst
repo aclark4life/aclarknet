@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**With Diazo theming on the rise (going in to 4.3 core) I'd like to take a look at the Diazo theming ecosystem again.**
+With Diazo theming on the rise (going in to 4.3 core) I'd like to take a look at the Diazo theming ecosystem again.
+-------------------------------------------------------------------------------------------------------------------
 
 For that matter, since I know that some folks will never commit to Diazo, I'd like to take a look at the entire Plone theming ecosystem.
 
@@ -43,7 +44,7 @@ What is the point?
 
 All of this brings me to the actual point of this post which is to take a quick look at the Plone themeing landscape in order to spur more Diazo theme development (or old style theming, if that is your thing). Quickly, using pip to search PyPI by package namespace I see:
 
-**88 plonetheme themes**::
+88 plonetheme themes::
 
     plonetheme.Bangalore      - An installable theme for Plone 3
     plonetheme.GreenEarthTheme3_0 - An installable theme for Plone 3
@@ -134,11 +135,11 @@ All of this brings me to the actual point of this post which is to take a quick 
     plonetheme.woodexperience - An installable Diazo theme for Plone 4.1
     plonetheme.xtheme         - An installable theme for Plone
 
-**1 diazotheme theme**::
+1 diazotheme theme::
 
     diazotheme.bootstrap      - Plone theme based on Twitter's Bootstrap CSS
 
-**5 Products themes**::
+5 Products themes::
 
     Products.Andreas09Theme   - An example theme for Plone 3.0
     Products.HSCustom         - The HSCustom theme was originally created for my band's website.
@@ -146,7 +147,7 @@ All of this brings me to the actual point of this post which is to take a quick 
     Products.NuPlone          - A new theme for Plone 3.0
     Products.PloneTableless   - Plone Tableless provides a completly tableless version of the Plone Default theme
 
-**60 other themes (WTF?!)**::
+60 other themes (WTF?!)::
 
     alterootheme.busycity     - Free City Plone 3.0 Theme
     alterootheme.intensesimplicity - A Plone 3.0 Theme based on a free template by David Uliana
@@ -209,7 +210,7 @@ All of this brings me to the actual point of this post which is to take a quick 
     xdvtheme.sparkling        - An xdv Theme for Plone
     zettwerk.ui               - Adding jquery.ui's themeroller to plone 4 for easy theme customization.
 
-That last one is a surprise, and that's a total of **154 themes for Plone on PyPI** (assuming I didn't miss any which I probably did). If we had the man power, all of these themes could be made to work with the latest Plone and work with either old style or new style technology. So if we can't do that (which is a hugely ambitious goal) let's at least try to come close!
+That last one is a surprise, and that's a total of 154 themes for Plone on PyPI (assuming I didn't miss any which I probably did). If we had the man power, all of these themes could be made to work with the latest Plone and work with either old style or new style technology. So if we can't do that (which is a hugely ambitious goal) let's at least try to come close!
 
 Do you like this post, and/or appreciate my open source work? Help build the commons by gittiping me: https://www.gittip.com/aclark4life/.
 

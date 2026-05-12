@@ -5,9 +5,10 @@
 :source: blog-2017
 :status: published
 
-**Pip installs Plock. Plock installs Plone.**
+Pip installs Plock. Plock installs Plone.
+-----------------------------------------
 
-The Plock installer for Plone has been **updated to support Plone 5**. To try Plone 5, just cut & paste::
+The Plock installer for Plone has been updated to support Plone 5. To try Plone 5, just cut & paste::
 
     pip install plock
     mkdir plone

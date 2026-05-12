@@ -46,15 +46,15 @@ Misc
 
 Next, I perform various additional steps manually *either* because I've not figured out how to automate them *or* the automation prospects are not attractive:
 
-- Security & Privacy → Allow apps downloaded from **Anywhere**
-- Drag **/opt** to **Finder Favorites** for easy access to Homebrew Casks, then:
+- Security & Privacy → Allow apps downloaded from Anywhere
+- Drag /opt to Finder Favorites for easy access to Homebrew Casks, then:
 
-  - Users & Groups → Login items → **Jumpcut**
+  - Users & Groups → Login items → Jumpcut
 
-- Keyboard → Shortcuts → Mission Control → **Move left a space → ⌘ ←**
-- Keyboard → Shortcuts → Mission Control → **Move right a space → ⌘ →**
-- Dock → Terminal → **Keep in Dock**
-- Dock → Firefox → **Keep in Dock**
+- Keyboard → Shortcuts → Mission Control → Move left a space → ⌘ ←
+- Keyboard → Shortcuts → Mission Control → Move right a space → ⌘ →
+- Dock → Terminal → Keep in Dock
+- Dock → Firefox → Keep in Dock
 
 Still, I'd trade all these steps for full automation if I could find an approach that's not more tedious than cut & pasting the above.
 

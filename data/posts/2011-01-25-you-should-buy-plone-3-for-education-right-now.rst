@@ -5,7 +5,8 @@
 :source: blog-2017
 :status: published
 
-**With what must be the fifth or sixth round of apologies to both Erik Rose and PACKT publishing for the delay (very sorry guys), here is my review! Better late than never.**
+With what must be the fifth or sixth round of apologies to both Erik Rose and PACKT publishing for the delay (very sorry guys), here is my review! Better late than never.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 I get bored with the same ol' blog entry titles:
 
@@ -13,7 +14,7 @@ I get bored with the same ol' blog entry titles:
 
 Not that there is anything wrong with these titles, they serve their purpose. It's not you… it's me. Can we still be friends?
 
-Anyway, I will cut to the chase with this one: if you care about Plone and you have not done so already, you should buy **`Plone 3 for Education`_**\ right now.
+Anyway, I will cut to the chase with this one: if you care about Plone and you have not done so already, you should buy `Plone 3 for Education`_\ right now.
 
 Why?
 
