@@ -84,6 +84,11 @@ class Command(BaseCommand):
             default=None,
             help="Override status for all imported entries (published/draft).",
         )
+        parser.add_argument(
+            "--sync",
+            action="store_true",
+            help="Delete DB entries that have no matching .rst file (by pub_date+slug).",
+        )
 
     def handle(self, *args, **options):
         from blog.models import Entry
@@ -169,4 +174,35 @@ class Command(BaseCommand):
                     f"Import complete: {created} created, {updated} updated, "
                     f"{skipped} skipped, {errors} errors."
                 )
+            )
+
+        if options.get("sync") and not options["dry_run"]:
+            # Build set of (pub_date, slug) keys present in RST files
+            rst_keys = set()
+            for path in rst_files:
+                date_str, slug_from_file = parse_filename(path.name)
+                if not date_str:
+                    continue
+                try:
+                    meta, _ = parse_rst_file(path)
+                except Exception:
+                    continue
+                slug = meta.get("slug", slug_from_file)
+                date_str = meta.get("date", date_str)
+                try:
+                    pub_date = datetime.date.fromisoformat(date_str)
+                except ValueError:
+                    continue
+                rst_keys.add((pub_date, slug))
+
+            deleted = 0
+            for entry in Entry.objects.all():
+                if (entry.pub_date, entry.slug) not in rst_keys:
+                    self.stdout.write(
+                        f"  Deleting orphan: {entry.pub_date} {entry.slug!r}"
+                    )
+                    entry.delete()
+                    deleted += 1
+            self.stdout.write(
+                self.style.SUCCESS(f"Sync complete: {deleted} orphan(s) deleted.")
             )
