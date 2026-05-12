@@ -3,7 +3,7 @@
 :slug: ten-years-blogged
 :tags: Python
 :source: blog-2017
-:status: published
+:status: draft
 
 In March 2007, I published my first blog post.
 ----------------------------------------------
