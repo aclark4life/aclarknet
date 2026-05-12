@@ -2,4 +2,4 @@
 :date: 2011-05-10
 :slug: top-10-reasons-plone-33-site-admin-book-is-still-for-you
 :source: pelican-blog
-:status: published
+:status: draft

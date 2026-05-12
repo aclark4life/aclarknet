@@ -2,7 +2,7 @@
 :date: 2011-06-16
 :slug: youre-so-vain-so-why-not-use-vanity-pelican
 :source: pelican-blog
-:status: published
+:status: draft
 
 You're so vain, so why not use Vanity?
  Tweet

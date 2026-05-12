@@ -2,4 +2,4 @@
 :date: 2010-03-15
 :slug: using-buildout-to-deploy-a-plone-21-site-to-the-cloud
 :source: pelican-blog
-:status: published
+:status: draft
