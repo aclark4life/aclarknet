@@ -184,7 +184,6 @@ Now you should see your add-ons available in Plone:
 Upgrading Plone
 ~~~~~~~~~~~~~~~
 
-
 Step #1
 +++++++
 

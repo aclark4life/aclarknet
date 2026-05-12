@@ -28,13 +28,7 @@ Pillow 2.0.0 was an enormous effort, made possible by a generous grant from the 
 
 - https://github.com/python-imaging/Pillow/blob/master/README.rst#support
 
-And I have personally steered my gittip profile entirely towards Pillow production.
-
 .. raw:: html
-
-    <script data-gittip-username="aclark4life"
-    src="https://www.gittip.com/assets/widgets/0002.js">
-    </script>
 
 Go get it now
 -------------

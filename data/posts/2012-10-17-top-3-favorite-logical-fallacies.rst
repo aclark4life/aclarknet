@@ -40,11 +40,8 @@ Final Thoughts
 
 It feels great to get those out. If anyone reading this has formal training in debate, I would love to hear your comments. Either below, or: aclark@aclark.net.
 
-*Like this blog entry? Consider supporting me on* `gittip`_.
-
 .. _`debate`: http://en.wikipedia.org/wiki/Debate
 .. _`fallacy`: http://en.wikipedia.org/wiki/Fallacy
-.. _`gittip`: http://gittip.com/aclark4life
 
 .. [1] I say "favorite" because these fallacies have crystallized in my brain over the years to the point where I feel I can categorize and discuss them.
 .. [2] I say "helping" because it's probably hurting the intended recipient (whether it's true or not). Sorry, it's not up to you to decide whether or not someone else will regret their comments.

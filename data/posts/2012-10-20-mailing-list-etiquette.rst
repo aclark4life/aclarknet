@@ -72,9 +72,6 @@ That way whenever someone posts to the list or emails me personally about job po
 
 Pointing them at netiquette may help too, but that would require them to read through the archives to discover things like "Wow, that recruiter got the smackdown when they identified themselves as a recruiter." So, a policy of netiquette plus an additional set of rules can go along way toward making communication better for everyone involved.
 
-*Like this article? Consider a* `gittip`_. *You may also* `follow me on Twitter`_.
-
-.. _`gittip`: http://gittip.com/aclark4life
 .. _`follow me on Twitter`: http://twitter.com/aclark4life
 .. _`policy for job postings`: http://dcpython.org/#job-postings
 .. _`The Core Rules of Netiquette`: http://www.albion.com/netiquette/corerules.html

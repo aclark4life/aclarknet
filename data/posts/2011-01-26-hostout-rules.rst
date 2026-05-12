@@ -47,7 +47,6 @@ Anyway, back to the awesomeness.
 Fabric
 --------------------------------------------------------------------------------
 
-
 Fabric is awesome! I won't bore you with the details of why Fabric is
 awesome. But I will mention one key feature:
 
@@ -78,7 +77,6 @@ took me this long to try it out.
 
 Hostout
 --------------------------------------------------------------------------------
-
 
 As compelling as it is to write "pure Python" in fab files, and it is,
 sometimes you just want to be done. And Hostout helps you get there. I

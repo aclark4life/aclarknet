@@ -53,7 +53,6 @@ Pre-Process
     # of plone.org's content.
     #    conf/devdrop.cfg
 
-
 #. Bootstrap and run Buildout::
 
     $ virtualenv-2.7 .

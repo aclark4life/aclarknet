@@ -112,7 +112,6 @@ Dotfiles
     git clone git@bitbucket.org:aclark4life/dotfiles.git Dotfiles
     dotfiles -s
 
-
 Todo
 ----
 

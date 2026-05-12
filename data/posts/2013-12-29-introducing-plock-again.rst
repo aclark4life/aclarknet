@@ -48,7 +48,6 @@ I've recently removed several extraneous features from Plock to sharpen the focu
       -w, --write-config    write buildout.cfg
       -r, --raw             unformatted output, use with -l
 
-
 Install Plone
 +++++++++++++
 

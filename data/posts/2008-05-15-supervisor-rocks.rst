@@ -75,7 +75,6 @@ Then use ``supervisorctl`` to start and stop your Zope and ZEO at the same time:
     bin/supervisorctl start all
     bin/supervisorctl stop all
 
-
 Stop Supervisor with:
 
 ::

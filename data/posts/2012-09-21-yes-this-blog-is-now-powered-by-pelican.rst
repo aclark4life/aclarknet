@@ -80,13 +80,9 @@ All the details are here if you'd like to take a look:
 
 - https://github.com/ACLARKNET/aclarknet.github.com/commits/master
 
-Comments from more knowledgable Pelican users welcome. Like this article? Tip me on Gittip!
-
 .. raw:: html
 
-    <iframe style="border: 0; margin: 0; padding: 0;"
-        src="https://www.gittip.com/aclark4life/widget.html"
-        width="48pt" height="20pt"></iframe>
+    <iframe style="border: 0; margin: 0; padding: 0;"        width="48pt" height="20pt"></iframe>
 
 .. [1] This is actually my first "test" post with Pelican so I will get a chance to see how the feeds perform. But they looked good in testing.
 

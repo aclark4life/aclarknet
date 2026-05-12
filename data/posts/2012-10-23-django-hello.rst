@@ -27,7 +27,6 @@ settings.py::
 
     from hello import urls
 
-
     DEBUG = True
     ROOT_URLCONF = urls
 
@@ -40,12 +39,10 @@ urls.py::
         (r'', 'hello.views.index'),
     )
 
-
 views.py::
 
     from django.http import HttpResponse
     import datetime
-
 
     # Based on https://docs.djangoproject.com/en/1.4/topics/http/views/
     def index(request):
@@ -75,8 +72,6 @@ To install::
 
 .. raw:: html
 
-    <iframe style="border: 0; margin: 0; padding: 0;"
-            src="https://www.gittip.com/aclark4life/widget.html"
-            width="48pt" height="20pt"></iframe>
+    <iframe style="border: 0; margin: 0; padding: 0;"            width="48pt" height="20pt"></iframe>
 
 <3

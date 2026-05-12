@@ -52,7 +52,6 @@ Distributions
 
 In addition to the `source distribution <https://pypi.org/project/Pillow/2.2.1/#files>`_, there are also Python Eggs and Windows Installers available (for 32 and 64 bit) and for the first time ever: Python Wheels! (New built-package format supported by pip.)
 
-
 Support
 -------
 

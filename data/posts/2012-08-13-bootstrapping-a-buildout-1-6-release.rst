@@ -25,7 +25,6 @@ And there are a `handful of other changes`_ in `trunk on svn.zope.org`_, of whic
 
 So with that, I am planning to do a zc.buildout 1.6 release within 24 hours or so of now. Please add a comment or weigh in on `distutils-sig`_ if you object. We have run the tests on Windows, and discovered only pre-existing failures. We are also preparing to do "Buildout 2 prophylactic releases" (i.e. releases that make 1.x continue to work when 2.x is released) in the 1.6.x series.
 
-
 .. _working on Buildout 2: https://github.com/buildout/buildout/commits/master
 .. _improved Buildout performance: http://rpatterson.net/blog/buildout-performance-improvements
 .. _provided a patch: http://zope3.pov.lt/trac/changeset/127507

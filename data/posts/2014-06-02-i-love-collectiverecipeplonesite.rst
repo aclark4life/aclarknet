@@ -7,13 +7,7 @@
 I love collective.recipe.plonesite!
  Tweet
 
-
-
-
-
                 Mon 02 June 2014
-
-
 
                 By  aclark
 
@@ -512,11 +506,7 @@ app.Plone.hasObject(                                            app.Plone.zope_q
 
  ( You should probably   hire me   or   follow me on Twitter   or both .)
 
-
-
-
        Comments !
-
 
         var disqus_identifier = "2014/06/02/i-love-collectiverecipeplonesite/";
         var disqus_url = "https://aclark.net/blog/2014/06/02/i-love-collectiverecipeplonesite/";

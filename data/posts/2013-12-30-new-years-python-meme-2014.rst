@@ -39,8 +39,6 @@ I didn't program much in 2013 but when I did, I tried to write tests too. Check 
 Which open source project did you contribute to the most this year? What did you do?
 -------------------------------------------------------------------------------------------------
 
-`Pillow <https://github.com/python-imaging/Pillow>`_. Fork author and project lead. Aside from a working PIL, the most exciting thing about Pillow for me is my `Gittip funding <https://www.gittip.com/aclark4life/>`_ and working with the `Pillow Team <https://github.com/python-imaging?tab=members>`_ which includes most notably Eric Soroos and Christopher Gohlke.
-
 Which Python blogs, websites, or mailing lists did you read the most this year?
 -------------------------------------------------------------------------------------------------
 

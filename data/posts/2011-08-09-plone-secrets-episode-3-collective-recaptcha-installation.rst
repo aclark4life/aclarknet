@@ -225,7 +225,6 @@ That's it!
 Notes
 --------------------------------------------------------------------------------
 
-
 ¹ I'm pushing "reasonable" limits here for argument's sake. For those who know Plone already, a lot of what might seem impossible to newcomers is "reasonable" for them. No flames please. Unless you absolutely must.  ;-)
 
 ² I hear people call it that, though I don't know the details. I assume it "monkey patches" which template to use at render-time.

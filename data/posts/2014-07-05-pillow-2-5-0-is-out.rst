@@ -136,7 +136,6 @@ Since Pillow 2.0 the Pillow Team has adopted a quarterly release cycle; as such,
 - Fix variable name used for transparency manipulations
   [nijel]
 
-
 Acknowledgements
 ----------------
 

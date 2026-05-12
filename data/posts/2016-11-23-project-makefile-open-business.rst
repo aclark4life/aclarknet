@@ -51,7 +51,6 @@ Now it contains this::
 
         curl -O https://raw.githubusercontent.com/aclark4life/project-makefile/master/Makefile
 
-
     Usage
     -----
 

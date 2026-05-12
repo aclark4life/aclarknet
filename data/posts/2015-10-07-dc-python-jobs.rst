@@ -20,7 +20,6 @@ Ideally we'd have a professional job board, but that would require a lot of effo
 
 This has worked surprisingly well however there *are* some issues. In this post, I will explain how to use DC Python's "Job Board" according to guidelines established by our community.
 
-
 The `DC Python Job Board <http://www.meetup.com/DCPython/messages/boards/>`_ features:
 
 - `A board for employers seeking Python programmers and vice versa <http://www.meetup.com/DCPython/messages/boards/forum/617991>`_.
@@ -43,7 +42,6 @@ Please follow these rules to post to the DC Python Job Board.
   - Include [JOB] in the subject line, some brief introductory text, a link to your post & nothing else. E.g.
 
 ::
-
 
     Wed Oct  7 16:45:52 EDT 2015
     From: aclark@aclark.net

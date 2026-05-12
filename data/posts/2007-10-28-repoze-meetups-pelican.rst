@@ -7,13 +7,7 @@
 Repoze "meetups"
  Tweet
 
-
-
-
-
                 Sun 28 October 2007
-
-
 
                 By  aclark
 
@@ -24,10 +18,7 @@ he'll be joined by  the other dude  and possibly Paul Everitt himself.  Please h
  Click here to check out The Washington DC Python Meetup Group!
  Lastly, we welcome anyone in the Washington, DC, USA area to join us.
 
-
-
        Comments !
-
 
         var disqus_identifier = "2007/10/28/repoze-quotmeetupsquot/";
         var disqus_url = "http://blog.aclark.net/2007/10/28/repoze-quotmeetupsquot/";

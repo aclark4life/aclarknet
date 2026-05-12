@@ -30,7 +30,7 @@ And actually, I found `ARTICLE_URL` and `ARTICLE_SAVE_AS` to be the settings I w
     SITEURL = 'https://aclark.net/blog/'
     SOCIAL = (
         ('GitHub', 'http://github.com/aclark4life'),
-        ('Gittip', 'https://www.gittip.com/aclark4life'),
+com/aclark4life'),
         ('PythonPackages', 'https://pythonpackages.com/user/aclark4life'),
         ('Twitter', 'http://twitter.com/aclark4life'),
         ('atom feed (Mozilla)', 'https://aclark.net/blog//Mozilla.atom.xml'),

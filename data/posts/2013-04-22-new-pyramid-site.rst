@@ -61,7 +61,6 @@ Until I added a contact form, the site was entirely unremarkable. There are view
     from .views import default
     import deform_bootstrap
 
-
     def main(global_config, **settings):
         """
         Oppan wsgi style! Configure and return WSGI application.
@@ -144,7 +143,6 @@ I still ended up sending mail "the old way" via GMail. But now I send two mails:
 
     from .forms import ContactFormSchema
 
-
     def contact(request):
         """
         Create and render deform form containing colander schema. Provide
@@ -205,7 +203,6 @@ I still ended up sending mail "the old way" via GMail. But now I send two mails:
             'form': form.render(),
             'request': request,
         }
-
 
     def default(request):
         """

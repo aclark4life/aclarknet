@@ -9,7 +9,6 @@
     >>> import other
     The Zen of Zope, by Alex Clark
 
-
     Beautiful is an attribute of ugly.
     Explicit is implemented by implicit.
     Simple is provided by complex.

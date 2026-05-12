@@ -7,13 +7,7 @@
 Pillow 2.2.1
  Tweet
 
-
-
-
-
                 Mon 02 September 2013
-
-
 
                 By  aclark
 
@@ -56,16 +50,9 @@ Pillow 2.2.1
  The Pillow Team  has really settled in to the groove of making Pillow releases every three months, and I am very proud to be a part it! Special thanks to Eric Soroos and Christopher Gohlke for their invaluable help in getting 2.2.1 completed.
  If you use Pillow professionally, please consider  supporting its development .
 
-
-
  [1] If there are no issues with 2.2.1 within 24 hours, Python Eggs and the first ever Pillow Wheel will be uploaded.
 
-
-
-
-
        Comments !
-
 
         var disqus_identifier = "2013/09/02/pillow-221/";
         (function() {

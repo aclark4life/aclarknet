@@ -372,7 +372,6 @@ Use Sunburst theme for content editing
 
 If you are Diazo-savvy, you may notice I completely ignore styling the content editing interface. Instead I rely on the unthemed [2]_ site for content editing.
 
-
 .. image:: /images/edit-ui.png
     :alt: alternate text
 
@@ -420,12 +419,8 @@ Prior to this, the entire site was stored in a private repo on bitbucket. And fi
 
 - If you load the site, you'll notice the images (configured as static resources) are a bit laggy. I'm a big fan of of CloudFlare and current user via pythonpackages.com, so I'll probably be configuring aclark.net to use it soon too. Once that is done, the site should be lightning fast instead of just really fast.
 
-Like this article and/or my open source work in general? Please `consider supporting me on gittip`_.
-
 .. [1] Some ideas for improving upgrades: 1.) optionally rename portal_skins/custom during the upgrade process. 2.) Include suggestions in the form copy to stage the upgrade away from the current production site. 3.) Report on availability of add-ons compatible with latest version of Plone.
 
 .. [2] Unthemed meaning un-diazo-themed. The content UI is themed with the Sunburst theme "the old way".
 
 .. [3] https://dev.plone.org/ticket/13178
-
-.. _`consider supporting me on gittip`: http://gittip.com/aclark4life

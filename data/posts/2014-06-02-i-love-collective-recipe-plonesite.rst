@@ -21,7 +21,6 @@ Then I edit ``buildout.cfg`` to look like this::
     [buildout]
     extends = https://raw.githubusercontent.com/plock/pins/master/plone-4-3
 
-
 Then I run Buildout::
 
     $ bin/buildout

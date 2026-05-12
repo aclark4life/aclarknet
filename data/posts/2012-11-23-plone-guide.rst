@@ -48,10 +48,6 @@ I think a lot about what other people think about Plone, so I decided this book 
 How much?
 ---------
 
-This book will be free. But if you'd like to support its development, please `gittip me`_.
-
-
 There's not much to it yet, but feel free to head over and add some comments: https://plone-guide.readthedocs.org/en/latest/.
 
-
-.. _`gittip me`: http://gittip.com/aclark4life
+..com/aclark4life

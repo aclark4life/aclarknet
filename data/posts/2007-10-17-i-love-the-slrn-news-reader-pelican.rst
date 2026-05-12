@@ -7,13 +7,7 @@
 I love the 'slrn' news reader.
        Tweet
 
-
-
-
-
                 Wed 17 October 2007
-
-
 
                 By  aclark
 
@@ -41,7 +35,6 @@ to ~/.slrnrc , and
  there are some additional configuration parameters I use that were
 hard to track down. Those are:
 
-
 set confirm_actions 14visible_headers "From:,Subject:,Newsgroups:,Followup-To:,Reply-To:,Date:"set query_read_group_cutoff 0set uncollapse_threads 1set netiquette_warnings 0
 
  Most of these are self-explanatory, but if you are looking at "set
@@ -59,11 +52,7 @@ will explain why ;-)*
  System Message: ERROR/3 ( /Users/aclark/Developer/blog/content/i-love-the-slrn-news-reader.rst , line 6);  backlink
 Unknown target name: "|image0|".
 
-
-
-
        Comments !
-
 
         var disqus_identifier = "/2007/10/17/i-love-the-039slrn039-news-reader/";
         (function() {

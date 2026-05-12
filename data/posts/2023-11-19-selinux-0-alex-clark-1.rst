@@ -85,7 +85,6 @@ Unfortunately, the joyfulness will end when you try to connect, even though the 
 
 ::
 
-
     ╰─(blog) ⠠⠵ sudo nmap 192.168.1.2
     Password:
     Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-19 14:20 EST

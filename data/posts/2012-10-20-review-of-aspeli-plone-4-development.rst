@@ -128,9 +128,6 @@ Conclusion
 
 I hope you have enjoyed this review; and I hope you'll consider purchasing a copy of Aspeli's book for your next Plone project.
 
-*Like this article? Consider a* `gittip`_. *You may also want to follow me on* `twitter`_.
-
-.. _`Gittip`: http://gittip.com/aclark4life
 .. _`Twitter`: http://twitter.com/aclark4life
 
 .. [0] Disclaimer: I was given a copy of both versions in exchange for this review.

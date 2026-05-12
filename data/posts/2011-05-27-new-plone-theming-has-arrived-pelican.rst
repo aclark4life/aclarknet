@@ -7,13 +7,7 @@
 "New" Plone theming has arrived
  Tweet
 
-
-
-
-
                 Fri 27 May 2011
-
-
 
                 By  aclark
 
@@ -58,7 +52,6 @@ package .
 downloads section  with "fun" easy-to-install (read: no buildout) Plone
 themes! [2]
 
-
  Disclaimer
  These are my experiences with relatively new Plone technologies. If I've
 made a mistake or if your experiences are different, please let me know
@@ -73,11 +66,7 @@ distribute as a Python package because it is so easy to do so (or
 hopefully will be very soon). But how the community chooses to
 capitalize on this new-found ability remains to be seen.
 
-
-
-
        Comments !
-
 
         var disqus_identifier = "2011/05/27/quotnewquot-plone-theming-has-arrived/";
         var disqus_url = "https://aclark.net/blog/2011/05/27/new-plone-theming-has-arrived/";

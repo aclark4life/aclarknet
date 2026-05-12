@@ -32,7 +32,6 @@ Project/App
 
 Last year around this time I didn't fully understand what I was doing with ``startproject`` and ``startapp`` (as evidenced by `this insanely nested package structure <https://github.com/ACLARKNET/aclarknet-django/tree/master/aclarknet/aclarknet/aclarknet>`_). Now I understand a little bit more, so I settled on a project called ``aclarknet`` and an app called ``website``.
 
-
 REST-powered
 ------------
 

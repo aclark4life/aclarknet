@@ -212,13 +212,9 @@ All of this brings me to the actual point of this post which is to take a quick 
 
 That last one is a surprise, and that's a total of 154 themes for Plone on PyPI (assuming I didn't miss any which I probably did). If we had the man power, all of these themes could be made to work with the latest Plone and work with either old style or new style technology. So if we can't do that (which is a hugely ambitious goal) let's at least try to come close!
 
-Do you like this post, and/or appreciate my open source work? Help build the commons by gittiping me: https://www.gittip.com/aclark4life/.
-
 .. raw:: html
 
-    <iframe style="border: 0; margin: 0; padding: 0;"
-        src="https://www.gittip.com/aclark4life/widget.html"
-        width="48pt" height="20pt"></iframe>
+    <iframe style="border: 0; margin: 0; padding: 0;"        width="48pt" height="20pt"></iframe>
 
 .. [1] It's getting harder to define what "old style" theming is. For this blog entry, old style theming is some form of customizing the main_template in Plone (I'm ignoring the fact that macros called by main_template are customizable, for now). If we could (consistently, in a core supported way) get newer ways to do that (e.g. browser views instead of CMF skin layers) then "old style" would become "newer style". It wouldn't become "new style" because Diazo technology is "newer" than browser view technology. Get it? I think my point is this: in addition to seeing Diazo help with isolating the complexity of the stack, I'd like to see the underlying technology modernized. Give me something that looks and feels like "old style" theming (i.e. putting templates in CMF skin layers) but that is built on modern technology (i.e. the ZCA).
 

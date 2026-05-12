@@ -58,7 +58,6 @@ Now I need a Python interpreter [3]_. For development I use the `Collective Pyth
 
     $ brew install python
 
-
 Git
 ---
 
