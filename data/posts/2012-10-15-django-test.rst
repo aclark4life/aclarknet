@@ -3,7 +3,7 @@
 :slug: django-test
 :tags: Django
 :source: blog-2017
-:status: published
+:status: draft
 
 **This is a test post to create a Django tag feed.**
 
