@@ -3,7 +3,7 @@
 :slug: plone-guide
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 **For anyone new to my blog, welcome.**
 
