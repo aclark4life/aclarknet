@@ -12,8 +12,8 @@ What’s the coolest Python application, framework or library you discovered thi
 
 This year we have a tie between two must-have packaging-related utilities:
 
-- `check-manifest <https://pypi.python.org/pypi/check-manifest>`_
-- `pyroma <https://pypi.python.org/pypi/pyroma>`_
+- `check-manifest <https://pypi.org/project/check-manifest>`_
+- `pyroma <https://pypi.org/project/pyroma>`_
 
 Both of these utilities help you make better Python packages, and I regularly use them in my packages via a Makefile like this::
 

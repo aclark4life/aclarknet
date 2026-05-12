@@ -225,10 +225,10 @@ Normally, I like to factor out the reusable bits first, but this buildout is pre
 You can check out the rest of the buildout `here`_ (themed with XDV). And if you enjoy this post, please feel free to pick up a copy of `Plone 3.3 Site Administration`_ from PACKT Publishing, due out any day now (I am expecting to review pre-finals this week some time).
 
 .. _HTML-XSLT website: http://code.google.com/p/html-xslt/
-.. _XDV middleware: http://pypi.python.org/pypi/dv.xdvserver
-.. _Zope 2.13: http://pypi.python.org/pypi/Zope2/2.13.0a1
+.. _XDV middleware: https://pypi.org/project/dv.xdvserver
+.. _Zope 2.13: https://pypi.org/project/Zope2/2.13.0a1
 .. _this thread: http://www.coactivate.org/projects/deliverance/lists/deliverance-discussion/archive/2010/06/1276982495896/forum_view
-.. _wrote a book: http://blog.aclark.net/2010/03/30/blood-sweat-tears-and-a-new-plone-book/
+.. _wrote a book: https://aclark.net/blog/2010/03/30/blood-sweat-tears-and-a-new-plone-book/
 .. _`http://code.google.com/p/html-xslt/`: http://code.google.com/p/html-xslt/
 .. _here: http://svn.aclark.net/trac/public/browser/buildout/aclark/apache-xdv/trunk
 .. _Plone 3.3 Site Administration: http://aclark.net

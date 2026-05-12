@@ -58,9 +58,9 @@ I hope this convinces at least some folks to consider uploading their packages t
 .. _distribution server: http://dist.plone.org/
 .. _simply telling people not to use easy\_install: http://blog.jazkarta.com/2010/05/15/installing-plone-without-buildout/#comment-162
 .. _test your packages: http://groups.google.com/group/pylons-devel/msg/abfe9e7a43f62594
-.. _local PyPI: http://pypi.python.org/pypi/Products.PloneSoftwareCenter
+.. _local PyPI: https://pypi.org/project/Products.PloneSoftwareCenter
 .. _even simpler methods: http://groups.google.com/group/pylons-devel/msg/696c69843eecd026
-.. _mkrelease,: http://pypi.python.org/pypi/jarn.mkrelease
+.. _mkrelease,: https://pypi.org/project/jarn.mkrelease
 .. _actively trying to improve the situation: http://wiki.python.org/moin/Distutils/SprintParis
 .. _here: http://sourceforge.net/tracker/?group_id=66150
-.. _helping me help Plone: http://blog.aclark.net/2011/01/21/help-alex-clark-help-plone/
+.. _helping me help Plone: https://aclark.net/blog/2011/01/21/help-alex-clark-help-plone/

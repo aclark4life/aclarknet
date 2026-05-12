@@ -14,7 +14,7 @@
 Due to the new Diazo theming features now available, I am very excited about the recent release of `Plone 4.1rc2`_ and `plone.app.theming 1.0b2`_. So much so, I created a couple themes (in just a few hours) to demonstrate my `rapture [1]`_:
 
 -  (released)
-   `http://pypi.python.org/pypi/plonetheme.unilluminated/0.1.0`_
+   `https://pypi.org/project/plonetheme.unilluminated/0.1.0`_
 -  (unreleased) `https://github.com/aclark4life/plonetheme.coolblue`_
 
 Granted, these aren't entirely "finished" (e.g. lots of CSS improvements are needed) but it is truly impressive how much you can do with so little effort (thanks to the hard work of the Diazo team, Plone team, and of course the theme designers themselves).
@@ -44,13 +44,13 @@ These are my experiences with relatively new Plone technologies. If I've made a 
 [2] Before you get upset over any suggested spamming, I only mean to suggest that the ability to distribute a theme as a zip file lowers the bar to Plone adoption tremendously. Personally (and tentatively, since I'm not even sure if everything is meant to work the way I currently expect it to), I plan to include a zipped archive of any theme I distribute as a Python package because it is so easy to do so (or hopefully will be very soon). But how the community chooses to capitalize on this new-found ability remains to be seen.
 
 .. _zip file: https://github.com/aclark4life/plonetheme.unilluminated/blob/master/unilluminated.zip?raw=true
-.. _Plone 4.1rc2: http://pypi.python.org/pypi/Plone/4.1rc2
-.. _plone.app.theming 1.0b2: http://pypi.python.org/pypi/plone.app.theming/1.0b2
+.. _Plone 4.1rc2: https://pypi.org/project/Plone/4.1rc2
+.. _plone.app.theming 1.0b2: https://pypi.org/project/plone.app.theming/1.0b2
 .. _rapture [1]: http://en.wikipedia.org/wiki/Rapture
-.. _`http://pypi.python.org/pypi/plonetheme.unilluminated/0.1.0`: http://pypi.python.org/pypi/plonetheme.unilluminated/0.1.0
+.. _`https://pypi.org/project/plonetheme.unilluminated/0.1.0`: https://pypi.org/project/plonetheme.unilluminated/0.1.0
 .. _`https://github.com/aclark4life/plonetheme.coolblue`: https://github.com/aclark4life/plonetheme.coolblue
-.. _zip file packaging features: http://pypi.python.org/pypi/plone.app.theming/1.0b2#zip-file-format
-.. _plone.resource: http://pypi.python.org/pypi/plone.resource/1.0b2
+.. _zip file packaging features: https://pypi.org/project/plone.app.theming/1.0b2#zip-file-format
+.. _plone.resource: https://pypi.org/project/plone.resource/1.0b2
 .. _my zip file: https://github.com/aclark4life/plonetheme.unilluminated/blob/master/plonetheme/unilluminated/theme/unilluminated.zip
 .. _quite elegantly: https://github.com/aclark4life/plonetheme.unilluminated/blob/master/plonetheme/unilluminated/configure.zcml
 .. _Python package: https://github.com/aclark4life/plonetheme.unilluminated/

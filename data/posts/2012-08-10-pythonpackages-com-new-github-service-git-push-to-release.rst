@@ -23,7 +23,7 @@ Instructions
 
 -  Sign up for the pythonpackages.com beta: `http://pythonpackages.com/signup`_.
 -  Follow the `Introduction`_ instructions.
--  On the Python Package Index, authorize pythonpackages.com to act on your behalf, as explained here: http://blog.aclark.net/pythonpackagescom-using-pypi039s-oauth1-support-to-register-and-upload-packages.html (**pythonpackages.com -> Dashboard -> Manage accounts -> PyPI -> Authorize**).
+-  On the Python Package Index, authorize pythonpackages.com to act on your behalf, as explained here: https://aclark.net/blog/2012/08/07/pythonpackagescom-using-pypis-oauth1-support-to-register-and-upload-packages/ (**pythonpackages.com -> Dashboard -> Manage accounts -> PyPI -> Authorize**).
 -  On GitHub, configure the PythonPackages service to be Active on any repository that contains a Python package you want to release (**Repo -> Admin -> Service Hooks -> PythonPackages -> [\*] Active**).
 
 Now you can git push to release! If you have any trouble, please `open a ticket`_. These instructions will live permanently here: http://docs.pythonpackages.com/en/latest/github-service.html.
@@ -31,6 +31,6 @@ Now you can git push to release! If you have any trouble, please `open a ticket`
 .. _GitHub Service: https://github.com/github/github-services
 .. _`http://pythonpackages.com/signup`: http://pythonpackages.com/signup
 .. _Introduction: http://docs.pythonpackages.com/en/latest/introduction.html
-.. _`http://blog.aclark.net/2012/08/07/pythonpackages-com-using-pypis-oauth1-support-to-register-and-upload-packages`: http://blog.aclark.net/2012/08/07/pythonpackages-com-using-pypis-oauth1-support-to-register-and-upload-packages
+.. _`https://aclark.net/blog/2012/08/07/pythonpackages-com-using-pypis-oauth1-support-to-register-and-upload-packages/`: https://aclark.net/blog/2012/08/07/pythonpackages-com-using-pypis-oauth1-support-to-register-and-upload-packages/
 .. _open a ticket: https://bitbucket.org/pythonpackages/pythonpackages.com/issues/new
 .. _`http://docs.pythonpackages.com/en/latest/github-service.html`: http://docs.pythonpackages.com/en/latest/github-service.html

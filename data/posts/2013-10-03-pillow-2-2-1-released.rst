@@ -9,7 +9,7 @@
 
 .. Note:: An earlier version of this entry was published yesterday with the wrong date. Apologies for any annoyance or confusion.
 
-The Pillow 2.2.1 source distribution is `now available on PyPI <https://pypi.python.org/pypi/Pillow/2.2.1>`_, featuring over 30 documented bug fixes and enhancements since 2.1.0 was released 3 months ago.
+The Pillow 2.2.1 source distribution is `now available on PyPI <https://pypi.org/project/Pillow/2.2.1>`_, featuring over 30 documented bug fixes and enhancements since 2.1.0 was released 3 months ago.
 
 Changelog
 ---------
@@ -49,7 +49,7 @@ Changelog
 Distributions
 -------------
 
-In addition to the `source distribution <https://pypi.python.org/pypi?name=Pillow&version=2.2.1&:action=files>`_, there are also Python Eggs and Windows Installers available (for 32 and 64 bit) and for the first time ever: Python Wheels! (New built-package format supported by pip.)
+In addition to the `source distribution <https://pypi.org/project/Pillow/2.2.1/#files>`_, there are also Python Eggs and Windows Installers available (for 32 and 64 bit) and for the first time ever: Python Wheels! (New built-package format supported by pip.)
 
 
 Support

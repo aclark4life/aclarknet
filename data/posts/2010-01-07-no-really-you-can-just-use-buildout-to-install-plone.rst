@@ -107,6 +107,6 @@ Sweet, blissful, silent running Plone.
 
 Happy Plone 4'ing all!
 
-.. _Getting Excited about Plone as Eggs: http://blog.aclark.net/2008/12/15/getting-excited-about-plone-as-eggs/
+.. _Getting Excited about Plone as Eggs: https://aclark.net/blog/2008/12/15/getting-excited-about-plone-as-eggs/
 .. _Unified Installer: http://launchpad.net/plone/3.3/3.3.3/+download/Plone-3.3.3-UnifiedInstaller.tgz
-.. _Distribute: http://pypi.python.org/pypi/distribute
+.. _Distribute: https://pypi.org/project/distribute

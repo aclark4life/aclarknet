@@ -187,7 +187,7 @@ In order to use it, first we add the package to our buildout, e.g.:
 
 See the rest of the file here:
 
--  `https://raw.github.com/ACLARKNET/aclark\_net\_website/master/buildout.cfg`_
+-  `https://raw.githubusercontent.com/ACLARKNET/aclark\_net\_website/master/buildout.cfg`_
 
 Now run buildout and restart Plone.
 
@@ -230,27 +230,27 @@ Notes
 
 .. _aclark.net: http://aclark.net
 .. _contact form: http://aclark.net/contact-info
-.. _z3c.jbot: http://pypi.python.org/pypi/z3c.jbot
+.. _z3c.jbot: https://pypi.org/project/z3c.jbot
 .. _contact-info.cpt: http://svn.plone.org/svn/plone/Products.CMFPlone/trunk/Products/CMFPlone/skins/plone_templates/contact-info.cpt
-.. _CMFFormController: http://pypi.python.org/pypi/Products.CMFFormController
+.. _CMFFormController: https://pypi.org/project/Products.CMFFormController
 .. _Wyn Williams: https://twitter.com/#!/asigottech
-.. _YEARS: http://pypi.python.org/pypi/Zope2
-.. _plone.app.theming: http://pypi.python.org/pypi/plone.app.theming
+.. _YEARS: https://pypi.org/project/Zope2
+.. _plone.app.theming: https://pypi.org/project/plone.app.theming
 .. _doesn't even require a Python package: https://github.com/aclark4life/aclark_net_website
 .. _gist of it: https://gist.github.com/1123090
-.. _ZopeSkel: http://pypi.python.org/pypi/ZopeSkel
+.. _ZopeSkel: https://pypi.org/project/ZopeSkel
 .. _plonetheme.aclarknet: https://github.com/ACLARKNET/aclark_net_website/tree/master/src/plonetheme.aclarknet
 .. _`https://github.com/ACLARKNET/aclark\_net\_website/tree/master/src/plonetheme.aclarknet/plonetheme/aclarknet/templates`: https://github.com/ACLARKNET/aclark_net_website/tree/master/src/plonetheme.aclarknet/plonetheme/aclarknet/templates
 .. _`https://github.com/ACLARKNET/aclark\_net\_website/blob/master/src/plonetheme.aclarknet/plonetheme/aclarknet/templates/Products.CMFPlone.skins.plone\_templates.contact-info.cpt`: https://github.com/ACLARKNET/aclark_net_website/blob/master/src/plonetheme.aclarknet/plonetheme/aclarknet/templates/Products.CMFPlone.skins.plone_templates.contact-info.cpt
 .. _here are the contents: http://dpaste.com/589529/
 .. _CMF: http://old.zope.org/Products/CMF/
-.. _RestrictedPython: http://pypi.python.org/pypi/RestrictedPython
+.. _RestrictedPython: https://pypi.org/project/RestrictedPython
 .. _`https://github.com/ACLARKNET/aclark\_net\_website/blob/master/src/plonetheme.aclarknet/plonetheme/aclarknet/templates/Products.CMFPlone.skins.plone\_form\_scripts.validate\_site\_feedback.vpy`: https://github.com/ACLARKNET/aclark_net_website/blob/master/src/plonetheme.aclarknet/plonetheme/aclarknet/templates/Products.CMFPlone.skins.plone_form_scripts.validate_site_feedback.vpy
 .. _ZCML: http://plone.org/documentation/manual/theme-reference/buildingblocks/components/wiring
-.. _`Genericsetup customizations:`: http://blog.aclark.net/2011/06/20/plone-secrets-episode-1-%e2%80%94-site-actions-contact-link/
+.. _`Genericsetup customizations:`: https://aclark.net/blog/2011/06/20/plone-secrets-episode-1-site-actions-contact-link/
 .. _`https://github.com/ACLARKNET/aclark\_net\_website/blob/master/src/plonetheme.aclarknet/plonetheme/aclarknet/configure.zcml`: https://github.com/ACLARKNET/aclark_net_website/blob/master/src/plonetheme.aclarknet/plonetheme/aclarknet/configure.zcml
-.. _collective.recaptcha: http://pypi.python.org/pypi/collective.recaptcha
+.. _collective.recaptcha: https://pypi.org/project/collective.recaptcha
 .. _Google's Recaptcha service: http://www.google.com/recaptcha
-.. _`https://raw.github.com/ACLARKNET/aclark\_net\_website/master/buildout.cfg`: https://raw.github.com/ACLARKNET/aclark_net_website/master/buildout.cfg
+.. _`https://raw.githubusercontent.com/ACLARKNET/aclark\_net\_website/master/buildout.cfg`: https://raw.githubusercontent.com/ACLARKNET/aclark_net_website/master/buildout.cfg
 .. _`include the captcha image:`: http://dpaste.com/589529/
 .. _validate the submission: https://github.com/ACLARKNET/aclark_net_website/blob/master/src/plonetheme.aclarknet/plonetheme/aclarknet/templates/Products.CMFPlone.skins.plone_form_scripts.validate_site_feedback.vpy

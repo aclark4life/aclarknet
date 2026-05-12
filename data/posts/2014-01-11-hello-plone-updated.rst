@@ -5,7 +5,7 @@
 :source: blog-2017
 :status: published
 
-Over two years ago I wrote a blog entry called `"Hello, Plone!" <http://blog.aclark.net/2011/08/20/hello-plone/>`_.
+Over two years ago I wrote a blog entry called `"Hello, Plone!" <https://aclark.net/blog/2011/08/20/hello-plone/>`_.
 
 I've just updated it in order to:
 
@@ -40,4 +40,4 @@ For folks new to Plone and Python development, it's often helpful to use a code 
 
 Why? Generally speaking, I now prefer to educate folks about Python packaging more so than code generation.
 
-Check out the new old post here: http://blog.aclark.net/2011/08/20/hello-plone/.
+Check out the new old post here: https://aclark.net/blog/2011/08/20/hello-plone/.

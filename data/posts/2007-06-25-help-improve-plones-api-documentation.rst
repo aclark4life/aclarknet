@@ -23,4 +23,4 @@ I plan to use either `Epydoc`_ or `Pudge`_, suggestions welcome.
 
 .. _Plone Doccomm Sprint: http://www.coactivate.org/projects/doc-and-e-commerce-sprint/project-home
 .. _Epydoc: http://epydoc.sourceforge.net/
-.. _Pudge: https://pypi.python.org/pypi/pudge
+.. _Pudge: https://pypi.org/project/pudge

@@ -13,7 +13,7 @@
 
 |
 
-Unimaginatively, it was titled `First Post <https://blog.aclark.net/2007/03/16/first-post/>`_.
+Unimaginatively, it was titled `First Post <https://aclark.net/blog/2007/10/17/first-post/>`_.
 
 Since then, a lot has changed. To celebrate this milestone, allow me to recap some significant personal and professional events, then and now.
 
@@ -25,7 +25,7 @@ Since then, a lot has changed. To celebrate this milestone, allow me to recap so
 +-----------------------------------------------------------------------------+------------------------------------------------------------------------------+
 | Left NIH (2005) to be self-employed.                                        | Still self-employed, but back at `NIH <https://www.nimh.nih.gov>`_ too.      |
 +-----------------------------------------------------------------------------+------------------------------------------------------------------------------+
-| Using irssi for IRC.                                                        | In `The Lounge <https://blog.aclark.net/2016/12/15/shout-out-to-shout-irc>`_.|
+| Using irssi for IRC.                                                        | In `The Lounge <https://aclark.net/blog/2016/12/15/shout-out-to-shout-irc/>`_.|
 |                                                                             | In between: WeeChat.                                                         |
 +-----------------------------------------------------------------------------+------------------------------------------------------------------------------+
 | Engaged but not married.                                                    | About to celebrate 10 years of marriage in November 2017.                    |
@@ -42,7 +42,7 @@ Since then, a lot has changed. To celebrate this milestone, allow me to recap so
 |                                                                             | <https://github.com/aclark4life/vanity/issues/22>`_.                         |
 +-----------------------------------------------------------------------------+------------------------------------------------------------------------------+
 | **Five years before** my **busiest blogging year ever**,                    | Averaging 15 posts `per year                                                 |
-| 35 posts in 2012.                                                           | <https://blog.aclark.net/blog/archive/>`_.                                   |
+| 35 posts in 2012.                                                           | <https://aclark.net/blog/>`_.                                   |
 +-----------------------------------------------------------------------------+------------------------------------------------------------------------------+
 | Six years before plock made noise in 2013.                                  | Pip installs plock. `Plock <http://plock.github.io/>`_ installs Plone.       |
 +-----------------------------------------------------------------------------+------------------------------------------------------------------------------+

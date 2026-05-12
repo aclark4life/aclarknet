@@ -27,21 +27,21 @@ And actually, I found `ARTICLE_URL` and `ARTICLE_SAVE_AS` to be the settings I w
     GITHUB_URL = 'https://github.com/ACLARKNET/aclarknet.github.com'
     GOOGLE_ANALYTICS = 'UA-34988446-1'
     SITENAME = u'Alex Clark'
-    SITEURL = 'http://blog.aclark.net'
+    SITEURL = 'https://aclark.net/blog/'
     SOCIAL = (
         ('GitHub', 'http://github.com/aclark4life'),
         ('Gittip', 'https://www.gittip.com/aclark4life'),
         ('PythonPackages', 'https://pythonpackages.com/user/aclark4life'),
         ('Twitter', 'http://twitter.com/aclark4life'),
-        ('atom feed (Mozilla)', 'http://blog.aclark.net/Mozilla.atom.xml'),
-        ('atom feed (Plone)', 'http://blog.aclark.net/Plone.atom.xml'),
-        ('atom feed (Python)', 'http://blog.aclark.net/Python.atom.xml'),
+        ('atom feed (Mozilla)', 'https://aclark.net/blog//Mozilla.atom.xml'),
+        ('atom feed (Plone)', 'https://aclark.net/blog//Plone.atom.xml'),
+        ('atom feed (Python)', 'https://aclark.net/blog//Python.atom.xml'),
     )
     TAG_FEED_ATOM = 'feeds/%s.atom.xml'
     TAG_FEED_RSS = None
     TWITTER_USERNAME = 'aclark4life'
 
-.. _`Dirkjan Ochtman pointed out`: http://blog.aclark.net/2012/09/21/yes-this-blog-is-now-powered-by-pelican/#comment-658707601
+.. _`Dirkjan Ochtman pointed out`: https://aclark.net/blog//2012/09/21/yes-this-blog-is-now-powered-by-pelican/#comment-658707601
 .. _`Pelican`: http://blog.getpelican.com
 .. _`publishconf.py`: https://github.com/ACLARKNET/aclarknet.github.com/blob/master/publishconf.py
 .. [1] http://pelican.notmyidea.org/en/3.0/settings.html#url-settings

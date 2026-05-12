@@ -141,7 +141,7 @@ Acknowledgements
 
 With every release, there are notable contributions I must acknowledge:
 
-- Thanks to Stephen Johnson for contributing http://pillow.readthedocs.org, we continue to rely on & extend this resource.
+- Thanks to Stephen Johnson for contributing https://pillow.readthedocs.io, we continue to rely on & extend this resource.
 
 - Thanks to Christopher Gohlke for producing Windows Egg, Exe, and Wheel distributions.
 

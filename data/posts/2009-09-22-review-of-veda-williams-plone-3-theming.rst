@@ -62,7 +62,7 @@ Here we get to watch Veda design, build, and deploy a theme. This is the focal p
 Chapter 12
 ----------
 
-This is a great little chapter about various add-ons that themers may find interesting. My favorite add-on mentioned in this chapter is Products.FSDump. Very, very useful tool for getting various bits out of your ZODB and on to your file system (e.g. the contents of the portal\_skins/custom folder). I'm really hoping that a 1.0 release will see the light of day one of these days. I notice Veda didn't mention it, but there is now an egg-based version of this popular add-on: `http://pypi.python.org/pypi/Products.FSDump/FSDump-0.9.4`_ Just add Products.FSDump to your instance section's eggs= parameter and off you go.
+This is a great little chapter about various add-ons that themers may find interesting. My favorite add-on mentioned in this chapter is Products.FSDump. Very, very useful tool for getting various bits out of your ZODB and on to your file system (e.g. the contents of the portal\_skins/custom folder). I'm really hoping that a 1.0 release will see the light of day one of these days. I notice Veda didn't mention it, but there is now an egg-based version of this popular add-on: `https://pypi.org/project/Products.FSDump/FSDump-0.9.4`_ Just add Products.FSDump to your instance section's eggs= parameter and off you go.
 
 Chapter 13
 ----------
@@ -72,12 +72,12 @@ Here, a gratuitous chapter on multimedia wherein various useful multi-media add-
 Chapter 14
 ----------
 
-An 'Amen!' for this chapter that covers deploying and contributing themes, especially on the contributing part. As I mentioned earlier, I would have liked to have seen the `PyPI features of plone.org mentioned`_ in this book, and in this chapter in particular. While it is arguably still hard to create Plone themes, it is encouragingly not hard to share them! Also, an incredibly useful tool for releasing themes (and any package) to both plone.org/products and pypi.python.org at the same time (i.e in a single command) is `http://pypi.python.org/pypi/jarn.mkrelease/2.0.2.`_
+An 'Amen!' for this chapter that covers deploying and contributing themes, especially on the contributing part. As I mentioned earlier, I would have liked to have seen the `PyPI features of plone.org mentioned`_ in this book, and in this chapter in particular. While it is arguably still hard to create Plone themes, it is encouragingly not hard to share them! Also, an incredibly useful tool for releasing themes (and any package) to both plone.org/products and pypi.python.org at the same time (i.e in a single command) is `https://pypi.org/project/jarn.mkrelease/2.0.2.`_
 
 Chapter 15
 ----------
 
-This chapter (by Alexander Limi) introduces people to "new style" theming with xdv. While I enjoy this subject tremendously, I think it's going to take a while before it is fully digested by integrators.  Hopefully, Alex's chapter will help. I'm also told that Laurence Rowe has been making some improvements to collective.xdv recently, and I see there is a new version here: `http://pypi.python.org/pypi/collective.xdv`_ (I think this version handles 404s).
+This chapter (by Alexander Limi) introduces people to "new style" theming with xdv. While I enjoy this subject tremendously, I think it's going to take a while before it is fully digested by integrators.  Hopefully, Alex's chapter will help. I'm also told that Laurence Rowe has been making some improvements to collective.xdv recently, and I see there is a new version here: `https://pypi.org/project/collective.xdv`_ (I think this version handles 404s).
 
 Bottom line: this is great stuff but potentially confusing in that you have an add-on, collective.xdv, that applies an XSLT transform "on the fly" (in memory) to your Plone site, but the recommended deployment strategy is to use NGINX or Apache with Laurence's patches applied. I've spent some time doing this (I expect to re-launch this site with xdv soon, and of course plone.org uses it) and it is non-trivial to say the least. What we have now is a situation where folks are starting to use collective.xdv and thinking that \*it\* is the new way to theme, when in fact it is only part of the story.
 
@@ -94,13 +94,13 @@ In conclusion, great job Veda! Thank you very much for your efforts. I look forw
 .. _else: http://www.littled.net/new/2009/09/27/review-of-plone-3-theming-by-veda-williams/
 .. _does: http://reinout.vanrees.org/weblog/2009/10/25/plone-3-theming.html
 .. _YSlow: http://developer.yahoo.com/yslow/
-.. _zc.buildout: http://pypi.python.org/pypi/zc.buildout/1.4.1
+.. _zc.buildout: https://pypi.org/project/zc.buildout/1.4.1
 .. _PyPI features of plone.org mentioned: is-anyone-using-plone.orgs-new-pypi-functionality
-.. _ZopeSkel: http://pypi.python.org/pypi/ZopeSkel/2.13
+.. _ZopeSkel: https://pypi.org/project/ZopeSkel/2.13
 .. _`http://www.coactivate.org/projects/zopeskel-bbq-sprint/blog/2009/10/13/zopeskel-bbq-sprint-days-two-three-and-four/`: http://www.coactivate.org/projects/zopeskel-bbq-sprint/blog/2009/10/13/zopeskel-bbq-sprint-days-two-three-and-four/
 .. _`http://docs.zope.org/zope2/zope2book/ZPT.html`: http://docs.zope.org/zope2/zope2book/ZPT.html
-.. _`http://pypi.python.org/pypi/Products.FSDump/FSDump-0.9.4`: http://pypi.python.org/pypi/Products.FSDump/FSDump-0.9.4
+.. _`https://pypi.org/project/Products.FSDump/FSDump-0.9.4`: https://pypi.org/project/Products.FSDump/FSDump-0.9.4
 .. _`http://plone.org/products/collective-fancyzoomview`: http://plone.org/products/collective-fancyzoomview
-.. _`http://pypi.python.org/pypi/jarn.mkrelease/2.0.2.`: http://pypi.python.org/pypi/jarn.mkrelease/2.0.2
-.. _`http://pypi.python.org/pypi/collective.xdv`: http://pypi.python.org/pypi/collective.xdv
+.. _`https://pypi.org/project/jarn.mkrelease/2.0.2.`: https://pypi.org/project/jarn.mkrelease/2.0.2
+.. _`https://pypi.org/project/collective.xdv`: https://pypi.org/project/collective.xdv
 .. _`http://www.packtpub.com/plone-3-theming-create-flexible-powerful-professional-templates`: http://www.packtpub.com/plone-3-theming-create-flexible-powerful-professional-templates/mid/220709943ki3?utm_source=aclark.net&utm_medium=affiliate&utm_content=blog&utm_campaign=mdb_001376

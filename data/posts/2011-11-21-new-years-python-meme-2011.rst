@@ -41,7 +41,7 @@ I hope someone (me) writes a "secret" feature for `pythonpackages.com`_ and laun
 
 .. _`http://blog.ziade.org/2011/12/20/new-year039s-python-meme-2011/`: http://blog.ziade.org/2011/12/20/new-year039s-python-meme-2011/
 .. _pythonpackages.com: http://pythonpackages.com
-.. _answering in 2009: http://blog.aclark.net/2009/12/31/new-years-python-meme/
+.. _answering in 2009: https://aclark.net/blog/2009/12/31/new-years-python-meme/
 .. _Pyramid: http://www.pylonsproject.org/
 .. _vanity: http://pythonpackages.com/info/vanity
 .. _`http://pythonpackages.com/info/parse2plone`: http://pythonpackages.com/info/parse2plone

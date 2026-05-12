@@ -81,7 +81,7 @@ Credits
 
 Thanks Martijn Pieters for creating collective.transmogrifier; thanks Martin Aspeli and Dylan Jay for their blueprints; and thanks Dylan Jay for bringing transmogrifier to the masses via mr.migrator.
 
-.. _collective.transmogrifier: http://pypi.python.org/pypi/collective.transmogrifier
+.. _collective.transmogrifier: https://pypi.org/project/collective.transmogrifier
 .. _mr.migrator: https://github.com/collective/mr.migrator
 .. _`https://github.com/aclark4life/mr\_migrator\_demo`: https://github.com/aclark4life/mr_migrator_demo
 .. _README: https://github.com/aclark4life/mr_migrator_demo/raw/master/README.txt

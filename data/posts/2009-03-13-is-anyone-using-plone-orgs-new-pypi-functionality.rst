@@ -15,7 +15,7 @@ Lots of exciting things are happening with Plone.org!
 
 This blog entry is both a "call to arms" to everyone involved in helping, and a message to everyone waiting patiently that we haven't forgotten about you! :-D
 
-In particular, I'd like to hear from any early adopters of the new `http://plone.org/products`_\ section. You can read about how to use the new PyPI functionality here, if you haven't already: `http://pypi.python.org/pypi/collective.dist/0.2.2`_. In my little "test" product, I found it quite useful: `http://plone.org/products/Products.todo/.`_
+In particular, I'd like to hear from any early adopters of the new `http://plone.org/products`_\ section. You can read about how to use the new PyPI functionality here, if you haven't already: `https://pypi.org/project/collective.dist/0.2.2`_. In my little "test" product, I found it quite useful: `http://plone.org/products/Products.todo/.`_
 
 So if you are using it, I'd definitely like to hear your experiences. Or if not, please give it a try!
 
@@ -25,5 +25,5 @@ So if you are using it, I'd definitely like to hear your experiences. Or if not,
 .. _company: http://plone.org/team/WebsiteTeam
 .. _kinks: https://dev.plone.org/plone.org/ticket/1080
 .. _`http://plone.org/products`: http://plone.org/products
-.. _`http://pypi.python.org/pypi/collective.dist/0.2.2`: http://pypi.python.org/pypi/collective.dist/0.2.2
+.. _`https://pypi.org/project/collective.dist/0.2.2`: https://pypi.org/project/collective.dist/0.2.2
 .. _`http://plone.org/products/Products.todo/.`: http://plone.org/products/Products.todo/

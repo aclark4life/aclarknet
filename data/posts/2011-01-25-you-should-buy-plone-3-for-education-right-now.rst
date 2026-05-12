@@ -102,18 +102,18 @@ Alex Clark (January 2011)
 .. _Plone 3 for Education: https://www.packtpub.com/plone-3-for-education/book
 .. _Plone Foundation.: http://plone.org/foundation
 .. _Penn State: http://weblion.psu.edu/
-.. _Plone4artists calendar: http://pypi.python.org/pypi/p4a.plonecalendar
+.. _Plone4artists calendar: https://pypi.org/project/p4a.plonecalendar
 .. _`https://dev.plone.org/plone/ticket/9109`: https://dev.plone.org/plone/ticket/9109
 .. _`http://dev.plone.org/plone/ticket/10902`: http://dev.plone.org/plone/ticket/10902
-.. _Faculty/Staff Directory: http://pypi.python.org/pypi/Products.FacultyStaffDirectory
-.. _AT Schema Extender: http://pypi.python.org/pypi/archetypes.schemaextender
-.. _Scrawl: http://pypi.python.org/pypi/Products.Scrawl
-.. _collective.flowplayer: http://pypi.python.org/pypi/collective.flowplayer
+.. _Faculty/Staff Directory: https://pypi.org/project/Products.FacultyStaffDirectory
+.. _AT Schema Extender: https://pypi.org/project/archetypes.schemaextender
+.. _Scrawl: https://pypi.org/project/Products.Scrawl
+.. _collective.flowplayer: https://pypi.org/project/collective.flowplayer
 .. _Flowplayer: http://flowplayer.org/
-.. _PloneFormGen: http://pypi.python.org/pypi/Products.PloneFormGen
-.. _z3c.jbot: http://pypi.python.org/pypi/z3c.jbot
+.. _PloneFormGen: https://pypi.org/project/Products.PloneFormGen
+.. _z3c.jbot: https://pypi.org/project/z3c.jbot
 .. _don't even need a package for!: https://github.com/aclark4life/aclark_net_website/blob/master/buildout.cfg#L24
-.. _plone.app.caching: http://pypi.python.org/pypi/plone.app.caching
-.. _collective.recipe.backup: http://pypi.python.org/pypi/collective.recipe.backup
-.. _z3c.recipe.usercrontab: http://pypi.python.org/pypi/z3c.recipe.usercrontab
-.. _helping me help Plone in February 2011.: http://blog.aclark.net/2011/01/21/help-alex-clark-help-plone/
+.. _plone.app.caching: https://pypi.org/project/plone.app.caching
+.. _collective.recipe.backup: https://pypi.org/project/collective.recipe.backup
+.. _z3c.recipe.usercrontab: https://pypi.org/project/z3c.recipe.usercrontab
+.. _helping me help Plone in February 2011.: https://aclark.net/blog/2011/01/21/help-alex-clark-help-plone/

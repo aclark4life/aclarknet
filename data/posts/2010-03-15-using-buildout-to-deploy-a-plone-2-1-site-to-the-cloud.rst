@@ -51,7 +51,7 @@ Since Plone 2.1 community support has expired for this release, and since Plone 
 
 .. _`http://www.zope.org/help`: http://www.zope.org/help
 .. _deployed one: http://harryroseman.com
-.. _Buildout: http://pypi.python.org/pypi/zc.buildout
+.. _Buildout: https://pypi.org/project/zc.buildout
 .. _Cloud: http://rackspacecloud.com
 .. _SourceForge: http://sourceforge.net/projects/plone/
 .. _hard to find: http://downloads.sourceforge.net/project/plone/OldFiles/Plone-2.1.4.tar.gz

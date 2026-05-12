@@ -70,7 +70,7 @@ Add-on installations are cumulative, so::
 will result in a ``buildout.cfg`` file that looks like this::
 
     [buildout]
-    extends = https://raw.github.com/plock/pins/master/plone-4-3
+    extends = https://raw.githubusercontent.com/plock/pins/master/plone-4-3
 
     [plone]
     eggs =
@@ -125,6 +125,6 @@ which will result in::
 
     $ cat buildout.cfg
     [buildout]
-    extends = https://raw.github.com/plock/pins/master/plone-4-3
+    extends = https://raw.githubusercontent.com/plock/pins/master/plone-4-3
 
 .. [1] Extending configuration files over the internet is not a universally accepted technique due to the inherent security risk, but it's how I've worked with Plone for years. I once added a "secure" feature to Plock but removed it recently due to the maintenance burden. Plock is now primarily insecure but true to its original goal of simplicity. Maybe security can be re-added later in some semi-elegant way (e.g. cert verification by the client?).

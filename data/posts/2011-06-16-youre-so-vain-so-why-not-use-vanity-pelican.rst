@@ -85,7 +85,7 @@ insensitive.
 
 
         var disqus_identifier = "2011/06/16/you039re-so-vain-so-why-not-use-vanity/";
-        var disqus_url = "http://blog.aclark.net/2011/06/16/you039re-so-vain-so-why-not-use-vanity/";
+        var disqus_url = "https://aclark.net/blog/2011/06/16/youre-so-vain-so-why-not-use-vanity/";
         (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
         dsq.src = 'http://aclark-blog.disqus.com/embed.js';

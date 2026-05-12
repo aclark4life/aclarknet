@@ -16,10 +16,10 @@ Installing Plone with `Plock <https://github.com/aclark4life/plock>`_ looks like
 Configuration
 -------------
 
-Plone uses `Buildout <https://pypi.python.org/pypi/zc.buildout>`_ to manage its installation and configuration. Plock creates a ``buildout.cfg`` file for you that looks like this::
+Plone uses `Buildout <https://pypi.org/project/zc.buildout>`_ to manage its installation and configuration. Plock creates a ``buildout.cfg`` file for you that looks like this::
 
     [buildout]
-    extends = https://raw.github.com/pythonpackages/buildout-plone/master/latest
+    extends = https://raw.githubusercontent.com/pythonpackages/buildout-plone/master/latest
 
     [plone]
     eggs +=
@@ -29,12 +29,12 @@ Plone uses `Buildout <https://pypi.python.org/pypi/zc.buildout>`_ to manage its 
 Add-ons
 ~~~~~~~
 
-See https://pypi.python.org/pypi?:action=browse&show=all&c=563 for a complete list of add-ons compatible with Plone 4.3.
+See https://pypi.org/search/?c=563 for a complete list of add-ons compatible with Plone 4.3.
 
 To install add-ons, add the desired Python package name(s) to the ``eggs +=`` parameter e.g.::
 
     [buildout]
-    extends = https://raw.github.com/pythonpackages/buildout-plone/master/latest
+    extends = https://raw.githubusercontent.com/pythonpackages/buildout-plone/master/latest
 
     [plone]
     eggs +=

@@ -31,7 +31,7 @@ Then create an empty buildout::
 Then add a Plone buildout::
 
     [buildout]
-    extends = https://raw.github.com/plock/pins/plone-4-3
+    extends = https://raw.githubusercontent.com/plock/pins/plone-4-3
 
 Now run Buildout::
 
@@ -58,7 +58,7 @@ Next we add our Python package to the buildout. The ``develop`` line makes the b
 
     [buildout]
     develop = ./my.app
-    extends = https://raw.github.com/plock/pins/plone-4-3
+    extends = https://raw.githubusercontent.com/plock/pins/plone-4-3
 
     [plone]
     eggs += my.app

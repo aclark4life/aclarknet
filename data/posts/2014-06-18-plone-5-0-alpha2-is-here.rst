@@ -9,9 +9,9 @@
 
 It is also too short. I may do a followup blog entry to review more features, depending on how well this one is received. I also want to talk more about Plock.
 
-When Plone 4 alpha 1 was released, I was so excited I immediately `ran it in production <http://blog.aclark.net/2012/10/03/plone-4-3-alpha-1-in-production/>`_. Now-a-days I use `Pyramid for aclark.net <http://blog.aclark.net/2013/04/22/new-pyramid-site/>`_ but I still get excited about new Plone releases.
+When Plone 4 alpha 1 was released, I was so excited I immediately `ran it in production <https://aclark.net/blog/2012/10/03/plone-4-3-alpha-1-in-production/>`_. Now-a-days I use `Pyramid for aclark.net <https://aclark.net/blog/2013/04/22/new-pyramid-site/>`_ but I still get excited about new Plone releases.
 
-As such, I finally got around to testing the latest Plone 5 alpha with `my deployment stack <http://blog.aclark.net/2014/03/20/introducing-plock-pins/>`_ and the results were very impressive, so I thought I'd share.
+As such, I finally got around to testing the latest Plone 5 alpha with `my deployment stack <https://aclark.net/blog/2014/03/20/introducing-plock-pins/>`_ and the results were very impressive, so I thought I'd share.
 
 Hosted configuration
 --------------------
@@ -29,7 +29,7 @@ Because of the "muscle memory" I've built up over the years doing this, I always
 Edit ``buildout.cfg`` to contain::
 
     [buildout]
-    extends = https://raw.github.com/plock/pins/master/plone-5-0
+    extends = https://raw.githubusercontent.com/plock/pins/master/plone-5-0
 
 Run Buildout and start Plone::
 
@@ -124,4 +124,4 @@ Many thanks to everyone who has worked hard to make Plone 5 a reality.
 
 *You should probably* `hire me <http://aclark.net>`_ *or* `follow me on Twitter <http://twitter.com/aclark4life>`_ *or both*.
 
-.. [1] And please try `Plock <http://plock.github.io>`_ which automates all of these steps e.g. ``pip install plock; plock .;bin/plone fg`` Once Plone (4) is installed, update the extends parameter in ``buildout.cfg`` to ``https://raw.github.com/plock/pins/master/plone-5-0`` and rerun Buildout.
+.. [1] And please try `Plock <http://plock.github.io>`_ which automates all of these steps e.g. ``pip install plock; plock .;bin/plone fg`` Once Plone (4) is installed, update the extends parameter in ``buildout.cfg`` to ``https://raw.githubusercontent.com/plock/pins/master/plone-5-0`` and rerun Buildout.

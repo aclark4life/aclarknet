@@ -63,18 +63,18 @@ That is to say: buildouts are frequently changing in response to what is going o
 .. _Nittany Lion Inn: http://www.nittanylioninn.psu.edu/
 .. _appropriate installer for their platform: http://plone.org/products/plone/releases/4.0.5
 .. _PACKT: http://www.packtpub.com
-.. _zc.buildout: http://pypi.python.org/pypi/zc.buildout
+.. _zc.buildout: https://pypi.org/project/zc.buildout
 .. _version numbers: http://dist.plone.org/release/4.1b2/versions.cfg
-.. _this buildout: http://raw.github.com/plock/pins/master/plone-3-3
-.. _this one: http://raw.github.com/plock/pins/master/plone-4-0
+.. _this buildout: https://raw.githubusercontent.com/plock/pins/master/plone-3-3
+.. _this one: https://raw.githubusercontent.com/plock/pins/master/plone-4-0
 .. _Setuptools: http://packages.python.org/setuptools/
-.. _pip: http://pypi.python.org/pypi/pip
+.. _pip: https://pypi.org/project/pip
 .. _Python buildout: https://github.com/collective/buildout.python
 .. _Python on Windows: http://python.org/download/windows/
 .. _sharing the results: http://plone.org/products
-.. _find and install an add-on: http://pypi.python.org/pypi
+.. _find and install an add-on: https://pypi.org/
 .. _`http://plone.org/upgrade`: http://plone.org/upgrade
-.. _somewhat more obscure case: http://raw.github.com/plock/pins/master/plone-2-1
-.. _munin graphs: http://pypi.python.org/pypi/munin.plone
+.. _somewhat more obscure case: https://raw.githubusercontent.com/plock/pins/master/plone-2-1
+.. _munin graphs: https://pypi.org/project/munin.plone
 .. _Plone Symposium East 2011: http://weblion.psu.edu/symposium
 .. _`http://aclark.net/services`: http://aclark.net/services

@@ -14,8 +14,8 @@
 
 I am good at:
 
-- Deploying Plone sites: http://blog.aclark.net/2012/10/03/plone-4-3-alpha-1-in-production/
-- Maintaining and releasing Python packages: http://pypi.python.org/pypi?%3Aaction=search&term=aclark&submit=search
+- Deploying Plone sites: https://aclark.net/blog/2012/10/03/plone-4-3-alpha-1-in-production/
+- Maintaining and releasing Python packages: https://pypi.org/search/?q=aclark
 - Cat herding volunteers: http://lists.plone.org/pipermail/plone-com/Week-of-Mon-20120903/000039.html
 - Writing documentation: http://docs.pythonpackages.com/en/latest/index.html
 - Writing narrative text: http://www.packtpub.com/plone-33-site-administration/book
@@ -23,4 +23,4 @@ I am good at:
 
 Also, I've put together a list of projects I am involved in (or have been involved in): http://resume.aclark.net/projects/, and please feel free to check out my résumé: http://resume.aclark.net/. If you'd like to discuss how I can help you or your team, please get in touch: aclark@aclark.net.
 
-.. _`pythonpackages.com winding down`: http://blog.aclark.net/2012/09/28/pythonpackages-com-one-year-later/
+.. _`pythonpackages.com winding down`: https://aclark.net/blog/2012/09/28/pythonpackages-com-one-year-later/

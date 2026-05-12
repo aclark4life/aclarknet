@@ -18,7 +18,7 @@ E.g.::
 Then I edit ``buildout.cfg`` to look like this::
 
     [buildout]
-    extends = https://raw.github.com/plock/pins/master/plone-4-3
+    extends = https://raw.githubusercontent.com/plock/pins/master/plone-4-3
 
 
 Then I run Buildout::
@@ -32,14 +32,14 @@ And because my ``.buildout/default.cfg`` file looks like this::
     download-cache = /Users/aclark/Developer/download-cache
     extends-cache = /Users/aclark/Developer/extends-cache
 
-, the entire process only takes a few seconds (except for when I `run into trouble with setuptools <http://blog.aclark.net/2014/03/19/virtualenv-support-update/>`_. I should probably start doing ``virtualenv --no-setuptools``. Perhaps this can be made default?)
+, the entire process only takes a few seconds (except for when I `run into trouble with setuptools <https://aclark.net/blog/2014/03/19/virtualenv-support-update/>`_. I should probably start doing ``virtualenv --no-setuptools``. Perhaps this can be made default?)
 
 If I'm in the mood to search the source code, I add the following::
 
     [buildout]
     extends =
-        https://raw.github.com/plock/pins/master/plone-4-3
-        https://raw.github.com/plock/pins/master/dev
+        https://raw.githubusercontent.com/plock/pins/master/plone-4-3
+        https://raw.githubusercontent.com/plock/pins/master/dev
 
 Then I run Buildout, after which I can easily search in ``parts/omelette``.
 
@@ -50,12 +50,12 @@ Anyway, sometimes instead of running Plone through-the-web I want to run a debug
 
     $ bin/plone debug
 
-However at this point there is no Plone site object in the database. One could easily create a Plone site through-the-web, but why bother when `collective.recipe.plonesite <https://pypi.python.org/pypi/collective.recipe.plonesite>`_ exists::
+However at this point there is no Plone site object in the database. One could easily create a Plone site through-the-web, but why bother when `collective.recipe.plonesite <https://pypi.org/project/collective.recipe.plonesite>`_ exists::
 
     [buildout]
     extends =
-        https://raw.github.com/plock/pins/master/plone-4-3
-        https://raw.github.com/plock/pins/master/dev
+        https://raw.githubusercontent.com/plock/pins/master/plone-4-3
+        https://raw.githubusercontent.com/plock/pins/master/dev
     parts += plonesite
 
     [plonesite]

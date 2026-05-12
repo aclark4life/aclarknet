@@ -44,7 +44,7 @@ After all this thinking, I've reached the following conclusion(s):
 
 1. **The concept of editing templates most web developers are familiar with is still valid in Plone.** But we must work harder to demonstrate where and how these customizations can occur. With great tools comes great power, but not without significant risk of injury (the so-called "power tool" analogy.)
 
-#. **We should strive for the appearance of one templating environment.** The easiest way to do this is to have only one templating environment. Many electronic flames have been burned over the discussion of making Diazo that single environment. In the meantime let's disassemble, polish & reassemble all of our templating environments and put effort in to making the difference between them seemless. (`zope2_bootstrap <http://pypi.python.org/pypi/zope2_bootstrap>`_ anyone?)
+#. **We should strive for the appearance of one templating environment.** The easiest way to do this is to have only one templating environment. Many electronic flames have been burned over the discussion of making Diazo that single environment. In the meantime let's disassemble, polish & reassemble all of our templating environments and put effort in to making the difference between them seemless. (`zope2_bootstrap <https://pypi.org/project/zope2_bootstrap>`_ anyone?)
 
 #. **We should actively discourage complex rules and custom XSLT**. Of course, these knobs are nice to turn when you need them. But I don't want to read through complex rules and custom XSLT anymore than I want to see inline JavaScript or CSS. (AKA "This is why we can't have nice things.")
 

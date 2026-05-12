@@ -38,7 +38,7 @@ I hope, after reading this, you may have some better idea of who I am and why I 
 
 Here's to you, Plone. And to the next 10 years of success.
 
-.. _`sticking to those criteria`: http://blog.aclark.net/2012/10/17/top-3-favorite-logical-fallacies/
+.. _`sticking to those criteria`: https://aclark.net/blog/2012/10/17/top-3-favorite-logical-fallacies/
 .. _`Plone Conference 2008`: http://plone.org/2008
 .. _`National Institutes of Health`: http://afni.nimh.nih.gov
 .. [1] Success means different things to different people.

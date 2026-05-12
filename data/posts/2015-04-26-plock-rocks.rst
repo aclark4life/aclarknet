@@ -166,9 +166,9 @@ Pick a few interesting things and install them::
     Installing cmmi & dist...
     Configuring cache...
     Installing addons...
-    - https://pypi.python.org/pypi/Products.PloneFormGen
-    - https://pypi.python.org/pypi/collective.plonetruegallery
-    - https://pypi.python.org/pypi/eea.facetednavigation
+    - https://pypi.org/project/Products.PloneFormGen
+    - https://pypi.org/project/collective.plonetruegallery
+    - https://pypi.org/project/eea.facetednavigation
     Running buildout...
     Done, now run:
       plone/bin/plone fg
@@ -201,15 +201,15 @@ Edit your ``buildout.cfg`` file. Change the first ``extends`` URL from::
 
     [buildout]
     extends =
-        https://raw.github.com/plock/pins/master/plone-4-3
-    #    https://raw.github.com/plock/pins/master/dev
+        https://raw.githubusercontent.com/plock/pins/master/plone-4-3
+    #    https://raw.githubusercontent.com/plock/pins/master/dev
 
 To::
 
     [buildout]
     extends =
-        https://raw.github.com/plock/pins/master/plone-5-0
-    #    https://raw.github.com/plock/pins/master/dev
+        https://raw.githubusercontent.com/plock/pins/master/plone-5-0
+    #    https://raw.githubusercontent.com/plock/pins/master/dev
 
 Run Buildout and start Plone::
 
@@ -249,7 +249,7 @@ Footnotes
 
 .. [7] Creating and executing a ``buildout.cfg`` file for the end user. Buildout configuration files are written in INI-style text. Ideally the end user sees this file and says "Ah, now I understand how this works."
 
-.. [8] I've also `covered <http://blog.aclark.net/2013/07/19/introducing-plock/>`_ `Plock <http://blog.aclark.net/2013/07/29/whats-new-as-of-plock-0-1-2/>`_ `before <http://blog.aclark.net/2013/12/29/introducing-plock-again/>`_ `here <http://blog.aclark.net/2014/03/20/introducing-plock-pins/>`_.
+.. [8] I've also `covered <https://aclark.net/blog/2013/07/19/introducing-plock/>`_ `Plock <https://aclark.net/blog/2013/07/29/whats-new-as-of-plock-0-1-2/>`_ `before <https://aclark.net/blog/2013/12/29/introducing-plock-again/>`_ `here <https://aclark.net/blog/2014/03/20/introducing-plock-pins/>`_.
 
 .. [9] As someone familiar with Python and a UNIX shell already, because that is the market I like to serve.
 

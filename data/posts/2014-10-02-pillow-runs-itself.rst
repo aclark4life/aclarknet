@@ -36,7 +36,7 @@ Lastly thanks to all the contributors from all over the world who continue to de
 
 .. |Windows Eggs, Exes, Wheels| raw:: html
 
-   <a href="https://pypi.python.org/pypi/Pillow/2.6.0#files" target="_blank">Windows Eggs, Exes, Wheels</a>
+   <a href="https://pypi.org/project/Pillow/2.6.0#files" target="_blank">Windows Eggs, Exes, Wheels</a>
 
 .. |OS X Wheels| raw:: html
 

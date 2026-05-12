@@ -104,7 +104,7 @@ That's it! Just so you don't worry the sprinters worked too hard, you can rest a
 
 .. _Cioppino Sprint: http://coactivate.org/projects/snow-sprint-west-2011/project-home
 .. _beautiful location: http://twitpic.com/3y21yk
-.. _ExternalStorage: http://pypi.python.org/pypi/Products.ExternalStorage
+.. _ExternalStorage: https://pypi.org/project/Products.ExternalStorage
 .. _`http://associacao.python.org.br/doacoes-familia-dorneles`: http://associacao.python.org.br/doacoes-familia-dorneles
 .. _plone.org issue tracker: http://dev.plone.org/plone.org
 .. _PloneOrg add-on: http://dev.plone.org/plone/browser/plone.org/Products.PloneOrg/trunk
@@ -117,7 +117,7 @@ That's it! Just so you don't worry the sprinters worked too hard, you can rest a
 .. _took that ball and ran with it: http://rpatterson.net/blog/cioppino-sprint
 .. _"follow" section: http://plone.org/follow
 .. _possibly non-compliant: http://plone.org/foundation/logo/logoguidelines.pdf/view
-.. _cioppino.twothumbs: http://pypi.python.org/pypi/cioppino.twothumbs/1
+.. _cioppino.twothumbs: https://pypi.org/project/cioppino.twothumbs/1
 .. _dist.plone.org: http://dist.plone.org/archive/
 .. _land on plone.org: http://plone.org/2008
-.. _donating to my travel fund: http://blog.aclark.net/2011/01/21/help-alex-clark-help-plone/
+.. _donating to my travel fund: https://aclark.net/blog/2011/01/21/help-alex-clark-help-plone/

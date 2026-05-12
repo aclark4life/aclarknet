@@ -39,7 +39,7 @@ This is a site where folks can add packages hosted elsewhere (e.g. svn, github, 
 The content is entirely user driven (TTW only) so please head over to `plone.opencomparison.org`_, login with your github ID, and start adding packages! And while you are at it, please report any issues you find here: `https://github.com/opencomparison/opencomparison/issues`_. Lastly, let's all tweet a big thanks to `@pydanny`_\ and `@audreyr`_ for their hard work and generosity!
 
 .. _Plone: http://plone.org
-.. _mkrelease: http://pypi.python.org/pypi/jarn.mkrelease
+.. _mkrelease: https://pypi.org/project/jarn.mkrelease
 .. _readthedocs.org: http://readthedocs.org/
 .. _join the fun in July 2011: https://github.com/collective/collective.developermanual/commit/4dc34d113b1a62064c83f3c431acc7d8deb42f1a
 .. _Github collective: http://github.com/collective

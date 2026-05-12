@@ -40,7 +40,7 @@ Here's `an example <https://github.com/ACLARKNET/plone-demo>`_:
 
     # buildout.cfg
     [buildout]
-    extends = https://raw.github.com/plock/pins/master/plone-4-3
+    extends = https://raw.githubusercontent.com/plock/pins/master/plone-4-3
 
     [user]
     packages = collective.loremipsum
@@ -62,4 +62,4 @@ Here's `an example <https://github.com/ACLARKNET/plone-demo>`_:
 Opinionated
 ~~~~~~~~~~~
 
-The Plock Buildpack is built on Plock, an "opinionated" installer for Plone. It may eventually use `Plock <https://pypi.python.org/pypi/plock/0.4.0>`_ itself, but currently only uses `Plock Pins <https://github.com/plock/pins>`_.
+The Plock Buildpack is built on Plock, an "opinionated" installer for Plone. It may eventually use `Plock <https://pypi.org/project/plock/0.4.0>`_ itself, but currently only uses `Plock Pins <https://github.com/plock/pins>`_.

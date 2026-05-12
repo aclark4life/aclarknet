@@ -12,7 +12,7 @@
     :align: center
     :class: img-thumbnail
 
-I did this in `2009 <http://blog.aclark.net/2009/12/31/new-years-python-meme/>`_ & `2011 <http://blog.aclark.net/2011/12/21/new-years-python-meme-2011/>`_. Let's try it again.
+I did this in `2009 <https://aclark.net/blog/2009/12/31/new-years-python-meme/>`_ & `2011 <https://aclark.net/blog/2011/12/21/new-years-python-meme-2011/>`_. Let's try it again.
 
 **1. What’s the coolest Python application, framework or library you have discovered in 2012?**
 

@@ -60,6 +60,6 @@ I (like so many others before me and along with me in the Plone, Python, and Moz
 
 *You may also want to follow me on Twitter:* http://twitter.com/aclark4life
 
-.. _`gittip is the future`: http://blog.aclark.net/gittip-is-the-future.html
+.. _`gittip is the future`: https://aclark.net/blog/2012/09/21/gittip-is-the-future/
 
 .. [1] http://blogs.hbr.org/ashkenas/2011/02/your-communications-may-not-be.html

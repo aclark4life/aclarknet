@@ -29,7 +29,7 @@ about the recent release of  Plone 4.1rc2  and  plone.app.theming
 demonstrate my  rapture [1] :
 
  (released)
- http://pypi.python.org/pypi/plonetheme.unilluminated/0.1.0
+ https://pypi.org/project/plonetheme.unilluminated/0.1.0
  (unreleased)  https://github.com/aclark4life/plonetheme.coolblue
 
  Granted, these aren't entirely "finished" (e.g. lots of CSS improvements
@@ -80,7 +80,7 @@ capitalize on this new-found ability remains to be seen.
 
 
         var disqus_identifier = "2011/05/27/quotnewquot-plone-theming-has-arrived/";
-        var disqus_url = "http://blog.aclark.net/2011/05/27/quotnewquot-plone-theming-has-arrived/";
+        var disqus_url = "https://aclark.net/blog/2011/05/27/new-plone-theming-has-arrived/";
         (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
         dsq.src = 'http://aclark-blog.disqus.com/embed.js';

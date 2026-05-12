@@ -15,7 +15,7 @@
 
 Last year I wrote about developing our company website with Django:
 
-- http://blog.aclark.net/2015/01/11/new-django-website/index.html
+- https://aclark.net/blog/2015/01/11/new-django-website/
 
 This year, I updated the site and am again very happy with the results. Here's an overview of the interesting aspects.
 

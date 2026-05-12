@@ -30,7 +30,7 @@ $ bin/buildout init
  Then I edit  buildout.cfg  to look like this:
 
 [buildout]
-extends = https://raw.github.com/plock/pins/master/plone-4-3
+extends = https://raw.githubusercontent.com/plock/pins/master/plone-4-3
 
  Then I run Buildout:
 
@@ -48,8 +48,8 @@ extends-cache = /Users/aclark/Developer/extends-cache
 
 [buildout]
 extends =
-    https://raw.github.com/plock/pins/master/plone-4-3
-    https://raw.github.com/plock/pins/master/dev
+    https://raw.githubusercontent.com/plock/pins/master/plone-4-3
+    https://raw.githubusercontent.com/plock/pins/master/dev
 
  Then I run Buildout, after which I can easily search in  parts/omelette .
 
@@ -62,8 +62,8 @@ $ bin/plone debug
 
 [buildout]
 extends =
-    https://raw.github.com/plock/pins/master/plone-4-3
-    https://raw.github.com/plock/pins/master/dev
+    https://raw.githubusercontent.com/plock/pins/master/plone-4-3
+    https://raw.githubusercontent.com/plock/pins/master/dev
 parts += plonesite
 
 [plonesite]
@@ -519,7 +519,7 @@ app.Plone.hasObject(                                            app.Plone.zope_q
 
 
         var disqus_identifier = "2014/06/02/i-love-collectiverecipeplonesite/";
-        var disqus_url = "http://blog.aclark.net/2014/06/02/i-love-collectiverecipeplonesite/";
+        var disqus_url = "https://aclark.net/blog/2014/06/02/i-love-collectiverecipeplonesite/";
         (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
         dsq.src = 'http://aclark-blog.disqus.com/embed.js';

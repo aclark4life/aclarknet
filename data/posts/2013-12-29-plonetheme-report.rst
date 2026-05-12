@@ -22,7 +22,7 @@ Before Plone start
 ::
 
     [buildout]
-    extends = https://raw.github.com/plock/pins/master/plone-4-3
+    extends = https://raw.githubusercontent.com/plock/pins/master/plone-4-3
 
     [plone]
     eggs =
@@ -102,7 +102,7 @@ After Plone start
 ::
 
     [buildout]
-    extends = https://raw.github.com/plock/pins/master/plone-4-3
+    extends = https://raw.githubusercontent.com/plock/pins/master/plone-4-3
 
     [plone]
     eggs =

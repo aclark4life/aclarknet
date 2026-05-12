@@ -8,7 +8,7 @@
 **Is Plone the next great static website generator? Probably not, but it definitely could be.**
 
 I am always looking for ways to improve, streamline and otherwise hack my e-life. And this post is about all of the above.
-https://raw.github.com/ACLARKNET/blog/gh-pages/images/httrack.png
+https://raw.githubusercontent.com/ACLARKNET/blog/gh-pages/images/httrack.png
 Plone in the cloud
 
 Plone is still too "heavy" to easily run "in the cloud" (except via http://ploud.com, HT), but it's getting there. In particular, I find this effort by David Bain very inspiring:

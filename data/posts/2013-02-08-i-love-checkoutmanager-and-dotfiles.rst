@@ -10,8 +10,8 @@
 I am big on setting up my development environment, and enjoying the environment I work in. And I'm very thankful to the folks who make my life easier, including the authors of:
 
 - `Python <http://www.ohloh.net/p/python/contributors/summary>`_: Python Core Developers
-- `dotfiles <http://pypi.python.org/pypi/dotfiles>`_: Jon Bernard
-- `checkoutmanager <http://pypi.python.org/pypi/checkoutmanager>`_: Reinout Van Rees
+- `dotfiles <https://pypi.org/project/dotfiles>`_: Jon Bernard
+- `checkoutmanager <https://pypi.org/project/checkoutmanager>`_: Reinout Van Rees
 
 I also love **repetition**. So picture if you will, a new **Macbook Air or Pro** ready to serve as my development workstation. I like to perform, and study, the steps required to turn a new laptop in to my development workstation. So here we go. In this article, I will walk through the steps required to turn a new machine in to my developer workstation. Do follow along!
 
@@ -50,7 +50,7 @@ Python
 
 Now I need a Python interpreter [3]_. For development I use the `Collective Python Buildout <https://github.com/collective/buildout.python>`_ but I also enjoy using `Homebrew's <http://mxcl.github.com/homebrew/>`_ Python 2.7. I use Homebrew for a variety of other things too (e.g. mobile-shell AKA mosh) so here we go::
 
-    $ ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+    $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/mxcl/homebrew/go)"
 
 … follow instructions …
 

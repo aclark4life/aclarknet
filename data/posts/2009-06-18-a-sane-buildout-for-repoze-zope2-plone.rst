@@ -158,11 +158,11 @@ site on `repoze.zope2`_ very shortly ;-)
 
 .. _Martin Aspeli recently described in great detail: http://www.martinaspeli.net/articles/scrambled-eggs
 .. _Chris McDonough tackled last year: http://plope.com/Members/chrism/distribution_links_considered_harmful
-.. _PyPI: http://pypi.python.org/simple/
+.. _PyPI: https://pypi.org/simple/
 .. _plone.org: http://plone.org/products/simple
-.. _plone.recipe.zope2install: http://pypi.python.org/pypi/plone.recipe.zope2instance/3.2
+.. _plone.recipe.zope2install: https://pypi.org/project/plone.recipe.zope2instance/3.2
 .. _multi-index support in setuptools: http://bugs.python.org/setuptools/issue32
-.. _index generating with basketweaver: http://pypi.python.org/pypi/basketweaver/0.1.2-r6
+.. _index generating with basketweaver: https://pypi.org/project/basketweaver/0.1.2-r6
 .. _`http://dist.plone.org/experimental/release/3.3rc3/`: http://dist.plone.org/experimental/release/3.3rc3/
 .. _Chris McDonough: http://plope.com/
 .. _Martin Aspeli: http://www.martinaspeli.net/

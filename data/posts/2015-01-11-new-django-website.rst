@@ -119,7 +119,7 @@ Overall, this was a great experience. As such, I'm now considering another `pyth
 
 .. [2] Granted, the perceived heaviness is much worse than the *actual* burden of "real" database setup which is admittedly fairly trivial: ``brew install postgres``.
 
-.. [3] The Django admin without Bootstrap reminds me of the ZMI without Bootstrap, which `I also don't like <https://pypi.python.org/pypi/zope2_bootstrap>`_.
+.. [3] The Django admin without Bootstrap reminds me of the ZMI without Bootstrap, which `I also don't like <https://pypi.org/project/zope2_bootstrap>`_.
 
 .. [4] Embarrassingly, I create the tabs with ``s/    /\t/`` because my tabstop is set to 4 spaces. Maybe I should be change my tabstop setting each time?
 

@@ -24,7 +24,7 @@ Time I donate to the Plone project is a labor of love, but there are "real world
 
 - **Plone.org website maintenance**: I spend a lot of time wrangling troops and performing feats of great maintenance on plone.org: `http://svn.plone.org/svn/plone/plone.org/Products.PloneOrg/trunk/`_
 - **Plone.org systems maintenance**: I consider myself a provider of great services for a great community. I've made a very significant effort to try and improve the services that volunteers are able to provide for such a great community. In documentation, and in deed I plan to  keep doing this for at least all of 2011: `http://admin-docs.plone.org`_.
-- **Plone software technical support**: I spend a great deal of time trying to de-mystify Plone technology for the masses. Early adoption is part of this process. I like to see Plone moving forward and I like to see others embracing that move: `http://blog.aclark.net/2011/01/19/new-website-for-2011/`_
+- **Plone software technical support**: I spend a great deal of time trying to de-mystify Plone technology for the masses. Early adoption is part of this process. I like to see Plone moving forward and I like to see others embracing that move: `https://aclark.net/blog/2011/01/19/new-website-for-2011/`_
 - **And much, much more!** I try to do as much for Plone as I can because it does a lot for me. I've `organized a conference`_ and `written a book`_ and I expect to be active in the community for at least the rest of 2011, and most likely4life.
 
 How much should you donate
@@ -49,6 +49,6 @@ Alex Clark (January 2011)
 .. _`http://admin-docs.plone.org/todo.html`: http://admin-docs.plone.org/todo.html
 .. _`http://svn.plone.org/svn/plone/plone.org/Products.PloneOrg/trunk/`: http://svn.plone.org/svn/plone/plone.org/Products.PloneOrg/trunk/
 .. _`http://admin-docs.plone.org`: http://admin-docs.plone.org
-.. _`http://blog.aclark.net/2011/01/19/new-website-for-2011/`: http://blog.aclark.net/2011/01/19/new-website-for-2011/
+.. _`https://aclark.net/blog/2011/01/19/new-website-for-2011/`: https://aclark.net/blog/2011/01/19/new-website-for-2011/
 .. _organized a conference: http://plone.org/2008
 .. _written a book: http://www.packtpub.com/plone-33-site-administration/book

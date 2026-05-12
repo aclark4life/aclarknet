@@ -102,13 +102,13 @@ Notes
 
 [7] Again, not that there is anything wrong with what Mozilla is doing here. As a systems guy, I just happen to gravitate toward simplifying processes by eliminating steps.
 
-.. _last time I wrote about PyPI: http://blog.aclark.net/in-defense-of-pypi
+.. _last time I wrote about PyPI: https://aclark.net/blog/2011/01/31/in-defense-of-pypi/
 .. _PyPy: http://pypy.org/
-.. _Python Packaging Index: http://pypi.python.org/pypi
+.. _Python Packaging Index: https://pypi.org/
 .. _virtual machine setup: https://github.com/aclark4life/kitsune-vagrant
 .. _support.mozilla.com: http://support.mozilla.com
 .. _installation docs: https://github.com/jsocol/kitsune/blob/master/docs/installation.rst
-.. _zc.buildout: http://pypi.python.org/pypi/zc.buildout/1.5.2
+.. _zc.buildout: https://pypi.org/project/zc.buildout/1.5.2
 .. _VirtualBox: http://virtualbox.org
 .. _"vagrantize": http://vagrantup.com
 .. _`http://mozweb.readthedocs.org/en/latest/packaging.html`: http://mozweb.readthedocs.org/en/latest/packaging.html

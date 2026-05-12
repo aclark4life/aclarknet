@@ -16,8 +16,8 @@
 
 In the next version, I'll try to import `Twitter Bootstrap JavaScript`_ for even more goodness. Enjoy, and give feedback in the comments, or `here`_.
 
-.. _zope2\_bootstrap: http://pypi.python.org/pypi/zope2_bootstrap
-.. _monkey patches: http://pypi.python.org/pypi/collective.monkeypatcher
+.. _zope2\_bootstrap: https://pypi.org/project/zope2_bootstrap
+.. _monkey patches: https://pypi.org/project/collective.monkeypatcher
 .. _manage\_page\_styles.css.dtml: http://zope3.pov.lt/trac/browser/Zope/trunk/src/App/dtml/manage_page_style.css.dtml
 .. _Twitter Bootstrap: http://twitter.github.com/bootstrap/base-css.html
 .. _main: http://zope3.pov.lt/trac/browser/Zope/trunk/src/OFS/dtml/main.dtml

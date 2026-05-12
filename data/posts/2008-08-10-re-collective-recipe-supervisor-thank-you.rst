@@ -7,7 +7,7 @@
 
 **Now even easier to use Supervisor**
 
-Since I `last wrote about supervisor <http://blog.aclark.net/2008/05/15/supervisor-rocks/index.html>`_ it's become easier to use thanks to `collective.recipe.supervisor`_. Now it's as simple as editing your ``buildout.cfg``.
+Since I `last wrote about supervisor <https://aclark.net/blog/2008/05/15/supervisor-rocks/>`_ it's become easier to use thanks to `collective.recipe.supervisor`_. Now it's as simple as editing your ``buildout.cfg``.
 
 Add a section for Supervisor:
 
@@ -104,5 +104,5 @@ Start/stop Zope/ZEO:
 
 Thanks `Mustapha Benali, Author & Hanno Schlichting, Contributor`_.
 
-.. _collective.recipe.supervisor: http://pypi.python.org/pypi/collective.recipe.supervisor
-.. _Mustapha Benali, Author & Hanno Schlichting, Contributor: http://pypi.python.org/pypi/collective.recipe.supervisor/0.4#contributors
+.. _collective.recipe.supervisor: https://pypi.org/project/collective.recipe.supervisor
+.. _Mustapha Benali, Author & Hanno Schlichting, Contributor: https://pypi.org/project/collective.recipe.supervisor/0.4#contributors

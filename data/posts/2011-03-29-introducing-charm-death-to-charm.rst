@@ -88,8 +88,8 @@ After charm
 After I began writing *charm*, I began to collaborate with Dylan Jay on funnelweb and beyond (e.g. `mr.migrator`_). And I am now more determined than ever to write reusable code.
 
 .. _`http://blip.tv/file/761624/`: http://blip.tv/file/761624/
-.. _mr.importer: http://pypi.python.org/pypi/mr.importer
-.. _parse2plone: http://pypi.python.org/pypi/parse2plone
-.. _collective.transmogrifier: http://pypi.python.org/pypi/collective.transmogrifier
+.. _mr.importer: https://pypi.org/project/mr.importer
+.. _parse2plone: https://pypi.org/project/parse2plone
+.. _collective.transmogrifier: https://pypi.org/project/collective.transmogrifier
 .. _charm.py: https://github.com/collective/charm/blob/master/charm.py
 .. _mr.migrator: https://github.com/collective/mr.migrator

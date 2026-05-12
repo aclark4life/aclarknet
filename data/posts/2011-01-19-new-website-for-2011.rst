@@ -132,7 +132,7 @@ Onwards Plone team! Here is to 2011.
 
 .. _December 23, 2010: https://github.com/aclark4life/aclark_net_website/commit/514a46a652d9ffb393fd7f83a296306761c995b7
 .. _`https://github.com/aclark4life/aclark\_net\_website`: https://github.com/aclark4life/aclark_net_website
-.. _collective.xdv: http://pypi.python.org/pypi/collective.xdv
+.. _collective.xdv: https://pypi.org/project/collective.xdv
 .. _need-it-now: http://twitter.com/aclark4life
-.. _working on this: http://pypi.python.org/pypi/collective.transmogrifier
+.. _working on this: https://pypi.org/project/collective.transmogrifier
 .. _because I can: http://www.stevemcmahon.com/steves-blog/tools

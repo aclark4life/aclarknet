@@ -13,7 +13,7 @@ I kid about the killing part, but seriously: **this is a problem**.  Fortunately
 
 I mean it makes me *dance-around-the-room* happy! Ahem. But are they really all gone? Close enough. A quick `crate.io search`_ now shows only 2 packages instead of 4 pages of results.
 
-Hallelujah! But is this the best we can do? I know that some well-meaning person wrote a book containing the example that is leading some poor, misguided souls to spam PyPI (if only the author listed the test site instead: `http://testpypi.python.org/pypi`_). And I have to assume that this was just some terrible mistake. But do we all have to live with this mistake?
+Hallelujah! But is this the best we can do? I know that some well-meaning person wrote a book containing the example that is leading some poor, misguided souls to spam PyPI (if only the author listed the test site instead: `https://test.pypi.org/`_). And I have to assume that this was just some terrible mistake. But do we all have to live with this mistake?
 
 I'm asking because I honestly don't know the answer. I remember when I started pythonpackages.com, the `Deliverance`_ documentation was being updated something like every 5 minutes (kidding again, but it was frequent enough to be annoying). After grousing about it in public, it stopped happening!
 
@@ -21,5 +21,5 @@ I wonder if some good natured grousing about our friends (read: enemies) the *si
 
 .. _pythonpackages.com: http://pythonpackages.com
 .. _crate.io search: https://crate.io/?q=a+simple+printer+of+nested+lists
-.. _`http://testpypi.python.org/pypi`: http://testpypi.python.org/pypi
+.. _`https://test.pypi.org/`: https://test.pypi.org/
 .. _Deliverance: http://pythonpackages.com/package/deliverance

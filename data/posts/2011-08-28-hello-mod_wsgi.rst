@@ -41,7 +41,7 @@ Edit the buildout.cfg to look like this:
 ::
 
     [buildout]
-    extends = https://raw.github.com/pythonpackages/buildout-apache-modwsgi/master/2.2.x
+    extends = https://raw.githubusercontent.com/pythonpackages/buildout-apache-modwsgi/master/2.2.x
 
 Run buildout:
 
@@ -73,7 +73,7 @@ I like to automate the process even further with the `following script`_:
     bin/buildout init
     cat << EOF > buildout.cfg
     [buildout]
-    extends = https://raw.github.com/pythonpackages/buildout-apache-modwsgi/master/2.2.x
+    extends = https://raw.githubusercontent.com/pythonpackages/buildout-apache-modwsgi/master/2.2.x
     EOF
     bin/buildout
     bin/supervisord -e debug -n
@@ -86,15 +86,15 @@ Thus closing the loop on this blog entry, and making the following possible:
 
 I've been using my `test-plone`_ script for years now, and I'm hoping that the test-apache script proves just as useful (especially as Plone moves closer to a WSGI-supporting stack via `Zope 2.13`_).
 
-.. _various exciting Python technologies: http://blog.aclark.net/2011/08/20/hello-plone/
+.. _various exciting Python technologies: https://aclark.net/blog/2011/08/20/hello-plone/
 .. _mod\_wsgi: http://code.google.com/p/modwsgi/
 .. _`http://code.google.com/p/modwsgi/wiki/QuickInstallationGuide`: http://code.google.com/p/modwsgi/wiki/QuickInstallationGuide
-.. _zc.buildout: http://pypi.python.org/pypi/zc.buildout/1.5.2
-.. _aforementioned extendable: https://raw.github.com/pythonpackages/buildout-apache-modwsgi/master/2.2.x
-.. _"extendable" (buildout configuration file): https://raw.github.com/pythonpackages/buildout-apache-modwsgi/master/2.2.x
-.. _little WSGI app: https://raw.github.com/pythonpackages/buildout-apache-modwsgi/master/conf/app.wsgi.in
-.. _collective.recipe.template: http://pypi.python.org/pypi/collective.recipe.template/1.9
+.. _zc.buildout: https://pypi.org/project/zc.buildout/1.5.2
+.. _aforementioned extendable: https://raw.githubusercontent.com/pythonpackages/buildout-apache-modwsgi/master/2.2.x
+.. _"extendable" (buildout configuration file): https://raw.githubusercontent.com/pythonpackages/buildout-apache-modwsgi/master/2.2.x
+.. _little WSGI app: https://raw.githubusercontent.com/pythonpackages/buildout-apache-modwsgi/master/conf/app.wsgi.in
+.. _collective.recipe.template: https://pypi.org/project/collective.recipe.template/1.9
 .. _templatized httpd.conf file: https://github.com/ACLARKNET/build/blob/master/apache/2.2.x/httpd.conf.in
 .. _following script: https://github.com/ACLARKNET/binfiles/blob/master/test-apache
 .. _test-plone: https://github.com/ACLARKNET/binfiles/blob/master/test-plone
-.. _Zope 2.13: http://pypi.python.org/pypi/Zope2/2.13.9
+.. _Zope 2.13: https://pypi.org/project/Zope2/2.13.9

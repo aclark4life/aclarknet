@@ -182,7 +182,7 @@ Notes
 
 ² It will likely end up on `Github`_ at some point.
 
-.. _count the number of times it has been downloaded: http://blog.aclark.net/2011/06/16/youre-so-vain-so-why-not-use-vanity/
+.. _count the number of times it has been downloaded: https://aclark.net/blog/2011/06/16/youre-so-vain-so-why-not-use-vanity/
 .. _log: http://goo.gl/BJw33
 .. _Collective: http://dev.plone.org/collective
 .. _Collective Python buildout: http://svn.plone.org/svn/collective/buildout/python

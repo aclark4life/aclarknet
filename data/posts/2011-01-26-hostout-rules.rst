@@ -175,11 +175,11 @@ Alex Clark (January 2011)
 *Did you enjoy reading this article? Please consider `helping me help
 Plone in February 2011`_.*
 
-.. _collective.hostout: http://pypi.python.org/pypi/collective.hostout
-.. _here: http://blog.aclark.net/2011/01/19/new-website-for-2011/
-.. _collective.recipe.rsync: http://pypi.python.org/pypi/collective.recipe.rsync
+.. _collective.hostout: https://pypi.org/project/collective.hostout
+.. _here: https://aclark.net/blog/2011/01/19/new-website-for-2011/
+.. _collective.recipe.rsync: https://pypi.org/project/collective.recipe.rsync
 .. _this: https://github.com/aclark4life/aclark_net_website/blob/master/buildout.cfg#L64
 .. _`staging.cfg:`: https://github.com/aclark4life/aclark_net_website/blob/master/staging.cfg
 .. _custom 503: https://github.com/aclark4life/aclark_net_website/blob/master/apache.conf
-.. _hostout.cloud: http://pypi.python.org/pypi/hostout.cloud
-.. _helping me help Plone in February 2011: http://blog.aclark.net/2011/01/21/help-alex-clark-help-plone/
+.. _hostout.cloud: https://pypi.org/project/hostout.cloud
+.. _helping me help Plone in February 2011: https://aclark.net/blog/2011/01/21/help-alex-clark-help-plone/
