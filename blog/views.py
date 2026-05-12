@@ -31,7 +31,17 @@ class EntryDetailView(TemplateView):
             int(self.kwargs["month"]),
             int(self.kwargs["day"]),
         )
-        context["entry"] = get_object_or_404(
-            Entry, pub_date=pub_date, slug=self.kwargs["slug"]
+        entry = get_object_or_404(Entry, pub_date=pub_date, slug=self.kwargs["slug"])
+        context["entry"] = entry
+        context["prev_entry"] = (
+            Entry.objects.filter(pub_date__lt=entry.pub_date)
+            .only("title", "slug", "pub_date")
+            .first()
+        )
+        context["next_entry"] = (
+            Entry.objects.filter(pub_date__gt=entry.pub_date)
+            .only("title", "slug", "pub_date")
+            .order_by("pub_date")
+            .first()
         )
         return context

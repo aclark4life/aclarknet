@@ -27,7 +27,23 @@
           {% autoescape off %}{{ entry.render_body }}{% endautoescape %}
         </article>
         <hr class="my-5">
-        <a href="{% url 'blog:entry_list' %}" class="btn btn-brand-outline">&larr; Back to Blog</a>
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+          <div>
+            {% if prev_entry %}
+              <a href="{{ prev_entry.get_absolute_url }}" class="btn btn-brand-outline btn-sm">
+                &larr; {{ prev_entry.title|truncatechars:40 }}
+              </a>
+            {% endif %}
+          </div>
+          <a href="{% url 'blog:entry_list' %}" class="btn btn-brand-outline btn-sm">↑ Blog</a>
+          <div>
+            {% if next_entry %}
+              <a href="{{ next_entry.get_absolute_url }}" class="btn btn-brand-outline btn-sm">
+                {{ next_entry.title|truncatechars:40 }} &rarr;
+              </a>
+            {% endif %}
+          </div>
+        </div>
       </div>
     </div>
   </div>
