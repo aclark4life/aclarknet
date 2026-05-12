@@ -3,7 +3,7 @@
 :slug: help-alex-clark-help-plone
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 **It's been a few years since I last attended a Plone sprint.**
 
