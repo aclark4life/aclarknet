@@ -3,7 +3,7 @@
 :slug: about-my-work
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 **Regarding some of the criticism or objection to some of the content of my blog entries, etc.,**
 
