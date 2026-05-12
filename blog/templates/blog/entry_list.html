@@ -50,6 +50,17 @@
             {% else %}
               <li class="page-item disabled"><span class="page-link">Next &raquo;</span></li>
             {% endif %}
+            <li class="page-item">
+              <a class="page-link" href="?page=all">Show All</a>
+            </li>
+          </ul>
+        </nav>
+      {% else %}
+        <nav aria-label="Blog pagination">
+          <ul class="pagination justify-content-center">
+            <li class="page-item">
+              <a class="page-link" href="?page=1">Paginate</a>
+            </li>
           </ul>
         </nav>
       {% endif %}

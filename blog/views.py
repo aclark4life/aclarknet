@@ -13,6 +13,11 @@ class EntryListView(ListView):
     def get_queryset(self):
         return Entry.objects.only("title", "slug", "pub_date", "tags", "source")
 
+    def get_paginate_by(self, queryset):
+        if self.request.GET.get("page") == "all":
+            return None
+        return self.paginate_by
+
 
 class EntryDetailView(TemplateView):
     template_name = "blog/entry_detail.html"
