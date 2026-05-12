@@ -3,7 +3,7 @@
 :slug: new-vanity-release
 :tags: Django, Plone, Pyramid, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 This release features the ability to display per package download statistics.
 -----------------------------------------------------------------------------
