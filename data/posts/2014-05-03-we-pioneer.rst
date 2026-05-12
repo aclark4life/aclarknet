@@ -3,7 +3,7 @@
 :slug: we-pioneer
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 **One of the subjects I find myself thinking about a lot is: Plone (surprise!)**
 
