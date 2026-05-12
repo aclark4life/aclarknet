@@ -18,7 +18,7 @@
         <!-- 2x2 tile grid for first 4 entries -->
         <div class="row g-4 mb-4">
           {% for entry in entries|slice:":4" %}
-            <div class="col-sm-6 d-flex">
+            <div class="col-sm-6">
               <a href="{{ entry.get_absolute_url }}" class="blog-tile">
                 {% with entry.first_image as thumb %}
                   {% if thumb %}
@@ -43,7 +43,7 @@
         <div class="row g-4 mb-5">
           {% for entry in entries|slice:"4:" %}
             <div class="col-sm-6 d-flex">
-              <a href="{{ entry.get_absolute_url }}" class="blog-tile">
+              <a href="{{ entry.get_absolute_url }}" class="blog-tile w-100">
                 {% with entry.first_image as thumb %}
                   {% if thumb %}
                     <img src="{{ thumb }}" alt="" class="tile-img" loading="lazy">
