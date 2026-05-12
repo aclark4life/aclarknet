@@ -3,7 +3,7 @@
 :slug: please-help-me-do-open-source-work
 :tags: Misc
 :source: blog-2017
-:status: published
+:status: draft
 
 **From my 'mid-life-crisis' series of blog entries**
 
