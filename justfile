@@ -196,8 +196,20 @@ generate-blog-csv:
 
 alias gbc := generate-blog-csv
 
-# Clone blog source repos to /tmp/blog-import/ for CSV regeneration
-clone-blog-repos:
+# Import blog entries from data/posts/*.rst files (upserts on pub_date + slug)
+import-rst-posts:
+    python manage.py import_rst_posts
+
+alias irp := import-rst-posts
+
+# Push local changes and reimport blog posts on production
+deploy-posts:
+    git push
+    ssh aclark.net "cd /srv/aclarknet && sudo git pull && sudo DJANGO_SETTINGS_MODULE=aclarknet.settings.production .venv/bin/python manage.py import_rst_posts && sudo systemctl restart aclarknet"
+
+alias dposts := deploy-posts
+
+
     mkdir -p /tmp/blog-import
     gh repo clone aclark4life/blog /tmp/blog-import/blog || true
     gh repo clone aclark4life/blog-2017 /tmp/blog-import/blog-2017 || true
