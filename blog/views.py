@@ -11,7 +11,7 @@ class EntryListView(ListView):
     paginate_by = 20
 
     def get_queryset(self):
-        return Entry.objects.only("title", "slug", "pub_date", "tags", "source")
+        return Entry.objects.only("title", "slug", "pub_date", "tags", "source", "body")
 
     def get_paginate_by(self, queryset):
         if self.request.GET.get("page") == "all":

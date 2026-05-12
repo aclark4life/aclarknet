@@ -1,5 +1,9 @@
+import re
+
 from django.db import models
 from django.urls import reverse
+
+_IMAGE_RE = re.compile(r"\.\. image::\s*(\S+)")
 
 
 class Entry(models.Model):
@@ -36,6 +40,11 @@ class Entry(models.Model):
                 "slug": self.slug,
             },
         )
+
+    def first_image(self):
+        """Return the URL of the first image in the body, or None."""
+        m = _IMAGE_RE.search(self.body)
+        return m.group(1) if m else None
 
     def render_body(self):
         """Render RST body to HTML, falling back to plain text."""
