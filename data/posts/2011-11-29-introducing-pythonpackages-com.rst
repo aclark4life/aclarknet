@@ -3,7 +3,7 @@
 :slug: introducing-pythonpackages-com
 :tags: Python
 :source: blog-2017
-:status: published
+:status: draft
 
 The website for Python egoists™
 ----------------------------------------
