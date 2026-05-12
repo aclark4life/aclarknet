@@ -10,8 +10,6 @@
     :align: center
     :class: img-thumbnail
 
-**This is you: I use virtualenv all the time and I love it!**
-
 This is you: "I use virtualenv all the time and I love it! But I hate having to manually upgrade setuptools within my virtualenvs because the `PyPA has been so prolific with setuptools releases lately <https://pypi.org/project/setuptools#changes>`_".
 
 Actually this is me, but it may be you too. If this is you, you may be familiar with the following process. If not, you may want to be.
