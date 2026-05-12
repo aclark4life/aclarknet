@@ -1,11 +1,15 @@
 """CMS models."""
 
+import django_mongodb_backend.fields
 from django.db import models
 
 
 class NowEntry(models.Model):
     """A single 'now page' snapshot. Latest entry is shown at /now/."""
 
+    id = django_mongodb_backend.fields.ObjectIdAutoField(
+        primary_key=True, serialize=False
+    )
     body = models.TextField(help_text="RST-formatted content.")
     updated_at = models.DateField(help_text="Date this entry was written.")
     location = models.CharField(

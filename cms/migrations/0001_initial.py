@@ -1,3 +1,4 @@
+import django_mongodb_backend.fields
 from django.db import migrations, models
 
 
@@ -12,7 +13,7 @@ class Migration(migrations.Migration):
             fields=[
                 (
                     "id",
-                    models.AutoField(
+                    django_mongodb_backend.fields.ObjectIdAutoField(
                         auto_created=True,
                         primary_key=True,
                         serialize=False,
@@ -27,7 +28,9 @@ class Migration(migrations.Migration):
                 (
                     "location",
                     models.CharField(
-                        blank=True, help_text="e.g. Bethesda, MD, USA", max_length=200
+                        blank=True,
+                        help_text="e.g. Bethesda, MD, USA",
+                        max_length=200,
                     ),
                 ),
             ],
