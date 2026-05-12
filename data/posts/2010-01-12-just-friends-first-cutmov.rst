@@ -1,4 +1,4 @@
-:title: just friends (first cut).mov // Alex Clark
+:title: just friends (first cut).mov
 :date: 2010-01-12
 :slug: just-friends-first-cutmov
 :source: pelican-blog

@@ -1,10 +1,10 @@
 :title: Repoze "meetups"
 :date: 2007-10-28
-:slug: repoze-quotmeetupsquot
+:slug: repoze-meetups-pelican
 :source: pelican-blog
 :status: published
 
-Repoze &quot;meetups&quot;
+Repoze "meetups"
  Tweet
 
 

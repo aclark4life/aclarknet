@@ -1,10 +1,10 @@
 :title: "New" Plone theming has arrived
 :date: 2011-05-27
-:slug: quotnewquot-plone-theming-has-arrived
+:slug: new-plone-theming-has-arrived-pelican
 :source: pelican-blog
 :status: published
 
-&quot;New&quot; Plone theming has arrived
+"New" Plone theming has arrived
  Tweet
 
 

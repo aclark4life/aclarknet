@@ -1,10 +1,10 @@
 :title: You're so vain, so why not use Vanity?
 :date: 2011-06-16
-:slug: you039re-so-vain-so-why-not-use-vanity
+:slug: youre-so-vain-so-why-not-use-vanity-pelican
 :source: pelican-blog
 :status: published
 
-You&#039;re so vain, so why not use Vanity?
+You're so vain, so why not use Vanity?
  Tweet
 
 

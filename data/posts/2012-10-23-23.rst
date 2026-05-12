@@ -1,4 +1,4 @@
-:title: Alex Clark
+:title: Gittip
 :date: 2012-10-23
 :slug: 23
 :source: pelican-blog

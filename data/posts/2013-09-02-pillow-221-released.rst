@@ -2,7 +2,7 @@
 :date: 2013-09-02
 :slug: pillow-221-released
 :source: pelican-blog
-:status: published
+:status: draft
 
 Pillow 2.2.1 Released
  Tweet

@@ -1,10 +1,10 @@
 :title: Help improve Plone's API documentation
 :date: 2007-10-17
-:slug: help-improve-plone039s-api-documentation
+:slug: help-improve-plones-api-documentation
 :source: pelican-blog
 :status: published
 
-Help improve Plone&#039;s API documentation
+Help improve Plone's API documentation
        Tweet
 
 

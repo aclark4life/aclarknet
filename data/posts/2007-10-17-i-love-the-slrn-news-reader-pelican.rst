@@ -1,10 +1,10 @@
 :title: I love the 'slrn' news reader.
 :date: 2007-10-17
-:slug: i-love-the-039slrn039-news-reader
+:slug: i-love-the-slrn-news-reader-pelican
 :source: pelican-blog
 :status: published
 
-I love the &#039;slrn&#039; news reader.
+I love the 'slrn' news reader.
        Tweet
 
 
