@@ -3,7 +3,7 @@
 :slug: looking-for-projects
 :tags: Misc, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 .. image:: /images/use_python.jpg
     :alt: I don't always work, but when I do I prefer to use Python.
