@@ -36,33 +36,13 @@
       }
     /* brand mark */
       .brand-mark {
-        display: inline-flex;
-        align-items: baseline;
-        gap: 0;
-        text-decoration: none;
-        font-family: 'Orbitron', sans-serif;
+        display: inline-flex; align-items: baseline; gap: 0;
+        text-decoration: none; font-family: 'Orbitron', sans-serif; padding: 0 !important;
       }
-      .brand-top {
-        font-size: 1.1rem;
-        font-weight: 700;
-        letter-spacing: 0.04em;
-        color: var(--dark);
-      }
-      .brand-top .brand-net { color: var(--brand); }
-      .brand-sep {
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: #f0a500;
-      }
-      .brand-llc {
-        font-size: 1.1rem;
-        font-weight: 700;
-        letter-spacing: 0.18em;
-        color: #f0a500;
-      }
-      .preview-nav .brand-mark { padding: 0 !important; }
-      .preview-nav .brand-top  { color: #f8f9fa; }
-      .preview-footer .brand-top { color: #dee2e6; }
+      .brand-mark .main { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.04em; color: #fff; }
+      .brand-mark .main .net { color: #8899aa; letter-spacing: normal; }
+      .brand-mark .main .sep { font-size: 0.75em; letter-spacing: 0; color: #8899aa; }
+      .brand-mark .llc { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.18em; color: #8899aa; }
       .preview-nav .nav-link {
         color: #adb5bd;
         font-size: 0.875rem;
@@ -202,8 +182,8 @@
   <!-- NAV -->
     <nav class="preview-nav navbar navbar-expand-md">
       <div class="container">
-        <a class="navbar-brand p-0 brand-mark" href="/">
-          <span class="brand-top">10D<span class="brand-net"> — Slate</span></span>
+        <a class="navbar-brand brand-mark" href="/">
+          <span class="main">ACLARK<span class="net">.NET</span><span class="sep">,</span>&nbsp;</span><span class="llc">LLC</span>
         </a>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#previewNav">
           <span class="navbar-toggler-icon"></span>
@@ -419,7 +399,7 @@
         <div class="row align-items-center">
           <div class="col-md-4 text-center text-md-start footer-brand mb-3 mb-md-0">
             <a class="brand-mark" href="/">
-              <span class="brand-top">ACLARK<span class="brand-net">.NET</span></span><span class="brand-sep">,</span><span class="brand-llc">LLC</span>
+              <span class="main">ACLARK<span class="net">.NET</span><span class="sep">,</span>&nbsp;</span><span class="llc">LLC</span>
             </a>
           </div>
           <div class="col-md-4 text-center mb-3 mb-md-0">

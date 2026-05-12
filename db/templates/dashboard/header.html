@@ -16,22 +16,13 @@
     z-index: 1000;
   }
   .dash-nav .brand-mark {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 0;
-    text-decoration: none;
-    padding: 0 !important;
-    font-family: 'Orbitron', sans-serif;
+    display: inline-flex; align-items: baseline; gap: 0;
+    text-decoration: none; padding: 0 !important; font-family: 'Orbitron', sans-serif;
   }
-  .dash-nav .brand-top {
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    color: #f8f9fa;
-  }
-  .dash-nav .brand-top .brand-net { color: var(--brand); }
-  .dash-nav .brand-sep { font-size: 1.1rem; font-weight: 700; color: #f0a500; }
-  .dash-nav .brand-llc { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.18em; color: #f0a500; }
+  .dash-nav .brand-mark .main { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.04em; color: #fff; }
+  .dash-nav .brand-mark .main .net { color: #8899aa; letter-spacing: normal; }
+  .dash-nav .brand-mark .main .sep { font-size: 0.75em; letter-spacing: 0; color: #8899aa; }
+  .dash-nav .brand-mark .llc { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.18em; color: #8899aa; }
   .dash-nav .nav-link {
     color: #adb5bd !important;
     font-size: 0.875rem;
@@ -56,12 +47,10 @@
 
   .dash-footer { background: var(--dark); color: #adb5bd; padding: 1.5rem 0; }
   .dash-footer .brand-mark { display: inline-flex; align-items: baseline; gap: 0; text-decoration: none; font-family: 'Orbitron', sans-serif; }
-  .dash-footer .brand-top {
-    font-size: 1.1rem; font-weight: 700; letter-spacing: 0.04em; color: #dee2e6;
-  }
-  .dash-footer .brand-top .brand-net { color: var(--brand); }
-  .dash-footer .brand-sep { font-size: 1.1rem; font-weight: 700; color: #f0a500; }
-  .dash-footer .brand-llc { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.18em; color: #f0a500; }
+  .dash-footer .brand-mark .main { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.04em; color: #dee2e6; }
+  .dash-footer .brand-mark .main .net { color: #8899aa; letter-spacing: normal; }
+  .dash-footer .brand-mark .main .sep { font-size: 0.75em; letter-spacing: 0; color: #8899aa; }
+  .dash-footer .brand-mark .llc { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.18em; color: #8899aa; }
   .dash-footer a { color: #adb5bd; text-decoration: none; transition: color 0.15s; }
   .dash-footer a:hover { color: #fff; }
   .dash-footer .social-icon { font-size: 1.3rem; margin: 0 0.35rem; }
@@ -80,7 +69,7 @@
 <nav class="dash-nav navbar navbar-expand-md">
   <div class="container">
     <a class="navbar-brand brand-mark" href="/">
-      <span class="brand-top">ACLARK<span class="brand-net">.NET</span></span><span class="brand-sep">,</span><span class="brand-llc">LLC</span>
+      <span class="main">ACLARK<span class="net">.NET</span><span class="sep">,</span>&nbsp;</span><span class="llc">LLC</span>
     </a>
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#dashNav">
       <span class="navbar-toggler-icon"></span>
