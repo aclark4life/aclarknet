@@ -4,7 +4,6 @@ import logging
 
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth.mixins import UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.views.generic import FormView, TemplateView
 
@@ -289,23 +288,23 @@ _TECHS = [
 
 
 _FONTS = [
-    ("font-inter",    "Inter (default)"),
-    ("font-grotesk",  "Space Grotesk"),
-    ("font-outfit",   "Outfit"),
-    ("font-ibm",      "IBM Plex Sans"),
-    ("font-syne",     "Syne"),
-    ("font-barlow",   "Barlow Condensed"),
+    ("font-inter", "Inter (default)"),
+    ("font-grotesk", "Space Grotesk"),
+    ("font-outfit", "Outfit"),
+    ("font-ibm", "IBM Plex Sans"),
+    ("font-syne", "Syne"),
+    ("font-barlow", "Barlow Condensed"),
     ("font-rajdhani", "Rajdhani"),
-    ("font-bebas",    "Bebas Neue"),
-    ("font-oxanium",  "Oxanium"),
-    ("font-exo2",     "Exo 2"),
-    ("font-russo",    "Russo One"),
-    ("font-titillium","Titillium Web"),
-    ("font-chakra",   "Chakra Petch"),
-    ("font-audiowide","Audiowide"),
-    ("font-saira",    "Saira Condensed"),
-    ("font-aldrich",  "Aldrich"),
-    ("font-sharetech","Share Tech Mono"),
+    ("font-bebas", "Bebas Neue"),
+    ("font-oxanium", "Oxanium"),
+    ("font-exo2", "Exo 2"),
+    ("font-russo", "Russo One"),
+    ("font-titillium", "Titillium Web"),
+    ("font-chakra", "Chakra Petch"),
+    ("font-audiowide", "Audiowide"),
+    ("font-saira", "Saira Condensed"),
+    ("font-aldrich", "Aldrich"),
+    ("font-sharetech", "Share Tech Mono"),
     ("font-orbitron", "Orbitron"),
 ]
 
@@ -336,3 +335,17 @@ class PythonPillowView(TemplateView):
     """Python Pillow sponsorship page."""
 
     template_name = "python_pillow.html"
+
+
+class NowView(BaseCMSView):
+    """Now page — what Alex is doing right now."""
+
+    template_name = "now.html"
+    page_name = "now"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        from .models import NowEntry
+
+        context["now_entry"] = NowEntry.objects.first()
+        return context

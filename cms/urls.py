@@ -7,6 +7,7 @@ from .views import (
     DesignPreviewView,
     HomeView,
     LogoIdeasView,
+    NowView,
     PythonPillowView,
     ServicesView,
 )
@@ -20,5 +21,6 @@ urlpatterns = [
     path("services/", ServicesView.as_view(), name="services"),
     path("design-preview/", DesignPreviewView.as_view(), name="design_preview"),
     path("logo-ideas/", LogoIdeasView.as_view(), name="logo_ideas"),
+    path("now/", NowView.as_view(), name="now"),
     path("python-pillow/", PythonPillowView.as_view(), name="python_pillow"),
 ]
