@@ -7,6 +7,13 @@ _IMAGE_RE = re.compile(r"\.\. image::\s*(\S+)")
 
 
 class Entry(models.Model):
+    DRAFT = "draft"
+    PUBLISHED = "published"
+    STATUS_CHOICES = [
+        (DRAFT, "Draft"),
+        (PUBLISHED, "Published"),
+    ]
+
     title = models.CharField(max_length=300)
     slug = models.SlugField(max_length=300)
     pub_date = models.DateField()
@@ -20,6 +27,13 @@ class Entry(models.Model):
         max_length=100,
         blank=True,
         help_text="Source repo (e.g. blog-2017)",
+    )
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default=PUBLISHED,
+        db_index=True,
+        help_text="Only published entries are visible to the public.",
     )
 
     class Meta:

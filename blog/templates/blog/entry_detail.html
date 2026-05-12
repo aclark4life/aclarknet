@@ -3,6 +3,13 @@
 {% block title %}{{ entry.title }}{% endblock %}
 
 {% block content %}
+  {% if user.is_staff and entry.status == 'draft' %}
+    <div class="alert alert-warning mb-0 rounded-0 text-center" style="font-size:0.9rem;">
+      <i class="fa-solid fa-triangle-exclamation me-1"></i>
+      <strong>Draft</strong> — this entry is not visible to the public.
+      <a href="{% url 'admin:blog_entry_change' entry.pk %}" class="alert-link ms-2">Edit in admin</a>
+    </div>
+  {% endif %}
   <!-- Entry header -->
   <div class="blog-header">
     <div class="container">

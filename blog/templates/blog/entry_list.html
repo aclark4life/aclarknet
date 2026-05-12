@@ -28,7 +28,7 @@
                   {% endif %}
                 {% endwith %}
                 <div class="tile-body">
-                  <div class="entry-title">{{ entry.title }}</div>
+                  <div class="entry-title">{{ entry.title }}{% if user.is_staff and entry.status == 'draft' %} <span class="badge bg-warning text-dark ms-1" style="font-size:0.65rem;">Draft</span>{% endif %}</div>
                   {% if entry.tags %}<div class="entry-tags mt-1">{{ entry.tags }}</div>{% endif %}
                   <div class="entry-meta mt-auto pt-2">{{ entry.pub_date }}</div>
                 </div>
@@ -54,7 +54,7 @@
                 <div class="flex-grow-1">
                   <div class="d-flex w-100 justify-content-between align-items-start gap-3">
                     <div class="flex-grow-1">
-                      <div class="entry-title">{{ entry.title }}</div>
+                      <div class="entry-title">{{ entry.title }}{% if user.is_staff and entry.status == 'draft' %} <span class="badge bg-warning text-dark ms-1" style="font-size:0.65rem;">Draft</span>{% endif %}</div>
                       {% if entry.tags %}
                         <div class="entry-tags mt-1">{{ entry.tags }}</div>
                       {% endif %}
