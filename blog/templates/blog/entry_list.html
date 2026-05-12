@@ -85,8 +85,12 @@
               <li class="page-item">
                 <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>
               </li>
+              <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;&raquo;</a>
+              </li>
             {% else %}
               <li class="page-item disabled"><span class="page-link">Next &raquo;</span></li>
+              <li class="page-item disabled"><span class="page-link">Last &raquo;&raquo;</span></li>
             {% endif %}
             <li class="page-item">
               <a class="page-link" href="?page=all">Show All</a>
