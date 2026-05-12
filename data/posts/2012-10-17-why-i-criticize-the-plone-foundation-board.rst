@@ -3,7 +3,7 @@
 :slug: why-i-criticize-the-plone-foundation-board
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 .. image:: /images/aclark-conf.jpg
     :alt: alternate text
