@@ -3,7 +3,7 @@
 :slug: adam-yauch-has-passed
 :tags: Misc
 :source: blog-2017
-:status: published
+:status: draft
 
 And why it matters to tech people like me.
 ------------------------------------------
