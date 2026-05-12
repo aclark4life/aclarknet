@@ -5,15 +5,12 @@
 :source: blog-2017
 :status: published
 
-The `Cioppino Sprint`_ was recently held in Bodega Bay, CA. It was a `beautiful location`_ for a gathering of awesome Plone folks; and much was accomplished. Unfortunately on the second morning of the sprint, we were all deeply saddened to hear about the passing of Dorneles Treméa.
+The `Cioppino Sprint`_ was recently held in Bodega Bay, CA. It was a `beautiful location`_ for a gathering of awesome Plone folks; and much was accomplished. Unfortunately on the second morning of the sprint, we were all deeply saddened to hear about the loss of Dorneles Treméa.
 
 .. image:: /images/bodega.jpg
     :alt: Bodega Bay
     :align: center
     :class: img-thumbnail
-
-The passing of Dorneles Treméa
-------------------------------
 
 I didn't know Dorneles very well, but he was certainly someone I idolized during my initial Plone fascination days (e.g. "Who are all these cool people with such cool names!"). And after digging through my old emails, I now remember we had several pleasant exchanges over the years.
 
