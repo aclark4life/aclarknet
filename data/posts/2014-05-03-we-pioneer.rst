@@ -50,8 +50,6 @@ After all this thinking, I've reached the following conclusion(s):
 
 *And other CMS vendors should be watching, because Plone 5 is about to drop!*
 
-(*You should probably* `hire me <http://aclark.net>`_ *or* `follow me on Twitter <http://twitter.com/aclark4life>`_ *or both*.)
-
 .. [1] The fear all your hard work and customizations are trapped inside an unwieldy ZODB, with no easy way to persist or track them elsewhere.
 
 .. [2] Early, pioneering implementation which inspired Diazo.

@@ -47,6 +47,4 @@ I have vision
 
 I (like so many others before me and along with me in the Plone, Python, and Mozilla communities) have become an entrepreneur. In addition to thinking about "what consulting projects am I going to work to pay my bills", I like thinking about "what services can I build to pay my bills". And I'm so lucky I get the chance to do it.
 
-*You may also want to follow me on Twitter:* http://twitter.com/aclark4life
-
 .. [1] http://blogs.hbr.org/ashkenas/2011/02/your-communications-may-not-be.html

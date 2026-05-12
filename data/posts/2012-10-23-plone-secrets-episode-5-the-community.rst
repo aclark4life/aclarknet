@@ -61,13 +61,9 @@ But when you share a common goal e.g. Running a country, or a city, or a state, 
 
 Good luck to us all!
 
-*Consider a*
-
 .. raw:: html
 
     <iframe style="border: 0; margin: 0; padding: 0;"            width="48pt" height="20pt"></iframe>
-
-<3
 
 .. [0] I'm not listing the core developers because there are over 100 of them and they don't formally meet as far as I know. But of course, without the Founders and Core Developers none of us would be here. So a very special thanks to them as well.
 .. [1] Term coined by Wyn Williams

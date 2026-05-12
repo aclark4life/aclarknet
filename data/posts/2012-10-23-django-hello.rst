@@ -68,10 +68,6 @@ To install::
 
 *The above code can be found here:* https://github.com/aclark4life/django-hello
 
-*Consider a*
-
 .. raw:: html
 
     <iframe style="border: 0; margin: 0; padding: 0;"            width="48pt" height="20pt"></iframe>
-
-<3

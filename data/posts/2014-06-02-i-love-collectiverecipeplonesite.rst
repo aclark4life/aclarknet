@@ -504,8 +504,6 @@ app.Plone.hasChildNodes(                                        app.Plone.wl_set
 app.Plone.hasChildNodes__roles__                                app.Plone.zope_quick_start(
 app.Plone.hasObject(                                            app.Plone.zope_quick_start__roles__
 
- ( You should probably   hire me   or   follow me on Twitter   or both .)
-
        Comments !
 
         var disqus_identifier = "2014/06/02/i-love-collectiverecipeplonesite/";

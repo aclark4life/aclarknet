@@ -123,6 +123,4 @@ Thanks
 
 Many thanks to everyone who has worked hard to make Plone 5 a reality.
 
-*You should probably* `hire me <http://aclark.net>`_ *or* `follow me on Twitter <http://twitter.com/aclark4life>`_ *or both*.
-
 .. [1] And please try `Plock <http://plock.github.io>`_ which automates all of these steps e.g. ``pip install plock; plock .;bin/plone fg`` Once Plone (4) is installed, update the extends parameter in ``buildout.cfg`` to ``https://raw.githubusercontent.com/plock/pins/master/plone-5-0`` and rerun Buildout.

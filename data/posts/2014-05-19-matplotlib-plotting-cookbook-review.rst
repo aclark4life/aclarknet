@@ -128,6 +128,4 @@ Conclusion
 
 Overall I enjoyed this book and would `recommend buying it <http://www.packtpub.com/matplotlib-plotting-cookbook/book>`_.
 
-(*You should probably* `hire me <http://aclark.net>`_ *or* `follow me on Twitter <http://twitter.com/aclark4life>`_ *or both*. *And speaking of PACKT, you should definitely* `buy my book too <https://aclark.net/blog/2011/05/10/top-10-reasons-plone-33-site-admin-book-is-still-for-you/>`_.)
-
 .. [1] Yes, I'm familiar with `Bokeh <http://bokeh.pydata.org/>`_.

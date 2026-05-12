@@ -95,8 +95,6 @@ event. To that end:
 
 That's it! Just so you don't worry the sprinters worked too hard, you can rest assured everyone was in good hands with zenwryly and his travelling-bar.
 
-*If you enjoyed reading this report and/or appreciate all the fun-but-hard work that goes in to attending a sprint, please consider* `donating to my travel fund`_. *Only three days left, and I'm still a few dollars short!*
-
 .. _Cioppino Sprint: http://coactivate.org/projects/snow-sprint-west-2011/project-home
 .. _beautiful location: http://twitpic.com/3y21yk
 .. _ExternalStorage: https://pypi.org/project/Products.ExternalStorage
@@ -115,4 +113,3 @@ That's it! Just so you don't worry the sprinters worked too hard, you can rest a
 .. _cioppino.twothumbs: https://pypi.org/project/cioppino.twothumbs/1
 .. _dist.plone.org: http://dist.plone.org/archive/
 .. _land on plone.org: http://plone.org/2008
-.. _donating to my travel fund: https://aclark.net/blog/2011/01/21/help-alex-clark-help-plone/

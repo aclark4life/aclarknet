@@ -501,5 +501,3 @@ After running Buildout, now I can examine the Plone site::
     app.Plone.hasChildNodes(                                        app.Plone.wl_setLock__roles__
     app.Plone.hasChildNodes__roles__                                app.Plone.zope_quick_start(
     app.Plone.hasObject(                                            app.Plone.zope_quick_start__roles__
-
-(*You should probably* `hire me <http://aclark.net>`_ *or* `follow me on Twitter <http://twitter.com/aclark4life>`_ *or both*.)
