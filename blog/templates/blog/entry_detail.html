@@ -1,25 +1,34 @@
-{% extends "base.html" %}
+{% extends "blog/base.html" %}
 
 {% block title %}{{ entry.title }}{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-  <article>
-    <header class="mb-4">
+  <!-- Entry header -->
+  <div class="blog-header">
+    <div class="container">
+      <p class="section-eyebrow mb-2" style="color:rgba(255,255,255,0.5);">
+        <a href="/blog/" style="color:rgba(255,255,255,0.5);text-decoration:none;">&larr; Blog</a>
+      </p>
       <h1>{{ entry.title }}</h1>
-      <p class="text-muted">
+      <p class="lead mb-0">
         <time datetime="{{ entry.pub_date|date:'Y-m-d' }}">{{ entry.pub_date }}</time>
         {% if entry.tags %}
-          &mdash; {{ entry.tags }}
+          &nbsp;&middot;&nbsp;
+          <span style="color:var(--brand);">{{ entry.tags }}</span>
         {% endif %}
       </p>
-    </header>
-    <div class="entry-body">
-      {% autoescape off %}{{ entry.render_body }}{% endautoescape %}
     </div>
-    <footer class="mt-5">
-      <a href="{% url 'blog:entry_list' %}">&larr; Back to Blog</a>
-    </footer>
-  </article>
-</div>
+  </div>
+
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <article class="entry-body">
+          {% autoescape off %}{{ entry.render_body }}{% endautoescape %}
+        </article>
+        <hr class="my-5">
+        <a href="{% url 'blog:entry_list' %}" class="btn btn-brand-outline">&larr; Back to Blog</a>
+      </div>
+    </div>
+  </div>
 {% endblock %}

@@ -1,0 +1,224 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Blog{% endblock %} — ACLARK.NET</title>
+    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --brand: #1997C6;
+        --brand-dark: #136f93;
+        --dark: #0f2b3d;
+      }
+      body { font-family: 'Inter', sans-serif; }
+
+      /* ── NAV ── */
+      .preview-nav {
+        background: var(--dark);
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        padding: 1.75rem 0;
+        box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+      .brand-mark {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 0;
+        text-decoration: none;
+        font-family: 'Orbitron', sans-serif;
+      }
+      .brand-top {
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: var(--dark);
+      }
+      .brand-top .brand-net { color: var(--brand); }
+      .brand-sep { font-size: 1.1rem; font-weight: 700; color: #f0a500; }
+      .brand-llc { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.18em; color: #f0a500; }
+      .preview-nav .brand-mark { padding: 0 !important; }
+      .preview-nav .brand-top  { color: #f8f9fa; }
+      .preview-nav .nav-link {
+        color: #adb5bd;
+        font-size: 0.875rem;
+        font-weight: 500;
+        padding: 0.4rem 0.8rem;
+        border-radius: 4px;
+        transition: color 0.15s, background 0.15s;
+      }
+      .preview-nav .nav-link:hover, .preview-nav .nav-link.active {
+        color: #fff;
+        background: rgba(255,255,255,0.08);
+      }
+      .preview-nav .btn-nav-cta {
+        font-size: 0.875rem;
+        font-weight: 600;
+        padding: 0.4rem 1.1rem;
+        border-radius: 4px;
+        border: 1.5px solid rgba(255,255,255,0.4);
+        color: #fff;
+        text-decoration: none;
+        transition: background 0.15s, color 0.15s;
+      }
+      .preview-nav .btn-nav-cta:hover { background: #fff; color: var(--dark); }
+      .preview-nav .dropdown:hover > .dropdown-menu { display: block; margin-top: 0; }
+
+      /* ── BLOG CONTENT ── */
+      .blog-header {
+        background: var(--dark);
+        color: #fff;
+        padding: 3rem 0 2.5rem;
+        border-bottom: 3px solid var(--brand);
+      }
+      .blog-header h1 { font-weight: 700; letter-spacing: -0.01em; }
+      .blog-header .lead { color: #adb5bd; }
+
+      .blog-card {
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        padding: 1.25rem 1.5rem;
+        transition: box-shadow 0.15s, border-color 0.15s;
+        text-decoration: none;
+        color: inherit;
+        display: block;
+      }
+      .blog-card:hover {
+        box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+        border-color: var(--brand);
+        color: inherit;
+      }
+      .blog-card .entry-title {
+        font-weight: 600;
+        color: var(--dark);
+        margin-bottom: 0.25rem;
+        font-size: 1.05rem;
+      }
+      .blog-card:hover .entry-title { color: var(--brand); }
+      .blog-card .entry-meta { font-size: 0.8rem; color: #868e96; }
+      .blog-card .entry-tags {
+        font-size: 0.75rem;
+        color: var(--brand);
+        font-weight: 500;
+      }
+
+      .entry-body { line-height: 1.8; font-size: 1.05rem; }
+      .entry-body h1, .entry-body h2, .entry-body h3 { font-weight: 700; margin-top: 2rem; color: var(--dark); }
+      .entry-body a { color: var(--brand); }
+      .entry-body pre, .entry-body code { background: #f4f6f8; border-radius: 4px; }
+      .entry-body pre { padding: 1rem; overflow-x: auto; }
+      .entry-body code { padding: 0.1em 0.4em; font-size: 0.9em; }
+
+      .section-eyebrow {
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--brand);
+      }
+      .btn-brand-outline {
+        color: var(--brand);
+        border: 1px solid var(--brand);
+        background: transparent;
+        transition: background 0.15s, color 0.15s;
+      }
+      .btn-brand-outline:hover { background: var(--brand); color: #fff; }
+
+      /* ── PAGINATION ── */
+      .page-link { color: var(--brand); }
+      .page-item.active .page-link { background: var(--brand); border-color: var(--brand); color: #fff; }
+
+      /* ── FOOTER ── */
+      .preview-footer { background: var(--dark); color: #adb5bd; }
+      .preview-footer a { color: #adb5bd; text-decoration: none; transition: color 0.15s; }
+      .preview-footer a:hover { color: #fff; }
+      .preview-footer .footer-brand a { text-decoration: none; }
+      .preview-footer .brand-top { color: #dee2e6; }
+      .preview-footer .social-icon { font-size: 1.3rem; margin: 0 0.35rem; }
+    </style>
+  </head>
+  <body>
+
+    <!-- NAV -->
+    <nav class="preview-nav navbar navbar-expand-md">
+      <div class="container">
+        <a class="navbar-brand p-0 brand-mark" href="/">
+          <span class="brand-top">ACLARK<span class="brand-net">.NET</span></span><span class="brand-sep">,</span><span class="brand-llc">LLC</span>
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#blogNav"
+                style="filter:invert(1)">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="blogNav">
+          <ul class="navbar-nav ms-auto align-items-center gap-1">
+            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link active" href="/blog/">Blog</a></li>
+            <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="/services/">Services</a></li>
+            <li class="nav-item ms-2"><a class="btn-nav-cta" href="/contact-us/">Contact Us</a></li>
+            {% if user.is_authenticated %}
+              <li class="nav-item dropdown ms-3">
+                <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" data-bs-toggle="dropdown">
+                  <i class="fa-solid fa-circle-user fs-5"></i>
+                  <span>{{ request.user.get_short_name|default:request.user.username }}</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+                  <li><a class="dropdown-item" href="{% url 'profile_view' %}"><i class="fa-solid fa-user me-2"></i>Profile</a></li>
+                  <li><a class="dropdown-item" href="{% url 'dashboard' %}"><i class="fa-solid fa-gauge me-2"></i>Dashboard</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="{% url 'account_logout' %}"><i class="fa-solid fa-right-from-bracket me-2"></i>Sign Out</a></li>
+                </ul>
+              </li>
+            {% else %}
+              <li class="nav-item ms-3">
+                <a class="nav-link" href="{% url 'account_login' %}" title="Sign In"><i class="fa-solid fa-circle-user fs-5"></i></a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <!-- FOOTER -->
+    <footer class="preview-footer py-4 mt-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-4 text-center text-md-start footer-brand mb-3 mb-md-0">
+            <a class="brand-mark" href="/">
+              <span class="brand-top">ACLARK<span class="brand-net">.NET</span></span><span class="brand-sep">,</span><span class="brand-llc">LLC</span>
+            </a>
+          </div>
+          <div class="col-md-4 text-center mb-3 mb-md-0">
+            <ul class="list-inline mb-1">
+              <li class="list-inline-item"><a href="/">Home</a></li>
+              <li class="list-inline-item">·</li>
+              <li class="list-inline-item"><a href="/blog/">Blog</a></li>
+              <li class="list-inline-item">·</li>
+              <li class="list-inline-item"><a href="/about/">About</a></li>
+              <li class="list-inline-item">·</li>
+              <li class="list-inline-item"><a href="/services/">Services</a></li>
+              <li class="list-inline-item">·</li>
+              <li class="list-inline-item"><a href="/contact-us/">Contact</a></li>
+            </ul>
+            <p class="small mb-0">&copy; 2004 &ndash; {% now "Y" %} ACLARK.NET, LLC</p>
+          </div>
+          <div class="col-md-4 text-center text-md-end">
+            <a href="https://www.linkedin.com/company/aclark-net" target="_blank" class="social-icon"><i class="fa-brands fa-linkedin"></i><span class="visually-hidden">LinkedIn</span></a>
+            <a href="https://github.com/aclark4life" target="_blank" class="social-icon"><i class="fa-brands fa-github"></i><span class="visually-hidden">GitHub</span></a>
+            <a href="https://aclark.net/blog/" class="social-icon"><i class="fa-solid fa-rss"></i><span class="visually-hidden">Blog</span></a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
