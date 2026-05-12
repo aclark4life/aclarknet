@@ -209,8 +209,8 @@ deploy-posts:
 
 alias dposts := deploy-posts
 
-
-    mkdir -p /tmp/blog-import
+# Clone blog source repos to /tmp/blog-import/ for CSV regeneration
+clone-blog-repos:
     gh repo clone aclark4life/blog /tmp/blog-import/blog || true
     gh repo clone aclark4life/blog-2017 /tmp/blog-import/blog-2017 || true
     gh repo clone aclark4life/blog-2020 /tmp/blog-import/blog-2020 || true
