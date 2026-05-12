@@ -156,7 +156,7 @@
       <div class="row justify-content-center">
         <div class="col-lg-8">
           {% if now_entry %}
-            <div class="now-body">{{ now_entry.render_body }}</div>
+            <div class="now-body">{{ now_entry.render_body|safe }}</div>
           {% else %}
             <p class="text-muted">Coming soon.</p>
           {% endif %}
