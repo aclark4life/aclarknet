@@ -21,7 +21,7 @@ This should require less than five minutes of down time to implement. First, con
 Varnish
 ~~~~~~~
 
-To modify the listen IP address and port, we typically edit a file like */etc/default/varnish* (in Ubuntu). However you do it, configure the equivalent of the following on your system:
+To modify the listen IP address and port, we typically edit a file like /etc/default/varnish (in Ubuntu). However you do it, configure the equivalent of the following on your system:
 
 ::
 
@@ -30,7 +30,7 @@ To modify the listen IP address and port, we typically edit a file like */etc/de
                  -f /etc/varnish/default.vcl
                  -s malloc,256m"
 
-This environment variable is then passed to *varnishd* on the command line. Next, pass traffic to Apache like so (in */etc/varnish/default.vcl* on Ubuntu):
+This environment variable is then passed to varnishd on the command line. Next, pass traffic to Apache like so (in /etc/varnish/default.vcl on Ubuntu):
 
 ::
 
@@ -41,13 +41,13 @@ This environment variable is then passed to *varnishd* on the command line. Next
 
 Now on to Apache.
 
-*Please note that the syntax above is for Varnish 3.x and the syntax has (annoyingly) changed from 2.x to 3.x.*
+Please note that the syntax above is for Varnish 3.x and the syntax has (annoyingly) changed from 2.x to 3.x.
 ---------------------------------------------------------------------------------------------------------------
 
 Apache
 ~~~~~~
 
-The Apache part is a bit simpler. You just need to change the listen port (on Ubuntu this is done in */etc/apache2/ports.conf*), typically from something like:
+The Apache part is a bit simpler. You just need to change the listen port (on Ubuntu this is done in /etc/apache2/ports.conf), typically from something like:
 
 ::
 

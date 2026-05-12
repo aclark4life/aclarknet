@@ -9,7 +9,7 @@ You know who uses the (Plone) Collective Python buildout? Me neither, because we
 
 You know who should use it? Everyone.
 
-*[dramatic pause…]*
+[dramatic pause…]
 
 OK maybe not everyone, but at least everyone that regularly develops with multiple versions of Python. Here's why.
 
@@ -23,7 +23,7 @@ If I recall correctly, it was born out of the frustration¹ of having to compile
 Easy to install
 --------------------------------------------------------------------------------
 
-Got Subversion? Then you *can haz* the Collective Python buildout². You will also need to bootstrap it with whatever Python version you happen to have laying around. I won't go into detail about this; but suffice it to say depending on your OS, one of the following or something like it should work:
+Got Subversion? Then you can haz the Collective Python buildout². You will also need to bootstrap it with whatever Python version you happen to have laying around. I won't go into detail about this; but suffice it to say depending on your OS, one of the following or something like it should work:
 
 ::
 
@@ -88,7 +88,7 @@ Easy to configure
 
 Now you can add /opt/local/bin to your environment PATH variable.  This will make it easy to choose a particular Python, PIP, or Virtualenv at your leisure.
 
-Unfortunately, if you pip install something, it will end up in the checkout instead of */opt/local/bin*.
+Unfortunately, if you pip install something, it will end up in the checkout instead of /opt/local/bin.
 
 To get around this, I usually pick one Python for daily use, and add its bin directory to my environment PATH variable:
 

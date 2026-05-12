@@ -27,7 +27,7 @@ The funniest thing he ever said to me was when I was making the rounds asking fo
 
 I'm not sure if I offended him, or what. But it struck me funny at the time (and he went on to joke about how donations usually flow in the other direction, ending with his tongue stuck out i.e. ":-p"). It also reminded me of one the things I love most about Plone: the opportunity (I may never get otherwise) to correspond/collaborate with cool, passionate people all over the world.
 
-To me, Dorneles was one of the living embodiments of the *coolness* and *worldliness* of the Plone project.
+To me, Dorneles was one of the living embodiments of the coolness and worldliness of the Plone project.
 
 Wishes
 ~~~~~~

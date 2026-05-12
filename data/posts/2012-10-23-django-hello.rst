@@ -66,7 +66,7 @@ To install::
     $ bin/pip install -r requirements.txt
     $ bin/django-admin.py runserver --settings=hello.settings
 
-*The above code can be found here:* https://github.com/aclark4life/django-hello
+The above code can be found here: https://github.com/aclark4life/django-hello
 
 .. raw:: html
 

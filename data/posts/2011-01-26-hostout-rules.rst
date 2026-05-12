@@ -66,9 +66,9 @@ runs the code remotely for you on any number of hosts you give it.
 Brilliant.
 
 Now, what could be better than these two technologies? These two
-technologies *together*, that's what. (See where I am going with this?)
+technologies together, that's what. (See where I am going with this?)
 And what could be better than joining these two technologies? Joining
-them with *absolutely no effort required on your part whatsoever*,
+them with absolutely no effort required on your part whatsoever,
 that's what.
 
 I have a long history of touting software that makes my job (and life)

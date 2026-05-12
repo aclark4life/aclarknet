@@ -18,7 +18,7 @@ The more complex, the better. I have no formal training in `debate`_, but I wish
 Fallacy
 -------
 
-In the course of debate, you may encounter a `fallacy`_ or "faulty reasoning". Discussion of fallacy is my favorite part of debate. So without further ado, my top 3 "favorite" [1]_ logical fallacies; of all those I've encountered since I begun to debate in electronic form in the mid-1990s. *Disclaimer: I have been on both sides of all three, I'm human. My goal in writing this blog entry is to facilitate better conversations within the communities I care about: Mozilla, Python, and Plone.*
+In the course of debate, you may encounter a `fallacy`_ or "faulty reasoning". Discussion of fallacy is my favorite part of debate. So without further ado, my top 3 "favorite" [1]_ logical fallacies; of all those I've encountered since I begun to debate in electronic form in the mid-1990s. Disclaimer: I have been on both sides of all three, I'm human. My goal in writing this blog entry is to facilitate better conversations within the communities I care about: Mozilla, Python, and Plone.
 
 1. "You will regret your comments!"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

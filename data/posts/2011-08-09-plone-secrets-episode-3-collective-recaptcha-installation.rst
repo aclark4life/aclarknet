@@ -11,9 +11,9 @@ Another one from the: "wow, this approach is totally and completely non-obvious 
 My kingdom for a (custom) contact form (with captcha)
 --------------------------------------------------------------------------------
 
-I don't know if I've made written-mention of this anywhere else, but `aclark.net`_\ has a new customized `contact form`_ with captcha. ;-) It is customized via `z3c.jbot`_ which is an awesome tool (more on that later). This in and of itself is not-so-terribly newsworthy. What is interesting, though, is *how* this new customized form came to be; and how its features compare to the default contact form.
+I don't know if I've made written-mention of this anywhere else, but `aclark.net`_\ has a new customized `contact form`_ with captcha. ;-) It is customized via `z3c.jbot`_ which is an awesome tool (more on that later). This in and of itself is not-so-terribly newsworthy. What is interesting, though, is how this new customized form came to be; and how its features compare to the default contact form.
 
-So here goes: In Plone, we have a page template called `contact-info.cpt`_. It's not so special (in that it is pretty feature-\ *less*, though it will send mail if you ask it to) but it does the job for most folks. And it almost has to, because customizing it is beyond the realm of what *anyone* would call "straight forward" or "reasonable to expect from TTW customizers, integrators, or even developers"¹.
+So here goes: In Plone, we have a page template called `contact-info.cpt`_. It's not so special (in that it is pretty feature-\ *less*, though it will send mail if you ask it to) but it does the job for most folks. And it almost has to, because customizing it is beyond the realm of what anyone would call "straight forward" or "reasonable to expect from TTW customizers, integrators, or even developers"¹.
 
 Why do I say this?
 
@@ -27,14 +27,14 @@ BUT… and this is a BIG BUT.
 We can do better
 --------------------------------------------------------------------------------
 
-Leaving this old stuff laying around, with no new stuff to point new users to does a huge disservice to *all* of our users. It flies *directly* in the face of one of our core missions: as `Wyn Williams`_ put it once, to be the
+Leaving this old stuff laying around, with no new stuff to point new users to does a huge disservice to all of our users. It flies directly in the face of one of our core missions: as `Wyn Williams`_ put it once, to be the
 
 "best damn enterprise content manage system on the planet".
 -----------------------------------------------------------
 
 Now, I've been around the block, so I am not suggesting we must fix everything at once. Legacy software can be supported for years and years and years (and `YEARS`_). What I am suggesting is that we need to make a very significant effort to COMPLETELY HIDE these implementation details to newcomers. I don't want to tell people in IRC to go to portal\_skins anymore. I want my "OS X Lion release for Plone", please (sans Vista overtones.)
 
-So how do we get there? Well, in the case of portal\_skins there is talk of decommissioning portal\_view\_customizations, which was supposed to be the "new portal\_skins" as I understand it. But since half of our templates are still in CMF skin layers, *and* because this feature was not technically well received (i.e. it needs *more* features and development), *and* because portal\_resources came along around the same time as `plone.app.theming`_, folks are considering removing portal\_view\_customizations. I have no strong opinion about it (other than I hate the name, too long) and I trust the Framework Team to handle it. What I do care about is that whatever remains in the ZMI be very clearly designated as either "new style" or "old style". We can't get away from the ZMI yet, but portal tools do have title attributes so let's use them.
+So how do we get there? Well, in the case of portal\_skins there is talk of decommissioning portal\_view\_customizations, which was supposed to be the "new portal\_skins" as I understand it. But since half of our templates are still in CMF skin layers, and because this feature was not technically well received (i.e. it needs more features and development), and because portal\_resources came along around the same time as `plone.app.theming`_, folks are considering removing portal\_view\_customizations. I have no strong opinion about it (other than I hate the name, too long) and I trust the Framework Team to handle it. What I do care about is that whatever remains in the ZMI be very clearly designated as either "new style" or "old style". We can't get away from the ZMI yet, but portal tools do have title attributes so let's use them.
 
 Now, we can't ditch portal\_skins just yet, and who knows what will happen with portal\_view\_customizations, but the \*minute\* we know some technology is out of date, we should reveal it in the user interface (even in the ZMI user interface). E.g.:
 
@@ -56,7 +56,7 @@ Like I said, I customized the contact form.
 Old style vs. new style
 -----------------------
 
-Back in the "old days" you had to create a CMF skin layer and put a copy of the template in a directory on the file system, configured as a File System Directory View. *Everything* used to be customized via skin layers.
+Back in the "old days" you had to create a CMF skin layer and put a copy of the template in a directory on the file system, configured as a File System Directory View. Everything used to be customized via skin layers.
 
 Now-a-days, we have z3c.jbot. Though a bit of a hack², it does exactly what you'd expect, almost exactly how you'd expect it to. It `doesn't even require a Python package`_. By convention though, folks typically do put z3c.jbot template customizations in Python packages.
 
@@ -100,7 +100,7 @@ Something like this:
     declare_namespace(__name__)
     EOF
 
-Alternatively, use `ZopeSkel`_ to generate all this boilerplate code for you. It does a much better, and more complete job than what I have done here. The important thing is that you *understand what is going on*. In the case of aclark.net, our Python package is called `plonetheme.aclarknet`_.
+Alternatively, use `ZopeSkel`_ to generate all this boilerplate code for you. It does a much better, and more complete job than what I have done here. The important thing is that you understand what is going on. In the case of aclark.net, our Python package is called `plonetheme.aclarknet`_.
 
 Step 2: Add template overrides
 ------------------------------

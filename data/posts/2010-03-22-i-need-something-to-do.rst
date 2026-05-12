@@ -40,7 +40,7 @@ What I have done:
 
 -  I have done some Python programming and evangelism:
 
-   - I have paid particular attention to making ZPUGDC more Python-centric, by welcoming all Python programmers in the area not just Plonistas. This has worked out very well and our monthly attendance has gone from 5-6 to 15-20. Each month, we go around the room and talk about "what we are doing with Python". It is *always* interesting.
+   - I have paid particular attention to making ZPUGDC more Python-centric, by welcoming all Python programmers in the area not just Plonistas. This has worked out very well and our monthly attendance has gone from 5-6 to 15-20. Each month, we go around the room and talk about "what we are doing with Python". It is always interesting.
 
    - I write code. I am particularly proud that working for myself has afforded me my first paid programming job (programming for system administration doesn't really count IMO). There is a ton to learn: Networking frameworks like Twisted, Web application frameworks like Zope, Django, Turbo Gears, Pylons, BFG, etc.  Continuous integration with Hudson (OK, that is Java but you can use it on your Python code ;-)), Documentation with Sphinx. And so on.
 

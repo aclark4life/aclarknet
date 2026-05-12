@@ -13,7 +13,7 @@ I was given a copy of `Matplotlib Plotting Cookbook by Alexandre Devert <http://
 Preface
 -------
 
-But first, I'll mention I've worked on two projects recently that involved rendering matplotlib graphs directly to the browser i.e. via content-type: image/png. This is fun! It's particularly enjoyable when you are trying to avoid performing the task "the right way", which is arguably outputting JSON to some JavaScript graphing library e.g. `Highcharts <http://www.highcharts.com/>`_. The dependencies are heavy i.e. pip install numpy, etc. but not *that* heavy and once they are installed, your web application can output graphs rivaling those produced by JavaScript, all written in Python [1]_. Highly recommended!
+But first, I'll mention I've worked on two projects recently that involved rendering matplotlib graphs directly to the browser i.e. via content-type: image/png. This is fun! It's particularly enjoyable when you are trying to avoid performing the task "the right way", which is arguably outputting JSON to some JavaScript graphing library e.g. `Highcharts <http://www.highcharts.com/>`_. The dependencies are heavy i.e. pip install numpy, etc. but not that heavy and once they are installed, your web application can output graphs rivaling those produced by JavaScript, all written in Python [1]_. Highly recommended!
 
 Chapter 1
 ---------

@@ -27,7 +27,7 @@ The Pyramid version of aclark.net was almost two years old and needed an overhau
 I hate code generators
 ----------------------
 
-I typically hate using code generators, full stop. But somehow Django's ``startproject`` and ``startapp`` don't make me want to vomit. So I used them in an organic [1]_ way, to make some `obnoxiously long package names <https://github.com/ACLARKNET/aclarknet-django/tree/master/aclarknet/aclarknet/aclarknet>`_, and I *miraculously* don't hate the results! This can only mean:
+I typically hate using code generators, full stop. But somehow Django's ``startproject`` and ``startapp`` don't make me want to vomit. So I used them in an organic [1]_ way, to make some `obnoxiously long package names <https://github.com/ACLARKNET/aclarknet-django/tree/master/aclarknet/aclarknet/aclarknet>`_, and I miraculously don't hate the results! This can only mean:
 
 - I am more tolerant of boilerplate code when learning a new framework, and/or:
 - The process of creating the boilerplate code and the resulting boilerplate are so elegant/minimalistic that my insatiable desire for elegance/minimalism is at least partially satisified.
@@ -64,7 +64,7 @@ Lately I've gotten into the habit of using good-ol' Make to automate various tas
 Add-ons, Apps, Eggs, Distributions, Packages, Products, Wheels
 --------------------------------------------------------------
 
-I am *literally* annoyed by the *figurative* abomination that is Python packaging terminology. The proliferation of terms is understandable though because of the many layers of *technology*, each with its own *terminology*, that may or may not overlap:
+I am *literally* annoyed by the *figurative* abomination that is Python packaging terminology. The proliferation of terms is understandable though because of the many layers of technology, each with its own terminology, that may or may not overlap:
 
 - The Python language
 - Various packaging frameworks
@@ -114,7 +114,7 @@ Overall
 
 Overall, this was a great experience. As such, I'm now considering another `pythonpackages.com <http://pythonpackages.com>`_ reboot with Django; to further exercise my Django chops and fullfill the packaging-automation-vision I've had since late 2011.
 
-*Please let me know your reaction to my experiences in the comments.*
+Please let me know your reaction to my experiences in the comments.
 
 .. [1] ``django-admin startproject aclarknet; cd aclarknet/aclarknet; django-admin startapp aclarknet``
 

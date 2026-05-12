@@ -22,7 +22,7 @@ The extendables make it easy to bootstrap a development environment with complex
 
     $ test-apache test-dir
 
-And get a working, *disposable* Apache instance minutes later. I also want that Apache to come with a mod\_wsgi app installed and working.
+And get a working, disposable Apache instance minutes later. I also want that Apache to come with a mod\_wsgi app installed and working.
 
 Setup
 --------------------------------------------------------------------------------

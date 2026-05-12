@@ -16,7 +16,7 @@ Anyway, this post is about this year's class taught from the same material but u
 
 #. The version reference in the title is mostly meaningless.  `PACKT`_ insist on incorporating a software version number into the title of their books. I would have called it: "Plone Site Administration", or "Buildout for Plone".
 
-#. The book teaches valuable *techniques*, using Plone 3.3 as an example. Most, if not all of the techniques still apply today i.e. w/Plone 4.0.x and Plone 4.1.x. They will likely continue to apply as long as Plone continues to rely on `zc.buildout`_.
+#. The book teaches valuable techniques, using Plone 3.3 as an example. Most, if not all of the techniques still apply today i.e. w/Plone 4.0.x and Plone 4.1.x. They will likely continue to apply as long as Plone continues to rely on `zc.buildout`_.
 
 #. Plone makes it relatively easy to upgrade by providing `version numbers`_ for all of the packages it requires. In many cases an upgrade simply involves referring to a newer list of package versions. In the case of upgrading from Plone 3.3.x to Plone 4.0.x, the [zope2] section goes away because Zope2 became an egg. (Compare `this buildout`_ with `this one`_.) Also Plone 4 buildouts should be bootstrapped with Python 2.6 instead of Python 2.4 as was required by Plone 3.
 
@@ -39,7 +39,7 @@ That's it!
 The training
 ------------
 
-Sound even the *slightest* bit interesting? And/or are these things you *need* to know about Plone for your job? If so, then you or your employees will not want to miss my one day class next week at the `Plone Symposium East 2011`_. In case you or your employees are interested, you can sign up here (separate from the symposium):
+Sound even the slightest bit interesting? And/or are these things you need to know about Plone for your job? If so, then you or your employees will not want to miss my one day class next week at the `Plone Symposium East 2011`_. In case you or your employees are interested, you can sign up here (separate from the symposium):
 
 -  `http://aclark.net/services`_
 

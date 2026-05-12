@@ -70,12 +70,12 @@ The ``/vendor`` library is supposed to contain all packages and repositories. It
 
 Let us all now hang our heads, for a moment of pause and reflection.
 
-*[a minute passes]*
+[a minute passes]
 
 The future
 ----------
 
-I can't speak for anyone else, but I would certainly like to see this change in the future. I would LOVE to see PyPI become a place that Mozilla felt confident it could use to deploy Python software. And this is something I'd love to work on *for* Mozilla, if given the opportunity[6].
+I can't speak for anyone else, but I would certainly like to see this change in the future. I would LOVE to see PyPI become a place that Mozilla felt confident it could use to deploy Python software. And this is something I'd love to work on for Mozilla, if given the opportunity[6].
 
 Great for Python == great for Mozilla?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

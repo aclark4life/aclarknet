@@ -12,7 +12,7 @@ Since I began drinking the `collective.transmogrifier`_ Kool Aid a few months ba
 
 It just so happens I have a current project that requires me to import content to Plone 2.5; it took me a while to realize I could just setup a Plone 4 instance, run transmogrifier in it, and import content from it (i.e. from the file system) to Plone 2.5 over XML-RPC. But something about having to include Plone 4 in that scenario rubbed me the wrong way: Plone 4 is not needed, it's just executing the pipeline.
 
-*(I also don't like the idea of having to create a Python package and a GenericSetup profile in order to facilitate a migration.)*
+(I also don't like the idea of having to create a Python package and a GenericSetup profile in order to facilitate a migration.)
 
 Goals
 -----

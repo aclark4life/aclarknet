@@ -232,7 +232,7 @@ Cut and paste this into a terminal::
 
 Now open http://localhost:8080 and happy Ploning.
 
-*Plock 0.3.0 is out! Install with* ``pip install plock`` *and report issues here:* https://github.com/plock/plock/issues.
+Plock 0.3.0 is out! Install with ``pip install plock`` and report issues here: https://github.com/plock/plock/issues.
 
 Footnotes
 ---------

@@ -16,7 +16,7 @@ Because Everybody Wins
 
 Believe it or not, the general Python community is interested in seeing your code. Whether to use it for an example, or to avoid reinventing the wheel, or whatever the reason; we'd like a chance to see your code. But if you don't publish it to PyPI, we may never get that chance!
 
-For better or worse, PyPI is the canonical place on Earth for Python packages. It's the CPAN of Python. I understand that not everyone is 100% comfortable with this, but that doesn't make it any less true. If you accept that "open source is good", and that "Python rules", then you simply must take this next leap of faith: "PyPI is *the* place for Python packages".
+For better or worse, PyPI is the canonical place on Earth for Python packages. It's the CPAN of Python. I understand that not everyone is 100% comfortable with this, but that doesn't make it any less true. If you accept that "open source is good", and that "Python rules", then you simply must take this next leap of faith: "PyPI is the place for Python packages".
 
 [waves hand]
 
@@ -25,7 +25,7 @@ Moving on, why else should you consider uploading your packages to PyPI?
 Because It Is The "Right" Thing To Do
 --------------------------------------------------------------------------------
 
-Another thing that struck me is the number of folks who (appear to) confuse "version control" with "distribution". If I'm not mistaken, Launchpad, Github, and Bitbucket are primarily designed for Bazaar, Git, and Mercurial hosting respectively. These sites can host your distribution tarballs, but they certainly weren't *designed and built* to do so. Rather, they were designed and built to host your source code.
+Another thing that struck me is the number of folks who (appear to) confuse "version control" with "distribution". If I'm not mistaken, Launchpad, Github, and Bitbucket are primarily designed for Bazaar, Git, and Mercurial hosting respectively. These sites can host your distribution tarballs, but they certainly weren't designed and built to do so. Rather, they were designed and built to host your source code.
 
 In some cases, a project may wish to host it's own `distribution server`_. Whether it be for redundancy (although PyPI has begun to tackle this) or "branding" or other reasons, I would argue this is the preferred way of handling it: *in addition to uploading to PyPI, not in place of it*.
 
@@ -52,7 +52,7 @@ Conclusion
 
 I hope this convinces at least some folks to consider uploading their packages to PyPI. If it doesn't, please let me know why in the comments.
 
-*Did you enjoy reading this article? If so, please consider `helping me help Plone`_.*
+Did you enjoy reading this article? If so, please consider `helping me help Plone`_.
 
 .. _about PyPI use (or lack thereof).: http://blog.wearpants.org/elitism-and-the-importance-of-pypi
 .. _distribution server: http://dist.plone.org/

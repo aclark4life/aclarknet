@@ -61,11 +61,11 @@ Conclusion
 
 Anyway, I'm quite happy with the buildout and I am sharing it in hopes that it will move the Apache/XDV story forward.
 
-In addition to compiling Apache with mod\_depends and mod\_transform, it includes Subversion, Trac, mod\_wsgi, PHP and Wordpress. As I mentioned earlier, it is not really my preference to cram all this stuff in to one buildout, but as long as it is reliable and consistent, I don't mind it too much. It also handles the theme compilation for a variety of services, which is accomplished via a command recipe that executes calls to *bin/xdvcompiler*.
+In addition to compiling Apache with mod\_depends and mod\_transform, it includes Subversion, Trac, mod\_wsgi, PHP and Wordpress. As I mentioned earlier, it is not really my preference to cram all this stuff in to one buildout, but as long as it is reliable and consistent, I don't mind it too much. It also handles the theme compilation for a variety of services, which is accomplished via a command recipe that executes calls to bin/xdvcompiler.
 
 Incidentally, I have no particular allegiance to, or dislike of Apache: more like a love/hate relationship; it can be very useful in a variety of situations, while at the same time confounding. But regardless, I would like to see the Apache XDV modules be able to deliver the same rock solid performance as the NGINX fork.
 
-Kudos to Laurence Rowe (et al.) for the Apache modules! I hope this blog entry will facilitate a push to get people using them with their *operating system vendor's Apache packages*, which may inspire Laurence to continue developing them, and most importantly to fix bugs ;-).
+Kudos to Laurence Rowe (et al.) for the Apache modules! I hope this blog entry will facilitate a push to get people using them with their operating system vendor's Apache packages, which may inspire Laurence to continue developing them, and most importantly to fix bugs ;-).
 
 Normally, I like to factor out the reusable bits first, but this buildout is presented in it's entirety as I am using it (minus some customer bits), for whatever that is worth. Here is a look at the "main" buildout.cfg file, most of which should be self-explanatory. Click around this site to see the results:
 

@@ -15,7 +15,7 @@ A while back I was asked to speak to the Configuration Management Working Group 
     :class: img-thumbnail
     :target: https://twitter.com/CMWorkingGrp/status/773228143939293185
 
-From that moment on, it was on: an excuse to finish and talk about the ``Makefile`` I'd been dragging around *formerly since January* and informerly much longer.
+From that moment on, it was on: an excuse to finish and talk about the ``Makefile`` I'd been dragging around formerly since January and informerly much longer.
 
 Finishing the Makefile
 ----------------------
@@ -25,7 +25,7 @@ I started writing slides on the `impressive slides.com <http://slides.com/aclark
 Finishing the Slides
 --------------------
 
-As I mentioned above, slides.com is *very* nice. I had hoped to be able to build the slides myself with reveal.js, but in lieu of JavaScript skills I settled on using the slides.com editor. Later I exported and converted them to PDF with pandoc, which was not as nice (through no fault of pandoc, I'm sure; I just wish I could get a better PDF copy from the slides.com HTML export.)
+As I mentioned above, slides.com is very nice. I had hoped to be able to build the slides myself with reveal.js, but in lieu of JavaScript skills I settled on using the slides.com editor. Later I exported and converted them to PDF with pandoc, which was not as nice (through no fault of pandoc, I'm sure; I just wish I could get a better PDF copy from the slides.com HTML export.)
 
 Closed for Business
 -------------------

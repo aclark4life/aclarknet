@@ -14,7 +14,7 @@ Pillow is a popular fork of PIL by Alex Clark and Contributors. PIL is the Pytho
     :align: center
     :class: img-thumbnail
 
-`Pillow 2.1.0 is out! <https://pypi.org/project/Pillow/2.1.0>`_ With this release, the Pillow team has *finally* removed support for "import _imaging", thus completing the move of PIL modules into the PIL namespace [1]_. Many thanks to Eric Soroos (AKA wiredfool) who completed the majority of this work. Also a big thanks to Christopher Gohlke and `Arfrever <https://github.com/Arfrever>`_ both of whom rallied around a push to get the 2.1.0 release out on schedule. And I want to thank everyone else who reported an issue and/or sent a pull request to help make this release the best it could be.
+`Pillow 2.1.0 is out! <https://pypi.org/project/Pillow/2.1.0>`_ With this release, the Pillow team has finally removed support for "import _imaging", thus completing the move of PIL modules into the PIL namespace [1]_. Many thanks to Eric Soroos (AKA wiredfool) who completed the majority of this work. Also a big thanks to Christopher Gohlke and `Arfrever <https://github.com/Arfrever>`_ both of whom rallied around a push to get the 2.1.0 release out on schedule. And I want to thank everyone else who reported an issue and/or sent a pull request to help make this release the best it could be.
 
 Quarterly release cycle
 -----------------------

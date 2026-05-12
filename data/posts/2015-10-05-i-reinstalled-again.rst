@@ -7,7 +7,7 @@
 
 A while back I wrote about reinstalling OS X: https://aclark.net/blog/2010/10/15/i-reinstalled-recently/ This is another one of those posts.
 
-I like to reinstall OS X, a lot. So much so, you'd think I'd find some way to automate the process. There must be something *soothing* about it, though, because I keep doing it.
+I like to reinstall OS X, a lot. So much so, you'd think I'd find some way to automate the process. There must be something soothing about it, though, because I keep doing it.
 
 I'm writing this post now because since my last post, I've begun storing a snippets on `gist.github.com <https://gist.github.com/aclark4life/starred>`_ to help automate the process. This way, I get "the best of both worlds":
 

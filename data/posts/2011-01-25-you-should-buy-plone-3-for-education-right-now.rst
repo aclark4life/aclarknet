@@ -96,7 +96,7 @@ All in all, I enjoyed reading this book. And, I appreciate whenever a member of 
 
 That's it! I hope you will consider purchasing a copy of `Plone 3 for Education`_ right now.
 
-*And if you enjoyed reading this review, please consider `helping me help Plone in February 2011.`_*
+And if you enjoyed reading this review, please consider `helping me help Plone in February 2011.`_
 
 Alex Clark (January 2011)
 
