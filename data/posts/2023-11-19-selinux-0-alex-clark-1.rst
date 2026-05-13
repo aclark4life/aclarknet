@@ -118,7 +118,7 @@ What source have you compiled for me lately?
 
 Next I tried compiling Samba from source. This is the kind of thing that sounds reasonable at 11pm after a long day of troubleshooting. I pulled the latest tarball, worked through the dependency chain (and there are many), and eventually got a build. It connected! But like the Homebrew attempt, I couldn't get systemd to manage it cleanly, and the whole exercise felt like I was solving the wrong problem.
 
-At this point I had spent the better part of two days on something that should have taken twenty minutes. I had a working Samba — just not one I could live with.
+At this point I had spent the better part of two days on something that should have taken twenty minutes. I had a working Samba — just not one I could connect to.
 
 Light Bulb
 ----------
