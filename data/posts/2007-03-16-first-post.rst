@@ -22,7 +22,7 @@ I have decided to start a blog:
 Build Tools
 -----------
 
-This post is about my |build_tools|, a shell script that spins up a Zope instance with add-on products. Running:
+This post is about my |build_tools|, a shell script that starts a Zope instance with Plone and add-on products installed. Running:
 
 ::
 
