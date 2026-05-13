@@ -22,21 +22,22 @@ I have decided to start a blog. Why? Because I can create one with Plone. But al
 Build Tools
 -----------
 
-To that end, this post is about my |build_tools|. But first I'll note these current and likely better alternatives:
-
-- |buildout|
-- :strike:`Buildit`
-- :strike:`Instance Manager`
-
-I used Buildout for the first time at the |baarn_sprint| and I've also used Chris McDonough's Buildit.
-
-There are probably even more to choose from, but for now I enjoy typing:
+This post is about my |build_tools|. I used it for the first time at the |baarn_sprint| and I've also used Chris McDonough's Buildit. There are probably even more options to choose from, but I enjoy typing:
 
 ::
 
     newzope test-site ProductA ProductB ProductC
 
 and having a working instance a few seconds later with products A, B and C installed.
+
+Alternatives
+------------
+
+At the time, these were the current and likely better alternatives:
+
+- |buildout|
+- :strike:`Buildit`
+- :strike:`Instance Manager`
 
 .. https://stackoverflow.com/a/11718325
 
