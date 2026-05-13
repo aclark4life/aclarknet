@@ -21,6 +21,8 @@ The task at hand
 Now the task at hand is running Samba on Rocky Linux 9. For years I ran File Sharing on a 2010 Mac Pro running Sierra and recent circumstances led me to replace that server with an HP Envy laptop with 11G RAM. It's a surprisingly good server!
 
 .. image:: /images/server-2023.jpg
+    :align: center
+    :class: blog-image
 
 It's been a lot of fun building out the services on this laptop running Rocky Linux 9, including:
 
