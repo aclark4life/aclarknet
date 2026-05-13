@@ -202,6 +202,28 @@
       }
       .entry-body div.note p:last-child { margin-bottom: 0; }
       .strike { text-decoration: line-through; }
+      .entry-body table.docutils {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+        font-size: 0.95rem;
+      }
+      .entry-body table.docutils th {
+        background: var(--dark);
+        color: #fff;
+        font-weight: 600;
+        padding: 0.6rem 1rem;
+        text-align: left;
+        border: none;
+      }
+      .entry-body table.docutils td {
+        padding: 0.6rem 1rem;
+        border: none;
+        border-bottom: 1px solid #e9ecef;
+        vertical-align: top;
+      }
+      .entry-body table.docutils tbody tr:nth-child(even) td { background: #f8f9fa; }
+      .entry-body table.docutils tbody tr:hover td { background: rgba(25,151,198,0.05); }
 
       .section-eyebrow {
         font-size: 0.72rem;
