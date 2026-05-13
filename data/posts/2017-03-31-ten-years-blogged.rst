@@ -25,7 +25,7 @@ Since then, a lot has changed. To celebrate this milestone, allow me to recap so
 | Left NIH (2005) to be self-employed.                               | Still self-employed, but back at `NIH <https://www.nimh.nih.gov>`_ |
 |                                                                    | too.                                                               |
 +--------------------------------------------------------------------+--------------------------------------------------------------------+
-| Using irssi for IRC.                                               | In `The Lounge`_. In between: WeeChat.                             |
+| Using irssi for IRC.                                               | Using `The Lounge`_. In between: WeeChat.                          |
 +--------------------------------------------------------------------+--------------------------------------------------------------------+
 | Engaged but not married.                                           | About to celebrate 10 years of marriage in November 2017.          |
 +--------------------------------------------------------------------+--------------------------------------------------------------------+
