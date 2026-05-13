@@ -30,8 +30,8 @@ This post is about my |build_tools|, a shell script that spins up a Zope instanc
 
 would produce a working instance a few seconds later with products A, B and C installed.
 
-Alternatives
-------------
+Conclusion
+----------
 
 I used Buildout for the first time at the |baarn_sprint| and I've also used Chris McDonough's Buildit. There are probably even more options to choose from, but at the time these were the current and likely better alternatives:
 
