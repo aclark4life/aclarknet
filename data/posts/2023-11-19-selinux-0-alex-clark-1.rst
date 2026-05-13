@@ -1,6 +1,7 @@
 :title: SELinux: 0, Alex Clark: 1
 :date: 2023-11-19
 :slug: selinux-0-alex-clark-1
+:tags: Linux, Python
 :source: blog
 :status: published
 

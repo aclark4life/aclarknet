@@ -5,7 +5,7 @@
 :source: blog-2017
 :status: published
 
-I'm back on IRC for the foreseeable future, and loving it. Thank you `Shout IRC <https://thelounge.chat>`_ (now The Lounge).
+I'm back on IRC for the foreseeable future and loving it. Thank you `Shout IRC <https://thelounge.chat>`_ (now The Lounge).
 
 .. image:: /images/shout-irc2.png
     :align: center
