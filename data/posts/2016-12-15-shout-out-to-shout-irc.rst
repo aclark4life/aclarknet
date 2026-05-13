@@ -98,3 +98,8 @@ Dotfiles
 
     git clone git@bitbucket.org:aclark4life/dotfiles.git Dotfiles
     dotfiles -s
+
+Conclusion
+----------
+
+If you've been looking for a self-hosted IRC web client that keeps you connected around the clock, Shout IRC — now `The Lounge <https://thelounge.chat>`_ — is worth your time. The setup is straightforward, and the always-on feature alone makes it worth running on even the smallest VPS.
