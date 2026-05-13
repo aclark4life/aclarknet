@@ -36,7 +36,7 @@ There are probably even more to choose from, but for now I enjoy typing:
 
     newzope test-site ProductA ProductB ProductC
 
-and having a working instance a few seconds later with Product{A,B,C} installed.
+and having a working instance a few seconds later with products A, B and C installed.
 
 .. https://stackoverflow.com/a/11718325
 
