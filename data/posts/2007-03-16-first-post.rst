@@ -17,7 +17,7 @@ I have decided to start a blog. Why? Because Plone allows me to do so. But also:
 
 - I have been reading a lot of |planet_plone| lately and they have inspired me to write my own.
 - I want to interact with other Plone developers and users.
-- I want to "get my new technology on".
+- I want to try new technology.
 
 Build Tools
 -----------
