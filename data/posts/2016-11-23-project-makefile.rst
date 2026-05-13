@@ -3,7 +3,7 @@
 :slug: project-makefile
 :tags: Python
 :source: blog
-:status: published
+:status: draft
 
 .. image:: /images/project-makefile-tweet.png
     :align: center
