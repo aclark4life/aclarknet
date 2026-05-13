@@ -3,41 +3,32 @@
 :slug: shout-out-to-shout-irc
 :tags: Plone, Python
 :source: blog-2017
-:status: draft
+:status: published
 
-I'm back on IRC for the foreseeable future, and loving it. Thank you Shout IRC.
--------------------------------------------------------------------------------
-
-|
+I'm back on IRC for the foreseeable future, and loving it. Thank you `Shout IRC <https://thelounge.chat>`_ (now The Lounge).
 
 .. image:: /images/shout-irc2.png
     :align: center
-    :class: img-thumbnail
-
-|
+    :class: blog-image
 
 Backlog
 -------
 
-A few years ago, I got old and gave up running command line IRC clients. I've run them all or at least a lot of them, including one `whose name is almost certainly in the crosshairs of political correctness <http://www.bitchx.com/>`_. Most recently I ran Weechat and irssi before that. For a while, I gave up IRC completely because I couldn't be bothered. But I missed it, and nothing else seemed to suffice. I tried Slack and thought it was OK, but not IRC. I tried various web clients, but couldn't find one I could stand to use long term. Then `Shout IRC <http://shout-irc.com/>`_ came along.
+A few years ago, I got old and gave up running command line IRC clients. I've run them all or at least a lot of them, including one whose name is almost certainly in the crosshairs of political correctness. Most recently I ran Weechat and irssi before that. For a while, I gave up IRC completely because I couldn't be bothered. But I missed it, and nothing else seemed to suffice. I tried Slack and thought it was OK, but not IRC. I tried various web clients, but couldn't find one I could stand to use long term. Then `Shout IRC <https://thelounge.chat>`_ came along.
 
 Stay online
 -----------
 
-I tried Shout for the first time over a year ago, but never bothered to create a Shout account on my server. This was a mistake, since user account creation enables one of Shout's most powerful features: `Stay online on IRC even when you log out <http://shout-irc.com/docs/server/users.html>`_.
+I tried Shout for the first time over a year ago, but never bothered to create a Shout account on my server. This was a mistake, since user account creation enables one of Shout's most powerful features: stay online on IRC even when you log out.
 
 Configuration
 -------------
 
-I had gotten annoyed with having to login each time, so I stopped using Shout for a while. I heard good things about Kiwi, but was disappointed to see `no npm release <https://www.npmjs.com/package/kiwiirc>`_. This led me back to Shout, which `does have an npm release <https://www.npmjs.com/package/shout>`_. What follows are configuration details for `irc.aclark.net <https://irc.aclark.net>`_, for posterity. (I added `Let's Encrypt <https://letsencrypt.org>`_ at the last minute for good measure.)
-
-|
+I had gotten annoyed with having to login each time, so I stopped using Shout for a while. I heard good things about Kiwi, but was disappointed to see no npm release. This led me back to Shout, which does have an npm release. What follows are configuration details for ``irc.aclark.net``, for posterity. (I added `Let's Encrypt <https://letsencrypt.org>`_ at the last minute for good measure.)
 
 .. image:: /images/shout-irc1.png
     :align: center
-    :class: img-thumbnail
-
-|
+    :class: blog-image
 
 AWS
 ~~~
@@ -93,10 +84,6 @@ NGINX
         location / {
             proxy_pass http://localhost:9000;
         }
-        location /.well-known/acme-challenge/AamTqX-Ic-YERnU0RWS2X_WpszSUsi2lIoXkMYOy_Fs {
-            add_header Content-Type text/plain;
-            return 200 "AamTqX-Ic-YERnU0RWS2X_WpszSUsi2lIoXkMYOy_Fs.gPCswvmAzfObWoqUg6d_…";
-        }
         ssl    on;
         ssl_certificate    /etc/ssl/fullchain.pem;
         ssl_certificate_key    /etc/ssl/privkey.pem;
@@ -111,10 +98,3 @@ Dotfiles
 
     git clone git@bitbucket.org:aclark4life/dotfiles.git Dotfiles
     dotfiles -s
-
-Todo
-----
-
-I'm currently running ``shout --private`` in `screen <https://www.gnu.org/software/screen/>`_, but may eventually add a `systemd <https://www.freedesktop.org/wiki/Software/systemd/>`_ service for it.
-
-|
