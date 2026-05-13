@@ -2,9 +2,7 @@
 :date: 2007-03-16
 :slug: first-post
 :source: blog
-:status: draft
-
-|
+:status: published
 
 .. image:: /images/look-at-me.jpg
     :align: center
@@ -14,8 +12,6 @@
 
 .. role:: strike
     :class: strike
-
-|
 
 I have decided to start a blog. Why? Because Plone allows me to do so. But also:
 
@@ -41,8 +37,6 @@ There are probably even more to choose from, but for now I enjoy typing:
     newzope test-site ProductA ProductB ProductC
 
 and having a working instance a few seconds later with Product{A,B,C} installed.
-
-|
 
 .. https://stackoverflow.com/a/11718325
 
