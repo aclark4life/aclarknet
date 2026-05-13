@@ -14,8 +14,8 @@
     :align: center
     :class: blog-image
 
-Intro
------
+Introduction
+------------
 
 I don't like to give up on a technical challenge, particularly when the progress is slow-but-consistent. It's only when I know I can't make any discernible progress easily (or at all) that I can force myself to give up. I'm not talking about giving up for the day and getting back to it. I'm talking about declaring failure and getting back to it WAY later, if at all. Well, this post is about how SAML got the better of me about one month ago. I really wanted this particular task to be successful, but I eventually had to give up and declare the task "too hard for me given the context, and possibly not even a good idea in the first place".
 
