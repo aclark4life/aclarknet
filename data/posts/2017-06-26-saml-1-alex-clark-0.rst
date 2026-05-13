@@ -10,11 +10,9 @@
     Update: OOPS looks like this one got away from me (got published prematurely). I meant to write about Django & SAML about a month ago. Here is that post finally.
 
 .. image:: /images/saml-failure-complete.jpg
-    :alt: Courtesy of quickmeme
+    :alt: SAML failure
     :align: center
     :class: blog-image
-
-*Courtesy of* `quickmeme <http://www.quickmeme.com/>`_
 
 Intro
 -----
@@ -69,4 +67,7 @@ I found a bunch of cool Python tooling for dealing with all-things-SAML that I w
 - https://github.com/mehcode/python-saml (saml on PyPI)
 - https://github.com/dlitz/pycrypto (secure hash functions!)
 
-TL;DR: Consider a commercial IdP like OneLogin or Auth0.
+Conclusion
+----------
+
+Consider a commercial IdP like OneLogin or Auth0.
