@@ -14,7 +14,7 @@ In March 2007, I published my first blog post.
 
 Unimaginatively, it was titled `First Post <https://aclark.net/blog/2007/03/16/first-post/>`_.
 
-Since then, a lot has changed. To celebrate this milestone, allow me to recap some significant personal and professional events, then and now.
+Since then, a lot has changed. To celebrate this milestone, allow me to recap some significant personal and professional milestones, then and now.
 
 +--------------------------------------------------------------------+--------------------------------------------------------------------+
 | Then (2007)                                                        | Now (2017)                                                         |
