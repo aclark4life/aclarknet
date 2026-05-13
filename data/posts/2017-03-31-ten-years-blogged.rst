@@ -29,7 +29,7 @@ Since then, a lot has changed. To celebrate this milestone, allow me to recap so
 +--------------------------------------------------------------------+--------------------------------------------------------------------+
 | Engaged but not married.                                           | About to celebrate 10 years of marriage in November 2017.          |
 +--------------------------------------------------------------------+--------------------------------------------------------------------+
-| No conferences hosted.                                             | Proud veteran organizer of                                         |
+| No conferences hosted.                                             | Organizer of                                                       |
 |                                                                    | `Plone Conference 2008 <http://old.plone.org/2008>`_.              |
 +--------------------------------------------------------------------+--------------------------------------------------------------------+
 | Three years before Pillow, my Python Imaging Library fork,         | `Pillow <http://python-pillow.org>`_ included in major Linux       |
