@@ -3,21 +3,18 @@
 :slug: saml-1-alex-clark-0
 :tags: Django, Python
 :source: blog-2017
-:status: draft
+:status: published
 
-|
+.. note::
 
-Update: OOPS looks like this one got away from me (got published prematurely). I meant to write about Django & SAML about a month ago. Here is that post finally.
------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-|
+    Update: OOPS looks like this one got away from me (got published prematurely). I meant to write about Django & SAML about a month ago. Here is that post finally.
 
 .. image:: /images/saml-failure-complete.jpg
     :alt: Courtesy of quickmeme
+    :align: center
+    :class: blog-image
 
 *Courtesy of* `quickmeme <http://www.quickmeme.com/>`_
-
-|
 
 Intro
 -----
@@ -29,7 +26,7 @@ Because I don't explicitly mention this anywhere else in the article, I'll menti
 The task
 --------
 
-The task was to make Django act as a SAML Identity Provider (IdP), enough to convince a commercial service, acting as a SAML Service Provider (SP), to use it as one. While I didn't achieve the desired end result, a learned a ton of information about SAML that I never really wanted to know, but feel better and good about now that I know it.
+The task was to make Django act as a SAML Identity Provider (IdP), enough to convince a commercial service, acting as a SAML Service Provider (SP), to use it as one. While I didn't achieve the desired end result, I learned a ton of information about SAML that I never really wanted to know, but feel better and good about now that I know it.
 
 IdP vs SP
 ---------
