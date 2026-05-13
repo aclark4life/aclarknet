@@ -54,4 +54,4 @@ and having a working instance a few seconds later with Product{A,B,C} installed.
 
 .. |buildout| raw:: html
 
-   <a href="https://buildout.org" target="_blank">Buildout</a>
+   <a href="https://github.com/buildout/buildout" target="_blank">Buildout</a>
