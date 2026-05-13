@@ -27,7 +27,7 @@ Since then, a lot has changed. To celebrate this milestone, allow me to recap so
 +--------------------------------------------------------------------+--------------------------------------------------------------------+
 | Using irssi for IRC.                                               | Using `The Lounge`_. In between: WeeChat.                          |
 +--------------------------------------------------------------------+--------------------------------------------------------------------+
-| Engaged but not married.                                           | About to celebrate 10 years of marriage in November 2017.          |
+| Engaged but not married.                                           | Celebrating 10 years of marriage in November 2017.                 |
 +--------------------------------------------------------------------+--------------------------------------------------------------------+
 | No conferences hosted.                                             | Organizer of                                                       |
 |                                                                    | `Plone Conference 2008 <http://old.plone.org/2008>`_.              |
