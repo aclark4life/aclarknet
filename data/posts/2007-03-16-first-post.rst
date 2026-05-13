@@ -50,7 +50,7 @@ and having a working instance a few seconds later with Product{A,B,C} installed.
 
 .. |build_tools| raw:: html
 
-   <a href="https://svn.plone.org/svn/collective/newzope" target="_blank">build tools</a>
+   <a href="https://github.com/aclark4life/newzope" target="_blank">build tools</a>
 
 .. |buildout| raw:: html
 
