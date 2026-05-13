@@ -35,9 +35,6 @@ Since then, a lot has changed. To celebrate this milestone, allow me to recap so
 | Three years before Pillow, my Python Imaging Library fork,         | `Pillow <http://python-pillow.org>`_ included in major Linux       |
 | born in 2010.                                                      | distributions and downloaded over 15 million times.                |
 +--------------------------------------------------------------------+--------------------------------------------------------------------+
-| Four years before vanity, my download statistics tool,             | Vanity `waiting for Warehouse                                      |
-| born in 2011.                                                      | <https://github.com/aclark4life/vanity/issues/22>`_.               |
-+--------------------------------------------------------------------+--------------------------------------------------------------------+
 | Five years before my busiest blogging year ever: 35 posts in 2012. | Averaging 15 posts per year.                                       |
 +--------------------------------------------------------------------+--------------------------------------------------------------------+
 | Six years before plock made noise in 2013.                         | Pip installs plock.                                                |
