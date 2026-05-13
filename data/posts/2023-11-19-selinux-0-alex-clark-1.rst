@@ -2,9 +2,7 @@
 :date: 2023-11-19
 :slug: selinux-0-alex-clark-1
 :source: blog
-:status: draft
-
-|
+:status: published
 
 .. image:: /images/selinux-0-alex-clark-1.jpg
     :align: center
@@ -35,7 +33,7 @@ Having Samba fail mysteriously was not fun, and I should have known better than 
 Attempts
 --------
 
-My recent encounter with Samba on Rocky Linux was embarrasingly long, but it started off normal.
+My recent encounter with Samba on Rocky Linux was embarrassingly long, but it started off normal.
 
 In the beginning
 ~~~~~~~~~~~~~~~~
@@ -44,7 +42,7 @@ If you Google or ChatGPT "Samba on Rocky Linux" you'll get steered toward someth
 
 ::
 
-    sudo dnf install xrdp
+    sudo dnf install samba
 
 Followed by some firewall instructions and, if you are lucky, some SE Linux instructions. If you are unlucky, you will proceed merrily with:
 
