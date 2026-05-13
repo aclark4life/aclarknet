@@ -104,7 +104,7 @@ Unfortunately, the joyfulness will end when you try to connect, even though the 
 
 I would love to say I immediately recognized the issue as being related to SE Linux, but I didn't. In fact, I went in the opposite direction:
 
-  "Maybe the version of Samba is too old!"
+    *"Maybe the version of Samba is too old!"*
 
 And then there was hombrew, and the brew was good
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
