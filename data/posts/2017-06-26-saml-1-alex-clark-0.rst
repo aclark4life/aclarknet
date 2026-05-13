@@ -3,7 +3,7 @@
 :slug: saml-1-alex-clark-0
 :tags: Django, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 |
 

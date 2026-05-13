@@ -3,7 +3,7 @@
 :slug: pythonpackages-com-beta-launch
 :tags: Python
 :source: blog-2017
-:status: published
+:status: draft
 
 After 9 months of development, pythonpackages.com has grand-ceremoniously flipped the switch from alpha to beta. Here is an overview of the beta release features.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------

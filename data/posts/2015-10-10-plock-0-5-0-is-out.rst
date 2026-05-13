@@ -3,7 +3,7 @@
 :slug: plock-0-5-0-is-out
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Pip installs Plock. Plock installs Plone.
 -----------------------------------------

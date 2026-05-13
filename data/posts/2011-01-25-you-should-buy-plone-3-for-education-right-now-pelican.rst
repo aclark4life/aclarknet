@@ -2,4 +2,4 @@
 :date: 2011-01-25
 :slug: you-should-buy-plone-3-for-education-right-now-pelican
 :source: pelican-blog
-:status: published
+:status: draft

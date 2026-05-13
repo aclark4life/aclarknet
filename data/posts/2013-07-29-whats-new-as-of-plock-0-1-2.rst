@@ -3,7 +3,7 @@
 :slug: whats-new-as-of-plock-0-1-2
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Plock is a Plone Installer for the Pip-Loving Crowd.
 ----------------------------------------------------

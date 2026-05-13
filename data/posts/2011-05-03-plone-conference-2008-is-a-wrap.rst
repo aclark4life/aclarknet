@@ -3,7 +3,7 @@
 :slug: plone-conference-2008-is-a-wrap
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 I have yet to finish my obligations to Plone Conference 2008 until NOW.
 -----------------------------------------------------------------------

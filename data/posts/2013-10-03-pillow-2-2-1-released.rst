@@ -3,7 +3,7 @@
 :slug: pillow-2.2.1-released
 :tags: Pillow, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 Pillow is the "friendly" PIL fork. PIL is the Python Imaging Library.
 ---------------------------------------------------------------------

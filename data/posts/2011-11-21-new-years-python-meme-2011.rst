@@ -3,7 +3,7 @@
 :slug: new-years-python-meme-2011
 :tags: Pyramid, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 My response to `http://blog.ziade.org/2011/12/20/new-year039s-python-meme-2011/`_.
 

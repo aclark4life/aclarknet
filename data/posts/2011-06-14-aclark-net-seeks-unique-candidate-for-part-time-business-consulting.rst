@@ -3,7 +3,7 @@
 :slug: aclark-net-seeks-unique-candidate-for-part-time-business-consulting
 :tags: Misc
 :source: blog-2017
-:status: published
+:status: draft
 
 We are looking for a unique and talented (but mostly non-technical) individual that is passionate about Plone, and able to dedicate some small amount of time per month to generating new business for us[1].
 

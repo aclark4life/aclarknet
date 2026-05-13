@@ -3,7 +3,7 @@
 :slug: plone-4-3-alpha-1-in-production
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 I love upgrading Plone. Given the choice between an afternoon in the sun and upgrading Plone… OK I'd probably pick the sun, but it'd be close.
 ----------------------------------------------------------------------------------------------------------------------------------------------

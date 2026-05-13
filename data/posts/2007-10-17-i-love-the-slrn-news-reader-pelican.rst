@@ -2,7 +2,7 @@
 :date: 2007-10-17
 :slug: i-love-the-slrn-news-reader-pelican
 :source: pelican-blog
-:status: published
+:status: draft
 
 I love the 'slrn' news reader.
        Tweet

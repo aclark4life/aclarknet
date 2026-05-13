@@ -3,7 +3,7 @@
 :slug: shout-out-to-shout-irc
 :tags: Plone, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 I'm back on IRC for the foreseeable future, and loving it. Thank you Shout IRC.
 -------------------------------------------------------------------------------

@@ -2,7 +2,7 @@
 :date: 2014-06-02
 :slug: i-love-collectiverecipeplonesite
 :source: pelican-blog
-:status: published
+:status: draft
 
 I love collective.recipe.plonesite!
  Tweet

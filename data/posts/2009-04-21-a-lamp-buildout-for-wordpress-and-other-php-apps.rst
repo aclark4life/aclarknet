@@ -3,7 +3,7 @@
 :slug: a-lamp-buildout-for-wordpress-and-other-php-apps
 :tags: Buildout
 :source: blog-2017
-:status: published
+:status: draft
 
 Buildout all the things
 ----------------------------------------

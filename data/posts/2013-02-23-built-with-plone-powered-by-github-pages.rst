@@ -3,7 +3,7 @@
 :slug: built-with-plone-powered-by-github-pages
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Is Plone the next great static website generator? Probably not, but it definitely could be.
 -------------------------------------------------------------------------------------------

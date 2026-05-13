@@ -3,7 +3,7 @@
 :slug: diazo-themes-revisited
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 With Diazo theming on the rise (going in to 4.3 core) I'd like to take a look at the Diazo theming ecosystem again.
 -------------------------------------------------------------------------------------------------------------------

@@ -3,7 +3,7 @@
 :slug: nasa-story-slashdotted
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 The Slashdot effect
 ----------------------------------------

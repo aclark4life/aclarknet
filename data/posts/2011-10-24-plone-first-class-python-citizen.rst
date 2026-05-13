@@ -3,7 +3,7 @@
 :slug: plone-first-class-python-citizen
 :tags: Plone, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 The Plone community and software fit nicely within the larger Python ecosystem. Here's why.
 -------------------------------------------------------------------------------------------

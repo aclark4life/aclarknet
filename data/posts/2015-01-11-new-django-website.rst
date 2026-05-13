@@ -3,7 +3,7 @@
 :slug: new-django-website
 :tags: Django, Python, Pyramid
 :source: blog-2017
-:status: published
+:status: draft
 
 After a series of Django gigs in 2014, I had the urge to redevelop our company website in Django; I am very happy with the results.
 -----------------------------------------------------------------------------------------------------------------------------------

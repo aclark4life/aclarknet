@@ -3,7 +3,7 @@
 :slug: top-3-favorite-logical-fallacies
 :tags: Misc
 :source: blog-2017
-:status: published
+:status: draft
 
 .. image:: /images/y-u-no-agree.jpg
     :alt: Y U NO AGREE

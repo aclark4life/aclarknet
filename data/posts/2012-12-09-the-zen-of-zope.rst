@@ -2,7 +2,7 @@
 :date: 2012-12-09
 :slug: the-zen-of-zope
 :source: blog-2017
-:status: published
+:status: draft
 
 ::
 

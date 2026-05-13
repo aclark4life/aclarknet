@@ -2,7 +2,7 @@
 :date: 2020-03-30
 :slug: distancing-my-social
 :source: blog-2020
-:status: published
+:status: draft
 
 .. image:: /images/distancing-my-social.jpg
    :align: center

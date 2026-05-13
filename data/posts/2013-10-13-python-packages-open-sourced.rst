@@ -3,7 +3,7 @@
 :slug: python-packages-open-sourced
 :tags: Python
 :source: blog-2017
-:status: published
+:status: draft
 
 Today I am open sourcing the code that ran pythonpackages.com from late 2011 to late 2012.
 ------------------------------------------------------------------------------------------

@@ -3,7 +3,7 @@
 :slug: pillow-one-year-later
 :tags: Pillow, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 For anyone unfamiliar with Pillow, it is the friendly PIL fork: a fork of PIL that aims to remain a good citizen in the PIL community through its actions.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------

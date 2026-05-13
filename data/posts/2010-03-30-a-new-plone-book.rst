@@ -2,7 +2,7 @@
 :date: 2010-03-30
 :slug: a-new-plone-book
 :source: blog
-:status: published
+:status: draft
 
 |
 

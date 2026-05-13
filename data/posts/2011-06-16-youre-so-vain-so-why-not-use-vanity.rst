@@ -3,7 +3,7 @@
 :slug: youre-so-vain-so-why-not-use-vanity
 :tags: Python
 :source: blog-2017
-:status: published
+:status: draft
 
 A few months ago I created a package called Vanity\ [0] that provides easy access to package download statistics from PyPI. You can find the source code here: `https://github.com/aclark4life/vanity`_.
 

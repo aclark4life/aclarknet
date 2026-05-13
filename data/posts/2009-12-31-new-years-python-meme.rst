@@ -2,7 +2,7 @@
 :date: 2009-12-31
 :slug: new-years-python-meme
 :source: blog
-:status: published
+:status: draft
 
 |
 

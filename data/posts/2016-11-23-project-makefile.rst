@@ -2,7 +2,7 @@
 :date: 2016-11-23
 :slug: project-makefile
 :source: blog
-:status: published
+:status: draft
 
 |
 

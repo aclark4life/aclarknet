@@ -3,7 +3,7 @@
 :slug: review-of-aspeli-plone-4-development
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 I owe PACKT a review of this book, so here it is.
 -------------------------------------------------

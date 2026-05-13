@@ -3,7 +3,7 @@
 :slug: matplotlib-plotting-cookbook-review
 :tags: Python
 :source: blog-2017
-:status: published
+:status: draft
 
 Here is my review
 ----------------------------------------

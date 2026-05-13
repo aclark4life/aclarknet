@@ -3,7 +3,7 @@
 :slug: mailing-list-etiquette
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 I read a lot of mailing lists.
 ----------------------------------------

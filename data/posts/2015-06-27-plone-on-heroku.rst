@@ -3,7 +3,7 @@
 :slug: plone-on-heroku
 :tags: Buildout, Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Dear Plone, welcome to 2015
 ----------------------------------------

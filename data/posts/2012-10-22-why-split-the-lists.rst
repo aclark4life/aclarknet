@@ -3,7 +3,7 @@
 :slug: why-split-the-lists
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 The Plone community consists (roughly) of Founders, Contributors, and Users.
 ----------------------------------------------------------------------------

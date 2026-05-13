@@ -3,7 +3,7 @@
 :slug: products-todo-0-1
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 A project to jump start my return to Plone development.
 -------------------------------------------------------

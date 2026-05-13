@@ -3,7 +3,7 @@
 :slug: plock-rocks
 :tags: Buildout, Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Pip installs Plock. Plock installs Plone.
 -----------------------------------------

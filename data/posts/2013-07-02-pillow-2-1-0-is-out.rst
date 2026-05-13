@@ -3,7 +3,7 @@
 :slug: pillow-2-1-0-is-out
 :tags: Pillow, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 Pillow is a popular fork of PIL by Alex Clark and Contributors. PIL is the Python Imaging Library by Fredrik Lundh and Contributors
 -----------------------------------------------------------------------------------------------------------------------------------

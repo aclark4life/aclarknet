@@ -3,7 +3,7 @@
 :slug: i-love-the-slrn-news-reader
 :tags: Misc
 :source: blog-2017
-:status: published
+:status: draft
 
 A command line news reader.
 ----------------------------------------

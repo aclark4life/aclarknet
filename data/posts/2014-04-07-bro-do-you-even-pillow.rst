@@ -3,7 +3,7 @@
 :slug: bro-do-you-even-pillow
 :tags: Pillow, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 .. image:: /images/bro-do-you-even-pillow.jpg
     :alt: Bro, do you even Pillow?

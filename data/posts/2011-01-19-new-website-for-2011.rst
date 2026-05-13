@@ -3,7 +3,7 @@
 :slug: new-website-for-2011
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Edit: In addition to "cool overlays", I added a couple Plone-core todo items (that I may like to PLIP/implement)
 ----------------------------------------------------------------------------------------------------------------

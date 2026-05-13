@@ -3,7 +3,7 @@
 :slug: help-improve-plones-api-documentation
 :tags: Plone, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 Sponsor my trip to the Plone "DocComm" Sprint in California
 -----------------------------------------------------------

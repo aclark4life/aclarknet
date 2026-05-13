@@ -3,7 +3,7 @@
 :slug: a-report-on-plonetheme
 :tags: Buildout, Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Plone Theme Buildout
 ----------------------------------------

@@ -3,7 +3,7 @@
 :slug: getting-excited-about-plone-as-eggs
 :tags: Buildout, Plone, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 Updated for 4.x
 ----------------------------------------

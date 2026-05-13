@@ -3,7 +3,7 @@
 :slug: plone-secrets-episode-3-collective-recaptcha-installation
 :tags: Buildout, Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Another one from the: "wow, this approach is totally and completely non-obvious to beginners" department.
 ---------------------------------------------------------------------------------------------------------

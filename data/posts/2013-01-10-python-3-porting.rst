@@ -3,7 +3,7 @@
 :slug: python-3-porting
 :tags: Python
 :source: blog-2017
-:status: published
+:status: draft
 
 The 3 in 2013 is for Python 3
 ----------------------------------------

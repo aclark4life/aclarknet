@@ -3,7 +3,7 @@
 :slug: plone-secrets-episode-5-the-community
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 This is a non-technical post on the Plone community, why it's so great, how it functions, and some details that may help one understand it from the outside looking in (AKA The "secrets")
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

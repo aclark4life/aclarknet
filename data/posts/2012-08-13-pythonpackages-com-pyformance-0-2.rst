@@ -3,7 +3,7 @@
 :slug: pythonpackages-com-pyformance-0-2
 :tags: Python
 :source: blog-2017
-:status: published
+:status: draft
 
 pythonpackages.com helps Python programmers package and release their software with just a few clicks.
 ------------------------------------------------------------------------------------------------------

@@ -3,7 +3,7 @@
 :slug: new-pyramid-site
 :tags: Pyramid, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 .. image:: /images/screenshot.png
     :width: 98%

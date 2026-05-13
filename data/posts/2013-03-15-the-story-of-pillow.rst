@@ -3,7 +3,7 @@
 :slug: the-story-of-pillow
 :tags: Pillow, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 On March 4, 2013 I got an email from the Python Software Foundation (PSF):
 

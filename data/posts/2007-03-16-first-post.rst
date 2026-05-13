@@ -2,7 +2,7 @@
 :date: 2007-03-16
 :slug: first-post
 :source: blog
-:status: published
+:status: draft
 
 |
 

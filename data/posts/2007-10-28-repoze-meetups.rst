@@ -3,7 +3,7 @@
 :slug: repoze-meetups
 :tags: Python, Zope
 :source: blog-2017
-:status: published
+:status: draft
 
 Plumbing Zope into the WSGI Pipeline
 ----------------------------------------

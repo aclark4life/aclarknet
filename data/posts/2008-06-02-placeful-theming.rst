@@ -3,7 +3,7 @@
 :slug: placeful-theming
 :tags: Plone, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 For some themed location /foo/bar, you want "bar" and everything below it to look different than "foo".
 -------------------------------------------------------------------------------------------------------

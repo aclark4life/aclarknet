@@ -3,7 +3,7 @@
 :slug: the-apache-modules-for-xdv
 :tags: Buildout
 :source: blog-2017
-:status: published
+:status: draft
 
 Apache Buildout
 ----------------------------------------

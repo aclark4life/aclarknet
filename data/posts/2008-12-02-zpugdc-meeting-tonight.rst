@@ -3,7 +3,7 @@
 :slug: zpugdc-meeting-tonight
 :tags: Python, Zope
 :source: blog-2017
-:status: published
+:status: draft
 
 ZPUGDC & DC Python Meetup: December Meeting
 -------------------------------------------

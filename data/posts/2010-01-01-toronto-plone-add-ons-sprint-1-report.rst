@@ -3,7 +3,7 @@
 :slug: toronto-plone-add-ons-sprint-1-report
 :tags: Buildout, Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Via Toronto Plone Users Group
 ----------------------------------------

@@ -3,7 +3,7 @@
 :slug: blood-sweat-tears-and-a-new-plone-book
 :tags: Buildout, Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Plone 3.3 Site Administration
 ----------------------------------------

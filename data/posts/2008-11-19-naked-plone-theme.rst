@@ -3,7 +3,7 @@
 :slug: naked-plone-theme
 :tags: Plone, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 Products.naked_plone
 ----------------------------------------

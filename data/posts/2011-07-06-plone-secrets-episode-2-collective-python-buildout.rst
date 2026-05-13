@@ -3,7 +3,7 @@
 :slug: plone-secrets-episode-2-collective-python-buildout
 :tags: Buildout, Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 You know who uses the (Plone) Collective Python buildout? Me neither, because we don't have any good statistics on its use (that I know of).  If it were a Python package, we could at least `count the number of times it has been downloaded`_.
 

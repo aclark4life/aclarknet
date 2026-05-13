@@ -3,7 +3,7 @@
 :slug: top-10-reasons-plone-3-3-site-admin-book-is-still-for-you
 :tags: Buildout, Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 About a year ago, I was frantically trying to finish `Plone 3.3 Site Administration`_ in time to teach it at Plone Symposium East 2010 at Penn State University as well as publish it. I remember staying up all night to finish & submit the final drafts then driving 4 hours to Penn State, then teaching for 8 hours before I was finally able to crash (but not before consuming a large and delicious cheeseburger and a Yuengling from the `Nittany Lion Inn`_ room service, yum).
 

@@ -3,7 +3,7 @@
 :slug: vagrant-puppet-and-mozilla-oh-my
 :tags: Mozilla, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 This post is only loosely Python related and not at all Plone related, but I thought folks might enjoy hearing about Vagrant and Puppet because these tools may help you do your Plone and Python jobs better.
 

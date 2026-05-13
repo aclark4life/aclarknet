@@ -3,7 +3,7 @@
 :slug: dc-python-jobs
 :tags: Misc
 :source: blog-2017
-:status: published
+:status: draft
 
 This information may eventually live within the DC Python corpus, but for now I prefer to post-it-now-move-it-later.
 --------------------------------------------------------------------------------------------------------------------

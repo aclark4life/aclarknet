@@ -3,7 +3,7 @@
 :slug: bootstrapping-a-buildout-1-6-release
 :tags: Buildout
 :source: blog-2017
-:status: published
+:status: draft
 
 A lot of work has been done on Buildout lately.
 -----------------------------------------------

@@ -3,7 +3,7 @@
 :slug: spaces-fixed
 :tags: Misc
 :source: blog-2017
-:status: published
+:status: draft
 
 Thanks Apple.
 ----------------------------------------

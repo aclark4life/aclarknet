@@ -3,7 +3,7 @@
 :slug: introducing-plock-pins
 :tags: Buildout, Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 "Plock Pins are the greatest thing to happen to Plone since Buildout" — Alex Clark
 ----------------------------------------------------------------------------------

@@ -3,7 +3,7 @@
 :slug: mozilla-and-pypi
 :tags: Mozilla, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 VM setup for kitsune
 ----------------------------------------

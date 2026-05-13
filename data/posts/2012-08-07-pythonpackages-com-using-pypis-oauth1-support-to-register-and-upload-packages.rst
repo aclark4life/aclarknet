@@ -3,7 +3,7 @@
 :slug: pythonpackages-com-using-pypis-oauth1-support-to-register-and-upload-packages
 :tags: Python
 :source: blog-2017
-:status: published
+:status: draft
 
 TL;DR PyPI has OAuth1 support; pythonpackages.com uses it to send your GitHub repos to PyPI.
 --------------------------------------------------------------------------------------------

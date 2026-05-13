@@ -3,7 +3,7 @@
 :slug: yup-this-blog-is-now-powered-by-ablog
 :tags: Python
 :source: blog-2017
-:status: published
+:status: draft
 
 Blog functionality for Sphinx
 ----------------------------------------

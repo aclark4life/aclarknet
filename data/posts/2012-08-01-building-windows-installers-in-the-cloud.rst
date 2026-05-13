@@ -3,7 +3,7 @@
 :slug: building-windows-installers-in-the-cloud
 :tags: Pillow, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 With pythonpackages.com I want to solve real problems for people today.
 -----------------------------------------------------------------------

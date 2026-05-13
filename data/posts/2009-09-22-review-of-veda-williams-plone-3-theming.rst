@@ -3,7 +3,7 @@
 :slug: review-of-veda-williams-plone-3-theming
 :tags: Buildout, Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Review all the chapters
 ----------------------------------------

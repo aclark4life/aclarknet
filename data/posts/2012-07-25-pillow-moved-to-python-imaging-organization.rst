@@ -3,7 +3,7 @@
 :slug: pillow-moved-to-python-imaging-organization
 :tags: Pillow, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 On 7/30/2010 Pillow, the friendly PIL fork, was released.
 ---------------------------------------------------------

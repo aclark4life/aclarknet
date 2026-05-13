@@ -3,7 +3,7 @@
 :slug: new-years-python-meme-2014
 :tags: Python
 :source: blog-2017
-:status: published
+:status: draft
 
 Tarek Ziadé's New Year's Python Meme
 ----------------------------------------

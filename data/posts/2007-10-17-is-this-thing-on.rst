@@ -3,7 +3,7 @@
 :slug: is-this-thing-on
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Sorry about the duplicate posts.
 ----------------------------------------

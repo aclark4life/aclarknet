@@ -3,7 +3,7 @@
 :slug: my-plone-days-october-2007
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 A commitment to the 10% Plone Manifesto.
 ----------------------------------------

@@ -3,7 +3,7 @@
 :slug: september-2008-is-the-month-of-plone-org
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Upgrade to Plone 3 before the conference
 ----------------------------------------

@@ -3,7 +3,7 @@
 :slug: plone-org-upgrade-remote-sprint
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Join us on IRC
 ----------------------------------------

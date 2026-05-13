@@ -3,7 +3,7 @@
 :slug: spaces-spaces-spaces-fix-for-spaces-app-in-mac-os-x-leopard
 :tags: Misc
 :source: blog-2017
-:status: published
+:status: draft
 
 Spaces.. Spaces.. Spaces.. App
 ----------------------------------------

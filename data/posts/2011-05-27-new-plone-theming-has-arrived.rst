@@ -3,7 +3,7 @@
 :slug: new-plone-theming-has-arrived
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Due to the new Diazo theming features now available, I am very excited about the recent release of Plone 4.1rc2
 ---------------------------------------------------------------------------------------------------------------

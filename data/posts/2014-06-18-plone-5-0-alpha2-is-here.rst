@@ -3,7 +3,7 @@
 :slug: plone-5-0-alpha2-is-here
 :tags: Plone, Pyramid
 :source: blog-2017
-:status: published
+:status: draft
 
 This post is long overdue since Plone 5 alpha 2 was released on 2014-04-20!
 ---------------------------------------------------------------------------

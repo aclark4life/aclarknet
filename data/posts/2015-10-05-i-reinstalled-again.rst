@@ -3,7 +3,7 @@
 :slug: i-reinstalled-again
 :tags: Misc
 :source: blog-2017
-:status: published
+:status: draft
 
 A while back I wrote about reinstalling OS X: https://aclark.net/blog/2010/10/15/i-reinstalled-recently/ This is another one of those posts.
 

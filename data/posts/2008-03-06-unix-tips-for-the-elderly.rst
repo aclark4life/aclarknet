@@ -2,7 +2,7 @@
 :date: 2008-03-06
 :slug: unix-tips-for-the-elderly
 :source: blog
-:status: published
+:status: draft
 
 |
 

@@ -2,7 +2,7 @@
 :date: 2011-05-27
 :slug: new-plone-theming-has-arrived-pelican
 :source: pelican-blog
-:status: published
+:status: draft
 
 "New" Plone theming has arrived
  Tweet

@@ -3,7 +3,7 @@
 :slug: pillow-python-3
 :tags: Pillow, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 PIL is on its way to Python 3 via Pillow.
 -----------------------------------------

@@ -3,7 +3,7 @@
 :slug: a-sane-buildout-for-repoze-zope2-plone
 :tags: Buildout, Plone, Python, Zope
 :source: blog-2017
-:status: published
+:status: draft
 
 This is a follow-up to Martin Aspeli's introduction to repoze and Plone from last year
 --------------------------------------------------------------------------------------

@@ -3,7 +3,7 @@
 :slug: plone-org-maintenance
 :tags: Buildout, Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 I am planning to do some work on the plone.org server and website by the end of the year.
 -----------------------------------------------------------------------------------------

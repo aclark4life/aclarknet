@@ -3,7 +3,7 @@
 :slug: a-simple-printer-of-nested-lists
 :tags: Python
 :source: blog-2017
-:status: published
+:status: draft
 
 A rant
 ----------------------------------------

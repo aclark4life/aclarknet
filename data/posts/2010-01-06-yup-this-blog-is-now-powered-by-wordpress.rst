@@ -3,7 +3,7 @@
 :slug: yup-this-blog-is-now-powered-by-wordpress
 :tags: Misc
 :source: blog-2017
-:status: published
+:status: draft
 
 How I learned to stop worrying and use the right tool for the job.
 ------------------------------------------------------------------

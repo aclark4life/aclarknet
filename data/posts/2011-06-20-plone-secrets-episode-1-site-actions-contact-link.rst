@@ -3,7 +3,7 @@
 :slug: plone-secrets-episode-1-site-actions-contact-link
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Today I am introducing a new category of blog entry called Plone secrets.
 -------------------------------------------------------------------------

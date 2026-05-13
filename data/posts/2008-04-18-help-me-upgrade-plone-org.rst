@@ -3,7 +3,7 @@
 :slug: help-me-upgrade-plone-org
 :tags: Buildout, Plone, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 Because plone.org should run the latest Plone
 ---------------------------------------------

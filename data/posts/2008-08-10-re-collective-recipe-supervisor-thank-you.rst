@@ -3,7 +3,7 @@
 :slug: re-collective-recipe-supervisor-thank-you
 :tags: Buildout, Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Now even easier to use Supervisor
 ----------------------------------------

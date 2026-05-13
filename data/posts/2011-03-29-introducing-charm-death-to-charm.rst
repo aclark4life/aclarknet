@@ -3,7 +3,7 @@
 :slug: introducing-charm-death-to-charm
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 A long time ago (several years ago, or more) one of my first Plone jobs was importing content from the file system (put there by another CMS) to a client's Plone 2.5 website (see: `http://blip.tv/file/761624/`_).
 

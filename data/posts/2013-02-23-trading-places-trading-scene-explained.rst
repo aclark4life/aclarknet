@@ -2,7 +2,7 @@
 :date: 2013-02-23
 :slug: trading-places-trading-scene-explained
 :source: blog
-:status: published
+:status: draft
 
 |
 

@@ -3,7 +3,7 @@
 :slug: hostout-rules
 :tags: Buildout, Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 As in "dominates", not a "list of rules"
 ----------------------------------------

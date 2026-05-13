@@ -3,7 +3,7 @@
 :slug: introducing-the-plone-kitty
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Actually: re-introducing the Plone Kitty from Plone 1!
 ------------------------------------------------------

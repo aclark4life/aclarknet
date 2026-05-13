@@ -3,7 +3,7 @@
 :slug: pillow-2-9-0-is-almost-out
 :tags: Pillow, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 Pillow 2.9.0 will be released on July 1, 2015.
 ----------------------------------------------

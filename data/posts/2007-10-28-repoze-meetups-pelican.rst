@@ -2,7 +2,7 @@
 :date: 2007-10-28
 :slug: repoze-meetups-pelican
 :source: pelican-blog
-:status: published
+:status: draft
 
 Repoze "meetups"
  Tweet

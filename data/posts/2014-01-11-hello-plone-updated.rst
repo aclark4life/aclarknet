@@ -3,7 +3,7 @@
 :slug: hello-plone-updated
 :tags: Buildout, Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Over two years ago I wrote a blog entry called `"Hello, Plone!" <https://aclark.net/blog/2011/08/20/hello-plone/>`_.
 

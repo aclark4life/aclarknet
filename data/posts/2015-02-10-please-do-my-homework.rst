@@ -3,7 +3,7 @@
 :slug: please-do-my-homework
 :tags: Misc
 :source: blog-2017
-:status: published
+:status: draft
 
 Reminiscent of A Simple Printer of Nested Lists.
 ------------------------------------------------

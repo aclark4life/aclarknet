@@ -3,7 +3,7 @@
 :slug: i-love-checkoutmanager-and-dotfiles
 :tags: Misc, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 An ode to my OS X development workstation setup [1]_
 

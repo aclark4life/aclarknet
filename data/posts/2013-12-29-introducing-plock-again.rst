@@ -3,7 +3,7 @@
 :slug: introducing-plock-again
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 A few months ago I introduced Plock: the Plone-installer for the Pip-loving crowd.
 ----------------------------------------------------------------------------------

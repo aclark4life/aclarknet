@@ -2,7 +2,7 @@
 :date: 2014-10-02
 :slug: pillow-runs-itself
 :source: blog
-:status: published
+:status: draft
 
 |
 

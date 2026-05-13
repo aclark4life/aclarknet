@@ -3,7 +3,7 @@
 :slug: updated-django-website
 :tags: Django, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 One year later
 ----------------------------------------

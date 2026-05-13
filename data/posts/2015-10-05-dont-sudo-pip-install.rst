@@ -3,7 +3,7 @@
 :slug: dont-sudo-pip-install
 :tags: Misc
 :source: blog-2017
-:status: published
+:status: draft
 
 How many times have you seen this?
 ----------------------------------------

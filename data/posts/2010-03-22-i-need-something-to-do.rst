@@ -3,7 +3,7 @@
 :slug: i-need-something-to-do
 :tags: Misc
 :source: blog-2017
-:status: published
+:status: draft
 
 The Pitch
 ----------------------------------------

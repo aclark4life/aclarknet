@@ -3,7 +3,7 @@
 :slug: project-makefile-open-business
 :tags: Plone, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 Makefile for Python Web Development & Related Projects
 ------------------------------------------------------

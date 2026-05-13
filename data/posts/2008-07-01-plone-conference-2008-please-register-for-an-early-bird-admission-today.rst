@@ -3,7 +3,7 @@
 :slug: plone-conference-2008-please-register-for-an-early-bird-admission-today
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Join 300-400 of your closest friends for a 7-day party
 ------------------------------------------------------

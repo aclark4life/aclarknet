@@ -2,4 +2,4 @@
 :date: 2010-01-06
 :slug: you-know-me-first-cutmov
 :source: pelican-blog
-:status: published
+:status: draft

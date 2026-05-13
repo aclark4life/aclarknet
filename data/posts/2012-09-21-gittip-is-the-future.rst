@@ -3,7 +3,7 @@
 :slug: gittip-is-the-future
 :tags: Misc, Pillow
 :source: blog-2017
-:status: published
+:status: draft
 
 The core is small weekly gifts. The idea is that if 1,000 people give $1 a week to a great programmer, musician, scientist, teacher, etc., then that frees them up to pursue their vision even further for making the world better.
 

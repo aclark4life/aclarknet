@@ -3,7 +3,7 @@
 :slug: hello-plone
 :tags: Buildout, Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 This is a Plone "Hello, World!" style tutorial/application for Python programmers. See https://github.com/aclark4life/hello_plone for more.
 

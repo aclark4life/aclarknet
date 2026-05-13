@@ -3,7 +3,7 @@
 :slug: nirvana-old-age-interrupted
 :tags: Music
 :source: blog-2017
-:status: published
+:status: draft
 
 |
 

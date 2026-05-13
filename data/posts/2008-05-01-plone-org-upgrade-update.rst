@@ -3,7 +3,7 @@
 :slug: plone-org-upgrade-update
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Thank You
 ----------------------------------------

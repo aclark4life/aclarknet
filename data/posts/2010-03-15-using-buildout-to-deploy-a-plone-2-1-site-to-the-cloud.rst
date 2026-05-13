@@ -3,7 +3,7 @@
 :slug: using-buildout-to-deploy-a-plone-2-1-site-to-the-cloud
 :tags: Buildout, Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Plone 2.1 Buildout
 ----------------------------------------

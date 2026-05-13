@@ -3,7 +3,7 @@
 :slug: i-love-collective-recipe-plonesite
 :tags: Buildout, Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Whenever I answer tech support questions, I usually begin with a clean slate
 ----------------------------------------------------------------------------

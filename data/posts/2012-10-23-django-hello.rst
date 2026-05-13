@@ -3,7 +3,7 @@
 :slug: django-hello
 :tags: Django, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 Django doesn't really need a hello world style introduction, its documentation speaks for itself.
 -------------------------------------------------------------------------------------------------

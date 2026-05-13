@@ -3,7 +3,7 @@
 :slug: usergroup-a-palooza
 :tags: Python, Zope
 :source: blog-2017
-:status: published
+:status: draft
 
 Updated Zope User Group Information
 ----------------------------------------

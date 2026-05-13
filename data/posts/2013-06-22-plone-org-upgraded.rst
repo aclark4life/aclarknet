@@ -3,7 +3,7 @@
 :slug: plone-org-upgraded
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Recently I upgraded plone.org from Plone 4.2 to Plone 4.3.
 ----------------------------------------------------------

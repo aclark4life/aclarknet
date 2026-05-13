@@ -3,7 +3,7 @@
 :slug: collective-transmogrifier-without-plone
 :tags: Buildout, Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Yes!
 ----------------------------------------

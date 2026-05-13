@@ -3,7 +3,7 @@
 :slug: gittip-misundood
 :tags: Misc
 :source: blog-2017
-:status: published
+:status: draft
 
 Or, they do not understand how I use it.
 -------------------------------------------------------------------------

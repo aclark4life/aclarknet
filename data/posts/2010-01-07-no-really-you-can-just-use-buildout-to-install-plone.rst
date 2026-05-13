@@ -3,7 +3,7 @@
 :slug: no-really-you-can-just-use-buildout-to-install-plone
 :tags: Buildout, Plone, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 This is a follow up to my 'Getting Excited about Plone as Eggs' post.
 ---------------------------------------------------------------------

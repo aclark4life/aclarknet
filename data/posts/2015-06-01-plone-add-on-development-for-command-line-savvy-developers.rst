@@ -3,7 +3,7 @@
 :slug: plone-add-on-development-for-command-line-savvy-developers
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 With Plone 5 heating up, it's time for me to go all-in again on Plone. To that end, here's a new tutorial for command-line savvy developers who may be totally unfamiliar with Python but want to learn Plone. This time, in the form of an embedded Gist:
 

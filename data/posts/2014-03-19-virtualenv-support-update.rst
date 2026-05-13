@@ -3,7 +3,7 @@
 :slug: virtualenv-support-update
 :tags: Buildout, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 .. image:: /images/virtualenv-support-update.jpg
     :alt: alternate text

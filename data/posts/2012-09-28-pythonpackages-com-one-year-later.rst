@@ -3,7 +3,7 @@
 :slug: pythonpackages-com-one-year-later
 :tags: Pyramid, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 We are rolling up on the one year anniversary of pythonpackages.com (in October).
 ---------------------------------------------------------------------------------

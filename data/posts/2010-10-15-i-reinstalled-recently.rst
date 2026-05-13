@@ -3,7 +3,7 @@
 :slug: i-reinstalled-recently
 :tags: Misc
 :source: blog-2017
-:status: published
+:status: draft
 
 OS X Installation Notes
 ----------------------------------------

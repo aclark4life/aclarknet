@@ -3,7 +3,7 @@
 :slug: test-plone-tmp
 :tags: Plone, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 Since Day 1 with Plone circa 2004, I've always taken pride in and greatly enjoyed refining my development environment.
 ----------------------------------------------------------------------------------------------------------------------

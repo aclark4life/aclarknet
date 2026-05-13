@@ -3,7 +3,7 @@
 :slug: supervisor-rocks
 :tags: Buildout, Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 This is a reiteration of Carlos de la Guardia's recent post on the subject.
 

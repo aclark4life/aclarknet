@@ -3,7 +3,7 @@
 :slug: zope2-bootstrap
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 Bootstrap all the things, including Zope2.
 ------------------------------------------

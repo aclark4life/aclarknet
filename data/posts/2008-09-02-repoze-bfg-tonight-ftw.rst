@@ -3,7 +3,7 @@
 :slug: repoze-bfg-tonight-ftw
 :tags: Python, Zope
 :source: blog-2017
-:status: published
+:status: draft
 
 Tonight ex-Zope Corporation developer Chris McDonough unveils his BFG
 ---------------------------------------------------------------------

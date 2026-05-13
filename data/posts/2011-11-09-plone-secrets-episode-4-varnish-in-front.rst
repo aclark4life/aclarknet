@@ -3,7 +3,7 @@
 :slug: plone-secrets-episode-4-varnish-in-front
 :tags: Plone
 :source: blog-2017
-:status: published
+:status: draft
 
 This just in from the production department: use Varnish. (And please forgive the heavily meme-laden approach to describing these techniques.)
 ----------------------------------------------------------------------------------------------------------------------------------------------

@@ -3,7 +3,7 @@
 :slug: is-anyone-using-plone-orgs-new-pypi-functionality
 :tags: Plone, Python
 :source: blog-2017
-:status: published
+:status: draft
 
 python setup.py upload -r plone.org
 ----------------------------------------

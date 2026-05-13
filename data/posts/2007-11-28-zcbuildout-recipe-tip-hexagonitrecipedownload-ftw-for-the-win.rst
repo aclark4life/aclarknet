@@ -2,7 +2,7 @@
 :date: 2007-11-28
 :slug: zcbuildout-recipe-tip-hexagonitrecipedownload-ftw-for-the-win
 :source: blog-2017
-:status: published
+:status: draft
 
 Sometimes a Plone add-on is distributed as a compressed archive and is extracted to the ``foo/`` directory but the Python package is named ``bar``. This can be a problem when using `plone.recipe.distros <https://pypi.org/project/plone.recipe.distros/>`_ because when ``bar`` is extracted to ``parts/productdistros/foo`` the Plone add-on will not be loaded by Zope.
 
