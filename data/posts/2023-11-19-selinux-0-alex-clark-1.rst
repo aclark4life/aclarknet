@@ -106,7 +106,7 @@ I would love to say I immediately recognized the issue as being related to SE Li
 
     *"Maybe the version of Samba is too old!"*
 
-And then there was hombrew, and the brew was good
+And then there was Homebrew, and the brew was good
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 My experience with Homebrew on macOS led me to try running Samba on Linux via Homebrew. It worked! The Samba version was newer, and the connection worked fine. Unfortunately I couldn't get systemd to run the Homebrew version of Samba, so after fighting with that for a while, I gave up.
