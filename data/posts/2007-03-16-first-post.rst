@@ -22,13 +22,13 @@ I have decided to start a blog. Why? Because I can create one with Plone. But al
 Build Tools
 -----------
 
-This post is about my |build_tools|. I enjoy typing:
+This post is about my |build_tools|, a shell script that spins up a Zope instance with add-on products. Running:
 
 ::
 
     newzope test-site ProductA ProductB ProductC
 
-and having a working instance a few seconds later with products A, B and C installed.
+would produce a working instance a few seconds later with products A, B and C installed.
 
 Alternatives
 ------------
@@ -36,8 +36,8 @@ Alternatives
 I used Buildout for the first time at the |baarn_sprint| and I've also used Chris McDonough's Buildit. There are probably even more options to choose from, but at the time these were the current and likely better alternatives:
 
 - |buildout|
-- :strike:`Buildit`
-- :strike:`Instance Manager`
+- Buildit
+- Instance Manager
 
 .. https://stackoverflow.com/a/11718325
 
