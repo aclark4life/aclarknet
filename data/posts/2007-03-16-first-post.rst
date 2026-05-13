@@ -22,7 +22,7 @@ I have decided to start a blog. Why? Because I can create one with Plone. But al
 Build Tools
 -----------
 
-This post is about my |build_tools|. I used it for the first time at the |baarn_sprint| and I've also used Chris McDonough's Buildit. There are probably even more options to choose from, but I enjoy typing:
+This post is about my |build_tools|. I enjoy typing:
 
 ::
 
@@ -33,7 +33,7 @@ and having a working instance a few seconds later with products A, B and C insta
 Alternatives
 ------------
 
-At the time, these were the current and likely better alternatives:
+I used Buildout for the first time at the |baarn_sprint| and I've also used Chris McDonough's Buildit. There are probably even more options to choose from, but at the time these were the current and likely better alternatives:
 
 - |buildout|
 - :strike:`Buildit`
