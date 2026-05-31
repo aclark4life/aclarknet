@@ -37,7 +37,8 @@
                 {% if field_values %}
                   {% with model_name=field_values.0.1 object_id=field_values.1.1 %}
                     <tr onclick="window.location='{% url model_name|add:"_view" object_id %}'"
-                        style="cursor: pointer">
+                        style="cursor: pointer"
+                        {% if field_values|is_not_invoiced %}class="table-warning"{% endif %}>
                       <td onclick="event.stopPropagation();">
                         <input type="checkbox" name="entry_id" value="{{ object_id }}"/>
                       </td>

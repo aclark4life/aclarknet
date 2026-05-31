@@ -75,3 +75,19 @@ def format_field_value(field_value, field_name):
     else:
         # For all other fields, default to empty string if None
         return field_value if field_value is not None else ""
+
+
+@register.filter
+def is_not_invoiced(field_values):
+    """Return True if the row contains an invoice field with no invoice assigned.
+
+    Args:
+        field_values: List of (field_name, field_value) tuples for a table row.
+
+    Returns:
+        bool: True if an 'invoice' field exists and its value is None.
+    """
+    for field_name, field_value in field_values:
+        if field_name == "invoice" and field_value is None:
+            return True
+    return False
