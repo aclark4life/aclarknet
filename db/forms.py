@@ -242,6 +242,7 @@ class ProjectForm(forms.ModelForm):
                 Field("name", css_class="form-control bg-transparent border"),
                 css_class="col-sm-6",
             ),
+            Div(Field("client", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("start_date", css_class="form-control"), css_class="col-sm-6"),
             Div(Field("end_date", css_class="form-control"), css_class="col-sm-6"),
             Div(
