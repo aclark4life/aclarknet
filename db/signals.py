@@ -15,7 +15,9 @@ def send_email_on_time_creation(sender, instance, created, **kwargs):
     if created:
         user = instance.user
         username = user.username if user else "Unknown User"
-        # Always send email to aclark@aclark.net when a new time entry is created
+        # Skip notification if user has email notifications disabled (e.g. self-created entries)
+        if not user or not getattr(user, "mail", False):
+            return
         subject = f"New Time object created by {username}"
         time_object_url = "https://aclark.net" + reverse(
             "time_view", kwargs={"pk": instance.pk}

@@ -54,6 +54,16 @@
                 </td>
               </tr>
               <tr>
+                <th scope="row" class="text-muted">Email Notifications:</th>
+                <td>
+                  {% if profile_user.mail %}
+                    <span class="badge bg-success">Enabled</span>
+                  {% else %}
+                    <span class="badge bg-secondary">Disabled</span>
+                  {% endif %}
+                </td>
+              </tr>
+              <tr>
                 <th scope="row" class="text-muted">Staff Status:</th>
                 <td>
                   {% if profile_user.is_staff %}
