@@ -23,10 +23,8 @@
              href="/">Home</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle"
-             href="/about/"
-             data-bs-toggle="dropdown"
-             aria-expanded="false">About</a>
+          <a class="nav-link dropdown-toggle {% if request.path == '/about/' %}active{% endif %}"
+             href="/about/">About</a>
           <ul class="dropdown-menu dropdown-menu-dark">
             <li><a class="dropdown-item" href="/about/#team">Team</a></li>
             <li><a class="dropdown-item" href="/about/#dcpython">Community</a></li>
@@ -37,10 +35,8 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle"
-             href="/clients/"
-             data-bs-toggle="dropdown"
-             aria-expanded="false">Clients</a>
+          <a class="nav-link dropdown-toggle {% if request.path == '/clients/' %}active{% endif %}"
+             href="/clients/">Clients</a>
           <ul class="dropdown-menu dropdown-menu-dark">
             <li><a class="dropdown-item" href="/clients/#testimonials">Testimonials</a></li>
           </ul>
