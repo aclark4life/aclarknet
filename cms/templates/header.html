@@ -1,99 +1,89 @@
-{% load wagtailcore_tags static %}
+{% load wagtailcore_tags %}
 {% wagtail_site as current_site %}
-<div class="app-header" style="background-image: url({% static 'img/startup-1.jpg' %})";
-     <div class="app-graph">
-  <div class="container py-2 app-navbar">
-    <nav class="navbar navbar-transparent navbar-padded navbar-expand-md">
-      <a class="navbar-brand me-auto text-light p-2 font-monospace border border-light"
-         href="/">ACLARK.NET,LLC</a>
-      <button class="navbar-toggler p-3"
-              type="button"
-              data-bs-toggle="offcanvas"
-              data-bs-target="#offcanvasExample"
-              aria-controls="offcanvasExample"
-              aria-expanded="false"
-              aria-label="Toggle navigation"></button>
-      <div class="d-none d-md-block">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a id="home-nav"
-               class="nav-link"
-               aria-current="page"
-               href="/">Home</a>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-nowrap exclude-from-hover "
-               aria-current="page"
-               href="/about/">About</a>
-            <ul class="dropdown-menu">
-              <li>
-                <a class="dropdown-item" href="/about/#team">Team</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="/about/#dcpython">Community</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="/about/#book">Publications</a>
-              </li>
-            </ul>
-          </li>
-
-
-
-
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-nowrap exclude-from-hover "
-               aria-current="page"
-               href="/clients/">Clients</a>
-            <ul class="dropdown-menu">
-              <li>
-                <a class="dropdown-item" href="/clients/#testimonials">Testimonials</a>
-              </li>
-            </ul>
-          </li>
-
-
-
-
-
-          <li class="nav-item">
-            <a class="nav-link text-nowrap "
-               aria-current="page"
-               href="/services/">Services</a>
-          </li>
-
-
-
-
-
-          <li class="nav-item">
-            <a class="nav-link text-nowrap "
-               aria-current="page"
-               href="/careers/">Careers</a>
-          </li>
-
-
-          <li class="nav-item">
-            <a class="nav-link text-nowrap "
-               aria-current="page"
-               href="/contact-us/">Contact Us</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link exclude-from-hover"
-               data-bs-toggle="tooltip"
-               title="Go to dashboard"
-               href="{% url 'dashboard' %}">
-              <i class="fas fa-dashboard"></i>
+<nav class="preview-nav navbar navbar-expand-md">
+  <div class="container">
+    <a class="navbar-brand brand-mark" href="/">
+      <span class="main">ACLARK<span class="net">.NET</span><span class="sep">,</span>&nbsp;</span><span class="llc">LLC</span>
+    </a>
+    <button class="navbar-toggler border-0"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNav"
+            aria-controls="mainNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto align-items-center gap-1">
+        <li class="nav-item">
+          <a id="home-nav"
+             class="nav-link {% if request.path == '/' %}active{% endif %}"
+             aria-current="page"
+             href="/">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"
+             href="/about/"
+             data-bs-toggle="dropdown"
+             aria-expanded="false">About</a>
+          <ul class="dropdown-menu dropdown-menu-dark">
+            <li><a class="dropdown-item" href="/about/#team">Team</a></li>
+            <li><a class="dropdown-item" href="/about/#dcpython">Community</a></li>
+            <li><a class="dropdown-item" href="/about/#book">Publications</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/blog/">Blog</a></li>
+            <li><a class="dropdown-item" href="/now/">Now</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"
+             href="/clients/"
+             data-bs-toggle="dropdown"
+             aria-expanded="false">Clients</a>
+          <ul class="dropdown-menu dropdown-menu-dark">
+            <li><a class="dropdown-item" href="/clients/#testimonials">Testimonials</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/services/' %}active{% endif %}"
+             href="/services/">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/careers/' %}active{% endif %}"
+             href="/careers/">Careers</a>
+        </li>
+        <li class="nav-item ms-2">
+          <a class="btn-nav-cta" href="/contact-us/">Contact Us</a>
+        </li>
+        {% if request.user.is_authenticated %}
+          <li class="nav-item dropdown ms-3">
+            <a class="nav-link dropdown-toggle d-flex align-items-center gap-2"
+               href="#"
+               data-bs-toggle="dropdown"
+               aria-expanded="false">
+              <i class="fa-solid fa-circle-user fs-5"></i>
+              <span>{{ request.user.get_short_name|default:request.user.username }}</span>
             </a>
+            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" href="{% url 'profile_view' %}"><i class="fa-solid fa-user me-2"></i>Profile</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'dashboard' %}"><i class="fa-solid fa-gauge me-2"></i>Dashboard</a>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <a class="dropdown-item" href="{% url 'account_logout' %}"><i class="fa-solid fa-right-from-bracket me-2"></i>Sign Out</a>
+              </li>
+            </ul>
           </li>
-
-        </ul>
-      </div>
-    </nav>
+        {% else %}
+          <li class="nav-item ms-3">
+            <a class="nav-link" href="{% url 'account_login' %}" title="Sign In"><i class="fa-solid fa-circle-user fs-5"></i></a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
   </div>
-</div>
-</div>
-{% include 'blocks/lead_block.html' %}
+</nav>

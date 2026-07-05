@@ -1,0 +1,290 @@
+// ─────────────────────────────────────────────────────────────
+// Preview theme
+//
+// Shared visual language introduced on /design-preview/ and the
+// blog, now rolled out site-wide: dark sticky nav with brand mark,
+// eyebrow labels, and a consistent brand color system.
+// ─────────────────────────────────────────────────────────────
+:root {
+  --brand: #1997c6;
+  --brand-dark: #136f93;
+  --dark: #0f2b3d;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+/* ── BRAND MARK ── */
+.brand-mark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
+  text-decoration: none;
+  font-family: "Orbitron", sans-serif;
+  padding: 0 !important;
+
+  .main {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #fff;
+
+    .net {
+      color: #8899aa;
+      letter-spacing: normal;
+    }
+
+    .sep {
+      font-size: 0.75em;
+      letter-spacing: 0;
+      color: #8899aa;
+    }
+  }
+
+  .llc {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: #8899aa;
+  }
+}
+
+/* ── NAV ── */
+.preview-nav {
+  background: var(--dark);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.75rem 0;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  .nav-link {
+    color: #adb5bd;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    transition: color 0.15s, background 0.15s;
+
+    &:hover,
+    &.active {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  .btn-nav-cta {
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.4rem 1.1rem;
+    border-radius: 4px;
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    color: #fff;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+
+    &:hover {
+      background: #fff;
+      color: var(--dark);
+    }
+  }
+
+  .dropdown:hover > .dropdown-menu {
+    display: block;
+    margin-top: 0;
+  }
+
+  .navbar-toggler {
+    filter: invert(1);
+  }
+}
+
+/* ── HERO ── */
+.preview-hero {
+  position: relative;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center 30%;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(100deg, rgba(15, 43, 61, 0.88) 0%, rgba(19, 111, 147, 0.7) 55%, rgba(25, 151, 198, 0.4) 100%);
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1.15;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .lead {
+    font-size: 1.1rem;
+    opacity: 0.9;
+  }
+
+  .btn-hero-primary {
+    background: #fff;
+    color: var(--brand-dark);
+    border: none;
+    font-weight: 600;
+    padding: 0.65rem 1.75rem;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+
+    &:hover {
+      background: var(--brand);
+      color: #fff;
+    }
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    opacity: 0.7;
+  }
+}
+
+/* ── SECTION EYEBROW ── */
+.section-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--brand);
+}
+
+/* ── MISSION ── */
+.preview-mission {
+  background: #f8f9fa;
+}
+
+/* ── SPLIT SECTIONS ── */
+.preview-split img {
+  object-fit: cover;
+  height: 420px;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* ── CLIENTS RIBBON ── */
+.preview-ribbon {
+  background: var(--brand);
+
+  img {
+    filter: brightness(0) invert(1);
+    opacity: 0.65;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+/* ── CTA BAND ── */
+.preview-cta-band {
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 43, 61, 0.82);
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/* ── TECH GRID ── */
+.tech-item {
+  i {
+    color: var(--brand);
+    transition: transform 0.2s;
+  }
+
+  h6 {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #495057;
+    margin-top: 0.4rem;
+    margin-bottom: 0;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  &:hover i {
+    transform: scale(1.15);
+  }
+}
+
+.btn-brand-outline {
+  color: var(--brand);
+  border: 1px solid var(--brand);
+  background: transparent;
+  transition: background 0.15s, color 0.15s;
+
+  &:hover {
+    background: var(--brand);
+    color: #fff;
+  }
+}
+
+/* ── CARD PATTERN ── */
+.preview-card {
+  border: 1px solid #e9ecef;
+  transition: box-shadow 0.15s;
+
+  &:hover {
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* ── FOOTER ── */
+.preview-footer {
+  background: var(--dark);
+  color: #adb5bd;
+
+  a {
+    color: #adb5bd;
+    text-decoration: none;
+    transition: color 0.15s;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  .footer-brand a {
+    text-decoration: none;
+  }
+
+  .social-icon {
+    font-size: 1.3rem;
+    margin: 0 0.35rem;
+  }
+}

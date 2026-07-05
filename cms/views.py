@@ -180,7 +180,7 @@ Message:
 {message_text}
 
 ---
-This email was sent from the contact form at {self.request.build_absolute_uri('/')}
+This email was sent from the contact form at {self.request.build_absolute_uri("/")}
 """
 
             # Send email with improved headers for better deliverability
@@ -227,7 +227,7 @@ class HomeView(BaseCMSView):
             settings, "HOMEPAGE_MESSAGE", "Welcome to ACLARK.NET!"
         )
 
-        # Get featured testimonial for homepage
+        # Get featured testimonial(s) for homepage
         try:
             from db.models import Note
 
@@ -238,8 +238,14 @@ class HomeView(BaseCMSView):
                 .first()
             )
             context["testimonial"] = testimonial
+            context["testimonials"] = Note.objects.filter(is_testimonial=True).order_by(
+                "-created"
+            )[:3]
         except (ImportError, Exception):
             context["testimonial"] = None
+            context["testimonials"] = []
+
+        context["techs"] = _TECHS
 
         return context
 

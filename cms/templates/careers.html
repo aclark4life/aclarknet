@@ -1,27 +1,21 @@
 {% extends 'base.html' %}
+{% block title %}ACLARK.NET &middot; Careers{% endblock %}
 {% block content %}
-  <div class="container text-xs-center py-5">
-    <div class="row justify-content-center my-5">
-      <div class="col-10 col-sm-8 col-lg-6">
-        <h3 class="text-uppercase">Career Opportunities</h3>
-      </div>
-    </div>
-    <div class="row justify-content-center my-5">
-      <div class="col-10 col-sm-8 col-lg-6">
-        <div class="border-top border-bottom">
-          <i class="fa fa-users fa-5x p-4"></i>
-          <p>
-            We are always looking for talented and experienced professionals to join <a href="/about/#team">our team</a> of core developers.
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-7 text-center">
+        <p class="section-eyebrow mb-2">Careers</p>
+        <h2 class="fw-bold mb-5">Career Opportunities</h2>
+        <div class="p-4 rounded-3 preview-card mb-4">
+          <i class="fa fa-users fa-3x mb-3" style="color:var(--brand);"></i>
+          <p class="text-secondary lh-lg">
+            We are always looking for talented and experienced professionals to join <a href="/about/#team" class="text-decoration-none" style="color:var(--brand);">our team</a> of core developers.
           </p>
-          <p>
-            Please <a href="/contact-us/">contact us</a> to learn more about working with ACLARK.NET, LLC.
+          <p class="text-secondary lh-lg mb-0">
+            Please <a href="/contact-us/" class="text-decoration-none" style="color:var(--brand);">contact us</a> to learn more about working with ACLARK.NET, LLC.
           </p>
         </div>
-      </div>
-    </div>
-    <div class="row justify-content-center my-5">
-      <div class="col-10 col-sm-8 col-lg-6">
-        <a class="btn btn-outline-primary" href="/contact-us/">Contact Us</a>
+        <a class="btn btn-brand-outline" href="/contact-us/">Contact Us</a>
       </div>
     </div>
   </div>

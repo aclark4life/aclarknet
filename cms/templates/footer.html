@@ -1,26 +1,39 @@
 {% load wagtailcore_tags %}
-<footer class="py-5 text-center text-small footer mt-auto border-top py-3">
-  {% wagtail_site as current_site %}
-  <p class="mb-1">&copy; 2004 &mdash; {% now "Y" %} ACLARK.NET, LLC</p>
-  <ul class="list-inline">
-    <li class="list-inline-item">
-      <a class="text-secondary text-decoration-none {% if request.path == '/' %}active{% endif %}"
-         href="/">Home</a>
-    </li>
-    {% for child in current_site.root_page.get_children %}
-      <li class="list-inline-item">
-        <a class="text-secondary text-decoration-none {% if request.path == child.url %}active{% endif %}"
-           href="{{ child.url }}">{{ child }}</a>
-      </li>
-    {% endfor %}
-  </ul>
-  <a class="text-light mx-1"
-     target="_blank"
-     href="https://linkedin.com/company/aclarknetllc"><i class="fa-brands fa-linkedin fa-3x"></i><span class="visually-hidden">LinkedIn</span></a>
-  <a class="text-light mx-1"
-     target="_blank"
-     href="https://github.com/aclark4life/aclarknet"><i class="fa-brands fa-github fa-3x"></i><span class="visually-hidden">GitHub</span></a>
-  <a class="text-light mx-1"
-     target="_blank"
-     href="https://aclarknet.readthedocs.io/"><i class="fa-solid fa-book fa-3x"></i><span class="visually-hidden">Documentation</span></a>
+{% wagtail_site as current_site %}
+<footer class="preview-footer py-4 mt-auto">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-4 text-center text-md-start footer-brand mb-3 mb-md-0">
+        <a class="brand-mark" href="/">
+          <span class="main">ACLARK<span class="net">.NET</span><span class="sep">,</span>&nbsp;</span><span class="llc">LLC</span>
+        </a>
+      </div>
+      <div class="col-md-4 text-center mb-3 mb-md-0">
+        <ul class="list-inline mb-1">
+          <li class="list-inline-item">
+            <a class="{% if request.path == '/' %}active{% endif %}" href="/">Home</a>
+          </li>
+          {% for child in current_site.root_page.get_children %}
+            <li class="list-inline-item">·</li>
+            <li class="list-inline-item">
+              <a class="{% if request.path == child.url %}active{% endif %}"
+                 href="{{ child.url }}">{{ child }}</a>
+            </li>
+          {% endfor %}
+          <li class="list-inline-item">·</li>
+          <li class="list-inline-item"><a href="/blog/">Blog</a></li>
+        </ul>
+        <p class="small mb-0">&copy; 2004 &ndash; {% now "Y" %} ACLARK.NET, LLC</p>
+      </div>
+      <div class="col-md-4 text-center text-md-end">
+        <a class="social-icon"
+           target="_blank"
+           href="https://linkedin.com/company/aclarknetllc"><i class="fa-brands fa-linkedin"></i><span class="visually-hidden">LinkedIn</span></a>
+        <a class="social-icon"
+           target="_blank"
+           href="https://github.com/aclark4life/aclarknet"><i class="fa-brands fa-github"></i><span class="visually-hidden">GitHub</span></a>
+        <a class="social-icon" href="https://aclarknet.readthedocs.io/"><i class="fa-solid fa-book"></i><span class="visually-hidden">Documentation</span></a>
+      </div>
+    </div>
+  </div>
 </footer>

@@ -1,14 +1,18 @@
-<section class="py-5 bg-light" id="testimonials">
+<section class="py-5" id="testimonials">
   <div class="container">
     <p class="text-center section-eyebrow mb-2">Client Feedback</p>
     <h2 class="text-center fw-bold mb-5">What our clients say</h2>
     <div class="row g-4">
       {% for testimonial in testimonials %}
         <div class="col-md-4">
-          <div class="p-4 h-100 rounded-3 preview-card" style="background:#fff;">
+          <div class="p-4 h-100 rounded-3" style="background:#f8f9fa;">
             <p class="text-secondary lh-lg mb-4">&ldquo;{{ testimonial.description }}&rdquo;</p>
             <div class="fw-semibold">&mdash; {{ testimonial.name }}</div>
           </div>
+        </div>
+      {% empty %}
+        <div class="col-12 text-center text-muted">
+          <a class="text-decoration-none" href="/clients/#testimonials" id="highpraise-block">Read our client testimonials &rarr;</a>
         </div>
       {% endfor %}
     </div>

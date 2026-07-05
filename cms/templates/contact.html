@@ -1,31 +1,31 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
-{% block title %}Contact Us - MyApp{% endblock %}
+{% block title %}ACLARK.NET &middot; Contact Us{% endblock %}
 {% block content %}
-  <div class="app-iphone-block" id="contact-us">
+  <div class="py-5" id="contact-us">
     <div class="container">
-      <div class="row align-items-center my-5">
-        <div class="col-md-6 col-sm-12 me-auto border rounded">
-          <h5 class="text-uppercase text-center my-3">Contact Us</h5>
-
-          <form class="bg-transparent" action="/contact-us/" method="POST">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <button class="btn btn-light block text-center border my-3" type="submit">Submit</button>
-          </form>
+      <p class="text-center section-eyebrow mb-2">Get in Touch</p>
+      <h2 class="text-center fw-bold mb-5">Contact Us</h2>
+      <div class="row align-items-center g-4">
+        <div class="col-md-6">
+          <div class="p-4 rounded-3 preview-card">
+            <form action="/contact-us/" method="POST">
+              {% csrf_token %}
+              {{ form|crispy }}
+              <button class="btn btn-brand-outline mt-3" type="submit">Submit</button>
+            </form>
+          </div>
         </div>
-        <div class="col-md-5 text-center my-3">
-          <div class="ratio ratio-16x9">
+        <div class="col-md-6 text-center">
+          <div class="ratio ratio-16x9 rounded-3 overflow-hidden preview-card">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d198740.9231454618!2d-77.17938484689716!3d38.8936386655496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b7c6de5af6e45b%3A0xc2524522d4885d2a!2sWashington%2C%20DC!5e0!3m2!1sen!2sus!4v1705871121684!5m2!1sen!2sus"
                     style="border:0"
                     allowfullscreen=""
                     loading="lazy"
                     title="Google Maps"
-                    class="border rounded p-3"
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
-          <p class="p-3">We are located in suburban Washington, DC, USA.</p>
-
+          <p class="text-secondary mt-3">We are located in suburban Washington, DC, USA.</p>
         </div>
       </div>
     </div>
