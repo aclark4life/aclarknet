@@ -145,7 +145,7 @@ body {
     transition: background 0.2s, color 0.2s;
 
     &:hover {
-      background: var(--brand);
+      background: var(--brand-dark);
       color: #fff;
     }
   }
@@ -243,13 +243,13 @@ body {
 }
 
 .btn-brand-outline {
-  color: var(--brand);
-  border: 1px solid var(--brand);
+  color: var(--brand-dark);
+  border: 1px solid var(--brand-dark);
   background: transparent;
   transition: background 0.15s, color 0.15s;
 
   &:hover {
-    background: var(--brand);
+    background: var(--brand-dark);
     color: #fff;
   }
 }
