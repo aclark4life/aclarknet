@@ -270,11 +270,36 @@
         </button>
         <div class="collapse navbar-collapse" id="blogNav">
           <ul class="navbar-nav ms-auto align-items-center gap-1">
-            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-            <li class="nav-item"><a class="nav-link active" href="/blog/">Blog</a></li>
-            <li class="nav-item"><a class="nav-link" href="/now/">Now</a></li>
-            <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="/services/">Services</a></li>
+            <li class="nav-item">
+              <a id="home-nav" class="nav-link {% if request.path == '/' %}active{% endif %}" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle {% if request.path == '/about/' or '/blog/' in request.path %}active{% endif %}"
+                 href="/about/">About</a>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href="/about/#team">Team</a></li>
+                <li><a class="dropdown-item" href="/blog/">Blog</a></li>
+                <li><a class="dropdown-item" href="/about/#dcpython">Community</a></li>
+                <li><a class="dropdown-item" href="/about/#history">History</a></li>
+                <li><a class="dropdown-item" href="/about/#book">Publications</a></li>
+                <li><a class="dropdown-item" href="{% url 'python_pillow' %}">Python Pillow</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle {% if request.path == '/clients/' %}active{% endif %}"
+                 href="/clients/">Clients</a>
+              <ul class="dropdown-menu dropdown-menu-dark">
+                <li><a class="dropdown-item" href="/clients/#testimonials">Testimonials</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if request.path == '/services/' %}active{% endif %}"
+                 href="/services/">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if request.path == '/careers/' %}active{% endif %}"
+                 href="/careers/">Careers</a>
+            </li>
             <li class="nav-item ms-2"><a class="btn-nav-cta" href="/contact-us/">Contact Us</a></li>
             {% if user.is_authenticated %}
               <li class="nav-item dropdown ms-3">
