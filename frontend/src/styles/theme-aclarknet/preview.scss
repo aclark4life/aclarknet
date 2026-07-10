@@ -187,13 +187,19 @@ body {
   background: var(--brand);
 
   img {
-    filter: brightness(0) invert(1);
     opacity: 0.65;
     transition: opacity 0.2s;
 
     &:hover {
       opacity: 1;
     }
+  }
+
+  // Raster client logos are dark artwork; force them white to match the
+  // dark ribbon. The SVG logos (JHU, PBS) are already white and must NOT
+  // be filtered — inverting flattens PBS's transparent knockout.
+  img[src$=".webp"] {
+    filter: brightness(0) invert(1);
   }
 }
 

@@ -135,7 +135,9 @@
 
     /* ── CLIENTS RIBBON ── */
       .preview-ribbon { background: var(--brand); }
-      .preview-ribbon img { filter: brightness(0) invert(1); opacity: 0.65; transition: opacity 0.2s; }
+      .preview-ribbon img { opacity: 0.65; transition: opacity 0.2s; }
+      /* Raster logos are dark artwork -> force white; SVG logos already white (PBS needs its transparent knockout preserved) */
+      .preview-ribbon img[src$=".webp"] { filter: brightness(0) invert(1); }
       .preview-ribbon img:hover { opacity: 1; }
 
     /* ── CTA BAND ── */
