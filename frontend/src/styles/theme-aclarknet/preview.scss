@@ -174,12 +174,19 @@ body {
 }
 
 /* ── SPLIT SECTIONS ── */
-.preview-split img {
-  object-fit: cover;
-  height: 420px;
-  width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+.preview-split {
+  h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    line-height: 1.2;
+  }
+
+  img {
+    object-fit: cover;
+    height: 420px;
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+  }
 }
 
 /* ── CLIENTS RIBBON ── */
