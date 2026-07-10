@@ -243,16 +243,16 @@ body {
 }
 
 .btn-brand-outline {
-  color: #fff;
-  border: 1px solid var(--brand);
-  background: var(--brand);
+  color: #fff !important;
+  border: 1px solid var(--brand) !important;
+  background: var(--brand) !important;
   transition: background 0.15s, border-color 0.15s, color 0.15s;
 
   &:hover,
   &:focus {
-    background: var(--brand-dark);
-    border-color: var(--brand-dark);
-    color: #fff;
+    background: var(--brand-dark) !important;
+    border-color: var(--brand-dark) !important;
+    color: #fff !important;
   }
 }
 
