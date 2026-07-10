@@ -9,7 +9,10 @@
   .dash-nav {
     background: #0f2b3d !important;
     border-bottom: 1px solid rgba(255,255,255,0.08);
-    padding: 1.75rem 0;
+    /* Matches the effective padding of the site-wide .preview-nav, which is
+       itself capped by Bootstrap's .navbar padding-y (0.5rem) due to CSS
+       cascade order in the compiled bundle. */
+    padding: 0.5rem 0;
     box-shadow: 0 1px 6px rgba(0,0,0,0.2);
     position: sticky;
     top: 0;
