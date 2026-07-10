@@ -147,7 +147,27 @@ alias dpr := deploy-remote
 
 # Deploy to preview server remotely via SSH
 deploy-preview:
-    ssh preview.aclark.net "cd /srv/aclarknet && sudo deployment/deploy.sh"
+    #!/usr/bin/env bash
+    echo "Pushing changes..."
+    git push
+    echo "Deploying to preview.aclark.net..."
+    ssh -i ~/.ssh/aclarknet-202604.pem ec2-user@preview.aclark.net '
+        set -e
+        cd /srv/aclarknet
+        echo "Updating code..."
+        sudo git pull origin preview
+        echo "Setting up Node environment..."
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+        NODE_BIN="$(dirname "$(which node)")"
+        echo "Building frontend..."
+        sudo env "PATH=$NODE_BIN:$PATH" npm run build
+        echo "Collecting static files..."
+        sudo .venv/bin/python manage.py collectstatic --noinput --settings=aclarknet.settings.production
+        echo "Restarting service..."
+        sudo systemctl restart aclarknet.service
+        echo "Deployment complete."
+    '
 
 alias dpp := deploy-preview
 
