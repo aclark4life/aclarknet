@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load i18n static allauth %}
+{% block title %}Sign In{% endblock %}
+{% block content %}
+  <section class="py-5 auth-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+          <div class="p-4 p-md-5 rounded-3 site-card auth-card text-center">
+            <p class="section-eyebrow mb-2">Account</p>
+            {% if process == "connect" %}
+              <h1 class="fw-bold mb-4">{% blocktrans with provider.name as provider %}Connect {{ provider }}{% endblocktrans %}</h1>
+              <p class="text-muted mb-4">
+                {% blocktrans with provider.name as provider %}You are about to connect a new third-party account from {{ provider }}.{% endblocktrans %}
+              </p>
+            {% else %}
+              <h1 class="fw-bold mb-4">{% blocktrans with provider.name as provider %}Sign In Via {{ provider }}{% endblocktrans %}</h1>
+              <p class="text-muted mb-4">
+                {% blocktrans with provider.name as provider %}You are about to sign in using a third-party account from {{ provider }}.{% endblocktrans %}
+              </p>
+            {% endif %}
+
+            <form method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-brand-outline w-100">{% trans "Continue" %}</button>
+            </form>
+
+            <p class="text-center text-muted small mt-4 mb-0">
+              <a class="text-decoration-none" style="color:var(--brand)" href="{% url 'account_login' %}">{% trans "Back to Sign In" %}</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
