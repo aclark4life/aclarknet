@@ -73,8 +73,11 @@ setup_repository() {
         git clone ${REPO_URL} /tmp/aclarknet-deploy
 
         # Sync files (excluding virtual environments, node_modules, and existing runtime data)
+        # NOTE: exclude patterns are anchored to the source root (leading slash) so they only
+        # match the top-level collected-static/media/logs directories, not app source
+        # directories that happen to be named "static" (e.g. db/static, cms/static).
         rsync -av $RSYNC_EXCLUDES \
-              --exclude='logs' --exclude='static' --exclude='media' --exclude='.env' \
+              --exclude='/logs' --exclude='/static' --exclude='/media' --exclude='/.env' \
               /tmp/aclarknet-deploy/ ${DEPLOY_DIR}/
         rm -rf /tmp/aclarknet-deploy
     fi
