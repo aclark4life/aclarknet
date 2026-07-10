@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n static crispy_forms_tags %}
+{% load i18n static crispy_forms_tags allauth socialaccount %}
 {% block title %}Sign In{% endblock %}
 {% block content %}
   <section class="py-5 auth-section">
@@ -30,6 +30,24 @@
             <p class="text-center text-muted small mt-4 mb-0">
               <a class="text-decoration-none" style="color:var(--brand)" href="{% url 'account_reset_password' %}">Forgot your password?</a>
             </p>
+
+            {% get_providers as socialaccount_providers %}
+            {% if socialaccount_providers %}
+              <hr class="my-4">
+              <p class="text-center text-muted small mb-3">{% trans "Or sign in with" %}</p>
+              <div class="d-grid gap-2">
+                {% for provider in socialaccount_providers %}
+                  {% if provider.id == "openid" %}
+                    {% for brand in provider.get_brands %}
+                      {% provider_login_url provider openid=brand.openid_url process="login" as brand_href %}
+                      <a href="{{ brand_href }}" class="btn btn-brand-outline w-100">{{ brand.name }}</a>
+                    {% endfor %}
+                  {% endif %}
+                  {% provider_login_url provider process="login" scope=scope auth_params=auth_params as href %}
+                  <a href="{{ href }}" class="btn btn-brand-outline w-100">{{ provider.name }}</a>
+                {% endfor %}
+              </div>
+            {% endif %}
           </div>
         </div>
       </div>
