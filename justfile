@@ -145,6 +145,12 @@ deploy-remote:
 
 alias dpr := deploy-remote
 
+# Deploy to preview server remotely via SSH
+deploy-preview:
+    ssh preview.aclark.net "cd /srv/aclarknet && sudo deployment/deploy.sh"
+
+alias dpp := deploy-preview
+
 # Check production service status
 deploy-status:
     sudo systemctl status aclarknet.service
