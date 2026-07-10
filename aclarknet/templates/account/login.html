@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load i18n static crispy_forms_tags %}
+{% block title %}Sign In{% endblock %}
+{% block content %}
+  <section class="py-5 auth-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+          <div class="p-4 p-md-5 rounded-3 preview-card auth-card">
+            <p class="text-center section-eyebrow mb-2">Account</p>
+            <h1 class="text-center fw-bold mb-4">Sign In</h1>
+
+            {% if form.non_field_errors %}
+              <div class="alert alert-danger" role="alert">
+                {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+              </div>
+            {% endif %}
+
+            <form method="post" action="{% url 'account_login' %}">
+              {% csrf_token %}
+              {{ form.login|as_crispy_field }}
+              {{ form.password|as_crispy_field }}
+              {% if form.remember %}
+                {{ form.remember|as_crispy_field }}
+              {% endif %}
+              {{ redirect_field }}
+              <button type="submit" class="btn btn-brand-outline w-100 mt-2">Sign In</button>
+            </form>
+
+            <p class="text-center text-muted small mt-4 mb-0">
+              <a class="text-decoration-none" style="color:var(--brand)" href="{% url 'account_reset_password' %}">Forgot your password?</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
