@@ -1,9 +1,9 @@
 // ─────────────────────────────────────────────────────────────
-// Preview theme
+// Site theme
 //
-// Shared visual language introduced on /design-preview/ and the
-// blog, now rolled out site-wide: dark sticky nav with brand mark,
-// eyebrow labels, and a consistent brand color system.
+// Shared visual language rolled out site-wide: dark sticky nav
+// with brand mark, eyebrow labels, and a consistent brand color
+// system.
 // ─────────────────────────────────────────────────────────────
 :root {
   --brand: #1997c6;
@@ -51,7 +51,7 @@ body {
 }
 
 /* ── NAV ── */
-.preview-nav {
+.site-nav {
   background: var(--dark);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   padding: 1.75rem 0;
@@ -102,7 +102,7 @@ body {
 }
 
 /* ── HERO ── */
-.preview-hero {
+.site-hero {
   position: relative;
   min-height: 520px;
   display: flex;
@@ -169,12 +169,12 @@ body {
 }
 
 /* ── MISSION ── */
-.preview-mission {
+.site-mission {
   background: #f8f9fa;
 }
 
 /* ── SPLIT SECTIONS ── */
-.preview-split {
+.site-split {
   h2 {
     font-size: clamp(1.6rem, 3vw, 2.2rem);
     line-height: 1.2;
@@ -190,7 +190,7 @@ body {
 }
 
 /* ── CLIENTS RIBBON ── */
-.preview-ribbon {
+.site-ribbon {
   background: var(--brand);
 
   img {
@@ -211,7 +211,7 @@ body {
 }
 
 /* ── CTA BAND ── */
-.preview-cta-band {
+.site-cta-band {
   position: relative;
   overflow: hidden;
   background-size: cover;
@@ -270,7 +270,7 @@ body {
 }
 
 /* ── CARD PATTERN ── */
-.preview-card {
+.site-card {
   border: 1px solid #e9ecef;
   transition: box-shadow 0.15s;
 
@@ -304,7 +304,7 @@ body {
 }
 
 /* ── FOOTER ── */
-.preview-footer {
+.site-footer {
   background: var(--dark);
   color: #adb5bd;
 
