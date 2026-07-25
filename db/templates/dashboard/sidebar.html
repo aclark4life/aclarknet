@@ -51,6 +51,13 @@ Displays different navigation options based on user role (superuser vs regular u
           {% if request.user.is_superuser %}
             {# Superuser Dashboard Links #}
             <li class="nav-item">
+              <a class="nav-link{% if analytics_nav %} active{% endif %}"
+                 href="{% url 'analytics' %}"
+                 {% if analytics_nav %}aria-current="page"{% endif %}>
+                Analytics
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link{% if invoice_nav %} active{% endif %}"
                  href="{% url 'invoice_index' %}"
                  {% if invoice_nav %}aria-current="page"{% endif %}>

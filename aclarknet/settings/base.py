@@ -278,3 +278,8 @@ STRIPE_TEST_MODE = (
 # Google Analytics (GA4) settings
 # Set GA_MEASUREMENT_ID to enable the gtag.js snippet in base.html.
 GA_MEASUREMENT_ID = os.getenv("GA_MEASUREMENT_ID", "")
+# Optional deep link to your GA4 property (shown on the internal /analytics/
+# dashboard). Defaults to the generic Analytics home if not set.
+GA_DASHBOARD_URL = os.getenv(
+    "GA_DASHBOARD_URL", "https://analytics.google.com/analytics/web/"
+)

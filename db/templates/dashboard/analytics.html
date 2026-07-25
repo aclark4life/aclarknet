@@ -1,0 +1,74 @@
+{% extends 'dashboard/index.html' %}
+{% load humanize %}
+
+{% block dashhead_title %}
+  <h2 class="dashhead-title text-secondary">Analytics</h2>
+{% endblock %}
+
+{% block dashboard %}
+  <div class="row statcards my-3">
+    <div class="col-md-6 col-xl-3 mb-3 mb-md-4 mb-xl-0">
+      <div class="statcard statcard-info">
+        <div class="p-3">
+          <span class="statcard-desc">Contact Submissions</span>
+          <h2 class="statcard-number">{{ analytics.contacts.total|intcomma }}</h2>
+          <hr class="statcard-hr mb-0">
+          <span class="text-muted small">{{ analytics.contacts.last_30_days }} in last 30 days</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-xl-3 mb-3 mb-md-4 mb-xl-0">
+      <div class="statcard statcard-success">
+        <div class="p-3">
+          <span class="statcard-desc">Testimonials</span>
+          <h2 class="statcard-number">{{ analytics.testimonials.total|intcomma }}</h2>
+          <hr class="statcard-hr mb-0">
+          <span class="text-muted small">{{ analytics.testimonials.featured }} featured</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-xl-3 mb-3 mb-md-4 mb-xl-0">
+      <div class="statcard statcard-warning">
+        <div class="p-3">
+          <span class="statcard-desc">Clients</span>
+          <h2 class="statcard-number">{{ analytics.clients.total|intcomma }}</h2>
+          <hr class="statcard-hr mb-0">
+          <span class="text-muted small">{{ analytics.clients.featured }} featured on site</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-xl-3 mb-3 mb-md-4 mb-xl-0">
+      <div class="statcard statcard-danger">
+        <div class="p-3">
+          <span class="statcard-desc">Blog Posts</span>
+          <h2 class="statcard-number">{{ analytics.blog.published|intcomma }}</h2>
+          <hr class="statcard-hr mb-0">
+          <span class="text-muted small">{{ analytics.blog.last_30_days }} in last 30 days</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card my-4">
+    <div class="card-body d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+      <div>
+        <h5 class="card-title mb-1">Full Traffic &amp; Engagement Reporting</h5>
+        <p class="card-text text-muted mb-0">
+          Visitor counts, traffic sources, page views, and audience details are
+          tracked via Google Analytics{% if ga_measurement_id %} (<code>{{ ga_measurement_id }}</code>){% endif %}.
+          The stats above are counted directly from this site's own data.
+        </p>
+      </div>
+      {% if ga_measurement_id %}
+        <a href="{{ ga_dashboard_url }}"
+           target="_blank"
+           rel="noopener"
+           class="btn btn-primary flex-shrink-0">
+          View in Google Analytics <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>
+        </a>
+      {% else %}
+        <span class="badge bg-secondary flex-shrink-0">Google Analytics not configured</span>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

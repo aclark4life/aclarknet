@@ -49,6 +49,7 @@ from .contact import (
 
 # Dashboard and utility views
 from .dashboard import (
+    AnalyticsView,
     DashboardView,
     display_mode,
     lounge,
@@ -161,6 +162,7 @@ __all__ = [
     "ContactListView",
     "ContactUpdateView",
     # Dashboard views
+    "AnalyticsView",
     "DashboardView",
     "display_mode",
     "html_mode",

@@ -93,6 +93,7 @@ from .views import (
 
 # Other Views
 from .views import DashboardView
+from .views import AnalyticsView
 from .views import SearchView
 from .views import trigger_500
 from .views import update_related_entries
@@ -102,6 +103,10 @@ from .views import time_api_invoice, time_api_project, time_api_task
 
 urlpatterns = [
     path("", DashboardView.as_view(), name="dashboard"),
+]
+
+urlpatterns += [
+    path("analytics/", AnalyticsView.as_view(), name="analytics"),
 ]
 
 urlpatterns += [
