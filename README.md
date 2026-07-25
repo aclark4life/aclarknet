@@ -1,4 +1,5 @@
 [![CI/CD Pipeline](https://github.com/aclark4life/aclarknet/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/aclark4life/aclarknet/actions/workflows/ci-cd.yml)
+[![Documentation Status](https://readthedocs.org/projects/aclarknet/badge/?version=latest)](https://aclarknet.readthedocs.io/en/latest/?badge=latest)
 
 (Written by [us.amazon.nova-micro-v1:0](https://github.com/aclark4life/aclarknet/blob/0d39a6525465a7ea4083177b4e536f98de19fd88/justfile#L5))
 
