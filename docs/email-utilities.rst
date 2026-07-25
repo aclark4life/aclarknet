@@ -217,6 +217,6 @@ Using these utility functions provides several benefits:
 See Also
 --------
 
-- :doc:`../explanation/email-authentication` - Understanding email authentication
-- :doc:`../how-to/fix-gmail-warning` - Fixing Gmail warnings
+- :doc:`email-authentication` - Understanding email authentication
+- :doc:`fix-gmail-warning` - Fixing Gmail warnings
 - :doc:`email-dns-records` - DNS records reference

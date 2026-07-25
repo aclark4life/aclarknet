@@ -197,6 +197,6 @@ After completing all steps, emails from aclark.net will:
 See Also
 --------
 
-- :doc:`../how-to/fix-gmail-warning` - Step-by-step guide to fix the warning
-- :doc:`../reference/email-dns-records` - Complete DNS records reference
-- :doc:`../how-to/aws-ses-setup` - AWS SES configuration guide
+- :doc:`fix-gmail-warning` - Step-by-step guide to fix the warning
+- :doc:`email-dns-records` - Complete DNS records reference
+- :doc:`aws-ses-setup` - AWS SES configuration guide

@@ -59,10 +59,10 @@ Diagnostic Tools
 Documentation
 ~~~~~~~~~~~~~
 
-- :doc:`how-to/fix-gmail-warning` - Step-by-step guide
-- :doc:`reference/email-dns-records` - Complete DNS records reference
-- :doc:`reference/email-utilities` - Email utilities API reference
-- :doc:`explanation/email-authentication` - Understanding email authentication
+- :doc:`fix-gmail-warning` - Step-by-step guide
+- :doc:`email-dns-records` - Complete DNS records reference
+- :doc:`email-utilities` - Email utilities API reference
+- :doc:`email-authentication` - Understanding email authentication
 
 What You Need to Do
 -------------------
@@ -158,11 +158,11 @@ Documentation
 
 For detailed information, see:
 
-- :doc:`how-to/fix-gmail-warning` - Complete step-by-step guide
-- :doc:`reference/email-dns-records` - DNS records reference
-- :doc:`reference/email-utilities` - Email utilities reference
-- :doc:`explanation/email-authentication` - Understanding email authentication
-- :doc:`how-to/aws-ses-setup` - AWS SES configuration guide
+- :doc:`fix-gmail-warning` - Complete step-by-step guide
+- :doc:`email-dns-records` - DNS records reference
+- :doc:`email-utilities` - Email utilities reference
+- :doc:`email-authentication` - Understanding email authentication
+- :doc:`aws-ses-setup` - AWS SES configuration guide
 
 Next Step
 ---------

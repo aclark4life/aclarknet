@@ -3,53 +3,83 @@ aclarknet Documentation
 
 Welcome to the aclarknet documentation! This is a Django-based web application using Wagtail CMS with a modern frontend stack.
 
-This documentation follows the `Diátaxis <https://diataxis.fr/>`_ framework, organizing content into four types:
-
-* **Tutorials** - Learning-oriented lessons for beginners
-* **How-to Guides** - Goal-oriented directions for specific tasks
-* **Reference** - Information-oriented technical descriptions
-* **Explanation** - Understanding-oriented context and background
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Tutorials:
-
-   tutorials/index
-
-.. toctree::
-   :maxdepth: 2
-   :caption: How-to Guides:
-
-   how-to/index
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Reference:
-
-   reference/index
-
-.. toctree::
-   :maxdepth: 2
-   :caption: Explanation:
-
-   explanation/index
+Documentation is organized as a flat set of topic-focused pages grouped below by area, rather than by learning stage.
 
 .. toctree::
    :maxdepth: 1
-   :caption: Quick References:
+   :caption: Getting Started:
 
+   getting-started
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Deployment & Server Operations:
+
+   deployment-quickstart
+   deployment-guide
+   ec2-iam-role-setup
+   letsencrypt-renewal
+   managing-dependencies
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Email:
+
+   aws-ses-setup
+   fix-gmail-warning
+   email-authentication
+   email-dns-records
+   email-utilities
    email-fix-summary
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Clients & Testimonials:
+
+   client-categorization
+   feature-visual-guide
+   testimonials-quickstart
+   notes-testimonials
+   notes-import
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Invoicing:
+
+   invoice-dashboard-design
+   invoice-time-formset
+   copy-invoice-data
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Payments:
+
+   stripe-test-mode
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Testing:
+
+   manual-testing-guide
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Reference:
+
+   db-views
+   frontend
+   frontend-application
+   frontend-components
+   design-system
 
 Getting Started
 ===============
 
-**New to aclarknet?** Start with :doc:`tutorials/getting-started` to set up your development environment and create your first client.
+**New to aclarknet?** Start with :doc:`getting-started` to set up your development environment and create your first client.
 
-**Need to accomplish a specific task?** Check out the :doc:`how-to/index` for goal-oriented guides.
+**Need to accomplish a specific task?** Browse the section captions in the sidebar, such as *Deployment & Server Operations* or *Email*, for goal-oriented guides.
 
-**Looking for technical details?** See the :doc:`reference/index` for complete API documentation.
-
-**Want to understand how it works?** Read the :doc:`explanation/index` for context and background.
+**Looking for technical details?** See the *Reference* section for database models and frontend architecture.
 
 Project Overview
 ================
@@ -103,18 +133,19 @@ Key Features
 Quick Links
 -----------
 
-* :doc:`tutorials/getting-started` - Get started with aclarknet
-* :doc:`how-to/deployment-quickstart` - Deploy to production
-* :doc:`how-to/testimonials-quickstart` - Manage testimonials
-* :doc:`how-to/aws-ses-setup` - Configure email sending
-* :doc:`how-to/fix-gmail-warning` - Fix Gmail email warnings
-* :doc:`reference/db-views` - Database model reference
-* :doc:`explanation/client-categorization` - Understand client categorization
+* :doc:`getting-started` - Get started with aclarknet
+* :doc:`deployment-quickstart` - Deploy to production
+* :doc:`letsencrypt-renewal` - Automate SSL certificate renewal
+* :doc:`testimonials-quickstart` - Manage testimonials
+* :doc:`aws-ses-setup` - Configure email sending
+* :doc:`fix-gmail-warning` - Fix Gmail email warnings
+* :doc:`db-views` - Database model reference
+* :doc:`client-categorization` - Understand client categorization
 
 Important
 ---------
 
-**Gmail showing warnings for your emails?** See :doc:`email-fix-summary` for a quick fix, or :doc:`how-to/fix-gmail-warning` for detailed instructions.
+**Gmail showing warnings for your emails?** See :doc:`email-fix-summary` for a quick fix, or :doc:`fix-gmail-warning` for detailed instructions.
 
 Indices and Tables
 ==================

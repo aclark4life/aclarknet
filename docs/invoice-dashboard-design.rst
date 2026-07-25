@@ -51,7 +51,7 @@ Each row in the Total accordion includes a copy button (clipboard icon)
 that copies the row's label and value as plain text. This is designed
 for quickly pasting invoice summaries into emails without reformatting.
 
-See :doc:`../how-to/copy-invoice-data` for usage instructions.
+See :doc:`copy-invoice-data` for usage instructions.
 
 Design Unification
 ------------------

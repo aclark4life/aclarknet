@@ -156,7 +156,7 @@ Congratulations! You've successfully set up aclarknet and created your first cli
 
 **Where to go from here:**
 
-* :doc:`../how-to/deployment-quickstart` - Deploy to production
-* :doc:`../how-to/testimonials-quickstart` - Learn more about managing testimonials
-* :doc:`../reference/db-views` - Explore the database models
-* :doc:`../explanation/client-categorization` - Understand how client categorization works
+* :doc:`deployment-quickstart` - Deploy to production
+* :doc:`testimonials-quickstart` - Learn more about managing testimonials
+* :doc:`db-views` - Explore the database models
+* :doc:`client-categorization` - Understand how client categorization works
