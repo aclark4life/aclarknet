@@ -3,13 +3,34 @@
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+import subprocess
+
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'aclarknet'
 copyright = '2026, Alex Clark'
 author = 'Alex Clark'
-release = '0.1.0'
+version = '0.1.0'
+
+
+def _git_sha():
+    """Return the short git SHA of the current commit, if available."""
+    try:
+        return (
+            subprocess.check_output(
+                ['git', 'rev-parse', '--short', 'HEAD'],
+                stderr=subprocess.DEVNULL,
+            )
+            .decode()
+            .strip()
+        )
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return None
+
+
+_sha = _git_sha()
+release = f'{version} ({_sha})' if _sha else version
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
