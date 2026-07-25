@@ -1,0 +1,102 @@
+{% if GA_MEASUREMENT_ID %}
+  <!-- Google tag (gtag.js) with Consent Mode v2 -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    // Default to "denied" until the visitor makes a choice via the cookie banner.
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied',
+      'wait_for_update': 500
+    });
+  </script>
+  <script async
+          src="https://www.googletagmanager.com/gtag/js?id={{ GA_MEASUREMENT_ID }}"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', '{{ GA_MEASUREMENT_ID }}');
+  </script>
+
+  <div id="cookie-consent-banner"
+       class="d-none position-fixed bottom-0 start-0 end-0 p-3 bg-dark text-white"
+       style="z-index: 1080;"
+       role="dialog"
+       aria-live="polite"
+       aria-label="Cookie consent">
+    <div class="container d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+      <p class="mb-0 small">
+        We use cookies to understand site traffic via Google Analytics. You can accept or
+        reject non-essential analytics cookies at any time.
+      </p>
+      <div class="d-flex gap-2 flex-shrink-0">
+        <button type="button"
+                id="cookie-consent-reject"
+                class="btn btn-outline-light btn-sm">Reject</button>
+        <button type="button"
+                id="cookie-consent-accept"
+                class="btn btn-primary btn-sm">Accept</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var STORAGE_KEY = 'cookie_consent';
+      var banner = document.getElementById('cookie-consent-banner');
+      if (!banner) {
+        return;
+      }
+
+      function applyConsent(granted) {
+        gtag('consent', 'update', {
+          'ad_storage': granted ? 'granted' : 'denied',
+          'ad_user_data': granted ? 'granted' : 'denied',
+          'ad_personalization': granted ? 'granted' : 'denied',
+          'analytics_storage': granted ? 'granted' : 'denied'
+        });
+      }
+
+      var saved = null;
+      try {
+        saved = window.localStorage.getItem(STORAGE_KEY);
+      } catch (e) {
+        // localStorage unavailable (e.g. private browsing); fall back to
+        // always showing the banner without persisting a choice.
+      }
+
+      if (saved === 'granted' || saved === 'denied') {
+        applyConsent(saved === 'granted');
+      } else {
+        banner.classList.remove('d-none');
+      }
+
+      function choose(granted) {
+        applyConsent(granted);
+        try {
+          window.localStorage.setItem(STORAGE_KEY, granted ? 'granted' : 'denied');
+        } catch (e) {
+          // Ignore storage failures; consent still applies for this page view.
+        }
+        banner.classList.add('d-none');
+      }
+
+      var acceptBtn = document.getElementById('cookie-consent-accept');
+      var rejectBtn = document.getElementById('cookie-consent-reject');
+      if (acceptBtn) {
+        acceptBtn.addEventListener('click', function () {
+          choose(true);
+        });
+      }
+      if (rejectBtn) {
+        rejectBtn.addEventListener('click', function () {
+          choose(false);
+        });
+      }
+    })();
+  </script>
+{% endif %}

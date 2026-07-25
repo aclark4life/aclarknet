@@ -84,20 +84,6 @@
     {% endblock footer %}
     {% javascript_pack 'app' %}
     {% block extra_js %}{# Override this in templates to add extra javascript #}{% endblock %}
-    {% if GA_MEASUREMENT_ID %}
-      <!-- Google tag (gtag.js) -->
-      <script async
-              src="https://www.googletagmanager.com/gtag/js?id={{ GA_MEASUREMENT_ID }}"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-          dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', '{{ GA_MEASUREMENT_ID }}');
-      </script>
-    {% endif %}
+    {% include 'cookie_consent.html' %}
   </body>
 </html>
