@@ -91,6 +91,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "aclarknet.context_processors.analytics",
             ],
         },
     },
@@ -273,3 +274,7 @@ STRIPE_CURRENCY = "usd"  # Default currency for payments
 STRIPE_TEST_MODE = (
     STRIPE_SECRET_KEY.startswith("sk_test_") if STRIPE_SECRET_KEY else False
 )
+
+# Google Analytics (GA4) settings
+# Set GA_MEASUREMENT_ID to enable the gtag.js snippet in base.html.
+GA_MEASUREMENT_ID = os.getenv("GA_MEASUREMENT_ID", "")
