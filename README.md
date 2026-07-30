@@ -1,3 +1,5 @@
+![ACLARK.NET, LLC](db/static/img/aclarknet-logo.png)
+
 [![CI/CD Pipeline](https://github.com/aclark4life/aclarknet/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/aclark4life/aclarknet/actions/workflows/ci-cd.yml)
 [![Documentation Status](https://readthedocs.org/projects/aclarknet/badge/?version=latest)](https://aclarknet.readthedocs.io/en/latest/?badge=latest)
 
