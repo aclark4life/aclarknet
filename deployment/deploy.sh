@@ -107,12 +107,13 @@ install_dependencies() {
     echo -e "${GREEN}Installing Python dependencies...${NC}"
     cd ${DEPLOY_DIR}
     ${DEPLOY_DIR}/.venv/bin/pip install --upgrade pip
-    # pyproject.toml intentionally has no version pins, so pip must be told
-    # to upgrade already-installed packages -- otherwise `pip install -e .`
-    # leaves existing packages (Django, Wagtail, django-mongodb-backend,
-    # etc.) at whatever version was previously installed, silently skipping
-    # upgrades even though the unbounded requirement is still satisfied.
-    ${DEPLOY_DIR}/.venv/bin/pip install --upgrade -e .
+    # pyproject.toml intentionally has no version pins, so pip's default
+    # "only-if-needed" upgrade strategy leaves already-installed
+    # dependencies (Django, Wagtail, django-mongodb-backend, etc.) alone,
+    # since their unbounded requirement is technically already satisfied.
+    # --upgrade-strategy eager forces pip to actually upgrade every
+    # dependency to its latest compatible version on each deploy.
+    ${DEPLOY_DIR}/.venv/bin/pip install --upgrade --upgrade-strategy eager -e .
 }
 
 # Setup environment file
