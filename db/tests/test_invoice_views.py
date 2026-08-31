@@ -86,23 +86,42 @@ class InvoiceViewRedirectTests(TestCase):
         self.assertEqual(response.url, '/invoice/invoice456/')
 
     def test_invoice_update_view_form_valid(self):
-        """Test that InvoiceUpdateView redirects correctly."""
-        # Create a mock form with an instance
+        """Test that InvoiceUpdateView redirects correctly.
+
+        InvoiceUpdateView.form_valid() builds a TimeEntryFormSet keyed off
+        self.object, which requires a real model instance (Django's
+        relation-field checks inspect ._meta.model on the instance). A bare
+        Mock(spec=Invoice) doesn't provide usable metadata for that, so we
+        use a real, saved Invoice instead.
+        """
+        real_invoice = Invoice.objects.create(name="Invoice 789")
+
+        # Create a mock form with a real instance
         mock_form = Mock()
-        mock_invoice = Mock(spec=Invoice)
-        mock_invoice.pk = 'invoice789'
-        mock_form.instance = mock_invoice
-        mock_form.save.return_value = mock_invoice
+        mock_form.instance = real_invoice
+        mock_form.save.return_value = real_invoice
         
         # Create the view
         view = InvoiceUpdateView()
-        request = self.factory.post('/invoice/invoice789/update/')
+        # Include valid (empty) time formset management data so
+        # get_time_formset().is_valid() succeeds and form_valid() takes
+        # the redirect path being tested here.
+        post_data = {
+            "times-TOTAL_FORMS": "0",
+            "times-INITIAL_FORMS": "0",
+            "times-MIN_NUM_FORMS": "0",
+            "times-MAX_NUM_FORMS": "1000",
+        }
+        request = self.factory.post(
+            f'/invoice/{real_invoice.pk}/update/', post_data
+        )
         request.user = self.user
         view.request = request
-        view.object = mock_invoice  # UpdateView has object set
+        view.kwargs = {"pk": real_invoice.pk}
+        view.object = real_invoice  # UpdateView has object set
         
         # Mock get_success_url to avoid URL resolution issues
-        view.get_success_url = Mock(return_value='/invoice/invoice789/')
+        view.get_success_url = Mock(return_value=f'/invoice/{real_invoice.pk}/')
         
         # Call form_valid
         response = view.form_valid(mock_form)
@@ -112,7 +131,7 @@ class InvoiceViewRedirectTests(TestCase):
         
         # Verify that we got a redirect response
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.url, '/invoice/invoice789/')
+        self.assertEqual(response.url, f'/invoice/{real_invoice.pk}/')
 
     def test_invoice_create_view_no_double_save(self):
         """Test that the invoice is not saved multiple times."""

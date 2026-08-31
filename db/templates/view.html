@@ -95,7 +95,7 @@
                     {% if note.name %}
                       <h6 class="card-title">{{ note.name }}</h6>
                     {% endif %}
-                    <p class="card-text">{{ note.text|linebreaks }}</p>
+                    <p class="card-text">{{ note.description|linebreaks }}</p>
                     <div class="text-muted small">
                       {% if note.user %}
                         <i class="fa-solid fa-user"></i> {{ note.user.username }} •

@@ -20,7 +20,7 @@ class TimeSignalTest(TestCase):
 
     def test_time_creation_with_user_and_profile(self):
         """Test that creating a time entry with a user and profile works correctly"""
-        with patch("db.signals.EmailMultiAlternatives.send") as mock_send:
+        with patch("aclarknet.email_utils.EmailMultiAlternatives.send") as mock_send:
             time_entry = Time.objects.create(
                 user=self.user, hours=8.0, description="Test work"
             )
@@ -39,7 +39,7 @@ class TimeSignalTest(TestCase):
         )
 
         # This should not send email
-        with patch("db.signals.EmailMultiAlternatives.send") as mock_send:
+        with patch("aclarknet.email_utils.EmailMultiAlternatives.send") as mock_send:
             time_entry = Time.objects.create(
                 user=user_no_mail, hours=8.0, description="Test work without mail"
             )
@@ -60,7 +60,7 @@ class TimeSignalTest(TestCase):
         self.user.mail = False
         self.user.save()
 
-        with patch("db.signals.EmailMultiAlternatives.send") as mock_send:
+        with patch("aclarknet.email_utils.EmailMultiAlternatives.send") as mock_send:
             time_entry = Time.objects.create(
                 user=self.user, hours=8.0, description="Test work without email"
             )
@@ -85,13 +85,13 @@ class InvoiceRecalculationSignalTest(TestCase):
         self.project = Project.objects.create(name="Test Project", client=self.client)
         self.task = Task.objects.create(name="Test Task", rate=Decimal("150.00"))
         self.invoice = Invoice.objects.create(
-            subject="Test Invoice", project=self.project
+            name="Test Invoice", project=self.project
         )
 
     def test_invoice_amount_calculated_on_time_creation(self):
         """Test that invoice amount is calculated when a time entry is created"""
         # Create a time entry associated with the invoice
-        with patch("db.signals.EmailMultiAlternatives.send"):
+        with patch("aclarknet.email_utils.EmailMultiAlternatives.send"):
             Time.objects.create(
                 user=self.user,
                 task=self.task,
@@ -113,7 +113,7 @@ class InvoiceRecalculationSignalTest(TestCase):
     def test_invoice_amount_updated_on_time_edit(self):
         """Test that invoice amount is updated when a time entry is edited"""
         # Create initial time entry
-        with patch("db.signals.EmailMultiAlternatives.send"):
+        with patch("aclarknet.email_utils.EmailMultiAlternatives.send"):
             time_entry = Time.objects.create(
                 user=self.user,
                 task=self.task,
@@ -141,7 +141,7 @@ class InvoiceRecalculationSignalTest(TestCase):
     def test_invoice_amount_updated_on_time_deletion(self):
         """Test that invoice amount is updated when a time entry is deleted"""
         # Create two time entries
-        with patch("db.signals.EmailMultiAlternatives.send"):
+        with patch("aclarknet.email_utils.EmailMultiAlternatives.send"):
             time_entry1 = Time.objects.create(
                 user=self.user,
                 task=self.task,
@@ -175,7 +175,7 @@ class InvoiceRecalculationSignalTest(TestCase):
     def test_invoice_amount_with_multiple_time_entries(self):
         """Test invoice amount calculation with multiple time entries"""
         # Create multiple time entries with different hours
-        with patch("db.signals.EmailMultiAlternatives.send"):
+        with patch("aclarknet.email_utils.EmailMultiAlternatives.send"):
             Time.objects.create(
                 user=self.user,
                 task=self.task,
@@ -205,7 +205,7 @@ class InvoiceRecalculationSignalTest(TestCase):
     def test_invoice_amount_with_no_task(self):
         """Test that invoice handles time entries without a task gracefully"""
         # Create time entry without a task (should use default task)
-        with patch("db.signals.EmailMultiAlternatives.send"):
+        with patch("aclarknet.email_utils.EmailMultiAlternatives.send"):
             time_entry = Time.objects.create(
                 user=self.user,
                 hours=Decimal("5.0"),
@@ -227,7 +227,7 @@ class InvoiceRecalculationSignalTest(TestCase):
     def test_invoice_cost_and_net_calculated(self):
         """Test that invoice cost and net are calculated correctly"""
         # Create time entry
-        with patch("db.signals.EmailMultiAlternatives.send"):
+        with patch("aclarknet.email_utils.EmailMultiAlternatives.send"):
             Time.objects.create(
                 user=self.user,
                 task=self.task,
@@ -247,7 +247,7 @@ class InvoiceRecalculationSignalTest(TestCase):
     def test_invoice_hours_calculated(self):
         """Test that total hours are calculated correctly"""
         # Create multiple time entries
-        with patch("db.signals.EmailMultiAlternatives.send"):
+        with patch("aclarknet.email_utils.EmailMultiAlternatives.send"):
             Time.objects.create(
                 user=self.user,
                 task=self.task,
@@ -272,7 +272,7 @@ class InvoiceRecalculationSignalTest(TestCase):
     def test_invoice_recalculation_on_invoice_save(self):
         """Test that invoice amounts are recalculated when invoice is saved"""
         # Create time entries first
-        with patch("db.signals.EmailMultiAlternatives.send"):
+        with patch("aclarknet.email_utils.EmailMultiAlternatives.send"):
             Time.objects.create(
                 user=self.user,
                 task=self.task,

@@ -34,7 +34,7 @@ class NoteGenericForeignKeyTest(TestCase):
         content_type = ContentType.objects.get_for_model(Company)
         note = Note.objects.create(
             name="Company Note",
-            text="This is a note about the company",
+            description="This is a note about the company",
             user=self.user,
             content_type=content_type,
             object_id=str(self.company.pk)
@@ -55,7 +55,7 @@ class NoteGenericForeignKeyTest(TestCase):
         content_type = ContentType.objects.get_for_model(Client)
         note = Note.objects.create(
             name="Client Note",
-            text="This is a note about the client",
+            description="This is a note about the client",
             user=self.user,
             content_type=content_type,
             object_id=str(self.client.pk)
@@ -68,7 +68,7 @@ class NoteGenericForeignKeyTest(TestCase):
         content_type = ContentType.objects.get_for_model(Project)
         note = Note.objects.create(
             name="Project Note",
-            text="This is a note about the project",
+            description="This is a note about the project",
             user=self.user,
             content_type=content_type,
             object_id=str(self.project.pk)
@@ -82,7 +82,7 @@ class NoteGenericForeignKeyTest(TestCase):
         
         note1 = Note.objects.create(
             name="Note 1",
-            text="First note",
+            description="First note",
             user=self.user,
             content_type=content_type,
             object_id=str(self.company.pk)
@@ -90,7 +90,7 @@ class NoteGenericForeignKeyTest(TestCase):
         
         note2 = Note.objects.create(
             name="Note 2",
-            text="Second note",
+            description="Second note",
             user=self.user,
             content_type=content_type,
             object_id=str(self.company.pk)
@@ -109,7 +109,7 @@ class NoteGenericForeignKeyTest(TestCase):
         content_type = ContentType.objects.get_for_model(Company)
         note = Note.objects.create(
             name="Company Note",
-            text="This is a note about the company",
+            description="This is a note about the company",
             user=self.user,
             content_type=content_type,
             object_id=str(self.company.pk)
@@ -148,7 +148,7 @@ class NoteGenericForeignKeyTest(TestCase):
         """Test that notes can still be created without generic FK fields."""
         note = Note.objects.create(
             name="Standalone Note",
-            text="This note is not attached to any object",
+            description="This note is not attached to any object",
             user=self.user
         )
         
@@ -163,7 +163,7 @@ class NoteGenericForeignKeyTest(TestCase):
         content_type = ContentType.objects.get_for_model(Company)
         note = Note.objects.create(
             name="Company Note",
-            text="This is a note about the company",
+            description="This is a note about the company",
             user=self.user,
             content_type=content_type,
             object_id=str(self.company.pk)
@@ -191,7 +191,7 @@ class NoteGenericForeignKeyTest(TestCase):
         
         note = Note.objects.create(
             name="Standalone Note",
-            text="This note is not attached to any object",
+            description="This note is not attached to any object",
             user=self.user
         )
         

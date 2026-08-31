@@ -2,15 +2,21 @@
 
 from django.conf import settings
 
+try:
+    from faker import Faker
+except ImportError:  # pragma: no cover - faker should be a dev/test dependency
+    Faker = None
+
 
 def get_faker():
     """Get Faker instance only if in DEBUG mode and Faker is available."""
     if not settings.DEBUG:
         return None
 
-    try:
-        from faker import Faker
+    if Faker is None:
+        return None
 
+    try:
         return Faker()
     except ImportError:
         return None

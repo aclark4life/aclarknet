@@ -54,7 +54,7 @@ class NoteAddToObjectViewTest(TestCase):
             url,
             {
                 'name': 'Test Note',
-                'text': 'This is a test note',
+                'description': 'This is a test note',
                 'content_type': self.content_type.id,
                 'object_id': str(self.company.pk),
                 'user': self.user.id,
@@ -79,7 +79,7 @@ class NoteAddToObjectViewTest(TestCase):
         ).first()
         
         self.assertEqual(note.name, 'Test Note')
-        self.assertEqual(note.text, 'This is a test note')
+        self.assertEqual(note.description, 'This is a test note')
         self.assertEqual(note.user, self.user)
         self.assertEqual(note.content_object, self.company)
 
@@ -91,7 +91,7 @@ class NoteAddToObjectViewTest(TestCase):
             url,
             {
                 'name': 'Test Note',
-                'text': 'This is a test note',
+                'description': 'This is a test note',
                 'content_type': self.content_type.id,
                 'object_id': str(self.company.pk),
                 'user': self.user.id,
@@ -109,14 +109,14 @@ class NoteAddToObjectViewTest(TestCase):
         
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Add Note')
-        self.assertContains(response, 'note_add_to_object')
+        self.assertContains(response, reverse('note_add_to_object'))
 
     def test_company_detail_view_shows_notes_section(self):
         """Test that company detail view shows notes section."""
         # Create a note
         Note.objects.create(
             name='Test Note',
-            text='This is a test note',
+            description='This is a test note',
             user=self.user,
             content_type=self.content_type,
             object_id=str(self.company.pk)
@@ -137,7 +137,7 @@ class NoteAddToObjectViewTest(TestCase):
         response = self.client.post(
             url,
             {
-                'text': 'This is a test note without a name',
+                'description': 'This is a test note without a name',
                 'content_type': self.content_type.id,
                 'object_id': str(self.company.pk),
                 'user': self.user.id,
@@ -152,5 +152,7 @@ class NoteAddToObjectViewTest(TestCase):
         ).first()
         
         self.assertIsNotNone(note)
-        self.assertEqual(note.text, 'This is a test note without a name')
-        self.assertEqual(note.name, '')
+        self.assertEqual(note.description, 'This is a test note without a name')
+        # CharField(null=True) form fields convert empty submissions to None
+        # rather than '' (see Field.formfield()'s empty_value handling).
+        self.assertFalse(note.name)

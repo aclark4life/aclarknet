@@ -141,4 +141,5 @@ class FakeDataFunctionsTest(TestCase):
         result = get_fake_note_data()
         self.assertIsInstance(result, dict)
         self.assertIn("name", result)
-        self.assertIn("text", result)
+        # Note has a "description" field, not "text" (see db/models.py)
+        self.assertIn("description", result)

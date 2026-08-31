@@ -107,10 +107,10 @@ class FieldValuesListViewTest(TestCase):
         self.factory = RequestFactory()
         self.user = User.objects.create_user(username="testuser", password="testpass")
         self.invoice1 = Invoice.objects.create(
-            subject="Invoice 1", amount=100.00, cost=50.00, net=50.00, hours=10.0
+            name="Invoice 1", amount=100.00, cost=50.00, net=50.00, hours=10.0
         )
         self.invoice2 = Invoice.objects.create(
-            subject="Invoice 2", amount=200.00, cost=100.00, net=100.00, hours=20.0
+            name="Invoice 2", amount=200.00, cost=100.00, net=100.00, hours=20.0
         )
         self.client_obj1 = Client.objects.create(
             name="Client 1", description="Description 1", url="http://client1.com"

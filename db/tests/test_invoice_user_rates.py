@@ -5,6 +5,7 @@ from io import StringIO
 
 from django.core.management import call_command
 from django.test import TestCase
+from django.urls import reverse
 
 from db.models import Invoice, Time
 from siteuser.models import SiteUser
@@ -42,8 +43,13 @@ class InvoiceUserRatesTest(TestCase):
         )
 
     def test_time_amount_uses_user_rate(self):
-        """Test that time entry amounts use user rates when available."""
-        # Run the command with minimal data
+        """Test that invoice cost reflects each time entry's user rate.
+
+        Time entries don't persist a per-entry cost field; the user-rate
+        based cost is only accumulated onto the parent Invoice (see
+        db/signals.py: update_invoice_on_time_save). Amount, meanwhile, is
+        calculated from the task's rate, not the user's.
+        """
         call_command(
             "create_data",
             "--companies=1",
@@ -55,19 +61,18 @@ class InvoiceUserRatesTest(TestCase):
             stdout=StringIO(),
         )
 
-        # Check that time entries use user rates for calculation
-        time_entries = Time.objects.all()
-        for time_entry in time_entries:
-            if time_entry.user and time_entry.user.rate:
-                # Amount should be user.rate * hours
-                expected_amount = time_entry.user.rate * time_entry.hours
-                self.assertEqual(
-                    time_entry.amount,
-                    expected_amount,
-                    f"Time entry {time_entry.id}: expected {expected_amount} "
-                    f"(user rate {time_entry.user.rate} * {time_entry.hours} hours), "
-                    f"got {time_entry.amount}",
-                )
+        for invoice in Invoice.objects.all():
+            expected_cost = sum(
+                (time_entry.user.rate * time_entry.hours)
+                for time_entry in invoice.times.all()
+                if time_entry.user and time_entry.user.rate
+            )
+            self.assertEqual(
+                invoice.cost,
+                expected_cost,
+                f"Invoice {invoice.id}: expected cost {expected_cost} from "
+                f"summed user rate * hours, got {invoice.cost}",
+            )
 
     def test_invoice_detail_view_includes_user_calculations(self):
         """Test that invoice detail view includes user rate calculations."""
@@ -95,7 +100,7 @@ class InvoiceUserRatesTest(TestCase):
         self.client.force_login(superuser)
 
         # Get the invoice detail page
-        response = self.client.get(f"/invoice/{invoice.id}/")
+        response = self.client.get(reverse("invoice_view", args=[invoice.id]))
         
         # Check response is successful
         self.assertEqual(response.status_code, 200)
@@ -155,7 +160,7 @@ class InvoiceUserRatesTest(TestCase):
             password="testpass"
         )
         self.client.force_login(superuser)
-        response = self.client.get(f"/invoice/{invoice.id}/")
+        response = self.client.get(reverse("invoice_view", args=[invoice.id]))
 
         # Check that calculated totals match
         calc_total_hours = response.context["calc_total_hours"]
@@ -195,7 +200,7 @@ class InvoiceUserRatesTest(TestCase):
             password="testpass"
         )
         self.client.force_login(superuser)
-        response = self.client.get(f"/invoice/{invoice.id}/")
+        response = self.client.get(reverse("invoice_view", args=[invoice.id]))
 
         # Get user calculations from context
         user_calculations = response.context["user_calculations"]

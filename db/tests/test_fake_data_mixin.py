@@ -50,18 +50,14 @@ class FakeDataMixinTest(TestCase):
     @override_settings(DEBUG=True)
     def test_get_initial_preserves_existing_values(self):
         """get_initial should not override existing initial values."""
-        # Create a view with existing initial data
-        class ViewWithInitial(FakeDataMixinTestView):
-            def get_initial(self):
-                initial = super(CreateView, self).get_initial()
-                initial['name'] = 'Existing Name'
-                initial = super().get_initial()  # Call mixin's get_initial
-                return initial
-        
-        view = ViewWithInitial()
+        # Set initial data the standard Django way (self.initial), which
+        # FormMixin.get_initial() returns as the base initial dict that
+        # FakeDataMixin.get_initial() then fills in missing keys on top of.
+        view = FakeDataMixinTestView()
         view.request = self.request
+        view.initial = {"name": "Existing Name"}
         initial = view.get_initial()
-        
+
         # The existing name should be preserved
         self.assertEqual(initial['name'], 'Existing Name')
         # But other fields should have fake data

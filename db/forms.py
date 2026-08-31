@@ -305,7 +305,9 @@ class TimeForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         # For admin users, make the user field visible (not hidden)
-        # For non-admin users, keep it hidden and remove admin-only fields
+        # For non-admin users, keep it hidden and remove admin-only fields.
+        # When no user is provided at all (backwards compatibility, e.g.
+        # generic field introspection in db/views/base.py), show all fields.
         if user and user.is_superuser:
             # Make user field visible for admins by replacing the HiddenInput widget
             # with a Select widget. The ModelChoiceField already has the queryset set up.
@@ -315,12 +317,11 @@ class TimeForm(forms.ModelForm):
             # Replace the widget while preserving the field's queryset
             self.fields["user"].widget = forms.Select()
             self.fields["user"].queryset = User.objects.all().order_by("username")
-        else:
-            # Remove invoice, task, name, and project fields for non-admin users
+        elif user is not None:
+            # Remove invoice, task, and name fields for non-admin users
             self.fields.pop("invoice", None)
             self.fields.pop("task", None)
             self.fields.pop("name", None)
-            self.fields.pop("project", None)
 
         self.helper = FormHelper()
         self.helper.form_method = "post"

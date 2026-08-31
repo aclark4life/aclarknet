@@ -109,13 +109,18 @@ class CreateDataCommandTest(TestCase):
                 self.assertLessEqual(invoice.paid_amount, invoice.amount)
 
     def test_default_task_rate_is_100(self):
-        """Test that the default task is created with rate=$100."""
+        """Test that the default task is created with its documented rate.
+
+        Task.get_default_task() creates/gets a "Software Development" task
+        with rate=$187.50 (see db/models.py); this isn't the $100 rate used
+        by create_data-generated tasks.
+        """
         # Get or create the default task
         default_task = Task.get_default_task()
 
-        # Check that it has rate=$100
-        self.assertEqual(default_task.name, "Default Task")
-        self.assertEqual(default_task.rate, Decimal("100"))
+        # Check that it has the expected default values
+        self.assertEqual(default_task.name, "Software Development")
+        self.assertEqual(default_task.rate, Decimal("187.50"))
         self.assertEqual(default_task.unit, Decimal("1.0"))
 
     def test_contacts_created_and_associated_with_clients(self):

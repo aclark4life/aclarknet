@@ -28,8 +28,16 @@ except ImportError:
     pass
 
 if DEBUG:
-    INSTALLED_APPS += ["debug_toolbar", "hijack", "hijack.contrib.admin"]  # noqa F405
-    MIDDLEWARE += [  # noqa F405
+    # Use list concatenation (not +=) so we don't mutate the shared
+    # INSTALLED_APPS/MIDDLEWARE list objects from base.py in place -- doing
+    # so would leak dev-only apps into any other settings module (e.g.
+    # production) that also did `from .base import *` in the same process.
+    INSTALLED_APPS = INSTALLED_APPS + [  # noqa F405
+        "debug_toolbar",
+        "hijack",
+        "hijack.contrib.admin",
+    ]
+    MIDDLEWARE = MIDDLEWARE + [  # noqa F405
         "debug_toolbar.middleware.DebugToolbarMiddleware",
         "hijack.middleware.HijackUserMiddleware",
     ]

@@ -123,7 +123,7 @@ try:
 except ImportError:
     pass
 
-INSTALLED_APPS += ["allauth.socialaccount.providers.github"]  # noqa F405
+INSTALLED_APPS = INSTALLED_APPS + ["allauth.socialaccount.providers.github"]  # noqa F405
 SOCIALACCOUNT_PROVIDERS = {
     "github": {
         "APP": {

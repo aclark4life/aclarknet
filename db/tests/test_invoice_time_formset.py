@@ -45,7 +45,7 @@ class InvoiceTimeEntryFormsetTests(TestCase):
         context = view.get_context_data()
 
         self.assertIn("time_formset", context)
-        self.assertIsInstance(context["time_formset"], TimeEntryFormSet.__class__)
+        self.assertIsInstance(context["time_formset"], TimeEntryFormSet)
 
     def test_formset_saves_new_time_entries(self):
         """Test that new time entries are saved via formset."""
