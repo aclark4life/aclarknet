@@ -16,6 +16,7 @@ urlpatterns = [
     path("dashboard/", include("db.urls")),
     path("accounts/", include("allauth.urls")),
     path("user/", include("siteuser.urls")),
+    path("feedwell/", include("feedwell.feeds.urls")),
 ]
 
 

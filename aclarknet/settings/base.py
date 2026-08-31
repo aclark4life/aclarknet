@@ -59,9 +59,10 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
     "django_recaptcha",
-    "siteuser",
     "import_export",
+    "siteuser",
     "blog",
+    "feedwell.feeds",
 ]
 
 MIDDLEWARE = [
@@ -92,6 +93,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "aclarknet.context_processors.analytics",
+                "feedwell.feeds.context_processors.auth_urls",
             ],
         },
     },

@@ -14,6 +14,7 @@ dependencies = [
   "django-phonenumber-field",
   "django-recaptcha",
   "django-ses",
+  "feedwell>=0.2.1a1",
   "gunicorn",
   "html2docx",
   "phonenumbers",
