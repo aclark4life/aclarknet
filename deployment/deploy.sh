@@ -107,7 +107,12 @@ install_dependencies() {
     echo -e "${GREEN}Installing Python dependencies...${NC}"
     cd ${DEPLOY_DIR}
     ${DEPLOY_DIR}/.venv/bin/pip install --upgrade pip
-    ${DEPLOY_DIR}/.venv/bin/pip install -e .
+    # pyproject.toml intentionally has no version pins, so pip must be told
+    # to upgrade already-installed packages -- otherwise `pip install -e .`
+    # leaves existing packages (Django, Wagtail, django-mongodb-backend,
+    # etc.) at whatever version was previously installed, silently skipping
+    # upgrades even though the unbounded requirement is still satisfied.
+    ${DEPLOY_DIR}/.venv/bin/pip install --upgrade -e .
 }
 
 # Setup environment file
