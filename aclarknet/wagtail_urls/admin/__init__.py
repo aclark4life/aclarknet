@@ -1,4 +1,4 @@
-# Copied from wagtail/admin/urls/__init__.py (Wagtail 7.3.1)
+# Copied from wagtail/admin/urls/__init__.py (Wagtail 8.0)
 # All <int: path converters replaced with <str: for Django MongoDB Backend compatibility.
 # Sub-module imports redirected to aclarknet.wagtail_urls.admin.* overrides.
 # Re-diff against upstream on Wagtail upgrades.
@@ -20,7 +20,7 @@ from wagtail.admin.views import account, chooser, dismissibles, home, tags
 from wagtail.admin.views.bulk_action import index as bulk_actions
 from wagtail.admin.views.generic.preview import StreamFieldBlockPreview
 from wagtail.admin.views.i18n import localized_js_catalog
-from wagtail.admin.views.pages import listing
+from wagtail.admin.viewsets.pages import page_viewset_registry
 from wagtail.utils.urlpatterns import decorate_urlpatterns
 
 # Use our local patched sub-modules instead of the originals
@@ -39,17 +39,20 @@ urlpatterns = [
     # TODO: Move into wagtailadmin_pages namespace
     path(
         "pages/",
-        listing.ExplorableIndexView.as_view(),
+        page_viewset_registry.as_view("index", is_base_page=True),
         name="wagtailadmin_explore_root",
     ),
     path(
         "pages/<str:parent_page_id>/",
-        listing.ExplorableIndexView.as_view(),
+        page_viewset_registry.as_view("index", parent_page_id_kwarg="parent_page_id"),
         name="wagtailadmin_explore",
     ),
     path(
         "pages/<str:parent_page_id>/results/",
-        listing.ExplorableIndexView.as_view(results_only=True),
+        page_viewset_registry.as_view(
+            "index_results",
+            parent_page_id_kwarg="parent_page_id",
+        ),
         name="wagtailadmin_explore_results",
     ),
     # bulk actions

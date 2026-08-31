@@ -1,144 +1,284 @@
-# Copied from wagtail/admin/urls/pages.py (Wagtail 7.3.1)
+# Copied from wagtail/admin/urls/pages.py (Wagtail 8.0)
 # All <int: path converters replaced with <str: for Django MongoDB Backend compatibility.
 # The revisions_compare re_path regex \d+ replaced with [^/.]+ to match ObjectIDs.
 # Re-diff against upstream on Wagtail upgrades.
 from django.urls import path, re_path
 
-from wagtail.admin.views import page_privacy
-from wagtail.admin.views.pages import (
-    convert_alias,
-    copy,
-    create,
-    delete,
-    edit,
-    history,
-    lock,
-    move,
-    ordering,
-    preview,
-    revisions,
-    search,
-    unpublish,
-    usage,
-    workflow,
-)
+from wagtail.admin.views.pages import revisions
+from wagtail.admin.viewsets.pages import page_viewset_registry
 
 app_name = "wagtailadmin_pages"
 urlpatterns = [
     path(
         "add/<slug:content_type_app_name>/<slug:content_type_model_name>/<str:parent_page_id>/",
-        create.CreateView.as_view(),
+        page_viewset_registry.as_view(
+            "add",
+            app_label_kwarg="content_type_app_name",
+            model_name_kwarg="content_type_model_name",
+        ),
         name="add",
     ),
     path(
         "add/<slug:content_type_app_name>/<slug:content_type_model_name>/<str:parent_page_id>/preview/",
-        preview.PreviewOnCreate.as_view(),
+        page_viewset_registry.as_view(
+            "preview_on_add",
+            app_label_kwarg="content_type_app_name",
+            model_name_kwarg="content_type_model_name",
+        ),
         name="preview_on_add",
     ),
     path(
         "usage/<slug:content_type_app_name>/<slug:content_type_model_name>/",
-        usage.ContentTypeUseView.as_view(),
+        page_viewset_registry.as_view(
+            "content_type_use",
+            app_label_kwarg="content_type_app_name",
+            model_name_kwarg="content_type_model_name",
+        ),
         name="type_use",
     ),
     path(
+        "create/<slug:app_label>/<slug:model_name>",
+        page_viewset_registry.as_view(
+            "choose_parent",
+            app_label_kwarg="app_label",
+            model_name_kwarg="model_name",
+        ),
+        name="choose_parent",
+    ),
+    path(
         "usage/<slug:content_type_app_name>/<slug:content_type_model_name>/results/",
-        usage.ContentTypeUseView.as_view(results_only=True),
+        page_viewset_registry.as_view(
+            "content_type_use_results",
+            app_label_kwarg="content_type_app_name",
+            model_name_kwarg="content_type_model_name",
+        ),
         name="type_use_results",
     ),
-    path("<str:page_id>/usage/", usage.UsageView.as_view(), name="usage"),
-    path("<str:page_id>/edit/", edit.EditView.as_view(), name="edit"),
+    path(
+        "<str:page_id>/usage/",
+        page_viewset_registry.as_view(
+            "usage",
+            page_id_kwarg="page_id",
+        ),
+        name="usage",
+    ),
+    path(
+        "<str:page_id>/edit/",
+        page_viewset_registry.as_view(
+            "edit",
+            page_id_kwarg="page_id",
+        ),
+        name="edit",
+    ),
     path(
         "<str:page_id>/edit/preview/",
-        preview.PreviewOnEdit.as_view(),
+        page_viewset_registry.as_view(
+            "preview_on_edit",
+            page_id_kwarg="page_id",
+        ),
         name="preview_on_edit",
     ),
-    path("<str:page_id>/view_draft/", preview.view_draft, name="view_draft"),
-    path("<str:parent_page_id>/add_subpage/", create.add_subpage, name="add_subpage"),
-    path("<str:page_id>/delete/", delete.delete, name="delete"),
-    path("<str:page_id>/unpublish/", unpublish.Unpublish.as_view(), name="unpublish"),
+    path(
+        "<str:page_id>/view_draft/",
+        page_viewset_registry.as_view(
+            "view_draft",
+            page_id_kwarg="page_id",
+        ),
+        name="view_draft",
+    ),
+    path(
+        "<str:parent_page_id>/add_subpage/",
+        page_viewset_registry.as_view(
+            "add_subpage",
+            parent_page_id_kwarg="parent_page_id",
+        ),
+        name="add_subpage",
+    ),
+    path(
+        "<str:page_id>/delete/",
+        page_viewset_registry.as_view(
+            "delete",
+            page_id_kwarg="page_id",
+        ),
+        name="delete",
+    ),
+    path(
+        "<str:page_id>/unpublish/",
+        page_viewset_registry.as_view(
+            "unpublish",
+            page_id_kwarg="page_id",
+        ),
+        name="unpublish",
+    ),
     path(
         "<str:page_id>/convert_alias/",
-        convert_alias.convert_alias,
+        page_viewset_registry.as_view(
+            "convert_alias",
+            page_id_kwarg="page_id",
+        ),
         name="convert_alias",
     ),
-    path("search/", search.SearchView.as_view(), name="search"),
+    path(
+        "search/",
+        page_viewset_registry.as_view("search", is_base_page=True),
+        name="search",
+    ),
     path(
         "search/results/",
-        search.SearchView.as_view(results_only=True),
+        page_viewset_registry.as_view("search_results", is_base_page=True),
         name="search_results",
     ),
     path(
-        "<str:page_to_move_id>/move/", move.MoveChooseDestination.as_view(), name="move"
+        "<str:page_to_move_id>/move/",
+        page_viewset_registry.as_view(
+            "move",
+            page_id_kwarg="page_to_move_id",
+        ),
+        name="move",
     ),
     path(
         "<str:page_to_move_id>/move/<str:destination_id>/confirm/",
-        move.move_confirm,
+        page_viewset_registry.as_view(
+            "move_confirm",
+            page_id_kwarg="page_to_move_id",
+        ),
         name="move_confirm",
     ),
     path(
         "<str:page_to_move_id>/set_position/",
-        ordering.set_page_position,
+        page_viewset_registry.as_view(
+            "set_page_position",
+            page_id_kwarg="page_to_move_id",
+        ),
         name="set_page_position",
     ),
-    path("<str:page_id>/copy/", copy.copy, name="copy"),
+    path(
+        "<str:page_id>/copy/",
+        page_viewset_registry.as_view(
+            "copy",
+            page_id_kwarg="page_id",
+        ),
+        name="copy",
+    ),
     path(
         "workflow/action/<str:page_id>/<slug:action_name>/<str:task_state_id>/",
-        workflow.WorkflowAction.as_view(),
+        page_viewset_registry.as_view(
+            "workflow_action",
+            page_id_kwarg="page_id",
+        ),
         name="workflow_action",
     ),
     path(
         "workflow/collect_action_data/<str:page_id>/<slug:action_name>/<str:task_state_id>/",
-        workflow.CollectWorkflowActionData.as_view(),
+        page_viewset_registry.as_view(
+            "collect_workflow_action_data",
+            page_id_kwarg="page_id",
+        ),
         name="collect_workflow_action_data",
     ),
     path(
         "workflow/confirm_cancellation/<str:page_id>/",
-        workflow.ConfirmWorkflowCancellation.as_view(),
+        page_viewset_registry.as_view(
+            "confirm_workflow_cancellation",
+            page_id_kwarg="page_id",
+        ),
         name="confirm_workflow_cancellation",
     ),
     path(
         "workflow/preview/<str:page_id>/<str:task_id>/",
-        workflow.PreviewRevisionForTask.as_view(),
+        page_viewset_registry.as_view(
+            "workflow_preview",
+            page_id_kwarg="page_id",
+        ),
         name="workflow_preview",
     ),
-    path("<str:page_id>/privacy/", page_privacy.set_privacy, name="set_privacy"),
-    path("<str:page_id>/lock/", lock.LockView.as_view(), name="lock"),
-    path("<str:page_id>/unlock/", lock.UnlockView.as_view(), name="unlock"),
+    path(
+        "<str:page_id>/privacy/",
+        page_viewset_registry.as_view(
+            "set_privacy",
+            page_id_kwarg="page_id",
+        ),
+        name="set_privacy",
+    ),
+    path(
+        "<str:page_id>/lock/",
+        page_viewset_registry.as_view(
+            "lock",
+            page_id_kwarg="page_id",
+        ),
+        name="lock",
+    ),
+    path(
+        "<str:page_id>/unlock/",
+        page_viewset_registry.as_view(
+            "unlock",
+            page_id_kwarg="page_id",
+        ),
+        name="unlock",
+    ),
     path("<str:page_id>/revisions/", revisions.revisions_index, name="revisions_index"),
     path(
         "<str:page_id>/revisions/<str:revision_id>/view/",
-        revisions.RevisionsView.as_view(),
+        page_viewset_registry.as_view(
+            "revisions_view",
+            page_id_kwarg="page_id",
+        ),
         name="revisions_view",
     ),
     path(
         "<str:page_id>/revisions/<str:revision_id>/revert/",
-        revisions.RevisionsRevertView.as_view(),
+        page_viewset_registry.as_view(
+            "revisions_revert",
+            page_id_kwarg="page_id",
+        ),
         name="revisions_revert",
     ),
     path(
         "<str:page_id>/revisions/<str:revision_id>/unschedule/",
-        revisions.RevisionsUnschedule.as_view(),
+        page_viewset_registry.as_view(
+            "revisions_unschedule",
+            page_id_kwarg="page_id",
+        ),
         name="revisions_unschedule",
     ),
     re_path(
-        r"^([^/]+)/revisions/compare/(live|earliest|[^/.]+)\.\.\.(live|latest|[^/.]+)/$",
-        revisions.RevisionsCompare.as_view(),
+        r"^(?P<pk>[^/.]+)/revisions/compare/(?P<revision_id_a>live|earliest|[^/.]+)\.\.\.(?P<revision_id_b>live|latest|[^/.]+)/$",
+        page_viewset_registry.as_view(
+            "revisions_compare",
+            page_id_kwarg="pk",
+        ),
         name="revisions_compare",
     ),
     path(
         "<str:page_id>/workflow_history/",
-        history.WorkflowHistoryView.as_view(),
+        page_viewset_registry.as_view(
+            "workflow_history",
+            page_id_kwarg="page_id",
+        ),
         name="workflow_history",
     ),
     path(
         "<str:page_id>/workflow_history/detail/<str:workflow_state_id>/",
-        history.WorkflowHistoryDetailView.as_view(),
+        page_viewset_registry.as_view(
+            "workflow_history_detail",
+            page_id_kwarg="page_id",
+        ),
         name="workflow_history_detail",
     ),
-    path("<str:page_id>/history/", history.PageHistoryView.as_view(), name="history"),
+    path(
+        "<str:page_id>/history/",
+        page_viewset_registry.as_view(
+            "history",
+            page_id_kwarg="page_id",
+        ),
+        name="history",
+    ),
     path(
         "<str:page_id>/history/results/",
-        history.PageHistoryView.as_view(results_only=True),
+        page_viewset_registry.as_view(
+            "history_results",
+            page_id_kwarg="page_id",
+        ),
         name="history_results",
     ),
 ]

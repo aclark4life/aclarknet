@@ -1,4 +1,4 @@
-# Copied from wagtail/admin/urls/editing_sessions.py (Wagtail 7.3.1)
+# Copied from wagtail/admin/urls/editing_sessions.py (Wagtail 8.0)
 # All <int: path converters replaced with <str: for Django MongoDB Backend compatibility.
 # Re-diff against upstream on Wagtail upgrades.
 from django.urls import path
