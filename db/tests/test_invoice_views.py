@@ -156,3 +156,39 @@ class InvoiceViewRedirectTests(TestCase):
         
         # Verify that form.save() was called exactly once (by the parent's form_valid)
         self.assertEqual(mock_form.save.call_count, 1)
+
+
+class InvoiceDeleteViewTests(TestCase):
+    """Test that InvoiceDeleteView actually deletes invoices.
+
+    Regression test for a bug where InvoiceDeleteView inherited
+    form_class = InvoiceForm from BaseInvoiceView. DeleteView's POST
+    handler validates that form against the (empty) confirmation POST
+    body, so required InvoiceForm fields (issue_date, paid_amount,
+    currency) failed validation and the invoice was silently never
+    deleted -- the confirmation page just re-rendered with a 200.
+    """
+
+    def setUp(self):
+        self.superuser = SiteUser.objects.create_superuser(
+            username="admin-delete-test", password="password123"
+        )
+        self.client.force_login(self.superuser)
+
+    def test_post_deletes_invoice_and_redirects(self):
+        invoice = Invoice.objects.create(name="Invoice To Delete")
+        url = reverse("invoice_delete", args=[invoice.pk])
+
+        response = self.client.post(url, {})
+
+        self.assertEqual(response.status_code, 302)
+        self.assertFalse(Invoice.objects.filter(pk=invoice.pk).exists())
+
+    def test_get_renders_confirmation_page(self):
+        invoice = Invoice.objects.create(name="Invoice To Confirm Delete")
+        url = reverse("invoice_delete", args=[invoice.pk])
+
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(Invoice.objects.filter(pk=invoice.pk).exists())

@@ -6,6 +6,7 @@ from decimal import Decimal
 from itertools import chain
 
 from dateutil.relativedelta import relativedelta
+from django import forms
 from django.http import FileResponse
 from django.shortcuts import get_object_or_404
 from django.template.loader import get_template
@@ -275,6 +276,12 @@ class InvoiceUpdateView(
 class InvoiceDeleteView(BaseInvoiceView, DeleteView):
     template_name = "delete.html"
     success_url = reverse_lazy("invoice_index")
+    # BaseInvoiceView sets form_class = InvoiceForm for the edit/create views,
+    # but DeleteView only needs a confirmation POST with no fields. Without
+    # this override, the inherited InvoiceForm is validated on submit and
+    # fails (issue_date/paid_amount/currency are required), so the delete
+    # silently re-renders the confirmation page instead of deleting.
+    form_class = forms.Form
 
     def get_queryset(self):
         return Invoice.objects.all()
