@@ -66,12 +66,13 @@ class InvoiceCreateView(
         start_of_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
 
         # 2. Calculate dates using relativedelta (handles year rollovers automatically)
+        # Default name uses the current month/year, matching Invoice.save()'s fallback.
         initial_data = {
             "start_date": start_of_month,
             "end_date": start_of_month + relativedelta(months=1, days=-1),
             "issue_date": start_of_month + relativedelta(months=1),
             "due_date": start_of_month + relativedelta(months=2),
-            "name": context["form"].initial.get("name", ""),
+            "name": f"Invoice {now.strftime('%B %Y')}",
         }
 
         # 3. Handle Project Logic
@@ -84,7 +85,7 @@ class InvoiceCreateView(
                     {
                         "project": project,
                         "client": project.client,
-                        "subject": f"{project} {now.strftime('%B %Y')}",
+                        "name": f"{project} {now.strftime('%B %Y')}",
                     }
                 )
 
