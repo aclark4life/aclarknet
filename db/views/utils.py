@@ -126,6 +126,25 @@ def update_selected_entries(request):
             else:
                 messages.warning(request, f"No {model_name} entries were deleted.")
 
+        elif action == "mark_paid":
+            if model_name != "invoice":
+                messages.error(
+                    request, "Mark as Paid is only available for invoices."
+                )
+            else:
+                marked_count = 0
+                for invoice in entries:
+                    invoice.paid_amount = invoice.amount or 0
+                    invoice.save()
+                    marked_count += 1
+                if marked_count > 0:
+                    messages.success(
+                        request,
+                        f"Successfully marked {marked_count} invoice(s) as paid.",
+                    )
+                else:
+                    messages.warning(request, "No invoices were marked as paid.")
+
         else:
             messages.error(request, "Invalid action requested.")
 

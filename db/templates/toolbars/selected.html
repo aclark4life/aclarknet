@@ -1,6 +1,15 @@
 <input type="hidden" name="model_name" value="{{ model_name }}">
 <div class="d-flex justify-content-end my-2">
   <div class="btn-group" role="group">
+    {% if model_name == 'invoice' %}
+      <button type="submit"
+              id="mark-paid-selected-btn"
+              name="action"
+              value="mark_paid"
+              class="btn btn-outline-success"
+              style="display: none">Mark as Paid
+      </button>
+    {% endif %}
     <button type="submit"
             id="delete-selected-btn"
             name="action"

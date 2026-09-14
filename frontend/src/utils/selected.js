@@ -9,6 +9,7 @@ function handleSelectAll() {
 function handleBtnVisibility() {
   const table = document.getElementById("table-select");
   const deleteBtn = document.getElementById("delete-selected-btn");
+  const markPaidBtn = document.getElementById("mark-paid-selected-btn");
   const archiveBtn = document.getElementById("archive-selected-btn");
   const unarchiveBtn = document.getElementById("unarchive-selected-btn");
   const htmlBtn = document.getElementById("html-selected-btn");
@@ -22,12 +23,20 @@ function handleBtnVisibility() {
         (checkbox) => checkbox.checked
       );
 
-      deleteBtn.style.display = anyChecked ? "block" : "none";
-      archiveBtn.style.display = anyChecked ? "block" : "none";
-      unarchiveBtn.style.display = anyChecked ? "block" : "none";
-      htmlBtn.style.display = anyChecked ? "block" : "none";
-      unhtmlBtn.style.display = anyChecked ? "block" : "none";
-      saveBtn.style.display = anyChecked ? "block" : "none";
+      const buttons = [
+        deleteBtn,
+        markPaidBtn,
+        archiveBtn,
+        unarchiveBtn,
+        htmlBtn,
+        unhtmlBtn,
+        saveBtn,
+      ];
+      buttons.forEach((btn) => {
+        if (btn) {
+          btn.style.display = anyChecked ? "block" : "none";
+        }
+      });
     });
   }
 }
