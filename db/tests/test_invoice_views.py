@@ -192,3 +192,59 @@ class InvoiceDeleteViewTests(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue(Invoice.objects.filter(pk=invoice.pk).exists())
+
+
+class InvoiceMarkPaidViewTests(TestCase):
+    """Test the 'Mark as Paid' action on the invoice view."""
+
+    def setUp(self):
+        self.superuser = SiteUser.objects.create_superuser(
+            username="admin-mark-paid-test", password="testpass123"
+        )
+        self.client.force_login(self.superuser)
+
+    def test_post_marks_invoice_as_paid(self):
+        from decimal import Decimal
+
+        invoice = Invoice.objects.create(
+            name="Invoice To Mark Paid", amount=Decimal("250.00")
+        )
+        url = reverse("invoice_mark_paid", args=[invoice.pk])
+
+        response = self.client.post(url)
+
+        invoice.refresh_from_db()
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse("invoice_view", args=[invoice.pk]))
+        self.assertEqual(invoice.paid_amount, invoice.amount)
+        self.assertEqual(invoice.balance, 0)
+
+    def test_post_with_no_amount_marks_paid_amount_zero(self):
+        invoice = Invoice.objects.create(name="Invoice With No Amount")
+        url = reverse("invoice_mark_paid", args=[invoice.pk])
+
+        response = self.client.post(url)
+
+        invoice.refresh_from_db()
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(invoice.paid_amount, 0)
+
+    def test_non_superuser_cannot_mark_paid(self):
+        self.client.logout()
+        regular_user = SiteUser.objects.create_user(
+            username="regular-user-mark-paid-test", password="testpass123"
+        )
+        self.client.force_login(regular_user)
+
+        from decimal import Decimal
+
+        invoice = Invoice.objects.create(
+            name="Invoice Non Superuser", amount=Decimal("100.00")
+        )
+        url = reverse("invoice_mark_paid", args=[invoice.pk])
+
+        response = self.client.post(url)
+
+        invoice.refresh_from_db()
+        self.assertNotEqual(response.status_code, 302)
+        self.assertEqual(invoice.paid_amount, 0)

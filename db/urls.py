@@ -80,6 +80,7 @@ from .views import (
     InvoiceDetailView,
     InvoiceExportPDFView,
     InvoiceListView,
+    InvoiceMarkPaidView,
     InvoiceUpdateView,
 )
 
@@ -244,6 +245,11 @@ urlpatterns += [
     ),
     path(
         "invoice/<object_id:pk>/copy/", InvoiceCopyView.as_view(), name="invoice_copy"
+    ),
+    path(
+        "invoice/<object_id:pk>/mark-paid/",
+        InvoiceMarkPaidView.as_view(),
+        name="invoice_mark_paid",
     ),
     path(
         "invoice/export-pdf/<object_id:object_id>",

@@ -2,6 +2,7 @@
 
 from itertools import chain
 
+from django import forms
 from django.http import HttpResponseRedirect
 from django.shortcuts import reverse
 from django.urls import reverse_lazy
@@ -106,6 +107,11 @@ class TaskDeleteView(BaseTaskView, DeleteView):
     form_model = TaskForm
     success_url = reverse_lazy("task_index")
     template_name = "delete.html"
+    # BaseTaskView sets form_class = TaskForm for edit/create, but
+    # DeleteView only needs a confirmation POST with no fields. TaskForm's
+    # "unit" field is required, which broke deletion the same way
+    # InvoiceDeleteView's bug did.
+    form_class = forms.Form
 
     def get_queryset(self):
         return Task.objects.all()

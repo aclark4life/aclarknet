@@ -7,10 +7,10 @@ from itertools import chain
 
 from dateutil.relativedelta import relativedelta
 from django import forms
-from django.http import FileResponse
+from django.http import FileResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.template.loader import get_template
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.views.generic import (
     CreateView,
@@ -285,6 +285,17 @@ class InvoiceDeleteView(BaseInvoiceView, DeleteView):
 
     def get_queryset(self):
         return Invoice.objects.all()
+
+
+class InvoiceMarkPaidView(BaseInvoiceView, View):
+    """Mark an invoice as fully paid by setting paid_amount to its amount."""
+
+    def post(self, request, *args, **kwargs):
+        object_id = self.kwargs["pk"]
+        invoice = get_object_or_404(Invoice, pk=object_id)
+        invoice.paid_amount = invoice.amount or 0
+        invoice.save()
+        return HttpResponseRedirect(reverse("invoice_view", args=[invoice.pk]))
 
 
 class InvoiceCopyView(

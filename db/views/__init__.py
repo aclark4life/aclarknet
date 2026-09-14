@@ -63,6 +63,7 @@ from .invoice import (
     InvoiceDetailView,
     InvoiceExportPDFView,
     InvoiceListView,
+    InvoiceMarkPaidView,
     InvoiceUpdateView,
 )
 
@@ -175,6 +176,7 @@ __all__ = [
     "InvoiceDetailView",
     "InvoiceExportPDFView",
     "InvoiceListView",
+    "InvoiceMarkPaidView",
     "InvoiceUpdateView",
     # Note views
     "NoteAddToObjectView",

@@ -2,6 +2,7 @@
 
 from itertools import chain
 
+from django import forms
 from django.http import HttpResponseRedirect
 from django.shortcuts import reverse
 from django.urls import reverse_lazy
@@ -140,6 +141,10 @@ class ProjectDeleteView(BaseProjectView, DeleteView):
     form_model = ProjectForm
     success_url = reverse_lazy("project_index")
     template_name = "delete.html"
+    # BaseProjectView sets form_class = ProjectForm for edit/create, but
+    # DeleteView only needs a confirmation POST with no fields (see
+    # InvoiceDeleteView for the bug this avoids).
+    form_class = forms.Form
 
     def get_queryset(self):
         return Project.objects.all()

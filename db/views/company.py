@@ -2,6 +2,7 @@
 
 from itertools import chain
 
+from django import forms
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -90,6 +91,10 @@ class CompanyUpdateView(
 class CompanyDeleteView(BaseCompanyView, DeleteView):
     template_name = "delete.html"
     success_url = reverse_lazy("company_index")
+    # BaseCompanyView sets form_class = CompanyForm for edit/create, but
+    # DeleteView only needs a confirmation POST with no fields (see
+    # InvoiceDeleteView for the bug this avoids).
+    form_class = forms.Form
 
     def get_queryset(self):
         return Company.objects.all()

@@ -1,5 +1,6 @@
 """Note-related views."""
 
+from django import forms
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -96,6 +97,10 @@ class NoteDeleteView(BaseNoteView, DeleteView):
     form_model = NoteForm
     success_url = reverse_lazy("note_index")
     template_name = "delete.html"
+    # BaseNoteView sets form_class = NoteForm for edit/create, but
+    # DeleteView only needs a confirmation POST with no fields (see
+    # InvoiceDeleteView for the bug this avoids).
+    form_class = forms.Form
 
     def get_queryset(self):
         return Note.objects.all()
