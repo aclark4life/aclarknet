@@ -202,9 +202,9 @@ class Invoice(BaseModel):
                 self.invoice_number = (max_invoice or 0) + 1
 
         if not self.name:
-            self.name = (
-                f"INV-{self.issue_date}-{self.invoice_number or self.pk or 'NEW'}"
-            )
+            issue_date = self.issue_date or timezone.now().date()
+            project_name = self.project.name if self.project else "Invoice"
+            self.name = f"{project_name} {issue_date.strftime('%B %Y')}"
         if self.amount is not None:
             self.balance = self.amount - (self.paid_amount or 0)
         super().save(*args, **kwargs)

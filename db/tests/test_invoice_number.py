@@ -50,11 +50,28 @@ class InvoiceNumberTest(TestCase):
                 issue_date=timezone.now().date(),
             )
 
-    def test_invoice_number_in_name(self):
-        """Test that invoice number is included in auto-generated name."""
+    def test_invoice_name_auto_generated(self):
+        """Test that name is auto-generated as '<project> <month> <year>'."""
+        issue_date = timezone.now().date()
         invoice = Invoice.objects.create(
-            issue_date=timezone.now().date(),
+            issue_date=issue_date,
         )
-        
-        # Name should be auto-generated with invoice_number
-        self.assertIn(str(invoice.invoice_number), invoice.name)
+
+        # Name should default to "<project> <month year>" (project falls back
+        # to "Invoice" when no project is set).
+        self.assertEqual(invoice.name, f"Invoice {issue_date.strftime('%B %Y')}")
+
+    def test_invoice_name_uses_project(self):
+        """Test that the auto-generated name includes the project name."""
+        from db.models import Project
+
+        project = Project.objects.create(name="Acme Corp")
+        issue_date = timezone.now().date()
+        invoice = Invoice.objects.create(
+            project=project,
+            issue_date=issue_date,
+        )
+
+        self.assertEqual(
+            invoice.name, f"Acme Corp {issue_date.strftime('%B %Y')}"
+        )
