@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.db.models.signals import post_delete, post_save
+from django.db.models.signals import post_delete, post_save, pre_save
 from django.dispatch import receiver
 from django.template.loader import render_to_string
 from django.urls import reverse
@@ -43,6 +43,35 @@ def send_email_on_time_creation(sender, instance, created, **kwargs):
             from_email=from_email,
             recipient_email=recipient_email,
         )
+
+
+@receiver(pre_save, sender=Time)
+def auto_assign_time_to_invoice(sender, instance, **kwargs):
+    """Auto-attach a newly created, unbilled Time entry to an existing
+    invoice that already covers its project and falls within the
+    invoice's start/end date range. Entries are typically logged after
+    an invoice period has been opened, so this matches new time to the
+    right invoice as it's created rather than the other way around.
+    """
+    if (
+        instance.pk
+        or instance.invoice_id
+        or not instance.project_id
+        or not instance.date
+    ):
+        return
+
+    invoice = (
+        Invoice.objects.filter(
+            project_id=instance.project_id,
+            start_date__lte=instance.date,
+            end_date__gte=instance.date,
+        )
+        .order_by("-start_date")
+        .first()
+    )
+    if invoice:
+        instance.invoice = invoice
 
 
 @receiver(post_save, sender=Invoice)

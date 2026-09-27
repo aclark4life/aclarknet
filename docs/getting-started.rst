@@ -18,6 +18,19 @@ Welcome! This tutorial will guide you through setting up aclarknet for local dev
 * MongoDB installed and running
 * Basic familiarity with Django
 
+.. note::
+
+   Running the test suite (``pytest`` / ``just t``) requires a running MongoDB
+   instance, since ``django-mongodb-backend`` creates a real test database.
+   If no local ``mongod`` (or Docker) is available, start a throwaway instance
+   with:
+
+   .. code-block:: bash
+
+      npx --yes mongodb-runner start --id aclarknet-test
+
+   Stop it afterward with ``npx mongodb-runner stop --id aclarknet-test``.
+
 Step 1: Clone and Install
 --------------------------
 

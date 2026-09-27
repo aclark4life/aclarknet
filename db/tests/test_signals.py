@@ -15,7 +15,10 @@ class TimeSignalTest(TestCase):
     def setUp(self):
         """Set up test data"""
         self.user = User.objects.create_user(
-            username="testuser", email="test@example.com", password="testpass123", mail=True
+            username="testuser",
+            email="test@example.com",
+            password="testpass123",
+            mail=True,
         )
 
     def test_time_creation_with_user_and_profile(self):
@@ -84,9 +87,7 @@ class InvoiceRecalculationSignalTest(TestCase):
         self.client = Client.objects.create(name="Test Client")
         self.project = Project.objects.create(name="Test Project", client=self.client)
         self.task = Task.objects.create(name="Test Task", rate=Decimal("150.00"))
-        self.invoice = Invoice.objects.create(
-            name="Test Invoice", project=self.project
-        )
+        self.invoice = Invoice.objects.create(name="Test Invoice", project=self.project)
 
     def test_invoice_amount_calculated_on_time_creation(self):
         """Test that invoice amount is calculated when a time entry is created"""
@@ -292,3 +293,102 @@ class InvoiceRecalculationSignalTest(TestCase):
             Decimal("750.00"),
             "Invoice amount should be recalculated on save",
         )
+
+
+class TimeAutoAssignInvoiceSignalTest(TestCase):
+    """Test cases for auto-assigning new Time entries to an existing Invoice.
+
+    Time entries are typically logged after an invoice period has already
+    been opened, so a new, unbilled Time entry should be matched to an
+    existing invoice covering its project and date -- not the other way
+    around.
+    """
+
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username="testuser",
+            email="test@example.com",
+            password="testpass123",
+            mail=True,
+        )
+        self.client = Client.objects.create(name="Test Client")
+        self.project = Project.objects.create(name="Test Project", client=self.client)
+        self.task = Task.objects.create(name="Test Task", rate=Decimal("150.00"))
+        self.invoice = Invoice.objects.create(
+            name="January Invoice",
+            project=self.project,
+            start_date="2024-01-01",
+            end_date="2024-01-31",
+        )
+
+    def _create_time(self, date, project=None, invoice=None):
+        with patch("aclarknet.email_utils.EmailMultiAlternatives.send"):
+            return Time.objects.create(
+                user=self.user,
+                task=self.task,
+                project=project if project is not None else self.project,
+                hours=Decimal("2.0"),
+                date=date,
+                invoice=invoice,
+                description="Test work",
+            )
+
+    def test_new_time_in_range_is_auto_assigned_to_existing_invoice(self):
+        """A new time entry within an open invoice's date range and
+        project should be auto-assigned to that invoice on creation."""
+        time_entry = self._create_time(date="2024-01-15")
+
+        self.assertEqual(time_entry.invoice_id, self.invoice.id)
+
+        self.invoice.refresh_from_db()
+        self.assertEqual(self.invoice.hours, Decimal("2.00"))
+
+    def test_new_time_outside_range_is_not_assigned(self):
+        """Time entries outside any invoice's date range should be left
+        unbilled."""
+        time_entry = self._create_time(date="2024-02-15")
+
+        self.assertIsNone(time_entry.invoice_id)
+
+    def test_new_time_for_other_project_is_not_assigned(self):
+        """Time entries for a different project should not be matched to
+        an invoice for another project."""
+        other_project = Project.objects.create(name="Other Project", client=self.client)
+        time_entry = self._create_time(date="2024-01-15", project=other_project)
+
+        self.assertIsNone(time_entry.invoice_id)
+
+    def test_explicit_invoice_is_respected(self):
+        """If an invoice is explicitly set on creation, auto-assignment
+        should not override it."""
+        other_invoice = Invoice.objects.create(name="Explicit Invoice")
+        time_entry = self._create_time(date="2024-01-15", invoice=other_invoice)
+
+        self.assertEqual(time_entry.invoice_id, other_invoice.id)
+
+    def test_most_recent_matching_invoice_is_chosen(self):
+        """When multiple invoices cover the same date, the one with the
+        latest start date should be preferred."""
+        newer_invoice = Invoice.objects.create(
+            name="January Invoice (Revised)",
+            project=self.project,
+            start_date="2024-01-10",
+            end_date="2024-01-31",
+        )
+
+        time_entry = self._create_time(date="2024-01-15")
+
+        self.assertEqual(time_entry.invoice_id, newer_invoice.id)
+
+    def test_existing_time_entry_is_not_reassigned_on_update(self):
+        """Saving an already-existing, unbilled time entry should not
+        trigger auto-assignment; only creation should."""
+        time_entry = self._create_time(date="2024-02-15")
+        self.assertIsNone(time_entry.invoice_id)
+
+        time_entry.description = "Updated description"
+        with patch("aclarknet.email_utils.EmailMultiAlternatives.send"):
+            time_entry.save()
+
+        time_entry.refresh_from_db()
+        self.assertIsNone(time_entry.invoice_id)

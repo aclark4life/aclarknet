@@ -49,6 +49,7 @@ Documentation is organized as a flat set of topic-focused pages grouped below by
    invoice-dashboard-design
    invoice-time-formset
    copy-invoice-data
+   time-entry-relationships
 
 .. toctree::
    :maxdepth: 1
