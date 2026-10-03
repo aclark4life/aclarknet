@@ -45,7 +45,7 @@
                   <small class="text-muted">Share this link with your client to allow them to pay the invoice.</small>
                 </div>
               </div>
-            {% elif object.balance == 0 %}
+            {% elif object.balance == 0 and object.amount %}
               <div class="border rounded m-3 p-3 bg-light text-success">
                 <i class="fa-solid fa-check-circle"></i> <strong>Paid in Full</strong>
               </div>
