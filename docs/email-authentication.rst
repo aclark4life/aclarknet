@@ -1,16 +1,15 @@
 Email Authentication Explained
 ===============================
 
-This document explains how email authentication works and why it's important for preventing Gmail warnings and improving email deliverability.
+This document explains how email authentication prevents Gmail warnings
+and improves deliverability.
 
 The Problem
 -----------
 
-Gmail and other email providers show warnings like "Be careful with this message" when emails fail authentication checks. This happens because:
-
-1. Email spoofing and phishing are common security threats
-2. Email providers need to verify that emails actually come from who they claim to be from
-3. Without proper authentication, your legitimate emails may be marked as suspicious
+Gmail and other providers show warnings like "Be careful with this
+message" when emails fail authentication checks. Without proper
+authentication, legitimate mail may be treated as suspicious.
 
 The Solution: Three Authentication Methods
 -------------------------------------------
@@ -22,13 +21,14 @@ SPF (Sender Policy Framework)
 
 **What it does:**
 
-SPF allows domain owners to specify which mail servers are authorized to send email on behalf of their domain.
+SPF lets domain owners specify which mail servers may send email for the
+domain.
 
 **How it works:**
 
-1. You publish a TXT record in your DNS listing authorized mail servers
+1. You publish a TXT record in DNS listing authorized mail servers
 2. When an email arrives, the receiving server checks the DNS record
-3. If the sending server is in the authorized list, SPF passes
+3. If the sending server is authorized, SPF passes
 4. If not, SPF fails and the email may be rejected or marked as spam
 
 **Example SPF record:**
@@ -37,7 +37,8 @@ SPF allows domain owners to specify which mail servers are authorized to send em
 
    v=spf1 include:amazonses.com include:_spf.google.com ~all
 
-This says: "Allow AWS SES and Google to send email for this domain, soft-fail everything else"
+This says: "Allow AWS SES and Google to send email for this domain,
+soft-fail everything else"
 
 **Status for aclark.net:** Already configured correctly
 
@@ -46,24 +47,27 @@ DKIM (DomainKeys Identified Mail)
 
 **What it does:**
 
-DKIM adds a digital signature to your emails that proves they haven't been tampered with and actually came from your domain.
+DKIM adds a digital signature that proves a message came from your domain
+and was not modified in transit.
 
 **How it works:**
 
 1. Your mail server signs outgoing emails with a private key
-2. You publish the corresponding public key in your DNS
+2. You publish the corresponding public key in DNS
 3. Receiving servers use the public key to verify the signature
 4. If the signature is valid and matches, DKIM passes
 
 **Why it matters:**
 
-- Proves the email content hasn't been modified in transit
-- Confirms the email actually came from your domain
-- More secure than SPF alone
+- Proves the email content has not been modified in transit
+- Confirms the email came from your domain
+- Provides stronger assurance than SPF alone
 
 **Implementation:**
 
-AWS SES automatically signs emails with DKIM when you verify your domain and enable Easy DKIM. You just need to add the CNAME records AWS provides to your DNS.
+AWS SES automatically signs emails with DKIM when you verify your domain
+and enable Easy DKIM. You only need to add the CNAME records AWS
+provides to your DNS.
 
 **Status for aclark.net:** Need to verify in AWS SES Console
 
@@ -72,11 +76,12 @@ DMARC (Domain-based Message Authentication, Reporting, and Conformance)
 
 **What it does:**
 
-DMARC ties SPF and DKIM together and tells receiving servers what to do when authentication fails.
+DMARC ties SPF and DKIM together and tells receiving servers what to do
+when authentication fails.
 
 **How it works:**
 
-1. You publish a DMARC policy in your DNS
+1. You publish a DMARC policy in DNS
 2. The policy specifies what to do with emails that fail SPF or DKIM
 3. Receiving servers follow your policy (reject, quarantine, or allow)
 4. You receive reports about authentication failures
@@ -84,8 +89,8 @@ DMARC ties SPF and DKIM together and tells receiving servers what to do when aut
 **Why it's critical:**
 
 - **This is the missing piece causing the Gmail warning**
-- Without DMARC, even if SPF and DKIM pass, Gmail may still show warnings
-- DMARC proves you're actively protecting your domain from spoofing
+- Without DMARC, Gmail may still show warnings even if SPF and DKIM pass
+- DMARC proves you are actively protecting your domain from spoofing
 
 **DMARC policies:**
 
@@ -107,10 +112,8 @@ DMARC ties SPF and DKIM together and tells receiving servers what to do when aut
 How They Work Together
 ----------------------
 
-All three authentication methods work together to provide comprehensive email security:
-
 1. **SPF** verifies the sending server is authorized
-2. **DKIM** verifies the email content hasn't been tampered with
+2. **DKIM** verifies the email content has not been tampered with
 3. **DMARC** ties them together and enforces a policy
 
 **Authentication flow:**
@@ -139,14 +142,15 @@ Gmail shows "Be careful with this message" when:
 4. DMARC policy fails (SPF and DKIM don't align)
 5. The sending domain has a poor reputation
 
-**Your specific issue:**
-
-Your SPF is configured correctly, but DMARC is missing. Even though your emails might be legitimate, Gmail can't verify your domain's authentication policy, so it shows a warning to be safe.
+Your SPF is configured correctly, but DMARC is missing. Even if the mail
+is legitimate, Gmail cannot verify your domain's policy, so it warns the
+recipient.
 
 Code Improvements
 -----------------
 
-Beyond DNS configuration, the email sending code has been improved to include headers that help with deliverability:
+Beyond DNS configuration, the email sending code has been improved to
+include headers that help with deliverability:
 
 Email Headers Added
 ~~~~~~~~~~~~~~~~~~~
@@ -166,12 +170,14 @@ Email Headers Added
    * - ``Precedence: bulk``
      - Indicates automated mail
 
-These headers don't affect authentication directly, but they improve email deliverability and reduce the chance of being marked as spam.
+These headers do not affect authentication directly, but they improve
+deliverability and reduce the chance of being marked as spam.
 
 Implementation
 ~~~~~~~~~~~~~~
 
-A new email utility module (``aclarknet/email_utils.py``) provides functions that automatically add these headers to all outgoing emails.
+A new email utility module (``aclarknet/email_utils.py``) provides
+functions that automatically add these headers to all outgoing emails.
 
 Timeline for Fix
 ----------------

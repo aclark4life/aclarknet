@@ -1,12 +1,13 @@
 Email Utilities Reference
 ==========================
 
-This document describes the email utility functions available in ``aclarknet/email_utils.py``.
+Reference for the email utility functions in ``aclarknet/email_utils.py``.
 
 Module: aclarknet.email_utils
 ------------------------------
 
-This module provides improved email sending functions with proper headers for better deliverability and authentication.
+This module provides email-sending helpers with headers that improve
+deliverability and reply handling.
 
 Functions
 ---------
@@ -68,7 +69,7 @@ Send email with proper headers for better deliverability and authentication.
 
 **Headers Added:**
 
-This function automatically adds the following headers to improve deliverability:
+This function automatically adds the following headers:
 
 .. list-table::
    :header-rows: 1
@@ -167,7 +168,8 @@ Usage in Application
 db/signals.py
 ~~~~~~~~~~~~~
 
-The ``send_email_on_time_creation`` signal uses ``send_notification_email`` to send notifications when Time objects are created:
+The ``send_email_on_time_creation`` signal uses
+``send_notification_email`` when Time objects are created:
 
 .. code-block:: python
 
@@ -187,7 +189,8 @@ The ``send_email_on_time_creation`` signal uses ``send_notification_email`` to s
 cms/views.py
 ~~~~~~~~~~~~
 
-The ``ContactView`` uses ``send_email_with_headers`` to send contact form notifications with proper Reply-To headers:
+The ``ContactView`` uses ``send_email_with_headers`` to send contact
+form notifications with proper Reply-To headers:
 
 .. code-block:: python
 
@@ -205,7 +208,7 @@ The ``ContactView`` uses ``send_email_with_headers`` to send contact form notifi
 Benefits
 --------
 
-Using these utility functions provides several benefits:
+Using these utility functions provides:
 
 1. **Consistent Headers**: All emails include proper headers for better deliverability
 2. **Authentication Support**: Headers help with SPF, DKIM, and DMARC authentication

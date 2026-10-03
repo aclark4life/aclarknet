@@ -2,7 +2,8 @@
 Stripe Test Mode Configuration
 ==================================
 
-This guide explains how to configure and test Stripe payments in production using Stripe's test mode.
+This guide explains how to configure and test Stripe payments in
+production using Stripe's test mode.
 
 Overview
 ========
@@ -12,7 +13,8 @@ Stripe provides separate API keys for **test mode** and **live mode**:
 - **Test mode**: Use test API keys to simulate payments without processing real transactions
 - **Live mode**: Use live API keys to process real payments
 
-The application automatically detects which mode you're in based on the API key prefix:
+The application automatically detects which mode you're in based on the
+API key prefix:
 
 - Test keys start with ``sk_test_`` or ``pk_test_``
 - Live keys start with ``sk_live_`` or ``pk_live_``
@@ -150,7 +152,7 @@ When in test mode, the application displays:
 2. **"TEST MODE" badge** in the page header
 3. **Test mode notice** on the success page
 
-These indicators automatically disappear when you switch to live mode keys.
+These indicators disappear when you switch to live mode keys.
 
 Switching to Live Mode
 =======================
@@ -175,9 +177,7 @@ When you're ready to accept real payments:
    - Copy the live webhook secret
 
 4. **Update environment variables** with live keys
-
 5. **Test with real card** (small amount first!)
-
 6. **Monitor payments**: https://dashboard.stripe.com/payments
 
 Security Notes

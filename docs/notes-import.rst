@@ -104,7 +104,7 @@ Step 2: Preview the Import (Dry Run)
 
    python manage.py import_notes --file notes_import_cleaned.csv --dry-run --skip-missing-users
 
-This will show you what would be imported without actually creating any notes.
+This shows what would be imported without creating notes.
 
 Step 3: Perform the Import
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -113,7 +113,7 @@ Step 3: Perform the Import
 
    python manage.py import_notes --file notes_import_cleaned.csv --skip-missing-users
 
-This will create all the notes in the database.
+This creates all the notes in the database.
 
 Example Output
 --------------

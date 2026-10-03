@@ -1,15 +1,18 @@
 How to Add an SES IAM Role to Your EC2 Instance
 ===============================================
 
-This guide walks you through creating an IAM role with SES permissions
-and attaching it to your EC2 instance.
+Create an IAM role with SES permissions, attach it to your EC2 instance,
+and switch the app to role-based credentials.
 
 Overview
 --------
 
 Using an IAM role is the **most secure** way to give your EC2 instance
-access to AWS SES: - ✅ No credentials in your code or .env file - ✅
-Automatic credential rotation (every hour) - ✅ No manual key management
+access to AWS SES:
+
+- ✅ No credentials in your code or .env file
+- ✅ Automatic credential rotation (every hour)
+- ✅ No manual key management
 - ✅ Can’t accidentally leak credentials
 
 Step 1: Create the IAM Role
@@ -33,13 +36,17 @@ Step 1: Create the IAM Role
 1.3 Add SES Permissions
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-**Option A: Use AWS Managed Policy (Quick)** 1. In the search box, type:
-``AmazonSESFullAccess`` 2. Check the box next to **AmazonSESFullAccess**
+**Option A: Use AWS Managed Policy (Quick)**
+
+1. In the search box, type: ``AmazonSESFullAccess``
+2. Check the box next to **AmazonSESFullAccess**
 3. Click **Next**
 
-**Option B: Create Custom Policy (Recommended - Least Privilege)** 1.
-Click **Create policy** (opens in new tab) 2. Click the **JSON** tab 3.
-Paste this policy:
+**Option B: Create Custom Policy (Recommended - Least Privilege)**
+
+1. Click **Create policy** (opens in new tab)
+2. Click the **JSON** tab
+3. Paste this policy:
 
 .. code:: json
 
@@ -57,12 +64,12 @@ Paste this policy:
      ]
    }
 
-4.  Click **Next**
-5.  Enter policy name: ``SESMinimalSendPolicy``
-6.  Click **Create policy**
-7.  Go back to the role creation tab
-8.  Click the refresh button
-9.  Search for ``SESMinimalSendPolicy``
+4. Click **Next**
+5. Enter policy name: ``SESMinimalSendPolicy``
+6. Click **Create policy**
+7. Go back to the role creation tab
+8. Click the refresh button
+9. Search for ``SESMinimalSendPolicy``
 10. Check the box next to it
 11. Click **Next**
 
@@ -73,8 +80,6 @@ Paste this policy:
 2. Enter description: ``Allows EC2 instance to send emails via AWS SES``
 3. Review the settings
 4. Click **Create role**
-
-✅ **Role created!** Now let’s attach it to your EC2 instance.
 
 Step 2: Attach the Role to Your EC2 Instance
 --------------------------------------------
@@ -95,9 +100,6 @@ Step 2: Attach the Role to Your EC2 Instance
 3. In the “IAM role” dropdown, select **aclarknet-ses-role** (the role
    you just created)
 4. Click **Update IAM role**
-
-✅ **Role attached!** Your EC2 instance now has permission to send
-emails via SES.
 
 **Note**: You do NOT need to restart your EC2 instance. The role takes
 effect immediately.
@@ -136,8 +138,8 @@ Make sure your ``.env`` file has these settings:
    USE_SES_V2=True
    AWS_SES_CONFIGURATION_SET=
 
-**Important**: Remove or comment out ``AWS_ACCESS_KEY_ID`` and
-``AWS_SECRET_ACCESS_KEY``. The IAM role will provide credentials
+Remove or comment out ``AWS_ACCESS_KEY_ID`` and
+``AWS_SECRET_ACCESS_KEY``. The IAM role provides credentials
 automatically.
 
 3.3 Restart Your Application
@@ -162,7 +164,7 @@ SSH into your EC2 instance and run:
 
    # Should output: aclarknet-ses-role (or whatever you named it)
 
-If you see the role name, it’s attached correctly!
+If you see the role name, it’s attached correctly.
 
 4.2 Get Temporary Credentials (Optional)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -173,12 +175,15 @@ To see the actual credentials that boto3 will use:
 
    curl http://169.254.169.254/latest/meta-data/iam/security-credentials/aclarknet-ses-role
 
-You should see JSON output with: - ``AccessKeyId`` - Temporary access
-key - ``SecretAccessKey`` - Temporary secret key - ``Token`` - Session
-token - ``Expiration`` - When credentials expire (auto-renewed)
+You should see JSON output with:
+
+- ``AccessKeyId`` - Temporary access key
+- ``SecretAccessKey`` - Temporary secret key
+- ``Token`` - Session token
+- ``Expiration`` - When credentials expire (auto-renewed)
 
 **Note**: These credentials rotate automatically every hour. You never
-need to manage them!
+need to manage them.
 
 4.3 Test Email Sending
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -203,7 +208,7 @@ Test from Django shell:
    )
 
 If successful, you should see ``1`` (one email sent) and receive the
-email!
+email.
 
 Troubleshooting
 ---------------
@@ -219,9 +224,10 @@ Issue: “Unable to locate credentials”
 
 Should output your role name. If empty, the role isn’t attached.
 
-**Check 2**: Verify .env doesn’t have credentials Make sure
-``AWS_ACCESS_KEY_ID`` and ``AWS_SECRET_ACCESS_KEY`` are removed or
-commented out.
+**Check 2**: Verify .env doesn’t have credentials
+
+Make sure ``AWS_ACCESS_KEY_ID`` and ``AWS_SECRET_ACCESS_KEY`` are removed
+or commented out.
 
 **Check 3**: Restart application
 
@@ -232,13 +238,18 @@ commented out.
 Issue: “Access Denied” when sending email
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Check 1**: Verify role has SES permissions 1. Go to IAM Console →
-Roles 2. Click on ``aclarknet-ses-role`` 3. Check “Permissions” tab 4.
-Should see ``AmazonSESFullAccess`` or ``SESMinimalSendPolicy``
+**Check 1**: Verify role has SES permissions
 
-**Check 2**: Verify email address is verified in SES 1. Go to SES
-Console → Verified identities 2. Make sure ``aclark@aclark.net`` is
-verified 3. Or request production access to send to any address
+1. Go to IAM Console → Roles
+2. Click on ``aclarknet-ses-role``
+3. Check “Permissions” tab
+4. Should see ``AmazonSESFullAccess`` or ``SESMinimalSendPolicy``
+
+**Check 2**: Verify email address is verified in SES
+
+1. Go to SES Console → Verified identities
+2. Make sure ``aclark@aclark.net`` is verified
+3. Or request production access to send to any address
 
 Issue: Email not sending but no errors
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -264,9 +275,12 @@ See ``docs/aws_ses_setup.md`` for complete AWS SES configuration guide.
 Summary
 -------
 
-You’ve successfully: - ✅ Created an IAM role with SES permissions - ✅
-Attached the role to your EC2 instance - ✅ Configured your application
-to use the role - ✅ Verified the role is working
+You’ve successfully:
 
-Your application can now send emails via AWS SES without any credentials
-in your code! 🎉
+- ✅ Created an IAM role with SES permissions
+- ✅ Attached the role to your EC2 instance
+- ✅ Configured your application to use the role
+- ✅ Verified the role is working
+
+Your application can now send emails via AWS SES without credentials in
+your code.

@@ -1,12 +1,9 @@
 Client Categorization Feature
 =============================
 
-Overview
---------
-
-This feature adds the ability to designate specific clients to be
-displayed on the public ``/clients/`` page and categorize them into
-groups like Government, Non-profit, Private Sector, etc.
+This feature lets you choose which clients appear on the public
+``/clients/`` page and group them into categories such as Government,
+Non-profit, and Private Sector.
 
 Changes Made
 ------------
@@ -99,14 +96,17 @@ How to Use
 2. Mark Clients as Featured
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In the Django admin at ``/admin/db/client/``: 1. Edit a client record 2.
-Check the “Featured” checkbox 3. Select a category from the dropdown 4.
-Save the client
+In the Django admin at ``/admin/db/client/``:
+
+1. Edit a client record
+2. Check the “Featured” checkbox
+3. Select a category from the dropdown
+4. Save the client
 
 3. View Featured Clients
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Visit ``/clients/`` to see the featured clients grouped by category.
+Visit ``/clients/`` to see featured clients grouped by category.
 
 Example Usage
 -------------
@@ -156,4 +156,4 @@ Notes
 - Clients without a category will be grouped under “Other”
 - The feature is backward compatible - existing clients default to
   featured=False
-- The admin interface provides easy filtering and searching capabilities
+- The admin interface provides easy filtering and searching

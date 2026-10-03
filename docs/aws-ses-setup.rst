@@ -1,19 +1,7 @@
 AWS SES Email Configuration Guide
 =================================
 
-This guide explains how to configure Amazon Simple Email Service (SES)
-for sending emails in production.
-
-Overview
---------
-
-The application supports two email backends: - **AWS SES** (recommended
-for production) - Reliable, scalable email service - **SMTP** (fallback)
-- Traditional SMTP server configuration
-
-AWS SES can be used with: - **IAM Role** (recommended for
-EC2/ECS/Lambda) - No credentials needed ⭐ - **IAM User Credentials**
-(for non-AWS servers) - Access keys required
+Configure Amazon Simple Email Service (SES) for production email.
 
 Prerequisites
 -------------
@@ -28,57 +16,71 @@ Step 1: Set Up AWS SES
 1.1 Create an AWS Account
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you don’t have one, sign up at https://aws.amazon.com
+If you do not have one, sign up at https://aws.amazon.com
 
 1.2 Verify Your Email Address or Domain
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Option A: Verify Individual Email Addresses** (Quick start) 1. Go to
-`AWS SES Console <https://console.aws.amazon.com/ses/>`__ 2. Navigate to
-**Verified identities** → **Create identity** 3. Select **Email
-address** 4. Enter your email address (e.g., ``aclark@aclark.net``) 5.
-Click **Create identity** 6. Check your email and click the verification
-link 7. Repeat for any email addresses you want to send FROM
+**Option A: Verify Individual Email Addresses** (Quick start)
 
-**Option B: Verify Your Domain** (Recommended for production) 1. Go to
-`AWS SES Console <https://console.aws.amazon.com/ses/>`__ 2. Navigate to
-**Verified identities** → **Create identity** 3. Select **Domain** 4.
-Enter your domain (e.g., ``aclark.net``) 5. Follow the instructions to
-add DNS records (DKIM, SPF, DMARC) 6. Wait for verification (can take up
-to 72 hours)
+1. Go to `AWS SES Console <https://console.aws.amazon.com/ses/>`__
+2. Navigate to **Verified identities** → **Create identity**
+3. Select **Email address**
+4. Enter your email address (e.g., ``aclark@aclark.net``)
+5. Click **Create identity**
+6. Check your email and click the verification link
+7. Repeat for any email addresses you want to send FROM
+
+**Option B: Verify Your Domain** (Recommended for production)
+
+1. Go to `AWS SES Console <https://console.aws.amazon.com/ses/>`__
+2. Navigate to **Verified identities** → **Create identity**
+3. Select **Domain**
+4. Enter your domain (e.g., ``aclark.net``)
+5. Follow the instructions to add DNS records (DKIM, SPF, DMARC)
+6. Wait for verification (can take up to 72 hours)
 
 1.3 Request Production Access
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default, AWS SES starts in **sandbox mode**, which only allows
-sending to verified addresses.
+AWS SES starts in **sandbox mode**, which only allows sending to verified
+addresses.
 
-To send to any email address: 1. In the SES Console, go to **Account
-dashboard** 2. Click **Request production access** 3. Fill out the form
-explaining your use case 4. AWS typically approves within 24 hours
+To send to any email address:
+
+1. In the SES Console, go to **Account dashboard**
+2. Click **Request production access**
+3. Fill out the form explaining your use case
+4. AWS typically approves within 24 hours
 
 1.4 Choose Your AWS Region
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Select a region close to your server for better performance: -
-``us-east-1`` (N. Virginia) - Default, most features - ``us-west-2``
-(Oregon) - ``eu-west-1`` (Ireland) - See `AWS SES
-Regions <https://docs.aws.amazon.com/general/latest/gr/ses.html>`__ for
-full list
+Choose a region close to your server:
+
+- ``us-east-1`` (N. Virginia) - Default, most features
+- ``us-west-2`` (Oregon)
+- ``eu-west-1`` (Ireland)
+- See `AWS SES Regions <https://docs.aws.amazon.com/general/latest/gr/ses.html>`__
+  for the full list
 
 Step 2: Set Up IAM Permissions
 ------------------------------
 
-You have two options for authentication:
+You can authenticate with either an IAM role or IAM user credentials.
 
 Option A: IAM Role (Recommended for EC2/ECS/Lambda) ⭐
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Best for**: Applications running on AWS infrastructure
 
-**Benefits**: - ✅ No credentials in your code or .env file - ✅
-Automatic credential rotation (every hour) - ✅ Most secure option - ✅
-No manual key management - ✅ Can’t accidentally leak credentials
+**Benefits**:
+
+- ✅ No credentials in your code or .env file
+- ✅ Automatic credential rotation (every hour)
+- ✅ Most secure option
+- ✅ No manual key management
+- ✅ Can’t accidentally leak credentials
 
 2A.1 Create IAM Role
 ^^^^^^^^^^^^^^^^^^^^
@@ -107,8 +109,8 @@ No manual key management - ✅ Can’t accidentally leak credentials
 4. Select the role you created (``aclarknet-ses-role``)
 5. Click **Update IAM role**
 
-**That’s it!** No credentials needed in your ``.env`` file. boto3 will
-automatically use the instance role.
+No credentials are needed in your ``.env`` file. boto3 uses the
+instance role automatically.
 
 Option B: IAM User Credentials (For Non-AWS Servers)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -165,11 +167,14 @@ security:
      ]
    }
 
-To create a custom policy: 1. In IAM Console, go to **Policies** →
-**Create policy** 2. Click **JSON** tab and paste the policy above 3.
-Click **Next** → Enter name (e.g., ``SESMinimalSendPolicy``) 4. Click
-**Create policy** 5. Attach this policy to your role or user instead of
-``AmazonSESFullAccess``
+To create a custom policy:
+
+1. In IAM Console, go to **Policies** → **Create policy**
+2. Click **JSON** tab and paste the policy above
+3. Click **Next** → Enter name (e.g., ``SESMinimalSendPolicy``)
+4. Click **Create policy**
+5. Attach this policy to your role or user instead of
+   ``AmazonSESFullAccess``
 
 Step 3: Configure Environment Variables
 ---------------------------------------
@@ -195,9 +200,6 @@ Edit your production ``.env`` file (e.g., ``/srv/aclarknet/.env``):
 
    # Use SES v2 API (recommended)
    USE_SES_V2=True
-
-**That’s it!** The application will automatically use the IAM role
-attached to your EC2 instance.
 
 If Using IAM User Credentials (Option B)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -303,11 +305,12 @@ Common Issues
 Issue: “Unable to locate credentials”
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Solution**: - **If using IAM role**: Verify the role is attached to
-your EC2 instance
-``bash   curl http://169.254.169.254/latest/meta-data/iam/security-credentials/``
+**Solution**:
+
+- **If using IAM role**: Verify the role is attached to your EC2 instance
+  ``bash   curl http://169.254.169.254/latest/meta-data/iam/security-credentials/``
 - **If using IAM user**: Check that ``AWS_ACCESS_KEY_ID`` and
-``AWS_SECRET_ACCESS_KEY`` are set in ``.env``
+  ``AWS_SECRET_ACCESS_KEY`` are set in ``.env``
 
 Issue: “Email address is not verified”
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -318,32 +321,44 @@ production access to send to any address.
 Issue: “Access Denied” or “InvalidClientTokenId”
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Solution**: - **If using IAM role**: Verify the role has SES
-permissions (check IAM policy) - **If using IAM user**: Check that AWS
-credentials are correct and not expired
+**Solution**:
+
+- **If using IAM role**: Verify the role has SES permissions (check IAM policy)
+- **If using IAM user**: Check that AWS credentials are correct and not expired
 
 Issue: Emails going to spam
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Solution**: - Verify your domain (not just email address) - Set up
-SPF, DKIM, and DMARC records - Use a verified domain for the FROM
-address - Avoid spam trigger words in subject/body
+**Solution**:
+
+- Verify your domain (not just email address)
+- Set up SPF, DKIM, and DMARC records
+- Use a verified domain for the FROM address
+- Avoid spam trigger words in subject/body
 
 Issue: “Daily sending quota exceeded”
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Solution**: - Check your sending limits in SES Console - Request a
-limit increase if needed - Implement rate limiting in your application
+**Solution**:
+
+- Check your sending limits in SES Console
+- Request a limit increase if needed
+- Implement rate limiting in your application
 
 Sending Limits
 ~~~~~~~~~~~~~~
 
-**Sandbox Mode:** - 200 emails per 24 hours - 1 email per second - Can
-only send to verified addresses
+**Sandbox Mode:**
 
-**Production Mode:** - Starts at 50,000 emails per 24 hours (can be
-increased) - 14 emails per second (can be increased) - Can send to any
-address
+- 200 emails per 24 hours
+- 1 email per second
+- Can only send to verified addresses
+
+**Production Mode:**
+
+- Starts at 50,000 emails per 24 hours (can be increased)
+- 14 emails per second (can be increased)
+- Can send to any address
 
 Step 6: Advanced Configuration
 ------------------------------
@@ -355,9 +370,7 @@ Configuration sets allow you to track email events (opens, clicks,
 bounces):
 
 1. Create a configuration set in SES Console
-
 2. Set up event destinations (SNS, CloudWatch, Kinesis)
-
 3. Add to your ``.env``:
 
    .. code:: bash
@@ -413,9 +426,11 @@ To switch back to SMTP (e.g., for testing):
 Cost Estimation
 ---------------
 
-AWS SES Pricing (as of 2026): - First 62,000 emails per month: **FREE**
-(when sent from EC2) - After that: $0.10 per 1,000 emails - Attachments:
-$0.12 per GB
+AWS SES Pricing (as of 2026):
+
+- First 62,000 emails per month: **FREE** (when sent from EC2)
+- After that: $0.10 per 1,000 emails
+- Attachments: $0.12 per GB
 
 Example: Sending 100,000 emails/month = ~$3.80/month
 
@@ -497,14 +512,16 @@ Additional Resources
 Support
 -------
 
-For issues specific to this application, check: - Application logs:
-``/srv/aclarknet/logs/django.log`` - Django settings:
-``aclarknet/settings/production.py`` - Environment variables:
-``/srv/aclarknet/.env``
+For issues specific to this application, check:
 
-For AWS SES issues: - `AWS
-Support <https://console.aws.amazon.com/support/>`__ - `AWS SES
-Forum <https://forums.aws.amazon.com/forum.jspa?forumID=90>`__
+- Application logs: ``/srv/aclarknet/logs/django.log``
+- Django settings: ``aclarknet/settings/production.py``
+- Environment variables: ``/srv/aclarknet/.env``
+
+For AWS SES issues:
+
+- `AWS Support <https://console.aws.amazon.com/support/>`__
+- `AWS SES Forum <https://forums.aws.amazon.com/forum.jspa?forumID=90>`__
 
 Quick Reference
 ---------------

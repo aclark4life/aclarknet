@@ -1,15 +1,14 @@
 Copy Invoice Data for Emails
 ============================
 
-This guide explains how to use the copy buttons in the invoice view to
-quickly paste formatted invoice data into emails or other communications.
+Use the copy buttons in the invoice view to paste formatted invoice data
+into emails or other plain-text messages.
 
 Overview
 --------
 
-The invoice view includes per-row copy buttons that format data as
-plain text suitable for pasting into emails. Each row in the totals
-accordion has a copy button that captures that row's label and value.
+Each row in the totals accordion has a copy button that copies that
+row's label and value as plain text.
 
 Using the Copy Buttons
 ----------------------
@@ -35,8 +34,7 @@ To copy a summary block for an email:
 1. Click the copy button on each row you want to include.
 2. Paste each into your email in sequence.
 
-The output is deliberately minimal and plain — no HTML, no extra
-formatting — so it pastes cleanly into any email client.
+The output stays plain so it pastes cleanly into any email client.
 
 Example Output
 --------------

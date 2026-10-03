@@ -24,9 +24,7 @@ Testing Steps
       just s
 
 2. Navigate to the Django Admin: http://localhost:8000/admin/
-
-3. Go to “Clients” section
-
+3. Go to the “Clients” section
 4. Create or edit clients with the following attributes:
 
    **Government Client:**
@@ -75,14 +73,13 @@ Testing Steps
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. Navigate to: http://localhost:8000/clients/
+2. Confirm:
 
-2. You should see:
-
-   - Clients grouped by their categories (Government, Non-Profit,
-     Private Sector, etc.)
+   - Clients are grouped by category (Government, Non-Profit, Private
+     Sector, etc.)
    - Only clients marked as “Featured” are displayed
-   - The “Internal Client” (not featured) should NOT appear
-   - If a client has a URL, it should be clickable
+   - The “Internal Client” (not featured) does NOT appear
+   - Any client URL is clickable
 
 3. Expected layout:
 
@@ -98,10 +95,9 @@ Testing Steps
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. Navigate to: http://localhost:8000/dashboard/client
+2. Confirm:
 
-2. You should see:
-
-   - All clients (both featured and non-featured)
+   - All clients (both featured and non-featured) are visible
    - This is the internal management view
    - You can create, edit, and delete clients
 
@@ -140,28 +136,36 @@ Expected Results
 Troubleshooting
 ---------------
 
-**Issue: Changes not visible on the public page** - Solution: Make sure
-the client is marked as “Featured” - Clear browser cache or hard refresh
-(Ctrl+Shift+R or Cmd+Shift+R)
+**Issue: Changes not visible on the public page**
 
-**Issue: Categories not showing** - Solution: Make sure at least one
-featured client has a category assigned - Check that the category field
-is not empty
+- Make sure the client is marked as “Featured”
+- Clear browser cache or hard refresh (Ctrl+Shift+R or Cmd+Shift+R)
 
-**Issue: Migration errors** - Solution: Run
-``python manage.py migrate db`` to apply the migration - If issues
-persist, check MongoDB connection
+**Issue: Categories not showing**
 
-**Issue: 500 error on clients page** - Solution: Check Django logs for
-errors - Verify that the db.models.Client import works in cms/views.py -
-Ensure all dependencies are installed
+- Make sure at least one featured client has a category assigned
+- Check that the category field is not empty
+
+**Issue: Migration errors**
+
+- Run ``python manage.py migrate db`` to apply the migration
+- If issues persist, check MongoDB connection
+
+**Issue: 500 error on clients page**
+
+- Check Django logs for errors
+- Verify that the db.models.Client import works in cms/views.py
+- Ensure all dependencies are installed
 
 Clean Up After Testing
 ----------------------
 
-To reset test data: 1. Navigate to Django Admin 2. Select all test
-clients 3. Choose “Delete selected clients” from the actions dropdown 4.
-Confirm deletion
+To reset test data:
+
+1. Navigate to Django Admin
+2. Select all test clients
+3. Choose “Delete selected clients” from the actions dropdown
+4. Confirm deletion
 
 Or use Django shell:
 
