@@ -59,6 +59,12 @@ Documentation is organized as a flat set of topic-focused pages grouped below by
 
 .. toctree::
    :maxdepth: 1
+   :caption: Features:
+
+   feedwell
+
+.. toctree::
+   :maxdepth: 1
    :caption: Testing:
 
    manual-testing-guide
@@ -129,6 +135,7 @@ Key Features
 * **Contact Form**: reCAPTCHA-protected contact form with email notifications
 * **Email Integration**: AWS SES integration with IAM role support
 * **Wagtail CMS**: Powerful content management system
+* **feedwell**: Unified social media feed (Mastodon, Bluesky) at ``/feedwell/``
 * **Modern Frontend**: React-based UI with Tailwind CSS
 
 Quick Links
