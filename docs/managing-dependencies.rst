@@ -60,6 +60,37 @@ For non-Django/Wagtail updates:
 3. Pull the branch locally and run ``just t`` if in doubt.
 4. Merge and deploy with ``just deploy-remote`` (or ``just dpr``).
 
+Branch Protection and CI Checks
+--------------------------------
+
+``main`` requires pull requests and two passing status checks before
+merging: ``Test with MongoDB`` and ``Build frontend assets``. The
+latter runs ``npm ci && npm run build`` on every push/PR — this exists
+specifically to catch npm peer-dependency conflicts (for example, a
+major-version bump that's incompatible with another package's peer
+dependency range) that ``pytest`` alone would never detect. Don't
+merge a Dependabot PR if this check fails; the dependency bump is
+likely broken even if the version diff looks harmless.
+
+When several npm Dependabot PRs are open at once, it's often faster to
+validate them together: create a scratch worktree off ``origin/main``,
+merge each branch into it, then run ``npm ci && npm run build`` once
+for the whole batch before merging each PR individually.
+
+Periodically Audit for Unused Dependencies
+-------------------------------------------
+
+Dependabot only updates packages already listed in ``package.json``
+or ``pyproject.toml`` — it has no way of knowing whether a dependency
+is actually used. An unrelated, unused npm package once sat in
+``dependencies`` for a long time and its outdated transitive
+dependencies accounted for the majority of open vulnerability alerts.
+When Dependabot alert counts seem disproportionate to the project's
+actual dependency footprint, check ``npm ls <package>`` for the
+offending package's dependents — if nothing in the codebase requires
+it, removing it entirely is often the real fix, not chasing every
+downstream alert one at a time.
+
 Skipping or Deferring an Update
 ---------------------------------
 
