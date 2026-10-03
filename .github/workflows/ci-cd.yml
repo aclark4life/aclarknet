@@ -90,6 +90,29 @@ jobs:
         run: |
           pytest db/tests/base.py
 
+  frontend:
+    name: Build frontend assets
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
+
+      # Installs exactly what's locked in package-lock.json and fails on any
+      # unresolved peer-dependency conflict (e.g. incompatible major bumps),
+      # which the Django test job above doesn't catch.
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Build production bundle
+        run: npm run build
+
   # Commented out ECS deployment for now
   # deploy:
   #   name: Deploy to Amazon ECS
