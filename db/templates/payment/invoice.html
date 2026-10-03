@@ -82,7 +82,7 @@
                     <i class="fa-solid fa-lock"></i> Secure payment powered by Stripe
                   </small>
                 </div>
-              {% else %}
+              {% elif invoice.amount %}
                 <div class="alert alert-success">
                   <i class="fa-solid fa-check-circle"></i>
                   <strong>Paid in Full</strong> - This invoice has been paid. Thank you!
