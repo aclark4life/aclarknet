@@ -30,7 +30,7 @@
     "@tailwindcss/postcss": "^4.0.3",
     "babel-loader": "^9.2.1",
     "clean-webpack-plugin": "^4.0.0",
-    "copy-webpack-plugin": "^12.0.2",
+    "copy-webpack-plugin": "^14.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^7.1.2",
     "eslint": "^9.20.1",
@@ -47,11 +47,10 @@
     "webpack": "^5.104.1",
     "webpack-assets-manifest": "^5.2.1",
     "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.6",
+    "webpack-dev-server": "^6.0.0",
     "webpack-merge": "^6.0.1"
   },
   "dependencies": {
-    "14": "^3.1.6",
     "@babel/preset-react": "^7.28.5",
     "@fortawesome/fontawesome-free": "^7.1.0",
     "bootstrap": "^5.3.8",
