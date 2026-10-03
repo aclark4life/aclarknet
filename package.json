@@ -47,11 +47,10 @@
     "webpack": "^5.104.1",
     "webpack-assets-manifest": "^5.2.1",
     "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.6",
+    "webpack-dev-server": "^6.0.0",
     "webpack-merge": "^6.0.1"
   },
   "dependencies": {
-    "14": "^3.1.6",
     "@babel/preset-react": "^7.28.5",
     "@fortawesome/fontawesome-free": "^7.1.0",
     "bootstrap": "^5.3.8",
