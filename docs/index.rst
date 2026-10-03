@@ -1,9 +1,8 @@
 aclarknet Documentation
 =======================
 
-Welcome to the aclarknet documentation! This is a Django-based web application using Wagtail CMS with a modern frontend stack.
-
-Documentation is organized as a flat set of topic-focused pages grouped below by area, rather than by learning stage.
+Documentation is organized as a flat set of topic-focused pages grouped
+below by area.
 
 .. toctree::
    :maxdepth: 1
@@ -82,16 +81,15 @@ Documentation is organized as a flat set of topic-focused pages grouped below by
 Getting Started
 ===============
 
-**New to aclarknet?** Start with :doc:`getting-started` to set up your development environment and create your first client.
-
-**Need to accomplish a specific task?** Browse the section captions in the sidebar, such as *Deployment & Server Operations* or *Email*, for goal-oriented guides.
-
-**Looking for technical details?** See the *Reference* section for database models and frontend architecture.
+- **New here?** Start with :doc:`getting-started`.
+- **Need a task guide?** Use the sidebar sections such as *Deployment &
+  Server Operations* or *Email*.
+- **Need implementation detail?** See the *Reference* section.
 
 Project Overview
 ================
 
-This is a Django-based web application using Wagtail CMS with a modern frontend stack. The project combines Django's robust backend capabilities with Wagtail's powerful content management features, along with a React-based frontend built with Webpack.
+aclarknet is a Django/Wagtail application with a React/Webpack frontend.
 
 Tech Stack
 ----------
@@ -134,7 +132,7 @@ Key Features
 * **Notes & Testimonials**: Manage contact form submissions and client testimonials
 * **Contact Form**: reCAPTCHA-protected contact form with email notifications
 * **Email Integration**: AWS SES integration with IAM role support
-* **Wagtail CMS**: Powerful content management system
+* **Wagtail CMS**: Content management system
 * **feedwell**: Unified social media feed (Mastodon, Bluesky) at ``/feedwell/``
 * **Modern Frontend**: React-based UI with Tailwind CSS
 
@@ -153,7 +151,8 @@ Quick Links
 Important
 ---------
 
-**Gmail showing warnings for your emails?** See :doc:`email-fix-summary` for a quick fix, or :doc:`fix-gmail-warning` for detailed instructions.
+**Gmail showing warnings for your emails?** See :doc:`email-fix-summary`
+for the short version, or :doc:`fix-gmail-warning` for full instructions.
 
 Indices and Tables
 ==================

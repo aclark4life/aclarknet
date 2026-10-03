@@ -1,12 +1,15 @@
 Gmail Warning Fix - Quick Summary
 ==================================
 
-This document provides a quick summary of the Gmail warning fix. For detailed instructions, see the documentation links below.
+Short version: Gmail is warning because **DMARC is missing**. Use this
+page for the immediate action items, then follow :doc:`fix-gmail-warning`
+for the full procedure.
 
 Problem
 -------
 
-Gmail shows "Be careful with this message" warning for emails sent from your SES setup.
+Gmail shows "Be careful with this message" for emails sent from your SES
+setup.
 
 Root Cause
 ----------
@@ -59,10 +62,10 @@ Diagnostic Tools
 Documentation
 ~~~~~~~~~~~~~
 
-- :doc:`fix-gmail-warning` - Step-by-step guide
+- :doc:`fix-gmail-warning` - Full step-by-step guide
 - :doc:`email-dns-records` - Complete DNS records reference
 - :doc:`email-utilities` - Email utilities API reference
-- :doc:`email-authentication` - Understanding email authentication
+- :doc:`email-authentication` - Background on SPF, DKIM, and DMARC
 
 What You Need to Do
 -------------------
@@ -156,15 +159,16 @@ After completing all steps:
 Documentation
 -------------
 
-For detailed information, see:
+For the full procedure, see:
 
 - :doc:`fix-gmail-warning` - Complete step-by-step guide
 - :doc:`email-dns-records` - DNS records reference
 - :doc:`email-utilities` - Email utilities reference
-- :doc:`email-authentication` - Understanding email authentication
+- :doc:`email-authentication` - Background and concepts
 - :doc:`aws-ses-setup` - AWS SES configuration guide
 
 Next Step
 ---------
 
-**Add the DMARC TXT record to your DNS provider now!** This is the most critical fix.
+**Add the DMARC TXT record first, then continue with
+:doc:`fix-gmail-warning`.**

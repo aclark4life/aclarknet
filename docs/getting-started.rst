@@ -1,14 +1,7 @@
 Getting Started with aclarknet
 ===============================
 
-Welcome! This tutorial will guide you through setting up aclarknet for local development and creating your first client entry.
-
-**What you'll learn:**
-
-* How to set up the development environment
-* How to run the application locally
-* How to create your first client
-* How to add a testimonial
+Set up aclarknet locally, then create a client entry and testimonial.
 
 **Time required:** 30 minutes
 
@@ -37,8 +30,6 @@ Welcome! This tutorial will guide you through setting up aclarknet for local dev
 Step 1: Clone and Install
 --------------------------
 
-First, let's get the code and install dependencies:
-
 .. code-block:: bash
 
    # Clone the repository
@@ -52,8 +43,6 @@ First, let's get the code and install dependencies:
    # Install dependencies
    pip install -e '.[dev]'
 
-**What just happened?** You've installed aclarknet and all its development dependencies, including Django, Wagtail, and the testing tools.
-
 Step 2: Configure Environment
 ------------------------------
 
@@ -64,7 +53,7 @@ Create a ``.env`` file for local development:
    # Copy the example environment file
    cp deployment/.env.example .env
 
-Edit the ``.env`` file with your settings:
+Edit ``.env`` with your local settings:
 
 .. code-block:: bash
 
@@ -79,44 +68,34 @@ Edit the ``.env`` file with your settings:
    RECAPTCHA_PUBLIC_KEY=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
    RECAPTCHA_PRIVATE_KEY=6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe
 
-**What just happened?** You've configured the application to use your local MongoDB and set up test reCAPTCHA keys that always pass validation.
-
 Step 3: Set Up the Database
 ----------------------------
 
-Run migrations to create the database structure:
+Run migrations:
 
 .. code-block:: bash
 
    python manage.py migrate --settings=aclarknet.settings.dev
 
-Create a superuser account:
+Create a superuser:
 
 .. code-block:: bash
 
    python manage.py createsuperuser --settings=aclarknet.settings.dev
 
-**What just happened?** Django created all the necessary database collections in MongoDB and you created an admin account.
-
 Step 4: Run the Development Server
 -----------------------------------
-
-Start the server:
 
 .. code-block:: bash
 
    python manage.py runserver --settings=aclarknet.settings.dev
 
-Open your browser to http://localhost:8000
-
-**What you should see:** The aclarknet homepage with navigation and content.
+Open http://localhost:8000
 
 Step 5: Access the Admin Interface
 -----------------------------------
 
-Navigate to http://localhost:8000/admin and log in with your superuser credentials.
-
-**What you should see:** The Django admin interface with sections for Clients, Notes, Invoices, and more.
+Open http://localhost:8000/admin and sign in with your superuser account.
 
 Step 6: Create Your First Client
 ---------------------------------
@@ -134,14 +113,13 @@ In the admin interface:
 
 4. Click **"Save"**
 
-**What just happened?** You created a client entry that will appear on the public ``/clients/`` page because you marked it as "featured".
+This client will appear on the public ``/clients/`` page because it is
+featured.
 
 Step 7: View Your Client
 -------------------------
 
-Navigate to http://localhost:8000/clients/
-
-**What you should see:** Your "Example Corporation" client listed under the "Private Sector" category.
+Open http://localhost:8000/clients/
 
 Step 8: Add a Testimonial
 --------------------------
@@ -161,18 +139,13 @@ Back in the admin interface:
 
 4. Click **"Save"**
 
-Navigate to http://localhost:8000
-
-**What you should see:** Your testimonial displayed on the homepage.
+Then open http://localhost:8000 to confirm the testimonial appears on
+the homepage.
 
 Next Steps
 ----------
 
-Congratulations! You've successfully set up aclarknet and created your first client and testimonial.
-
-**Where to go from here:**
-
 * :doc:`deployment-quickstart` - Deploy to production
 * :doc:`testimonials-quickstart` - Learn more about managing testimonials
 * :doc:`db-views` - Explore the database models
-* :doc:`client-categorization` - Understand how client categorization works
+* :doc:`client-categorization` - Understand client categorization

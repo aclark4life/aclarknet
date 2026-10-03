@@ -1,7 +1,8 @@
 Fix Gmail Warning
 =================
 
-This guide shows you how to fix the "Be careful with this message" warning that Gmail displays for emails sent from your AWS SES setup.
+This guide fixes the "Be careful with this message" warning Gmail shows
+for emails sent from your AWS SES setup.
 
 Current Status
 --------------

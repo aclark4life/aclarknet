@@ -1,13 +1,11 @@
 Quick Deployment Guide
 ======================
 
-This is a quick reference for deploying aclarknet to aclark.net
-(including www.aclark.net and m.aclark.net).
+Quick reference for deploying aclarknet to aclark.net, including
+``www.aclark.net`` and ``m.aclark.net``.
 
 Using ``just`` Commands (Recommended)
 -------------------------------------
-
-If you have ``just`` installed, you can use these convenient commands:
 
 .. code:: bash
 
@@ -32,20 +30,17 @@ If you have ``just`` installed, you can use these convenient commands:
 Deploying via GitHub Actions
 ----------------------------
 
-Deployment can also be triggered from GitHub Actions without needing a
-local SSH key or ``just``, via the manual-only **Deploy to Production**
-workflow:
+Deployment can also be triggered from GitHub Actions via the manual-only
+**Deploy to Production** workflow:
 
 .. code:: bash
 
    gh workflow run deploy.yml --repo aclark4life/aclarknet
 
-Or trigger it from the Actions tab in the GitHub UI. The workflow is
-``workflow_dispatch``-only - it never runs automatically on push or merge
-(including Dependabot auto-merges), so a deploy is always a deliberate,
-explicit action. It runs the same ``deployment/deploy.sh`` script over SSH
-as ``just deploy-remote``, using a dedicated ``DEPLOY_SSH_KEY`` repository
-secret (separate from any developer's personal key).
+You can also trigger it from the Actions tab in the GitHub UI. The
+workflow is ``workflow_dispatch``-only, so deploys are always explicit.
+It runs the same ``deployment/deploy.sh`` script over SSH as
+``just deploy-remote``, using the ``DEPLOY_SSH_KEY`` repository secret.
 
 Manual Deployment
 -----------------
@@ -129,12 +124,10 @@ Quick Checks
 The Lounge IRC Client
 ---------------------
 
-The Lounge is accessible at: **https://aclark.net/lounge/**
+The Lounge is available at **https://aclark.net/lounge/**.
 
-**Important**: The Lounge configuration at
 ``/srv/aclarknet/lounge/.thelounge/config.js`` must have
-``reverseProxyPath: "/lounge/"`` set for proper operation behind the
-nginx reverse proxy.
+``reverseProxyPath: "/lounge/"`` set for nginx reverse proxying.
 
 .. code:: bash
 
@@ -166,4 +159,4 @@ File Locations
   ``/etc/systemd/system/thelounge.service``
 - nginx Config: ``/etc/nginx/conf.d/aclarknet.conf``
 
-For detailed documentation, see `Deployment Guide <deployment_guide>`__
+For more detail, see `Deployment Guide <deployment_guide>`__

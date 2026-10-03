@@ -1,10 +1,9 @@
 Notes as Testimonials Feature
 ================================
 
-Overview
---------
-
-This feature enables the use of Notes to display testimonials on the public-facing site. Notes can now be marked as testimonials and will appear on the ``/clients/`` page and optionally as a featured testimonial on the homepage.
+This feature lets Notes display as testimonials on the public site.
+Notes can appear on ``/clients/`` and, optionally, as the featured
+homepage testimonial.
 
 Changes Made
 ------------

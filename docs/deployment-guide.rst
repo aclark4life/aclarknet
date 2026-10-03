@@ -1,9 +1,8 @@
 Deployment Guide for aclarknet
 ==============================
 
-This guide provides instructions for deploying the aclarknet
-Django/Wagtail application to a production server running Amazon Linux
-2023 with nginx.
+Deploy the aclarknet Django/Wagtail application to a production server
+running Amazon Linux 2023 with nginx.
 
 Server Requirements
 -------------------
@@ -217,9 +216,14 @@ For updating the application after the initial deployment:
 
    sudo aclarknet-deploy
 
-This will: 1. Pull the latest code from the repository 2. Install any
-new dependencies 3. Build frontend assets 4. Collect static files 5. Run
-database migrations 6. Restart the application
+This will:
+
+1. Pull the latest code from the repository
+2. Install any new dependencies
+3. Build frontend assets
+4. Collect static files
+5. Run database migrations
+6. Restart the application
 
 Useful ``just`` Commands
 ------------------------
@@ -306,10 +310,13 @@ Configuration
 The Lounge configuration is located at
 ``/srv/aclarknet/lounge/.thelounge/config.js``.
 
-Key configuration settings: - **Mode**: Private (requires user
-authentication) - **Port**: 9000 (localhost only, proxied through nginx)
-- **Reverse Proxy**: Enabled - **Reverse Proxy Path**: ``/lounge/``
-(required for subpath deployment) - **Default Network**: Libera.Chat
+Key configuration settings:
+
+- **Mode**: Private (requires user authentication)
+- **Port**: 9000 (localhost only, proxied through nginx)
+- **Reverse Proxy**: Enabled
+- **Reverse Proxy Path**: ``/lounge/`` (required for subpath deployment)
+- **Default Network**: Libera.Chat
 
 **Important**: The ``reverseProxyPath`` setting in the config file must
 be set to ``/lounge/`` to match the nginx proxy path. This ensures all
@@ -407,7 +414,6 @@ Database Connection Issues
    sudo systemctl status mongod
 
 2. Verify MongoDB connection string in ``/srv/aclarknet/.env``
-
 3. Test connection:
 
 .. code:: bash

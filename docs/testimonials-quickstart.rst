@@ -1,7 +1,8 @@
 Testimonials Quick Start Guide
 ================================
 
-This guide shows you how to add and manage testimonials on your ACLARK.NET site.
+This guide shows how to add and manage testimonials on your ACLARK.NET
+site. For the model and template details, see :doc:`notes-testimonials`.
 
 Step 1: Access the Admin Interface
 -----------------------------------
@@ -56,14 +57,14 @@ On the Clients Page
 
 1. Navigate to ``/clients/`` on your site
 2. Scroll down to the "Client Feedback" section
-3. You'll see all testimonials (Example #1, #2, and #3) displayed in a grid
+3. You will see all testimonials displayed in a grid
 
 On the Homepage
 ~~~~~~~~~~~~~~~
 
 1. Navigate to ``/`` (homepage)
 2. Look for the "Testimonials" section with a background image
-3. You'll see only the featured testimonial (Example #1) displayed prominently
+3. You will see only the featured testimonial displayed prominently
 
 Managing Testimonials
 ---------------------
@@ -132,7 +133,7 @@ Want to hide a testimonial temporarily?
 Real-World Example
 ------------------
 
-Here's what a complete testimonial entry looks like:
+Here is what a complete testimonial entry looks like:
 
 .. code-block:: text
 
@@ -152,7 +153,7 @@ With the testimonials feature, you can:
 
 - ✅ Display customer feedback on ``/clients/`` page
 - ✅ Feature a standout testimonial on the homepage
-- ✅ Easily manage testimonials through Django admin
+- ✅ Manage testimonials through Django admin
 - ✅ Filter and search testimonials
 - ✅ Toggle visibility without deleting content
 
