@@ -173,6 +173,28 @@ npm run start  # Uses webpack.config.dev.js
 - Default connection: `mongodb://localhost:27017/aclarknet`
 - Can be overridden with `MONGODB_URI` environment variable
 
+### No local MongoDB available
+
+If no `mongod`/Docker MongoDB instance is running (e.g. in an agent sandbox),
+use `mongodb-runner` to start a throwaway, ephemeral instance instead of
+installing/configuring a full MongoDB server:
+
+```bash
+npx --yes mongodb-runner start --id aclarknet-agent
+# prints a mongodb:// URI, e.g. mongodb://127.0.0.1:PORT/
+export MONGODB_URI="mongodb://127.0.0.1:PORT/"
+
+# run migrations, makemigrations, tests, etc. against it
+python manage.py migrate
+python manage.py makemigrations
+
+# stop it when done
+npx mongodb-runner stop --id aclarknet-agent
+```
+
+This is also documented in `docs/getting-started.rst` for running the test
+suite locally.
+
 ## Admin Access
 
 - Django Admin: http://localhost:8000/admin/
