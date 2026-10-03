@@ -1,0 +1,39 @@
+name: Deploy to Production
+
+# Manual-only: deployment is never triggered automatically by pushes or merges
+# (including Dependabot auto-merges). Trigger from the Actions tab (or
+# `gh workflow run deploy.yml`) once you're ready to ship what's on main.
+#
+# Note: deployment/deploy.sh always clones the current default branch (main)
+# from GitHub fresh on the server, same as `just deploy-remote` locally -
+# there's no way to deploy an arbitrary ref.
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy to aclark.net
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          echo "${{ secrets.DEPLOY_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Deploy
+        run: |
+          ssh -i ~/.ssh/deploy_key ec2-user@aclark.net \
+            "cd /srv/aclarknet && sudo deployment/deploy.sh"
+
+      - name: Clean up
+        if: always()
+        run: rm -f ~/.ssh/deploy_key ~/.ssh/known_hosts

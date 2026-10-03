@@ -29,6 +29,24 @@ If you have ``just`` installed, you can use these convenient commands:
    # Restart service
    just deploy-restart  # or: just dr
 
+Deploying via GitHub Actions
+----------------------------
+
+Deployment can also be triggered from GitHub Actions without needing a
+local SSH key or ``just``, via the manual-only **Deploy to Production**
+workflow:
+
+.. code:: bash
+
+   gh workflow run deploy.yml --repo aclark4life/aclarknet
+
+Or trigger it from the Actions tab in the GitHub UI. The workflow is
+``workflow_dispatch``-only - it never runs automatically on push or merge
+(including Dependabot auto-merges), so a deploy is always a deliberate,
+explicit action. It runs the same ``deployment/deploy.sh`` script over SSH
+as ``just deploy-remote``, using a dedicated ``DEPLOY_SSH_KEY`` repository
+secret (separate from any developer's personal key).
+
 Manual Deployment
 -----------------
 
