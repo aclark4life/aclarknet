@@ -71,23 +71,24 @@ def auto_assign_time_to_invoice(sender, instance, **kwargs):
         date = datetime.date.fromisoformat(date)
     invoices = Invoice.objects.filter(project_id=instance.project_id)
 
-    # Time logged shortly after an invoice period ends, up to the invoice's
-    # issue date (e.g. Nov 1 time on an October invoice issued Nov 1), still
-    # belongs to that invoice. Capped so a stale issue date can't make an old
-    # invoice swallow new time.
     invoice = (
-        invoices.filter(
-            end_date__lt=date,
-            end_date__gte=date - datetime.timedelta(days=INVOICE_GRACE_DAYS),
-            issue_date__gte=date,
-        )
-        .order_by("start_date")
+        invoices.filter(start_date__lte=date, end_date__gte=date)
+        .order_by("-start_date")
         .first()
     )
+    # With no invoice covering the date, time logged shortly after an invoice
+    # period ends, up to its issue date (e.g. Nov 1 time on an October invoice
+    # issued Nov 1, before November's invoice exists), still belongs to that
+    # invoice. Capped so a stale issue date can't make an old invoice swallow
+    # new time.
     if not invoice:
         invoice = (
-            invoices.filter(start_date__lte=date, end_date__gte=date)
-            .order_by("-start_date")
+            invoices.filter(
+                end_date__lt=date,
+                end_date__gte=date - datetime.timedelta(days=INVOICE_GRACE_DAYS),
+                issue_date__gte=date,
+            )
+            .order_by("start_date")
             .first()
         )
     if invoice:

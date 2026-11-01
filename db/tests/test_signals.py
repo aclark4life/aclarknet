@@ -384,8 +384,15 @@ class TimeAutoAssignInvoiceSignalTest(TestCase):
     def test_time_on_issue_date_is_assigned_to_previous_invoice(self):
         """Time logged after the period ends but on or before the issue
         date (e.g. Feb 1 time on a January invoice issued Feb 1) belongs
-        to that invoice, even if the next month's invoice already exists."""
-        Invoice.objects.create(
+        to that invoice when no invoice covers the date."""
+        time_entry = self._create_time(date="2024-02-01")
+
+        self.assertEqual(time_entry.invoice_id, self.invoice.id)
+
+    def test_next_month_invoice_is_preferred_over_previous(self):
+        """If the next month's invoice already covers the date, it wins
+        over the previous invoice's grace window."""
+        february_invoice = Invoice.objects.create(
             name="February Invoice",
             project=self.project,
             start_date="2024-02-01",
@@ -395,7 +402,7 @@ class TimeAutoAssignInvoiceSignalTest(TestCase):
 
         time_entry = self._create_time(date="2024-02-01")
 
-        self.assertEqual(time_entry.invoice_id, self.invoice.id)
+        self.assertEqual(time_entry.invoice_id, february_invoice.id)
 
     def test_time_after_issue_date_is_not_assigned_to_previous_invoice(self):
         """Once an invoice's issue date has passed, new time no longer
