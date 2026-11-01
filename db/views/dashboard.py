@@ -82,14 +82,16 @@ class DashboardView(BaseView, UserPassesTestMixin, ListView):
         today = timezone.localdate()
         month_start = today.replace(day=1)
         next_month_start = (month_start + timezone.timedelta(days=32)).replace(day=1)
+        # Monthly: unpaid invoices issued since the start of last month.
+        last_month_start = (month_start - timezone.timedelta(days=1)).replace(day=1)
         monthly = invoice_totals(
             get_base_queryset(Invoice).filter(
-                issue_date__gte=month_start, issue_date__lt=next_month_start
+                balance__gt=0, issue_date__gte=last_month_start
             )
         )
 
-        # Sparkline trends over the last 12 months: per-month totals for the
-        # monthly row, running totals for the cumulative row.
+        # Sparkline trend for the cumulative row: running invoice totals over
+        # the last 12 months.
         months = [month_start]
         for _ in range(11):
             months.insert(0, (months[0] - timezone.timedelta(days=1)).replace(day=1))
@@ -138,10 +140,8 @@ class DashboardView(BaseView, UserPassesTestMixin, ListView):
                         "sparkline_labels": trend_labels,
                     },
                     "monthly": {
-                        "label": today.strftime("%B %Y"),
+                        "label": f"Unpaid since {last_month_start:%B %Y}",
                         "invoices": monthly,
-                        "sparklines": sparklines(monthly_trend),
-                        "sparkline_labels": trend_labels,
                     },
                 },
                 "dataset_times": [int(entered), int(approved)],

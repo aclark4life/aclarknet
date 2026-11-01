@@ -132,7 +132,8 @@ class DashboardViewTest(TestCase):
 
 
 class DashboardMonthlyStatcardsTest(TestCase):
-    """Test that Dashboard view reports monthly totals alongside cumulative."""
+    """Test that Dashboard view reports unpaid-since-last-month totals
+    alongside cumulative totals."""
 
     def setUp(self):
         from datetime import date
@@ -149,57 +150,54 @@ class DashboardMonthlyStatcardsTest(TestCase):
             password="adminpass123",
         )
         today = timezone.localdate()
-        Invoice.objects.create(
-            name="This month",
-            issue_date=today,
-            amount=Decimal("1000.00"),
-            cost=Decimal("400.00"),
-            net=Decimal("600.00"),
+
+        def invoice(name, issue_date, amount, cost, paid):
+            # Set totals with update() so the post_save signal, which
+            # recomputes them from time entries, doesn't zero them out.
+            obj = Invoice.objects.create(name=name, issue_date=issue_date)
+            Invoice.objects.filter(pk=obj.pk).update(
+                amount=Decimal(amount),
+                cost=Decimal(cost),
+                net=Decimal(amount) - Decimal(cost),
+                paid_amount=Decimal(paid),
+                balance=Decimal(amount) - Decimal(paid),
+            )
+
+        invoice("Unpaid this month", today, "1000", "400", "0")
+        invoice("Paid this month", today, "300", "100", "300")
+        invoice(
+            "Unpaid last year", date(today.year - 1, today.month, 1), "500", "100", "0"
         )
-        Invoice.objects.create(
-            name="Last year",
-            issue_date=date(today.year - 1, today.month, 1),
-            amount=Decimal("500.00"),
-            cost=Decimal("100.00"),
-            net=Decimal("400.00"),
-        )
+
+    def get_statcards(self):
+        request = self.factory.get("/dashboard/")
+        request.user = self.superuser
+        view = DashboardView()
+        view.request = request
+        view.object_list = []
+        return view.get_context_data()["statcards"]
 
     def test_monthly_and_cumulative_totals(self):
-        request = self.factory.get("/dashboard/")
-        request.user = self.superuser
-        view = DashboardView()
-        view.request = request
-        view.object_list = []
-        statcards = view.get_context_data()["statcards"]
+        statcards = self.get_statcards()
+        self.assertEqual(
+            statcards["dashboard"]["invoices"],
+            {"gross": 1800, "cost": 600, "net": 1200},
+        )
+        self.assertEqual(
+            statcards["monthly"]["invoices"],
+            {"gross": 1000, "cost": 400, "net": 600},
+        )
+        self.assertTrue(statcards["monthly"]["label"].startswith("Unpaid since"))
 
-        cumulative = statcards["dashboard"]["invoices"]
-        self.assertEqual(cumulative, {"gross": 1500, "cost": 500, "net": 1000})
-
-        monthly = statcards["monthly"]["invoices"]
-        self.assertEqual(monthly, {"gross": 1000, "cost": 400, "net": 600})
-
-    def test_sparkline_trends(self):
+    def test_cumulative_sparkline_trend(self):
         import json
 
-        request = self.factory.get("/dashboard/")
-        request.user = self.superuser
-        view = DashboardView()
-        view.request = request
-        view.object_list = []
-        statcards = view.get_context_data()["statcards"]
+        statcards = self.get_statcards()
+        self.assertNotIn("sparklines", statcards["monthly"])
 
         # Last year's invoice falls just outside the 12-month window, so it
-        # only contributes to the cumulative baseline.
-        monthly_gross = json.loads(statcards["monthly"]["sparklines"]["gross"])[0]
-        self.assertEqual(len(monthly_gross), 12)
-        self.assertEqual(monthly_gross[-1], 1000)
-        self.assertEqual(sum(monthly_gross), 1000)
-
-        cumulative_gross = json.loads(
-            statcards["dashboard"]["sparklines"]["gross"]
-        )[0]
-        self.assertEqual(cumulative_gross[0], 500)
-        self.assertEqual(cumulative_gross[-1], 1500)
-        self.assertEqual(
-            len(json.loads(statcards["monthly"]["sparkline_labels"])), 12
-        )
+        # only contributes to the running total's starting point.
+        gross = json.loads(statcards["dashboard"]["sparklines"]["gross"])[0]
+        self.assertEqual(len(gross), 12)
+        self.assertEqual(gross[0], 500)
+        self.assertEqual(gross[-1], 1800)

@@ -9,6 +9,7 @@
           <h2 class="statcard-number">{{ statcard.invoices.gross|default:0|currencyfmt:"USD" }}</h2>
           <hr class="statcard-hr mb-0">
         </div>
+        {% if statcard.sparklines %}
         <canvas width="100%"
                 height="94"
                 class="sparkline"
@@ -18,6 +19,7 @@
                 style="width: 100%;
                        height: 47px">
         </canvas>
+        {% endif %}
       </div>
     </div>
     <div class="col-md-6 col-xl-3 mb-3 mb-md-4 mb-xl-0">
@@ -27,6 +29,7 @@
           <h2 class="statcard-number">{{ statcard.invoices.cost|default:0|currencyfmt:"USD" }}</h2>
           <hr class="statcard-hr mb-0">
         </div>
+        {% if statcard.sparklines %}
         <canvas width="100%"
                 height="94"
                 class="sparkline"
@@ -36,6 +39,7 @@
                 style="width: 100%;
                        height: 47px">
         </canvas>
+        {% endif %}
       </div>
     </div>
     <div class="col-md-6 col-xl-3 mb-3 mb-md-4 mb-xl-0">
@@ -45,6 +49,7 @@
           <h2 class="statcard-number">{{ statcard.invoices.net|default:0|currencyfmt:"USD" }}</h2>
           <hr class="statcard-hr mb-0">
         </div>
+        {% if statcard.sparklines %}
         <canvas width="100%"
                 height="94"
                 class="sparkline"
@@ -54,6 +59,7 @@
                 style="width: 100%;
                        height: 47px">
         </canvas>
+        {% endif %}
       </div>
     </div>
   </div>
