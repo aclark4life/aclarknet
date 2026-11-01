@@ -1,8 +1,8 @@
 {% load babel humanize %}
 {% for statcard in statcards.values %}
-  <div class="d-flex justify-content-between align-items-center mt-3">
+  <div class="d-flex align-items-center gap-2 mt-3">
     <h6 class="text-muted text-uppercase mb-0">{{ statcard.label }}</h6>
-    <button class="btn btn-outline-primary btn-sm copy-statcards-btn"
+    <button class="btn btn-link btn-sm text-muted p-0 copy-statcards-btn"
             title="Copy"
             data-copy="{{ statcard.label }}&#10;Gross: {{ statcard.invoices.gross|default:0|currencyfmt:"USD" }}&#10;Cost: {{ statcard.invoices.cost|default:0|currencyfmt:"USD" }}&#10;Net: {{ statcard.invoices.net|default:0|currencyfmt:"USD" }}">
       <i class="fa-solid fa-copy"></i>
@@ -78,10 +78,10 @@
         navigator.clipboard.writeText(btn.dataset.copy).then(function () {
           const orig = btn.innerHTML;
           btn.innerHTML = '<i class="fa-solid fa-check"></i>';
-          btn.classList.replace('btn-outline-primary', 'btn-success');
+          btn.classList.replace('text-muted', 'text-success');
           setTimeout(function () {
             btn.innerHTML = orig;
-            btn.classList.replace('btn-success', 'btn-outline-primary');
+            btn.classList.replace('text-success', 'text-muted');
           }, 2000);
         }).catch(function () {
           alert('Failed to copy. Please copy manually.');
