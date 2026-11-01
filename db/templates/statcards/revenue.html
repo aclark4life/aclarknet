@@ -1,6 +1,13 @@
 {% load babel humanize %}
 {% for statcard in statcards.values %}
-  <h6 class="text-muted text-uppercase mt-3 mb-0">{{ statcard.label }}</h6>
+  <div class="d-flex justify-content-between align-items-center mt-3">
+    <h6 class="text-muted text-uppercase mb-0">{{ statcard.label }}</h6>
+    <button class="btn btn-outline-primary btn-sm copy-statcards-btn"
+            title="Copy"
+            data-copy="{{ statcard.label }}&#10;Gross: {{ statcard.invoices.gross|default:0|currencyfmt:"USD" }}&#10;Cost: {{ statcard.invoices.cost|default:0|currencyfmt:"USD" }}&#10;Net: {{ statcard.invoices.net|default:0|currencyfmt:"USD" }}">
+      <i class="fa-solid fa-copy"></i>
+    </button>
+  </div>
   <div class="row statcards my-3">
     <div class="col-md-6 col-xl-3 mb-3 mb-md-4 mb-xl-0">
       <div class="statcard statcard-info">
@@ -64,3 +71,22 @@
     </div>
   </div>
 {% endfor %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.copy-statcards-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        navigator.clipboard.writeText(btn.dataset.copy).then(function () {
+          const orig = btn.innerHTML;
+          btn.innerHTML = '<i class="fa-solid fa-check"></i>';
+          btn.classList.replace('btn-outline-primary', 'btn-success');
+          setTimeout(function () {
+            btn.innerHTML = orig;
+            btn.classList.replace('btn-success', 'btn-outline-primary');
+          }, 2000);
+        }).catch(function () {
+          alert('Failed to copy. Please copy manually.');
+        });
+      });
+    });
+  });
+</script>
