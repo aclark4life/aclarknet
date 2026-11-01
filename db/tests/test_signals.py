@@ -319,6 +319,7 @@ class TimeAutoAssignInvoiceSignalTest(TestCase):
             project=self.project,
             start_date="2024-01-01",
             end_date="2024-01-31",
+            issue_date="2024-02-01",
         )
 
     def _create_time(self, date, project=None, invoice=None):
@@ -379,6 +380,40 @@ class TimeAutoAssignInvoiceSignalTest(TestCase):
         time_entry = self._create_time(date="2024-01-15")
 
         self.assertEqual(time_entry.invoice_id, newer_invoice.id)
+
+    def test_time_on_issue_date_is_assigned_to_previous_invoice(self):
+        """Time logged after the period ends but on or before the issue
+        date (e.g. Feb 1 time on a January invoice issued Feb 1) belongs
+        to that invoice, even if the next month's invoice already exists."""
+        Invoice.objects.create(
+            name="February Invoice",
+            project=self.project,
+            start_date="2024-02-01",
+            end_date="2024-02-29",
+            issue_date="2024-03-01",
+        )
+
+        time_entry = self._create_time(date="2024-02-01")
+
+        self.assertEqual(time_entry.invoice_id, self.invoice.id)
+
+    def test_time_after_issue_date_is_not_assigned_to_previous_invoice(self):
+        """Once an invoice's issue date has passed, new time no longer
+        lands on it."""
+        time_entry = self._create_time(date="2024-02-02")
+
+        self.assertIsNone(time_entry.invoice_id)
+
+    def test_grace_period_is_capped_for_stale_issue_dates(self):
+        """An invoice whose issue date is far past its end date only takes
+        time within the grace window after its end date."""
+        Invoice.objects.filter(pk=self.invoice.pk).update(issue_date="2024-06-01")
+
+        in_window = self._create_time(date="2024-02-07")
+        past_window = self._create_time(date="2024-02-08")
+
+        self.assertEqual(in_window.invoice_id, self.invoice.id)
+        self.assertIsNone(past_window.invoice_id)
 
     def test_existing_time_entry_is_not_reassigned_on_update(self):
         """Saving an already-existing, unbilled time entry should not

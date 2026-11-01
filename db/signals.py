@@ -1,3 +1,5 @@
+import datetime
+
 from django.conf import settings
 from django.db.models.signals import post_delete, post_save, pre_save
 from django.dispatch import receiver
@@ -8,6 +10,9 @@ from django.utils.html import strip_tags
 from aclarknet.email_utils import send_notification_email
 from .models import Invoice
 from .models import Time
+
+# Days after an invoice's end date that new time can still land on it.
+INVOICE_GRACE_DAYS = 7
 
 
 @receiver(post_save, sender=Time)
@@ -61,15 +66,30 @@ def auto_assign_time_to_invoice(sender, instance, **kwargs):
     ):
         return
 
+    date = instance.date
+    if isinstance(date, str):
+        date = datetime.date.fromisoformat(date)
+    invoices = Invoice.objects.filter(project_id=instance.project_id)
+
+    # Time logged shortly after an invoice period ends, up to the invoice's
+    # issue date (e.g. Nov 1 time on an October invoice issued Nov 1), still
+    # belongs to that invoice. Capped so a stale issue date can't make an old
+    # invoice swallow new time.
     invoice = (
-        Invoice.objects.filter(
-            project_id=instance.project_id,
-            start_date__lte=instance.date,
-            end_date__gte=instance.date,
+        invoices.filter(
+            end_date__lt=date,
+            end_date__gte=date - datetime.timedelta(days=INVOICE_GRACE_DAYS),
+            issue_date__gte=date,
         )
-        .order_by("-start_date")
+        .order_by("start_date")
         .first()
     )
+    if not invoice:
+        invoice = (
+            invoices.filter(start_date__lte=date, end_date__gte=date)
+            .order_by("-start_date")
+            .first()
+        )
     if invoice:
         instance.invoice = invoice
 
