@@ -1,7 +1,10 @@
 """Tests for Dashboard view filtering."""
 
+from datetime import timedelta
+
 from django.contrib.auth import get_user_model
 from django.test import RequestFactory, TestCase
+from django.utils import timezone
 
 from db.models import Time
 from db.views.dashboard import DashboardView
@@ -187,7 +190,10 @@ class DashboardMonthlyStatcardsTest(TestCase):
             statcards["monthly"]["invoices"],
             {"gross": 1000, "cost": 400, "net": 600},
         )
-        self.assertTrue(statcards["monthly"]["label"].startswith("Unpaid since"))
+        last_month = (timezone.localdate().replace(day=1) - timedelta(days=1)).replace(
+            day=1
+        )
+        self.assertEqual(statcards["monthly"]["label"], f"{last_month:%B %Y}")
 
     def test_cumulative_sparkline_trend(self):
         import json

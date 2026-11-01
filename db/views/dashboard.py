@@ -140,7 +140,7 @@ class DashboardView(BaseView, UserPassesTestMixin, ListView):
                         "sparkline_labels": trend_labels,
                     },
                     "monthly": {
-                        "label": f"Unpaid since {last_month_start:%B %Y}",
+                        "label": f"{last_month_start:%B %Y}",
                         "invoices": monthly,
                     },
                 },
