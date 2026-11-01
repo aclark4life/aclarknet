@@ -1,3 +1,5 @@
+import json
+
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
@@ -68,11 +70,57 @@ class DashboardView(BaseView, UserPassesTestMixin, ListView):
             or 0
         )
 
-        gross = (
-            get_base_queryset(Invoice).aggregate(amount=Sum(F("amount")))["amount"] or 0
+        def invoice_totals(queryset):
+            totals = queryset.aggregate(
+                gross=Sum("amount"), cost=Sum("cost"), net=Sum("net")
+            )
+            return {key: value or 0 for key, value in totals.items()}
+
+        cumulative = invoice_totals(get_base_queryset(Invoice))
+        gross, cost, net = cumulative["gross"], cumulative["cost"], cumulative["net"]
+
+        today = timezone.localdate()
+        month_start = today.replace(day=1)
+        next_month_start = (month_start + timezone.timedelta(days=32)).replace(day=1)
+        monthly = invoice_totals(
+            get_base_queryset(Invoice).filter(
+                issue_date__gte=month_start, issue_date__lt=next_month_start
+            )
         )
-        cost = get_base_queryset(Invoice).aggregate(cost=Sum(F("cost")))["cost"] or 0
-        net = get_base_queryset(Invoice).aggregate(net=Sum(F("net")))["net"] or 0
+
+        # Sparkline trends over the last 12 months: per-month totals for the
+        # monthly row, running totals for the cumulative row.
+        months = [month_start]
+        for _ in range(11):
+            months.insert(0, (months[0] - timezone.timedelta(days=1)).replace(day=1))
+        monthly_trend = {key: [0.0] * len(months) for key in ("gross", "cost", "net")}
+        index = {month: i for i, month in enumerate(months)}
+        window = get_base_queryset(Invoice).filter(
+            issue_date__gte=months[0], issue_date__lt=next_month_start
+        )
+        for issue_date, amount, invoice_cost, invoice_net in window.values_list(
+            "issue_date", "amount", "cost", "net"
+        ):
+            i = index[issue_date.replace(day=1)]
+            monthly_trend["gross"][i] += float(amount or 0)
+            monthly_trend["cost"][i] += float(invoice_cost or 0)
+            monthly_trend["net"][i] += float(invoice_net or 0)
+
+        baseline = invoice_totals(
+            get_base_queryset(Invoice).filter(issue_date__lt=months[0])
+        )
+        cumulative_trend = {}
+        for key, values in monthly_trend.items():
+            running = float(baseline[key])
+            cumulative_trend[key] = []
+            for value in values:
+                running += value
+                cumulative_trend[key].append(running)
+
+        trend_labels = json.dumps([month.strftime("%b %Y") for month in months])
+
+        def sparklines(trend):
+            return {key: json.dumps([values]) for key, values in trend.items()}
 
         context.update(
             {
@@ -84,12 +132,17 @@ class DashboardView(BaseView, UserPassesTestMixin, ListView):
                 },
                 "statcards": {
                     "dashboard": {
-                        "invoices": {
-                            "gross": gross,
-                            "cost": cost,
-                            "net": net,
-                        }
-                    }
+                        "label": "Cumulative",
+                        "invoices": cumulative,
+                        "sparklines": sparklines(cumulative_trend),
+                        "sparkline_labels": trend_labels,
+                    },
+                    "monthly": {
+                        "label": today.strftime("%B %Y"),
+                        "invoices": monthly,
+                        "sparklines": sparklines(monthly_trend),
+                        "sparkline_labels": trend_labels,
+                    },
                 },
                 "dataset_times": [int(entered), int(approved)],
                 "dataset_invoices": [int(gross), int(cost), int(net)],

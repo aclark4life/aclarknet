@@ -129,3 +129,77 @@ class DashboardViewTest(TestCase):
 
         # Verify the entered hours are only from user1 (8.0 + 4.0 = 12.0)
         self.assertEqual(entered, 12.0)
+
+
+class DashboardMonthlyStatcardsTest(TestCase):
+    """Test that Dashboard view reports monthly totals alongside cumulative."""
+
+    def setUp(self):
+        from datetime import date
+        from decimal import Decimal
+
+        from django.utils import timezone
+
+        from db.models import Invoice
+
+        self.factory = RequestFactory()
+        self.superuser = User.objects.create_superuser(
+            username="admin",
+            email="admin@example.com",
+            password="adminpass123",
+        )
+        today = timezone.localdate()
+        Invoice.objects.create(
+            name="This month",
+            issue_date=today,
+            amount=Decimal("1000.00"),
+            cost=Decimal("400.00"),
+            net=Decimal("600.00"),
+        )
+        Invoice.objects.create(
+            name="Last year",
+            issue_date=date(today.year - 1, today.month, 1),
+            amount=Decimal("500.00"),
+            cost=Decimal("100.00"),
+            net=Decimal("400.00"),
+        )
+
+    def test_monthly_and_cumulative_totals(self):
+        request = self.factory.get("/dashboard/")
+        request.user = self.superuser
+        view = DashboardView()
+        view.request = request
+        view.object_list = []
+        statcards = view.get_context_data()["statcards"]
+
+        cumulative = statcards["dashboard"]["invoices"]
+        self.assertEqual(cumulative, {"gross": 1500, "cost": 500, "net": 1000})
+
+        monthly = statcards["monthly"]["invoices"]
+        self.assertEqual(monthly, {"gross": 1000, "cost": 400, "net": 600})
+
+    def test_sparkline_trends(self):
+        import json
+
+        request = self.factory.get("/dashboard/")
+        request.user = self.superuser
+        view = DashboardView()
+        view.request = request
+        view.object_list = []
+        statcards = view.get_context_data()["statcards"]
+
+        # Last year's invoice falls just outside the 12-month window, so it
+        # only contributes to the cumulative baseline.
+        monthly_gross = json.loads(statcards["monthly"]["sparklines"]["gross"])[0]
+        self.assertEqual(len(monthly_gross), 12)
+        self.assertEqual(monthly_gross[-1], 1000)
+        self.assertEqual(sum(monthly_gross), 1000)
+
+        cumulative_gross = json.loads(
+            statcards["dashboard"]["sparklines"]["gross"]
+        )[0]
+        self.assertEqual(cumulative_gross[0], 500)
+        self.assertEqual(cumulative_gross[-1], 1500)
+        self.assertEqual(
+            len(json.loads(statcards["monthly"]["sparkline_labels"])), 12
+        )
