@@ -1,13 +1,15 @@
-function handleSelectAll() {
-  var selectAll = document.getElementById("select-all");
-  var checkboxes = document.getElementsByName("entry_id");
-  checkboxes.forEach(function (checkbox) {
+// Each table's select-all only toggles its own rows, so collapsed groups
+// on grouped list pages are never selected by accident.
+function handleSelectAll(event) {
+  const selectAll = event.target;
+  const table = selectAll.closest("table");
+  table.querySelectorAll('tbody input[name="entry_id"]').forEach((checkbox) => {
     checkbox.checked = selectAll.checked;
   });
 }
 
 function handleBtnVisibility() {
-  const table = document.getElementById("table-select");
+  const tables = document.querySelectorAll(".table-select");
   const deleteBtn = document.getElementById("delete-selected-btn");
   const markPaidBtn = document.getElementById("mark-paid-selected-btn");
   const archiveBtn = document.getElementById("archive-selected-btn");
@@ -16,12 +18,11 @@ function handleBtnVisibility() {
   const unhtmlBtn = document.getElementById("unhtml-selected-btn");
   const saveBtn = document.getElementById("save-selected-btn");
 
-  if (table) {
+  tables.forEach((table) => {
     table.addEventListener("change", () => {
-      const checkboxes = table.querySelectorAll('tbody input[type="checkbox"]');
-      const anyChecked = Array.from(checkboxes).some(
-        (checkbox) => checkbox.checked
-      );
+      const anyChecked = Array.from(
+        document.querySelectorAll('.table-select tbody input[type="checkbox"]')
+      ).some((checkbox) => checkbox.checked);
 
       const buttons = [
         deleteBtn,
@@ -38,11 +39,10 @@ function handleBtnVisibility() {
         }
       });
     });
-  }
+  });
 }
 
-var selectAll = document.getElementById("select-all");
-if (selectAll) {
+document.querySelectorAll(".select-all").forEach((selectAll) => {
   selectAll.addEventListener("click", handleSelectAll);
-}
+});
 handleBtnVisibility();

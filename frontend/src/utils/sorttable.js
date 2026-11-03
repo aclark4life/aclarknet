@@ -4,8 +4,7 @@
 // |                      language model.                       |
 // ==============================================================
 
-const table = document.getElementById("table-select");
-if (table) {
+document.querySelectorAll(".table-select").forEach((table) => {
   const tbody = table.getElementsByTagName("tbody")[0];
   const rows = Array.from(tbody.getElementsByTagName("tr"));
 
@@ -38,4 +37,4 @@ if (table) {
     });
   };
   addHeaderListeners();
-}
+});

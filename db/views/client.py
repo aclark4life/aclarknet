@@ -1,11 +1,12 @@
 """Client-related views."""
 
-from itertools import chain
+from itertools import chain, groupby
 
 from django import forms
 from django.http import HttpResponseRedirect
 from django.shortcuts import reverse
 from django.urls import reverse_lazy
+from django.utils import timezone
 from django.views.generic import (
     CreateView,
     DeleteView,
@@ -14,9 +15,9 @@ from django.views.generic import (
     UpdateView,
 )
 
-from .base import BaseView, FakeDataMixin, SuperuserRequiredMixin
+from .base import BaseView, FakeDataMixin, GroupedListMixin, SuperuserRequiredMixin
 from ..forms import ClientForm
-from ..models import Client, Company, Invoice
+from ..models import Client, Company, Invoice, Project
 
 
 class BaseClientView(BaseView, SuperuserRequiredMixin):
@@ -29,9 +30,35 @@ class BaseClientView(BaseView, SuperuserRequiredMixin):
     related_title_fields = ["name", "title", "subject"]
 
 
-class ClientListView(BaseClientView, ListView):
+class ClientListView(GroupedListMixin, BaseClientView, ListView):
     model = Client
     template_name = "index.html"
+    field_values_include = ["name", "category", "featured"]
+
+    def get_groups(self, clients):
+        """Clients with a current project first, then by year of their last project."""
+        today = timezone.localdate()
+        projects = {}
+        for project in Project.objects.exclude(client=None):
+            projects.setdefault(project.client_id, []).append(project)
+
+        current, past, no_projects = [], [], []
+        for client in clients:
+            client_projects = projects.get(client.pk)
+            if not client_projects:
+                no_projects.append(client)
+            elif any(p.is_current(today) for p in client_projects):
+                current.append(client)
+            else:
+                last = max(p.last_date for p in client_projects)
+                past.append((last, client))
+
+        groups = [("Current", current, True)]
+        past.sort(key=lambda lc: lc[0], reverse=True)
+        for year, items in groupby(past, key=lambda lc: lc[0].year):
+            groups.append((str(year), [client for _, client in items], False))
+        groups.append(("No projects", no_projects, False))
+        return groups
 
 
 class ClientCreateView(FakeDataMixin, BaseClientView, CreateView):

@@ -1,6 +1,6 @@
 """Project-related views."""
 
-from itertools import chain
+from itertools import chain, groupby
 
 from django import forms
 from django.http import HttpResponseRedirect
@@ -15,7 +15,7 @@ from django.views.generic import (
     UpdateView,
 )
 
-from .base import BaseView, FakeDataMixin, SuperuserRequiredMixin
+from .base import BaseView, FakeDataMixin, GroupedListMixin, SuperuserRequiredMixin
 from ..forms import ProjectForm
 from ..models import Client, Invoice, Project
 
@@ -40,9 +40,29 @@ class BaseProjectView(BaseView, SuperuserRequiredMixin):
     related_title_fields = ["name", "title", "subject"]
 
 
-class ProjectListView(BaseProjectView, ListView):
+class ProjectListView(GroupedListMixin, BaseProjectView, ListView):
     model = Project
     template_name = "index.html"
+    field_values_include = ["name", "client", "start_date", "end_date", "amount"]
+
+    def get_queryset(self):
+        return Project.objects.select_related("client")
+
+    def get_groups(self, projects):
+        """Current projects first, then past projects by the year they ended."""
+        today = timezone.localdate()
+        current = [p for p in projects if p.is_current(today)]
+        current.sort(key=lambda p: p.start_date or p.last_date, reverse=True)
+        groups = [("Current", current, True)]
+
+        past = sorted(
+            (p for p in projects if not p.is_current(today)),
+            key=lambda p: p.last_date,
+            reverse=True,
+        )
+        for year, items in groupby(past, key=lambda p: p.last_date.year):
+            groups.append((str(year), list(items), False))
+        return groups
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -129,6 +129,20 @@ class Project(BaseModel, ContactInfoMixin):
     def get_absolute_url(self):
         return reverse("project_view", args=[self.id])
 
+    def is_current(self, today=None):
+        """A project is current until its end date has passed.
+
+        Projects without an end date count as current for a year after they start.
+        """
+        today = today or timezone.localdate()
+        if self.end_date is None:
+            return (today - self.last_date).days <= 365
+        return self.end_date >= today
+
+    @property
+    def last_date(self):
+        return self.end_date or self.start_date or self.created.date()
+
 
 class Task(BaseModel):
     project = models.ForeignKey(

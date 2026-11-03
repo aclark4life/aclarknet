@@ -509,6 +509,34 @@ class RedirectToObjectViewMixin:
         )
 
 
+class GroupedListMixin:
+    """
+    Render a list view as titled, collapsible groups instead of one paginated table.
+
+    Subclasses implement get_groups() returning (label, items, open) tuples.
+    """
+
+    def get_groups(self, items):
+        raise NotImplementedError("Subclasses must implement get_groups()")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        groups = []
+        for label, items, is_open in self.get_groups(list(self.get_queryset())):
+            if not items:
+                continue
+            # get_field_values adds an "item" column for non-paginated lists
+            rows = [
+                [fv for fv in row if fv[0] != "item"]
+                for row in self.get_field_values(items)
+            ]
+            groups.append({"label": label, "rows": rows, "open": is_open})
+        context["groups"] = groups
+        if groups:
+            context["table_headers"] = [fv[0] for fv in groups[0]["rows"][0]]
+        return context
+
+
 class FilterByUserMixin:
     """
     Non-superusers only see their own objects.
